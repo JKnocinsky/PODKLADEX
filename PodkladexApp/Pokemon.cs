@@ -12,6 +12,8 @@ namespace PodkladexApp
         public string Rodzaj { get; set; }
         public int Numer {  get; set; }
 
+        public string PelnaNazwa => $"{Nazwa} - {Rodzaj}";
+
         public Pokemon()
         {
             Nazwa = "Pikachu";

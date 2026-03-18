@@ -11,7 +11,6 @@ namespace PodkladexApp
 
             pokemon1.WydajDzwiek("Pika Pika!");
             pokemon1.Atak_pokemona("Piorun");
-
         }
     }
 }
