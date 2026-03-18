@@ -18,6 +18,11 @@ namespace PodkladexApp
             Rodzaj = "Elektryczny";
         }
 
+        public void Doswiadczenie()
+        {
+
+        }
+
         public static void WydajDzwiek(string tresc)
         {
             MessageBox.Show(
