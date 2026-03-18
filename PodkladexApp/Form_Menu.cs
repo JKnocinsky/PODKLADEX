@@ -3,6 +3,7 @@ namespace PodkladexApp
     public partial class Form_Menu : Form
     {
         Pokemon pokemon1;
+        Pokemon pokemon2;
 
         public Form_Menu()
         {
@@ -11,6 +12,10 @@ namespace PodkladexApp
 
             pokemon1.WydajDzwiek("Pika Pika!");
             pokemon1.Atak_pokemona("Piorun");
+
+            pokemon2 = new Pokemon("Scizor","Stalowy/Robak");
+            pokemon2.Atak_pokemona("X-no¿yce");
+            pokemon2.WydajDzwiek("Siiizor");
 
         }
     }
