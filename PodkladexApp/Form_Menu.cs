@@ -24,8 +24,8 @@ namespace PodkladexApp
             pokemon2.WydajDzwiek("Siiizor");
 
             pokemon10 = new Pokemon("Krabby", "Woda");
-            pokemon10.WydajDzwiek("ploom ploom");
-            pokemon10.Atak_pokemona("*");
+            pokemon10.WydajDzwiek("Ploom Ploom");
+            pokemon10.Atak_pokemona("Water Gun");
 
 
         }
