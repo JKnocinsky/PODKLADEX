@@ -45,7 +45,7 @@ namespace PodkladexApp
             );
         }
 
-        public void Atak_pokemona(string atak)
+        public void Atak_pokemona()
         {
             MessageBox.Show(atak);
         }
