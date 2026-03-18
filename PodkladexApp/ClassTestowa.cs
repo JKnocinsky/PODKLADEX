@@ -8,6 +8,11 @@ namespace PodkladexApp
 {
     public class ClassTestowa
     {
+        public void Doswiadczenie()
+        {
+
+        }
+
         public static void WydajDzwiek(string tresc)
         {
             MessageBox.Show(
