@@ -5,6 +5,8 @@ namespace PodkladexApp
         Pokemon pokemon1;
         Pokemon pokemon2;
         Pokemon pokemon3;
+        Pokemon pokemon10;
+        Pokemon pokemon3;
         Pokemon pokemon4;
         Pokemon pokemon5;
         Pokemon pokemon6;
@@ -13,8 +15,12 @@ namespace PodkladexApp
         {
             InitializeComponent();
             pokemon1 = new Pokemon();
+            pokemon3 = new Pokemon("Blastoise","Wodny");
 
             pokemon1.WydajDzwiek("Pika Pika!");
+
+            pokemon3.WydajDzwiek("Plum Plum");
+            pokemon3.Atak_pokemona("Mega Wyrzutnia");
             pokemon1.Atak_pokemona("Piorun");
 
             pokemon2 = new Pokemon("Scizor","Stalowy/Robak");
