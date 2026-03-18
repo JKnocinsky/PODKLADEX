@@ -1,2 +1,2 @@
 # PODKLADEX
-Podkładki lepsze niż te z radomia
+Podkładki lepsze niż te z Radomia
