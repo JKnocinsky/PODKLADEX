@@ -13,5 +13,13 @@ namespace PodkladexApp
         public int Numer {  get; set; }
 
 
+        public static void WydajDzwiek(string tresc)
+        {
+            MessageBox.Show(
+                tresc,
+                "Błąd",
+                MessageBoxButtons.OK
+            );
+        }
     }
 }
