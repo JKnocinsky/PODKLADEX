@@ -8,9 +8,13 @@ namespace PodkladexApp
 {
     public class ClassTestowa
     {
-        void Test()
+        public static void WydajDzwiek(string tresc)
         {
-            Console.WriteLine("Test");
+            MessageBox.Show(
+                tresc,
+                "Błąd",
+                MessageBoxButtons.OK
+            );
         }
     }
 }
