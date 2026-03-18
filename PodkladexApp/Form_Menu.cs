@@ -9,6 +9,7 @@ namespace PodkladexApp
         Pokemon pokemon4;
         Pokemon pokemon5;
         Pokemon pokemon6;
+        Pokemon pokemon7;
 
         public Form_Menu()
         {
@@ -35,11 +36,14 @@ namespace PodkladexApp
 
 
 
-            pokemon3 = new Pokemon("Bulbasaur", "Trawiasty", "Heteroseksualny", "Ateista", "Centrolewicowy");
+            pokemon7 = new Pokemon("Bulbasaur", "Trawiasty", "Heteroseksualny", "Ateista", "Centrolewicowy");
             pokemon4 = new Pokemon("Magikarp", "Wodny", "Biseksualny", "Ateista", "Centroprawicowy");
             pokemon5 = new Pokemon("Charizard", "Ognisty/Lataj¹cy", "Heteroseksualny", "Ateista", "Centroprawicowy");
             pokemon6 = new Pokemon( "Squirtle", "Wodny", "Heteroseksualny", "Ateista", "Centrolewicowy");
 
+            List<Pokemon> pokemony = new List<Pokemon> { pokemon1, pokemon2, pokemon3, pokemon4, pokemon5, pokemon6, pokemon7, pokemon10 };
+
+            comboBox1.DataSource = pokemony;
         }
     }
 }
