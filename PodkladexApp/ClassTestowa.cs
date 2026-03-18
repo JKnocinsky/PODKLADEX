@@ -8,6 +8,10 @@ namespace PodkladexApp
 {
     public class ClassTestowa
     {
-
+        public ClassTestowa(string Nazwa, string Rodzaj)
+        {
+            Nazwa = "Pikachu";
+            Rodzaj = "Elektryczny";
+        }
     }
 }
