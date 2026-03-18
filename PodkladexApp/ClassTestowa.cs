@@ -8,6 +8,9 @@ namespace PodkladexApp
 {
     public class ClassTestowa
     {
-
+        void Test()
+        {
+            Console.WriteLine("Test");
+        }
     }
 }
