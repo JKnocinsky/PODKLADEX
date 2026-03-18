@@ -11,12 +11,16 @@ namespace PodkladexApp
         Pokemon pokemon5;
         Pokemon pokemon6;
 
+        Pokemon pokemon5;
         public Form_Menu()
         {
             InitializeComponent();
             pokemon1 = new Pokemon();
             pokemon3 = new Pokemon("Blastoise","Wodny");
+            pokemon5 = new Pokemon("Charmander", "Ogieñ");
 
+            pokemon5.WydajDzwiek("Aaaaaaaaaa!");
+            pokemon5.Atak_pokemona("P³omieñ");
             pokemon1.WydajDzwiek("Pika Pika!");
 
             pokemon3.WydajDzwiek("Plum Plum");
