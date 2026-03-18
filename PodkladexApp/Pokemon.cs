@@ -24,6 +24,11 @@ namespace PodkladexApp
             Nazwa = "Pikachu";
             Rodzaj = "Elektryczny";
         }
+        public Pokemon(string Nazwa, string Rodzaj)
+        {
+            this.Nazwa = Nazwa;
+            this.Rodzaj = Rodzaj;
+        }
         public Pokemon(string Nazwa, string Rodzaj, string Orientacja, string wyznanie_religijne, string poglądy_polityczne)
         {
             this.Nazwa = Nazwa;
