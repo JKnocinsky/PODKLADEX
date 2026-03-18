@@ -6,16 +6,21 @@ using System.Threading.Tasks;
 
 namespace PodkladexApp
 {
-    public class ClassTestowa
+    public class Pokemon
     {
         public string Nazwa {  get; set; }
         public string Rodzaj { get; set; }
         public int Numer {  get; set; }
 
-        public ClassTestowa(string Nazwa, string Rodzaj)
+        public Pokemon()
         {
             Nazwa = "Pikachu";
             Rodzaj = "Elektryczny";
+        }
+        public Pokemon(string Nazwa, string Rodzaj)
+        {
+            this.Nazwa = Nazwa;
+            this.Rodzaj = Rodzaj;
         }
 
         public void Doswiadczenie()
