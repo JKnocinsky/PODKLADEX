@@ -17,6 +17,16 @@ namespace PodkladexApp
             pokemon1.WydajDzwiek("Pika Pika!");
             pokemon1.Atak_pokemona("Piorun");
 
+            pokemon2 = new Pokemon("Scizor","Stalowy/Robak");
+            pokemon2.Atak_pokemona("X-no¿yce");
+            pokemon2.WydajDzwiek("Siiizor");
+
+            pokemon10 = new Pokemon("Krabby", "Woda");
+            pokemon10.WydajDzwiek("Ploom Ploom");
+            pokemon10.Atak_pokemona("Water Gun");
+
+
+
             pokemon3 = new Pokemon("Bulbasaur", "Trawiasty", "Heteroseksualny", "Ateista", "Centrolewicowy");
             pokemon4 = new Pokemon("Magikarp", "Wodny", "Biseksualny", "Ateista", "Centroprawicowy");
             pokemon5 = new Pokemon("Charizard", "Ognisty/Lataj¹cy", "Heteroseksualny", "Ateista", "Centroprawicowy");
