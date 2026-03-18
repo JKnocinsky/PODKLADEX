@@ -6,12 +6,10 @@ namespace PodkladexApp
         Pokemon pokemon2;
         Pokemon pokemon3;
         Pokemon pokemon10;
-        Pokemon pokemon3;
         Pokemon pokemon4;
         Pokemon pokemon5;
         Pokemon pokemon6;
 
-        Pokemon pokemon5;
         public Form_Menu()
         {
             InitializeComponent();

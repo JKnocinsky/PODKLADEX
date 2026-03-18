@@ -17,10 +17,17 @@ namespace PodkladexApp
 
         public string Poglądy_polityczne { get; set; }
 
+        public string PelnaNazwa => $"{Nazwa} - {Rodzaj}";
+
         public Pokemon()
         {
             Nazwa = "Pikachu";
             Rodzaj = "Elektryczny";
+        }
+        public Pokemon(string Nazwa, string Rodzaj)
+        {
+            this.Nazwa = Nazwa;
+            this.Rodzaj = Rodzaj;
         }
         public Pokemon(string Nazwa, string Rodzaj, string Orientacja, string wyznanie_religijne, string poglądy_polityczne)
         {
