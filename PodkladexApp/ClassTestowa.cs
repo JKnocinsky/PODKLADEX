@@ -8,6 +8,9 @@ namespace PodkladexApp
 {
     public class ClassTestowa
     {
-
+        public void Atak_pokemona(string atak)
+        {
+            MessageBox.Show(atak);
+        }
     }
 }
