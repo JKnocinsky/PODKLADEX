@@ -4,6 +4,7 @@ namespace PodkladexApp
     {
         Pokemon pokemon1;
         Pokemon pokemon2;
+        Pokemon pokemon10;
 
         public Form_Menu()
         {
@@ -16,6 +17,12 @@ namespace PodkladexApp
             pokemon2 = new Pokemon("Scizor","Stalowy/Robak");
             pokemon2.Atak_pokemona("X-no¿yce");
             pokemon2.WydajDzwiek("Siiizor");
+
+            pokemon10 = new Pokemon("Krabby", "Woda");
+            pokemon10.WydajDzwiek("ploom ploom");
+            pokemon10.Atak_pokemona("*");
+
+
 
         }
     }
