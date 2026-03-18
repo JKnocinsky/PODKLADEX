@@ -46,8 +46,8 @@ namespace PodkladexApp
         public void WydajDzwiek(string tresc)
         {
             MessageBox.Show(
-                tresc,
-                "Błąd",
+                tresc+" "+Poglądy_polityczne,
+                "Dźwięk",
                 MessageBoxButtons.OK
             );
         }
@@ -55,6 +55,11 @@ namespace PodkladexApp
         public void Atak_pokemona(string atak)
         {
             MessageBox.Show(atak);
+        }
+
+        public override string ToString()
+        {
+            return $"{Nazwa} - {Rodzaj} - {Orientacja_seksulana} - {Wyznanie_religijne} - {Poglądy_polityczne}";
         }
     }
 }

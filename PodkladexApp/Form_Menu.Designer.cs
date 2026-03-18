@@ -33,6 +33,7 @@
             btn_Zaopatrzenie = new Button();
             btn_Kontrola_Jakosci = new Button();
             btn_Utrzymanie_Ruchu = new Button();
+            comboBox1 = new ComboBox();
             SuspendLayout();
             // 
             // btn_Kadry
@@ -85,11 +86,20 @@
             btn_Utrzymanie_Ruchu.Text = "Utrzymanie Ruchu";
             btn_Utrzymanie_Ruchu.UseVisualStyleBackColor = true;
             // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(262, 71);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(622, 23);
+            comboBox1.TabIndex = 5;
+            // 
             // Form_Menu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(163, 320);
+            ClientSize = new Size(997, 320);
+            Controls.Add(comboBox1);
             Controls.Add(btn_Utrzymanie_Ruchu);
             Controls.Add(btn_Kontrola_Jakosci);
             Controls.Add(btn_Zaopatrzenie);
@@ -107,5 +117,6 @@
         private Button btn_Zaopatrzenie;
         private Button btn_Kontrola_Jakosci;
         private Button btn_Utrzymanie_Ruchu;
+        private ComboBox comboBox1;
     }
 }
