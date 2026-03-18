@@ -12,6 +12,12 @@ namespace PodkladexApp
         public string Rodzaj { get; set; }
         public int Numer {  get; set; }
 
+        public ClassTestowa(string Nazwa, string Rodzaj)
+        {
+            Nazwa = "Pikachu";
+            Rodzaj = "Elektryczny";
+        }
+
         public static void WydajDzwiek(string tresc)
         {
             MessageBox.Show(
