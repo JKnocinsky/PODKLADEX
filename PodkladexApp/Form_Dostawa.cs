@@ -10,17 +10,12 @@ using System.Windows.Forms;
 
 namespace PodkladexApp
 {
-    public partial class Form_Jakosc : Form
+    public partial class Form_Dostawa : Form
     {
-        public Form_Jakosc()
+        public Form_Dostawa()
         {
             InitializeComponent();
         }
 
-
-        private void btn_Material_Click_1(object sender, EventArgs e)
-        {
-            new Form_Material().Show();
-        }
     }
 }

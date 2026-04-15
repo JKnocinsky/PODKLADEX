@@ -16,5 +16,10 @@ namespace PodkladexApp
 
             comboBox1.DataSource = pracownicy;
         }
+
+        private void btn_Kontrola_Jakosci_Click(object sender, EventArgs e)
+        {
+            new Form_Jakosc().Show();
+        }
     }
 }
