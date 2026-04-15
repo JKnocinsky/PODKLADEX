@@ -16,5 +16,16 @@ namespace PodkladexApp
 
             comboBox1.DataSource = pracownicy;
         }
+
+        private void btn_Kadry_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_Zaopatrzenie_Click(object sender, EventArgs e)
+        {
+            Form_ZaoLog form_ZaoLog = new Form_ZaoLog();
+            form_ZaoLog.Show();
+        }
     }
 }

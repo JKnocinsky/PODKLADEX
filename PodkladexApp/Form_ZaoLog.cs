@@ -16,5 +16,16 @@ namespace PodkladexApp
         {
             InitializeComponent();
         }
+
+        private void button_Nowa_firma_Click_1(object sender, EventArgs e)
+        {
+            Form_Nowa_Firma form_Nowa_Firma = new Form_Nowa_Firma();
+            form_Nowa_Firma.Show();
+        }
+
+        private void button_Edytuj_firmy_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
