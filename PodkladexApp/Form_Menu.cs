@@ -27,9 +27,16 @@ namespace PodkladexApp
             new Form_Jakosc().Show();
         }
 
+        private void btn_Zaopatrzenie_Click(object sender, EventArgs e)
+        {
+            Form_ZaoLog form_ZaoLog = new Form_ZaoLog();
+            form_ZaoLog.Show();
+        }
+
         private void btn_Produkcja_Click(object sender, EventArgs e)
         {
-            new Form_Produkcja().Show();
+            Form_Maszyny form = new Form_Maszyny(db);
+            form.Show();
         }
     }
 }

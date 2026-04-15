@@ -28,28 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dataGridView1 = new DataGridView();
-            textBox1 = new TextBox();
+            dgv_Maszyny = new DataGridView();
+            txt_Nazwa_Maszyny = new TextBox();
             btn_dodaj = new Button();
             btn_edytuj = new Button();
             btn_usun = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            label1 = new Label();
+            ((System.ComponentModel.ISupportInitialize)dgv_Maszyny).BeginInit();
             SuspendLayout();
             // 
-            // dataGridView1
+            // dgv_Maszyny
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(78, 74);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(875, 547);
-            dataGridView1.TabIndex = 0;
+            dgv_Maszyny.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_Maszyny.Location = new Point(78, 74);
+            dgv_Maszyny.Name = "dgv_Maszyny";
+            dgv_Maszyny.Size = new Size(875, 547);
+            dgv_Maszyny.TabIndex = 0;
             // 
-            // textBox1
+            // txt_Nazwa_Maszyny
             // 
-            textBox1.Location = new Point(315, 28);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(374, 23);
-            textBox1.TabIndex = 1;
+            txt_Nazwa_Maszyny.Location = new Point(315, 28);
+            txt_Nazwa_Maszyny.Name = "txt_Nazwa_Maszyny";
+            txt_Nazwa_Maszyny.Size = new Size(374, 23);
+            txt_Nazwa_Maszyny.TabIndex = 1;
+            txt_Nazwa_Maszyny.TextChanged += txt_Nazwa_Maszyny_TextChanged;
             // 
             // btn_dodaj
             // 
@@ -81,29 +83,40 @@
             btn_usun.UseVisualStyleBackColor = true;
             btn_usun.Click += btn_dodaj_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(218, 31);
+            label1.Name = "label1";
+            label1.Size = new Size(91, 15);
+            label1.TabIndex = 5;
+            label1.Text = "Nazwa Maszyny";
+            // 
             // Form_Maszyny
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1028, 676);
+            Controls.Add(label1);
             Controls.Add(btn_usun);
             Controls.Add(btn_edytuj);
             Controls.Add(btn_dodaj);
-            Controls.Add(textBox1);
-            Controls.Add(dataGridView1);
+            Controls.Add(txt_Nazwa_Maszyny);
+            Controls.Add(dgv_Maszyny);
             Name = "Form_Maszyny";
             Text = "Form_Maszyny";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgv_Maszyny).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private DataGridView dataGridView1;
-        private TextBox textBox1;
+        private DataGridView dgv_Maszyny;
+        private TextBox txt_Nazwa_Maszyny;
         private Button btn_dodaj;
         private Button btn_edytuj;
         private Button btn_usun;
+        private Label label1;
     }
 }

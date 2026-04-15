@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PodkladexApp.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,22 +13,24 @@ namespace PodkladexApp
 {
     public partial class Form_DodajMaszyne : Form
     {
+        int btn;
         public Form_DodajMaszyne()
         {
             InitializeComponent();
         }
 
-        public Form_DodajMaszyne(string Nazwa)
+        public Form_DodajMaszyne(string Nazwa, Maszyna maszyna)
         {
             InitializeComponent();
             switch (Nazwa) 
             {
                 case "btn_dodaj":
                     label_tytul.Text = "Dodaj maszynę";
-
+                    btn = 1;
                     break;
                 case "btn_edytuj":
                     label_tytul.Text = "Edytuj maszynę";
+                    btn = 2;
                     break;
             }
         }
