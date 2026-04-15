@@ -1,6 +1,6 @@
 ﻿namespace PodkladexApp
 {
-    partial class ListaOsob
+    partial class Form_DodawanieOsoby
     {
         /// <summary>
         /// Required designer variable.
@@ -47,11 +47,7 @@
             textBox_numer = new TextBox();
             textBox_pesel = new TextBox();
             panel_daneosoby = new Panel();
-            label_idosoby = new Label();
-            btn_dodawanie = new Button();
-            btn_edytowanie = new Button();
-            btn_usuwanie = new Button();
-            comboBox_idosoby = new ComboBox();
+            btn_dodaj = new Button();
             panel_daneosoby.SuspendLayout();
             SuspendLayout();
             // 
@@ -219,76 +215,32 @@
             panel_daneosoby.Controls.Add(label_nrtelefonu);
             panel_daneosoby.Controls.Add(label_nazwisko);
             panel_daneosoby.Controls.Add(label_imie);
-            panel_daneosoby.Location = new Point(43, 99);
+            panel_daneosoby.Location = new Point(44, 23);
             panel_daneosoby.Name = "panel_daneosoby";
             panel_daneosoby.Size = new Size(736, 400);
             panel_daneosoby.TabIndex = 2;
             // 
-            // label_idosoby
+            // btn_dodaj
             // 
-            label_idosoby.AutoSize = true;
-            label_idosoby.Location = new Point(71, 49);
-            label_idosoby.Name = "label_idosoby";
-            label_idosoby.Size = new Size(41, 15);
-            label_idosoby.TabIndex = 0;
-            label_idosoby.Text = "Osoba";
+            btn_dodaj.Location = new Point(367, 469);
+            btn_dodaj.Name = "btn_dodaj";
+            btn_dodaj.Size = new Size(89, 23);
+            btn_dodaj.TabIndex = 3;
+            btn_dodaj.Text = "Dodaj";
+            btn_dodaj.UseVisualStyleBackColor = true;
             // 
-            // btn_dodawanie
-            // 
-            btn_dodawanie.Location = new Point(43, 545);
-            btn_dodawanie.Name = "btn_dodawanie";
-            btn_dodawanie.Size = new Size(75, 23);
-            btn_dodawanie.TabIndex = 3;
-            btn_dodawanie.Text = "Dodawanie";
-            btn_dodawanie.UseVisualStyleBackColor = true;
-            btn_dodawanie.Click += btn_dodawanie_Click;
-            // 
-            // btn_edytowanie
-            // 
-            btn_edytowanie.Location = new Point(366, 545);
-            btn_edytowanie.Name = "btn_edytowanie";
-            btn_edytowanie.Size = new Size(89, 23);
-            btn_edytowanie.TabIndex = 3;
-            btn_edytowanie.Text = "Edytuj";
-            btn_edytowanie.UseVisualStyleBackColor = true;
-            btn_edytowanie.Click += btn_edytowanie_Click;
-            // 
-            // btn_usuwanie
-            // 
-            btn_usuwanie.Location = new Point(703, 545);
-            btn_usuwanie.Name = "btn_usuwanie";
-            btn_usuwanie.Size = new Size(75, 23);
-            btn_usuwanie.TabIndex = 3;
-            btn_usuwanie.Text = "Usuń";
-            btn_usuwanie.UseVisualStyleBackColor = true;
-            btn_usuwanie.Click += btn_usuwanie_Click;
-            // 
-            // comboBox_idosoby
-            // 
-            comboBox_idosoby.FormattingEnabled = true;
-            comboBox_idosoby.Location = new Point(207, 41);
-            comboBox_idosoby.Name = "comboBox_idosoby";
-            comboBox_idosoby.Size = new Size(554, 23);
-            comboBox_idosoby.TabIndex = 4;
-            comboBox_idosoby.SelectedIndexChanged += comboBox_idosoby_SelectedIndexChanged;
-            // 
-            // ListaOsob
+            // DodawanieOsoby
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(908, 636);
-            Controls.Add(comboBox_idosoby);
-            Controls.Add(btn_usuwanie);
-            Controls.Add(btn_edytowanie);
-            Controls.Add(btn_dodawanie);
+            ClientSize = new Size(908, 524);
+            Controls.Add(btn_dodaj);
             Controls.Add(panel_daneosoby);
-            Controls.Add(label_idosoby);
-            Name = "ListaOsob";
+            Name = "DodawanieOsoby";
             Text = "Lista osób  ";
             panel_daneosoby.ResumeLayout(false);
             panel_daneosoby.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -312,10 +264,6 @@
         private TextBox textBox_numer;
         private TextBox textBox_pesel;
         private Panel panel_daneosoby;
-        private Label label_idosoby;
-        private Button btn_dodawanie;
-        private Button btn_edytowanie;
-        private Button btn_usuwanie;
-        private ComboBox comboBox_idosoby;
+        private Button btn_dodaj;
     }
 }

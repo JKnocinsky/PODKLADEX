@@ -11,11 +11,11 @@ using PodkladexApp.Models;
 
 namespace PodkladexApp
 {
-    public partial class DodawanieOsoby : Form
+    public partial class Form_DodawanieOsoby : Form
     {
         private PodkladexContext db;
 
-        public DodawanieOsoby()
+        public Form_DodawanieOsoby()
         {
             InitializeComponent();
 

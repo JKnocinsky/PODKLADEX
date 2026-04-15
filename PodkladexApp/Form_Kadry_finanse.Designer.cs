@@ -58,7 +58,7 @@
 
         private void btn_lista_Click(object sender, EventArgs e)
         {
-            ListaOsob formlista = new ListaOsob();
+            Form_ListaOsob formlista = new Form_ListaOsob();
             formlista.Show();
         }
     }
