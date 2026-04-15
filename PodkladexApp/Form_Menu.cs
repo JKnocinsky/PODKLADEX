@@ -21,5 +21,16 @@ namespace PodkladexApp
             formKadry.Show();
         }
 
+
+        private void btn_Kontrola_Jakosci_Click(object sender, EventArgs e)
+        {
+            new Form_Jakosc().Show();
+        }
+
+        private void btn_Zaopatrzenie_Click(object sender, EventArgs e)
+        {
+            Form_ZaoLog form_ZaoLog = new Form_ZaoLog();
+            form_ZaoLog.Show();
+        }
     }
 }

@@ -66,6 +66,7 @@
             btn_Zaopatrzenie.TabIndex = 2;
             btn_Zaopatrzenie.Text = "Zaopatrzenie i Logistyka";
             btn_Zaopatrzenie.UseVisualStyleBackColor = true;
+            btn_Zaopatrzenie.Click += btn_Zaopatrzenie_Click;
             // 
             // btn_Kontrola_Jakosci
             // 
@@ -76,6 +77,7 @@
             btn_Kontrola_Jakosci.TabIndex = 3;
             btn_Kontrola_Jakosci.Text = "Kontrola Jakości";
             btn_Kontrola_Jakosci.UseVisualStyleBackColor = true;
+            btn_Kontrola_Jakosci.Click += btn_Kontrola_Jakosci_Click;
             // 
             // btn_Utrzymanie_Ruchu
             // 
