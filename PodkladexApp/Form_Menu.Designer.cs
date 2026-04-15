@@ -45,6 +45,7 @@
             btn_Kadry.TabIndex = 0;
             btn_Kadry.Text = "Kadry i Finanse";
             btn_Kadry.UseVisualStyleBackColor = true;
+            btn_Kadry.Click += btn_Kadry_Click;
             // 
             // btn_Produkcja
             // 

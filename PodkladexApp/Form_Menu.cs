@@ -11,11 +11,16 @@ namespace PodkladexApp
             InitializeComponent();
             db = new PodkladexContext();
             List<Pracownik> pracownicy = db.Pracownik.ToList();
-            pracownicy.Add(new Pracownik { IdOsoba = 1 });
-            pracownicy.Add(new Pracownik { IdOsoba = 2 });
 
             comboBox1.DataSource = pracownicy;
         }
+
+        private void btn_Kadry_Click(object sender, EventArgs e)
+        {
+            Form_Kadry_finanse formKadry = new Form_Kadry_finanse();
+            formKadry.Show();
+        }
+
 
         private void btn_Kontrola_Jakosci_Click(object sender, EventArgs e)
         {
