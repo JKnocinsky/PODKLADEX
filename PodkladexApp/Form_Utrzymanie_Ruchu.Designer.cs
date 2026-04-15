@@ -28,12 +28,79 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form_Utrzymanie_Ruchu";
+            button_otworz_czesci_zamienne = new Button();
+            button_otworz_awaria = new Button();
+            button_otworz_obsluga = new Button();
+            button_otworz_normy_eksplatacyjne = new Button();
+            button_otworz_rodzaj_obslugi = new Button();
+            SuspendLayout();
+            // 
+            // button_otworz_czesci_zamienne
+            // 
+            button_otworz_czesci_zamienne.Location = new Point(28, 22);
+            button_otworz_czesci_zamienne.Name = "button_otworz_czesci_zamienne";
+            button_otworz_czesci_zamienne.Size = new Size(129, 55);
+            button_otworz_czesci_zamienne.TabIndex = 1;
+            button_otworz_czesci_zamienne.Text = "Części zamienne";
+            button_otworz_czesci_zamienne.UseVisualStyleBackColor = true;
+            // 
+            // button_otworz_awaria
+            // 
+            button_otworz_awaria.Location = new Point(28, 83);
+            button_otworz_awaria.Name = "button_otworz_awaria";
+            button_otworz_awaria.Size = new Size(129, 55);
+            button_otworz_awaria.TabIndex = 2;
+            button_otworz_awaria.Text = "Awaria";
+            button_otworz_awaria.UseVisualStyleBackColor = true;
+            // 
+            // button_otworz_obsluga
+            // 
+            button_otworz_obsluga.Location = new Point(28, 144);
+            button_otworz_obsluga.Name = "button_otworz_obsluga";
+            button_otworz_obsluga.Size = new Size(129, 55);
+            button_otworz_obsluga.TabIndex = 3;
+            button_otworz_obsluga.Text = "Obsługa";
+            button_otworz_obsluga.UseVisualStyleBackColor = true;
+            // 
+            // button_otworz_normy_eksplatacyjne
+            // 
+            button_otworz_normy_eksplatacyjne.Location = new Point(28, 266);
+            button_otworz_normy_eksplatacyjne.Name = "button_otworz_normy_eksplatacyjne";
+            button_otworz_normy_eksplatacyjne.Size = new Size(129, 55);
+            button_otworz_normy_eksplatacyjne.TabIndex = 5;
+            button_otworz_normy_eksplatacyjne.Text = "Normy Eksploatacyjne";
+            button_otworz_normy_eksplatacyjne.UseVisualStyleBackColor = true;
+            // 
+            // button_otworz_rodzaj_obslugi
+            // 
+            button_otworz_rodzaj_obslugi.Location = new Point(28, 205);
+            button_otworz_rodzaj_obslugi.Name = "button_otworz_rodzaj_obslugi";
+            button_otworz_rodzaj_obslugi.Size = new Size(129, 55);
+            button_otworz_rodzaj_obslugi.TabIndex = 6;
+            button_otworz_rodzaj_obslugi.Text = "Rodzaj obsługi";
+            button_otworz_rodzaj_obslugi.UseVisualStyleBackColor = true;
+            // 
+            // Form_Utrzymanie_Ruchu
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(button_otworz_rodzaj_obslugi);
+            Controls.Add(button_otworz_normy_eksplatacyjne);
+            Controls.Add(button_otworz_obsluga);
+            Controls.Add(button_otworz_awaria);
+            Controls.Add(button_otworz_czesci_zamienne);
+            Name = "Form_Utrzymanie_Ruchu";
+            Text = "Form_Utrzymanie_Ruchu";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Button button_otworz_czesci_zamienne;
+        private Button button_otworz_awaria;
+        private Button button_otworz_obsluga;
+        private Button button_otworz_normy_eksplatacyjne;
+        private Button button_otworz_rodzaj_obslugi;
     }
 }

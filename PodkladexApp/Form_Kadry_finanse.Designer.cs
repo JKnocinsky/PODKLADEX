@@ -28,12 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form_Kadry_finanse";
+            btn_Lista_osob = new Button();
+            SuspendLayout();
+            // 
+            // btn_Lista_osob
+            // 
+            btn_Lista_osob.Location = new Point(29, 29);
+            btn_Lista_osob.Name = "btn_Lista_osob";
+            btn_Lista_osob.Size = new Size(75, 23);
+            btn_Lista_osob.TabIndex = 0;
+            btn_Lista_osob.Text = "Lista Osób";
+            btn_Lista_osob.UseVisualStyleBackColor = true;
+            btn_Lista_osob.Click += btn_lista_Click;
+            // 
+            // Form_Kadry_finanse
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(btn_Lista_osob);
+            Name = "Form_Kadry_finanse";
+            Text = "Form_Kadry_finanse";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Button btn_Lista_osob;
+
+        private void btn_lista_Click(object sender, EventArgs e)
+        {
+            ListaOsob formlista = new ListaOsob();
+            formlista.Show();
+        }
     }
 }
