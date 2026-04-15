@@ -26,5 +26,10 @@ namespace PodkladexApp
         {
             new Form_Jakosc().Show();
         }
+
+        private void btn_Produkcja_Click(object sender, EventArgs e)
+        {
+            new Form_Produkcja().Show();
+        }
     }
 }

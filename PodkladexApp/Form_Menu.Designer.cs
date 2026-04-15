@@ -56,6 +56,7 @@
             btn_Produkcja.TabIndex = 1;
             btn_Produkcja.Text = "Produkcja";
             btn_Produkcja.UseVisualStyleBackColor = true;
+            btn_Produkcja.Click += btn_Produkcja_Click;
             // 
             // btn_Zaopatrzenie
             // 

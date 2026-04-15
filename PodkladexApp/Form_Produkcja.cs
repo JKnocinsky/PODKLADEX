@@ -16,5 +16,10 @@ namespace PodkladexApp
         {
             InitializeComponent();
         }
+
+        private void btn_maszyny_Click(object sender, EventArgs e)
+        {
+            new Form_Maszyny().Show();
+        }
     }
 }

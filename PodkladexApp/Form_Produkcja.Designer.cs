@@ -28,12 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form_Produkcja";
+            btn_maszyny = new Button();
+            SuspendLayout();
+            // 
+            // btn_maszyny
+            // 
+            btn_maszyny.Location = new Point(55, 45);
+            btn_maszyny.Name = "btn_maszyny";
+            btn_maszyny.Size = new Size(160, 38);
+            btn_maszyny.TabIndex = 0;
+            btn_maszyny.Text = "Maszyny";
+            btn_maszyny.UseVisualStyleBackColor = true;
+            btn_maszyny.Click += btn_maszyny_Click;
+            // 
+            // Form_Produkcja
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(btn_maszyny);
+            Name = "Form_Produkcja";
+            Text = "Form_Produkcja";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Button btn_maszyny;
     }
 }
