@@ -1,0 +1,270 @@
+﻿{
+   "CodeGenerationMode": 5,
+   "ContextClassName": "PodkladexContext",
+   "ContextNamespace": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": true,
+   "IrregularWords": null,
+   "MinimumProductVersion": "2.6.1465",
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PluralRules": null,
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "PodkladexApp",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 0,
+   "SingularRules": null,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[dbo].[Awaria]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Badanie_medyczne]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Czesci_awaria]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Czesci_przeglady]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Czesci_zamienne]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Dostawa]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Firma]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Gwarancja]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Jednostki]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Klient]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Klient_firma]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Kontrola_mat]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Kontrola_prod]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Maszyna]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Maszyna_typ]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Maszyna_wyp]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Material]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Material_wlasciwosci]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Norma_prod]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Normy]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Normy_eksploatacyjne]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Normy_maszyna]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Obsluga]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Osoba]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Pomiar]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Pomiar_mat]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Pracownik]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Pracownik_szkolenia]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Produkcja]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Produkty]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Produkty_Normy]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Produkty_wlasciwosci]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Rodzaj_materialu]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Rodzaj_obslugi]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Rodzaj_umowy]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Siatka_plac]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Szczegoly_dostawy]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Szczegoly_zamowienia]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Szkolenia]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Typ]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Typ_badania_med]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Typ_wlasciwosci]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Typ_zwolnienie]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Umowa]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Urlop]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Urlop_umowa]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Wlasciwosci]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Wniosek_urlopowy]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Wyposazenie]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Wyposazenie_wlasciwosci]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Wysylka]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Wysylka_zamowienie]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Zadanie_produkcyjne]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Zamowienie]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Zwolnienie_lekarskie]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": null,
+   "UncountableWords": null,
+   "UseAsyncStoredProcedureCalls": true,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDatabaseNamesForRoutines": true,
+   "UseDateOnlyTimeOnly": true,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseInternalAccessModifiersForSprocsAndFunctions": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false,
+   "UseT4Split": false,
+   "UseTypedTvpParameters": true
+}
