@@ -38,10 +38,8 @@
             button_dodaj_gwarancje = new Button();
             label1 = new Label();
             comboBox_lista_firm = new ComboBox();
-            label_datausuniecia = new Label();
-            dtp_data_koniec_gwarancji = new DateTimePicker();
-            label_data_poczatek_gwarancji = new Label();
-            dtp_data_poczatek_gwarancji = new DateTimePicker();
+            label2 = new Label();
+            textBox_miesiace_gwarancji = new TextBox();
             SuspendLayout();
             // 
             // button_powrot_z_gwarancja
@@ -138,49 +136,30 @@
             comboBox_lista_firm.Size = new Size(213, 28);
             comboBox_lista_firm.TabIndex = 30;
             // 
-            // label_datausuniecia
+            // label2
             // 
-            label_datausuniecia.AutoSize = true;
-            label_datausuniecia.Location = new Point(259, 177);
-            label_datausuniecia.Name = "label_datausuniecia";
-            label_datausuniecia.Size = new Size(159, 20);
-            label_datausuniecia.TabIndex = 35;
-            label_datausuniecia.Text = "Data Koniec Gwarancji";
+            label2.AutoSize = true;
+            label2.Location = new Point(12, 174);
+            label2.Name = "label2";
+            label2.Size = new Size(232, 20);
+            label2.TabIndex = 33;
+            label2.Text = "Czas trwania gwarancji (miesiące)";
             // 
-            // dtp_data_koniec_gwarancji
+            // textBox_miesiace_gwarancji
             // 
-            dtp_data_koniec_gwarancji.Location = new Point(259, 205);
-            dtp_data_koniec_gwarancji.Margin = new Padding(3, 4, 3, 4);
-            dtp_data_koniec_gwarancji.Name = "dtp_data_koniec_gwarancji";
-            dtp_data_koniec_gwarancji.Size = new Size(228, 27);
-            dtp_data_koniec_gwarancji.TabIndex = 34;
-            // 
-            // label_data_poczatek_gwarancji
-            // 
-            label_data_poczatek_gwarancji.AutoSize = true;
-            label_data_poczatek_gwarancji.Location = new Point(12, 177);
-            label_data_poczatek_gwarancji.Name = "label_data_poczatek_gwarancji";
-            label_data_poczatek_gwarancji.Size = new Size(172, 20);
-            label_data_poczatek_gwarancji.TabIndex = 33;
-            label_data_poczatek_gwarancji.Text = "Data Początek Gwarancji";
-            // 
-            // dtp_data_poczatek_gwarancji
-            // 
-            dtp_data_poczatek_gwarancji.Location = new Point(12, 205);
-            dtp_data_poczatek_gwarancji.Margin = new Padding(3, 4, 3, 4);
-            dtp_data_poczatek_gwarancji.Name = "dtp_data_poczatek_gwarancji";
-            dtp_data_poczatek_gwarancji.Size = new Size(228, 27);
-            dtp_data_poczatek_gwarancji.TabIndex = 32;
+            textBox_miesiace_gwarancji.Location = new Point(12, 207);
+            textBox_miesiace_gwarancji.Margin = new Padding(3, 4, 3, 4);
+            textBox_miesiace_gwarancji.Name = "textBox_miesiace_gwarancji";
+            textBox_miesiace_gwarancji.Size = new Size(426, 27);
+            textBox_miesiace_gwarancji.TabIndex = 32;
             // 
             // Form_Gwarancja
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(label_datausuniecia);
-            Controls.Add(dtp_data_koniec_gwarancji);
-            Controls.Add(label_data_poczatek_gwarancji);
-            Controls.Add(dtp_data_poczatek_gwarancji);
+            Controls.Add(label2);
+            Controls.Add(textBox_miesiace_gwarancji);
             Controls.Add(label1);
             Controls.Add(comboBox_lista_firm);
             Controls.Add(button_powrot_z_gwarancja);
@@ -209,9 +188,7 @@
         private Button button_dodaj_gwarancje;
         private Label label1;
         private ComboBox comboBox_lista_firm;
-        private Label label_datausuniecia;
-        private DateTimePicker dtp_data_koniec_gwarancji;
-        private Label label_data_poczatek_gwarancji;
-        private DateTimePicker dtp_data_poczatek_gwarancji;
+        private Label label2;
+        private TextBox textBox_miesiace_gwarancji;
     }
 }
