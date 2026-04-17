@@ -51,6 +51,7 @@
             button_powrot_z_czesci_zamienne.TabIndex = 17;
             button_powrot_z_czesci_zamienne.Text = "Powrót";
             button_powrot_z_czesci_zamienne.UseVisualStyleBackColor = true;
+            button_powrot_z_czesci_zamienne.Click += button_powrot_z_czesci_zamienne_Click;
             // 
             // label_lista_rodzajow
             // 
@@ -98,7 +99,6 @@
             label_dodajczesc.Size = new Size(107, 20);
             label_dodajczesc.TabIndex = 12;
             label_dodajczesc.Text = "Nazwa obsługi";
-            label_dodajczesc.Click += this.label_dodajczesc_Click;
             // 
             // textBox_nazwa_obslugi
             // 

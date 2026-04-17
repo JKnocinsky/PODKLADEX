@@ -235,6 +235,7 @@
             button_powrot_z_obsluga.TabIndex = 19;
             button_powrot_z_obsluga.Text = "Powrót";
             button_powrot_z_obsluga.UseVisualStyleBackColor = true;
+            button_powrot_z_obsluga.Click += button_powrot_z_obsluga_Click;
             // 
             // label1
             // 

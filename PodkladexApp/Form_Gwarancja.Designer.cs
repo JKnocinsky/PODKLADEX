@@ -53,6 +53,7 @@
             button_powrot_z_gwarancja.TabIndex = 29;
             button_powrot_z_gwarancja.Text = "Powrót";
             button_powrot_z_gwarancja.UseVisualStyleBackColor = true;
+            button_powrot_z_gwarancja.Click += button_powrot_z_gwarancja_Click;
             // 
             // label_lista_rodzajow
             // 
@@ -191,7 +192,7 @@
             Controls.Add(textBox_warunki_gwarancji);
             Controls.Add(button_dodaj_gwarancje);
             Name = "Form_Gwarancja";
-            Text = "Gwarnacja";
+            Text = "Gwarancja";
             ResumeLayout(false);
             PerformLayout();
         }

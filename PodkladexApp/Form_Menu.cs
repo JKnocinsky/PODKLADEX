@@ -38,5 +38,11 @@ namespace PodkladexApp
             Form_Maszyny form = new Form_Maszyny(db);
             form.Show();
         }
+
+        private void btn_Utrzymanie_Ruchu_Click(object sender, EventArgs e)
+        {
+            Form_Utrzymanie_Ruchu form = new Form_Utrzymanie_Ruchu(db);
+            form.Show();
+        }
     }
 }

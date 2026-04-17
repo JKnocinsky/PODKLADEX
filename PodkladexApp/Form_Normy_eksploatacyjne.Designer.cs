@@ -71,6 +71,7 @@
             button_powrot_z_normy.TabIndex = 29;
             button_powrot_z_normy.Text = "Powrót";
             button_powrot_z_normy.UseVisualStyleBackColor = true;
+            button_powrot_z_normy.Click += button_powrot_z_normy_Click;
             // 
             // label_lista_norm
             // 

@@ -45,6 +45,7 @@
             button_otworz_czesci_zamienne.TabIndex = 1;
             button_otworz_czesci_zamienne.Text = "Części zamienne";
             button_otworz_czesci_zamienne.UseVisualStyleBackColor = true;
+            button_otworz_czesci_zamienne.Click += button_otworz_czesci_zamienne_Click;
             // 
             // button_otworz_awaria
             // 
@@ -55,6 +56,7 @@
             button_otworz_awaria.TabIndex = 2;
             button_otworz_awaria.Text = "Awaria";
             button_otworz_awaria.UseVisualStyleBackColor = true;
+            button_otworz_awaria.Click += button_otworz_awaria_Click;
             // 
             // button_otworz_obsluga
             // 
@@ -65,6 +67,7 @@
             button_otworz_obsluga.TabIndex = 3;
             button_otworz_obsluga.Text = "Obsługa";
             button_otworz_obsluga.UseVisualStyleBackColor = true;
+            button_otworz_obsluga.Click += button_otworz_obsluga_Click;
             // 
             // button_otworz_normy_eksplatacyjne
             // 
@@ -75,6 +78,7 @@
             button_otworz_normy_eksplatacyjne.TabIndex = 5;
             button_otworz_normy_eksplatacyjne.Text = "Normy Eksploatacyjne";
             button_otworz_normy_eksplatacyjne.UseVisualStyleBackColor = true;
+            button_otworz_normy_eksplatacyjne.Click += button_otworz_normy_eksplatacyjne_Click;
             // 
             // button_otworz_rodzaj_obslugi
             // 
@@ -85,6 +89,7 @@
             button_otworz_rodzaj_obslugi.TabIndex = 6;
             button_otworz_rodzaj_obslugi.Text = "Rodzaj obsługi";
             button_otworz_rodzaj_obslugi.UseVisualStyleBackColor = true;
+            button_otworz_rodzaj_obslugi.Click += button_otworz_rodzaj_obslugi_Click;
             // 
             // button_otworz_gwarancja
             // 
@@ -95,6 +100,7 @@
             button_otworz_gwarancja.TabIndex = 7;
             button_otworz_gwarancja.Text = "Gwarancja";
             button_otworz_gwarancja.UseVisualStyleBackColor = true;
+            button_otworz_gwarancja.Click += button_otworz_gwarancja_Click;
             // 
             // Form_Utrzymanie_Ruchu
             // 
@@ -109,7 +115,7 @@
             Controls.Add(button_otworz_czesci_zamienne);
             Margin = new Padding(3, 4, 3, 4);
             Name = "Form_Utrzymanie_Ruchu";
-            Text = "Form_Utrzymanie_Ruchu";
+            Text = "Utrzymanie_Ruchu";
             ResumeLayout(false);
         }
 
