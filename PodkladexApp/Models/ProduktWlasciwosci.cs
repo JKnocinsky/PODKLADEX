@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace PodkladexApp.Models;
 
-public partial class ProduktyWlasciwosci
+public partial class ProduktWlasciwosci
 {
     public int IdProduktyWlasciwosci { get; set; }
 
@@ -17,7 +17,7 @@ public partial class ProduktyWlasciwosci
 
     public decimal WartoscMaksymalna { get; set; }
 
-    public virtual Produkty IdProduktNavigation { get; set; }
+    public virtual Produkt IdProduktNavigation { get; set; }
 
-    public virtual Wlasciwosci IdWlasciwosciNavigation { get; set; }
+    public virtual Wlasciwosc IdWlasciwosciNavigation { get; set; }
 }

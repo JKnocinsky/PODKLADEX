@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace PodkladexApp.Models;
 
-public partial class Wlasciwosci
+public partial class Wlasciwosc
 {
     public int IdWlasciwosci { get; set; }
 
@@ -13,7 +13,7 @@ public partial class Wlasciwosci
 
     public int IdJednostki { get; set; }
 
-    public virtual Jednostki IdJednostkiNavigation { get; set; }
+    public virtual Jednostka IdJednostkiNavigation { get; set; }
 
     public virtual ICollection<MaterialWlasciwosci> MaterialWlasciwosci { get; set; } = new List<MaterialWlasciwosci>();
 
@@ -21,7 +21,7 @@ public partial class Wlasciwosci
 
     public virtual ICollection<PomiarMat> PomiarMat { get; set; } = new List<PomiarMat>();
 
-    public virtual ICollection<ProduktyWlasciwosci> ProduktyWlasciwosci { get; set; } = new List<ProduktyWlasciwosci>();
+    public virtual ICollection<ProduktWlasciwosci> ProduktWlasciwosci { get; set; } = new List<ProduktWlasciwosci>();
 
     public virtual ICollection<TypWlasciwosci> TypWlasciwosci { get; set; } = new List<TypWlasciwosci>();
 

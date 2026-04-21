@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace PodkladexApp.Models;
 
-public partial class Szkolenia
+public partial class Szkolenie
 {
     public int IdSzkolenia { get; set; }
 

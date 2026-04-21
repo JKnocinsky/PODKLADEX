@@ -5,13 +5,15 @@ using System.Collections.Generic;
 
 namespace PodkladexApp.Models;
 
-public partial class Normy
+public partial class ProduktNorma
 {
+    public int IdProduktyNormy { get; set; }
+
     public int IdNormy { get; set; }
 
-    public string Nazwa { get; set; }
+    public int IdProdukt { get; set; }
 
-    public string Opis { get; set; }
+    public virtual Norma IdNormyNavigation { get; set; }
 
-    public virtual ICollection<ProduktyNormy> ProduktyNormy { get; set; } = new List<ProduktyNormy>();
+    public virtual Produkt IdProduktNavigation { get; set; }
 }

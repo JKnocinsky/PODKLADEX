@@ -9,9 +9,9 @@ public partial class NormyMaszyna
 {
     public int IdNormyMaszyna { get; set; }
 
-    public int? IdNormyEkspl { get; set; }
+    public int IdNormyEkspl { get; set; }
 
-    public int? IdMaszyna { get; set; }
+    public int IdMaszyna { get; set; }
 
     public decimal Wartosc { get; set; }
 

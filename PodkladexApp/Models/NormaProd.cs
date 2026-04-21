@@ -23,7 +23,7 @@ public partial class NormaProd
 
     public virtual Material IdMaterialNavigation { get; set; }
 
-    public virtual Produkty IdProduktNavigation { get; set; }
+    public virtual Produkt IdProduktNavigation { get; set; }
 
     public virtual ICollection<MaszynaWyp> MaszynaWyp { get; set; } = new List<MaszynaWyp>();
 

@@ -17,7 +17,7 @@ public partial class KontrolaProd
 
     public decimal? Odpady { get; set; }
 
-    public int? IdZadanieP { get; set; }
+    public int IdZadanieP { get; set; }
 
     public virtual Pracownik IdPracownikNavigation { get; set; }
 

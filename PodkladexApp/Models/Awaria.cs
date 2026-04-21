@@ -9,15 +9,15 @@ public partial class Awaria
 {
     public int IdAwaria { get; set; }
 
-    public int? IdMaszyna { get; set; }
+    public int IdMaszyna { get; set; }
 
     public DateOnly DataZgloszenia { get; set; }
 
-    public int? IdPracownik { get; set; }
+    public int IdPracownik { get; set; }
 
     public string Opis { get; set; }
 
-    public DateOnly DataUsuniecia { get; set; }
+    public DateOnly? DataUsuniecia { get; set; }
 
     public virtual ICollection<CzesciAwaria> CzesciAwaria { get; set; } = new List<CzesciAwaria>();
 

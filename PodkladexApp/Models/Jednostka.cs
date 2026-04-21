@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace PodkladexApp.Models;
 
-public partial class Jednostki
+public partial class Jednostka
 {
     public int IdJednostki { get; set; }
 
     public string NazwaJednostki { get; set; }
 
-    public virtual ICollection<Wlasciwosci> Wlasciwosci { get; set; } = new List<Wlasciwosci>();
+    public virtual ICollection<Wlasciwosc> Wlasciwosc { get; set; } = new List<Wlasciwosc>();
 }

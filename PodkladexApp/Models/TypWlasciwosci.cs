@@ -17,5 +17,5 @@ public partial class TypWlasciwosci
 
     public virtual Typ IdTypNavigation { get; set; }
 
-    public virtual Wlasciwosci IdWlasciwosciNavigation { get; set; }
+    public virtual Wlasciwosc IdWlasciwosciNavigation { get; set; }
 }

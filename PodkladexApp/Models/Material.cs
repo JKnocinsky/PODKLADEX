@@ -13,13 +13,17 @@ public partial class Material
 
     public string Opis { get; set; }
 
-    public virtual ICollection<Dostawa> Dostawa { get; set; } = new List<Dostawa>();
+    public int IdRodzaj { get; set; }
+
+    public virtual RodzajMaterialu IdRodzajNavigation { get; set; }
 
     public virtual ICollection<KontrolaMat> KontrolaMat { get; set; } = new List<KontrolaMat>();
 
     public virtual ICollection<MaterialWlasciwosci> MaterialWlasciwosci { get; set; } = new List<MaterialWlasciwosci>();
 
     public virtual ICollection<NormaProd> NormaProd { get; set; } = new List<NormaProd>();
+
+    public virtual ICollection<SzczegolyDostawy> SzczegolyDostawy { get; set; } = new List<SzczegolyDostawy>();
 
     public virtual ICollection<SzczegolyZamowienia> SzczegolyZamowienia { get; set; } = new List<SzczegolyZamowienia>();
 }

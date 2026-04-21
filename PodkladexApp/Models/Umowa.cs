@@ -9,13 +9,13 @@ public partial class Umowa
 {
     public int IdUmowa { get; set; }
 
-    public int? IdPracownik { get; set; }
+    public int IdPracownik { get; set; }
 
     public DateOnly DataRoz { get; set; }
 
     public DateOnly DataZak { get; set; }
 
-    public int? IdRodzaju { get; set; }
+    public int IdRodzaju { get; set; }
 
     public virtual Pracownik IdPracownikNavigation { get; set; }
 

@@ -11,7 +11,7 @@ public partial class SzczegolyZamowienia
 
     public int IdZamowienie { get; set; }
 
-    public int? IdProdukt { get; set; }
+    public int IdProdukt { get; set; }
 
     public decimal Ilosc { get; set; }
 
@@ -23,7 +23,7 @@ public partial class SzczegolyZamowienia
 
     public virtual Material IdMaterialNavigation { get; set; }
 
-    public virtual Produkty IdProduktNavigation { get; set; }
+    public virtual Produkt IdProduktNavigation { get; set; }
 
     public virtual Zamowienie IdZamowienieNavigation { get; set; }
 }

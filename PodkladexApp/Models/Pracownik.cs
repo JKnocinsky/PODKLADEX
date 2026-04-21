@@ -9,7 +9,7 @@ public partial class Pracownik
 {
     public int IdPracownik { get; set; }
 
-    public int? IdOsoba { get; set; }
+    public int IdOsoba { get; set; }
 
     public virtual ICollection<Awaria> Awaria { get; set; } = new List<Awaria>();
 

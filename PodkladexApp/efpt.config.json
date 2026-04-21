@@ -27,15 +27,15 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[Czesc_zamienna]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Czesci_awaria]",
          "ObjectType": 0
       },
       {
          "Name": "[dbo].[Czesci_przeglady]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[Czesci_zamienne]",
          "ObjectType": 0
       },
       {
@@ -51,7 +51,7 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[Jednostki]",
+         "Name": "[dbo].[Jednostka]",
          "ObjectType": 0
       },
       {
@@ -91,11 +91,11 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[Norma_prod]",
+         "Name": "[dbo].[Norma]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[Normy]",
+         "Name": "[dbo].[Norma_prod]",
          "ObjectType": 0
       },
       {
@@ -135,15 +135,15 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[Produkty]",
+         "Name": "[dbo].[Produkt]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[Produkty_Normy]",
+         "Name": "[dbo].[Produkt_Norma]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[Produkty_wlasciwosci]",
+         "Name": "[dbo].[Produkt_wlasciwosci]",
          "ObjectType": 0
       },
       {
@@ -171,7 +171,7 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[Szkolenia]",
+         "Name": "[dbo].[Szkolenie]",
          "ObjectType": 0
       },
       {
@@ -187,7 +187,7 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[Typ_zwolnienie]",
+         "Name": "[dbo].[Typ_zwolnienia]",
          "ObjectType": 0
       },
       {
@@ -203,7 +203,7 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[Wlasciwosci]",
+         "Name": "[dbo].[Wlasciwosc]",
          "ObjectType": 0
       },
       {

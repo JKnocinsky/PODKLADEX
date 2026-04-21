@@ -9,13 +9,13 @@ public partial class CzesciAwaria
 {
     public int IdCzesciAwaria { get; set; }
 
-    public int? IdCzesci { get; set; }
+    public int IdCzesci { get; set; }
 
-    public int? IdAwaria { get; set; }
+    public int IdAwaria { get; set; }
 
     public int Liczba { get; set; }
 
     public virtual Awaria IdAwariaNavigation { get; set; }
 
-    public virtual CzesciZamienne IdCzesciNavigation { get; set; }
+    public virtual CzescZamienna IdCzesciNavigation { get; set; }
 }

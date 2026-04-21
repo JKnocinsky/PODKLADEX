@@ -9,9 +9,9 @@ public partial class UrlopUmowa
 {
     public int IdUrlopUmowa { get; set; }
 
-    public int? IdUmowy { get; set; }
+    public int IdUmowy { get; set; }
 
-    public int? IdUrlopu { get; set; }
+    public int IdUrlopu { get; set; }
 
     public decimal LiczbaDni { get; set; }
 
