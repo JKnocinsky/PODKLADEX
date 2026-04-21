@@ -25,6 +25,9 @@
     <Compile Update="Form_Obsluga.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Zaopatrzenie\Form_Firma_edycja.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>
