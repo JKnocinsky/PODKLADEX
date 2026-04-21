@@ -30,6 +30,7 @@
         {
             button_Nowa_firma = new Button();
             button_Edytuj_firmy = new Button();
+            button_konf_mat = new Button();
             SuspendLayout();
             // 
             // button_Nowa_firma
@@ -54,11 +55,23 @@
             button_Edytuj_firmy.UseVisualStyleBackColor = true;
             button_Edytuj_firmy.Click += button_Edytuj_firmy_Click;
             // 
+            // button_konf_mat
+            // 
+            button_konf_mat.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
+            button_konf_mat.Location = new Point(31, 171);
+            button_konf_mat.Name = "button_konf_mat";
+            button_konf_mat.Size = new Size(236, 67);
+            button_konf_mat.TabIndex = 2;
+            button_konf_mat.Text = "Konfiguruj dane materiałowe";
+            button_konf_mat.UseVisualStyleBackColor = true;
+            button_konf_mat.Click += button_konf_mat_Click;
+            // 
             // Form_ZaoLog
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(button_konf_mat);
             Controls.Add(button_Edytuj_firmy);
             Controls.Add(button_Nowa_firma);
             Name = "Form_ZaoLog";
@@ -70,5 +83,6 @@
 
         private Button button_Nowa_firma;
         private Button button_Edytuj_firmy;
+        private Button button_konf_mat;
     }
 }

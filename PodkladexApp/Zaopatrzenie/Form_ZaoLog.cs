@@ -27,5 +27,10 @@ namespace PodkladexApp
         {
 
         }
+
+        private void button_konf_mat_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
