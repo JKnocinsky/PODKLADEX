@@ -285,6 +285,7 @@ namespace PodkladexApp.Zaopatrzenie
             textBox_NIP.Name = "textBox_NIP";
             textBox_NIP.Size = new Size(172, 38);
             textBox_NIP.TabIndex = 16;
+            textBox_NIP.TextChanged += textBox_NIP_TextChanged;
             // 
             // label_nazwa_firmy
             // 
@@ -304,6 +305,7 @@ namespace PodkladexApp.Zaopatrzenie
             textBox_nazwa_firmy.Name = "textBox_nazwa_firmy";
             textBox_nazwa_firmy.Size = new Size(172, 38);
             textBox_nazwa_firmy.TabIndex = 18;
+            textBox_nazwa_firmy.TextChanged += textBox_nazwa_firmy_TextChanged;
             // 
             // Form_Zamowienie
             // 

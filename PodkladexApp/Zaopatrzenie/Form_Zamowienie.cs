@@ -66,5 +66,15 @@ namespace PodkladexApp.Zaopatrzenie
         {
 
         }
+
+        private void textBox_nazwa_firmy_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox_NIP_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
