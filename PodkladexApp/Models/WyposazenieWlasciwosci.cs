@@ -15,7 +15,7 @@ public partial class WyposazenieWlasciwosci
 
     public decimal Wartosc { get; set; }
 
-    public virtual Wlasciwosci IdWlasciwosciNavigation { get; set; }
+    public virtual Wlasciwosc IdWlasciwosciNavigation { get; set; }
 
     public virtual Wyposazenie IdWyposazenieNavigation { get; set; }
 }

@@ -15,7 +15,7 @@ public partial class KlientFirma
 
     public DateOnly DataPocz { get; set; }
 
-    public DateOnly DataKoniec { get; set; }
+    public DateOnly? DataKoniec { get; set; }
 
     public virtual Firma IdFirmaNavigation { get; set; }
 

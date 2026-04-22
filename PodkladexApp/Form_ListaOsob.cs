@@ -12,7 +12,7 @@ using PodkladexApp.Models;
 
 namespace PodkladexApp
 {
-    public partial class ListaOsob : Form
+    public partial class Form_ListaOsob : Form
     {
         private PodkladexContext db;
 
@@ -24,7 +24,7 @@ namespace PodkladexApp
             ZaladujOsobyDoComboBox();
         }
 
-        public ListaOsob()
+        public Form_ListaOsob()
         {
             InitializeComponent();
 
@@ -228,6 +228,21 @@ namespace PodkladexApp
             textBox_ulica.Text = "";
             textBox_numer.Text = "";
             textBox_pesel.Text = "";
+        }
+
+        private void textBox_numertelefonu_TextChanged(object sender, EventArgs e)
+        {
+            string numer = textBox_numertelefonu.Text;
+            try
+            {
+                int telefon = Convert.ToInt32(textBox_numertelefonu.Text);
+            }
+            catch (Exception)
+            {
+
+                    textBox_numertelefonu.Text = numer.Substring(0,numer.Length-1);
+
+            }
         }
     }
 }

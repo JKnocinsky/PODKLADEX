@@ -9,17 +9,17 @@ public partial class Obsluga
 {
     public int IdObsluga { get; set; }
 
-    public int? IdMaszyna { get; set; }
+    public int IdMaszyna { get; set; }
 
     public DateOnly DataPoczatek { get; set; }
 
-    public int? IdPracownik { get; set; }
+    public int IdPracownik { get; set; }
 
-    public int? IdRodzajObslugi { get; set; }
+    public int IdRodzajObslugi { get; set; }
 
     public string Uwagi { get; set; }
 
-    public DateOnly DataKoniec { get; set; }
+    public DateOnly? DataKoniec { get; set; }
 
     public decimal Przebieg { get; set; }
 

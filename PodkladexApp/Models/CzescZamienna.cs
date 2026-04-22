@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace PodkladexApp.Models;
 
-public partial class CzesciZamienne
+public partial class CzescZamienna
 {
     public int IdCzesci { get; set; }
 

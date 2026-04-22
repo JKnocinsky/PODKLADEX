@@ -17,5 +17,5 @@ public partial class PomiarMat
 
     public virtual KontrolaMat IdKontrolaMatNavigation { get; set; }
 
-    public virtual Wlasciwosci IdWlasciwosciNavigation { get; set; }
+    public virtual Wlasciwosc IdWlasciwosciNavigation { get; set; }
 }

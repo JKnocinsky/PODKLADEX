@@ -1,6 +1,6 @@
-﻿namespace PodkladexApp
+﻿namespace PodkladexApp.Zaopatrzenie
 {
-    partial class Form_Produkcja
+    partial class Form_Konf_mat
     {
         /// <summary>
         /// Required designer variable.
@@ -28,32 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btn_maszyny = new Button();
+            button1 = new Button();
             SuspendLayout();
             // 
-            // btn_maszyny
+            // button1
             // 
-            btn_maszyny.Location = new Point(55, 45);
-            btn_maszyny.Name = "btn_maszyny";
-            btn_maszyny.Size = new Size(160, 38);
-            btn_maszyny.TabIndex = 0;
-            btn_maszyny.Text = "Maszyny";
-            btn_maszyny.UseVisualStyleBackColor = true;
-            btn_maszyny.Click += btn_maszyny_Click;
+            button1.Location = new Point(61, 53);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 0;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
             // 
-            // Form_Produkcja
+            // Form_Konf_mat
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(btn_maszyny);
-            Name = "Form_Produkcja";
-            Text = "Form_Produkcja";
+            Controls.Add(button1);
+            Name = "Form_Konf_mat";
+            Text = "Form1";
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Button btn_maszyny;
+        private Button button1;
     }
 }

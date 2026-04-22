@@ -19,5 +19,5 @@ public partial class PracownikSzkolenia
 
     public virtual Pracownik IdPracownikNavigation { get; set; }
 
-    public virtual Szkolenia IdSzkoleniaNavigation { get; set; }
+    public virtual Szkolenie IdSzkoleniaNavigation { get; set; }
 }

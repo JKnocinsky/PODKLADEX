@@ -40,28 +40,29 @@
             // 
             // button_dodaj_czesc
             // 
-            button_dodaj_czesc.Location = new Point(31, 21);
+            button_dodaj_czesc.Location = new Point(247, 12);
             button_dodaj_czesc.Name = "button_dodaj_czesc";
             button_dodaj_czesc.Size = new Size(129, 55);
             button_dodaj_czesc.TabIndex = 0;
             button_dodaj_czesc.Text = "Dodaj Część";
             button_dodaj_czesc.UseVisualStyleBackColor = true;
+            button_dodaj_czesc.Click += button_dodaj_czesc_Click;
             // 
             // textBox_nazwa_czesci
             // 
-            textBox_nazwa_czesci.Location = new Point(203, 53);
+            textBox_nazwa_czesci.Location = new Point(31, 44);
             textBox_nazwa_czesci.Name = "textBox_nazwa_czesci";
-            textBox_nazwa_czesci.Size = new Size(100, 23);
+            textBox_nazwa_czesci.Size = new Size(187, 23);
             textBox_nazwa_czesci.TabIndex = 1;
             // 
             // label_dodajczesc
             // 
             label_dodajczesc.AutoSize = true;
-            label_dodajczesc.Location = new Point(203, 21);
+            label_dodajczesc.Location = new Point(31, 12);
             label_dodajczesc.Name = "label_dodajczesc";
-            label_dodajczesc.Size = new Size(71, 15);
+            label_dodajczesc.Size = new Size(75, 15);
             label_dodajczesc.TabIndex = 2;
-            label_dodajczesc.Text = "Dodaj Część";
+            label_dodajczesc.Text = "Nazwa Część";
             // 
             // button_edytuj_czesc
             // 
@@ -71,6 +72,7 @@
             button_edytuj_czesc.TabIndex = 3;
             button_edytuj_czesc.Text = "Edytuj Część";
             button_edytuj_czesc.UseVisualStyleBackColor = true;
+            button_edytuj_czesc.Click += button_edytuj_czesc_Click;
             // 
             // button_usun_czesc
             // 
@@ -80,6 +82,7 @@
             button_usun_czesc.TabIndex = 6;
             button_usun_czesc.Text = "Usuń część";
             button_usun_czesc.UseVisualStyleBackColor = true;
+            button_usun_czesc.Click += button_usun_czesc_Click;
             // 
             // comboBox_lista_czesci
             // 
@@ -88,6 +91,7 @@
             comboBox_lista_czesci.Name = "comboBox_lista_czesci";
             comboBox_lista_czesci.Size = new Size(187, 23);
             comboBox_lista_czesci.TabIndex = 7;
+            comboBox_lista_czesci.SelectedIndexChanged += comboBox_lista_czesci_SelectedIndexChanged;
             // 
             // label_listaczesc
             // 
@@ -106,6 +110,7 @@
             button_powrot_z_czesci_zamienne.TabIndex = 9;
             button_powrot_z_czesci_zamienne.Text = "Powrót";
             button_powrot_z_czesci_zamienne.UseVisualStyleBackColor = true;
+            button_powrot_z_czesci_zamienne.Click += button_powrot_z_czesci_zamienne_Click;
             // 
             // Form_czesci_zamienne
             // 

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace PodkladexApp.Models;
 
-public partial class Produkty
+public partial class Produkt
 {
     public int IdProdukt { get; set; }
 
@@ -13,9 +13,9 @@ public partial class Produkty
 
     public virtual ICollection<NormaProd> NormaProd { get; set; } = new List<NormaProd>();
 
-    public virtual ICollection<ProduktyNormy> ProduktyNormy { get; set; } = new List<ProduktyNormy>();
+    public virtual ICollection<ProduktNorma> ProduktNorma { get; set; } = new List<ProduktNorma>();
 
-    public virtual ICollection<ProduktyWlasciwosci> ProduktyWlasciwosci { get; set; } = new List<ProduktyWlasciwosci>();
+    public virtual ICollection<ProduktWlasciwosci> ProduktWlasciwosci { get; set; } = new List<ProduktWlasciwosci>();
 
     public virtual ICollection<SzczegolyZamowienia> SzczegolyZamowienia { get; set; } = new List<SzczegolyZamowienia>();
 }

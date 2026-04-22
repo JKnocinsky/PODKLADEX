@@ -13,7 +13,7 @@ public partial class Zamowienie
 
     public DateOnly DataPrzyjeciaZ { get; set; }
 
-    public DateOnly DataZrealizowaniaZ { get; set; }
+    public DateOnly? DataZrealizowaniaZ { get; set; }
 
     public virtual Klient IdKlientNavigation { get; set; }
 

@@ -11,7 +11,7 @@ public partial class SzczegolyDostawy
 
     public int IdDostawa { get; set; }
 
-    public int IdRodzaj { get; set; }
+    public int IdMaterial { get; set; }
 
     public decimal Liczba { get; set; }
 
@@ -19,5 +19,5 @@ public partial class SzczegolyDostawy
 
     public virtual Dostawa IdDostawaNavigation { get; set; }
 
-    public virtual RodzajMaterialu IdRodzajNavigation { get; set; }
+    public virtual Material IdMaterialNavigation { get; set; }
 }

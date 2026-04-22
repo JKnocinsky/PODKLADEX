@@ -9,8 +9,6 @@ public partial class Dostawa
 {
     public int IdDostawa { get; set; }
 
-    public int IdMaterial { get; set; }
-
     public int IdFirma { get; set; }
 
     public int IdPracownik { get; set; }
@@ -18,8 +16,6 @@ public partial class Dostawa
     public DateTime DataDostawy { get; set; }
 
     public virtual Firma IdFirmaNavigation { get; set; }
-
-    public virtual Material IdMaterialNavigation { get; set; }
 
     public virtual Pracownik IdPracownikNavigation { get; set; }
 

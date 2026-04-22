@@ -11,5 +11,5 @@ public partial class RodzajMaterialu
 
     public string Nazwa { get; set; }
 
-    public virtual ICollection<SzczegolyDostawy> SzczegolyDostawy { get; set; } = new List<SzczegolyDostawy>();
+    public virtual ICollection<Material> Material { get; set; } = new List<Material>();
 }

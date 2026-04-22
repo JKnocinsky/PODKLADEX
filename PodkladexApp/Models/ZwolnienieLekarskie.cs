@@ -21,5 +21,5 @@ public partial class ZwolnienieLekarskie
 
     public virtual Pracownik IdPracownikNavigation { get; set; }
 
-    public virtual TypZwolnienie IdTypZwolnieniaNavigation { get; set; }
+    public virtual TypZwolnienia IdTypZwolnieniaNavigation { get; set; }
 }

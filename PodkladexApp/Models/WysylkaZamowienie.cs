@@ -7,7 +7,7 @@ namespace PodkladexApp.Models;
 
 public partial class WysylkaZamowienie
 {
-    public int WysylkaZamowienie1 { get; set; }
+    public int IdWysylkaZamowienie { get; set; }
 
     public int IdZamowienie { get; set; }
 

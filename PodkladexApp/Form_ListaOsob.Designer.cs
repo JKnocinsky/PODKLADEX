@@ -1,6 +1,6 @@
 ﻿namespace PodkladexApp
 {
-    partial class ListaOsob
+    partial class Form_ListaOsob
     {
         /// <summary>
         /// Required designer variable.
@@ -156,6 +156,7 @@
             textBox_numertelefonu.Name = "textBox_numertelefonu";
             textBox_numertelefonu.Size = new Size(554, 23);
             textBox_numertelefonu.TabIndex = 1;
+            textBox_numertelefonu.TextChanged += textBox_numertelefonu_TextChanged;
             // 
             // textBox_email
             // 
@@ -272,7 +273,7 @@
             comboBox_idosoby.TabIndex = 4;
             comboBox_idosoby.SelectedIndexChanged += comboBox_idosoby_SelectedIndexChanged;
             // 
-            // ListaOsob
+            // Form_ListaOsob
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -283,7 +284,7 @@
             Controls.Add(btn_dodawanie);
             Controls.Add(panel_daneosoby);
             Controls.Add(label_idosoby);
-            Name = "ListaOsob";
+            Name = "Form_ListaOsob";
             Text = "Lista osób  ";
             panel_daneosoby.ResumeLayout(false);
             panel_daneosoby.PerformLayout();

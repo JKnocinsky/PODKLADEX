@@ -10,16 +10,16 @@ using System.Windows.Forms;
 
 namespace PodkladexApp
 {
-    public partial class Form_Produkcja : Form
+    public partial class Form_Normy_eksploatacyjne : Form
     {
-        public Form_Produkcja()
+        public Form_Normy_eksploatacyjne()
         {
             InitializeComponent();
         }
 
-        private void btn_maszyny_Click(object sender, EventArgs e)
+        private void button_powrot_z_normy_Click(object sender, EventArgs e)
         {
-            //new Form_Maszyny().Show();
+            this.Close();
         }
     }
 }

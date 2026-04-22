@@ -11,11 +11,11 @@ public partial class Pomiar
 
     public int IdKontrolaProd { get; set; }
 
-    public int? IdWlasciwosci { get; set; }
+    public int IdWlasciwosci { get; set; }
 
     public decimal WartoscZmierzona { get; set; }
 
     public virtual KontrolaProd IdKontrolaProdNavigation { get; set; }
 
-    public virtual Wlasciwosci IdWlasciwosciNavigation { get; set; }
+    public virtual Wlasciwosc IdWlasciwosciNavigation { get; set; }
 }

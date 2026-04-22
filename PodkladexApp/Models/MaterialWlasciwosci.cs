@@ -19,5 +19,5 @@ public partial class MaterialWlasciwosci
 
     public virtual Material IdMaterialNavigation { get; set; }
 
-    public virtual Wlasciwosci IdWlasciwosciNavigation { get; set; }
+    public virtual Wlasciwosc IdWlasciwosciNavigation { get; set; }
 }

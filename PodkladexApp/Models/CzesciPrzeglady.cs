@@ -9,15 +9,15 @@ public partial class CzesciPrzeglady
 {
     public int IdCzesciPrzeglady { get; set; }
 
-    public int? IdCzesci { get; set; }
+    public int IdCzesci { get; set; }
 
-    public int? IdObsluga { get; set; }
+    public int IdObsluga { get; set; }
 
     public int Liczba { get; set; }
 
     public string Opis { get; set; }
 
-    public virtual CzesciZamienne IdCzesciNavigation { get; set; }
+    public virtual CzescZamienna IdCzesciNavigation { get; set; }
 
     public virtual Obsluga IdObslugaNavigation { get; set; }
 }

@@ -8,18 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PodkladexApp
+namespace PodkladexApp.Zaopatrzenie
 {
-    public partial class Form_Produkcja : Form
+    public partial class Form_Konf_mat : Form
     {
-        public Form_Produkcja()
+        public Form_Konf_mat()
         {
             InitializeComponent();
-        }
-
-        private void btn_maszyny_Click(object sender, EventArgs e)
-        {
-            //new Form_Maszyny().Show();
         }
     }
 }
