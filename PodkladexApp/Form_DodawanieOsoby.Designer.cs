@@ -1,6 +1,6 @@
 ﻿namespace PodkladexApp
 {
-    partial class DodawanieOsoby
+    partial class Form_DodawanieOsoby
     {
         /// <summary>
         /// Required designer variable.

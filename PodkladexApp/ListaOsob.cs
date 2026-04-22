@@ -18,7 +18,7 @@ namespace PodkladexApp
 
         private void btn_dodawanie_Click(object? sender, EventArgs e)
         {
-            DodawanieOsoby formularzDodawania = new DodawanieOsoby();
+            Form_DodawanieOsoby formularzDodawania = new Form_DodawanieOsoby();
             formularzDodawania.ShowDialog();
 
             ZaladujOsobyDoComboBox();
