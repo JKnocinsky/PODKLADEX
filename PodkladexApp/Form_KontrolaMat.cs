@@ -11,11 +11,10 @@ using System.Windows.Forms;
 
 namespace PodkladexApp
 {
-    public partial class Form_Material : Form
+    public partial class Form_KontrolaMat : Form
     {
         PodkladexContext _context;
-
-        public Form_Material(PodkladexContext db)
+        public Form_KontrolaMat(PodkladexContext db)
         {
             InitializeComponent();
             _context = db;

@@ -25,7 +25,7 @@ namespace PodkladexApp
 
         private void btn_Kontrola_Jakosci_Click(object sender, EventArgs e)
         {
-            Form_Jakosc form_Jakosc = new Form_Jakosc();
+            Form_Jakosc form_Jakosc = new Form_Jakosc(db);
             OpenChildForm(form_Jakosc);
         }
 
