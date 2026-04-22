@@ -230,5 +230,15 @@ namespace PodkladexApp
             Form_Dostawa form_Dostawa = new Form_Dostawa();
             form_Dostawa.Show();
         }
+
+        private void button_utworz_zamowienie_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button_zamow_material_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

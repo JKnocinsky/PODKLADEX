@@ -47,6 +47,8 @@
             textBox_Ulica_firmy = new TextBox();
             textBox_Kod_pocztowy_firmy = new TextBox();
             btn_Dostawa = new Button();
+            button_utworz_zamowienie = new Button();
+            button_zamow_material = new Button();
             panel_dane_firmy.SuspendLayout();
             SuspendLayout();
             // 
@@ -54,7 +56,7 @@
             // 
             button_Nowa_firma.Cursor = Cursors.Hand;
             button_Nowa_firma.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_Nowa_firma.Location = new Point(31, 65);
+            button_Nowa_firma.Location = new Point(48, 243);
             button_Nowa_firma.Name = "button_Nowa_firma";
             button_Nowa_firma.Size = new Size(237, 51);
             button_Nowa_firma.TabIndex = 0;
@@ -66,7 +68,7 @@
             // 
             button_Edytuj_firmy.Cursor = Cursors.Hand;
             button_Edytuj_firmy.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_Edytuj_firmy.Location = new Point(31, 140);
+            button_Edytuj_firmy.Location = new Point(48, 318);
             button_Edytuj_firmy.Name = "button_Edytuj_firmy";
             button_Edytuj_firmy.Size = new Size(213, 58);
             button_Edytuj_firmy.TabIndex = 1;
@@ -255,7 +257,7 @@
             // btn_Dostawa
             // 
             btn_Dostawa.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_Dostawa.Location = new Point(31, 222);
+            btn_Dostawa.Location = new Point(48, 400);
             btn_Dostawa.Name = "btn_Dostawa";
             btn_Dostawa.Size = new Size(255, 64);
             btn_Dostawa.TabIndex = 5;
@@ -263,11 +265,37 @@
             btn_Dostawa.UseVisualStyleBackColor = true;
             btn_Dostawa.Click += btn_Dostawa_Click;
             // 
+            // button_utworz_zamowienie
+            // 
+            button_utworz_zamowienie.Cursor = Cursors.Hand;
+            button_utworz_zamowienie.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            button_utworz_zamowienie.Location = new Point(48, 65);
+            button_utworz_zamowienie.Name = "button_utworz_zamowienie";
+            button_utworz_zamowienie.Size = new Size(237, 51);
+            button_utworz_zamowienie.TabIndex = 6;
+            button_utworz_zamowienie.Text = "Nowe zamówienie";
+            button_utworz_zamowienie.UseVisualStyleBackColor = true;
+            button_utworz_zamowienie.Click += button_utworz_zamowienie_Click;
+            // 
+            // button_zamow_material
+            // 
+            button_zamow_material.Cursor = Cursors.Hand;
+            button_zamow_material.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            button_zamow_material.Location = new Point(48, 154);
+            button_zamow_material.Name = "button_zamow_material";
+            button_zamow_material.Size = new Size(237, 51);
+            button_zamow_material.TabIndex = 7;
+            button_zamow_material.Text = "Zamów materiał";
+            button_zamow_material.UseVisualStyleBackColor = true;
+            button_zamow_material.Click += button_zamow_material_Click;
+            // 
             // Form_ZaoLog
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1337, 751);
+            Controls.Add(button_zamow_material);
+            Controls.Add(button_utworz_zamowienie);
             Controls.Add(btn_Dostawa);
             Controls.Add(panel_dane_firmy);
             Controls.Add(comboBox_Nazwa_firmy);
@@ -302,5 +330,7 @@
         private Button btn_Dostawa;
         private Button button_usun_firme;
         private Button button_zaakceptuj_zmiany;
+        private Button button_utworz_zamowienie;
+        private Button button_zamow_material;
     }
 }
