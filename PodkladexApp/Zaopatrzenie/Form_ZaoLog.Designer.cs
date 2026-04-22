@@ -56,7 +56,7 @@
             // 
             button_Nowa_firma.Cursor = Cursors.Hand;
             button_Nowa_firma.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_Nowa_firma.Location = new Point(48, 243);
+            button_Nowa_firma.Location = new Point(48, 229);
             button_Nowa_firma.Name = "button_Nowa_firma";
             button_Nowa_firma.Size = new Size(237, 51);
             button_Nowa_firma.TabIndex = 0;
@@ -68,7 +68,7 @@
             // 
             button_Edytuj_firmy.Cursor = Cursors.Hand;
             button_Edytuj_firmy.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_Edytuj_firmy.Location = new Point(48, 318);
+            button_Edytuj_firmy.Location = new Point(48, 311);
             button_Edytuj_firmy.Name = "button_Edytuj_firmy";
             button_Edytuj_firmy.Size = new Size(213, 58);
             button_Edytuj_firmy.TabIndex = 1;
@@ -281,7 +281,7 @@
             // 
             button_zamow_material.Cursor = Cursors.Hand;
             button_zamow_material.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_zamow_material.Location = new Point(48, 154);
+            button_zamow_material.Location = new Point(48, 147);
             button_zamow_material.Name = "button_zamow_material";
             button_zamow_material.Size = new Size(237, 51);
             button_zamow_material.TabIndex = 7;

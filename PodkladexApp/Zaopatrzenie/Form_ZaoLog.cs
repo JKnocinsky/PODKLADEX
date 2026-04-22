@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PodkladexApp.Models; // Wymagane, aby widzieć klasę PodkladexContext i Firma
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PodkladexApp.Models; // Wymagane, aby widzieć klasę PodkladexContext i Firma
 
 namespace PodkladexApp
 {
@@ -15,6 +15,7 @@ namespace PodkladexApp
     {
         // 1. Inicjalizacja połączenia z bazą danych (Entity Framework Core)
         private PodkladexContext _db = new PodkladexContext();
+
 
         public Form_ZaoLog()
         {
@@ -231,6 +232,10 @@ namespace PodkladexApp
             form_Dostawa.Show();
         }
 
+
+
+
+
         private void button_utworz_zamowienie_Click(object sender, EventArgs e)
         {
 
@@ -240,5 +245,7 @@ namespace PodkladexApp
         {
 
         }
+
+
     }
 }
