@@ -33,6 +33,11 @@ namespace PodkladexApp.Zaopatrzenie
             button_Klient_prywatny = new Button();
             button_klient_z_firmy = new Button();
             panel1 = new Panel();
+            button_zapisz = new Button();
+            label_nazwa_firmy = new Label();
+            textBox_nazwa_firmy = new TextBox();
+            label_NIP = new Label();
+            textBox_NIP = new TextBox();
             label_numer = new Label();
             label_ulica = new Label();
             label_kodpozc = new Label();
@@ -48,27 +53,23 @@ namespace PodkladexApp.Zaopatrzenie
             textBox_email = new TextBox();
             textBox_Numer_telefonu = new TextBox();
             textBox_imie = new TextBox();
-            label_NIP = new Label();
-            textBox_NIP = new TextBox();
-            label_nazwa_firmy = new Label();
-            textBox_nazwa_firmy = new TextBox();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // textBox_Nazwisko
             // 
             textBox_Nazwisko.Font = new Font("Segoe UI", 13.8F);
-            textBox_Nazwisko.Location = new Point(473, 59);
+            textBox_Nazwisko.Location = new Point(644, 62);
             textBox_Nazwisko.Margin = new Padding(3, 4, 3, 4);
             textBox_Nazwisko.Name = "textBox_Nazwisko";
-            textBox_Nazwisko.Size = new Size(172, 38);
+            textBox_Nazwisko.Size = new Size(298, 38);
             textBox_Nazwisko.TabIndex = 0;
             textBox_Nazwisko.TextChanged += textBox_Nazwisko_TextChanged;
             // 
             // button_Klient_prywatny
             // 
             button_Klient_prywatny.Font = new Font("Segoe UI", 14F);
-            button_Klient_prywatny.Location = new Point(137, 47);
+            button_Klient_prywatny.Location = new Point(201, 13);
             button_Klient_prywatny.Margin = new Padding(3, 4, 3, 4);
             button_Klient_prywatny.Name = "button_Klient_prywatny";
             button_Klient_prywatny.Size = new Size(150, 50);
@@ -80,7 +81,7 @@ namespace PodkladexApp.Zaopatrzenie
             // button_klient_z_firmy
             // 
             button_klient_z_firmy.Font = new Font("Segoe UI", 14F);
-            button_klient_z_firmy.Location = new Point(343, 47);
+            button_klient_z_firmy.Location = new Point(407, 13);
             button_klient_z_firmy.Margin = new Padding(3, 4, 3, 4);
             button_klient_z_firmy.Name = "button_klient_z_firmy";
             button_klient_z_firmy.Size = new Size(150, 50);
@@ -91,6 +92,7 @@ namespace PodkladexApp.Zaopatrzenie
             // 
             // panel1
             // 
+            panel1.Controls.Add(button_zapisz);
             panel1.Controls.Add(label_nazwa_firmy);
             panel1.Controls.Add(textBox_nazwa_firmy);
             panel1.Controls.Add(label_NIP);
@@ -111,18 +113,72 @@ namespace PodkladexApp.Zaopatrzenie
             panel1.Controls.Add(textBox_Numer_telefonu);
             panel1.Controls.Add(textBox_imie);
             panel1.Controls.Add(textBox_Nazwisko);
-            panel1.Location = new Point(12, 122);
+            panel1.Location = new Point(76, 88);
             panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
             panel1.Size = new Size(1467, 977);
             panel1.TabIndex = 3;
             panel1.Paint += panel1_Paint;
             // 
+            // button_zapisz
+            // 
+            button_zapisz.Font = new Font("Segoe UI", 14F);
+            button_zapisz.Location = new Point(213, 586);
+            button_zapisz.Margin = new Padding(3, 4, 3, 4);
+            button_zapisz.Name = "button_zapisz";
+            button_zapisz.Size = new Size(185, 69);
+            button_zapisz.TabIndex = 4;
+            button_zapisz.Text = "Zatwierdź";
+            button_zapisz.UseVisualStyleBackColor = true;
+            button_zapisz.Click += button_zapisz_Click;
+            // 
+            // label_nazwa_firmy
+            // 
+            label_nazwa_firmy.AutoSize = true;
+            label_nazwa_firmy.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
+            label_nazwa_firmy.Location = new Point(42, 471);
+            label_nazwa_firmy.Name = "label_nazwa_firmy";
+            label_nazwa_firmy.Size = new Size(148, 31);
+            label_nazwa_firmy.TabIndex = 19;
+            label_nazwa_firmy.Text = "Nazwa firmy";
+            // 
+            // textBox_nazwa_firmy
+            // 
+            textBox_nazwa_firmy.Font = new Font("Segoe UI", 13.8F);
+            textBox_nazwa_firmy.Location = new Point(196, 462);
+            textBox_nazwa_firmy.Margin = new Padding(3, 4, 3, 4);
+            textBox_nazwa_firmy.Name = "textBox_nazwa_firmy";
+            textBox_nazwa_firmy.Size = new Size(285, 38);
+            textBox_nazwa_firmy.TabIndex = 18;
+            textBox_nazwa_firmy.TextChanged += textBox_nazwa_firmy_TextChanged;
+            // 
+            // label_NIP
+            // 
+            label_NIP.AutoSize = true;
+            label_NIP.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
+            label_NIP.Location = new Point(626, 458);
+            label_NIP.Name = "label_NIP";
+            label_NIP.Size = new Size(53, 31);
+            label_NIP.TabIndex = 17;
+            label_NIP.Text = "NIP";
+            // 
+            // textBox_NIP
+            // 
+            textBox_NIP.Font = new Font("Segoe UI", 13.8F);
+            textBox_NIP.Location = new Point(685, 451);
+            textBox_NIP.Margin = new Padding(3, 4, 3, 4);
+            textBox_NIP.Name = "textBox_NIP";
+            textBox_NIP.Size = new Size(259, 38);
+            textBox_NIP.TabIndex = 16;
+            textBox_NIP.TextChanged += textBox_NIP_TextChanged;
+            textBox_NIP.KeyDown += textBox_NIP_KeyDown;
+            textBox_NIP.Leave += textBox_NIP_Leave;
+            // 
             // label_numer
             // 
             label_numer.AutoSize = true;
             label_numer.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_numer.Location = new Point(462, 398);
+            label_numer.Location = new Point(593, 385);
             label_numer.Name = "label_numer";
             label_numer.Size = new Size(86, 31);
             label_numer.TabIndex = 15;
@@ -142,7 +198,7 @@ namespace PodkladexApp.Zaopatrzenie
             // 
             label_kodpozc.AutoSize = true;
             label_kodpozc.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_kodpozc.Location = new Point(391, 319);
+            label_kodpozc.Location = new Point(522, 306);
             label_kodpozc.Name = "label_kodpozc";
             label_kodpozc.Size = new Size(157, 31);
             label_kodpozc.TabIndex = 13;
@@ -183,44 +239,46 @@ namespace PodkladexApp.Zaopatrzenie
             // 
             label_nazwisko.AutoSize = true;
             label_nazwisko.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_nazwisko.Location = new Point(352, 66);
+            label_nazwisko.Location = new Point(523, 65);
             label_nazwisko.Name = "label_nazwisko";
             label_nazwisko.Size = new Size(115, 31);
             label_nazwisko.TabIndex = 9;
             label_nazwisko.Text = "Nazwisko";
+            label_nazwisko.Click += label_nazwisko_Click;
             // 
             // label_imie
             // 
             label_imie.AutoSize = true;
             label_imie.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_imie.Location = new Point(57, 66);
+            label_imie.Location = new Point(117, 69);
             label_imie.Name = "label_imie";
             label_imie.Size = new Size(60, 31);
             label_imie.TabIndex = 8;
             label_imie.Text = "Imię";
+            label_imie.Click += label_imie_Click;
             // 
             // textBox_numer
             // 
             textBox_numer.Font = new Font("Segoe UI", 13.8F);
-            textBox_numer.Location = new Point(554, 394);
+            textBox_numer.Location = new Point(685, 381);
             textBox_numer.Margin = new Padding(3, 4, 3, 4);
             textBox_numer.Name = "textBox_numer";
-            textBox_numer.Size = new Size(172, 38);
+            textBox_numer.Size = new Size(259, 38);
             textBox_numer.TabIndex = 7;
             // 
             // textBox_ulica
             // 
             textBox_ulica.Font = new Font("Segoe UI", 13.8F);
-            textBox_ulica.Location = new Point(196, 394);
+            textBox_ulica.Location = new Point(196, 382);
             textBox_ulica.Margin = new Padding(3, 4, 3, 4);
             textBox_ulica.Name = "textBox_ulica";
-            textBox_ulica.Size = new Size(172, 38);
+            textBox_ulica.Size = new Size(285, 38);
             textBox_ulica.TabIndex = 6;
             // 
             // textBox_kod_pocztowy
             // 
             textBox_kod_pocztowy.Font = new Font("Segoe UI", 13.8F);
-            textBox_kod_pocztowy.Location = new Point(554, 315);
+            textBox_kod_pocztowy.Location = new Point(685, 302);
             textBox_kod_pocztowy.Margin = new Padding(3, 4, 3, 4);
             textBox_kod_pocztowy.Name = "textBox_kod_pocztowy";
             textBox_kod_pocztowy.Size = new Size(172, 38);
@@ -230,82 +288,44 @@ namespace PodkladexApp.Zaopatrzenie
             // textBox_Miejscowosc
             // 
             textBox_Miejscowosc.Font = new Font("Segoe UI", 13.8F);
-            textBox_Miejscowosc.Location = new Point(196, 315);
+            textBox_Miejscowosc.Location = new Point(196, 302);
             textBox_Miejscowosc.Margin = new Padding(3, 4, 3, 4);
             textBox_Miejscowosc.Name = "textBox_Miejscowosc";
-            textBox_Miejscowosc.Size = new Size(172, 38);
+            textBox_Miejscowosc.Size = new Size(285, 38);
             textBox_Miejscowosc.TabIndex = 4;
             textBox_Miejscowosc.TextChanged += textBox_Miejscowosc_TextChanged;
             // 
             // textBox_email
             // 
             textBox_email.Font = new Font("Segoe UI", 13.8F);
-            textBox_email.Location = new Point(196, 236);
+            textBox_email.Location = new Point(196, 222);
             textBox_email.Margin = new Padding(3, 4, 3, 4);
             textBox_email.Name = "textBox_email";
-            textBox_email.Size = new Size(172, 38);
+            textBox_email.Size = new Size(366, 38);
             textBox_email.TabIndex = 3;
             textBox_email.TextChanged += textBox_email_TextChanged;
+            textBox_email.KeyDown += textBox_email_KeyDown;
+            textBox_email.Leave += textBox_email_Leave;
             // 
             // textBox_Numer_telefonu
             // 
             textBox_Numer_telefonu.Font = new Font("Segoe UI", 13.8F);
-            textBox_Numer_telefonu.Location = new Point(196, 157);
+            textBox_Numer_telefonu.Location = new Point(196, 142);
             textBox_Numer_telefonu.Margin = new Padding(3, 4, 3, 4);
             textBox_Numer_telefonu.Name = "textBox_Numer_telefonu";
-            textBox_Numer_telefonu.Size = new Size(172, 38);
+            textBox_Numer_telefonu.Size = new Size(366, 38);
             textBox_Numer_telefonu.TabIndex = 2;
             textBox_Numer_telefonu.TextChanged += textBox_Numer_telefonu_TextChanged;
             // 
             // textBox_imie
             // 
             textBox_imie.Font = new Font("Segoe UI", 13.8F);
-            textBox_imie.Location = new Point(136, 59);
+            textBox_imie.Location = new Point(196, 62);
             textBox_imie.Margin = new Padding(3, 4, 3, 4);
             textBox_imie.Name = "textBox_imie";
-            textBox_imie.Size = new Size(172, 38);
+            textBox_imie.Size = new Size(283, 38);
             textBox_imie.TabIndex = 1;
             textBox_imie.TextChanged += textBox_imie_TextChanged;
-            // 
-            // label_NIP
-            // 
-            label_NIP.AutoSize = true;
-            label_NIP.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_NIP.Location = new Point(485, 471);
-            label_NIP.Name = "label_NIP";
-            label_NIP.Size = new Size(53, 31);
-            label_NIP.TabIndex = 17;
-            label_NIP.Text = "NIP";
-            // 
-            // textBox_NIP
-            // 
-            textBox_NIP.Font = new Font("Segoe UI", 13.8F);
-            textBox_NIP.Location = new Point(554, 464);
-            textBox_NIP.Margin = new Padding(3, 4, 3, 4);
-            textBox_NIP.Name = "textBox_NIP";
-            textBox_NIP.Size = new Size(172, 38);
-            textBox_NIP.TabIndex = 16;
-            textBox_NIP.TextChanged += textBox_NIP_TextChanged;
-            // 
-            // label_nazwa_firmy
-            // 
-            label_nazwa_firmy.AutoSize = true;
-            label_nazwa_firmy.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_nazwa_firmy.Location = new Point(42, 471);
-            label_nazwa_firmy.Name = "label_nazwa_firmy";
-            label_nazwa_firmy.Size = new Size(148, 31);
-            label_nazwa_firmy.TabIndex = 19;
-            label_nazwa_firmy.Text = "Nazwa firmy";
-            // 
-            // textBox_nazwa_firmy
-            // 
-            textBox_nazwa_firmy.Font = new Font("Segoe UI", 13.8F);
-            textBox_nazwa_firmy.Location = new Point(196, 464);
-            textBox_nazwa_firmy.Margin = new Padding(3, 4, 3, 4);
-            textBox_nazwa_firmy.Name = "textBox_nazwa_firmy";
-            textBox_nazwa_firmy.Size = new Size(172, 38);
-            textBox_nazwa_firmy.TabIndex = 18;
-            textBox_nazwa_firmy.TextChanged += textBox_nazwa_firmy_TextChanged;
             // 
             // Form_Zamowienie
             // 
@@ -326,7 +346,7 @@ namespace PodkladexApp.Zaopatrzenie
 
         private void textBox_Nazwisko_TextChanged(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+
         }
 
         #endregion
@@ -354,5 +374,6 @@ namespace PodkladexApp.Zaopatrzenie
         private TextBox textBox_NIP;
         private Label label_nazwa_firmy;
         private TextBox textBox_nazwa_firmy;
+        private Button button_zapisz;
     }
 }

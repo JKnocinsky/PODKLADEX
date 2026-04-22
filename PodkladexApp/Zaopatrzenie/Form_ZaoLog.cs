@@ -270,7 +270,7 @@ namespace PodkladexApp
             // Ręcznie ustalamy pozycję i rozmiar, żeby idealnie pasowało po prawej stronie 
             // (wypełnia miejsce nad ukrytym panelem firm i comboboxem)
             childForm.Location = new Point(337, 65);
-            childForm.Size = new Size(885, 617);
+            childForm.Size = new Size(1920, 1200);
 
             // KLUCZOWA ZMIANA: Dodajemy formularz do głównego okna (this), a nie do panel_dane_firmy!
             this.Controls.Add(childForm);
