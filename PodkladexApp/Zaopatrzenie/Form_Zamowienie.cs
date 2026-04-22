@@ -1,5 +1,4 @@
-﻿using PodkladexApp.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,16 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PodkladexApp
+namespace PodkladexApp.Zaopatrzenie
 {
-    public partial class Form_Material : Form
+    public partial class Form_Zamowienie : Form
     {
-        PodkladexContext _context;
-
-        public Form_Material(PodkladexContext db)
+        public Form_Zamowienie()
         {
             InitializeComponent();
-            _context = db;
         }
     }
 }

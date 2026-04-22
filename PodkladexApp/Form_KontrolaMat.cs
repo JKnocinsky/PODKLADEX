@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PodkladexApp.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,13 +11,13 @@ using System.Windows.Forms;
 
 namespace PodkladexApp
 {
-    public partial class Form_Kadry_finanse : Form
+    public partial class Form_KontrolaMat : Form
     {
-        public Form_Kadry_finanse()
+        PodkladexContext _context;
+        public Form_KontrolaMat(PodkladexContext db)
         {
             InitializeComponent();
+            _context = db;
         }
-
-
     }
 }

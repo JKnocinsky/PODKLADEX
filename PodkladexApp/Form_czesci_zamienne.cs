@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.EntityFrameworkCore;
-using PodkladexApp.Models;
+using PodkladexApp.Models; // potrzebne
 
 namespace PodkladexApp
 {
@@ -44,6 +44,7 @@ namespace PodkladexApp
                 context.SaveChanges();
                 comboBox_lista_czesci.DataSource = context.CzescZamienna.ToList();
                 textBox_nazwa_czesci.Clear();
+                comboBox_lista_czesci.SelectedIndex = -1;
             }
         }
 
@@ -55,12 +56,12 @@ namespace PodkladexApp
 
             if (textBox_nazwa_czesci.Text == "" || textBox_nazwa_czesci.Text == null)
             {
-                MessageBox.Show("Nazwa jest pusta! Wpisz nazwę.","Błąd");
+                MessageBox.Show("Nazwa jest pusta! Wpisz nazwę.", "Błąd");
 
             }
-            else if(context.CzescZamienna.Where(czesc => czesc.Nazwa == textBox_nazwa_czesci.Text).FirstOrDefault()!=null)
+            else if (context.CzescZamienna.Where(czesc => czesc.Nazwa == textBox_nazwa_czesci.Text).FirstOrDefault() != null)
             {
-                MessageBox.Show("Nazwa jest zajeta! Wpisz inna nazwę.","Błąd");
+                MessageBox.Show("Nazwa jest zajeta! Wpisz inna nazwę.", "Błąd");
             }
             else
             {
@@ -69,6 +70,7 @@ namespace PodkladexApp
                 context.SaveChanges();
                 comboBox_lista_czesci.DataSource = context.CzescZamienna.ToList();
                 textBox_nazwa_czesci.Clear();
+                comboBox_lista_czesci.SelectedItem = czescZamienna;
             }
 
         }
@@ -78,7 +80,7 @@ namespace PodkladexApp
             CzescZamienna czescZamienna = new CzescZamienna();
             if (comboBox_lista_czesci.SelectedItem == null || comboBox_lista_czesci.SelectedIndex == -1)
             {
-                MessageBox.Show("Nie wybrano czesci.","Błąd");
+                MessageBox.Show("Nie wybrano czesci.", "Błąd");
             }
             else
             {
@@ -114,6 +116,11 @@ namespace PodkladexApp
             {
                 textBox_nazwa_czesci.Text = czescZamienna.Nazwa;
             }
+        }
+
+        private void label_dodajczesc_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
