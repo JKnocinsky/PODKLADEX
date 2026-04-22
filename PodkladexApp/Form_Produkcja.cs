@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PodkladexApp.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,14 +13,32 @@ namespace PodkladexApp
 {
     public partial class Form_Produkcja : Form
     {
-        public Form_Produkcja()
+        PodkladexContext db;
+        Form activeForm = null;
+
+        public Form_Produkcja(PodkladexContext db)
         {
+            this.db = db;
             InitializeComponent();
         }
 
         private void btn_maszyny_Click(object sender, EventArgs e)
         {
-            //new Form_Maszyny().Show();
+            Form_Maszyny form = new Form_Maszyny(db);
+            OpenChildForm(form);
+        }
+        private void OpenChildForm(Form childForm)
+        {
+            if (activeForm != null)
+                activeForm.Close();
+            activeForm = childForm;
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+            panel_Produkcja.Controls.Add(childForm);
+            panel_Produkcja.Tag = childForm;
+            childForm.BringToFront();
+            childForm.Show();
         }
     }
 }
