@@ -20,11 +20,18 @@ namespace PodkladexApp
         {
             InitializeComponent();
             this.context = context;
+            dtp_dataUruch.CustomFormat = "dd-MM-yyyy";
+            dtp_dataZakup.CustomFormat = "dd-MM-yyyy";
+            dtp_dataWyl.CustomFormat = "dd-MM-yyyy";
         }
 
         public Form_DodajMaszyne(PodkladexContext context, string buttonName)
         {
             InitializeComponent();
+            this.context = context;
+            dtp_dataUruch.CustomFormat = "dd-MM-yyyy";
+            dtp_dataZakup.CustomFormat = "dd-MM-yyyy";
+            dtp_dataWyl.CustomFormat = "dd-MM-yyyy";
         }
 
         private void btn_funkcja_Click(object sender, EventArgs e)
@@ -42,8 +49,10 @@ namespace PodkladexApp
             }
             else
             {
-                MessageBox.Show(dtp_dataUruch.Value.ToString());
                 nowaMaszyna.Nazwa = txtbox_Nazwa.Text;
+                nowaMaszyna.DataUruchomienia = DateOnly.FromDateTime(dtp_dataUruch.Value);
+                nowaMaszyna.DataZakupu = DateOnly.FromDateTime(dtp_dataZakup.Value);
+                nowaMaszyna.DataWylaczenia = DateOnly.FromDateTime(dtp_dataWyl.Value);
                 context.Maszyna.Add(nowaMaszyna);
                 context.SaveChanges();
                 MessageBox.Show("Dodano nową maszynę!", "Dodawanie maszyny");
