@@ -39,6 +39,7 @@
             // 
             // button_otworz_czesci_zamienne
             // 
+            button_otworz_czesci_zamienne.Font = new Font("Segoe UI", 16F);
             button_otworz_czesci_zamienne.Location = new Point(12, 6);
             button_otworz_czesci_zamienne.Name = "button_otworz_czesci_zamienne";
             button_otworz_czesci_zamienne.Size = new Size(129, 55);

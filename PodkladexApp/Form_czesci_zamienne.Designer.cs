@@ -35,8 +35,6 @@
             button_usun_czesc = new Button();
             comboBox_lista_czesci = new ComboBox();
             label_listaczesc = new Label();
-            button_powrot_z_czesci_zamienne = new Button();
-            button1 = new Button();
             SuspendLayout();
             // 
             // button_dodaj_czesc
@@ -103,33 +101,11 @@
             label_listaczesc.TabIndex = 8;
             label_listaczesc.Text = "Lista części";
             // 
-            // button_powrot_z_czesci_zamienne
-            // 
-            button_powrot_z_czesci_zamienne.Location = new Point(12, 256);
-            button_powrot_z_czesci_zamienne.Name = "button_powrot_z_czesci_zamienne";
-            button_powrot_z_czesci_zamienne.Size = new Size(129, 55);
-            button_powrot_z_czesci_zamienne.TabIndex = 9;
-            button_powrot_z_czesci_zamienne.Text = "Powrót";
-            button_powrot_z_czesci_zamienne.UseVisualStyleBackColor = true;
-            button_powrot_z_czesci_zamienne.Click += button_powrot_z_czesci_zamienne_Click;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(12, 195);
-            button1.Name = "button1";
-            button1.Size = new Size(129, 55);
-            button1.TabIndex = 10;
-            button1.Text = ".";
-            button1.UseVisualStyleBackColor = true;
-            button1.Visible = false;
-            // 
             // Form_czesci_zamienne
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(button1);
-            Controls.Add(button_powrot_z_czesci_zamienne);
             Controls.Add(label_listaczesc);
             Controls.Add(comboBox_lista_czesci);
             Controls.Add(button_usun_czesc);
@@ -152,7 +128,5 @@
         private Button button_usun_czesc;
         private ComboBox comboBox_lista_czesci;
         private Label label_listaczesc;
-        private Button button_powrot_z_czesci_zamienne;
-        private Button button1;
     }
 }
