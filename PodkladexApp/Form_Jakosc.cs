@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PodkladexApp.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,15 +13,41 @@ namespace PodkladexApp
 {
     public partial class Form_Jakosc : Form
     {
-        public Form_Jakosc()
+        PodkladexContext context;
+        Form activeForm = null;
+        public Form_Jakosc(PodkladexContext db)
         {
             InitializeComponent();
+            context = db;
         }
 
 
         private void btn_Material_Click_1(object sender, EventArgs e)
         {
-            new Form_Material().Show();
+            Form_Material formMaterial = new Form_Material(context);
+            OpenChildForm(formMaterial);
         }
+        private void btn_KontrolaMat_Click(object sender, EventArgs e)
+        {
+            Form_KontrolaMat formKontrolaMat = new Form_KontrolaMat(context);
+            OpenChildForm(formKontrolaMat);
+        }
+
+        private void OpenChildForm(Form childForm)
+        {
+            if (activeForm != null)
+                activeForm.Close();
+            activeForm = childForm;
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+            panel_Jakosc.Controls.Add(childForm);
+            panel_Jakosc.Tag = childForm;
+            childForm.BringToFront();
+            childForm.Show();
+        }
+
+
     }
+
 }

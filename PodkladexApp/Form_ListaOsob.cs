@@ -16,14 +16,6 @@ namespace PodkladexApp
     {
         private PodkladexContext db;
 
-        private void btn_dodawanie_Click(object? sender, EventArgs e)
-        {
-            Form_DodawanieOsoby formularzDodawania = new Form_DodawanieOsoby();
-            formularzDodawania.ShowDialog();
-
-            ZaladujOsobyDoComboBox();
-        }
-
         public Form_ListaOsob()
         {
             InitializeComponent();
@@ -233,16 +225,148 @@ namespace PodkladexApp
         private void textBox_numertelefonu_TextChanged(object sender, EventArgs e)
         {
             string numer = textBox_numertelefonu.Text;
+
+            if (string.IsNullOrEmpty(numer))
+                return;
+
+            if (!numer.All(char.IsDigit))
+            {
+                textBox_numertelefonu.Text = new string(numer.Where(char.IsDigit).ToArray());
+                textBox_numertelefonu.SelectionStart = textBox_numertelefonu.Text.Length;
+            }
+        }
+
+        private void button_ArrowL_Click(object sender, EventArgs e)
+        {
+            if (comboBox_idosoby.Items.Count == 0)
+                return;
+
+            if (comboBox_idosoby.SelectedIndex > 0)
+            {
+                comboBox_idosoby.SelectedIndex--;
+            }
+            else
+            {
+                MessageBox.Show("To jest pierwszy rekord.");
+            }
+        }
+
+        private void button_ArrowR_Click(object sender, EventArgs e)
+        {
+            if (comboBox_idosoby.Items.Count == 0)
+                return;
+
+            if (comboBox_idosoby.SelectedIndex < comboBox_idosoby.Items.Count - 1)
+            {
+                comboBox_idosoby.SelectedIndex++;
+            }
+            else
+            {
+                MessageBox.Show("To jest ostatni rekord.");
+            }
+        }
+
+        private void btn_dodawanie_Click(object? sender, EventArgs e)
+        {
+            if (!CzyWszystkiePolaUzupelnione())
+            {
+                MessageBox.Show(
+                    "Nie wszystkie pola zostały uzupełnione.\nWypełnij wszystkie dane przed dodaniem osoby.",
+                    "Brak danych",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            string imie = textBox_imie.Text.Trim();
+            string nazwisko = textBox_nazwisko.Text.Trim();
+            string nrTelefonu = textBox_numertelefonu.Text.Trim();
+            string email = textBox_email.Text.Trim();
+            string miejscowosc = textBox_miejscowosc.Text.Trim();
+            string kodPocztowy = textBox_kodpocztowy.Text.Trim();
+            string ulica = textBox_ulica.Text.Trim();
+            string numer = textBox_numer.Text.Trim();
+            string pesel = textBox_pesel.Text.Trim();
+
             try
             {
-                int telefon = Convert.ToInt32(textBox_numertelefonu.Text);
+                bool czyIstniejePesel = db.Osoba.Any(o => o.Pesel == pesel);
+
+                if (czyIstniejePesel)
+                {
+                    MessageBox.Show(
+                        "Osoba o podanym numerze PESEL już istnieje w bazie.",
+                        "Duplikat PESEL",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return;
+                }
+
+                DialogResult wynik = MessageBox.Show(
+                    "Czy na pewno chcesz dodać nową osobę?",
+                    "Potwierdzenie dodania",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (wynik == DialogResult.No)
+                {
+                    return;
+                }
+
+                Osoba nowaOsoba = new Osoba
+                {
+                    Imie = imie,
+                    Nazwisko = nazwisko,
+                    NrTelefonu = nrTelefonu,
+                    AdresEMail = email,
+                    Miejscowosc = miejscowosc,
+                    KodPocztowy = kodPocztowy,
+                    Ulica = ulica,
+                    Numer = numer,
+                    Pesel = pesel
+                };
+
+                db.Osoba.Add(nowaOsoba);
+                db.SaveChanges();
+
+                MessageBox.Show(
+                    "Nowa osoba została dodana poprawnie.",
+                    "Sukces",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                ZaladujOsobyDoComboBox();
+                WyczyscPola();
+                comboBox_idosoby.SelectedIndex = -1;
+                panel_daneosoby.Visible = false;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                string blad = ex.Message;
 
-                    textBox_numertelefonu.Text = numer.Substring(0,numer.Length-1);
+                if (ex.InnerException != null)
+                {
+                    blad += "\n\nSzczegóły:\n" + ex.InnerException.Message;
+                }
 
+                MessageBox.Show(
+                    "Wystąpił błąd podczas dodawania osoby:\n" + blad,
+                    "Błąd",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
+        }
+        private bool CzyWszystkiePolaUzupelnione()
+        {
+            return !string.IsNullOrWhiteSpace(textBox_imie.Text)
+                && !string.IsNullOrWhiteSpace(textBox_nazwisko.Text)
+                && !string.IsNullOrWhiteSpace(textBox_numertelefonu.Text)
+                && !string.IsNullOrWhiteSpace(textBox_email.Text)
+                && !string.IsNullOrWhiteSpace(textBox_miejscowosc.Text)
+                && !string.IsNullOrWhiteSpace(textBox_kodpocztowy.Text)
+                && !string.IsNullOrWhiteSpace(textBox_ulica.Text)
+                && !string.IsNullOrWhiteSpace(textBox_numer.Text)
+                && !string.IsNullOrWhiteSpace(textBox_pesel.Text);
         }
     }
 }

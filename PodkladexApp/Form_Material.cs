@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PodkladexApp.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,12 @@ namespace PodkladexApp
 {
     public partial class Form_Material : Form
     {
-        public Form_Material()
+        PodkladexContext _context;
+
+        public Form_Material(PodkladexContext db)
         {
             InitializeComponent();
+            _context = db;
         }
     }
 }

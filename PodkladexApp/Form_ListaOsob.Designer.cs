@@ -49,10 +49,15 @@
             panel_daneosoby = new Panel();
             label_idosoby = new Label();
             btn_dodawanie = new Button();
-            btn_edytowanie = new Button();
             btn_usuwanie = new Button();
             comboBox_idosoby = new ComboBox();
+            button1 = new Button();
+            button2 = new Button();
+            button_ArrowR = new Button();
+            button_ArrowL = new Button();
+            panel1 = new Panel();
             panel_daneosoby.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // label_imie
@@ -220,7 +225,7 @@
             panel_daneosoby.Controls.Add(label_nrtelefonu);
             panel_daneosoby.Controls.Add(label_nazwisko);
             panel_daneosoby.Controls.Add(label_imie);
-            panel_daneosoby.Location = new Point(43, 99);
+            panel_daneosoby.Location = new Point(41, 97);
             panel_daneosoby.Name = "panel_daneosoby";
             panel_daneosoby.Size = new Size(736, 400);
             panel_daneosoby.TabIndex = 2;
@@ -228,7 +233,7 @@
             // label_idosoby
             // 
             label_idosoby.AutoSize = true;
-            label_idosoby.Location = new Point(71, 49);
+            label_idosoby.Location = new Point(72, 47);
             label_idosoby.Name = "label_idosoby";
             label_idosoby.Size = new Size(41, 15);
             label_idosoby.TabIndex = 0;
@@ -236,7 +241,7 @@
             // 
             // btn_dodawanie
             // 
-            btn_dodawanie.Location = new Point(43, 545);
+            btn_dodawanie.Location = new Point(43, 521);
             btn_dodawanie.Name = "btn_dodawanie";
             btn_dodawanie.Size = new Size(75, 23);
             btn_dodawanie.TabIndex = 3;
@@ -244,24 +249,16 @@
             btn_dodawanie.UseVisualStyleBackColor = true;
             btn_dodawanie.Click += btn_dodawanie_Click;
             // 
-            // btn_edytowanie
-            // 
-            btn_edytowanie.Location = new Point(366, 545);
-            btn_edytowanie.Name = "btn_edytowanie";
-            btn_edytowanie.Size = new Size(89, 23);
-            btn_edytowanie.TabIndex = 3;
-            btn_edytowanie.Text = "Edytuj";
-            btn_edytowanie.UseVisualStyleBackColor = true;
-            btn_edytowanie.Click += btn_edytowanie_Click;
-            // 
             // btn_usuwanie
             // 
-            btn_usuwanie.Location = new Point(703, 545);
+            btn_usuwanie.BackColor = SystemColors.ControlLight;
+            btn_usuwanie.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold);
+            btn_usuwanie.Location = new Point(706, 521);
             btn_usuwanie.Name = "btn_usuwanie";
-            btn_usuwanie.Size = new Size(75, 23);
+            btn_usuwanie.Size = new Size(73, 34);
             btn_usuwanie.TabIndex = 3;
             btn_usuwanie.Text = "Usuń";
-            btn_usuwanie.UseVisualStyleBackColor = true;
+            btn_usuwanie.UseVisualStyleBackColor = false;
             btn_usuwanie.Click += btn_usuwanie_Click;
             // 
             // comboBox_idosoby
@@ -273,21 +270,86 @@
             comboBox_idosoby.TabIndex = 4;
             comboBox_idosoby.SelectedIndexChanged += comboBox_idosoby_SelectedIndexChanged;
             // 
+            // button1
+            // 
+            button1.BackColor = SystemColors.ControlLight;
+            button1.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold);
+            button1.Location = new Point(43, 521);
+            button1.Name = "button1";
+            button1.Size = new Size(162, 34);
+            button1.TabIndex = 3;
+            button1.Text = "Dodaj rekord";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += btn_dodawanie_Click;
+            // 
+            // button2
+            // 
+            button2.BackColor = SystemColors.ControlLight;
+            button2.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold);
+            button2.Location = new Point(391, 521);
+            button2.Name = "button2";
+            button2.Size = new Size(99, 34);
+            button2.TabIndex = 3;
+            button2.Text = "Edytuj";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += btn_edytowanie_Click;
+            // 
+            // button_ArrowR
+            // 
+            button_ArrowR.BackgroundImage = Properties.Resources.Arrow_right;
+            button_ArrowR.BackgroundImageLayout = ImageLayout.Zoom;
+            button_ArrowR.ImageAlign = ContentAlignment.TopCenter;
+            button_ArrowR.Location = new Point(649, 642);
+            button_ArrowR.Name = "button_ArrowR";
+            button_ArrowR.Size = new Size(130, 50);
+            button_ArrowR.TabIndex = 5;
+            button_ArrowR.UseVisualStyleBackColor = true;
+            button_ArrowR.Click += button_ArrowR_Click;
+            // 
+            // button_ArrowL
+            // 
+            button_ArrowL.BackgroundImage = Properties.Resources.Arrow_left;
+            button_ArrowL.BackgroundImageLayout = ImageLayout.Zoom;
+            button_ArrowL.Location = new Point(43, 642);
+            button_ArrowL.Name = "button_ArrowL";
+            button_ArrowL.Size = new Size(130, 50);
+            button_ArrowL.TabIndex = 5;
+            button_ArrowL.UseVisualStyleBackColor = true;
+            button_ArrowL.Click += button_ArrowL_Click;
+            // 
+            // panel1
+            // 
+            panel1.AutoSize = true;
+            panel1.BackColor = SystemColors.ButtonFace;
+            panel1.Controls.Add(label_idosoby);
+            panel1.Controls.Add(panel_daneosoby);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(2, 2);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(804, 713);
+            panel1.TabIndex = 6;
+            // 
             // Form_ListaOsob
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(908, 636);
+            AutoSize = true;
+            ClientSize = new Size(808, 717);
+            Controls.Add(button_ArrowL);
+            Controls.Add(button_ArrowR);
             Controls.Add(comboBox_idosoby);
             Controls.Add(btn_usuwanie);
-            Controls.Add(btn_edytowanie);
+            Controls.Add(button2);
+            Controls.Add(button1);
             Controls.Add(btn_dodawanie);
-            Controls.Add(panel_daneosoby);
-            Controls.Add(label_idosoby);
+            Controls.Add(panel1);
             Name = "Form_ListaOsob";
+            Padding = new Padding(2);
             Text = "Lista osób  ";
             panel_daneosoby.ResumeLayout(false);
             panel_daneosoby.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -315,8 +377,12 @@
         private Panel panel_daneosoby;
         private Label label_idosoby;
         private Button btn_dodawanie;
-        private Button btn_edytowanie;
         private Button btn_usuwanie;
         private ComboBox comboBox_idosoby;
+        private Button button1;
+        private Button button2;
+        private Button button_ArrowR;
+        private Button button_ArrowL;
+        private Panel panel1;
     }
 }
