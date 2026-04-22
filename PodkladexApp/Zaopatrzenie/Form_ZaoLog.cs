@@ -89,5 +89,11 @@ namespace PodkladexApp
         private void label_ulica_Click(object sender, EventArgs e) { }
         private void label_Numer_Click(object sender, EventArgs e) { }
         private void label_NIP_Click(object sender, EventArgs e) { }
+
+        private void btn_Dostawa_Click(object sender, EventArgs e)
+        {
+            Form_Dostawa form_Dostawa = new Form_Dostawa();
+            form_Dostawa.Show();
+        }
     }
 }

@@ -75,6 +75,7 @@
             btn_DodajDostawe.TabIndex = 4;
             btn_DodajDostawe.Text = "Dodaj dostawe";
             btn_DodajDostawe.UseVisualStyleBackColor = true;
+            btn_DodajDostawe.Click += btn_DodajDostawe_Click;
             // 
             // label_DosawaMat
             // 
