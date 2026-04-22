@@ -90,7 +90,7 @@
             btn_Utrzymanie_Ruchu.Font = new Font("Segoe UI", 14F);
             btn_Utrzymanie_Ruchu.Location = new Point(9, 473);
             btn_Utrzymanie_Ruchu.Name = "btn_Utrzymanie_Ruchu";
-            btn_Utrzymanie_Ruchu.Size = new Size(325, 71);
+            btn_Utrzymanie_Ruchu.Size = new Size(322, 71);
             btn_Utrzymanie_Ruchu.TabIndex = 4;
             btn_Utrzymanie_Ruchu.Text = "Utrzymanie Ruchu";
             btn_Utrzymanie_Ruchu.UseVisualStyleBackColor = true;
