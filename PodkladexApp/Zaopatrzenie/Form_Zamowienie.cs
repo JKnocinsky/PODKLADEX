@@ -243,5 +243,10 @@ namespace PodkladexApp.Zaopatrzenie
         {
 
         }
+
+        private void button_czyszczenie_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

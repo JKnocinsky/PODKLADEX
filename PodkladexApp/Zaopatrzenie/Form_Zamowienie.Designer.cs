@@ -53,6 +53,7 @@ namespace PodkladexApp.Zaopatrzenie
             textBox_email = new TextBox();
             textBox_Numer_telefonu = new TextBox();
             textBox_imie = new TextBox();
+            button_czyszczenie = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -92,6 +93,7 @@ namespace PodkladexApp.Zaopatrzenie
             // 
             // panel1
             // 
+            panel1.Controls.Add(button_czyszczenie);
             panel1.Controls.Add(button_zapisz);
             panel1.Controls.Add(label_nazwa_firmy);
             panel1.Controls.Add(textBox_nazwa_firmy);
@@ -327,6 +329,18 @@ namespace PodkladexApp.Zaopatrzenie
             textBox_imie.TabIndex = 1;
             textBox_imie.TextChanged += textBox_imie_TextChanged;
             // 
+            // button_czyszczenie
+            // 
+            button_czyszczenie.Font = new Font("Segoe UI", 14F);
+            button_czyszczenie.Location = new Point(462, 586);
+            button_czyszczenie.Margin = new Padding(3, 4, 3, 4);
+            button_czyszczenie.Name = "button_czyszczenie";
+            button_czyszczenie.Size = new Size(185, 69);
+            button_czyszczenie.TabIndex = 20;
+            button_czyszczenie.Text = "Wyczyść dane";
+            button_czyszczenie.UseVisualStyleBackColor = true;
+            button_czyszczenie.Click += button_czyszczenie_Click;
+            // 
             // Form_Zamowienie
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -375,5 +389,6 @@ namespace PodkladexApp.Zaopatrzenie
         private Label label_nazwa_firmy;
         private TextBox textBox_nazwa_firmy;
         private Button button_zapisz;
+        private Button button_czyszczenie;
     }
 }
