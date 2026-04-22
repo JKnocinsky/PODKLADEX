@@ -96,13 +96,14 @@
             // 
             // panel1
             // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.AutoSize = true;
             panel1.Controls.Add(label1);
             panel1.Controls.Add(btn_usun);
             panel1.Controls.Add(btn_edytuj);
             panel1.Controls.Add(btn_dodaj);
             panel1.Controls.Add(txt_Nazwa_Maszyny);
             panel1.Controls.Add(dgv_Maszyny);
-            panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(1028, 676);
@@ -120,6 +121,7 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

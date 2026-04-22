@@ -26,25 +26,40 @@ namespace PodkladexApp
 
         private void btn_dodaj_Click(object sender, EventArgs e)
         {
+
             Button button = sender as Button;
             Maszyna selectedMaszyna = null;
-            // wybór maszyny z DataGridView
 
-            DataGridViewRow row = dgv_Maszyny.SelectedRows.Count > 0 ? dgv_Maszyny.SelectedRows[0] : null;
-
-            if (row == null)
+            if (button.Text == "Edytuj")
             {
-                MessageBox.Show("Proszę wybrać maszynę z listy.");
+                DataGridViewRow row = dgv_Maszyny.SelectedRows.Count > 0 ? dgv_Maszyny.SelectedRows[0] : null;
+
+                if (row == null)
+                {
+                    MessageBox.Show("Proszę wybrać maszynę z listy.");
+                }
+                else
+                {
+                    selectedMaszyna = row.DataBoundItem as Maszyna;
+                }
+
+                // otwarcie formularza dodawania maszyny z przekazaniem nazwy przycisku oraz maszny
+                Form_DodajMaszyne FD = new Form_DodajMaszyne(db, button.Name, selectedMaszyna);
+                FD.ShowDialog();
+            }
+            else if (button.Text == "Dodaj")
+            {
+                Form_DodajMaszyne FD = new Form_DodajMaszyne(db, button.Name);
+                FD.ShowDialog();
             }
             else
             {
-                selectedMaszyna = row.DataBoundItem as Maszyna;
+                Form_DodajMaszyne FD = new Form_DodajMaszyne(db, button.Name);
+                FD.ShowDialog();
             }
+                // wybór maszyny z DataGridView
 
-
-            // otwarcie formularza dodawania maszyny z przekazaniem nazwy przycisku oraz maszny
-            Form_DodajMaszyne FD = new Form_DodajMaszyne(button.Name, selectedMaszyna);
-            FD.ShowDialog();
+            
         }
 
         private void txt_Nazwa_Maszyny_TextChanged(object sender, EventArgs e)

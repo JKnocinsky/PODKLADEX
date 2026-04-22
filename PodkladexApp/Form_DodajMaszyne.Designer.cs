@@ -148,7 +148,7 @@
             btn_funkcja.Name = "btn_funkcja";
             btn_funkcja.Size = new Size(139, 34);
             btn_funkcja.TabIndex = 11;
-            btn_funkcja.Text = "Dodaj";
+            btn_funkcja.Text = "Zatwierdź";
             btn_funkcja.UseVisualStyleBackColor = true;
             btn_funkcja.Click += btn_funkcja_Click;
             // 

@@ -13,26 +13,23 @@ namespace PodkladexApp
 {
     public partial class Form_DodajMaszyne : Form
     {
+        PodkladexContext context;
         int btn;
-        public Form_DodajMaszyne()
+
+        //public Form_DodajMaszyne()
+        //{
+        //    InitializeComponent();
+        //}
+
+        public Form_DodajMaszyne(PodkladexContext context, string Nazwa, Maszyna maszyna)
         {
             InitializeComponent();
+            Maszyna nowaMaszyna = new Maszyna();
         }
 
-        public Form_DodajMaszyne(string Nazwa, Maszyna maszyna)
+        public Form_DodajMaszyne(PodkladexContext context, string buttonName)
         {
             InitializeComponent();
-            switch (Nazwa) 
-            {
-                case "btn_dodaj":
-                    label_tytul.Text = "Dodaj maszynę";
-                    btn = 1;
-                    break;
-                case "btn_edytuj":
-                    label_tytul.Text = "Edytuj maszynę";
-                    btn = 2;
-                    break;
-            }
         }
 
         private void btn_funkcja_Click(object sender, EventArgs e)
