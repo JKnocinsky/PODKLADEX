@@ -74,17 +74,6 @@
             button_Edytuj_firmy.UseVisualStyleBackColor = true;
             button_Edytuj_firmy.Click += button_Edytuj_firmy_Click;
             // 
-            // button_konf_mat
-            // 
-            button_konf_mat.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic);
-            button_konf_mat.Location = new Point(31, 190);
-            button_konf_mat.Name = "button_konf_mat";
-            button_konf_mat.Size = new Size(160, 74);
-            button_konf_mat.TabIndex = 2;
-            button_konf_mat.Text = "Konfiguruj dane materiałowe";
-            button_konf_mat.UseVisualStyleBackColor = true;
-            button_konf_mat.Click += button_konf_mat_Click;
-            // 
             // comboBox_Nazwa_firmy
             // 
             comboBox_Nazwa_firmy.Font = new Font("Segoe UI", 12F);
