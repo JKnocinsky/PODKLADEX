@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PodkladexApp.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,7 +13,7 @@ namespace PodkladexApp
 {
     public partial class Form_Normy_eksploatacyjne : Form
     {
-        public Form_Normy_eksploatacyjne()
+        public Form_Normy_eksploatacyjne(PodkladexContext context)
         {
             InitializeComponent();
         }

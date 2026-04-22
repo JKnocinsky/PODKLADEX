@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.EntityFrameworkCore;
 using PodkladexApp.Models;
 
 namespace PodkladexApp
@@ -31,21 +32,35 @@ namespace PodkladexApp
 
         private void button_usun_czesc_Click(object sender, EventArgs e)
         {
-
+            CzescZamienna czescZamienna = new CzescZamienna();
+            if (comboBox_lista_czesci.SelectedItem == null || comboBox_lista_czesci.SelectedIndex == -1)
+            {
+                MessageBox.Show("Nie wybrano czesci.", "Błąd");
+            }
+            else
+            {
+                czescZamienna = comboBox_lista_czesci.SelectedItem as CzescZamienna;
+                context.CzescZamienna.Remove(czescZamienna);
+                context.SaveChanges();
+                comboBox_lista_czesci.DataSource = context.CzescZamienna.ToList();
+                textBox_nazwa_czesci.Clear();
+            }
         }
 
         private void button_dodaj_czesc_Click(object sender, EventArgs e)
         {
             CzescZamienna czescZamienna = new CzescZamienna();
 
+
+
             if (textBox_nazwa_czesci.Text == "" || textBox_nazwa_czesci.Text == null)
             {
-                MessageBox.Show("Błąd: Nazwa jest pusta! Wpisz nazwę.");
+                MessageBox.Show("Nazwa jest pusta! Wpisz nazwę.","Błąd");
 
             }
-            else if(textBox_nazwa_czesci.Text== context.CzescZamienna.Where(czesc=>czesc.Nazwa==textBox_nazwa_czesci.Text).FirstOrDefault().Nazwa)
-                {
-                MessageBox.Show("Błąd: Nazwa jest zajeta! Wpisz inna nazwę.");
+            else if(context.CzescZamienna.Where(czesc => czesc.Nazwa == textBox_nazwa_czesci.Text).FirstOrDefault()!=null)
+            {
+                MessageBox.Show("Nazwa jest zajeta! Wpisz inna nazwę.","Błąd");
             }
             else
             {
@@ -63,7 +78,7 @@ namespace PodkladexApp
             CzescZamienna czescZamienna = new CzescZamienna();
             if (comboBox_lista_czesci.SelectedItem == null || comboBox_lista_czesci.SelectedIndex == -1)
             {
-                MessageBox.Show("Błąd: nie wybrano czesci.");
+                MessageBox.Show("Nie wybrano czesci.","Błąd");
             }
             else
             {
@@ -72,7 +87,7 @@ namespace PodkladexApp
 
                 if (textBox_nazwa_czesci.Text == "" || textBox_nazwa_czesci.Text == null)
                 {
-                    MessageBox.Show("Błąd: Nazwa jest pusta! Wpisz nazwę.");
+                    MessageBox.Show("Nazwa jest pusta! Wpisz nazwę.", "Błąd");
 
                 }
                 else

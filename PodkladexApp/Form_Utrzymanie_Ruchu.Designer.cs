@@ -34,14 +34,14 @@
             button_otworz_normy_eksplatacyjne = new Button();
             button_otworz_rodzaj_obslugi = new Button();
             button_otworz_gwarancja = new Button();
+            panel_UR = new Panel();
             SuspendLayout();
             // 
             // button_otworz_czesci_zamienne
             // 
-            button_otworz_czesci_zamienne.Location = new Point(29, 51);
-            button_otworz_czesci_zamienne.Margin = new Padding(3, 4, 3, 4);
+            button_otworz_czesci_zamienne.Location = new Point(12, 6);
             button_otworz_czesci_zamienne.Name = "button_otworz_czesci_zamienne";
-            button_otworz_czesci_zamienne.Size = new Size(147, 73);
+            button_otworz_czesci_zamienne.Size = new Size(129, 55);
             button_otworz_czesci_zamienne.TabIndex = 1;
             button_otworz_czesci_zamienne.Text = "Części zamienne";
             button_otworz_czesci_zamienne.UseVisualStyleBackColor = true;
@@ -49,10 +49,9 @@
             // 
             // button_otworz_awaria
             // 
-            button_otworz_awaria.Location = new Point(29, 133);
-            button_otworz_awaria.Margin = new Padding(3, 4, 3, 4);
+            button_otworz_awaria.Location = new Point(12, 67);
             button_otworz_awaria.Name = "button_otworz_awaria";
-            button_otworz_awaria.Size = new Size(147, 73);
+            button_otworz_awaria.Size = new Size(129, 55);
             button_otworz_awaria.TabIndex = 2;
             button_otworz_awaria.Text = "Awaria";
             button_otworz_awaria.UseVisualStyleBackColor = true;
@@ -60,10 +59,9 @@
             // 
             // button_otworz_obsluga
             // 
-            button_otworz_obsluga.Location = new Point(29, 214);
-            button_otworz_obsluga.Margin = new Padding(3, 4, 3, 4);
+            button_otworz_obsluga.Location = new Point(12, 128);
             button_otworz_obsluga.Name = "button_otworz_obsluga";
-            button_otworz_obsluga.Size = new Size(147, 73);
+            button_otworz_obsluga.Size = new Size(129, 55);
             button_otworz_obsluga.TabIndex = 3;
             button_otworz_obsluga.Text = "Obsługa";
             button_otworz_obsluga.UseVisualStyleBackColor = true;
@@ -71,10 +69,9 @@
             // 
             // button_otworz_normy_eksplatacyjne
             // 
-            button_otworz_normy_eksplatacyjne.Location = new Point(29, 377);
-            button_otworz_normy_eksplatacyjne.Margin = new Padding(3, 4, 3, 4);
+            button_otworz_normy_eksplatacyjne.Location = new Point(12, 251);
             button_otworz_normy_eksplatacyjne.Name = "button_otworz_normy_eksplatacyjne";
-            button_otworz_normy_eksplatacyjne.Size = new Size(147, 73);
+            button_otworz_normy_eksplatacyjne.Size = new Size(129, 55);
             button_otworz_normy_eksplatacyjne.TabIndex = 5;
             button_otworz_normy_eksplatacyjne.Text = "Normy Eksploatacyjne";
             button_otworz_normy_eksplatacyjne.UseVisualStyleBackColor = true;
@@ -82,10 +79,9 @@
             // 
             // button_otworz_rodzaj_obslugi
             // 
-            button_otworz_rodzaj_obslugi.Location = new Point(29, 295);
-            button_otworz_rodzaj_obslugi.Margin = new Padding(3, 4, 3, 4);
+            button_otworz_rodzaj_obslugi.Location = new Point(12, 189);
             button_otworz_rodzaj_obslugi.Name = "button_otworz_rodzaj_obslugi";
-            button_otworz_rodzaj_obslugi.Size = new Size(147, 73);
+            button_otworz_rodzaj_obslugi.Size = new Size(129, 55);
             button_otworz_rodzaj_obslugi.TabIndex = 6;
             button_otworz_rodzaj_obslugi.Text = "Rodzaj obsługi";
             button_otworz_rodzaj_obslugi.UseVisualStyleBackColor = true;
@@ -93,27 +89,33 @@
             // 
             // button_otworz_gwarancja
             // 
-            button_otworz_gwarancja.Location = new Point(29, 467);
-            button_otworz_gwarancja.Margin = new Padding(3, 4, 3, 4);
+            button_otworz_gwarancja.Location = new Point(12, 318);
             button_otworz_gwarancja.Name = "button_otworz_gwarancja";
-            button_otworz_gwarancja.Size = new Size(147, 73);
+            button_otworz_gwarancja.Size = new Size(129, 55);
             button_otworz_gwarancja.TabIndex = 7;
             button_otworz_gwarancja.Text = "Gwarancja";
             button_otworz_gwarancja.UseVisualStyleBackColor = true;
             button_otworz_gwarancja.Click += button_otworz_gwarancja_Click;
             // 
+            // panel_UR
+            // 
+            panel_UR.Location = new Point(147, 6);
+            panel_UR.Name = "panel_UR";
+            panel_UR.Size = new Size(1756, 1151);
+            panel_UR.TabIndex = 8;
+            // 
             // Form_Utrzymanie_Ruchu
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(914, 600);
+            ClientSize = new Size(1904, 1161);
+            Controls.Add(panel_UR);
             Controls.Add(button_otworz_gwarancja);
             Controls.Add(button_otworz_rodzaj_obslugi);
             Controls.Add(button_otworz_normy_eksplatacyjne);
             Controls.Add(button_otworz_obsluga);
             Controls.Add(button_otworz_awaria);
             Controls.Add(button_otworz_czesci_zamienne);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "Form_Utrzymanie_Ruchu";
             Text = "Utrzymanie_Ruchu";
             ResumeLayout(false);
@@ -127,5 +129,6 @@
         private Button button_otworz_normy_eksplatacyjne;
         private Button button_otworz_rodzaj_obslugi;
         private Button button_otworz_gwarancja;
+        private Panel panel_UR;
     }
 }

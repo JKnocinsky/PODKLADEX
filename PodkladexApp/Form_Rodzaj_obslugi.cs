@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PodkladexApp.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,7 +13,7 @@ namespace PodkladexApp
 {
     public partial class Form_Rodzaj_obslugi : Form
     {
-        public Form_Rodzaj_obslugi()
+        public Form_Rodzaj_obslugi(PodkladexContext context)
         {
             InitializeComponent();
         }
