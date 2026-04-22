@@ -29,16 +29,20 @@ namespace PodkladexApp
         }
         private void OpenChildForm(Form childForm)
         {
+            Panel panel = tableLayoutPanel1.Controls["panel_Produkcja"] as Panel;
+
             if (activeForm != null)
                 activeForm.Close();
             activeForm = childForm;
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
             childForm.Dock = DockStyle.Fill;
-            panel_Produkcja.Controls.Add(childForm);
-            panel_Produkcja.Tag = childForm;
+            panel.Controls.Add(childForm);
+            panel.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
+
+
         }
     }
 }

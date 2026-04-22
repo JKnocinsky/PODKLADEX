@@ -28,27 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
+            txtbox_Nazwa = new TextBox();
             label_tytul = new Label();
             label2 = new Label();
             label3 = new Label();
-            textBox2 = new TextBox();
-            dateTimePicker1 = new DateTimePicker();
+            txtbox_uwagi = new TextBox();
+            dtp_dataZakup = new DateTimePicker();
             label4 = new Label();
             label5 = new Label();
-            dateTimePicker2 = new DateTimePicker();
+            dtp_dataUruch = new DateTimePicker();
             label6 = new Label();
-            dateTimePicker3 = new DateTimePicker();
+            dtp_dataWyl = new DateTimePicker();
             btn_funkcja = new Button();
             SuspendLayout();
             // 
-            // textBox1
+            // txtbox_Nazwa
             // 
-            textBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            textBox1.Location = new Point(60, 102);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(289, 29);
-            textBox1.TabIndex = 0;
+            txtbox_Nazwa.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            txtbox_Nazwa.Location = new Point(60, 102);
+            txtbox_Nazwa.Name = "txtbox_Nazwa";
+            txtbox_Nazwa.Size = new Size(289, 29);
+            txtbox_Nazwa.TabIndex = 0;
             // 
             // label_tytul
             // 
@@ -80,21 +80,21 @@
             label3.TabIndex = 4;
             label3.Text = "Uwagi";
             // 
-            // textBox2
+            // txtbox_uwagi
             // 
-            textBox2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            textBox2.Location = new Point(60, 460);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(289, 29);
-            textBox2.TabIndex = 3;
+            txtbox_uwagi.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            txtbox_uwagi.Location = new Point(60, 460);
+            txtbox_uwagi.Name = "txtbox_uwagi";
+            txtbox_uwagi.Size = new Size(289, 29);
+            txtbox_uwagi.TabIndex = 3;
             // 
-            // dateTimePicker1
+            // dtp_dataZakup
             // 
-            dateTimePicker1.CalendarFont = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            dateTimePicker1.Location = new Point(60, 196);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(289, 23);
-            dateTimePicker1.TabIndex = 5;
+            dtp_dataZakup.CalendarFont = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dtp_dataZakup.Location = new Point(60, 196);
+            dtp_dataZakup.Name = "dtp_dataZakup";
+            dtp_dataZakup.Size = new Size(289, 23);
+            dtp_dataZakup.TabIndex = 5;
             // 
             // label4
             // 
@@ -116,13 +116,13 @@
             label5.TabIndex = 8;
             label5.Text = "Data uruchomienia";
             // 
-            // dateTimePicker2
+            // dtp_dataUruch
             // 
-            dateTimePicker2.CalendarFont = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            dateTimePicker2.Location = new Point(60, 284);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(289, 23);
-            dateTimePicker2.TabIndex = 7;
+            dtp_dataUruch.CalendarFont = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dtp_dataUruch.Location = new Point(60, 284);
+            dtp_dataUruch.Name = "dtp_dataUruch";
+            dtp_dataUruch.Size = new Size(289, 23);
+            dtp_dataUruch.TabIndex = 7;
             // 
             // label6
             // 
@@ -134,13 +134,13 @@
             label6.TabIndex = 10;
             label6.Text = "Data wyłączenia";
             // 
-            // dateTimePicker3
+            // dtp_dataWyl
             // 
-            dateTimePicker3.CalendarFont = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            dateTimePicker3.Location = new Point(60, 372);
-            dateTimePicker3.Name = "dateTimePicker3";
-            dateTimePicker3.Size = new Size(289, 23);
-            dateTimePicker3.TabIndex = 9;
+            dtp_dataWyl.CalendarFont = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dtp_dataWyl.Location = new Point(60, 372);
+            dtp_dataWyl.Name = "dtp_dataWyl";
+            dtp_dataWyl.Size = new Size(289, 23);
+            dtp_dataWyl.TabIndex = 9;
             // 
             // btn_funkcja
             // 
@@ -159,16 +159,16 @@
             ClientSize = new Size(402, 573);
             Controls.Add(btn_funkcja);
             Controls.Add(label6);
-            Controls.Add(dateTimePicker3);
+            Controls.Add(dtp_dataWyl);
             Controls.Add(label5);
-            Controls.Add(dateTimePicker2);
+            Controls.Add(dtp_dataUruch);
             Controls.Add(label4);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(dtp_dataZakup);
             Controls.Add(label3);
-            Controls.Add(textBox2);
+            Controls.Add(txtbox_uwagi);
             Controls.Add(label2);
             Controls.Add(label_tytul);
-            Controls.Add(textBox1);
+            Controls.Add(txtbox_Nazwa);
             Name = "Form_DodajMaszyne";
             Text = "Form_DodajMaszyne";
             ResumeLayout(false);
@@ -177,17 +177,17 @@
 
         #endregion
 
-        private TextBox textBox1;
+        private TextBox txtbox_Nazwa;
         private Label label_tytul;
         private Label label2;
         private Label label3;
-        private TextBox textBox2;
-        private DateTimePicker dateTimePicker1;
+        private TextBox txtbox_uwagi;
+        private DateTimePicker dtp_dataZakup;
         private Label label4;
         private Label label5;
-        private DateTimePicker dateTimePicker2;
+        private DateTimePicker dtp_dataUruch;
         private Label label6;
-        private DateTimePicker dateTimePicker3;
+        private DateTimePicker dtp_dataWyl;
         private Button btn_funkcja;
     }
 }

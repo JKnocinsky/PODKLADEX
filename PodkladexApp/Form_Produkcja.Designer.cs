@@ -28,56 +28,62 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btn_maszyny = new Button();
+            tableLayoutPanel1 = new TableLayoutPanel();
             panel_Produkcja = new Panel();
-            panel1 = new Panel();
-            panel1.SuspendLayout();
+            btn_maszyny = new Button();
+            tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
-            // btn_maszyny
+            // tableLayoutPanel1
             // 
-            btn_maszyny.Location = new Point(8, 9);
-            btn_maszyny.Name = "btn_maszyny";
-            btn_maszyny.Size = new Size(178, 38);
-            btn_maszyny.TabIndex = 0;
-            btn_maszyny.Text = "Maszyny";
-            btn_maszyny.UseVisualStyleBackColor = true;
-            btn_maszyny.Click += btn_maszyny_Click;
+            tableLayoutPanel1.ColumnCount = 2;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 11.4859905F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 88.51401F));
+            tableLayoutPanel1.Controls.Add(panel_Produkcja, 1, 0);
+            tableLayoutPanel1.Controls.Add(btn_maszyny, 0, 0);
+            tableLayoutPanel1.Dock = DockStyle.Fill;
+            tableLayoutPanel1.Location = new Point(0, 0);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 1;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Size = new Size(1814, 1117);
+            tableLayoutPanel1.TabIndex = 0;
             // 
             // panel_Produkcja
             // 
-            panel_Produkcja.Dock = DockStyle.Right;
-            panel_Produkcja.Location = new Point(197, 0);
+            panel_Produkcja.Dock = DockStyle.Fill;
+            panel_Produkcja.Location = new Point(211, 3);
             panel_Produkcja.Name = "panel_Produkcja";
-            panel_Produkcja.Size = new Size(1617, 1017);
-            panel_Produkcja.TabIndex = 1;
+            panel_Produkcja.Size = new Size(1600, 1111);
+            panel_Produkcja.TabIndex = 3;
             // 
-            // panel1
+            // btn_maszyny
             // 
-            panel1.Controls.Add(btn_maszyny);
-            panel1.Dock = DockStyle.Left;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(191, 1017);
-            panel1.TabIndex = 2;
+            btn_maszyny.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            btn_maszyny.Location = new Point(3, 3);
+            btn_maszyny.Name = "btn_maszyny";
+            btn_maszyny.Size = new Size(191, 52);
+            btn_maszyny.TabIndex = 4;
+            btn_maszyny.Text = "Maszyny";
+            btn_maszyny.UseVisualStyleBackColor = true;
+            btn_maszyny.Click += btn_maszyny_Click;
             // 
             // Form_Produkcja
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1814, 1017);
-            Controls.Add(panel1);
-            Controls.Add(panel_Produkcja);
+            ClientSize = new Size(1814, 1117);
+            Controls.Add(tableLayoutPanel1);
             Name = "Form_Produkcja";
             Text = "Form_Produkcja";
-            panel1.ResumeLayout(false);
+            tableLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Button btn_maszyny;
+        private TableLayoutPanel tableLayoutPanel1;
         private Panel panel_Produkcja;
-        private Panel panel1;
+        private Button btn_maszyny;
     }
 }

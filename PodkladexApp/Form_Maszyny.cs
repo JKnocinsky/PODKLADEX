@@ -51,15 +51,31 @@ namespace PodkladexApp
             {
                 Form_DodajMaszyne FD = new Form_DodajMaszyne(db, button.Name);
                 FD.ShowDialog();
+                dgv_Maszyny.DataSource = db.Maszyna.ToList();
+                dgv_Maszyny.Refresh();
             }
             else
             {
-                Form_DodajMaszyne FD = new Form_DodajMaszyne(db, button.Name);
-                FD.ShowDialog();
+                DataGridViewRow row = dgv_Maszyny.SelectedRows.Count > 0 ? dgv_Maszyny.SelectedRows[0] : null;
+
+                if (row == null)
+                {
+                    MessageBox.Show("Proszę wybrać maszynę z listy.");
+                }
+                else
+                {
+                    selectedMaszyna = row.DataBoundItem as Maszyna;
+                    var confirmResult = MessageBox.Show("Czy na pewno chcesz usunąć tę maszynę?", "Potwierdzenie usunięcia", MessageBoxButtons.YesNo);
+                    if (confirmResult == DialogResult.Yes)
+                    {
+                        db.Maszyna.Remove(selectedMaszyna);
+                        db.SaveChanges();
+                    }
+                    dgv_Maszyny.DataSource = db.Maszyna.ToList();
+                    dgv_Maszyny.Refresh();
+                }
             }
                 // wybór maszyny z DataGridView
-
-            
         }
 
         private void txt_Nazwa_Maszyny_TextChanged(object sender, EventArgs e)
