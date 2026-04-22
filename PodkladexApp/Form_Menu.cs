@@ -47,7 +47,7 @@ namespace PodkladexApp
             OpenChildForm(form);
         }
 
-        private void OpenChildForm(Form childForm)
+        public void OpenChildForm(Form childForm)
         {
             if (activeForm != null)
                 activeForm.Close();

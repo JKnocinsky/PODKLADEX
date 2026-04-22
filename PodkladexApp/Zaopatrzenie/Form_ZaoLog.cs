@@ -1,4 +1,5 @@
 ﻿using PodkladexApp.Models; // Wymagane, aby widzieć klasę PodkladexContext i Firma
+using PodkladexApp.Zaopatrzenie;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -233,12 +234,20 @@ namespace PodkladexApp
         }
 
 
-
-
-
         private void button_utworz_zamowienie_Click(object sender, EventArgs e)
         {
+            // Odnajdujemy główne okno aplikacji (Form_Menu), w którym zagnieżdżony jest obecny widok
+            Form_Menu menuForm = (Form_Menu)this.TopLevelControl;
 
+            // Sprawdzamy, czy udało się znaleźć główne okno
+            if (menuForm != null)
+            {
+                // Inicjalizujemy nowy formularz zamówienia
+                Form_Zamowienie form_Zamowienie = new Form_Zamowienie();
+
+                // Zlecamy głównemu menu otwarcie tego formularza w panel_Main
+                menuForm.OpenChildForm(form_Zamowienie);
+            }
         }
 
         private void button_zamow_material_Click(object sender, EventArgs e)
