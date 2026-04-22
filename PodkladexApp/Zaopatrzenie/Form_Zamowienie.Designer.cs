@@ -37,7 +37,6 @@
             ClientSize = new Size(800, 450);
             Name = "Form_Zamowienie";
             Text = "Form1";
-            Load += this.Form_Zamowienie_Load;
             ResumeLayout(false);
         }
 

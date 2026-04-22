@@ -18,8 +18,13 @@ namespace PodkladexApp
 
         private void btn_Kadry_Click(object sender, EventArgs e)
         {
-            Form_Kadry_finanse formKadry = new Form_Kadry_finanse();
-            OpenChildForm(formKadry);
+            Form_ListaOsob form_ListaOsob = new Form_ListaOsob();
+            form_ListaOsob.BackColor = Color.Black;
+            form_ListaOsob.Padding = new Padding(2);
+            form_ListaOsob.Width = 824;
+            form_ListaOsob.Height = 756;
+
+            OpenChildForm(form_ListaOsob, false);
         }
 
 
@@ -47,16 +52,29 @@ namespace PodkladexApp
             OpenChildForm(form);
         }
 
-        private void OpenChildForm(Form childForm)
+        private void OpenChildForm(Form childForm, bool dopasujDoCalegoPanelu = true)
         {
             if (activeForm != null)
                 activeForm.Close();
+
             activeForm = childForm;
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
-            childForm.Dock = DockStyle.Fill;
+
+            panel_Main.Controls.Clear();
             panel_Main.Controls.Add(childForm);
             panel_Main.Tag = childForm;
+
+            if (dopasujDoCalegoPanelu)
+            {
+                childForm.Dock = DockStyle.Fill;
+            }
+            else
+            {
+                childForm.Dock = DockStyle.None;
+                childForm.Location = new Point(5, 5);
+            }
+
             childForm.BringToFront();
             childForm.Show();
         }
