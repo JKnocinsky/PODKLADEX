@@ -5,44 +5,60 @@ namespace PodkladexApp
     public partial class Form_Menu : Form
     {
         PodkladexContext db;
+        Form activeForm = null;
 
         public Form_Menu()
         {
             InitializeComponent();
             db = new PodkladexContext();
-            List<Pracownik> pracownicy = db.Pracownik.ToList();
+            //List<Pracownik> pracownicy = db.Pracownik.ToList();
 
-            comboBox1.DataSource = pracownicy;
+            //comboBox1.DataSource = pracownicy;
         }
 
         private void btn_Kadry_Click(object sender, EventArgs e)
         {
             Form_Kadry_finanse formKadry = new Form_Kadry_finanse();
-            formKadry.Show();
+            OpenChildForm(formKadry);
         }
 
 
         private void btn_Kontrola_Jakosci_Click(object sender, EventArgs e)
         {
-            new Form_Jakosc().Show();
+            Form_Jakosc form_Jakosc = new Form_Jakosc();
+            OpenChildForm(form_Jakosc);
         }
 
         private void btn_Zaopatrzenie_Click(object sender, EventArgs e)
         {
             Form_ZaoLog form_ZaoLog = new Form_ZaoLog();
-            form_ZaoLog.Show();
+            OpenChildForm(form_ZaoLog);
         }
 
         private void btn_Produkcja_Click(object sender, EventArgs e)
         {
             Form_Maszyny form = new Form_Maszyny(db);
-            form.Show();
+            OpenChildForm(form);
         }
 
         private void btn_Utrzymanie_Ruchu_Click(object sender, EventArgs e)
         {
             Form_Utrzymanie_Ruchu form = new Form_Utrzymanie_Ruchu(db);
-            form.Show();
+            OpenChildForm(form);
+        }
+
+        private void OpenChildForm(Form childForm)
+        {
+            if (activeForm != null)
+                activeForm.Close();
+            activeForm = childForm;
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+            panel_Main.Controls.Add(childForm);
+            panel_Main.Tag = childForm;
+            childForm.BringToFront();
+            childForm.Show();
         }
     }
 }
