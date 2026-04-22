@@ -51,5 +51,20 @@ namespace PodkladexApp.Zaopatrzenie
         {
 
         }
+
+        private void Form_Zamowienie_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button_Klient_prywatny_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button_klient_z_firmy_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -56,9 +56,10 @@
             // 
             button_Nowa_firma.Cursor = Cursors.Hand;
             button_Nowa_firma.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_Nowa_firma.Location = new Point(48, 229);
+            button_Nowa_firma.Location = new Point(55, 305);
+            button_Nowa_firma.Margin = new Padding(3, 4, 3, 4);
             button_Nowa_firma.Name = "button_Nowa_firma";
-            button_Nowa_firma.Size = new Size(237, 51);
+            button_Nowa_firma.Size = new Size(271, 68);
             button_Nowa_firma.TabIndex = 0;
             button_Nowa_firma.Text = "Dodaj nową firmę";
             button_Nowa_firma.UseVisualStyleBackColor = true;
@@ -68,9 +69,10 @@
             // 
             button_Edytuj_firmy.Cursor = Cursors.Hand;
             button_Edytuj_firmy.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_Edytuj_firmy.Location = new Point(48, 311);
+            button_Edytuj_firmy.Location = new Point(55, 415);
+            button_Edytuj_firmy.Margin = new Padding(3, 4, 3, 4);
             button_Edytuj_firmy.Name = "button_Edytuj_firmy";
-            button_Edytuj_firmy.Size = new Size(213, 58);
+            button_Edytuj_firmy.Size = new Size(243, 77);
             button_Edytuj_firmy.TabIndex = 1;
             button_Edytuj_firmy.Text = "Edytuj dane firmy";
             button_Edytuj_firmy.UseVisualStyleBackColor = true;
@@ -80,10 +82,9 @@
             // 
             comboBox_Nazwa_firmy.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
             comboBox_Nazwa_firmy.FormattingEnabled = true;
-            comboBox_Nazwa_firmy.Location = new Point(337, 65);
-            comboBox_Nazwa_firmy.Margin = new Padding(3, 2, 3, 2);
+            comboBox_Nazwa_firmy.Location = new Point(385, 87);
             comboBox_Nazwa_firmy.Name = "comboBox_Nazwa_firmy";
-            comboBox_Nazwa_firmy.Size = new Size(885, 33);
+            comboBox_Nazwa_firmy.Size = new Size(1011, 40);
             comboBox_Nazwa_firmy.TabIndex = 3;
             comboBox_Nazwa_firmy.SelectedIndexChanged += comboBox_Nazwa_firmy_SelectedIndexChanged;
             // 
@@ -103,10 +104,9 @@
             panel_dane_firmy.Controls.Add(label_Miejscowosc);
             panel_dane_firmy.Controls.Add(textBox_Ulica_firmy);
             panel_dane_firmy.Controls.Add(textBox_Kod_pocztowy_firmy);
-            panel_dane_firmy.Location = new Point(337, 108);
-            panel_dane_firmy.Margin = new Padding(3, 2, 3, 2);
+            panel_dane_firmy.Location = new Point(385, 155);
             panel_dane_firmy.Name = "panel_dane_firmy";
-            panel_dane_firmy.Size = new Size(885, 574);
+            panel_dane_firmy.Size = new Size(1493, 970);
             panel_dane_firmy.TabIndex = 4;
             panel_dane_firmy.Visible = false;
             // 
@@ -114,9 +114,10 @@
             // 
             button_usun_firme.Cursor = Cursors.Hand;
             button_usun_firme.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold | FontStyle.Italic);
-            button_usun_firme.Location = new Point(598, 330);
+            button_usun_firme.Location = new Point(683, 440);
+            button_usun_firme.Margin = new Padding(3, 4, 3, 4);
             button_usun_firme.Name = "button_usun_firme";
-            button_usun_firme.Size = new Size(229, 55);
+            button_usun_firme.Size = new Size(262, 73);
             button_usun_firme.TabIndex = 6;
             button_usun_firme.Text = "Usuń firmę";
             button_usun_firme.UseVisualStyleBackColor = true;
@@ -126,9 +127,10 @@
             // 
             button_zaakceptuj_zmiany.Cursor = Cursors.Hand;
             button_zaakceptuj_zmiany.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold | FontStyle.Italic);
-            button_zaakceptuj_zmiany.Location = new Point(598, 215);
+            button_zaakceptuj_zmiany.Location = new Point(683, 287);
+            button_zaakceptuj_zmiany.Margin = new Padding(3, 4, 3, 4);
             button_zaakceptuj_zmiany.Name = "button_zaakceptuj_zmiany";
-            button_zaakceptuj_zmiany.Size = new Size(229, 55);
+            button_zaakceptuj_zmiany.Size = new Size(262, 73);
             button_zaakceptuj_zmiany.TabIndex = 5;
             button_zaakceptuj_zmiany.Text = "Zaakceptuj zmiany";
             button_zaakceptuj_zmiany.UseVisualStyleBackColor = true;
@@ -138,9 +140,9 @@
             // 
             label_NIP.AutoSize = true;
             label_NIP.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold | FontStyle.Italic);
-            label_NIP.Location = new Point(136, 492);
+            label_NIP.Location = new Point(155, 656);
             label_NIP.Name = "label_NIP";
-            label_NIP.Size = new Size(44, 25);
+            label_NIP.Size = new Size(54, 32);
             label_NIP.TabIndex = 25;
             label_NIP.Text = "NIP";
             label_NIP.Click += label_NIP_Click;
@@ -148,18 +150,20 @@
             // textBox_NazwaFirmy
             // 
             textBox_NazwaFirmy.Font = new Font("Segoe UI", 14.25F);
-            textBox_NazwaFirmy.Location = new Point(193, 69);
+            textBox_NazwaFirmy.Location = new Point(221, 92);
+            textBox_NazwaFirmy.Margin = new Padding(3, 4, 3, 4);
             textBox_NazwaFirmy.Name = "textBox_NazwaFirmy";
-            textBox_NazwaFirmy.Size = new Size(340, 33);
+            textBox_NazwaFirmy.Size = new Size(388, 39);
             textBox_NazwaFirmy.TabIndex = 26;
             textBox_NazwaFirmy.TextChanged += textBox_NazwaFirmy_TextChanged;
             // 
             // textBox_NIP_firmy
             // 
             textBox_NIP_firmy.Font = new Font("Segoe UI", 14.25F);
-            textBox_NIP_firmy.Location = new Point(193, 489);
+            textBox_NIP_firmy.Location = new Point(221, 652);
+            textBox_NIP_firmy.Margin = new Padding(3, 4, 3, 4);
             textBox_NIP_firmy.Name = "textBox_NIP_firmy";
-            textBox_NIP_firmy.Size = new Size(340, 33);
+            textBox_NIP_firmy.Size = new Size(388, 39);
             textBox_NIP_firmy.TabIndex = 19;
             textBox_NIP_firmy.TextChanged += textBox_NIP_firmy_TextChanged;
             // 
@@ -167,9 +171,9 @@
             // 
             label_Numer.AutoSize = true;
             label_Numer.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold | FontStyle.Italic);
-            label_Numer.Location = new Point(110, 408);
+            label_Numer.Location = new Point(126, 544);
             label_Numer.Name = "label_Numer";
-            label_Numer.Size = new Size(72, 25);
+            label_Numer.Size = new Size(89, 32);
             label_Numer.TabIndex = 24;
             label_Numer.Text = "Numer";
             label_Numer.Click += label_Numer_Click;
@@ -178,9 +182,9 @@
             // 
             Label_Nazwa_firmy.AutoSize = true;
             Label_Nazwa_firmy.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold | FontStyle.Italic);
-            Label_Nazwa_firmy.Location = new Point(64, 72);
+            Label_Nazwa_firmy.Location = new Point(73, 96);
             Label_Nazwa_firmy.Name = "Label_Nazwa_firmy";
-            Label_Nazwa_firmy.Size = new Size(122, 25);
+            Label_Nazwa_firmy.Size = new Size(154, 32);
             Label_Nazwa_firmy.TabIndex = 20;
             Label_Nazwa_firmy.Text = "Nazwa firmy";
             Label_Nazwa_firmy.Click += Label_Nazwa_firmy_Click;
@@ -189,9 +193,9 @@
             // 
             label_ulica.AutoSize = true;
             label_ulica.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold | FontStyle.Italic);
-            label_ulica.Location = new Point(124, 324);
+            label_ulica.Location = new Point(142, 432);
             label_ulica.Name = "label_ulica";
-            label_ulica.Size = new Size(55, 25);
+            label_ulica.Size = new Size(70, 32);
             label_ulica.TabIndex = 23;
             label_ulica.Text = "Ulica";
             label_ulica.Click += label_ulica_Click;
@@ -199,18 +203,20 @@
             // textBox_Numer_firmy
             // 
             textBox_Numer_firmy.Font = new Font("Segoe UI", 14.25F);
-            textBox_Numer_firmy.Location = new Point(193, 405);
+            textBox_Numer_firmy.Location = new Point(221, 540);
+            textBox_Numer_firmy.Margin = new Padding(3, 4, 3, 4);
             textBox_Numer_firmy.Name = "textBox_Numer_firmy";
-            textBox_Numer_firmy.Size = new Size(340, 33);
+            textBox_Numer_firmy.Size = new Size(388, 39);
             textBox_Numer_firmy.TabIndex = 18;
             textBox_Numer_firmy.TextChanged += textBox_Numer_firmy_TextChanged;
             // 
             // textBox_Miejscowosc_firmy
             // 
             textBox_Miejscowosc_firmy.Font = new Font("Segoe UI", 14.25F);
-            textBox_Miejscowosc_firmy.Location = new Point(193, 153);
+            textBox_Miejscowosc_firmy.Location = new Point(221, 204);
+            textBox_Miejscowosc_firmy.Margin = new Padding(3, 4, 3, 4);
             textBox_Miejscowosc_firmy.Name = "textBox_Miejscowosc_firmy";
-            textBox_Miejscowosc_firmy.Size = new Size(340, 33);
+            textBox_Miejscowosc_firmy.Size = new Size(388, 39);
             textBox_Miejscowosc_firmy.TabIndex = 15;
             textBox_Miejscowosc_firmy.TextChanged += textBox_Miejscowosc_firmy_TextChanged;
             // 
@@ -218,9 +224,9 @@
             // 
             label_kod_pocztowy_firmy.AutoSize = true;
             label_kod_pocztowy_firmy.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold | FontStyle.Italic);
-            label_kod_pocztowy_firmy.Location = new Point(57, 240);
+            label_kod_pocztowy_firmy.Location = new Point(65, 320);
             label_kod_pocztowy_firmy.Name = "label_kod_pocztowy_firmy";
-            label_kod_pocztowy_firmy.Size = new Size(133, 25);
+            label_kod_pocztowy_firmy.Size = new Size(163, 32);
             label_kod_pocztowy_firmy.TabIndex = 22;
             label_kod_pocztowy_firmy.Text = "Kod pocztowy";
             label_kod_pocztowy_firmy.Click += label_kod_pocztowy_firmy_Click;
@@ -229,9 +235,9 @@
             // 
             label_Miejscowosc.AutoSize = true;
             label_Miejscowosc.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold | FontStyle.Italic);
-            label_Miejscowosc.Location = new Point(69, 156);
+            label_Miejscowosc.Location = new Point(79, 208);
             label_Miejscowosc.Name = "label_Miejscowosc";
-            label_Miejscowosc.Size = new Size(118, 25);
+            label_Miejscowosc.Size = new Size(145, 32);
             label_Miejscowosc.TabIndex = 21;
             label_Miejscowosc.Text = "Miejscowość";
             label_Miejscowosc.Click += label_Miejscowosc_Click;
@@ -239,27 +245,30 @@
             // textBox_Ulica_firmy
             // 
             textBox_Ulica_firmy.Font = new Font("Segoe UI", 14.25F);
-            textBox_Ulica_firmy.Location = new Point(193, 321);
+            textBox_Ulica_firmy.Location = new Point(221, 428);
+            textBox_Ulica_firmy.Margin = new Padding(3, 4, 3, 4);
             textBox_Ulica_firmy.Name = "textBox_Ulica_firmy";
-            textBox_Ulica_firmy.Size = new Size(340, 33);
+            textBox_Ulica_firmy.Size = new Size(388, 39);
             textBox_Ulica_firmy.TabIndex = 17;
             textBox_Ulica_firmy.TextChanged += textBox_Ulica_firmy_TextChanged;
             // 
             // textBox_Kod_pocztowy_firmy
             // 
             textBox_Kod_pocztowy_firmy.Font = new Font("Segoe UI", 14.25F);
-            textBox_Kod_pocztowy_firmy.Location = new Point(193, 237);
+            textBox_Kod_pocztowy_firmy.Location = new Point(221, 316);
+            textBox_Kod_pocztowy_firmy.Margin = new Padding(3, 4, 3, 4);
             textBox_Kod_pocztowy_firmy.Name = "textBox_Kod_pocztowy_firmy";
-            textBox_Kod_pocztowy_firmy.Size = new Size(340, 33);
+            textBox_Kod_pocztowy_firmy.Size = new Size(388, 39);
             textBox_Kod_pocztowy_firmy.TabIndex = 16;
             textBox_Kod_pocztowy_firmy.TextChanged += textBox_Kod_pocztowy_firmy_TextChanged;
             // 
             // btn_Dostawa
             // 
             btn_Dostawa.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_Dostawa.Location = new Point(48, 400);
+            btn_Dostawa.Location = new Point(55, 533);
+            btn_Dostawa.Margin = new Padding(3, 4, 3, 4);
             btn_Dostawa.Name = "btn_Dostawa";
-            btn_Dostawa.Size = new Size(255, 64);
+            btn_Dostawa.Size = new Size(291, 85);
             btn_Dostawa.TabIndex = 5;
             btn_Dostawa.Text = "Dodaj/Edytuj dostawę";
             btn_Dostawa.UseVisualStyleBackColor = true;
@@ -269,9 +278,10 @@
             // 
             button_utworz_zamowienie.Cursor = Cursors.Hand;
             button_utworz_zamowienie.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_utworz_zamowienie.Location = new Point(48, 65);
+            button_utworz_zamowienie.Location = new Point(55, 87);
+            button_utworz_zamowienie.Margin = new Padding(3, 4, 3, 4);
             button_utworz_zamowienie.Name = "button_utworz_zamowienie";
-            button_utworz_zamowienie.Size = new Size(237, 51);
+            button_utworz_zamowienie.Size = new Size(271, 68);
             button_utworz_zamowienie.TabIndex = 6;
             button_utworz_zamowienie.Text = "Nowe zamówienie";
             button_utworz_zamowienie.UseVisualStyleBackColor = true;
@@ -281,9 +291,10 @@
             // 
             button_zamow_material.Cursor = Cursors.Hand;
             button_zamow_material.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_zamow_material.Location = new Point(48, 147);
+            button_zamow_material.Location = new Point(55, 196);
+            button_zamow_material.Margin = new Padding(3, 4, 3, 4);
             button_zamow_material.Name = "button_zamow_material";
-            button_zamow_material.Size = new Size(237, 51);
+            button_zamow_material.Size = new Size(271, 68);
             button_zamow_material.TabIndex = 7;
             button_zamow_material.Text = "Zamów materiał";
             button_zamow_material.UseVisualStyleBackColor = true;
@@ -291,9 +302,9 @@
             // 
             // Form_ZaoLog
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1337, 751);
+            ClientSize = new Size(1902, 1153);
             Controls.Add(button_zamow_material);
             Controls.Add(button_utworz_zamowienie);
             Controls.Add(btn_Dostawa);
@@ -301,6 +312,7 @@
             Controls.Add(comboBox_Nazwa_firmy);
             Controls.Add(button_Edytuj_firmy);
             Controls.Add(button_Nowa_firma);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Form_ZaoLog";
             Text = "Zaopatrzenie i logistyka";
             Load += Form_ZaoLog_Load;
