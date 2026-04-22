@@ -39,9 +39,10 @@
             // 
             // button_otworz_czesci_zamienne
             // 
+            button_otworz_czesci_zamienne.Font = new Font("Segoe UI", 14F);
             button_otworz_czesci_zamienne.Location = new Point(12, 6);
             button_otworz_czesci_zamienne.Name = "button_otworz_czesci_zamienne";
-            button_otworz_czesci_zamienne.Size = new Size(129, 55);
+            button_otworz_czesci_zamienne.Size = new Size(212, 55);
             button_otworz_czesci_zamienne.TabIndex = 1;
             button_otworz_czesci_zamienne.Text = "Części zamienne";
             button_otworz_czesci_zamienne.UseVisualStyleBackColor = true;
@@ -49,9 +50,10 @@
             // 
             // button_otworz_awaria
             // 
+            button_otworz_awaria.Font = new Font("Segoe UI", 14F);
             button_otworz_awaria.Location = new Point(12, 67);
             button_otworz_awaria.Name = "button_otworz_awaria";
-            button_otworz_awaria.Size = new Size(129, 55);
+            button_otworz_awaria.Size = new Size(212, 55);
             button_otworz_awaria.TabIndex = 2;
             button_otworz_awaria.Text = "Awaria";
             button_otworz_awaria.UseVisualStyleBackColor = true;
@@ -59,9 +61,10 @@
             // 
             // button_otworz_obsluga
             // 
+            button_otworz_obsluga.Font = new Font("Segoe UI", 14F);
             button_otworz_obsluga.Location = new Point(12, 128);
             button_otworz_obsluga.Name = "button_otworz_obsluga";
-            button_otworz_obsluga.Size = new Size(129, 55);
+            button_otworz_obsluga.Size = new Size(212, 55);
             button_otworz_obsluga.TabIndex = 3;
             button_otworz_obsluga.Text = "Obsługa";
             button_otworz_obsluga.UseVisualStyleBackColor = true;
@@ -69,19 +72,21 @@
             // 
             // button_otworz_normy_eksplatacyjne
             // 
+            button_otworz_normy_eksplatacyjne.Font = new Font("Segoe UI", 14F);
             button_otworz_normy_eksplatacyjne.Location = new Point(12, 251);
             button_otworz_normy_eksplatacyjne.Name = "button_otworz_normy_eksplatacyjne";
-            button_otworz_normy_eksplatacyjne.Size = new Size(129, 55);
+            button_otworz_normy_eksplatacyjne.Size = new Size(212, 55);
             button_otworz_normy_eksplatacyjne.TabIndex = 5;
-            button_otworz_normy_eksplatacyjne.Text = "Normy Eksploatacyjne";
+            button_otworz_normy_eksplatacyjne.Text = "Normy eksploatacyjne";
             button_otworz_normy_eksplatacyjne.UseVisualStyleBackColor = true;
             button_otworz_normy_eksplatacyjne.Click += button_otworz_normy_eksplatacyjne_Click;
             // 
             // button_otworz_rodzaj_obslugi
             // 
+            button_otworz_rodzaj_obslugi.Font = new Font("Segoe UI", 14F);
             button_otworz_rodzaj_obslugi.Location = new Point(12, 189);
             button_otworz_rodzaj_obslugi.Name = "button_otworz_rodzaj_obslugi";
-            button_otworz_rodzaj_obslugi.Size = new Size(129, 55);
+            button_otworz_rodzaj_obslugi.Size = new Size(212, 55);
             button_otworz_rodzaj_obslugi.TabIndex = 6;
             button_otworz_rodzaj_obslugi.Text = "Rodzaj obsługi";
             button_otworz_rodzaj_obslugi.UseVisualStyleBackColor = true;
@@ -89,9 +94,10 @@
             // 
             // button_otworz_gwarancja
             // 
+            button_otworz_gwarancja.Font = new Font("Segoe UI", 14F);
             button_otworz_gwarancja.Location = new Point(12, 318);
             button_otworz_gwarancja.Name = "button_otworz_gwarancja";
-            button_otworz_gwarancja.Size = new Size(129, 55);
+            button_otworz_gwarancja.Size = new Size(212, 55);
             button_otworz_gwarancja.TabIndex = 7;
             button_otworz_gwarancja.Text = "Gwarancja";
             button_otworz_gwarancja.UseVisualStyleBackColor = true;
@@ -99,9 +105,9 @@
             // 
             // panel_UR
             // 
-            panel_UR.Location = new Point(147, 6);
+            panel_UR.Location = new Point(230, -3);
             panel_UR.Name = "panel_UR";
-            panel_UR.Size = new Size(1756, 1151);
+            panel_UR.Size = new Size(1673, 1160);
             panel_UR.TabIndex = 8;
             // 
             // Form_Utrzymanie_Ruchu

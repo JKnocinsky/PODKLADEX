@@ -8,15 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PodkladexApp
+namespace PodkladexApp.Zaopatrzenie
 {
-    public partial class Form_Kadry_finanse : Form
+    public partial class Form_Zamowienie : Form
     {
-        public Form_Kadry_finanse()
+        public Form_Zamowienie()
         {
             InitializeComponent();
         }
-
-
     }
 }

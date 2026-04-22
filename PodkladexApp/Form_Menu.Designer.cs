@@ -43,10 +43,10 @@
             // 
             // btn_Kadry
             // 
-            btn_Kadry.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            btn_Kadry.Font = new Font("Segoe UI", 14F);
             btn_Kadry.Location = new Point(9, 242);
             btn_Kadry.Name = "btn_Kadry";
-            btn_Kadry.Size = new Size(158, 71);
+            btn_Kadry.Size = new Size(322, 71);
             btn_Kadry.TabIndex = 0;
             btn_Kadry.Text = "Kadry i Finanse";
             btn_Kadry.UseVisualStyleBackColor = true;
@@ -54,10 +54,10 @@
             // 
             // btn_Produkcja
             // 
-            btn_Produkcja.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_Produkcja.Location = new Point(173, 242);
+            btn_Produkcja.Font = new Font("Segoe UI", 14F);
+            btn_Produkcja.Location = new Point(9, 396);
             btn_Produkcja.Name = "btn_Produkcja";
-            btn_Produkcja.Size = new Size(158, 71);
+            btn_Produkcja.Size = new Size(322, 71);
             btn_Produkcja.TabIndex = 1;
             btn_Produkcja.Text = "Produkcja";
             btn_Produkcja.UseVisualStyleBackColor = true;
@@ -65,8 +65,8 @@
             // 
             // btn_Zaopatrzenie
             // 
-            btn_Zaopatrzenie.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_Zaopatrzenie.Location = new Point(9, 396);
+            btn_Zaopatrzenie.Font = new Font("Segoe UI", 14F);
+            btn_Zaopatrzenie.Location = new Point(9, 550);
             btn_Zaopatrzenie.Name = "btn_Zaopatrzenie";
             btn_Zaopatrzenie.Size = new Size(322, 76);
             btn_Zaopatrzenie.TabIndex = 2;
@@ -76,10 +76,10 @@
             // 
             // btn_Kontrola_Jakosci
             // 
-            btn_Kontrola_Jakosci.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            btn_Kontrola_Jakosci.Font = new Font("Segoe UI", 14F);
             btn_Kontrola_Jakosci.Location = new Point(9, 319);
             btn_Kontrola_Jakosci.Name = "btn_Kontrola_Jakosci";
-            btn_Kontrola_Jakosci.Size = new Size(158, 71);
+            btn_Kontrola_Jakosci.Size = new Size(322, 71);
             btn_Kontrola_Jakosci.TabIndex = 3;
             btn_Kontrola_Jakosci.Text = "Kontrola Jakości";
             btn_Kontrola_Jakosci.UseVisualStyleBackColor = true;
@@ -87,10 +87,10 @@
             // 
             // btn_Utrzymanie_Ruchu
             // 
-            btn_Utrzymanie_Ruchu.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_Utrzymanie_Ruchu.Location = new Point(173, 319);
+            btn_Utrzymanie_Ruchu.Font = new Font("Segoe UI", 14F);
+            btn_Utrzymanie_Ruchu.Location = new Point(9, 473);
             btn_Utrzymanie_Ruchu.Name = "btn_Utrzymanie_Ruchu";
-            btn_Utrzymanie_Ruchu.Size = new Size(158, 71);
+            btn_Utrzymanie_Ruchu.Size = new Size(322, 71);
             btn_Utrzymanie_Ruchu.TabIndex = 4;
             btn_Utrzymanie_Ruchu.Text = "Utrzymanie Ruchu";
             btn_Utrzymanie_Ruchu.UseVisualStyleBackColor = true;
