@@ -29,31 +29,55 @@
         private void InitializeComponent()
         {
             btn_maszyny = new Button();
+            panel_Produkcja = new Panel();
+            panel1 = new Panel();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // btn_maszyny
             // 
-            btn_maszyny.Location = new Point(55, 45);
+            btn_maszyny.Location = new Point(8, 9);
             btn_maszyny.Name = "btn_maszyny";
-            btn_maszyny.Size = new Size(160, 38);
+            btn_maszyny.Size = new Size(178, 38);
             btn_maszyny.TabIndex = 0;
             btn_maszyny.Text = "Maszyny";
             btn_maszyny.UseVisualStyleBackColor = true;
             btn_maszyny.Click += btn_maszyny_Click;
             // 
+            // panel_Produkcja
+            // 
+            panel_Produkcja.Dock = DockStyle.Right;
+            panel_Produkcja.Location = new Point(197, 0);
+            panel_Produkcja.Name = "panel_Produkcja";
+            panel_Produkcja.Size = new Size(1617, 1017);
+            panel_Produkcja.TabIndex = 1;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(btn_maszyny);
+            panel1.Dock = DockStyle.Left;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(191, 1017);
+            panel1.TabIndex = 2;
+            // 
             // Form_Produkcja
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(btn_maszyny);
+            ClientSize = new Size(1814, 1017);
+            Controls.Add(panel1);
+            Controls.Add(panel_Produkcja);
             Name = "Form_Produkcja";
             Text = "Form_Produkcja";
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
         private Button btn_maszyny;
+        private Panel panel_Produkcja;
+        private Panel panel1;
     }
 }
