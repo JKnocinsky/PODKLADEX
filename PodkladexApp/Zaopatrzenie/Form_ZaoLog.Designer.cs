@@ -30,9 +30,10 @@
         {
             button_Nowa_firma = new Button();
             button_Edytuj_firmy = new Button();
-            button_konf_mat = new Button();
             comboBox_Nazwa_firmy = new ComboBox();
             panel_dane_firmy = new Panel();
+            button_usun_firme = new Button();
+            button_zaakceptuj_zmiany = new Button();
             label_NIP = new Label();
             textBox_NazwaFirmy = new TextBox();
             textBox_NIP_firmy = new TextBox();
@@ -51,6 +52,7 @@
             // 
             // button_Nowa_firma
             // 
+            button_Nowa_firma.Cursor = Cursors.Hand;
             button_Nowa_firma.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic);
             button_Nowa_firma.Location = new Point(31, 20);
             button_Nowa_firma.Name = "button_Nowa_firma";
@@ -62,6 +64,7 @@
             // 
             // button_Edytuj_firmy
             // 
+            button_Edytuj_firmy.Cursor = Cursors.Hand;
             button_Edytuj_firmy.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic);
             button_Edytuj_firmy.Location = new Point(31, 110);
             button_Edytuj_firmy.Name = "button_Edytuj_firmy";
@@ -84,6 +87,7 @@
             // 
             // comboBox_Nazwa_firmy
             // 
+            comboBox_Nazwa_firmy.Font = new Font("Segoe UI", 12F);
             comboBox_Nazwa_firmy.FormattingEnabled = true;
             comboBox_Nazwa_firmy.Location = new Point(366, 43);
             comboBox_Nazwa_firmy.Margin = new Padding(3, 2, 3, 2);
@@ -94,6 +98,8 @@
             // 
             // panel_dane_firmy
             // 
+            panel_dane_firmy.Controls.Add(button_usun_firme);
+            panel_dane_firmy.Controls.Add(button_zaakceptuj_zmiany);
             panel_dane_firmy.Controls.Add(label_NIP);
             panel_dane_firmy.Controls.Add(textBox_NazwaFirmy);
             panel_dane_firmy.Controls.Add(textBox_NIP_firmy);
@@ -112,6 +118,30 @@
             panel_dane_firmy.Size = new Size(486, 350);
             panel_dane_firmy.TabIndex = 4;
             panel_dane_firmy.Visible = false;
+            // 
+            // button_usun_firme
+            // 
+            button_usun_firme.Cursor = Cursors.Hand;
+            button_usun_firme.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic);
+            button_usun_firme.Location = new Point(640, 330);
+            button_usun_firme.Name = "button_usun_firme";
+            button_usun_firme.Size = new Size(160, 55);
+            button_usun_firme.TabIndex = 6;
+            button_usun_firme.Text = "Usuń firmę";
+            button_usun_firme.UseVisualStyleBackColor = true;
+            button_usun_firme.Click += button_usun_firme_Click;
+            // 
+            // button_zaakceptuj_zmiany
+            // 
+            button_zaakceptuj_zmiany.Cursor = Cursors.Hand;
+            button_zaakceptuj_zmiany.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic);
+            button_zaakceptuj_zmiany.Location = new Point(640, 215);
+            button_zaakceptuj_zmiany.Name = "button_zaakceptuj_zmiany";
+            button_zaakceptuj_zmiany.Size = new Size(160, 55);
+            button_zaakceptuj_zmiany.TabIndex = 5;
+            button_zaakceptuj_zmiany.Text = "Zaakceptuj zmiany";
+            button_zaakceptuj_zmiany.UseVisualStyleBackColor = true;
+            button_zaakceptuj_zmiany.Click += button_zaakceptuj_zmiany_Click;
             // 
             // label_NIP
             // 
@@ -251,11 +281,11 @@
             Controls.Add(btn_Dostawa);
             Controls.Add(panel_dane_firmy);
             Controls.Add(comboBox_Nazwa_firmy);
-            Controls.Add(button_konf_mat);
             Controls.Add(button_Edytuj_firmy);
             Controls.Add(button_Nowa_firma);
             Name = "Form_ZaoLog";
-            Text = "Form_ZaoLog";
+            Text = "Zaopatrzenie i logistyka";
+            Load += Form_ZaoLog_Load;
             panel_dane_firmy.ResumeLayout(false);
             panel_dane_firmy.PerformLayout();
             ResumeLayout(false);
@@ -265,7 +295,6 @@
 
         private Button button_Nowa_firma;
         private Button button_Edytuj_firmy;
-        private Button button_konf_mat;
         private ComboBox comboBox_Nazwa_firmy;
         private Panel panel_dane_firmy;
         private TextBox textBox_NazwaFirmy;
@@ -281,5 +310,7 @@
         private TextBox textBox_Kod_pocztowy_firmy;
         private TextBox textBox_Miejscowosc_firmy;
         private Button btn_Dostawa;
+        private Button button_usun_firme;
+        private Button button_zaakceptuj_zmiany;
     }
 }

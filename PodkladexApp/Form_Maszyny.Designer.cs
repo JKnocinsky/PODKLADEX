@@ -34,20 +34,22 @@
             btn_edytuj = new Button();
             btn_usun = new Button();
             label1 = new Label();
+            panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)dgv_Maszyny).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // dgv_Maszyny
             // 
             dgv_Maszyny.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_Maszyny.Location = new Point(78, 74);
+            dgv_Maszyny.Location = new Point(65, 64);
             dgv_Maszyny.Name = "dgv_Maszyny";
             dgv_Maszyny.Size = new Size(875, 547);
             dgv_Maszyny.TabIndex = 0;
             // 
             // txt_Nazwa_Maszyny
             // 
-            txt_Nazwa_Maszyny.Location = new Point(315, 28);
+            txt_Nazwa_Maszyny.Location = new Point(302, 18);
             txt_Nazwa_Maszyny.Name = "txt_Nazwa_Maszyny";
             txt_Nazwa_Maszyny.Size = new Size(374, 23);
             txt_Nazwa_Maszyny.TabIndex = 1;
@@ -55,7 +57,7 @@
             // 
             // btn_dodaj
             // 
-            btn_dodaj.Location = new Point(315, 636);
+            btn_dodaj.Location = new Point(302, 626);
             btn_dodaj.Name = "btn_dodaj";
             btn_dodaj.Size = new Size(120, 30);
             btn_dodaj.TabIndex = 2;
@@ -65,7 +67,7 @@
             // 
             // btn_edytuj
             // 
-            btn_edytuj.Location = new Point(443, 636);
+            btn_edytuj.Location = new Point(430, 626);
             btn_edytuj.Name = "btn_edytuj";
             btn_edytuj.Size = new Size(120, 30);
             btn_edytuj.TabIndex = 3;
@@ -75,7 +77,7 @@
             // 
             // btn_usun
             // 
-            btn_usun.Location = new Point(569, 636);
+            btn_usun.Location = new Point(556, 626);
             btn_usun.Name = "btn_usun";
             btn_usun.Size = new Size(120, 30);
             btn_usun.TabIndex = 4;
@@ -86,28 +88,38 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(218, 31);
+            label1.Location = new Point(205, 21);
             label1.Name = "label1";
             label1.Size = new Size(91, 15);
             label1.TabIndex = 5;
             label1.Text = "Nazwa Maszyny";
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(btn_usun);
+            panel1.Controls.Add(btn_edytuj);
+            panel1.Controls.Add(btn_dodaj);
+            panel1.Controls.Add(txt_Nazwa_Maszyny);
+            panel1.Controls.Add(dgv_Maszyny);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1028, 676);
+            panel1.TabIndex = 6;
             // 
             // Form_Maszyny
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1028, 676);
-            Controls.Add(label1);
-            Controls.Add(btn_usun);
-            Controls.Add(btn_edytuj);
-            Controls.Add(btn_dodaj);
-            Controls.Add(txt_Nazwa_Maszyny);
-            Controls.Add(dgv_Maszyny);
+            Controls.Add(panel1);
             Name = "Form_Maszyny";
             Text = "Form_Maszyny";
             ((System.ComponentModel.ISupportInitialize)dgv_Maszyny).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -118,5 +130,6 @@
         private Button btn_edytuj;
         private Button btn_usun;
         private Label label1;
+        private Panel panel1;
     }
 }

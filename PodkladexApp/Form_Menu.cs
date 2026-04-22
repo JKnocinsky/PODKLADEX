@@ -37,8 +37,8 @@ namespace PodkladexApp
 
         private void btn_Produkcja_Click(object sender, EventArgs e)
         {
-            Form_Maszyny form = new Form_Maszyny(db);
-            OpenChildForm(form);
+            Form_Produkcja form_Produkcja = new Form_Produkcja(db);
+            OpenChildForm(form_Produkcja);
         }
 
         private void btn_Utrzymanie_Ruchu_Click(object sender, EventArgs e)
