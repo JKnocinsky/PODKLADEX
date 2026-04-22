@@ -85,7 +85,7 @@ namespace PodkladexApp.Zaopatrzenie
             panel1.Name = "panel1";
             panel1.Size = new Size(651, 494);
             panel1.TabIndex = 3;
-            panel1.Paint += this.panel1_Paint;
+
             // 
             // textBox_email
             // 
@@ -153,8 +153,11 @@ namespace PodkladexApp.Zaopatrzenie
             Controls.Add(button_klient_z_firmy);
             Name = "Form_Zamowienie";
             Text = "Form1";
+//<<<<<<< HEAD
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+//=======
+//>>>>>>> da41794a0a2626b6465b912d6b9323fd7c16b3af
             ResumeLayout(false);
         }
 
