@@ -60,5 +60,10 @@ namespace PodkladexApp
             childForm.BringToFront();
             childForm.Show();
         }
+
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

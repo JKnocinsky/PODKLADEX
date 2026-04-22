@@ -35,15 +35,18 @@
             btn_Utrzymanie_Ruchu = new Button();
             panel_Main = new Panel();
             pictureBox1 = new PictureBox();
+            button_Exit = new Button();
+            panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // btn_Kadry
             // 
             btn_Kadry.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_Kadry.Location = new Point(12, 157);
+            btn_Kadry.Location = new Point(9, 242);
             btn_Kadry.Name = "btn_Kadry";
-            btn_Kadry.Size = new Size(223, 53);
+            btn_Kadry.Size = new Size(158, 71);
             btn_Kadry.TabIndex = 0;
             btn_Kadry.Text = "Kadry i Finanse";
             btn_Kadry.UseVisualStyleBackColor = true;
@@ -52,9 +55,9 @@
             // btn_Produkcja
             // 
             btn_Produkcja.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_Produkcja.Location = new Point(12, 216);
+            btn_Produkcja.Location = new Point(173, 242);
             btn_Produkcja.Name = "btn_Produkcja";
-            btn_Produkcja.Size = new Size(223, 53);
+            btn_Produkcja.Size = new Size(158, 71);
             btn_Produkcja.TabIndex = 1;
             btn_Produkcja.Text = "Produkcja";
             btn_Produkcja.UseVisualStyleBackColor = true;
@@ -63,9 +66,9 @@
             // btn_Zaopatrzenie
             // 
             btn_Zaopatrzenie.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_Zaopatrzenie.Location = new Point(12, 275);
+            btn_Zaopatrzenie.Location = new Point(9, 396);
             btn_Zaopatrzenie.Name = "btn_Zaopatrzenie";
-            btn_Zaopatrzenie.Size = new Size(223, 53);
+            btn_Zaopatrzenie.Size = new Size(322, 76);
             btn_Zaopatrzenie.TabIndex = 2;
             btn_Zaopatrzenie.Text = "Zaopatrzenie i Logistyka";
             btn_Zaopatrzenie.UseVisualStyleBackColor = true;
@@ -74,9 +77,9 @@
             // btn_Kontrola_Jakosci
             // 
             btn_Kontrola_Jakosci.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_Kontrola_Jakosci.Location = new Point(12, 334);
+            btn_Kontrola_Jakosci.Location = new Point(9, 319);
             btn_Kontrola_Jakosci.Name = "btn_Kontrola_Jakosci";
-            btn_Kontrola_Jakosci.Size = new Size(223, 53);
+            btn_Kontrola_Jakosci.Size = new Size(158, 71);
             btn_Kontrola_Jakosci.TabIndex = 3;
             btn_Kontrola_Jakosci.Text = "Kontrola Jakości";
             btn_Kontrola_Jakosci.UseVisualStyleBackColor = true;
@@ -85,9 +88,9 @@
             // btn_Utrzymanie_Ruchu
             // 
             btn_Utrzymanie_Ruchu.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_Utrzymanie_Ruchu.Location = new Point(12, 393);
+            btn_Utrzymanie_Ruchu.Location = new Point(173, 319);
             btn_Utrzymanie_Ruchu.Name = "btn_Utrzymanie_Ruchu";
-            btn_Utrzymanie_Ruchu.Size = new Size(223, 53);
+            btn_Utrzymanie_Ruchu.Size = new Size(158, 71);
             btn_Utrzymanie_Ruchu.TabIndex = 4;
             btn_Utrzymanie_Ruchu.Text = "Utrzymanie Ruchu";
             btn_Utrzymanie_Ruchu.UseVisualStyleBackColor = true;
@@ -97,21 +100,51 @@
             // 
             panel_Main.BackColor = Color.Transparent;
             panel_Main.BackgroundImageLayout = ImageLayout.Stretch;
-            panel_Main.Location = new Point(251, 12);
+            panel_Main.Location = new Point(340, 12);
             panel_Main.Name = "panel_Main";
-            panel_Main.Size = new Size(1650, 1137);
+            panel_Main.Size = new Size(1561, 1137);
             panel_Main.TabIndex = 6;
             // 
             // pictureBox1
             // 
-            pictureBox1.BackgroundImage = Properties.Resources.Logo;
+            pictureBox1.BackgroundImage = Properties.Resources.Logo1;
             pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBox1.BorderStyle = BorderStyle.FixedSingle;
-            pictureBox1.Location = new Point(12, 12);
+            pictureBox1.Location = new Point(9, 3);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(223, 139);
+            pictureBox1.Size = new Size(322, 233);
             pictureBox1.TabIndex = 7;
             pictureBox1.TabStop = false;
+            // 
+            // button_Exit
+            // 
+            button_Exit.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            button_Exit.BackColor = Color.Firebrick;
+            button_Exit.FlatAppearance.BorderColor = SystemColors.Window;
+            button_Exit.FlatAppearance.BorderSize = 0;
+            button_Exit.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            button_Exit.ForeColor = Color.Snow;
+            button_Exit.Location = new Point(3, 1046);
+            button_Exit.Name = "button_Exit";
+            button_Exit.Size = new Size(322, 76);
+            button_Exit.TabIndex = 8;
+            button_Exit.Text = "Exit";
+            button_Exit.UseVisualStyleBackColor = false;
+            button_Exit.Click += buttonExit_Click;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(pictureBox1);
+            panel1.Controls.Add(button_Exit);
+            panel1.Controls.Add(btn_Zaopatrzenie);
+            panel1.Controls.Add(btn_Utrzymanie_Ruchu);
+            panel1.Controls.Add(btn_Kadry);
+            panel1.Controls.Add(btn_Kontrola_Jakosci);
+            panel1.Controls.Add(btn_Produkcja);
+            panel1.Location = new Point(0, 12);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(334, 1137);
+            panel1.TabIndex = 9;
             // 
             // Form_Menu
             // 
@@ -119,18 +152,14 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.Zoom;
             ClientSize = new Size(1904, 1161);
-            Controls.Add(pictureBox1);
             Controls.Add(panel_Main);
-            Controls.Add(btn_Utrzymanie_Ruchu);
-            Controls.Add(btn_Kontrola_Jakosci);
-            Controls.Add(btn_Zaopatrzenie);
-            Controls.Add(btn_Produkcja);
-            Controls.Add(btn_Kadry);
+            Controls.Add(panel1);
             DoubleBuffered = true;
             Name = "Form_Menu";
             Text = "Podkladex";
             WindowState = FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -143,5 +172,7 @@
         private Button btn_Utrzymanie_Ruchu;
         private Panel panel_Main;
         private PictureBox pictureBox1;
+        private Button button_Exit;
+        private Panel panel1;
     }
 }
