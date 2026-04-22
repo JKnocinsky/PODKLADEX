@@ -66,7 +66,7 @@
             // 
             button_Edytuj_firmy.Cursor = Cursors.Hand;
             button_Edytuj_firmy.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_Edytuj_firmy.Location = new Point(31, 138);
+            button_Edytuj_firmy.Location = new Point(31, 140);
             button_Edytuj_firmy.Name = "button_Edytuj_firmy";
             button_Edytuj_firmy.Size = new Size(213, 58);
             button_Edytuj_firmy.TabIndex = 1;
@@ -76,12 +76,12 @@
             // 
             // comboBox_Nazwa_firmy
             // 
-            comboBox_Nazwa_firmy.Font = new Font("Segoe UI", 12F);
+            comboBox_Nazwa_firmy.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
             comboBox_Nazwa_firmy.FormattingEnabled = true;
-            comboBox_Nazwa_firmy.Location = new Point(366, 43);
+            comboBox_Nazwa_firmy.Location = new Point(337, 65);
             comboBox_Nazwa_firmy.Margin = new Padding(3, 2, 3, 2);
             comboBox_Nazwa_firmy.Name = "comboBox_Nazwa_firmy";
-            comboBox_Nazwa_firmy.Size = new Size(885, 29);
+            comboBox_Nazwa_firmy.Size = new Size(885, 33);
             comboBox_Nazwa_firmy.TabIndex = 3;
             comboBox_Nazwa_firmy.SelectedIndexChanged += comboBox_Nazwa_firmy_SelectedIndexChanged;
             // 
@@ -101,7 +101,7 @@
             panel_dane_firmy.Controls.Add(label_Miejscowosc);
             panel_dane_firmy.Controls.Add(textBox_Ulica_firmy);
             panel_dane_firmy.Controls.Add(textBox_Kod_pocztowy_firmy);
-            panel_dane_firmy.Location = new Point(366, 86);
+            panel_dane_firmy.Location = new Point(337, 108);
             panel_dane_firmy.Margin = new Padding(3, 2, 3, 2);
             panel_dane_firmy.Name = "panel_dane_firmy";
             panel_dane_firmy.Size = new Size(885, 574);

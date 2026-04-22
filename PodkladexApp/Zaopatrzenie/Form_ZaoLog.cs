@@ -20,23 +20,31 @@ namespace PodkladexApp
         {
             InitializeComponent();
 
-            // Ukrywamy ComboBox przy starcie formularza.
-            comboBox_Nazwa_firmy.Visible = false;
+            // Wymuszamy domyślny, "czysty" widok przy starcie formularza
+            ResetujWidok();
         }
 
-        private void button_Nowa_firma_Click_1(object sender, EventArgs e)
+        // --- NOWA METODA: Powrót do widoku domyślnego ---
+        private void ResetujWidok()
         {
-            // Ukrywamy listę rozwijaną i usuwamy jej ewentualne zaznaczenie
-            comboBox_Nazwa_firmy.SelectedIndex = -1;
+            panel_dane_firmy.Visible = false;
             comboBox_Nazwa_firmy.Visible = false;
+            comboBox_Nazwa_firmy.DataSource = null; // Czyścimy listę, by przy kolejnym kliknięciu pobrać na nowo z bazy
+            comboBox_Nazwa_firmy.SelectedIndex = -1;
 
-            // Czyścimy pola TextBox, aby przygotować je na nową firmę
+            // Czyścimy wszystkie pola tekstowe
             textBox_NazwaFirmy.Clear();
             textBox_Miejscowosc_firmy.Clear();
             textBox_Kod_pocztowy_firmy.Clear();
             textBox_Ulica_firmy.Clear();
             textBox_Numer_firmy.Clear();
             textBox_NIP_firmy.Clear();
+        }
+
+        private void button_Nowa_firma_Click_1(object sender, EventArgs e)
+        {
+            // Najpierw czyścimy cały formularz do stanu domyślnego
+            ResetujWidok();
 
             // Wyświetlamy panel, w którym użytkownik wpisze nowe dane
             panel_dane_firmy.Visible = true;
@@ -49,16 +57,21 @@ namespace PodkladexApp
         // =========================================================================
         private void button_Edytuj_firmy_Click(object sender, EventArgs e)
         {
-            // Pobieramy firmy z bazy
+            // 1. Pobieramy firmy z bazy
             var listaFirm = _db.Firma.ToList();
 
-            // Podpinamy je pod ukryty ComboBox
+            // 2. Podpinamy dane
             comboBox_Nazwa_firmy.DataSource = listaFirm;
             comboBox_Nazwa_firmy.DisplayMember = "Nazwa";    // Wyświetla nazwę
             comboBox_Nazwa_firmy.ValueMember = "IdFirma";    // Trzyma ID w tle
 
-            // Odkrywamy ComboBox
+            // 3. KLUCZOWA ZMIANA: Czyścimy domyślne zaznaczenie
+            // Musi to nastąpić PO przypisaniu DataSource
+            comboBox_Nazwa_firmy.SelectedIndex = -1;
+
+            // 4. Odkrywamy ComboBox, ukrywamy panel do czasu wyboru
             comboBox_Nazwa_firmy.Visible = true;
+            panel_dane_firmy.Visible = false;
         }
 
         // =========================================================================
@@ -85,7 +98,6 @@ namespace PodkladexApp
             }
         }
 
-
         // =========================================================================
         // Puste zdarzenia wygenerowane przez designera
         // =========================================================================
@@ -102,56 +114,76 @@ namespace PodkladexApp
         private void label_ulica_Click(object sender, EventArgs e) { }
         private void label_Numer_Click(object sender, EventArgs e) { }
         private void label_NIP_Click(object sender, EventArgs e) { }
-
-        private void Form_ZaoLog_Load(object sender, EventArgs e)
-        {
-
-        }
+        private void Form_ZaoLog_Load(object sender, EventArgs e) { }
 
         private void button_usun_firme_Click(object sender, EventArgs e)
         {
             // Sprawdzamy, czy w ogóle edytujemy istniejącą firmę (czy coś jest wybrane w ComboBox)
             if (comboBox_Nazwa_firmy.SelectedItem != null && comboBox_Nazwa_firmy.SelectedItem is Firma wybranaFirma)
             {
-                // 1. Wyświetlamy okienko z pytaniem o potwierdzenie usunięcia
+                // 1. ZABEZPIECZENIE: Sprawdzenie powiązań w bazie danych
+                bool czyMaKlientow = _db.KlientFirma.Any(k => k.IdFirma == wybranaFirma.IdFirma);
+                bool czyMaDostawy = _db.Dostawa.Any(d => d.IdFirma == wybranaFirma.IdFirma);
+                bool czyMaGwarancje = _db.Gwarancja.Any(g => g.IdFirma == wybranaFirma.IdFirma);
+
+                if (czyMaKlientow || czyMaDostawy || czyMaGwarancje)
+                {
+                    MessageBox.Show("Nie można usunąć tej firmy, ponieważ jest ona używana w systemie!\n\n" +
+                                    "Firma jest przypisana do:\n" +
+                                    (czyMaKlientow ? "- Modułu Klient-Firma\n" : "") +
+                                    (czyMaDostawy ? "- Modułu Dostaw\n" : "") +
+                                    (czyMaGwarancje ? "- Modułu Gwarancji\n" : ""),
+                                    "Błąd usuwania",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+                    return;
+                }
+
+                // 2. Jeśli firma nie ma powiązań, wyświetlamy okienko z pytaniem
                 DialogResult wynik = MessageBox.Show($"Czy na pewno chcesz usunąć firmę: {wybranaFirma.Nazwa}?",
                                                      "Potwierdzenie usunięcia",
                                                      MessageBoxButtons.YesNo,
                                                      MessageBoxIcon.Warning);
 
-                // 2. Jeśli użytkownik kliknie "Tak"
+                // 3. Jeśli użytkownik kliknie "Tak"
                 if (wynik == DialogResult.Yes)
                 {
-                    // Pobieramy rekord do usunięcia z bazy danych
                     var firmaDoUsuniecia = _db.Firma.Find(wybranaFirma.IdFirma);
 
                     if (firmaDoUsuniecia != null)
                     {
-                        // Usuwamy z kontekstu i zapisujemy zmiany w bazie
-                        _db.Firma.Remove(firmaDoUsuniecia);
-                        _db.SaveChanges();
+                        try
+                        {
+                            _db.Firma.Remove(firmaDoUsuniecia);
+                            _db.SaveChanges();
 
-                        MessageBox.Show("Firma została usunięta!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Firma została pomyślnie usunięta!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        // Ukrywamy panel i resetujemy ComboBox
-                        panel_dane_firmy.Visible = false;
-                        comboBox_Nazwa_firmy.Visible = false;
-
-                        // Opcjonalnie: usuwamy aktualne dane z ComboBoxa, 
-                        // aby usunięta firma zniknęła z listy od razu
-                        comboBox_Nazwa_firmy.DataSource = null;
+                            // POWRÓT DO DOMYŚLNEGO WIDOKU PO USUNIĘCIU
+                            ResetujWidok();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Wystąpił błąd podczas usuwania z bazy:\n" + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
             }
             else
             {
-                // Komunikat na wypadek, gdyby ktoś kliknął przycisk, zanim cokolwiek załadował (choć w Twoim układzie to mało prawdopodobne)
                 MessageBox.Show("Wybierz najpierw firmę z listy.");
             }
         }
 
         private void button_zaakceptuj_zmiany_Click(object sender, EventArgs e)
         {
+            // Opcjonalne zabezpieczenie: Wymagamy minimum nazwy i NIP
+            if (string.IsNullOrWhiteSpace(textBox_NazwaFirmy.Text) || string.IsNullOrWhiteSpace(textBox_NIP_firmy.Text))
+            {
+                MessageBox.Show("Nazwa firmy i NIP są polami obowiązkowymi!", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             // Warunek: jeśli NIC nie wybrano z ComboBoxa - to znaczy, że DODAJEMY nową firmę
             if (comboBox_Nazwa_firmy.SelectedIndex == -1)
             {
@@ -166,17 +198,15 @@ namespace PodkladexApp
                 };
 
                 _db.Firma.Add(nowaFirma);
-                MessageBox.Show("Dodano nową firmę!");
+                MessageBox.Show("Dodano nową firmę!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             // Warunek: jeśli COŚ wybrano z ComboBoxa - to znaczy, że EDYTUJEMY istniejącą
             else if (comboBox_Nazwa_firmy.SelectedItem is Firma wybranaFirma)
             {
-                // Pobieramy rekord do edycji z bazy danych
                 var firmaDoEdycji = _db.Firma.Find(wybranaFirma.IdFirma);
 
                 if (firmaDoEdycji != null)
                 {
-                    // Aktualizujemy właściwości
                     firmaDoEdycji.Nazwa = textBox_NazwaFirmy.Text;
                     firmaDoEdycji.Miejscowosc = textBox_Miejscowosc_firmy.Text;
                     firmaDoEdycji.KodPocztowy = textBox_Kod_pocztowy_firmy.Text;
@@ -184,17 +214,15 @@ namespace PodkladexApp
                     firmaDoEdycji.Numer = textBox_Numer_firmy.Text;
                     firmaDoEdycji.Nip = textBox_NIP_firmy.Text;
 
-                    MessageBox.Show("Zaktualizowano dane firmy!");
+                    MessageBox.Show("Zaktualizowano dane firmy!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
 
             // Wykonanie zmian w bazie Entity Framework
             _db.SaveChanges();
 
-            // Na koniec warto schować panel i zresetować kontrolki
-            panel_dane_firmy.Visible = false;
-            comboBox_Nazwa_firmy.Visible = false;
-            comboBox_Nazwa_firmy.SelectedIndex = -1;
+            // POWRÓT DO DOMYŚLNEGO WIDOKU PO ZAPISIE LUB EDYCJI
+            ResetujWidok();
         }
 
         private void btn_Dostawa_Click(object sender, EventArgs e)
