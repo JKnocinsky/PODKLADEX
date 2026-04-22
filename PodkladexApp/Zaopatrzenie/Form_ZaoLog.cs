@@ -89,5 +89,20 @@ namespace PodkladexApp
         private void label_ulica_Click(object sender, EventArgs e) { }
         private void label_Numer_Click(object sender, EventArgs e) { }
         private void label_NIP_Click(object sender, EventArgs e) { }
+
+        private void Form_ZaoLog_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button_usun_firme_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button_zaakceptuj_zmiany_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
