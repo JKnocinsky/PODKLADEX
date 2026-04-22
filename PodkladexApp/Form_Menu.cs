@@ -52,7 +52,7 @@ namespace PodkladexApp
             OpenChildForm(form);
         }
 
-        public void OpenChildForm(Form childForm, bool dopasujDoCalegoPanelu = true)
+        private void OpenChildForm(Form childForm, bool dopasujDoCalegoPanelu = true)
         {
             if (activeForm != null)
                 activeForm.Close();

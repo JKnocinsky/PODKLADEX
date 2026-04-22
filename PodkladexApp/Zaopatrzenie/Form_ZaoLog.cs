@@ -16,7 +16,7 @@ namespace PodkladexApp
     {
         // 1. Inicjalizacja połączenia z bazą danych (Entity Framework Core)
         private PodkladexContext _db = new PodkladexContext();
-
+        Form activeForm = null;
 
         public Form_ZaoLog()
         {
@@ -29,12 +29,20 @@ namespace PodkladexApp
         // --- NOWA METODA: Powrót do widoku domyślnego ---
         private void ResetujWidok()
         {
+            // 1. ZAMYKANIE PODFORMULARZA (np. Form_Zamowienie)
+            if (activeForm != null)
+            {
+                activeForm.Close();
+                activeForm = null;
+            }
+
+            // 2. Resetowanie widoczności standardowych elementów
             panel_dane_firmy.Visible = false;
             comboBox_Nazwa_firmy.Visible = false;
-            comboBox_Nazwa_firmy.DataSource = null; // Czyścimy listę, by przy kolejnym kliknięciu pobrać na nowo z bazy
+            comboBox_Nazwa_firmy.DataSource = null;
             comboBox_Nazwa_firmy.SelectedIndex = -1;
 
-            // Czyścimy wszystkie pola tekstowe
+            // 3. Czyszczenie pól tekstowych
             textBox_NazwaFirmy.Clear();
             textBox_Miejscowosc_firmy.Clear();
             textBox_Kod_pocztowy_firmy.Clear();
@@ -60,6 +68,7 @@ namespace PodkladexApp
         private void button_Edytuj_firmy_Click(object sender, EventArgs e)
         {
             // 1. Pobieramy firmy z bazy
+            ResetujWidok();
             var listaFirm = _db.Firma.ToList();
 
             // 2. Podpinamy dane
@@ -236,24 +245,37 @@ namespace PodkladexApp
 
         private void button_utworz_zamowienie_Click(object sender, EventArgs e)
         {
-            // Odnajdujemy główne okno aplikacji (Form_Menu), w którym zagnieżdżony jest obecny widok
-            Form_Menu menuForm = (Form_Menu)this.TopLevelControl;
+            // 1. Zamykamy i ukrywamy wszystkie otwarte formularze oraz widoki z polami firmy
+            ResetujWidok();
 
-            // Sprawdzamy, czy udało się znaleźć główne okno
-            if (menuForm != null)
-            {
-                // Inicjalizujemy nowy formularz zamówienia
-                Form_Zamowienie form_Zamowienie = new Form_Zamowienie();
-
-                // Zlecamy głównemu menu otwarcie tego formularza w panel_Main
-                menuForm.OpenChildForm(form_Zamowienie);
-            }
+            // 2. Otwieramy czysty formularz zamówienia (jeśli twój Form_Zamowienie wymaga _db, wstaw to w nawias)
+            Form_Zamowienie form_zamowienie = new Form_Zamowienie();
+            OpenChildForm(form_zamowienie);
         }
+
 
         private void button_zamow_material_Click(object sender, EventArgs e)
         {
 
         }
+        private void OpenChildForm(Form childForm)
+        {
+            if (activeForm != null)
+                activeForm.Close();
 
+            activeForm = childForm;
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+
+            // Ręcznie ustalamy pozycję i rozmiar, żeby idealnie pasowało po prawej stronie 
+            // (wypełnia miejsce nad ukrytym panelem firm i comboboxem)
+            childForm.Location = new Point(337, 65);
+            childForm.Size = new Size(885, 617);
+
+            // KLUCZOWA ZMIANA: Dodajemy formularz do głównego okna (this), a nie do panel_dane_firmy!
+            this.Controls.Add(childForm);
+            childForm.BringToFront();
+            childForm.Show();
+        }
     }
 }
