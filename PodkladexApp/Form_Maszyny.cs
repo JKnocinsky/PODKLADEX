@@ -51,15 +51,14 @@ namespace PodkladexApp
             {
                 Form_DodajMaszyne FD = new Form_DodajMaszyne(db, button.Name);
                 FD.ShowDialog();
+                dgv_Maszyny.DataSource = db.Maszyna.ToList();
+                dgv_Maszyny.Refresh();
             }
             else
             {
-                Form_DodajMaszyne FD = new Form_DodajMaszyne(db, button.Name);
-                FD.ShowDialog();
+
             }
                 // wybór maszyny z DataGridView
-
-            
         }
 
         private void txt_Nazwa_Maszyny_TextChanged(object sender, EventArgs e)
