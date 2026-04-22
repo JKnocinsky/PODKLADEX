@@ -35,7 +35,7 @@ namespace PodkladexApp
             CzescZamienna czescZamienna = new CzescZamienna();
             if (comboBox_lista_czesci.SelectedItem == null || comboBox_lista_czesci.SelectedIndex == -1)
             {
-                MessageBox.Show("Nie wybrano czesci.", "Błąd");
+                MessageBox.Show("Nie wybrano części.", "Błąd");
             }
             else
             {
