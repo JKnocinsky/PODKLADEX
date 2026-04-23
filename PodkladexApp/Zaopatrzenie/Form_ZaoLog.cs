@@ -243,17 +243,10 @@ namespace PodkladexApp
         }
 
 
-        private void button_utworz_zamowienie_Click(object sender, EventArgs e)
+        private void button_NoweZamowienie_Click(object sender, EventArgs e)
         {
-            // --- NOWA LOGIKA ---
-            // 1. Zaczynamy od otwarcia koszyka produktów
-            Form_SzczegolyZamowienia formularzKoszyka = new Form_SzczegolyZamowienia();
-
-            // 2. Wyświetlamy okno
-            formularzKoszyka.Show();
-
-            // Użyj formularzKoszyka.ShowDialog(); jeśli chcesz, aby użytkownik nie mógł 
-            // klikać niczego w głównym menu, dopóki nie zamknie procesu zamówienia.
+            // Otwieramy KROK 1 (Produkty) wewnątrz panelu
+            OpenChildForm(new Form_SzczegolyZamowienia());
         }
 
 
@@ -279,6 +272,21 @@ namespace PodkladexApp
             this.Controls.Add(childForm);
             childForm.BringToFront();
             childForm.Show();
+        }
+
+        private void button_utworz_zamowienie_Click(object sender, EventArgs e)
+        {
+            {
+                // --- NOWA LOGIKA ---
+                // 1. Zaczynamy od otwarcia koszyka produktów
+                Form_SzczegolyZamowienia formularzKoszyka = new Form_SzczegolyZamowienia();
+
+                // 2. Wyświetlamy okno
+                formularzKoszyka.Show();
+
+                // Użyj formularzKoszyka.ShowDialog(); jeśli chcesz, aby użytkownik nie mógł 
+                // klikać niczego w głównym menu, dopóki nie zamknie procesu zamówienia.
+            }
         }
     }
 }

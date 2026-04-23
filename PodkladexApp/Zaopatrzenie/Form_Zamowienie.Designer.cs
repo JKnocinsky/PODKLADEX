@@ -33,6 +33,7 @@ namespace PodkladexApp.Zaopatrzenie
             button_Klient_prywatny = new Button();
             button_klient_z_firmy = new Button();
             panel1 = new Panel();
+            button_czyszczenie = new Button();
             button_zapisz = new Button();
             label_nazwa_firmy = new Label();
             textBox_nazwa_firmy = new TextBox();
@@ -53,7 +54,7 @@ namespace PodkladexApp.Zaopatrzenie
             textBox_email = new TextBox();
             textBox_Numer_telefonu = new TextBox();
             textBox_imie = new TextBox();
-            button_czyszczenie = new Button();
+            button_Wroc = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -121,6 +122,18 @@ namespace PodkladexApp.Zaopatrzenie
             panel1.Size = new Size(1467, 977);
             panel1.TabIndex = 3;
             panel1.Paint += panel1_Paint;
+            // 
+            // button_czyszczenie
+            // 
+            button_czyszczenie.Font = new Font("Segoe UI", 14F);
+            button_czyszczenie.Location = new Point(462, 586);
+            button_czyszczenie.Margin = new Padding(3, 4, 3, 4);
+            button_czyszczenie.Name = "button_czyszczenie";
+            button_czyszczenie.Size = new Size(185, 69);
+            button_czyszczenie.TabIndex = 20;
+            button_czyszczenie.Text = "Wyczyść dane";
+            button_czyszczenie.UseVisualStyleBackColor = true;
+            button_czyszczenie.Click += button_czyszczenie_Click;
             // 
             // button_zapisz
             // 
@@ -329,23 +342,24 @@ namespace PodkladexApp.Zaopatrzenie
             textBox_imie.TabIndex = 1;
             textBox_imie.TextChanged += textBox_imie_TextChanged;
             // 
-            // button_czyszczenie
+            // button_Wroc
             // 
-            button_czyszczenie.Font = new Font("Segoe UI", 14F);
-            button_czyszczenie.Location = new Point(462, 586);
-            button_czyszczenie.Margin = new Padding(3, 4, 3, 4);
-            button_czyszczenie.Name = "button_czyszczenie";
-            button_czyszczenie.Size = new Size(185, 69);
-            button_czyszczenie.TabIndex = 20;
-            button_czyszczenie.Text = "Wyczyść dane";
-            button_czyszczenie.UseVisualStyleBackColor = true;
-            button_czyszczenie.Click += button_czyszczenie_Click;
+            button_Wroc.Font = new Font("Segoe UI", 14F);
+            button_Wroc.Location = new Point(615, 13);
+            button_Wroc.Margin = new Padding(3, 4, 3, 4);
+            button_Wroc.Name = "button_Wroc";
+            button_Wroc.Size = new Size(150, 50);
+            button_Wroc.TabIndex = 4;
+            button_Wroc.Text = "Powrót";
+            button_Wroc.UseVisualStyleBackColor = true;
+            button_Wroc.Click += button_Wroc_Click;
             // 
             // Form_Zamowienie
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1902, 1153);
+            Controls.Add(button_Wroc);
             Controls.Add(button_Klient_prywatny);
             Controls.Add(panel1);
             Controls.Add(button_klient_z_firmy);
@@ -390,5 +404,6 @@ namespace PodkladexApp.Zaopatrzenie
         private TextBox textBox_nazwa_firmy;
         private Button button_zapisz;
         private Button button_czyszczenie;
+        private Button button_Wroc;
     }
 }

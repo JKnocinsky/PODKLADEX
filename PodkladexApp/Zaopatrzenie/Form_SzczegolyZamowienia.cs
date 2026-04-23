@@ -87,30 +87,45 @@ namespace PodkladexApp.Zaopatrzenie
 
         private void button_PrzejdzDalej_Click(object sender, EventArgs e)
         {
-            // Sprawdzenie, czy nie przechodzimy dalej z pustym zamówieniem
             if (_koszyk.Count == 0)
             {
                 MessageBox.Show("Koszyk jest pusty! Dodaj przynajmniej jeden produkt przed przejściem do danych klienta.", "Brak produktów", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Otwieramy formularz z klientem i podajemy mu nasz koszyk produktów!
+            // Tworzymy KROK 2 (Dane klienta)
             Form_Zamowienie formKlient = new Form_Zamowienie(_koszyk);
 
-            // Ukrywamy okno z koszykiem na czas uzupełniania danych klienta
+            // --- KLUCZOWA ZMIANA: Ustawiamy formularz tak, aby zachowywał się jak element panelu ---
+            formKlient.TopLevel = false;
+            formKlient.FormBorderStyle = FormBorderStyle.None;
+            formKlient.Dock = DockStyle.Fill;
+
+            // Pobieramy panel z głównego okna (ten, w którym aktualnie jest nasz koszyk)
+            Panel parentPanel = (Panel)this.Parent;
+            parentPanel.Controls.Add(formKlient); // Dodajemy do niego formularz klienta
+
+            formKlient.BringToFront(); // Wysuwamy na wierzch
+            formKlient.Show();         // Wyświetlamy
+
+            // Ukrywamy obecny formularz (koszyk) - użytkownik widzi teraz płynne przejście
             this.Hide();
 
-            // Czekamy na to, co się wydarzy w oknie klienta (Zatwierdzenie lub anulowanie)
-            if (formKlient.ShowDialog() == DialogResult.OK)
+            // Dodajemy sprytną logikę: co ma się stać, gdy okno klienta zostanie zamknięte?
+            formKlient.FormClosed += (s, args) =>
             {
-                // Jeśli w oknie klienta zamówienie zostało zapisane poprawnie, możemy zamknąć również to okno
-                this.Close();
-            }
-            else
-            {
-                // Jeśli użytkownik anulował z poziomu okna klienta, wracamy do widoku koszyka
-                this.Show();
-            }
+                // Sprawdzamy, w jaki sposób zakończono pracę w oknie klienta
+                if (formKlient.DialogResult == DialogResult.OK)
+                {
+                    // Jeśli zamówienie zostało poprawnie zapisane do bazy, zamykamy cały proces
+                    this.Close();
+                }
+                else
+                {
+                    // Jeśli użytkownik anulował lub kliknął "Powrót", ponownie pokazujemy koszyk
+                    this.Show();
+                }
+            };
         }
 
         // ==========================================

@@ -319,5 +319,13 @@ namespace PodkladexApp.Zaopatrzenie
             textBox_NIP.Clear();
 
         }
+
+        private void button_Wroc_Click(object sender, EventArgs e)
+        {
+            // Ustawiamy wynik na Cancel (oznacza, że nie zapisaliśmy) i zamykamy formularz.
+            // To uruchomi zdarzenie FormClosed w KROKU 1, które z powrotem pokaże koszyk!
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
     }
 }
