@@ -47,7 +47,7 @@ namespace PodkladexApp
             // textBox_Miejscowosc_firmy
             // 
             textBox_Miejscowosc_firmy.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            textBox_Miejscowosc_firmy.Location = new Point(166, 139);
+            textBox_Miejscowosc_firmy.Location = new Point(132, 105);
             textBox_Miejscowosc_firmy.Margin = new Padding(3, 4, 3, 4);
             textBox_Miejscowosc_firmy.Name = "textBox_Miejscowosc_firmy";
             textBox_Miejscowosc_firmy.Size = new Size(388, 34);
@@ -57,7 +57,7 @@ namespace PodkladexApp
             // textBox_Ulica_firmy
             // 
             textBox_Ulica_firmy.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            textBox_Ulica_firmy.Location = new Point(166, 328);
+            textBox_Ulica_firmy.Location = new Point(132, 294);
             textBox_Ulica_firmy.Margin = new Padding(3, 4, 3, 4);
             textBox_Ulica_firmy.Name = "textBox_Ulica_firmy";
             textBox_Ulica_firmy.Size = new Size(388, 34);
@@ -67,7 +67,7 @@ namespace PodkladexApp
             // textBox_Kod_pocztowy_firmy
             // 
             textBox_Kod_pocztowy_firmy.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            textBox_Kod_pocztowy_firmy.Location = new Point(166, 233);
+            textBox_Kod_pocztowy_firmy.Location = new Point(132, 199);
             textBox_Kod_pocztowy_firmy.Margin = new Padding(3, 4, 3, 4);
             textBox_Kod_pocztowy_firmy.Name = "textBox_Kod_pocztowy_firmy";
             textBox_Kod_pocztowy_firmy.Size = new Size(388, 34);
@@ -77,7 +77,7 @@ namespace PodkladexApp
             // textBox_NIP_firmy
             // 
             textBox_NIP_firmy.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            textBox_NIP_firmy.Location = new Point(166, 517);
+            textBox_NIP_firmy.Location = new Point(132, 483);
             textBox_NIP_firmy.Margin = new Padding(3, 4, 3, 4);
             textBox_NIP_firmy.Name = "textBox_NIP_firmy";
             textBox_NIP_firmy.Size = new Size(388, 34);
@@ -87,7 +87,7 @@ namespace PodkladexApp
             // textBox_Numer_firmy
             // 
             textBox_Numer_firmy.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            textBox_Numer_firmy.Location = new Point(166, 423);
+            textBox_Numer_firmy.Location = new Point(132, 389);
             textBox_Numer_firmy.Margin = new Padding(3, 4, 3, 4);
             textBox_Numer_firmy.Name = "textBox_Numer_firmy";
             textBox_Numer_firmy.Size = new Size(388, 34);
@@ -98,7 +98,7 @@ namespace PodkladexApp
             // 
             Label_Nazwa_firmy.AutoSize = true;
             Label_Nazwa_firmy.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            Label_Nazwa_firmy.Location = new Point(42, 43);
+            Label_Nazwa_firmy.Location = new Point(8, 9);
             Label_Nazwa_firmy.Name = "Label_Nazwa_firmy";
             Label_Nazwa_firmy.Size = new Size(127, 28);
             Label_Nazwa_firmy.TabIndex = 7;
@@ -109,7 +109,7 @@ namespace PodkladexApp
             // 
             label_Miejscowosc.AutoSize = true;
             label_Miejscowosc.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_Miejscowosc.Location = new Point(46, 139);
+            label_Miejscowosc.Location = new Point(12, 105);
             label_Miejscowosc.Name = "label_Miejscowosc";
             label_Miejscowosc.Size = new Size(121, 28);
             label_Miejscowosc.TabIndex = 8;
@@ -120,7 +120,7 @@ namespace PodkladexApp
             // 
             label_kod_pocztowy_firmy.AutoSize = true;
             label_kod_pocztowy_firmy.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_kod_pocztowy_firmy.Location = new Point(33, 235);
+            label_kod_pocztowy_firmy.Location = new Point(-1, 201);
             label_kod_pocztowy_firmy.Name = "label_kod_pocztowy_firmy";
             label_kod_pocztowy_firmy.Size = new Size(135, 28);
             label_kod_pocztowy_firmy.TabIndex = 9;
@@ -131,7 +131,7 @@ namespace PodkladexApp
             // 
             label_ulica.AutoSize = true;
             label_ulica.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_ulica.Location = new Point(105, 331);
+            label_ulica.Location = new Point(71, 297);
             label_ulica.Name = "label_ulica";
             label_ulica.Size = new Size(58, 28);
             label_ulica.TabIndex = 10;
@@ -142,7 +142,7 @@ namespace PodkladexApp
             // 
             label_Numer.AutoSize = true;
             label_Numer.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_Numer.Location = new Point(91, 427);
+            label_Numer.Location = new Point(57, 393);
             label_Numer.Name = "label_Numer";
             label_Numer.Size = new Size(75, 28);
             label_Numer.TabIndex = 11;
@@ -153,7 +153,7 @@ namespace PodkladexApp
             // 
             label_NIP.AutoSize = true;
             label_NIP.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_NIP.Location = new Point(117, 523);
+            label_NIP.Location = new Point(83, 489);
             label_NIP.Name = "label_NIP";
             label_NIP.Size = new Size(45, 28);
             label_NIP.TabIndex = 12;
@@ -163,7 +163,7 @@ namespace PodkladexApp
             // button_Dodaj_nowa_firme
             // 
             button_Dodaj_nowa_firme.Font = new Font("Segoe UI", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            button_Dodaj_nowa_firme.Location = new Point(600, 251);
+            button_Dodaj_nowa_firme.Location = new Point(566, 217);
             button_Dodaj_nowa_firme.Margin = new Padding(3, 4, 3, 4);
             button_Dodaj_nowa_firme.Name = "button_Dodaj_nowa_firme";
             button_Dodaj_nowa_firme.Size = new Size(281, 108);
@@ -175,7 +175,7 @@ namespace PodkladexApp
             // textBox_NazwaFirmy
             // 
             textBox_NazwaFirmy.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            textBox_NazwaFirmy.Location = new Point(166, 44);
+            textBox_NazwaFirmy.Location = new Point(132, 10);
             textBox_NazwaFirmy.Margin = new Padding(3, 4, 3, 4);
             textBox_NazwaFirmy.Name = "textBox_NazwaFirmy";
             textBox_NazwaFirmy.Size = new Size(388, 34);
