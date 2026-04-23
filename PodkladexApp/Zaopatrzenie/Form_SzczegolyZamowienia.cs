@@ -87,17 +87,30 @@ namespace PodkladexApp.Zaopatrzenie
 
         private void button_PrzejdzDalej_Click(object sender, EventArgs e)
         {
+            // 1. Sprawdzenie, czy koszyk nie jest pusty
             if (_koszyk.Count == 0)
             {
                 MessageBox.Show("Koszyk jest pusty! Dodaj przynajmniej jeden produkt przed przejściem do danych klienta.", "Brak produktów", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Tworzymy KROK 2 (Dane klienta)
-            Form_Zamowienie formKlient = new Form_Zamowienie(_koszyk);
+            // ====================================================
+            // 2. NOWE: SPRAWDZENIE ZAPOTRZEBOWANIA MATERIAŁOWEGO
+            // ====================================================
+            string raportBrakow = GenerujRaportBrakow();
+            if (!string.IsNullOrEmpty(raportBrakow))
+            {
+                // Wyświetlamy ostrzeżenie z żółtym trójkątem, ale pozwalamy przejść dalej po kliknięciu "OK"
+                string wiadomosc = "W magazynie nie ma wystarczającej ilości materiału!\n\n" +
+                                   raportBrakow +
+                                   "\nZamówienie zostanie przetworzone, ale pamiętaj o zamówieniu surowca.";
 
-            // Pobieramy rodzica jako ogólną "Kontrolkę", bez wymuszania, że musi to być Panel!
-            // Pozwoli to obsłużyć sytuację, gdy rodzicem jest Form_ZaoLog
+                MessageBox.Show(wiadomosc, "Wymagane domówienie materiału", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            // ====================================================
+
+            // 3. Tworzymy KROK 2 (Dane klienta) - TEN KOD JUŻ MASZ
+            Form_Zamowienie formKlient = new Form_Zamowienie(_koszyk);
             Control kontenerRodzica = this.Parent;
 
             if (kontenerRodzica != null)
@@ -145,8 +158,65 @@ namespace PodkladexApp.Zaopatrzenie
                     this.Show(); // Powrót do koszyka
                 }
             }
+
         }
-        
+        private string GenerujRaportBrakow()
+        {
+            StringBuilder raport = new StringBuilder();
+
+            // Grupujemy koszyk po ID materiału, aby zsumować ile łącznie potrzebujemy danego surowca
+            var grupyMaterialow = _koszyk.GroupBy(k => new { k.IdMaterialu, k.NazwaMaterialu }).ToList();
+
+            foreach (var grupa in grupyMaterialow)
+            {
+                int idMat = grupa.Key.IdMaterialu;
+                decimal laczneZapotrzebowanie = 0;
+
+                foreach (var poz in grupa)
+                {
+                    // POBIERANIE NORMY - Zmień 'ProduktNorma' na nazwę Twojej encji z modelu EF
+                    // oraz upewnij się, że pola 'IloscMaterialu' i 'IloscProduktu' nazywają się tak samo w Twojej klasie.
+                    var norma = _db.NormaProd
+                                   .Where(n => n.IdProdukt == poz.IdProduktu && n.IdMaterial == idMat)
+                                   // .OrderByDescending(n => n.DataWprowadzenia) <-- Odkomentuj, jeśli masz pole z datą normy
+                                   .FirstOrDefault();
+
+                    if (norma != null)
+                    {
+                        // Obliczamy ile potrzeba materiału na 1 sztukę (lub 1 kg) produktu
+                        decimal ileMatNaJednostke = (decimal)norma.Ilosc / (decimal)norma.IloscMat;
+
+                        // Mnożymy przez ilość z koszyka
+                        laczneZapotrzebowanie += poz.Ilosc * ileMatNaJednostke;
+                    }
+                    else
+                    {
+                        raport.AppendLine($"- UWAGA: Brak normy w systemie dla pary: {poz.NazwaProduktu} + {poz.NazwaMaterialu}.");
+                    }
+                }
+
+                // POBIERANIE STANU MAGAZYNOWEGO
+                // 1. Suma z dostaw (Co wjechało)
+                decimal wjechalo = _db.SzczegolyDostawy
+                                      .Where(d => d.IdMaterial == idMat)
+                                      .Sum(d => (decimal?)d.Liczba) ?? 0;
+
+                // 2. Suma zużycia (Co zeszło) - ZMIEŃ TO gdy dodasz tabelę zużycia!
+                decimal wyjechalo = 0;
+                // Przykład w przyszłości: _db.ZuzycieMaterialu.Where(z => z.IdMaterial == idMat).Sum(z => (decimal?)z.Ilosc) ?? 0;
+
+                decimal stanMagazynu = wjechalo - wyjechalo;
+
+                // Porównujemy zapotrzebowanie ze stanem magazynowym
+                if (stanMagazynu < laczneZapotrzebowanie)
+                {
+                    decimal brakuje = laczneZapotrzebowanie - stanMagazynu;
+                    raport.AppendLine($"- {grupa.Key.NazwaMaterialu}: BRAKUJE {Math.Round(brakuje, 2)} kg (Zapotrzebowanie: {Math.Round(laczneZapotrzebowanie, 2)} kg | Na stanie: {Math.Round(stanMagazynu, 2)} kg)");
+                }
+            }
+
+            return raport.ToString();
+        }
 
         // ==========================================
         // Puste zdarzenia (odpięte/nieużywane w tej chwili, pozostawione na przyszłość)
