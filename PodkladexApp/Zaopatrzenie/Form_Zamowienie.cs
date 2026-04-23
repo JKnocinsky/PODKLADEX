@@ -119,7 +119,7 @@ namespace PodkladexApp.Zaopatrzenie
         // DODAJ PRZYCISK "Zapisz" W DESIGNERZE I PODEPNIJ TO ZDARZENIE
         private void button_zapisz_Click(object sender, EventArgs e)
         {
-            // 1. Sprawdzamy, czy osoba już istnieje w bazie (np. po PESELu lub Emailu)
+            // 1. Sprawdzamy, czy osoba już istnieje w bazie po Emailu
             var osoba = _db.Osoba.FirstOrDefault(o => o.AdresEMail == textBox_email.Text);
 
             if (osoba == null)
@@ -135,22 +135,57 @@ namespace PodkladexApp.Zaopatrzenie
                     KodPocztowy = textBox_kod_pocztowy.Text,
                     Ulica = textBox_ulica.Text,
                     Numer = textBox_numer.Text,
-                    Pesel = "00000000000" // <--- WAŻNE: Musisz tu podpiąć tekst z textBox_PESEL.Text !
+                    Pesel = "00000000000" // <--- Pamiętaj o podpięciu TextBoxa
                 };
                 _db.Osoba.Add(osoba);
-                _db.SaveChanges(); // Zapisujemy, aby uzyskać ID_Osoby
+            }
+            else
+            {
+                // Osoba istnieje -> Sprawdzamy, czy którekolwiek z danych uległy zmianie
+                bool czyDaneZmienione =
+                    osoba.Imie != textBox_imie.Text ||
+                    osoba.Nazwisko != textBox_Nazwisko.Text ||
+                    osoba.NrTelefonu != textBox_Numer_telefonu.Text ||
+                    osoba.Miejscowosc != textBox_Miejscowosc.Text ||
+                    osoba.KodPocztowy != textBox_kod_pocztowy.Text ||
+                    osoba.Ulica != textBox_ulica.Text ||
+                    osoba.Numer != textBox_numer.Text;
+                // || osoba.Pesel != textBox_PESEL.Text; // Odkomentuj, gdy dodasz PESEL
+
+                if (czyDaneZmienione)
+                {
+                    // Dane się zmieniły! Tworzymy nowy rekord w bazie, aby nie nadpisać historii
+                    osoba = new Osoba()
+                    {
+                        Imie = textBox_imie.Text,
+                        Nazwisko = textBox_Nazwisko.Text,
+                        NrTelefonu = textBox_Numer_telefonu.Text,
+                        AdresEMail = textBox_email.Text, // Zachowujemy ten sam email
+                        Miejscowosc = textBox_Miejscowosc.Text,
+                        KodPocztowy = textBox_kod_pocztowy.Text,
+                        Ulica = textBox_ulica.Text,
+                        Numer = textBox_numer.Text,
+                        Pesel = "00000000000"
+                    };
+                    _db.Osoba.Add(osoba);
+                }
+                // Jeśli czyDaneZmienione == false, zmienna 'osoba' nadal trzyma stary rekord z bazy,
+                // więc nie dodajemy go ponownie, po prostu zostanie podpięty pod nowe zamówienie/klienta.
             }
 
-            // 2. Szukamy czy ta osoba jest już Klientem
+            // Zapisujemy zmiany (wygeneruje to nowe IdOsoba, jeśli obiekt został dodany)
+            _db.SaveChanges();
+
+            // 2. Szukamy czy ta osoba jest już Klientem (używamy aktualnego osoba.IdOsoba)
             var klient = _db.Klient.FirstOrDefault(k => k.IdOsoba == osoba.IdOsoba);
             if (klient == null)
             {
                 klient = new Klient() { IdOsoba = osoba.IdOsoba };
                 _db.Klient.Add(klient);
-                _db.SaveChanges(); // Zapisujemy, aby uzyskać ID_Klienta
+                _db.SaveChanges(); // Zapisujemy, aby uzyskać IdKlienta
             }
 
-            // 3. Jeśli zaznaczono "Firma", obsługujemy logikę firmy
+            // 3. Logika Firmy
             if (czyFirma)
             {
                 var firma = _db.Firma.FirstOrDefault(f => f.Nip == textBox_NIP.Text);
@@ -162,16 +197,27 @@ namespace PodkladexApp.Zaopatrzenie
                     {
                         Nazwa = textBox_nazwa_firmy.Text,
                         Nip = textBox_NIP.Text,
-                        // Zakładam, że firma na start otrzymuje ten sam adres, 
-                        // chyba że zrobisz oddzielne pola adresowe dla firmy w swoim formularzu
                         Miejscowosc = textBox_Miejscowosc.Text,
                         KodPocztowy = textBox_kod_pocztowy.Text,
                         Ulica = textBox_ulica.Text,
                         Numer = textBox_numer.Text
                     };
                     _db.Firma.Add(firma);
-                    _db.SaveChanges(); // Generuje ID_Firmy
                 }
+                else
+                {
+                    // Pytanie: Czy dla firmy (np. przy zmianie adresu firmy) 
+                    // też chcesz tworzyć nową firmę z tym samym NIPem, aby chronić historię?
+                    // Jeśli tak, zrób to analogicznie jak z osobą. 
+                    // Na ten moment zostawiłem nadpisywanie:
+                    firma.Nazwa = textBox_nazwa_firmy.Text;
+                    firma.Miejscowosc = textBox_Miejscowosc.Text;
+                    firma.KodPocztowy = textBox_kod_pocztowy.Text;
+                    firma.Ulica = textBox_ulica.Text;
+                    firma.Numer = textBox_numer.Text;
+                }
+
+                _db.SaveChanges(); // Zapisuje zmiany dla firmy
 
                 // 4. Łączymy Klienta z Firmą w tabeli pośredniej
                 var klientFirma = _db.KlientFirma.FirstOrDefault(kf => kf.IdKlient == klient.IdKlient && kf.IdFirma == firma.IdFirma);
@@ -180,18 +226,19 @@ namespace PodkladexApp.Zaopatrzenie
                     klientFirma = new KlientFirma()
                     {
                         IdKlient = klient.IdKlient,
-                        IdFirma = firma.IdFirma
+                        IdFirma = firma.IdFirma,
+                        DataPocz = DateOnly.FromDateTime(DateTime.Today) // <--- Tutaj przypisujemy dzisiejszą datę początku
                     };
                     _db.KlientFirma.Add(klientFirma);
                 }
             }
 
-            // Finalny zapis całej transakcji
+            // Finalny zapis relacji Klient-Firma
             _db.SaveChanges();
 
-            MessageBox.Show("Klient (oraz ewentualna firma) został poprawnie zapisany/zaktualizowany w bazie!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Dane zostały poprawnie zapisane!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            // Odświeżenie list podpowiedzi, aby nowa osoba była od razu widoczna
+            // Odświeżenie list podpowiedzi
             ZaladujPodpowiedzi();
         }
 
@@ -246,6 +293,21 @@ namespace PodkladexApp.Zaopatrzenie
 
         private void button_czyszczenie_Click(object sender, EventArgs e)
         {
+            // Czyszczenie danych klienta (osoby)
+            textBox_imie.Clear();
+            textBox_Nazwisko.Clear();
+            textBox_Numer_telefonu.Clear();
+            textBox_email.Clear();
+
+            // Czyszczenie danych adresowych
+            textBox_Miejscowosc.Clear();
+            textBox_kod_pocztowy.Clear();
+            textBox_ulica.Clear();
+            textBox_numer.Clear();
+
+            // Czyszczenie danych firmowych
+            textBox_nazwa_firmy.Clear();
+            textBox_NIP.Clear();
 
         }
     }
