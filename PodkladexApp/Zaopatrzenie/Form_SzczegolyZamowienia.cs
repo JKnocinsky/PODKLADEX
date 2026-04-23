@@ -183,8 +183,13 @@ namespace PodkladexApp.Zaopatrzenie
 
                     if (norma != null)
                     {
-                        // Obliczamy ile potrzeba materiału na 1 sztukę (lub 1 kg) produktu
-                        decimal ileMatNaJednostke = (decimal)norma.Ilosc / (decimal)norma.IloscMat;
+                        // Poprawione obliczanie zapotrzebowania
+                        decimal ileMatNaJednostke = 0;
+                        if (norma.Ilosc > 0)
+                        {
+                            // Poprawne działanie: Ilość materiału podzielona przez Ilość produktu
+                            ileMatNaJednostke = (decimal)norma.IloscMat / (decimal)norma.Ilosc;
+                        }
 
                         // Mnożymy przez ilość z koszyka
                         laczneZapotrzebowanie += poz.Ilosc * ileMatNaJednostke;
