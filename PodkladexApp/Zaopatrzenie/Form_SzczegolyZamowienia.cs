@@ -96,37 +96,57 @@ namespace PodkladexApp.Zaopatrzenie
             // Tworzymy KROK 2 (Dane klienta)
             Form_Zamowienie formKlient = new Form_Zamowienie(_koszyk);
 
-            // --- KLUCZOWA ZMIANA: Ustawiamy formularz tak, aby zachowywał się jak element panelu ---
-            formKlient.TopLevel = false;
-            formKlient.FormBorderStyle = FormBorderStyle.None;
-            formKlient.Dock = DockStyle.Fill;
+            // Pobieramy rodzica jako ogólną "Kontrolkę", bez wymuszania, że musi to być Panel!
+            // Pozwoli to obsłużyć sytuację, gdy rodzicem jest Form_ZaoLog
+            Control kontenerRodzica = this.Parent;
 
-            // Pobieramy panel z głównego okna (ten, w którym aktualnie jest nasz koszyk)
-            Panel parentPanel = (Panel)this.Parent;
-            parentPanel.Controls.Add(formKlient); // Dodajemy do niego formularz klienta
-
-            formKlient.BringToFront(); // Wysuwamy na wierzch
-            formKlient.Show();         // Wyświetlamy
-
-            // Ukrywamy obecny formularz (koszyk) - użytkownik widzi teraz płynne przejście
-            this.Hide();
-
-            // Dodajemy sprytną logikę: co ma się stać, gdy okno klienta zostanie zamknięte?
-            formKlient.FormClosed += (s, args) =>
+            if (kontenerRodzica != null)
             {
-                // Sprawdzamy, w jaki sposób zakończono pracę w oknie klienta
-                if (formKlient.DialogResult == DialogResult.OK)
+                // --- ODKRYTO RODZICA: Formularz jest wstrzyknięty w inne okno (przez OpenChildForm) ---
+                formKlient.TopLevel = false;
+                formKlient.FormBorderStyle = FormBorderStyle.None;
+
+                // Kopiujemy rozmiar i pozycję od aktualnego okna koszyka
+                formKlient.Location = this.Location;
+                formKlient.Size = this.Size;
+
+                // Dodajemy okno klienta do tego samego kontenera
+                kontenerRodzica.Controls.Add(formKlient);
+                formKlient.BringToFront();
+                formKlient.Show();
+
+                // Ukrywamy koszyk
+                this.Hide();
+
+                // Podpinamy powrót
+                formKlient.FormClosed += (s, args) =>
                 {
-                    // Jeśli zamówienie zostało poprawnie zapisane do bazy, zamykamy cały proces
-                    this.Close();
+                    if (formKlient.DialogResult == DialogResult.OK)
+                    {
+                        this.Close(); // Finał - zapisano poprawnie
+                    }
+                    else
+                    {
+                        this.Show(); // Użytkownik kliknął powrót, odkrywamy znowu koszyk
+                    }
+                };
+            }
+            else
+            {
+                // --- BRAK RODZICA: Formularz jest otwarty jako wolne okno przez zwykłe .Show() ---
+                this.Hide(); // Ukrywamy koszyk
+
+                if (formKlient.ShowDialog() == DialogResult.OK)
+                {
+                    this.Close(); // Finał po oknie modalnym
                 }
                 else
                 {
-                    // Jeśli użytkownik anulował lub kliknął "Powrót", ponownie pokazujemy koszyk
-                    this.Show();
+                    this.Show(); // Powrót do koszyka
                 }
-            };
+            }
         }
+        
 
         // ==========================================
         // Puste zdarzenia (odpięte/nieużywane w tej chwili, pozostawione na przyszłość)

@@ -12,7 +12,7 @@ namespace PodkladexApp.Models
         public string NazwaProduktu { get; set; }
         public int IdMaterialu { get; set; }
         public string NazwaMaterialu { get; set; }
-        public int Ilosc { get; set; } // Zgodnie z SQL Szczegoly_zamowienia to INT
+        public decimal Ilosc { get; set; } // Zgodnie z SQL Szczegoly_zamowienia to INT
         public decimal Cena { get; set; }
         public string Uwagi { get; set; }
     }

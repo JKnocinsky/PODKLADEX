@@ -201,17 +201,16 @@ namespace PodkladexApp.Zaopatrzenie
 
                 if (firma == null)
                 {
-                    // Firma nie istnieje -> tworzymy nową
                     firma = new Firma()
                     {
                         Nazwa = textBox_nazwa_firmy.Text,
-                        Nip = textBox_NIP.Text,
+                        // DODAJ TE POLA:
                         Miejscowosc = textBox_Miejscowosc.Text,
-                        KodPocztowy = textBox_kod_pocztowy.Text,
                         Ulica = textBox_ulica.Text,
                         Numer = textBox_numer.Text
                     };
                     _db.Firma.Add(firma);
+                    _db.SaveChanges();
                 }
                 else
                 {
@@ -244,7 +243,42 @@ namespace PodkladexApp.Zaopatrzenie
 
             // Finalny zapis relacji Klient-Firma
             _db.SaveChanges();
+            // === DODANY KOD: 5. Tworzenie nagłówka zamówienia ===
+            var zamowienie = new Zamowienie()
+            {
+                IdKlient = klient.IdKlient, // Zmienna 'klient' z Twojego kodu powyżej
+                DataPrzyjeciaZ = DateOnly.FromDateTime(DateTime.Today),
+                DataZrealizowaniaZ = null
+            };
+            _db.Zamowienie.Add(zamowienie);
+            _db.SaveChanges(); // Zapisujemy, aby baza wygenerowała IdZamowienie
 
+            // === DODANY KOD: 6. Zapisywanie produktów z koszyka ===
+            // Upewniamy się, że koszyk został przekazany i nie jest pusty
+            if (_produktyDoZapisania != null && _produktyDoZapisania.Count > 0)
+            {
+                foreach (var poz in _produktyDoZapisania)
+                {
+                    var szczegol = new SzczegolyZamowienia()
+                    {
+                        IdZamowienie = zamowienie.IdZamowienie, // Powiązanie z nagłówkiem z kroku 5
+                        IdProdukt = poz.IdProduktu,
+                        IdMaterial = poz.IdMaterialu,
+                        Ilosc = poz.Ilosc,
+                        Cena = poz.Cena,
+                        Uwagi = poz.Uwagi
+                    };
+                    _db.SzczegolyZamowienia.Add(szczegol);
+                }
+
+                _db.SaveChanges(); // Ostateczny zapis wszystkich szczegółów do bazy
+            }
+
+            // Opcjonalnie: Ustawienie flagi sukcesu i zamknięcie tego okna (Krok 2)
+            // Jeśli chcesz, aby okno zamknęło się po kliknięciu "OK" w MessageBox,
+            // przenieś te dwie linijki POD MessageBox.Show
+            this.DialogResult = DialogResult.OK;
+            this.Close();
             MessageBox.Show("Dane zostały poprawnie zapisane!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             // Odświeżenie list podpowiedzi
