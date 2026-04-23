@@ -13,6 +13,15 @@ namespace PodkladexApp.Zaopatrzenie
 {
     public partial class Form_Zamowienie : Form
     {
+
+        private List<Form_SzczegolyZamowienia.PozycjaKoszyka> _produktyDoZapisania;
+
+        public Form_Zamowienie(List<Form_SzczegolyZamowienia.PozycjaKoszyka> koszyk)
+        {
+            InitializeComponent();
+            _produktyDoZapisania = koszyk;
+        }
+
         // 1. Deklaracja połączenia z bazą
         private PodkladexContext _db = new PodkladexContext();
 

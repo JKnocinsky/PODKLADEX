@@ -245,12 +245,15 @@ namespace PodkladexApp
 
         private void button_utworz_zamowienie_Click(object sender, EventArgs e)
         {
-            // 1. Zamykamy i ukrywamy wszystkie otwarte formularze oraz widoki z polami firmy
-            ResetujWidok();
+            // --- NOWA LOGIKA ---
+            // 1. Zaczynamy od otwarcia koszyka produktów
+            Form_SzczegolyZamowienia formularzKoszyka = new Form_SzczegolyZamowienia();
 
-            // 2. Otwieramy czysty formularz zamówienia (jeśli twój Form_Zamowienie wymaga _db, wstaw to w nawias)
-            Form_Zamowienie form_zamowienie = new Form_Zamowienie();
-            OpenChildForm(form_zamowienie);
+            // 2. Wyświetlamy okno
+            formularzKoszyka.Show();
+
+            // Użyj formularzKoszyka.ShowDialog(); jeśli chcesz, aby użytkownik nie mógł 
+            // klikać niczego w głównym menu, dopóki nie zamknie procesu zamówienia.
         }
 
 

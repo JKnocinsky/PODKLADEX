@@ -35,6 +35,7 @@
             textBox_Uwagi = new TextBox();
             button_DodajPozycje = new Button();
             dataGridView_Koszyk = new DataGridView();
+            button_PrzejdzDalej = new Button();
             ((System.ComponentModel.ISupportInitialize)numericUpDown_Ilosc).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown_Cena).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView_Koszyk).BeginInit();
@@ -99,18 +100,30 @@
             // dataGridView_Koszyk
             // 
             dataGridView_Koszyk.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView_Koszyk.Location = new Point(600, 237);
+            dataGridView_Koszyk.Location = new Point(665, 45);
             dataGridView_Koszyk.Name = "dataGridView_Koszyk";
             dataGridView_Koszyk.RowHeadersWidth = 51;
             dataGridView_Koszyk.Size = new Size(300, 188);
             dataGridView_Koszyk.TabIndex = 6;
             dataGridView_Koszyk.CellContentClick += dataGridView_Koszyk_CellContentClick;
             // 
+            // button_PrzejdzDalej
+            // 
+            button_PrzejdzDalej.Font = new Font("Segoe UI", 14F);
+            button_PrzejdzDalej.Location = new Point(473, 377);
+            button_PrzejdzDalej.Name = "button_PrzejdzDalej";
+            button_PrzejdzDalej.Size = new Size(284, 48);
+            button_PrzejdzDalej.TabIndex = 7;
+            button_PrzejdzDalej.Text = "Przejdź dalej";
+            button_PrzejdzDalej.UseVisualStyleBackColor = true;
+            button_PrzejdzDalej.Click += button_PrzejdzDalej_Click;
+            // 
             // Form_SzczegolyZamowienia
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1189, 450);
+            Controls.Add(button_PrzejdzDalej);
             Controls.Add(dataGridView_Koszyk);
             Controls.Add(button_DodajPozycje);
             Controls.Add(textBox_Uwagi);
@@ -137,5 +150,6 @@
         private TextBox textBox_Uwagi;
         private Button button_DodajPozycje;
         private DataGridView dataGridView_Koszyk;
+        private Button button_PrzejdzDalej;
     }
 }
