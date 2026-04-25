@@ -198,20 +198,14 @@ namespace PodkladexApp.Zaopatrzenie
                     {
                         raport.AppendLine($"- UWAGA: Brak normy w systemie dla pary: {poz.NazwaProduktu} + {poz.NazwaMaterialu}.");
                     }
-                }
 
-                // POBIERANIE STANU MAGAZYNOWEGO
-                // 1. Suma z dostaw (Co wjechało)
-                decimal wjechalo = _db.SzczegolyDostawy
-                                      .Where(d => d.IdMaterial == idMat)
-                                      .Sum(d => (decimal?)d.Liczba) ?? 0;
+                // POBIERANIE STANU MAGAZYNOWEGO BEZPOŚREDNIO Z WIDOKU SQL
+                var stanBaza = _db.AktualnyStanMagazynu
+                                  .FirstOrDefault(s => s.IdMaterial == idMat);
 
-                // 2. Suma zużycia (Co zeszło) - ZMIEŃ TO gdy dodasz tabelę zużycia!
-                decimal wyjechalo = 0;
-                // Przykład w przyszłości: _db.ZuzycieMaterialu.Where(z => z.IdMaterial == idMat).Sum(z => (decimal?)z.Ilosc) ?? 0;
-
-                decimal stanMagazynu = wjechalo - wyjechalo;
-
+                // Znak zapytania po stanBaza zapobiega błędowi gdy nie ma materiału w bazie,
+                // a operator ?? 0m wstawia zero (typu decimal), jeśli wynik okazałby się nullem.
+                decimal stanMagazynu = stanBaza?.AktualnyStan ?? 0m;
                 // Porównujemy zapotrzebowanie ze stanem magazynowym
                 if (stanMagazynu < laczneZapotrzebowanie)
                 {
