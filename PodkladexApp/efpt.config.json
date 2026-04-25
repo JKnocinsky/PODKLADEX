@@ -237,6 +237,10 @@
       {
          "Name": "[dbo].[Zwolnienie_lekarskie]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AktualnyStanMagazynu]",
+         "ObjectType": 3
       }
    ],
    "UiHint": null,

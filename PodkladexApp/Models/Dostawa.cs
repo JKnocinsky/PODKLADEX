@@ -13,7 +13,7 @@ public partial class Dostawa
 
     public int IdPracownik { get; set; }
 
-    public DateTime DataDostawy { get; set; }
+    public DateOnly DataDostawy { get; set; }
 
     public virtual Firma IdFirmaNavigation { get; set; }
 

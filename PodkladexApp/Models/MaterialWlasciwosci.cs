@@ -17,6 +17,8 @@ public partial class MaterialWlasciwosci
 
     public decimal WartoscMaksymalna { get; set; }
 
+    public decimal WartoscNominalna { get; set; }
+
     public virtual Material IdMaterialNavigation { get; set; }
 
     public virtual Wlasciwosc IdWlasciwosciNavigation { get; set; }

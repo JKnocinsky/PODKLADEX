@@ -17,6 +17,8 @@ public partial class ProduktWlasciwosci
 
     public decimal WartoscMaksymalna { get; set; }
 
+    public decimal WartoscNominalna { get; set; }
+
     public virtual Produkt IdProduktNavigation { get; set; }
 
     public virtual Wlasciwosc IdWlasciwosciNavigation { get; set; }

@@ -65,7 +65,8 @@ namespace PodkladexApp
                 // 1. Pobieramy wartości z ComboBoxów Firmy i Pracownika oraz datę
                 int wybraneIdFirmy = (int)comboBox_DostawaFirma.SelectedValue;
                 int wybraneIdPracownika = (int)comboBox_DostawaPracownik.SelectedValue;
-                DateTime dataDostawy = dateTimePicker1.Value;
+                // Konwersja DateTime na DateOnly
+                DateOnly dataDostawy = DateOnly.FromDateTime(dateTimePicker1.Value);
 
                 // 2. Tworzymy TYLKO główny obiekt dostawy (bez szczegółów)
                 var nowaDostawa = new Dostawa
