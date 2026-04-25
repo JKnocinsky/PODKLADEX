@@ -198,6 +198,7 @@ namespace PodkladexApp.Zaopatrzenie
                     {
                         raport.AppendLine($"- UWAGA: Brak normy w systemie dla pary: {poz.NazwaProduktu} + {poz.NazwaMaterialu}.");
                     }
+                }
 
                 // POBIERANIE STANU MAGAZYNOWEGO BEZPOŚREDNIO Z WIDOKU SQL
                 var stanBaza = _db.AktualnyStanMagazynu
