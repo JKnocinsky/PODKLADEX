@@ -56,6 +56,7 @@
             button_ArrowR = new Button();
             button_ArrowL = new Button();
             panel1 = new Panel();
+            button_wyczysc = new Button();
             panel_daneosoby.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -207,6 +208,7 @@
             // 
             // panel_daneosoby
             // 
+            panel_daneosoby.BorderStyle = BorderStyle.FixedSingle;
             panel_daneosoby.Controls.Add(textBox_pesel);
             panel_daneosoby.Controls.Add(textBox_numer);
             panel_daneosoby.Controls.Add(textBox_ulica);
@@ -259,7 +261,7 @@
             btn_usuwanie.TabIndex = 3;
             btn_usuwanie.Text = "Usuń";
             btn_usuwanie.UseVisualStyleBackColor = false;
-            btn_usuwanie.Click += btn_usuwanie_Click;
+            btn_usuwanie.Click += btn_wyczysc_Click;
             // 
             // comboBox_idosoby
             // 
@@ -280,19 +282,19 @@
             button1.TabIndex = 3;
             button1.Text = "Dodaj rekord";
             button1.UseVisualStyleBackColor = false;
-            button1.Click += btn_dodawanie_Click;
+            button1.Click += btn_wyczysc_Click;
             // 
             // button2
             // 
             button2.BackColor = SystemColors.ControlLight;
             button2.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold);
-            button2.Location = new Point(391, 521);
+            button2.Location = new Point(285, 519);
             button2.Name = "button2";
             button2.Size = new Size(99, 34);
             button2.TabIndex = 3;
             button2.Text = "Edytuj";
             button2.UseVisualStyleBackColor = false;
-            button2.Click += btn_edytowanie_Click;
+            button2.Click += btn_wyczysc_Click;
             // 
             // button_ArrowR
             // 
@@ -323,11 +325,25 @@
             panel1.BackColor = SystemColors.ButtonFace;
             panel1.Controls.Add(label_idosoby);
             panel1.Controls.Add(panel_daneosoby);
+            panel1.Controls.Add(button_wyczysc);
+            panel1.Controls.Add(button2);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(2, 2);
             panel1.Name = "panel1";
             panel1.Size = new Size(804, 713);
             panel1.TabIndex = 6;
+            // 
+            // button_wyczysc
+            // 
+            button_wyczysc.BackColor = SystemColors.ControlLight;
+            button_wyczysc.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold);
+            button_wyczysc.Location = new Point(464, 519);
+            button_wyczysc.Name = "button_wyczysc";
+            button_wyczysc.Size = new Size(162, 34);
+            button_wyczysc.TabIndex = 3;
+            button_wyczysc.Text = "Wyczyść pola";
+            button_wyczysc.UseVisualStyleBackColor = false;
+            button_wyczysc.Click += btn_wyczysc_Click;
             // 
             // Form_ListaOsob
             // 
@@ -339,7 +355,6 @@
             Controls.Add(button_ArrowR);
             Controls.Add(comboBox_idosoby);
             Controls.Add(btn_usuwanie);
-            Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(btn_dodawanie);
             Controls.Add(panel1);
@@ -384,5 +399,6 @@
         private Button button_ArrowR;
         private Button button_ArrowL;
         private Panel panel1;
+        private Button button_wyczysc;
     }
 }

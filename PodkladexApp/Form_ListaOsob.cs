@@ -368,5 +368,11 @@ namespace PodkladexApp
                 && !string.IsNullOrWhiteSpace(textBox_numer.Text)
                 && !string.IsNullOrWhiteSpace(textBox_pesel.Text);
         }
+
+        private void btn_wyczysc_Click(object sender, EventArgs e)
+        {
+            WyczyscPola();
+            comboBox_idosoby.SelectedIndex = -1;
+        }
     }
 }
