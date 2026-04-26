@@ -92,7 +92,7 @@ CREATE TABLE Pracownik_szkolenia (
     Data_szkolenia DATE NOT NULL,
     Data_waznosci DATE NULL,
     Cena_szkolenia DECIMAL(10,2) NOT NULL,
-    PRIMARY KEY (ID_pracownik, ID_szkolenia, Data_szkolenia)
+    PRIMARY KEY (ID_pracownik, ID_szkolenia)
 );
 GO
 
