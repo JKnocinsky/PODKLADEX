@@ -496,14 +496,14 @@ GO
 
 INSERT INTO Normy_maszyna (ID_normy_ekspl, ID_maszyna, Wartosc) VALUES
 (1,1,10.00),
-(2,2,50.00),
-(3,3,30.00),
-(1,4,100.00),
-(2,5,350.00),
-(3,6,100.00),
-(1,7,170.00),
-(2,8,200.00),
-(3,9,300.00);
+(2,2,5.00),
+(3,3,3.00),
+(1,4,1.00),
+(2,5,3.50),
+(3,6,1.00),
+(1,7,1.00),
+(2,8,2.00),
+(3,9,3.00);
 GO
 
 INSERT INTO Czesci_przeglady (ID_czesci, ID_obsluga, Liczba, Opis) VALUES
