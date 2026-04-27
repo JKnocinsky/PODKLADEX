@@ -231,21 +231,28 @@ INSERT INTO Typ_badania_med (Nazwa, Opis) VALUES
 GO
 
 INSERT INTO Czesc_zamienna (Nazwa) VALUES
-('Lozysko'),
-('Pasek klinowy'),
-('Filtr oleju');
+('Przycisk'),
+('Tłok'),
+('Głowica narzędziowa'),
+('Pierścień centrujący'),
+('Płyta dociskowa'),
+('Przewód hydrualiczny 2"'),
+('Zawór regulacyjny'),
+('Układ smarowania'),
+('Osłona');
 GO
 
 INSERT INTO Rodzaj_obslugi (Nazwa, Opis) VALUES
 ('Przeglad', 'Okresowy'),
-('Naprawa', 'Awaria'),
+('Naprawa', 'Planowana'),
+('Inspekcja', 'Planowana'),
 ('Konserwacja', 'Zapobiegawcza');
 GO
 
 INSERT INTO Normy_eksploatacyjne (Nazwa_normy, Przebieg_norma) VALUES
-('Przeglad 100h', 100),
-('Przeglad 500h', 500),
-('Przeglad 1000h', 1000);
+('Przegląd co 100h', 100),
+('Przegląd co 500h', 500),
+('Przegląd co 1000h', 1000);
 GO
 
 -- ==========================================
@@ -434,8 +441,8 @@ GO
 
 -- Każda maszyna ma dokładnie jednš gwarancję (ID_maszyna od 1 do 9)
 INSERT INTO Gwarancja (ID_maszyna, ID_firma, Czas_gwarancji, Warunki) VALUES
-(1,1,12.00,'Standardowa gwarancja 12 miesiecy'),
-(2,1,12.00,'Standardowa gwarancja 12 miesiecy'),
+(1,1,12.00,'Standardowa gwarancja'),
+(2,1,12.00,'Standardowa gwarancja'),
 (3,2,24.00,'Rozszerzona gwarancja'),
 (4,3,12.00,'Standardowa gwarancja'),
 (5,4,12.00,'Standardowa gwarancja'),
@@ -445,71 +452,71 @@ INSERT INTO Gwarancja (ID_maszyna, ID_firma, Czas_gwarancji, Warunki) VALUES
 (9,8,12.00,'Standardowa gwarancja');
 GO
 
+
 -- ==========================================
 -- 22. AWARIE / OBSLUGA 
 -- (Zmieniono dni tak, by awarie wystepowaly w trakcie dat 'Zadan produkcyjnych', 
 -- a obsluga w 'okienkach' miedzy konkretnymi zadaniami)
 -- ==========================================
 INSERT INTO Awaria (ID_maszyna, Data_zgloszenia, ID_pracownik, Opis, Data_usuniecia) VALUES
-(1,'2024-03-02',1,'Uszkodzone lozysko','2024-03-03'),
-(2,'2024-03-03',2,'Zerwany pasek','2024-03-04'),
-(3,'2024-03-06',3,'Wycieki oleju','2024-03-07'),
-(4,'2024-03-11',4,'Halas','2024-03-12'),
+(1,'2024-03-02',1,'Uszkodzonie','2024-03-03'),
+(2,'2024-03-03',2,'Zniszczenie','2024-03-04'),
+(3,'2024-03-06',3,'Wypadek','2024-03-07'),
+(4,'2024-03-11',4,'Hałas','2024-03-12'),
 (5,'2024-03-13',5,'Przegrzewanie','2024-03-14'),
-(1,'2024-03-16',6,'Drgania','2024-03-17'),
-(2,'2024-03-21',7,'Awaria silnika','2024-03-22'),
-(3,'2024-03-26',8,'Zuzycie czesci','2024-03-27'),
-(4,'2024-04-02',9,'Uszkodzenie filtra','2024-04-03');
+(6,'2024-03-16',6,'Drgania','2024-03-17'),
+(7,'2024-03-21',7,'Awaria całkowita','2024-03-22'),
+(8,'2024-03-26',8,'Zużycie części','2024-03-27'),
+(9,'2024-04-02',9,'Uszkodzenie filtra','2024-04-03');
 GO
 
 INSERT INTO Czesci_awaria (ID_czesci, ID_awaria, Liczba) VALUES
 (1,1,2),
 (2,2,1),
 (3,3,1),
-(1,4,1),
-(2,5,2),
-(3,6,1),
-(1,7,3),
-(2,8,1),
-(3,9,2);
+(4,4,1),
+(5,5,2),
+(6,6,1),
+(7,7,3),
+(8,8,1),
+(9,9,2);
 GO
 
 INSERT INTO Obsluga (ID_maszyna, Data_poczatek, ID_pracownik, ID_rodzaj_obslugi, Uwagi, Data_koniec, Przebieg) VALUES
-(1,'2024-03-10',1,1,'OK','2024-03-10',50.00),
-(2,'2024-03-15',2,2,'Naprawa','2024-03-15',60.00),
-(3,'2024-03-15',3,3,'Konserwacja','2024-03-15',40.00),
-(4,'2024-03-25',4,1,'OK','2024-03-25',55.00),
-(5,'2024-03-25',5,2,'Naprawa','2024-03-25',70.00),
-(1,'2024-03-25',6,3,'Konserwacja','2024-03-25',30.00),
-(2,'2024-03-28',7,1,'OK','2024-03-28',50.00),
-(3,'2024-04-01',8,2,'Naprawa','2024-04-01',65.00),
-(4,'2024-04-06',9,3,'Konserwacja','2024-04-06',45.00);
+(1,'2024-03-10',1,1,'OK','2024-03-10',5.00),
+(2,'2024-03-15',2,2,'Brak','2024-03-15',6.00),
+(3,'2024-03-15',3,3,'Konserwacja','2024-03-15',4.00),
+(4,'2024-03-25',4,1,'OK','2024-03-25',5.00),
+(5,'2024-03-25',5,2,'Naprawa','2024-03-25',7.00),
+(1,'2024-03-25',6,3,'','2024-03-25',1.00),
+(2,'2024-03-28',7,1,'OK','2024-03-28',2.00),
+(3,'2024-04-01',8,2,'Brak','2024-04-01',0.50),
+(7,'2024-04-06',9,3,'Konserwacja','2024-04-06',1.50);
 GO
 
 INSERT INTO Normy_maszyna (ID_normy_ekspl, ID_maszyna, Wartosc) VALUES
-(1,1,100.00),
-(2,2,500.00),
-(3,3,1000.00),
-(1,2,100.00),
-(2,3,500.00),
-(3,1,1000.00),
-(1,3,100.00),
-(2,1,500.00),
-(3,2,1000.00);
+(1,1,10.00),
+(2,2,50.00),
+(3,3,30.00),
+(1,4,100.00),
+(2,5,350.00),
+(3,6,100.00),
+(1,7,170.00),
+(2,8,200.00),
+(3,9,300.00);
 GO
 
 INSERT INTO Czesci_przeglady (ID_czesci, ID_obsluga, Liczba, Opis) VALUES
-(1,1,1,'Wymiana'),
-(2,2,1,'Naprawa'),
-(3,3,1,'Kontrola'),
-(1,4,2,'Wymiana'),
-(2,5,1,'Naprawa'),
-(3,6,2,'Kontrola'),
+(1,1,1,''),
+(2,2,1,''),
+(3,3,1,''),
+(1,4,2,'Braki'),
+(2,5,1,''),
+(3,6,2,'Uszkodzenie pierwszej części'),
 (1,7,1,'Wymiana'),
-(2,8,2,'Naprawa'),
-(3,9,1,'Kontrola');
+(2,8,2,''),
+(3,9,1,'');
 GO
-
 -- ==========================================
 -- 23. ZAMOWIENIA I PRODUKCJA
 -- ==========================================
