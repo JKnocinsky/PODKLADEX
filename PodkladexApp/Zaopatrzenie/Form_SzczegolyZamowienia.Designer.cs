@@ -69,9 +69,11 @@
             // 
             numericUpDown_Ilosc.Font = new Font("Segoe UI", 13.8F);
             numericUpDown_Ilosc.Location = new Point(121, 196);
+            numericUpDown_Ilosc.Maximum = new decimal(new int[] { 10000000, 0, 0, 0 });
             numericUpDown_Ilosc.Name = "numericUpDown_Ilosc";
             numericUpDown_Ilosc.Size = new Size(216, 38);
             numericUpDown_Ilosc.TabIndex = 2;
+            numericUpDown_Ilosc.ThousandsSeparator = true;
             numericUpDown_Ilosc.ValueChanged += numericUpDown_Ilosc_ValueChanged;
             // 
             // numericUpDown_Cena
@@ -168,7 +170,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1902, 1153);
+            ClientSize = new Size(1902, 1055);
             Controls.Add(label_Materiał);
             Controls.Add(label_Produkt);
             Controls.Add(label_Liczba);

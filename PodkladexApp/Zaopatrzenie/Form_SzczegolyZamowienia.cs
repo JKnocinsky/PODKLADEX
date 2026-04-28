@@ -11,8 +11,21 @@ using PodkladexApp.Models; // <-- Wymagane, aby widzieć klasy takie jak Podklad
 
 namespace PodkladexApp.Zaopatrzenie
 {
+
+
     public partial class Form_SzczegolyZamowienia : Form
     {
+
+        private void ZablokujReszteFormularza(bool stan)
+        {
+            comboBox_Material.Enabled = stan;
+            numericUpDown_Ilosc.Enabled = stan;
+            numericUpDown_Cena.Enabled = stan;
+            textBox_Uwagi.Enabled = stan;
+            button_DodajPozycje.Enabled = stan;
+        }
+
+
         // Klasa przetrzymująca dane wybranej pozycji w "koszyku"
         public class PozycjaKoszyka
         {
@@ -39,15 +52,20 @@ namespace PodkladexApp.Zaopatrzenie
             // Ładowanie listy produktów z bazy danych
             comboBox_Produkt.DataSource = _db.Produkt.ToList();
             comboBox_Produkt.DisplayMember = "Nazwa";
-            comboBox_Produkt.ValueMember = "IdProdukt"; // Upewnij się, że pole w encji nazywa się IdProdukt
+            comboBox_Produkt.ValueMember = "IdProdukt"; // Upewnij się, że pole nazywa się IdProdukt
 
-            // Ładowanie listy materiałów z bazy danych
-            comboBox_Material.DataSource = _db.Material.ToList();
-            comboBox_Material.DisplayMember = "Nazwa";
-            comboBox_Material.ValueMember = "IdMaterial"; // Upewnij się, że pole w encji to IdMaterial
+            // Ustawiamy brak wybranego produktu na start
+            comboBox_Produkt.SelectedIndex = -1;
 
-            // Konfiguracja wartości domyślnych dla UI
+            // Konfiguracja wartości domyślnych
             numericUpDown_Ilosc.Minimum = 1;
+
+            // Blokujemy resztę okna dopóki nie zostanie wybrany produkt
+            ZablokujReszteFormularza(false);
+            dataGridView_Koszyk.DefaultCellStyle.Font = new Font("Segoe UI", 14);
+
+            // (Opcjonalnie) Jeśli chcesz, żeby nagłówki kolumn też były większe i np. pogrubione:
+            dataGridView_Koszyk.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
         }
 
         private void button_DodajPozycje_Click(object sender, EventArgs e)
@@ -83,6 +101,27 @@ namespace PodkladexApp.Zaopatrzenie
             {
                 MessageBox.Show("Wybierz poprawnie produkt oraz materiał z list rozwijanych.", "Błąd danych", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            // UKRYWANIE IDENTYFIKATORÓW:
+            dataGridView_Koszyk.DataSource = null;
+            dataGridView_Koszyk.DataSource = _koszyk;
+
+            // Zmiana nazw i rozszerzanie po zbindowaniu danych:
+            if (dataGridView_Koszyk.Columns["NazwaProduktu"] != null)
+            {
+                dataGridView_Koszyk.Columns["NazwaProduktu"].HeaderText = "Produkt";
+            }
+
+            if (dataGridView_Koszyk.Columns["NazwaMaterialu"] != null)
+            {
+                dataGridView_Koszyk.Columns["NazwaMaterialu"].HeaderText = "Materiał";
+            }
+
+            // Ukrywanie ID (z poprzedniego kroku)
+            dataGridView_Koszyk.Columns["IdProduktu"].Visible = false;
+            dataGridView_Koszyk.Columns["IdMaterialu"].Visible = false;
+
+            // Automatyczne dopasowanie szerokości wszystkich kolumn
+            dataGridView_Koszyk.AutoResizeColumns();
         }
 
         private void button_PrzejdzDalej_Click(object sender, EventArgs e)
@@ -174,20 +213,16 @@ namespace PodkladexApp.Zaopatrzenie
 
                 foreach (var poz in grupa)
                 {
-                    // POBIERANIE NORMY - Zmień 'ProduktNorma' na nazwę Twojej encji z modelu EF
-                    // oraz upewnij się, że pola 'IloscMaterialu' i 'IloscProduktu' nazywają się tak samo w Twojej klasie.
+                    // POBIERANIE NORMY
                     var norma = _db.NormaProd
                                    .Where(n => n.IdProdukt == poz.IdProduktu && n.IdMaterial == idMat)
-                                   // .OrderByDescending(n => n.DataWprowadzenia) <-- Odkomentuj, jeśli masz pole z datą normy
                                    .FirstOrDefault();
 
                     if (norma != null)
                     {
-                        // Poprawione obliczanie zapotrzebowania
                         decimal ileMatNaJednostke = 0;
                         if (norma.Ilosc > 0)
                         {
-                            // Poprawne działanie: Ilość materiału podzielona przez Ilość produktu
                             ileMatNaJednostke = (decimal)norma.IloscMat / (decimal)norma.Ilosc;
                         }
 
@@ -204,14 +239,23 @@ namespace PodkladexApp.Zaopatrzenie
                 var stanBaza = _db.AktualnyStanMagazynu
                                   .FirstOrDefault(s => s.IdMaterial == idMat);
 
-                // Znak zapytania po stanBaza zapobiega błędowi gdy nie ma materiału w bazie,
-                // a operator ?? 0m wstawia zero (typu decimal), jeśli wynik okazałby się nullem.
                 decimal stanMagazynu = stanBaza?.AktualnyStan ?? 0m;
+
                 // Porównujemy zapotrzebowanie ze stanem magazynowym
                 if (stanMagazynu < laczneZapotrzebowanie)
                 {
                     decimal brakuje = laczneZapotrzebowanie - stanMagazynu;
-                    raport.AppendLine($"- {grupa.Key.NazwaMaterialu}: BRAKUJE {Math.Round(brakuje, 2)} kg (Zapotrzebowanie: {Math.Round(laczneZapotrzebowanie, 2)} kg | Na stanie: {Math.Round(stanMagazynu, 2)} kg)");
+
+                    // =========================================================
+                    // NOWE: Pobieranie wartości nominalnej brakującego materiału
+                    // =========================================================
+                    var wartoscNominalna = _db.MaterialWlasciwosci
+                                              .Where(mw => mw.IdMaterial == idMat)
+                                              .Select(mw => mw.WartoscNominalna)
+                                              .FirstOrDefault();
+
+                    // Dodajemy wartość nominalną do tekstu w raporcie
+                    raport.AppendLine($"- {grupa.Key.NazwaMaterialu} (Grubość: {wartoscNominalna}): BRAKUJE {Math.Round(brakuje, 2)} kg (Zapotrzebowanie: {Math.Round(laczneZapotrzebowanie, 2)} kg | Na stanie: {Math.Round(stanMagazynu, 2)} kg)");
                 }
             }
 
@@ -221,7 +265,56 @@ namespace PodkladexApp.Zaopatrzenie
         // ==========================================
         // Puste zdarzenia (odpięte/nieużywane w tej chwili, pozostawione na przyszłość)
         // ==========================================
-        private void comboBox_Produkt_SelectedIndexChanged(object sender, EventArgs e) { }
+        private void comboBox_Produkt_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Sprawdzamy, czy użytkownik faktycznie wybrał produkt
+            if (comboBox_Produkt.SelectedItem is Produkt wybranyProdukt)
+            {
+                // Odblokowujemy resztę formularza
+                ZablokujReszteFormularza(true);
+
+                // Zapytanie LINQ dopasowujące materiały do produktu
+                var pasujaceMaterialy = (from m in _db.Material
+                                         join mw in _db.MaterialWlasciwosci on m.IdMaterial equals mw.IdMaterial
+                                         join pw in _db.ProduktWlasciwosci on mw.IdWlasciwosci equals pw.IdWlasciwosci
+                                         where pw.IdProdukt == wybranyProdukt.IdProdukt
+                                            && mw.WartoscNominalna == pw.WartoscNominalna
+                                         select m).Distinct().ToList();
+
+                // Podpinamy przefiltrowaną listę pod ComboBox
+                comboBox_Material.DataSource = pasujaceMaterialy;
+                comboBox_Material.DisplayMember = "Nazwa";
+                comboBox_Material.ValueMember = "IdMaterial";
+
+                // ==========================================
+                // BRAK MATERIAŁU - ZMIENIONY KOMUNIKAT
+                // ==========================================
+                if (pasujaceMaterialy.Count == 0)
+                {
+                    // Pobieramy wartość nominalną (grubość) dla wybranego produktu z bazy
+                    var wymaganaGrubosc = _db.ProduktWlasciwosci
+                                             .Where(pw => pw.IdProdukt == wybranyProdukt.IdProdukt)
+                                             .Select(pw => pw.WartoscNominalna)
+                                             .FirstOrDefault();
+
+                    // Tworzymy spersonalizowany komunikat
+                    string wiadomosc = $"Brak materiałów o zgodnej grubości dla wybranego produktu!\n\n" +
+                                       $"Wymagana wartość nominalna to: {wymaganaGrubosc}";
+
+                    MessageBox.Show(wiadomosc, "Brak odpowiedniego materiału", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Blokujemy możliwość dodania pozycji do koszyka
+                    button_DodajPozycje.Enabled = false;
+                }
+            }
+            else
+            {
+                // Jeśli zaznaczenie zniknie, znowu blokujemy formularz i czyścimy materiały
+                ZablokujReszteFormularza(false);
+                comboBox_Material.DataSource = null;
+            }
+        }
+        
         private void comboBox_Material_SelectedIndexChanged(object sender, EventArgs e) { }
         private void numericUpDown_Ilosc_ValueChanged(object sender, EventArgs e) { }
         private void numericUpDown_Cena_ValueChanged(object sender, EventArgs e) { }
