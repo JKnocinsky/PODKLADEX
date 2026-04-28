@@ -21,6 +21,16 @@ namespace PodkladexApp
             this.db = db;
             dgv_Maszyny.DataSource = db.Maszyna.ToList();
             dgv_Maszyny.Columns["IdMaszyna"].Visible = false;
+            dgv_Maszyny.Columns["Awaria"].Visible = false;
+            dgv_Maszyny.Columns["Gwarancja"].Visible = false;
+            dgv_Maszyny.Columns["MaszynaTyp"].Visible = false;
+            dgv_Maszyny.Columns["MaszynaWyp"].Visible = false;
+            dgv_Maszyny.Columns["NormyMaszyna"].Visible = false;
+            dgv_Maszyny.Columns["Obsluga"].Visible = false;
+            dgv_Maszyny.Columns["ZadanieProdukcyjne"].Visible = false;
+            dgv_Maszyny.Columns["DataZakupu"].HeaderText = "Data zakupu";
+            dgv_Maszyny.Columns["DataUruchomienia"].HeaderText = "Data uruchomienia";
+            dgv_Maszyny.Columns["DataWylaczenia"].HeaderText = "Data wyłączenia";
             dgv_Maszyny.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 

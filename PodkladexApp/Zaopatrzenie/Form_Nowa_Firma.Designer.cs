@@ -202,7 +202,7 @@ namespace PodkladexApp
             Controls.Add(textBox_Miejscowosc_firmy);
             Margin = new Padding(3, 4, 3, 4);
             Name = "Form_Nowa_Firma";
-            Text = "Nowa_Firma";
+            Text = "Nowa Firma";
             Load += Nowa_Firma_Load;
             ResumeLayout(false);
             PerformLayout();
