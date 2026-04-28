@@ -49,6 +49,7 @@
             btn_Dostawa = new Button();
             button_utworz_zamowienie = new Button();
             button_HistoriaZamowien = new Button();
+            label_ProszeWybracFirme = new Label();
             panel_dane_firmy.SuspendLayout();
             SuspendLayout();
             // 
@@ -300,11 +301,24 @@
             button_HistoriaZamowien.UseVisualStyleBackColor = true;
             button_HistoriaZamowien.Click += button_zamow_material_Click;
             // 
+            // label_ProszeWybracFirme
+            // 
+            label_ProszeWybracFirme.AutoSize = true;
+            label_ProszeWybracFirme.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
+            label_ProszeWybracFirme.Location = new Point(606, 34);
+            label_ProszeWybracFirme.Name = "label_ProszeWybracFirme";
+            label_ProszeWybracFirme.Size = new Size(292, 31);
+            label_ProszeWybracFirme.TabIndex = 27;
+            label_ProszeWybracFirme.Text = "Proszę wybrać firmę z listy";
+            label_ProszeWybracFirme.Visible = false;
+            label_ProszeWybracFirme.Click += label_ProszeWybracFirme_Click;
+            // 
             // Form_ZaoLog
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1902, 1055);
+            Controls.Add(label_ProszeWybracFirme);
             Controls.Add(button_HistoriaZamowien);
             Controls.Add(button_utworz_zamowienie);
             Controls.Add(btn_Dostawa);
@@ -319,6 +333,7 @@
             panel_dane_firmy.ResumeLayout(false);
             panel_dane_firmy.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -344,5 +359,6 @@
         private Button button_zaakceptuj_zmiany;
         private Button button_utworz_zamowienie;
         private Button button_HistoriaZamowien;
+        private Label label_ProszeWybracFirme;
     }
 }
