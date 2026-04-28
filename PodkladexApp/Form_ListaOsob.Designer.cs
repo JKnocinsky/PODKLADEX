@@ -65,9 +65,9 @@
             label_imie.AutoSize = true;
             label_imie.Location = new Point(32, 32);
             label_imie.Name = "label_imie";
-            label_imie.Size = new Size(62, 20);
+            label_imie.Size = new Size(38, 20);
             label_imie.TabIndex = 0;
-            label_imie.Text = "Imięeee";
+            label_imie.Text = "Imię";
             // 
             // textBox_imie
             // 
