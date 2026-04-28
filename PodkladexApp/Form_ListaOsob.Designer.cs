@@ -51,11 +51,13 @@
             btn_dodawanie = new Button();
             btn_usuwanie = new Button();
             comboBox_idosoby = new ComboBox();
-            button1 = new Button();
-            button2 = new Button();
+            button_Dodaj = new Button();
+            button_Edytuj = new Button();
             button_ArrowR = new Button();
             button_ArrowL = new Button();
             panel1 = new Panel();
+            label1 = new Label();
+            button_Wyczysc = new Button();
             panel_daneosoby.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -216,6 +218,7 @@
             // 
             // panel_daneosoby
             // 
+            panel_daneosoby.BorderStyle = BorderStyle.FixedSingle;
             panel_daneosoby.Controls.Add(textBox_pesel);
             panel_daneosoby.Controls.Add(textBox_numer);
             panel_daneosoby.Controls.Add(textBox_ulica);
@@ -264,7 +267,7 @@
             // 
             btn_usuwanie.BackColor = SystemColors.ControlLight;
             btn_usuwanie.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold);
-            btn_usuwanie.Location = new Point(807, 695);
+            btn_usuwanie.Location = new Point(804, 695);
             btn_usuwanie.Margin = new Padding(3, 4, 3, 4);
             btn_usuwanie.Name = "btn_usuwanie";
             btn_usuwanie.Size = new Size(83, 45);
@@ -283,38 +286,38 @@
             comboBox_idosoby.TabIndex = 4;
             comboBox_idosoby.SelectedIndexChanged += comboBox_idosoby_SelectedIndexChanged;
             // 
-            // button1
+            // button_Dodaj
             // 
-            button1.BackColor = SystemColors.ControlLight;
-            button1.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold);
-            button1.Location = new Point(49, 695);
-            button1.Margin = new Padding(3, 4, 3, 4);
-            button1.Name = "button1";
-            button1.Size = new Size(185, 45);
-            button1.TabIndex = 3;
-            button1.Text = "Dodaj rekord";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += btn_dodawanie_Click;
+            button_Dodaj.BackColor = SystemColors.ControlLight;
+            button_Dodaj.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold);
+            button_Dodaj.Location = new Point(49, 695);
+            button_Dodaj.Margin = new Padding(3, 4, 3, 4);
+            button_Dodaj.Name = "button_Dodaj";
+            button_Dodaj.Size = new Size(185, 45);
+            button_Dodaj.TabIndex = 3;
+            button_Dodaj.Text = "Dodaj rekord";
+            button_Dodaj.UseVisualStyleBackColor = false;
+            button_Dodaj.Click += btn_dodawanie_Click;
             // 
-            // button2
+            // button_Edytuj
             // 
-            button2.BackColor = SystemColors.ControlLight;
-            button2.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold);
-            button2.Location = new Point(447, 695);
-            button2.Margin = new Padding(3, 4, 3, 4);
-            button2.Name = "button2";
-            button2.Size = new Size(113, 45);
-            button2.TabIndex = 3;
-            button2.Text = "Edytuj";
-            button2.UseVisualStyleBackColor = false;
-            button2.Click += btn_edytowanie_Click;
+            button_Edytuj.BackColor = SystemColors.ControlLight;
+            button_Edytuj.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold);
+            button_Edytuj.Location = new Point(322, 692);
+            button_Edytuj.Margin = new Padding(3, 4, 3, 4);
+            button_Edytuj.Name = "button_Edytuj";
+            button_Edytuj.Size = new Size(113, 45);
+            button_Edytuj.TabIndex = 3;
+            button_Edytuj.Text = "Edytuj";
+            button_Edytuj.UseVisualStyleBackColor = false;
+            button_Edytuj.Click += btn_edytowanie_Click;
             // 
             // button_ArrowR
             // 
             button_ArrowR.BackgroundImage = Properties.Resources.Arrow_right;
             button_ArrowR.BackgroundImageLayout = ImageLayout.Zoom;
             button_ArrowR.ImageAlign = ContentAlignment.TopCenter;
-            button_ArrowR.Location = new Point(742, 856);
+            button_ArrowR.Location = new Point(739, 804);
             button_ArrowR.Margin = new Padding(3, 4, 3, 4);
             button_ArrowR.Name = "button_ArrowR";
             button_ArrowR.Size = new Size(149, 67);
@@ -326,7 +329,7 @@
             // 
             button_ArrowL.BackgroundImage = Properties.Resources.Arrow_left;
             button_ArrowL.BackgroundImageLayout = ImageLayout.Zoom;
-            button_ArrowL.Location = new Point(49, 856);
+            button_ArrowL.Location = new Point(47, 804);
             button_ArrowL.Margin = new Padding(3, 4, 3, 4);
             button_ArrowL.Name = "button_ArrowL";
             button_ArrowL.Size = new Size(149, 67);
@@ -337,28 +340,53 @@
             // panel1
             // 
             panel1.AutoSize = true;
-            panel1.BackColor = SystemColors.ButtonFace;
+            panel1.BackColor = Color.WhiteSmoke;
+            panel1.Controls.Add(button_ArrowL);
             panel1.Controls.Add(label_idosoby);
+            panel1.Controls.Add(button_ArrowR);
             panel1.Controls.Add(panel_daneosoby);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(button_Wyczysc);
+            panel1.Controls.Add(button_Edytuj);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(2, 3);
             panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(919, 950);
+            panel1.Size = new Size(931, 897);
             panel1.TabIndex = 6;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(235, 156);
+            label1.Name = "label1";
+            label1.Size = new Size(38, 20);
+            label1.TabIndex = 0;
+            label1.Text = "Imię";
+            // 
+            // button_Wyczysc
+            // 
+            button_Wyczysc.BackColor = SystemColors.ControlLight;
+            button_Wyczysc.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold);
+            button_Wyczysc.Location = new Point(523, 692);
+            button_Wyczysc.Margin = new Padding(3, 4, 3, 4);
+            button_Wyczysc.Name = "button_Wyczysc";
+            button_Wyczysc.Size = new Size(193, 45);
+            button_Wyczysc.TabIndex = 3;
+            button_Wyczysc.Text = "Wyczyść dane";
+            button_Wyczysc.UseVisualStyleBackColor = false;
+            button_Wyczysc.Click += btn_wyczysc_Click;
             // 
             // Form_ListaOsob
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            ClientSize = new Size(923, 956);
-            Controls.Add(button_ArrowL);
-            Controls.Add(button_ArrowR);
+            BackColor = Color.Black;
+            ClientSize = new Size(935, 903);
             Controls.Add(comboBox_idosoby);
             Controls.Add(btn_usuwanie);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(button_Dodaj);
             Controls.Add(btn_dodawanie);
             Controls.Add(panel1);
             Margin = new Padding(3, 4, 3, 4);
@@ -398,10 +426,12 @@
         private Button btn_dodawanie;
         private Button btn_usuwanie;
         private ComboBox comboBox_idosoby;
-        private Button button1;
-        private Button button2;
+        private Button button_Dodaj;
+        private Button button_Edytuj;
         private Button button_ArrowR;
         private Button button_ArrowL;
         private Panel panel1;
+        private Label label1;
+        private Button button_Wyczysc;
     }
 }
