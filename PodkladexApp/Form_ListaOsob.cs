@@ -436,7 +436,6 @@ namespace PodkladexApp
             comboBox_idosoby.SelectedIndex = -1;
             UstawDaneComboBox(listaOsob);
             WyczyscPola();
-            panel_daneosoby.Visible = false;
         }
     }
 }

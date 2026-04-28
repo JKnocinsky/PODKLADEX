@@ -30,18 +30,21 @@
         {
             button_listaosob = new Button();
             button_urlopy = new Button();
-            button3 = new Button();
-            button4 = new Button();
-            button5 = new Button();
-            button6 = new Button();
+            button_szkolenia = new Button();
+            button_badania = new Button();
+            button_umowy = new Button();
+            button_bilans = new Button();
             panel_kadryfinanse = new Panel();
             SuspendLayout();
             // 
             // button_listaosob
             // 
-            button_listaosob.Location = new Point(12, 3);
+            button_listaosob.FlatStyle = FlatStyle.Flat;
+            button_listaosob.Font = new Font("Segoe UI", 14.25F);
+            button_listaosob.Location = new Point(0, 0);
+            button_listaosob.Margin = new Padding(0);
             button_listaosob.Name = "button_listaosob";
-            button_listaosob.Size = new Size(182, 81);
+            button_listaosob.Size = new Size(150, 50);
             button_listaosob.TabIndex = 0;
             button_listaosob.Text = "Lista osób";
             button_listaosob.UseVisualStyleBackColor = true;
@@ -49,74 +52,91 @@
             // 
             // button_urlopy
             // 
-            button_urlopy.Location = new Point(12, 94);
+            button_urlopy.FlatStyle = FlatStyle.Flat;
+            button_urlopy.Font = new Font("Segoe UI", 14.25F);
+            button_urlopy.Location = new Point(300, 0);
+            button_urlopy.Margin = new Padding(0);
             button_urlopy.Name = "button_urlopy";
-            button_urlopy.Size = new Size(182, 81);
+            button_urlopy.Size = new Size(150, 50);
             button_urlopy.TabIndex = 1;
             button_urlopy.Text = "Urlopy";
             button_urlopy.UseVisualStyleBackColor = true;
             button_urlopy.Click += button_urlopy_Click;
             // 
-            // button3
+            // button_szkolenia
             // 
-            button3.Location = new Point(12, 181);
-            button3.Name = "button3";
-            button3.Size = new Size(182, 81);
-            button3.TabIndex = 2;
-            button3.Text = "Szkolenia";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button_szkolenia_Click;
+            button_szkolenia.FlatStyle = FlatStyle.Flat;
+            button_szkolenia.Font = new Font("Segoe UI", 14.25F);
+            button_szkolenia.Location = new Point(450, 0);
+            button_szkolenia.Margin = new Padding(0);
+            button_szkolenia.Name = "button_szkolenia";
+            button_szkolenia.Size = new Size(150, 50);
+            button_szkolenia.TabIndex = 2;
+            button_szkolenia.Text = "Szkolenia";
+            button_szkolenia.UseVisualStyleBackColor = true;
+            button_szkolenia.Click += button_szkolenia_Click;
             // 
-            // button4
+            // button_badania
             // 
-            button4.Location = new Point(12, 268);
-            button4.Name = "button4";
-            button4.Size = new Size(182, 81);
-            button4.TabIndex = 3;
-            button4.Text = "Badania";
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += button_badania_Click;
+            button_badania.FlatStyle = FlatStyle.Flat;
+            button_badania.Font = new Font("Segoe UI", 14.25F);
+            button_badania.Location = new Point(600, 0);
+            button_badania.Margin = new Padding(0);
+            button_badania.Name = "button_badania";
+            button_badania.Size = new Size(150, 50);
+            button_badania.TabIndex = 3;
+            button_badania.Text = "Badania";
+            button_badania.UseVisualStyleBackColor = true;
+            button_badania.Click += button_badania_Click;
             // 
-            // button5
+            // button_umowy
             // 
-            button5.Location = new Point(12, 355);
-            button5.Name = "button5";
-            button5.Size = new Size(182, 81);
-            button5.TabIndex = 4;
-            button5.Text = "Umowy";
-            button5.UseVisualStyleBackColor = true;
-            button5.Click += button_umowy_Click;
+            button_umowy.FlatStyle = FlatStyle.Flat;
+            button_umowy.Font = new Font("Segoe UI", 14.25F);
+            button_umowy.Location = new Point(150, 0);
+            button_umowy.Margin = new Padding(0);
+            button_umowy.Name = "button_umowy";
+            button_umowy.Size = new Size(150, 50);
+            button_umowy.TabIndex = 4;
+            button_umowy.Text = "Umowy";
+            button_umowy.UseVisualStyleBackColor = true;
+            button_umowy.Click += button_umowy_Click;
             // 
-            // button6
+            // button_bilans
             // 
-            button6.Location = new Point(12, 448);
-            button6.Name = "button6";
-            button6.Size = new Size(182, 81);
-            button6.TabIndex = 5;
-            button6.Text = "Bilans zysków i strat";
-            button6.UseVisualStyleBackColor = true;
+            button_bilans.FlatStyle = FlatStyle.Flat;
+            button_bilans.Font = new Font("Segoe UI", 14.25F);
+            button_bilans.Location = new Point(750, 0);
+            button_bilans.Margin = new Padding(0);
+            button_bilans.Name = "button_bilans";
+            button_bilans.Size = new Size(197, 50);
+            button_bilans.TabIndex = 5;
+            button_bilans.Text = "Bilans zysków i strat";
+            button_bilans.UseVisualStyleBackColor = true;
             // 
             // panel_kadryfinanse
             // 
-            panel_kadryfinanse.BackColor = SystemColors.ButtonHighlight;
-            panel_kadryfinanse.Location = new Point(212, 3);
+            panel_kadryfinanse.BackColor = Color.Black;
+            panel_kadryfinanse.Location = new Point(0, 50);
+            panel_kadryfinanse.Margin = new Padding(0);
             panel_kadryfinanse.Name = "panel_kadryfinanse";
-            panel_kadryfinanse.Size = new Size(953, 950);
+            panel_kadryfinanse.Size = new Size(947, 712);
             panel_kadryfinanse.TabIndex = 6;
             // 
             // Form_KadryFinanse
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(1173, 973);
+            ClientSize = new Size(947, 769);
+            Controls.Add(button_badania);
             Controls.Add(panel_kadryfinanse);
-            Controls.Add(button6);
-            Controls.Add(button5);
-            Controls.Add(button4);
-            Controls.Add(button3);
+            Controls.Add(button_bilans);
+            Controls.Add(button_umowy);
+            Controls.Add(button_szkolenia);
             Controls.Add(button_urlopy);
             Controls.Add(button_listaosob);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Form_KadryFinanse";
             Text = "Kadry i finanse";
             ResumeLayout(false);
@@ -126,10 +146,10 @@
 
         private Button button_listaosob;
         private Button button_urlopy;
-        private Button button3;
-        private Button button4;
-        private Button button5;
-        private Button button6;
+        private Button button_szkolenia;
+        private Button button_badania;
+        private Button button_umowy;
+        private Button button_bilans;
         private Panel panel_kadryfinanse;
     }
 }
