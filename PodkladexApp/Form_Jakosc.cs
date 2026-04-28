@@ -32,6 +32,21 @@ namespace PodkladexApp
             Form_KontrolaMat formKontrolaMat = new Form_KontrolaMat(context);
             OpenChildForm(formKontrolaMat);
         }
+        private void btn_KontrolaProd_Click(object sender, EventArgs e)
+        {
+            Form_KontrolaProd formKontrolaProd = new Form_KontrolaProd(context);
+            OpenChildForm(formKontrolaProd);
+        }
+        private void btn_PomiarMat_Click(object sender, EventArgs e)
+        {
+            Form_PomiarMat formPomiarMat = new Form_PomiarMat(context);
+            OpenChildForm(formPomiarMat);
+        }
+        private void btn_PomiarProd_Click(object sender, EventArgs e)
+        {
+            Form_PomiarProd formPomiarProd = new Form_PomiarProd(context);
+            OpenChildForm(formPomiarProd);
+        }
 
         private void OpenChildForm(Form childForm)
         {
