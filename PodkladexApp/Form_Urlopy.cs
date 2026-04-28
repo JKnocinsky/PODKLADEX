@@ -440,5 +440,9 @@ namespace PodkladexApp
             ZaladujWnioski();
         }
 
+        private void comboBox_Dane_Pracownika_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

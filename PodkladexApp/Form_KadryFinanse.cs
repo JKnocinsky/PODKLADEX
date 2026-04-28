@@ -19,32 +19,44 @@ namespace PodkladexApp
 
         private void UstawStylPrzyciskow()
         {
-            button_listaosob.UseVisualStyleBackColor = false;
-            button_urlopy.UseVisualStyleBackColor = false;
-            button_szkolenia.UseVisualStyleBackColor = false;
-            button_badania.UseVisualStyleBackColor = false;
-            button_umowy.UseVisualStyleBackColor = false;
-
-            button_listaosob.BackColor = SystemColors.Control;
-            button_urlopy.BackColor = SystemColors.Control;
-            button_szkolenia.BackColor = SystemColors.Control;
-            button_badania.BackColor = SystemColors.Control;
-            button_umowy.BackColor = SystemColors.Control;
+            PrzygotujPrzycisk(button_listaosob);
+            PrzygotujPrzycisk(button_urlopy);
+            PrzygotujPrzycisk(button_szkolenia);
+            PrzygotujPrzycisk(button_badania);
+            PrzygotujPrzycisk(button_umowy);
         }
 
-        private void ResetujKoloryPrzyciskow()
+        private void PrzygotujPrzycisk(Button button)
         {
-            button_listaosob.BackColor = SystemColors.Control;
-            button_urlopy.BackColor = SystemColors.Control;
-            button_szkolenia.BackColor = SystemColors.Control;
-            button_badania.BackColor = SystemColors.Control;
-            button_umowy.BackColor = SystemColors.Control;
+            button.UseVisualStyleBackColor = false;
+            button.FlatStyle = FlatStyle.Flat;
+            button.FlatAppearance.BorderSize = 1;
+            button.FlatAppearance.MouseDownBackColor = Color.Gainsboro;
+            button.FlatAppearance.MouseOverBackColor = SystemColors.ControlLight;
+            button.BackColor = SystemColors.Control;
+            button.TabStop = false;
+        }
+
+        private void ResetujWygladPrzyciskow()
+        {
+            UstawNieaktywnyPrzycisk(button_listaosob);
+            UstawNieaktywnyPrzycisk(button_urlopy);
+            UstawNieaktywnyPrzycisk(button_szkolenia);
+            UstawNieaktywnyPrzycisk(button_badania);
+            UstawNieaktywnyPrzycisk(button_umowy);
+        }
+
+        private void UstawNieaktywnyPrzycisk(Button button)
+        {
+            button.BackColor = SystemColors.Control;
+            button.FlatAppearance.BorderSize = 1;
         }
 
         private void UstawAktywnyPrzycisk(Button aktywnyPrzycisk)
         {
-            ResetujKoloryPrzyciskow();
-            aktywnyPrzycisk.BackColor = Color.Silver;
+            ResetujWygladPrzyciskow();
+            aktywnyPrzycisk.BackColor = Color.Gainsboro;
+            aktywnyPrzycisk.FlatAppearance.BorderSize = 0;
         }
 
         private void OpenChildForm(Form childForm, bool dopasujDoCalegoPanelu = true)

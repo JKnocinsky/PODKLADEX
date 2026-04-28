@@ -54,7 +54,7 @@
             // 
             button_urlopy.FlatStyle = FlatStyle.Flat;
             button_urlopy.Font = new Font("Segoe UI", 14.25F);
-            button_urlopy.Location = new Point(300, 0);
+            button_urlopy.Location = new Point(302, 0);
             button_urlopy.Margin = new Padding(0);
             button_urlopy.Name = "button_urlopy";
             button_urlopy.Size = new Size(150, 50);
@@ -67,7 +67,7 @@
             // 
             button_szkolenia.FlatStyle = FlatStyle.Flat;
             button_szkolenia.Font = new Font("Segoe UI", 14.25F);
-            button_szkolenia.Location = new Point(450, 0);
+            button_szkolenia.Location = new Point(453, 0);
             button_szkolenia.Margin = new Padding(0);
             button_szkolenia.Name = "button_szkolenia";
             button_szkolenia.Size = new Size(150, 50);
@@ -80,7 +80,7 @@
             // 
             button_badania.FlatStyle = FlatStyle.Flat;
             button_badania.Font = new Font("Segoe UI", 14.25F);
-            button_badania.Location = new Point(600, 0);
+            button_badania.Location = new Point(604, 0);
             button_badania.Margin = new Padding(0);
             button_badania.Name = "button_badania";
             button_badania.Size = new Size(150, 50);
@@ -93,7 +93,7 @@
             // 
             button_umowy.FlatStyle = FlatStyle.Flat;
             button_umowy.Font = new Font("Segoe UI", 14.25F);
-            button_umowy.Location = new Point(150, 0);
+            button_umowy.Location = new Point(151, 0);
             button_umowy.Margin = new Padding(0);
             button_umowy.Name = "button_umowy";
             button_umowy.Size = new Size(150, 50);
@@ -106,7 +106,7 @@
             // 
             button_bilans.FlatStyle = FlatStyle.Flat;
             button_bilans.Font = new Font("Segoe UI", 14.25F);
-            button_bilans.Location = new Point(750, 0);
+            button_bilans.Location = new Point(755, 0);
             button_bilans.Margin = new Padding(0);
             button_bilans.Name = "button_bilans";
             button_bilans.Size = new Size(197, 50);
@@ -120,7 +120,7 @@
             panel_kadryfinanse.Location = new Point(0, 50);
             panel_kadryfinanse.Margin = new Padding(0);
             panel_kadryfinanse.Name = "panel_kadryfinanse";
-            panel_kadryfinanse.Size = new Size(947, 712);
+            panel_kadryfinanse.Size = new Size(950, 750);
             panel_kadryfinanse.TabIndex = 6;
             // 
             // Form_KadryFinanse
@@ -128,7 +128,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(947, 769);
+            ClientSize = new Size(953, 788);
             Controls.Add(button_badania);
             Controls.Add(panel_kadryfinanse);
             Controls.Add(button_bilans);
