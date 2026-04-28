@@ -1,20 +1,24 @@
 ﻿using PodkladexApp.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using PodkladexApp.Models;
 
 namespace PodkladexApp
 {
     public partial class Form_ListaOsob : Form
     {
         private PodkladexContext db;
+        private List<OsobaComboBoxItem> listaOsob;
+        private bool ladowanieComboBox = false;
+
+        private class OsobaComboBoxItem
+        {
+            public int IdOsoba { get; set; }
+            public string Imie { get; set; }
+            public string Nazwisko { get; set; }
+            public string PelnaNazwa { get; set; }
+        }
 
         public Form_ListaOsob()
         {
@@ -29,24 +33,36 @@ namespace PodkladexApp
         {
             try
             {
-                var osoby = db.Osoba
+                listaOsob = db.Osoba
                     .ToList()
-                    .Select(o => new
+                    .Select(o => new OsobaComboBoxItem
                     {
                         IdOsoba = o.IdOsoba,
+                        Imie = o.Imie,
+                        Nazwisko = o.Nazwisko,
                         PelnaNazwa = o.Imie + " " + o.Nazwisko
                     })
                     .ToList();
 
-                comboBox_idosoby.DataSource = osoby;
-                comboBox_idosoby.DisplayMember = "PelnaNazwa";
-                comboBox_idosoby.ValueMember = "IdOsoba";
-                comboBox_idosoby.SelectedIndex = -1;
+                UstawDaneComboBox(listaOsob);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Błąd ładowania osób z bazy:\n" + ex.Message);
             }
+        }
+
+        private void UstawDaneComboBox(List<OsobaComboBoxItem> osoby)
+        {
+            ladowanieComboBox = true;
+
+            comboBox_idosoby.DataSource = null;
+            comboBox_idosoby.DataSource = osoby;
+            comboBox_idosoby.DisplayMember = "PelnaNazwa";
+            comboBox_idosoby.ValueMember = "IdOsoba";
+            comboBox_idosoby.SelectedIndex = -1;
+
+            ladowanieComboBox = false;
         }
 
         private void ZaladujDaneOsobyDoPol(int idOsoby)
@@ -81,18 +97,57 @@ namespace PodkladexApp
 
         private void comboBox_idosoby_SelectedIndexChanged(object? sender, EventArgs e)
         {
+            if (ladowanieComboBox)
+                return;
+
             if (comboBox_idosoby.SelectedIndex == -1 || comboBox_idosoby.SelectedValue == null)
                 return;
 
             try
             {
-                int idOsoby = (int)comboBox_idosoby.SelectedValue;
-                ZaladujDaneOsobyDoPol(idOsoby);
+                if (comboBox_idosoby.SelectedValue is int idOsoby)
+                {
+                    ZaladujDaneOsobyDoPol(idOsoby);
+                }
             }
             catch
             {
                 // zabezpieczenie na moment bindowania DataSource
             }
+        }
+
+        private void comboBox_idosoby_TextUpdate(object sender, EventArgs e)
+        {
+            if (listaOsob == null)
+                return;
+
+            string wpisanyTekst = comboBox_idosoby.Text.Trim();
+
+            var przefiltrowanaLista = listaOsob
+                .Where(o =>
+                    o.Imie.Contains(wpisanyTekst, StringComparison.OrdinalIgnoreCase) ||
+                    o.Nazwisko.Contains(wpisanyTekst, StringComparison.OrdinalIgnoreCase) ||
+                    o.PelnaNazwa.Contains(wpisanyTekst, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            ladowanieComboBox = true;
+
+            comboBox_idosoby.DataSource = null;
+            comboBox_idosoby.DataSource = przefiltrowanaLista;
+            comboBox_idosoby.DisplayMember = "PelnaNazwa";
+            comboBox_idosoby.ValueMember = "IdOsoba";
+            comboBox_idosoby.SelectedIndex = -1;
+            comboBox_idosoby.Text = wpisanyTekst;
+            comboBox_idosoby.SelectionStart = comboBox_idosoby.Text.Length;
+            comboBox_idosoby.SelectionLength = 0;
+
+            if (przefiltrowanaLista.Count > 0)
+            {
+                comboBox_idosoby.DroppedDown = true;
+                Cursor.Current = Cursors.Default;
+            }
+
+            ladowanieComboBox = false;
         }
 
         private void btn_edytowanie_Click(object? sender, EventArgs e)
@@ -148,6 +203,7 @@ namespace PodkladexApp
                 MessageBox.Show("Błąd podczas edycji danych:\n" + ex.Message);
             }
         }
+
         private void btn_usuwanie_Click(object? sender, EventArgs e)
         {
             if (comboBox_idosoby.SelectedIndex == -1 || comboBox_idosoby.SelectedValue == null)
@@ -199,6 +255,8 @@ namespace PodkladexApp
                 WyczyscPola();
                 panel_daneosoby.Visible = false;
                 ZaladujOsobyDoComboBox();
+                comboBox_idosoby.Text = "";
+                comboBox_idosoby.SelectedIndex = -1;
             }
             catch (Exception ex)
             {
@@ -209,6 +267,7 @@ namespace PodkladexApp
                     MessageBoxIcon.Error);
             }
         }
+
         private void WyczyscPola()
         {
             textBox_imie.Text = "";
@@ -337,6 +396,7 @@ namespace PodkladexApp
 
                 ZaladujOsobyDoComboBox();
                 WyczyscPola();
+                comboBox_idosoby.Text = "";
                 comboBox_idosoby.SelectedIndex = -1;
                 panel_daneosoby.Visible = false;
             }
@@ -356,6 +416,7 @@ namespace PodkladexApp
                     MessageBoxIcon.Error);
             }
         }
+
         private bool CzyWszystkiePolaUzupelnione()
         {
             return !string.IsNullOrWhiteSpace(textBox_imie.Text)
@@ -371,8 +432,11 @@ namespace PodkladexApp
 
         private void btn_wyczysc_Click(object sender, EventArgs e)
         {
+            comboBox_idosoby.Text = "";
             comboBox_idosoby.SelectedIndex = -1;
+            UstawDaneComboBox(listaOsob);
             WyczyscPola();
+            panel_daneosoby.Visible = false;
         }
     }
 }

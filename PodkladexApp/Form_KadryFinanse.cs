@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PodkladexApp
@@ -50,6 +44,26 @@ namespace PodkladexApp
         private void button_listaosob_Click(object sender, EventArgs e)
         {
             OpenChildForm(new Form_ListaOsob());
+        }
+
+        private void button_umowy_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Form_Umowy());
+        }
+
+        private void button_szkolenia_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Form_Szkolenia());
+        }
+
+        private void button_badania_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Form_Badania());
+        }
+
+        private void button_urlopy_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Form_Urlopy());
         }
     }
 }
