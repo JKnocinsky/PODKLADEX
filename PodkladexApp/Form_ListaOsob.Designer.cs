@@ -48,7 +48,6 @@
             textBox_pesel = new TextBox();
             panel_daneosoby = new Panel();
             label_idosoby = new Label();
-            btn_dodawanie = new Button();
             btn_usuwanie = new Button();
             comboBox_idosoby = new ComboBox();
             button_Dodaj = new Button();
@@ -252,22 +251,11 @@
             label_idosoby.TabIndex = 0;
             label_idosoby.Text = "Osoba";
             // 
-            // btn_dodawanie
-            // 
-            btn_dodawanie.Location = new Point(49, 695);
-            btn_dodawanie.Margin = new Padding(3, 4, 3, 4);
-            btn_dodawanie.Name = "btn_dodawanie";
-            btn_dodawanie.Size = new Size(86, 31);
-            btn_dodawanie.TabIndex = 3;
-            btn_dodawanie.Text = "Dodawanie";
-            btn_dodawanie.UseVisualStyleBackColor = true;
-            btn_dodawanie.Click += btn_dodawanie_Click;
-            // 
             // btn_usuwanie
             // 
             btn_usuwanie.BackColor = SystemColors.ControlLight;
             btn_usuwanie.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold);
-            btn_usuwanie.Location = new Point(804, 695);
+            btn_usuwanie.Location = new Point(805, 693);
             btn_usuwanie.Margin = new Padding(3, 4, 3, 4);
             btn_usuwanie.Name = "btn_usuwanie";
             btn_usuwanie.Size = new Size(83, 45);
@@ -285,12 +273,13 @@
             comboBox_idosoby.Size = new Size(633, 28);
             comboBox_idosoby.TabIndex = 4;
             comboBox_idosoby.SelectedIndexChanged += comboBox_idosoby_SelectedIndexChanged;
+            comboBox_idosoby.TextUpdate += comboBox_idosoby_TextUpdate;
             // 
             // button_Dodaj
             // 
             button_Dodaj.BackColor = SystemColors.ControlLight;
             button_Dodaj.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold);
-            button_Dodaj.Location = new Point(49, 695);
+            button_Dodaj.Location = new Point(47, 693);
             button_Dodaj.Margin = new Padding(3, 4, 3, 4);
             button_Dodaj.Name = "button_Dodaj";
             button_Dodaj.Size = new Size(185, 45);
@@ -342,6 +331,8 @@
             panel1.AutoSize = true;
             panel1.BackColor = Color.WhiteSmoke;
             panel1.Controls.Add(button_ArrowL);
+            panel1.Controls.Add(button_Dodaj);
+            panel1.Controls.Add(btn_usuwanie);
             panel1.Controls.Add(label_idosoby);
             panel1.Controls.Add(button_ArrowR);
             panel1.Controls.Add(panel_daneosoby);
@@ -349,10 +340,10 @@
             panel1.Controls.Add(button_Wyczysc);
             panel1.Controls.Add(button_Edytuj);
             panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(2, 3);
-            panel1.Margin = new Padding(3, 4, 3, 4);
+            panel1.Location = new Point(2, 2);
+            panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(931, 897);
+            panel1.Size = new Size(931, 899);
             panel1.TabIndex = 6;
             // 
             // label1
@@ -385,13 +376,10 @@
             BackColor = Color.Black;
             ClientSize = new Size(935, 903);
             Controls.Add(comboBox_idosoby);
-            Controls.Add(btn_usuwanie);
-            Controls.Add(button_Dodaj);
-            Controls.Add(btn_dodawanie);
             Controls.Add(panel1);
             Margin = new Padding(3, 4, 3, 4);
             Name = "Form_ListaOsob";
-            Padding = new Padding(2, 3, 2, 3);
+            Padding = new Padding(2);
             Text = "Lista osób  ";
             panel_daneosoby.ResumeLayout(false);
             panel_daneosoby.PerformLayout();
@@ -423,7 +411,6 @@
         private TextBox textBox_pesel;
         private Panel panel_daneosoby;
         private Label label_idosoby;
-        private Button btn_dodawanie;
         private Button btn_usuwanie;
         private ComboBox comboBox_idosoby;
         private Button button_Dodaj;
