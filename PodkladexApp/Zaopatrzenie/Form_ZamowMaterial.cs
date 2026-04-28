@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace PodkladexApp.Zaopatrzenie
 {
-    public partial class Form_Konf_mat : Form
+    public partial class Form_ZamowMaterial: Form
     {
-        public Form_Konf_mat()
+        public Form_ZamowMaterial()
         {
             InitializeComponent();
         }

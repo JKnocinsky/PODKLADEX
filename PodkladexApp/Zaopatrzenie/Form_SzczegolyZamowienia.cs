@@ -16,6 +16,41 @@ namespace PodkladexApp.Zaopatrzenie
     public partial class Form_SzczegolyZamowienia : Form
     {
 
+        private void AktualizujWyliczonaCene()
+        {
+            // Pobieramy ID wybranego materiału z ComboBoxa
+            if (comboBox_Material.SelectedValue is int idMaterialu)
+            {
+                // 1. Łączymy SzczegolyDostawy z Dostawa (JOIN), 
+                // filtrujemy po materiale, sortujemy po dacie z tabeli Dostawa i wyciągamy cenę.
+                var ostatniaCenaZakupu = (from sd in _db.SzczegolyDostawy
+                                          join d in _db.Dostawa on sd.IdDostawa equals d.IdDostawa
+                                          where sd.IdMaterial == idMaterialu
+                                          orderby d.DataDostawy descending
+                                          select sd.Cena).FirstOrDefault();
+
+                if (ostatniaCenaZakupu > 0)
+                {
+                    decimal iloscKg = numericUpDown_Ilosc.Value;
+
+                    // TWOJE RÓWNANIE: (Cena za kg * 1.25 marży) * ilość w kg
+                    decimal surowaCena = (ostatniaCenaZakupu * 1.25m) * iloscKg;
+
+                    // NOWE: Zaokrąglenie do 2 miejsc po przecinku
+                    decimal wyliczonaCena = Math.Round(surowaCena, 2);
+
+                    // Ustawiamy wynik w polu ceny
+                    numericUpDown_Cena.Value = wyliczonaCena;
+                }
+                else
+                {
+                    // Jeśli materiał nigdy nie był kupowany
+                    numericUpDown_Cena.Value = 0;
+                }
+            }
+        }
+
+
         private void ZablokujReszteFormularza(bool stan)
         {
             comboBox_Material.Enabled = stan;
@@ -314,10 +349,17 @@ namespace PodkladexApp.Zaopatrzenie
                 comboBox_Material.DataSource = null;
             }
         }
-        
-        private void comboBox_Material_SelectedIndexChanged(object sender, EventArgs e) { }
-        private void numericUpDown_Ilosc_ValueChanged(object sender, EventArgs e) { }
+
+        private void comboBox_Material_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            AktualizujWyliczonaCene();
+        }
+        private void numericUpDown_Ilosc_ValueChanged(object sender, EventArgs e)
+        {
+            AktualizujWyliczonaCene();
+        }
         private void numericUpDown_Cena_ValueChanged(object sender, EventArgs e) { }
+
         private void textBox_Uwagi_TextChanged(object sender, EventArgs e) { }
         private void dataGridView_Koszyk_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
     }

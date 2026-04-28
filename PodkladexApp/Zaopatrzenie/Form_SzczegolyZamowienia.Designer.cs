@@ -40,6 +40,7 @@
             label_Liczba = new Label();
             label_Produkt = new Label();
             label_Materiał = new Label();
+            label_cena_pozycji = new Label();
             ((System.ComponentModel.ISupportInitialize)numericUpDown_Ilosc).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown_Cena).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView_Koszyk).BeginInit();
@@ -78,8 +79,10 @@
             // 
             // numericUpDown_Cena
             // 
+            numericUpDown_Cena.DecimalPlaces = 2;
             numericUpDown_Cena.Font = new Font("Segoe UI", 13.8F);
             numericUpDown_Cena.Location = new Point(485, 196);
+            numericUpDown_Cena.Maximum = new decimal(new int[] { 1874919423, 2328306, 0, 0 });
             numericUpDown_Cena.Name = "numericUpDown_Cena";
             numericUpDown_Cena.Size = new Size(216, 38);
             numericUpDown_Cena.TabIndex = 3;
@@ -166,11 +169,22 @@
             label_Materiał.TabIndex = 11;
             label_Materiał.Text = "Materiał";
             // 
+            // label_cena_pozycji
+            // 
+            label_cena_pozycji.AutoSize = true;
+            label_cena_pozycji.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
+            label_cena_pozycji.Location = new Point(400, 198);
+            label_cena_pozycji.Name = "label_cena_pozycji";
+            label_cena_pozycji.Size = new Size(67, 31);
+            label_cena_pozycji.TabIndex = 12;
+            label_cena_pozycji.Text = "Cena";
+            // 
             // Form_SzczegolyZamowienia
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1902, 1055);
+            Controls.Add(label_cena_pozycji);
             Controls.Add(label_Materiał);
             Controls.Add(label_Produkt);
             Controls.Add(label_Liczba);
@@ -207,5 +221,6 @@
         private Label label_Liczba;
         private Label label_Produkt;
         private Label label_Materiał;
+        private Label label_cena_pozycji;
     }
 }
