@@ -398,7 +398,6 @@ namespace PodkladexApp
                 WyczyscPola();
                 comboBox_idosoby.Text = "";
                 comboBox_idosoby.SelectedIndex = -1;
-                panel_daneosoby.Visible = false;
             }
             catch (Exception ex)
             {
