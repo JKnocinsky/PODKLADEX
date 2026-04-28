@@ -44,6 +44,8 @@
             label_datarozp = new Label();
             comboBox_Rodzaj_Urlopu = new ComboBox();
             comboBox_Dane_Pracownika = new ComboBox();
+            comboBox_filtrPracownik = new ComboBox();
+            label_filtr = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView_urlopy).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -97,6 +99,7 @@
             button_dodajWniosek.TabIndex = 4;
             button_dodajWniosek.Text = "Dodaj wniosek";
             button_dodajWniosek.UseVisualStyleBackColor = true;
+            button_dodajWniosek.Click += button_dodajWniosek_Click;
             // 
             // dateTimePicker_datarozp
             // 
@@ -145,7 +148,6 @@
             label_datazak.Size = new Size(173, 20);
             label_datazak.TabIndex = 4;
             label_datazak.Text = "Data zakończenia urlopu";
-            label_datazak.Click += label3_Click;
             // 
             // button_dodajWniosekdoZatwierdzenia
             // 
@@ -155,6 +157,7 @@
             button_dodajWniosekdoZatwierdzenia.TabIndex = 4;
             button_dodajWniosekdoZatwierdzenia.Text = "Dodaj wniosek do zatwierdzenia";
             button_dodajWniosekdoZatwierdzenia.UseVisualStyleBackColor = true;
+            button_dodajWniosekdoZatwierdzenia.Click += button_dodajWniosekdoZatwierdzenia_Click;
             // 
             // label_rodzajurlopu
             // 
@@ -190,7 +193,6 @@
             comboBox_Rodzaj_Urlopu.Name = "comboBox_Rodzaj_Urlopu";
             comboBox_Rodzaj_Urlopu.Size = new Size(596, 28);
             comboBox_Rodzaj_Urlopu.TabIndex = 3;
-            comboBox_Rodzaj_Urlopu.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             // 
             // comboBox_Dane_Pracownika
             // 
@@ -200,11 +202,31 @@
             comboBox_Dane_Pracownika.Size = new Size(596, 28);
             comboBox_Dane_Pracownika.TabIndex = 3;
             // 
+            // comboBox_filtrPracownik
+            // 
+            comboBox_filtrPracownik.FormattingEnabled = true;
+            comboBox_filtrPracownik.Location = new Point(445, 19);
+            comboBox_filtrPracownik.Name = "comboBox_filtrPracownik";
+            comboBox_filtrPracownik.Size = new Size(359, 28);
+            comboBox_filtrPracownik.TabIndex = 5;
+            comboBox_filtrPracownik.SelectedIndexChanged += comboBox_filtrPracownik_SelectedIndexChanged;
+            // 
+            // label_filtr
+            // 
+            label_filtr.AutoSize = true;
+            label_filtr.Location = new Point(346, 25);
+            label_filtr.Name = "label_filtr";
+            label_filtr.Size = new Size(79, 20);
+            label_filtr.TabIndex = 6;
+            label_filtr.Text = "Pracownik:";
+            // 
             // Form_Urlopy
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(919, 698);
+            Controls.Add(label_filtr);
+            Controls.Add(comboBox_filtrPracownik);
             Controls.Add(panel1);
             Controls.Add(button_dodajWniosek);
             Controls.Add(checkBox_tylkoNiezatwierdzone);
@@ -239,5 +261,7 @@
         private Label label_rodzajurlopu;
         private ComboBox comboBox_Rodzaj_Urlopu;
         private Button button_dodajWniosekdoZatwierdzenia;
+        private ComboBox comboBox_filtrPracownik;
+        private Label label_filtr;
     }
 }
