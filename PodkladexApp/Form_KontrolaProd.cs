@@ -19,5 +19,7 @@ namespace PodkladexApp
             InitializeComponent();
             _context = db;
         }
+
+
     }
 }

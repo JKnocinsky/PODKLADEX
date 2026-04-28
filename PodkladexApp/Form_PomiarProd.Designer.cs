@@ -39,13 +39,14 @@
             btn_PomiarProdDodaj = new Button();
             btn_PomiarProdEdytuj = new Button();
             btn_PomiarProdUsun = new Button();
+            btn_PomiarProdPotwierdz = new Button();
             SuspendLayout();
             // 
             // label_PomiarProdKont
             // 
             label_PomiarProdKont.AutoSize = true;
             label_PomiarProdKont.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_PomiarProdKont.Location = new Point(245, 64);
+            label_PomiarProdKont.Location = new Point(284, 64);
             label_PomiarProdKont.Name = "label_PomiarProdKont";
             label_PomiarProdKont.Size = new Size(274, 31);
             label_PomiarProdKont.TabIndex = 0;
@@ -55,7 +56,7 @@
             // 
             label_PomiarProdWlasc.AutoSize = true;
             label_PomiarProdWlasc.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_PomiarProdWlasc.Location = new Point(307, 160);
+            label_PomiarProdWlasc.Location = new Point(284, 160);
             label_PomiarProdWlasc.Name = "label_PomiarProdWlasc";
             label_PomiarProdWlasc.Size = new Size(131, 31);
             label_PomiarProdWlasc.TabIndex = 1;
@@ -65,7 +66,7 @@
             // 
             label_PomiarProdWartosc.AutoSize = true;
             label_PomiarProdWartosc.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_PomiarProdWartosc.Location = new Point(274, 256);
+            label_PomiarProdWartosc.Location = new Point(284, 249);
             label_PomiarProdWartosc.Name = "label_PomiarProdWartosc";
             label_PomiarProdWartosc.Size = new Size(206, 31);
             label_PomiarProdWartosc.TabIndex = 2;
@@ -75,7 +76,7 @@
             // 
             label_PomiarProdPomiar.AutoSize = true;
             label_PomiarProdPomiar.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_PomiarProdPomiar.Location = new Point(288, 351);
+            label_PomiarProdPomiar.Location = new Point(284, 351);
             label_PomiarProdPomiar.Name = "label_PomiarProdPomiar";
             label_PomiarProdPomiar.Size = new Size(168, 31);
             label_PomiarProdPomiar.TabIndex = 3;
@@ -117,36 +118,47 @@
             btn_PomiarProdDodaj.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
             btn_PomiarProdDodaj.Location = new Point(35, 34);
             btn_PomiarProdDodaj.Name = "btn_PomiarProdDodaj";
-            btn_PomiarProdDodaj.Size = new Size(153, 72);
+            btn_PomiarProdDodaj.Size = new Size(171, 73);
             btn_PomiarProdDodaj.TabIndex = 8;
-            btn_PomiarProdDodaj.Text = "Dodaj";
+            btn_PomiarProdDodaj.Text = "Dodaj pomiar";
             btn_PomiarProdDodaj.UseVisualStyleBackColor = true;
             // 
             // btn_PomiarProdEdytuj
             // 
             btn_PomiarProdEdytuj.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_PomiarProdEdytuj.Location = new Point(35, 143);
+            btn_PomiarProdEdytuj.Location = new Point(35, 132);
             btn_PomiarProdEdytuj.Name = "btn_PomiarProdEdytuj";
-            btn_PomiarProdEdytuj.Size = new Size(153, 72);
+            btn_PomiarProdEdytuj.Size = new Size(171, 73);
             btn_PomiarProdEdytuj.TabIndex = 9;
-            btn_PomiarProdEdytuj.Text = "Edytuj";
+            btn_PomiarProdEdytuj.Text = "Edytuj pomiar";
             btn_PomiarProdEdytuj.UseVisualStyleBackColor = true;
             // 
             // btn_PomiarProdUsun
             // 
             btn_PomiarProdUsun.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_PomiarProdUsun.Location = new Point(35, 252);
+            btn_PomiarProdUsun.Location = new Point(35, 230);
             btn_PomiarProdUsun.Name = "btn_PomiarProdUsun";
-            btn_PomiarProdUsun.Size = new Size(153, 72);
+            btn_PomiarProdUsun.Size = new Size(171, 73);
             btn_PomiarProdUsun.TabIndex = 10;
-            btn_PomiarProdUsun.Text = "Usuń";
+            btn_PomiarProdUsun.Text = "Usuń pomiar";
             btn_PomiarProdUsun.UseVisualStyleBackColor = true;
+            // 
+            // btn_PomiarProdPotwierdz
+            // 
+            btn_PomiarProdPotwierdz.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            btn_PomiarProdPotwierdz.Location = new Point(35, 328);
+            btn_PomiarProdPotwierdz.Name = "btn_PomiarProdPotwierdz";
+            btn_PomiarProdPotwierdz.Size = new Size(171, 73);
+            btn_PomiarProdPotwierdz.TabIndex = 11;
+            btn_PomiarProdPotwierdz.Text = "Potwierdź";
+            btn_PomiarProdPotwierdz.UseVisualStyleBackColor = true;
             // 
             // Form_PomiarProd
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1166, 620);
+            Controls.Add(btn_PomiarProdPotwierdz);
             Controls.Add(btn_PomiarProdUsun);
             Controls.Add(btn_PomiarProdEdytuj);
             Controls.Add(btn_PomiarProdDodaj);
@@ -177,5 +189,6 @@
         private Button btn_PomiarProdDodaj;
         private Button btn_PomiarProdEdytuj;
         private Button btn_PomiarProdUsun;
+        private Button btn_PomiarProdPotwierdz;
     }
 }

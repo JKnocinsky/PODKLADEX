@@ -39,6 +39,7 @@
             btn_PomiarMatDodaj = new Button();
             btn_PomiarMatEdytuj = new Button();
             btn_PomiarMatUsun = new Button();
+            btn_PomiarMatPotwierdz = new Button();
             SuspendLayout();
             // 
             // label_PomiarMatKontMat
@@ -115,7 +116,7 @@
             // btn_PomiarMatDodaj
             // 
             btn_PomiarMatDodaj.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_PomiarMatDodaj.Location = new Point(23, 31);
+            btn_PomiarMatDodaj.Location = new Point(28, 26);
             btn_PomiarMatDodaj.Name = "btn_PomiarMatDodaj";
             btn_PomiarMatDodaj.Size = new Size(173, 73);
             btn_PomiarMatDodaj.TabIndex = 8;
@@ -125,7 +126,7 @@
             // btn_PomiarMatEdytuj
             // 
             btn_PomiarMatEdytuj.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_PomiarMatEdytuj.Location = new Point(23, 132);
+            btn_PomiarMatEdytuj.Location = new Point(28, 128);
             btn_PomiarMatEdytuj.Name = "btn_PomiarMatEdytuj";
             btn_PomiarMatEdytuj.Size = new Size(173, 73);
             btn_PomiarMatEdytuj.TabIndex = 9;
@@ -135,18 +136,29 @@
             // btn_PomiarMatUsun
             // 
             btn_PomiarMatUsun.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_PomiarMatUsun.Location = new Point(23, 233);
+            btn_PomiarMatUsun.Location = new Point(28, 230);
             btn_PomiarMatUsun.Name = "btn_PomiarMatUsun";
             btn_PomiarMatUsun.Size = new Size(173, 73);
             btn_PomiarMatUsun.TabIndex = 10;
             btn_PomiarMatUsun.Text = "Usuń pomiar";
             btn_PomiarMatUsun.UseVisualStyleBackColor = true;
             // 
+            // btn_PomiarMatPotwierdz
+            // 
+            btn_PomiarMatPotwierdz.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            btn_PomiarMatPotwierdz.Location = new Point(28, 332);
+            btn_PomiarMatPotwierdz.Name = "btn_PomiarMatPotwierdz";
+            btn_PomiarMatPotwierdz.Size = new Size(173, 73);
+            btn_PomiarMatPotwierdz.TabIndex = 11;
+            btn_PomiarMatPotwierdz.Text = "Potwierdź";
+            btn_PomiarMatPotwierdz.UseVisualStyleBackColor = true;
+            // 
             // Form_PomiarMat
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1172, 602);
+            Controls.Add(btn_PomiarMatPotwierdz);
             Controls.Add(btn_PomiarMatUsun);
             Controls.Add(btn_PomiarMatEdytuj);
             Controls.Add(btn_PomiarMatDodaj);
@@ -177,5 +189,6 @@
         private Button btn_PomiarMatDodaj;
         private Button btn_PomiarMatEdytuj;
         private Button btn_PomiarMatUsun;
+        private Button btn_PomiarMatPotwierdz;
     }
 }
