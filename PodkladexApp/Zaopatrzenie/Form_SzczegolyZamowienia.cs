@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PodkladexApp.Models; // <-- Wymagane, aby widzieć klasy takie jak PodkladexContext, Produkt, Material
+using System.ComponentModel;
 
 namespace PodkladexApp.Zaopatrzenie
 {
@@ -15,6 +16,50 @@ namespace PodkladexApp.Zaopatrzenie
 
     public partial class Form_SzczegolyZamowienia : Form
     {
+        private void DopasujWymiaryKontrolki()
+        {
+            // ==================================================
+            // OŚ Y - WYSOKOŚĆ (Nagłówek + maksymalnie 20 wierszy)
+            // ==================================================
+            int calkowitaWysokosc = dataGridView_Koszyk.ColumnHeadersHeight;
+            int limitWierszy = 21;
+            int policzoneWiersze = 0;
+
+            foreach (DataGridViewRow wiersz in dataGridView_Koszyk.Rows)
+            {
+                if (wiersz.Visible)
+                {
+                    calkowitaWysokosc += wiersz.Height;
+                    policzoneWiersze++;
+
+                    // Jak doliczymy do 20 widocznych wierszy, przerywamy pętlę!
+                    // Tabela przestanie rosnąć w dół, a pojawi się suwak.
+                    if (policzoneWiersze >= limitWierszy)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            // ==================================================
+            // OŚ X - SZEROKOŚĆ (Widoczne kolumny + ewentualny nagłówek boczny)
+            // ==================================================
+            int calkowitaSzerokosc = dataGridView_Koszyk.RowHeadersVisible ? dataGridView_Koszyk.RowHeadersWidth : 0;
+            foreach (DataGridViewColumn kolumna in dataGridView_Koszyk.Columns)
+            {
+                if (kolumna.Visible)
+                {
+                    calkowitaSzerokosc += kolumna.Width;
+                }
+            }
+
+            // Upewniamy się, że suwaki są włączone (zazwyczaj są domyślnie, ale dla pewności)
+            dataGridView_Koszyk.ScrollBars = ScrollBars.Both;
+
+            // Ustawiamy nowe wymiary (dodajemy 2 piksele na grubość ramek obramowania)
+            dataGridView_Koszyk.Height = calkowitaWysokosc + 2;
+            dataGridView_Koszyk.Width = calkowitaSzerokosc + 2;
+        }
 
         private void AktualizujWyliczonaCene()
         {
@@ -49,6 +94,7 @@ namespace PodkladexApp.Zaopatrzenie
                 }
             }
         }
+        
 
 
         private void ZablokujReszteFormularza(bool stan)
@@ -75,7 +121,8 @@ namespace PodkladexApp.Zaopatrzenie
 
         // Deklaracja połączenia z bazą i listy (naszego koszyka)
         private PodkladexContext _db = new PodkladexContext();
-        private List<PozycjaKoszyka> _koszyk = new List<PozycjaKoszyka>();
+        // Zmieniamy na BindingList (wymaga using System.ComponentModel;)
+        private BindingList<PozycjaKoszyka> _koszyk = new BindingList<PozycjaKoszyka>();
 
         public Form_SzczegolyZamowienia()
         {
@@ -101,6 +148,22 @@ namespace PodkladexApp.Zaopatrzenie
 
             // (Opcjonalnie) Jeśli chcesz, żeby nagłówki kolumn też były większe i np. pogrubione:
             dataGridView_Koszyk.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+
+            // 1. Podpinamy naszą BindingList RAZ na zawsze
+            dataGridView_Koszyk.DataSource = _koszyk;
+
+
+            // 2. Ukrywamy całkowicie koszyk na starcie
+            dataGridView_Koszyk.Visible = false;
+
+            // 3. Wyłączamy pusty, szary wiersz na samym dole, który psuł obliczenia
+            dataGridView_Koszyk.AllowUserToAddRows = false;
+
+            // 4. Kolumny będą miały szerokość idealnie dopasowaną do tekstu (napisów)
+            dataGridView_Koszyk.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            // Reszta Twojego kodu...
+            ZablokujReszteFormularza(false);
         }
 
         private void button_DodajPozycje_Click(object sender, EventArgs e)
@@ -122,15 +185,12 @@ namespace PodkladexApp.Zaopatrzenie
 
                 // Dodanie do wewnętrznej listy
                 _koszyk.Add(nowaPozycja);
+                if (!dataGridView_Koszyk.Visible)
+                {
+                    dataGridView_Koszyk.Visible = true;
+                }
 
-                // Odświeżenie tabelki na ekranie (DataGridView)
-                dataGridView_Koszyk.DataSource = null;
-                dataGridView_Koszyk.DataSource = _koszyk;
-
-                // Czyszczenie pół dla wygody dodania kolejnego produktu
-                numericUpDown_Ilosc.Value = 1;
-                numericUpDown_Cena.Value = 0;
-                textBox_Uwagi.Clear();
+                DopasujWymiaryKontrolki();
             }
             else
             {
@@ -139,8 +199,23 @@ namespace PodkladexApp.Zaopatrzenie
             // UKRYWANIE IDENTYFIKATORÓW:
             dataGridView_Koszyk.DataSource = null;
             dataGridView_Koszyk.DataSource = _koszyk;
+            // 1. Wyłączamy auto-rozszerzanie dla uwag, żeby kolumna nie puchła
+            dataGridView_Koszyk.Columns["Uwagi"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
 
-            // Zmiana nazw i rozszerzanie po zbindowaniu danych:
+            // 2. Ustawiamy sztywną, zgrabną szerokość
+            dataGridView_Koszyk.Columns["Uwagi"].Width = 200;
+
+            // ==========================================
+            // TO JEST KLUCZ DO WIELOKROPKA I DYMKÓW:
+            // ==========================================
+
+            // 3. Twardo wyłączamy zawijanie tekstu. 
+            // Gdy to zrobisz, kontrolka zorientuje się, że tekst się nie mieści i SAMA narysuje "..." na końcu.
+            dataGridView_Koszyk.Columns["Uwagi"].DefaultCellStyle.WrapMode = DataGridViewTriState.False;
+
+            // 4. Upewniamy się, że podgląd w dymkach jest włączony na poziomie całej tabeli
+            // (Domyślnie jest to 'true', ale dodajemy dla 100% pewności)
+            dataGridView_Koszyk.ShowCellToolTips = true;
             if (dataGridView_Koszyk.Columns["NazwaProduktu"] != null)
             {
                 dataGridView_Koszyk.Columns["NazwaProduktu"].HeaderText = "Produkt";
@@ -151,12 +226,28 @@ namespace PodkladexApp.Zaopatrzenie
                 dataGridView_Koszyk.Columns["NazwaMaterialu"].HeaderText = "Materiał";
             }
 
+            if (dataGridView_Koszyk.Columns["Ilosc"] != null)
+            {
+                dataGridView_Koszyk.Columns["Ilosc"].HeaderText = "Liczba [kg]";
+            }
+
+            if (dataGridView_Koszyk.Columns["Cena"] != null)
+            {
+                dataGridView_Koszyk.Columns["Cena"].HeaderText = "Cena [zł]";
+            }
+
             // Ukrywanie ID (z poprzedniego kroku)
             dataGridView_Koszyk.Columns["IdProduktu"].Visible = false;
             dataGridView_Koszyk.Columns["IdMaterialu"].Visible = false;
 
-            // Automatyczne dopasowanie szerokości wszystkich kolumn
-            dataGridView_Koszyk.AutoResizeColumns();
+            // Dopasowujemy wielkość (musi być po .Visible = true, żeby WinForms poprawnie zliczył pixele)
+            DopasujWymiaryKontrolki();
+
+            // Czyszczenie pól dla wygody
+            numericUpDown_Ilosc.Value = 1;
+            numericUpDown_Cena.Value = 0;
+            textBox_Uwagi.Clear();
+
         }
 
         private void button_PrzejdzDalej_Click(object sender, EventArgs e)
@@ -184,7 +275,7 @@ namespace PodkladexApp.Zaopatrzenie
             // ====================================================
 
             // 3. Tworzymy KROK 2 (Dane klienta) - TEN KOD JUŻ MASZ
-            Form_Zamowienie formKlient = new Form_Zamowienie(_koszyk);
+            Form_Zamowienie formKlient = new Form_Zamowienie(_koszyk.ToList());
             Control kontenerRodzica = this.Parent;
 
             if (kontenerRodzica != null)

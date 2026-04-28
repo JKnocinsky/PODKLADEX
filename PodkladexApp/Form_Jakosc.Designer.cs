@@ -41,9 +41,10 @@
             // btn_Material
             // 
             btn_Material.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_Material.Location = new Point(12, 12);
+            btn_Material.Location = new Point(14, 16);
+            btn_Material.Margin = new Padding(3, 4, 3, 4);
             btn_Material.Name = "btn_Material";
-            btn_Material.Size = new Size(179, 62);
+            btn_Material.Size = new Size(223, 88);
             btn_Material.TabIndex = 0;
             btn_Material.Text = "Dodaj materiał";
             btn_Material.UseVisualStyleBackColor = true;
@@ -52,19 +53,22 @@
             // btn_PomiarMat
             // 
             btn_PomiarMat.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_PomiarMat.Location = new Point(12, 261);
+            btn_PomiarMat.Location = new Point(14, 346);
+            btn_PomiarMat.Margin = new Padding(3, 4, 3, 4);
             btn_PomiarMat.Name = "btn_PomiarMat";
-            btn_PomiarMat.Size = new Size(179, 62);
+            btn_PomiarMat.Size = new Size(223, 88);
             btn_PomiarMat.TabIndex = 1;
             btn_PomiarMat.Text = "Dodaj pomiar materiału";
             btn_PomiarMat.UseVisualStyleBackColor = true;
+            btn_PomiarMat.Click += btn_PomiarMat_Click;
             // 
             // btn_KontrolaMat
             // 
             btn_KontrolaMat.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_KontrolaMat.Location = new Point(12, 95);
+            btn_KontrolaMat.Location = new Point(14, 126);
+            btn_KontrolaMat.Margin = new Padding(3, 4, 3, 4);
             btn_KontrolaMat.Name = "btn_KontrolaMat";
-            btn_KontrolaMat.Size = new Size(179, 62);
+            btn_KontrolaMat.Size = new Size(223, 88);
             btn_KontrolaMat.TabIndex = 2;
             btn_KontrolaMat.Text = "Dodaj kontrole jakości materiałów";
             btn_KontrolaMat.UseVisualStyleBackColor = true;
@@ -73,55 +77,62 @@
             // btn_NormaMat
             // 
             btn_NormaMat.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_NormaMat.Location = new Point(12, 427);
+            btn_NormaMat.Location = new Point(14, 566);
+            btn_NormaMat.Margin = new Padding(3, 4, 3, 4);
             btn_NormaMat.Name = "btn_NormaMat";
-            btn_NormaMat.Size = new Size(179, 62);
+            btn_NormaMat.Size = new Size(223, 88);
             btn_NormaMat.TabIndex = 3;
             btn_NormaMat.Text = "Dodaj normę jakości materiału";
             btn_NormaMat.UseVisualStyleBackColor = true;
             // 
             // panel_Jakosc
             // 
-            panel_Jakosc.Location = new Point(213, 12);
+            panel_Jakosc.Location = new Point(243, 16);
+            panel_Jakosc.Margin = new Padding(3, 4, 3, 4);
             panel_Jakosc.Name = "panel_Jakosc";
-            panel_Jakosc.Size = new Size(979, 834);
+            panel_Jakosc.Size = new Size(1119, 1112);
             panel_Jakosc.TabIndex = 4;
             // 
             // btn_KontrolaProd
             // 
             btn_KontrolaProd.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_KontrolaProd.Location = new Point(12, 178);
+            btn_KontrolaProd.Location = new Point(14, 236);
+            btn_KontrolaProd.Margin = new Padding(3, 4, 3, 4);
             btn_KontrolaProd.Name = "btn_KontrolaProd";
-            btn_KontrolaProd.Size = new Size(179, 62);
+            btn_KontrolaProd.Size = new Size(223, 88);
             btn_KontrolaProd.TabIndex = 5;
             btn_KontrolaProd.Text = "Dodaj kontrole jakości produków";
             btn_KontrolaProd.UseVisualStyleBackColor = true;
+            btn_KontrolaProd.Click += btn_KontrolaProd_Click;
             // 
             // btn_PomiarProd
             // 
             btn_PomiarProd.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_PomiarProd.Location = new Point(12, 344);
+            btn_PomiarProd.Location = new Point(14, 456);
+            btn_PomiarProd.Margin = new Padding(3, 4, 3, 4);
             btn_PomiarProd.Name = "btn_PomiarProd";
-            btn_PomiarProd.Size = new Size(179, 62);
+            btn_PomiarProd.Size = new Size(223, 88);
             btn_PomiarProd.TabIndex = 6;
             btn_PomiarProd.Text = "Dodaj pomiar produktu";
             btn_PomiarProd.UseVisualStyleBackColor = true;
+            btn_PomiarProd.Click += btn_PomiarProd_Click;
             // 
             // btn_NormaProd
             // 
             btn_NormaProd.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_NormaProd.Location = new Point(12, 508);
+            btn_NormaProd.Location = new Point(14, 676);
+            btn_NormaProd.Margin = new Padding(3, 4, 3, 4);
             btn_NormaProd.Name = "btn_NormaProd";
-            btn_NormaProd.Size = new Size(179, 62);
+            btn_NormaProd.Size = new Size(223, 88);
             btn_NormaProd.TabIndex = 7;
             btn_NormaProd.Text = "Dodaj normę jakości produktu";
             btn_NormaProd.UseVisualStyleBackColor = true;
             // 
             // Form_Jakosc
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1198, 852);
+            ClientSize = new Size(1369, 1055);
             Controls.Add(btn_NormaProd);
             Controls.Add(btn_PomiarProd);
             Controls.Add(btn_KontrolaProd);
@@ -130,6 +141,7 @@
             Controls.Add(btn_KontrolaMat);
             Controls.Add(btn_PomiarMat);
             Controls.Add(btn_Material);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Form_Jakosc";
             Text = "Form_Jakosc";
             ResumeLayout(false);

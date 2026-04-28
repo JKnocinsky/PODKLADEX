@@ -43,62 +43,67 @@
             // 
             label_NazwaMat.AutoSize = true;
             label_NazwaMat.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_NazwaMat.Location = new Point(102, 54);
+            label_NazwaMat.Location = new Point(245, 53);
             label_NazwaMat.Name = "label_NazwaMat";
-            label_NazwaMat.Size = new Size(163, 25);
+            label_NazwaMat.Size = new Size(204, 32);
             label_NazwaMat.TabIndex = 0;
             label_NazwaMat.Text = "Nazwa materiału: ";
             // 
             // textBox_DodajNazweMat
             // 
-            textBox_DodajNazweMat.Location = new Point(276, 56);
+            textBox_DodajNazweMat.Location = new Point(469, 58);
+            textBox_DodajNazweMat.Margin = new Padding(3, 4, 3, 4);
             textBox_DodajNazweMat.Name = "textBox_DodajNazweMat";
-            textBox_DodajNazweMat.Size = new Size(346, 23);
+            textBox_DodajNazweMat.Size = new Size(395, 27);
             textBox_DodajNazweMat.TabIndex = 1;
             // 
             // label_OpisMat
             // 
             label_OpisMat.AutoSize = true;
             label_OpisMat.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_OpisMat.Location = new Point(102, 110);
+            label_OpisMat.Location = new Point(245, 128);
             label_OpisMat.Name = "label_OpisMat";
-            label_OpisMat.Size = new Size(139, 25);
+            label_OpisMat.Size = new Size(175, 32);
             label_OpisMat.TabIndex = 2;
             label_OpisMat.Text = "Opis materiału:";
             // 
             // textBox_DodajOpisMat
             // 
-            textBox_DodajOpisMat.Location = new Point(276, 112);
+            textBox_DodajOpisMat.Location = new Point(469, 128);
+            textBox_DodajOpisMat.Margin = new Padding(3, 4, 3, 4);
             textBox_DodajOpisMat.Name = "textBox_DodajOpisMat";
-            textBox_DodajOpisMat.Size = new Size(346, 23);
+            textBox_DodajOpisMat.Size = new Size(395, 27);
             textBox_DodajOpisMat.TabIndex = 3;
             // 
             // btn_DodajMaterial
             // 
             btn_DodajMaterial.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_DodajMaterial.Location = new Point(46, 256);
+            btn_DodajMaterial.Location = new Point(12, 27);
+            btn_DodajMaterial.Margin = new Padding(3, 4, 3, 4);
             btn_DodajMaterial.Name = "btn_DodajMaterial";
-            btn_DodajMaterial.Size = new Size(167, 61);
+            btn_DodajMaterial.Size = new Size(191, 81);
             btn_DodajMaterial.TabIndex = 4;
-            btn_DodajMaterial.Text = "Dodaj Material";
+            btn_DodajMaterial.Text = "Dodaj material";
             btn_DodajMaterial.UseVisualStyleBackColor = true;
             // 
             // btn_EdytujMat
             // 
             btn_EdytujMat.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_EdytujMat.Location = new Point(276, 254);
+            btn_EdytujMat.Location = new Point(12, 139);
+            btn_EdytujMat.Margin = new Padding(3, 4, 3, 4);
             btn_EdytujMat.Name = "btn_EdytujMat";
-            btn_EdytujMat.Size = new Size(167, 63);
+            btn_EdytujMat.Size = new Size(191, 84);
             btn_EdytujMat.TabIndex = 5;
-            btn_EdytujMat.Text = "Edytuj Materiał";
+            btn_EdytujMat.Text = "Edytuj materiał";
             btn_EdytujMat.UseVisualStyleBackColor = true;
             // 
             // btn_UsunMat
             // 
             btn_UsunMat.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_UsunMat.Location = new Point(513, 254);
+            btn_UsunMat.Location = new Point(12, 254);
+            btn_UsunMat.Margin = new Padding(3, 4, 3, 4);
             btn_UsunMat.Name = "btn_UsunMat";
-            btn_UsunMat.Size = new Size(167, 61);
+            btn_UsunMat.Size = new Size(191, 81);
             btn_UsunMat.TabIndex = 6;
             btn_UsunMat.Text = "Usuń materiał";
             btn_UsunMat.UseVisualStyleBackColor = true;
@@ -106,26 +111,27 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(353, 180);
+            comboBox1.Location = new Point(469, 221);
+            comboBox1.Margin = new Padding(3, 4, 3, 4);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(269, 23);
+            comboBox1.Size = new Size(395, 28);
             comboBox1.TabIndex = 7;
             // 
             // label_DodajUsun
             // 
             label_DodajUsun.AutoSize = true;
             label_DodajUsun.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_DodajUsun.Location = new Point(102, 175);
+            label_DodajUsun.Location = new Point(245, 217);
             label_DodajUsun.Name = "label_DodajUsun";
-            label_DodajUsun.Size = new Size(243, 25);
+            label_DodajUsun.Size = new Size(186, 32);
             label_DodajUsun.TabIndex = 8;
-            label_DodajUsun.Text = "Wybierz istniejący materiał ";
+            label_DodajUsun.Text = "Lista materiałów";
             // 
             // Form_Material
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(914, 600);
             Controls.Add(label_DodajUsun);
             Controls.Add(comboBox1);
             Controls.Add(btn_UsunMat);
@@ -135,6 +141,7 @@
             Controls.Add(label_OpisMat);
             Controls.Add(textBox_DodajNazweMat);
             Controls.Add(label_NazwaMat);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Form_Material";
             Text = "Form_Material";
             ResumeLayout(false);
