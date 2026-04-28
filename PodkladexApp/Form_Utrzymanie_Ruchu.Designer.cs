@@ -42,10 +42,9 @@
             // button_otworz_czesci_zamienne
             // 
             button_otworz_czesci_zamienne.Font = new Font("Segoe UI", 14F);
-            button_otworz_czesci_zamienne.Location = new Point(14, 8);
-            button_otworz_czesci_zamienne.Margin = new Padding(3, 4, 3, 4);
+            button_otworz_czesci_zamienne.Location = new Point(12, 6);
             button_otworz_czesci_zamienne.Name = "button_otworz_czesci_zamienne";
-            button_otworz_czesci_zamienne.Size = new Size(242, 73);
+            button_otworz_czesci_zamienne.Size = new Size(212, 55);
             button_otworz_czesci_zamienne.TabIndex = 1;
             button_otworz_czesci_zamienne.Text = "Części zamienne";
             button_otworz_czesci_zamienne.UseVisualStyleBackColor = true;
@@ -54,10 +53,9 @@
             // button_otworz_awaria
             // 
             button_otworz_awaria.Font = new Font("Segoe UI", 14F);
-            button_otworz_awaria.Location = new Point(14, 89);
-            button_otworz_awaria.Margin = new Padding(3, 4, 3, 4);
+            button_otworz_awaria.Location = new Point(12, 67);
             button_otworz_awaria.Name = "button_otworz_awaria";
-            button_otworz_awaria.Size = new Size(242, 73);
+            button_otworz_awaria.Size = new Size(212, 55);
             button_otworz_awaria.TabIndex = 2;
             button_otworz_awaria.Text = "Awaria";
             button_otworz_awaria.UseVisualStyleBackColor = true;
@@ -66,10 +64,9 @@
             // button_otworz_obsluga
             // 
             button_otworz_obsluga.Font = new Font("Segoe UI", 14F);
-            button_otworz_obsluga.Location = new Point(14, 171);
-            button_otworz_obsluga.Margin = new Padding(3, 4, 3, 4);
+            button_otworz_obsluga.Location = new Point(12, 128);
             button_otworz_obsluga.Name = "button_otworz_obsluga";
-            button_otworz_obsluga.Size = new Size(242, 73);
+            button_otworz_obsluga.Size = new Size(212, 55);
             button_otworz_obsluga.TabIndex = 3;
             button_otworz_obsluga.Text = "Obsługa";
             button_otworz_obsluga.UseVisualStyleBackColor = true;
@@ -78,10 +75,9 @@
             // button_otworz_normy_eksplatacyjne
             // 
             button_otworz_normy_eksplatacyjne.Font = new Font("Segoe UI", 14F);
-            button_otworz_normy_eksplatacyjne.Location = new Point(14, 335);
-            button_otworz_normy_eksplatacyjne.Margin = new Padding(3, 4, 3, 4);
+            button_otworz_normy_eksplatacyjne.Location = new Point(12, 251);
             button_otworz_normy_eksplatacyjne.Name = "button_otworz_normy_eksplatacyjne";
-            button_otworz_normy_eksplatacyjne.Size = new Size(242, 73);
+            button_otworz_normy_eksplatacyjne.Size = new Size(212, 55);
             button_otworz_normy_eksplatacyjne.TabIndex = 5;
             button_otworz_normy_eksplatacyjne.Text = "Normy eksploatacyjne";
             button_otworz_normy_eksplatacyjne.UseVisualStyleBackColor = true;
@@ -90,10 +86,9 @@
             // button_otworz_rodzaj_obslugi
             // 
             button_otworz_rodzaj_obslugi.Font = new Font("Segoe UI", 14F);
-            button_otworz_rodzaj_obslugi.Location = new Point(14, 252);
-            button_otworz_rodzaj_obslugi.Margin = new Padding(3, 4, 3, 4);
+            button_otworz_rodzaj_obslugi.Location = new Point(12, 189);
             button_otworz_rodzaj_obslugi.Name = "button_otworz_rodzaj_obslugi";
-            button_otworz_rodzaj_obslugi.Size = new Size(242, 73);
+            button_otworz_rodzaj_obslugi.Size = new Size(212, 55);
             button_otworz_rodzaj_obslugi.TabIndex = 6;
             button_otworz_rodzaj_obslugi.Text = "Rodzaj obsługi";
             button_otworz_rodzaj_obslugi.UseVisualStyleBackColor = true;
@@ -102,10 +97,9 @@
             // button_otworz_gwarancja
             // 
             button_otworz_gwarancja.Font = new Font("Segoe UI", 14F);
-            button_otworz_gwarancja.Location = new Point(14, 416);
-            button_otworz_gwarancja.Margin = new Padding(3, 4, 3, 4);
+            button_otworz_gwarancja.Location = new Point(12, 312);
             button_otworz_gwarancja.Name = "button_otworz_gwarancja";
-            button_otworz_gwarancja.Size = new Size(242, 73);
+            button_otworz_gwarancja.Size = new Size(212, 55);
             button_otworz_gwarancja.TabIndex = 7;
             button_otworz_gwarancja.Text = "Gwarancja";
             button_otworz_gwarancja.UseVisualStyleBackColor = true;
@@ -113,19 +107,17 @@
             // 
             // panel_UR
             // 
-            panel_UR.Location = new Point(263, -4);
-            panel_UR.Margin = new Padding(3, 4, 3, 4);
+            panel_UR.Location = new Point(230, -3);
             panel_UR.Name = "panel_UR";
-            panel_UR.Size = new Size(1912, 1547);
+            panel_UR.Size = new Size(1673, 1160);
             panel_UR.TabIndex = 8;
             // 
             // button_otworz_napawy
             // 
             button_otworz_napawy.Font = new Font("Segoe UI", 14F);
-            button_otworz_napawy.Location = new Point(15, 497);
-            button_otworz_napawy.Margin = new Padding(3, 4, 3, 4);
+            button_otworz_napawy.Location = new Point(13, 373);
             button_otworz_napawy.Name = "button_otworz_napawy";
-            button_otworz_napawy.Size = new Size(242, 73);
+            button_otworz_napawy.Size = new Size(212, 55);
             button_otworz_napawy.TabIndex = 9;
             button_otworz_napawy.Text = "Naprawy";
             button_otworz_napawy.UseVisualStyleBackColor = true;
@@ -134,10 +126,9 @@
             // button_otworz_ocena_stanu
             // 
             button_otworz_ocena_stanu.Font = new Font("Segoe UI", 14F);
-            button_otworz_ocena_stanu.Location = new Point(14, 578);
-            button_otworz_ocena_stanu.Margin = new Padding(3, 4, 3, 4);
+            button_otworz_ocena_stanu.Location = new Point(12, 434);
             button_otworz_ocena_stanu.Name = "button_otworz_ocena_stanu";
-            button_otworz_ocena_stanu.Size = new Size(242, 73);
+            button_otworz_ocena_stanu.Size = new Size(212, 58);
             button_otworz_ocena_stanu.TabIndex = 10;
             button_otworz_ocena_stanu.Text = "Ocena stanu technicznego";
             button_otworz_ocena_stanu.UseVisualStyleBackColor = true;
@@ -145,9 +136,9 @@
             // 
             // Form_Utrzymanie_Ruchu
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1924, 1055);
+            ClientSize = new Size(1684, 791);
             Controls.Add(button_otworz_ocena_stanu);
             Controls.Add(button_otworz_napawy);
             Controls.Add(panel_UR);
@@ -157,7 +148,6 @@
             Controls.Add(button_otworz_obsluga);
             Controls.Add(button_otworz_awaria);
             Controls.Add(button_otworz_czesci_zamienne);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "Form_Utrzymanie_Ruchu";
             Text = "Utrzymanie_Ruchu";
             ResumeLayout(false);
