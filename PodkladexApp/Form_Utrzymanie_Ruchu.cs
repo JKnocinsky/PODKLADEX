@@ -18,7 +18,7 @@ namespace PodkladexApp
         public Form_Utrzymanie_Ruchu(Models.PodkladexContext db)
         {
             InitializeComponent();
-            context= db;
+            context = db;
         }
 
         private void button_otworz_czesci_zamienne_Click(object sender, EventArgs e)
@@ -36,8 +36,8 @@ namespace PodkladexApp
         private void button_otworz_obsluga_Click(object sender, EventArgs e)
         {
             Form_Obsluga formobsluga = new Form_Obsluga(context);
-            OpenChildForm(formobsluga); 
-            
+            OpenChildForm(formobsluga);
+
         }
 
         private void button_otworz_rodzaj_obslugi_Click(object sender, EventArgs e)
@@ -57,6 +57,18 @@ namespace PodkladexApp
             Form_Gwarancja formGwarancja = new Form_Gwarancja(context);
             OpenChildForm(formGwarancja);
         }
+        private void button_otworz_napawy_Click(object sender, EventArgs e)
+        {
+            Form_Naprawy formnaprawy = new Form_Naprawy(context);
+            OpenChildForm(formnaprawy);
+        }
+        private void button_otworz_ocena_stanu_Click(object sender, EventArgs e)
+        {
+            Form_ocena_stanu formOcenaStanu = new Form_ocena_stanu(context);
+            OpenChildForm(formOcenaStanu); 
+        }
+
+
         private void OpenChildForm(Form childForm)
         {
             if (activeForm != null)

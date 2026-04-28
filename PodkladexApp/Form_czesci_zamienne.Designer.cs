@@ -35,14 +35,20 @@
             button_usun_czesc = new Button();
             comboBox_lista_czesci = new ComboBox();
             label_listaczesc = new Label();
+            panel_nazwa = new Panel();
+            panel_lista = new Panel();
+            button_potwierdz = new Button();
+            panel_nazwa.SuspendLayout();
+            panel_lista.SuspendLayout();
             SuspendLayout();
             // 
             // button_dodaj_czesc
             // 
             button_dodaj_czesc.Font = new Font("Segoe UI", 14F);
-            button_dodaj_czesc.Location = new Point(12, 12);
+            button_dodaj_czesc.Location = new Point(14, 16);
+            button_dodaj_czesc.Margin = new Padding(3, 4, 3, 4);
             button_dodaj_czesc.Name = "button_dodaj_czesc";
-            button_dodaj_czesc.Size = new Size(129, 55);
+            button_dodaj_czesc.Size = new Size(190, 73);
             button_dodaj_czesc.TabIndex = 0;
             button_dodaj_czesc.Text = "Dodaj część";
             button_dodaj_czesc.UseVisualStyleBackColor = true;
@@ -51,18 +57,19 @@
             // textBox_nazwa_czesci
             // 
             textBox_nazwa_czesci.Font = new Font("Segoe UI", 14F);
-            textBox_nazwa_czesci.Location = new Point(147, 34);
+            textBox_nazwa_czesci.Location = new Point(3, 44);
+            textBox_nazwa_czesci.Margin = new Padding(3, 4, 3, 4);
             textBox_nazwa_czesci.Name = "textBox_nazwa_czesci";
-            textBox_nazwa_czesci.Size = new Size(361, 32);
+            textBox_nazwa_czesci.Size = new Size(412, 39);
             textBox_nazwa_czesci.TabIndex = 1;
             // 
             // label_dodajczesc
             // 
             label_dodajczesc.AutoSize = true;
             label_dodajczesc.Font = new Font("Segoe UI", 14F);
-            label_dodajczesc.Location = new Point(147, 8);
+            label_dodajczesc.Location = new Point(3, 10);
             label_dodajczesc.Name = "label_dodajczesc";
-            label_dodajczesc.Size = new Size(124, 25);
+            label_dodajczesc.Size = new Size(153, 32);
             label_dodajczesc.TabIndex = 2;
             label_dodajczesc.Text = "Nazwa części";
             label_dodajczesc.Click += label_dodajczesc_Click;
@@ -70,9 +77,10 @@
             // button_edytuj_czesc
             // 
             button_edytuj_czesc.Font = new Font("Segoe UI", 14F);
-            button_edytuj_czesc.Location = new Point(12, 134);
+            button_edytuj_czesc.Location = new Point(14, 179);
+            button_edytuj_czesc.Margin = new Padding(3, 4, 3, 4);
             button_edytuj_czesc.Name = "button_edytuj_czesc";
-            button_edytuj_czesc.Size = new Size(129, 55);
+            button_edytuj_czesc.Size = new Size(190, 73);
             button_edytuj_czesc.TabIndex = 3;
             button_edytuj_czesc.Text = "Edytuj część";
             button_edytuj_czesc.UseVisualStyleBackColor = true;
@@ -81,9 +89,10 @@
             // button_usun_czesc
             // 
             button_usun_czesc.Font = new Font("Segoe UI", 14F);
-            button_usun_czesc.Location = new Point(12, 73);
+            button_usun_czesc.Location = new Point(14, 97);
+            button_usun_czesc.Margin = new Padding(3, 4, 3, 4);
             button_usun_czesc.Name = "button_usun_czesc";
-            button_usun_czesc.Size = new Size(129, 55);
+            button_usun_czesc.Size = new Size(190, 73);
             button_usun_czesc.TabIndex = 6;
             button_usun_czesc.Text = "Usuń część";
             button_usun_czesc.UseVisualStyleBackColor = true;
@@ -94,9 +103,10 @@
             comboBox_lista_czesci.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox_lista_czesci.Font = new Font("Segoe UI", 14F);
             comboBox_lista_czesci.FormattingEnabled = true;
-            comboBox_lista_czesci.Location = new Point(147, 97);
+            comboBox_lista_czesci.Location = new Point(0, 36);
+            comboBox_lista_czesci.Margin = new Padding(3, 4, 3, 4);
             comboBox_lista_czesci.Name = "comboBox_lista_czesci";
-            comboBox_lista_czesci.Size = new Size(361, 33);
+            comboBox_lista_czesci.Size = new Size(412, 39);
             comboBox_lista_czesci.TabIndex = 7;
             comboBox_lista_czesci.SelectedIndexChanged += comboBox_lista_czesci_SelectedIndexChanged;
             // 
@@ -104,28 +114,61 @@
             // 
             label_listaczesc.AutoSize = true;
             label_listaczesc.Font = new Font("Segoe UI", 14F);
-            label_listaczesc.Location = new Point(147, 69);
+            label_listaczesc.Location = new Point(3, 0);
             label_listaczesc.Name = "label_listaczesc";
-            label_listaczesc.Size = new Size(105, 25);
+            label_listaczesc.Size = new Size(130, 32);
             label_listaczesc.TabIndex = 8;
             label_listaczesc.Text = "Lista części";
             // 
+            // panel_nazwa
+            // 
+            panel_nazwa.Controls.Add(textBox_nazwa_czesci);
+            panel_nazwa.Controls.Add(label_dodajczesc);
+            panel_nazwa.Location = new Point(210, 16);
+            panel_nazwa.Name = "panel_nazwa";
+            panel_nazwa.Size = new Size(454, 90);
+            panel_nazwa.TabIndex = 9;
+            // 
+            // panel_lista
+            // 
+            panel_lista.Controls.Add(comboBox_lista_czesci);
+            panel_lista.Controls.Add(label_listaczesc);
+            panel_lista.Location = new Point(210, 112);
+            panel_lista.Name = "panel_lista";
+            panel_lista.Size = new Size(454, 87);
+            panel_lista.TabIndex = 10;
+            // 
+            // button_potwierdz
+            // 
+            button_potwierdz.Font = new Font("Segoe UI", 14F);
+            button_potwierdz.Location = new Point(14, 260);
+            button_potwierdz.Margin = new Padding(3, 4, 3, 4);
+            button_potwierdz.Name = "button_potwierdz";
+            button_potwierdz.Size = new Size(190, 73);
+            button_potwierdz.TabIndex = 11;
+            button_potwierdz.Text = "Potwierdź";
+            button_potwierdz.UseVisualStyleBackColor = true;
+            button_potwierdz.Click += button_potwierdz_Click;
+            // 
             // Form_czesci_zamienne
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(label_listaczesc);
-            Controls.Add(comboBox_lista_czesci);
+            ClientSize = new Size(914, 600);
+            Controls.Add(button_potwierdz);
+            Controls.Add(panel_lista);
+            Controls.Add(panel_nazwa);
             Controls.Add(button_usun_czesc);
             Controls.Add(button_edytuj_czesc);
-            Controls.Add(label_dodajczesc);
-            Controls.Add(textBox_nazwa_czesci);
             Controls.Add(button_dodaj_czesc);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Form_czesci_zamienne";
             Text = "Części zamienne";
+            panel_nazwa.ResumeLayout(false);
+            panel_nazwa.PerformLayout();
+            panel_lista.ResumeLayout(false);
+            panel_lista.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -137,5 +180,8 @@
         private Button button_usun_czesc;
         private ComboBox comboBox_lista_czesci;
         private Label label_listaczesc;
+        private Panel panel_nazwa;
+        private Panel panel_lista;
+        private Button button_potwierdz;
     }
 }
