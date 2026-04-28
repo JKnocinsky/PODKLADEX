@@ -17,6 +17,7 @@ namespace PodkladexApp
 
         public Form_Maszyny(PodkladexContext db)
         {
+
             InitializeComponent();
             this.db = db;
             dgv_Maszyny.DataSource = db.Maszyna.ToList();
@@ -85,13 +86,18 @@ namespace PodkladexApp
                     dgv_Maszyny.Refresh();
                 }
             }
-                // wybór maszyny z DataGridView
+            // wybór maszyny z DataGridView
         }
 
         private void txt_Nazwa_Maszyny_TextChanged(object sender, EventArgs e)
         {
             List<Maszyna> maszyny = db.Maszyna.Where(m => m.Nazwa.Contains(txt_Nazwa_Maszyny.Text)).ToList();
-            dgv_Maszyny.DataSource = maszyny; 
+            dgv_Maszyny.DataSource = maszyny;
+        }
+
+        private void btn_MaszWyp_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

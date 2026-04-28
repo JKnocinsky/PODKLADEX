@@ -46,7 +46,7 @@
             btn_Material.Name = "btn_Material";
             btn_Material.Size = new Size(223, 88);
             btn_Material.TabIndex = 0;
-            btn_Material.Text = "Dodaj materiał";
+            btn_Material.Text = "Materiał";
             btn_Material.UseVisualStyleBackColor = true;
             btn_Material.Click += btn_Material_Click_1;
             // 
@@ -58,7 +58,7 @@
             btn_PomiarMat.Name = "btn_PomiarMat";
             btn_PomiarMat.Size = new Size(223, 88);
             btn_PomiarMat.TabIndex = 1;
-            btn_PomiarMat.Text = "Dodaj pomiar materiału";
+            btn_PomiarMat.Text = "Pomiar materiału";
             btn_PomiarMat.UseVisualStyleBackColor = true;
             btn_PomiarMat.Click += btn_PomiarMat_Click;
             // 
@@ -70,7 +70,7 @@
             btn_KontrolaMat.Name = "btn_KontrolaMat";
             btn_KontrolaMat.Size = new Size(223, 88);
             btn_KontrolaMat.TabIndex = 2;
-            btn_KontrolaMat.Text = "Dodaj kontrole jakości materiałów";
+            btn_KontrolaMat.Text = "Kontrola jakości materiałów";
             btn_KontrolaMat.UseVisualStyleBackColor = true;
             btn_KontrolaMat.Click += btn_KontrolaMat_Click;
             // 
@@ -82,7 +82,7 @@
             btn_NormaMat.Name = "btn_NormaMat";
             btn_NormaMat.Size = new Size(223, 88);
             btn_NormaMat.TabIndex = 3;
-            btn_NormaMat.Text = "Dodaj normę jakości materiału";
+            btn_NormaMat.Text = "Norma jakości materiału";
             btn_NormaMat.UseVisualStyleBackColor = true;
             // 
             // panel_Jakosc
@@ -101,7 +101,7 @@
             btn_KontrolaProd.Name = "btn_KontrolaProd";
             btn_KontrolaProd.Size = new Size(223, 88);
             btn_KontrolaProd.TabIndex = 5;
-            btn_KontrolaProd.Text = "Dodaj kontrole jakości produków";
+            btn_KontrolaProd.Text = "Kontrola jakości produków";
             btn_KontrolaProd.UseVisualStyleBackColor = true;
             btn_KontrolaProd.Click += btn_KontrolaProd_Click;
             // 
@@ -113,7 +113,7 @@
             btn_PomiarProd.Name = "btn_PomiarProd";
             btn_PomiarProd.Size = new Size(223, 88);
             btn_PomiarProd.TabIndex = 6;
-            btn_PomiarProd.Text = "Dodaj pomiar produktu";
+            btn_PomiarProd.Text = "Pomiar produktu";
             btn_PomiarProd.UseVisualStyleBackColor = true;
             btn_PomiarProd.Click += btn_PomiarProd_Click;
             // 
@@ -125,7 +125,7 @@
             btn_NormaProd.Name = "btn_NormaProd";
             btn_NormaProd.Size = new Size(223, 88);
             btn_NormaProd.TabIndex = 7;
-            btn_NormaProd.Text = "Dodaj normę jakości produktu";
+            btn_NormaProd.Text = "Norma jakości produktu";
             btn_NormaProd.UseVisualStyleBackColor = true;
             // 
             // Form_Jakosc

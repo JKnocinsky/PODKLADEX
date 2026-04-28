@@ -146,7 +146,7 @@
             // btn_PomiarMatPotwierdz
             // 
             btn_PomiarMatPotwierdz.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_PomiarMatPotwierdz.Location = new Point(28, 332);
+            btn_PomiarMatPotwierdz.Location = new Point(246, 388);
             btn_PomiarMatPotwierdz.Name = "btn_PomiarMatPotwierdz";
             btn_PomiarMatPotwierdz.Size = new Size(173, 73);
             btn_PomiarMatPotwierdz.TabIndex = 11;
