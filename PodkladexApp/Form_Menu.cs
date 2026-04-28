@@ -18,13 +18,11 @@ namespace PodkladexApp
 
         private void btn_Kadry_Click(object sender, EventArgs e)
         {
-            Form_ListaOsob form_ListaOsob = new Form_ListaOsob();
-            form_ListaOsob.BackColor = Color.Black;
-            form_ListaOsob.Padding = new Padding(2);
-            form_ListaOsob.Width = 824;
-            form_ListaOsob.Height = 756;
+            Form_KadryFinanse form_KadryFinanse = new Form_KadryFinanse();
+            //form_KadryFinanse.BackColor = Color.Black;
+            form_KadryFinanse.Padding = new Padding(2);
 
-            OpenChildForm(form_ListaOsob, false);
+            OpenChildForm(form_KadryFinanse, false);
         }
 
 

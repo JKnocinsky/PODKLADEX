@@ -17,10 +17,21 @@ namespace PodkladexApp
 
         public Form_Maszyny(PodkladexContext db)
         {
+
             InitializeComponent();
             this.db = db;
             dgv_Maszyny.DataSource = db.Maszyna.ToList();
             dgv_Maszyny.Columns["IdMaszyna"].Visible = false;
+            dgv_Maszyny.Columns["Awaria"].Visible = false;
+            dgv_Maszyny.Columns["Gwarancja"].Visible = false;
+            dgv_Maszyny.Columns["MaszynaTyp"].Visible = false;
+            dgv_Maszyny.Columns["MaszynaWyp"].Visible = false;
+            dgv_Maszyny.Columns["NormyMaszyna"].Visible = false;
+            dgv_Maszyny.Columns["Obsluga"].Visible = false;
+            dgv_Maszyny.Columns["ZadanieProdukcyjne"].Visible = false;
+            dgv_Maszyny.Columns["DataZakupu"].HeaderText = "Data zakupu";
+            dgv_Maszyny.Columns["DataUruchomienia"].HeaderText = "Data uruchomienia";
+            dgv_Maszyny.Columns["DataWylaczenia"].HeaderText = "Data wyłączenia";
             dgv_Maszyny.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
@@ -75,13 +86,18 @@ namespace PodkladexApp
                     dgv_Maszyny.Refresh();
                 }
             }
-                // wybór maszyny z DataGridView
+            // wybór maszyny z DataGridView
         }
 
         private void txt_Nazwa_Maszyny_TextChanged(object sender, EventArgs e)
         {
             List<Maszyna> maszyny = db.Maszyna.Where(m => m.Nazwa.Contains(txt_Nazwa_Maszyny.Text)).ToList();
-            dgv_Maszyny.DataSource = maszyny; 
+            dgv_Maszyny.DataSource = maszyny;
+        }
+
+        private void btn_MaszWyp_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

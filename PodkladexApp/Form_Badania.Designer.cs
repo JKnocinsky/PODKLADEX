@@ -1,6 +1,6 @@
-﻿namespace PodkladexApp.Zaopatrzenie
+﻿namespace PodkladexApp
 {
-    partial class Form_Konf_mat
+    partial class Form_Badania
     {
         /// <summary>
         /// Required designer variable.
@@ -28,31 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
-            SuspendLayout();
-            // 
-            // button1
-            // 
-            button1.Location = new Point(61, 53);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // Form_Konf_mat
-            // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(button1);
-            Name = "Form_Konf_mat";
-            Text = "Form1";
-            ResumeLayout(false);
+            this.components = new System.ComponentModel.Container();
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Text = "Form_Badania";
         }
 
         #endregion
-
-        private Button button1;
     }
 }

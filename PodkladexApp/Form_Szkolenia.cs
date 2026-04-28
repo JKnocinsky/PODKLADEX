@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PodkladexApp.Zaopatrzenie
+namespace PodkladexApp
 {
-    public partial class Form_Konf_mat : Form
+    public partial class Form_Szkolenia : Form
     {
-        public Form_Konf_mat()
+        public Form_Szkolenia()
         {
             InitializeComponent();
         }

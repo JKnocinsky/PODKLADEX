@@ -40,6 +40,7 @@
             label_Liczba = new Label();
             label_Produkt = new Label();
             label_Materiał = new Label();
+            label_cena_pozycji = new Label();
             ((System.ComponentModel.ISupportInitialize)numericUpDown_Ilosc).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown_Cena).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView_Koszyk).BeginInit();
@@ -49,7 +50,7 @@
             // 
             comboBox_Produkt.Font = new Font("Segoe UI", 14F);
             comboBox_Produkt.FormattingEnabled = true;
-            comboBox_Produkt.Location = new Point(121, 64);
+            comboBox_Produkt.Location = new Point(124, 202);
             comboBox_Produkt.Name = "comboBox_Produkt";
             comboBox_Produkt.Size = new Size(234, 39);
             comboBox_Produkt.TabIndex = 0;
@@ -59,7 +60,7 @@
             // 
             comboBox_Material.Font = new Font("Segoe UI", 14F);
             comboBox_Material.FormattingEnabled = true;
-            comboBox_Material.Location = new Point(486, 64);
+            comboBox_Material.Location = new Point(489, 202);
             comboBox_Material.Name = "comboBox_Material";
             comboBox_Material.Size = new Size(234, 39);
             comboBox_Material.TabIndex = 1;
@@ -68,16 +69,20 @@
             // numericUpDown_Ilosc
             // 
             numericUpDown_Ilosc.Font = new Font("Segoe UI", 13.8F);
-            numericUpDown_Ilosc.Location = new Point(121, 196);
+            numericUpDown_Ilosc.Location = new Point(124, 334);
+            numericUpDown_Ilosc.Maximum = new decimal(new int[] { 10000000, 0, 0, 0 });
             numericUpDown_Ilosc.Name = "numericUpDown_Ilosc";
             numericUpDown_Ilosc.Size = new Size(216, 38);
             numericUpDown_Ilosc.TabIndex = 2;
+            numericUpDown_Ilosc.ThousandsSeparator = true;
             numericUpDown_Ilosc.ValueChanged += numericUpDown_Ilosc_ValueChanged;
             // 
             // numericUpDown_Cena
             // 
+            numericUpDown_Cena.DecimalPlaces = 2;
             numericUpDown_Cena.Font = new Font("Segoe UI", 13.8F);
-            numericUpDown_Cena.Location = new Point(485, 196);
+            numericUpDown_Cena.Location = new Point(488, 334);
+            numericUpDown_Cena.Maximum = new decimal(new int[] { 1874919423, 2328306, 0, 0 });
             numericUpDown_Cena.Name = "numericUpDown_Cena";
             numericUpDown_Cena.Size = new Size(216, 38);
             numericUpDown_Cena.TabIndex = 3;
@@ -86,7 +91,7 @@
             // textBox_Uwagi
             // 
             textBox_Uwagi.Font = new Font("Segoe UI", 14F);
-            textBox_Uwagi.Location = new Point(121, 302);
+            textBox_Uwagi.Location = new Point(124, 440);
             textBox_Uwagi.Name = "textBox_Uwagi";
             textBox_Uwagi.Size = new Size(538, 39);
             textBox_Uwagi.TabIndex = 4;
@@ -94,8 +99,9 @@
             // 
             // button_DodajPozycje
             // 
+            button_DodajPozycje.Cursor = Cursors.Hand;
             button_DodajPozycje.Font = new Font("Segoe UI", 14F);
-            button_DodajPozycje.Location = new Point(238, 398);
+            button_DodajPozycje.Location = new Point(241, 536);
             button_DodajPozycje.Name = "button_DodajPozycje";
             button_DodajPozycje.Size = new Size(284, 48);
             button_DodajPozycje.TabIndex = 5;
@@ -106,7 +112,7 @@
             // dataGridView_Koszyk
             // 
             dataGridView_Koszyk.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView_Koszyk.Location = new Point(771, 40);
+            dataGridView_Koszyk.Location = new Point(826, 88);
             dataGridView_Koszyk.Name = "dataGridView_Koszyk";
             dataGridView_Koszyk.RowHeadersWidth = 51;
             dataGridView_Koszyk.Size = new Size(1107, 552);
@@ -115,8 +121,9 @@
             // 
             // button_PrzejdzDalej
             // 
+            button_PrzejdzDalej.Cursor = Cursors.Hand;
             button_PrzejdzDalej.Font = new Font("Segoe UI", 14F);
-            button_PrzejdzDalej.Location = new Point(1121, 653);
+            button_PrzejdzDalej.Location = new Point(1100, 790);
             button_PrzejdzDalej.Name = "button_PrzejdzDalej";
             button_PrzejdzDalej.Size = new Size(284, 48);
             button_PrzejdzDalej.TabIndex = 7;
@@ -128,7 +135,7 @@
             // 
             label_Uwagi.AutoSize = true;
             label_Uwagi.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_Uwagi.Location = new Point(34, 306);
+            label_Uwagi.Location = new Point(37, 444);
             label_Uwagi.Name = "label_Uwagi";
             label_Uwagi.Size = new Size(80, 31);
             label_Uwagi.TabIndex = 8;
@@ -138,7 +145,7 @@
             // 
             label_Liczba.AutoSize = true;
             label_Liczba.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_Liczba.Location = new Point(35, 198);
+            label_Liczba.Location = new Point(38, 338);
             label_Liczba.Name = "label_Liczba";
             label_Liczba.Size = new Size(79, 31);
             label_Liczba.TabIndex = 9;
@@ -148,7 +155,7 @@
             // 
             label_Produkt.AutoSize = true;
             label_Produkt.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_Produkt.Location = new Point(18, 68);
+            label_Produkt.Location = new Point(21, 206);
             label_Produkt.Name = "label_Produkt";
             label_Produkt.Size = new Size(96, 31);
             label_Produkt.TabIndex = 10;
@@ -158,17 +165,28 @@
             // 
             label_Materiał.AutoSize = true;
             label_Materiał.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_Materiał.Location = new Point(383, 68);
+            label_Materiał.Location = new Point(386, 206);
             label_Materiał.Name = "label_Materiał";
             label_Materiał.Size = new Size(102, 31);
             label_Materiał.TabIndex = 11;
             label_Materiał.Text = "Materiał";
             // 
+            // label_cena_pozycji
+            // 
+            label_cena_pozycji.AutoSize = true;
+            label_cena_pozycji.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
+            label_cena_pozycji.Location = new Point(421, 338);
+            label_cena_pozycji.Name = "label_cena_pozycji";
+            label_cena_pozycji.Size = new Size(67, 31);
+            label_cena_pozycji.TabIndex = 12;
+            label_cena_pozycji.Text = "Cena";
+            // 
             // Form_SzczegolyZamowienia
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1902, 1153);
+            ClientSize = new Size(1902, 1055);
+            Controls.Add(label_cena_pozycji);
             Controls.Add(label_Materiał);
             Controls.Add(label_Produkt);
             Controls.Add(label_Liczba);
@@ -205,5 +223,6 @@
         private Label label_Liczba;
         private Label label_Produkt;
         private Label label_Materiał;
+        private Label label_cena_pozycji;
     }
 }

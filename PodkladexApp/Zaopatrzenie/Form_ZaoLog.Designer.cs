@@ -48,7 +48,8 @@
             textBox_Kod_pocztowy_firmy = new TextBox();
             btn_Dostawa = new Button();
             button_utworz_zamowienie = new Button();
-            button_zamow_material = new Button();
+            button_HistoriaZamowien = new Button();
+            label_ProszeWybracFirme = new Label();
             panel_dane_firmy.SuspendLayout();
             SuspendLayout();
             // 
@@ -287,25 +288,38 @@
             button_utworz_zamowienie.UseVisualStyleBackColor = true;
             button_utworz_zamowienie.Click += button_utworz_zamowienie_Click;
             // 
-            // button_zamow_material
+            // button_HistoriaZamowien
             // 
-            button_zamow_material.Cursor = Cursors.Hand;
-            button_zamow_material.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_zamow_material.Location = new Point(55, 196);
-            button_zamow_material.Margin = new Padding(3, 4, 3, 4);
-            button_zamow_material.Name = "button_zamow_material";
-            button_zamow_material.Size = new Size(271, 68);
-            button_zamow_material.TabIndex = 7;
-            button_zamow_material.Text = "Zamów materiał";
-            button_zamow_material.UseVisualStyleBackColor = true;
-            button_zamow_material.Click += button_zamow_material_Click;
+            button_HistoriaZamowien.Cursor = Cursors.Hand;
+            button_HistoriaZamowien.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            button_HistoriaZamowien.Location = new Point(55, 196);
+            button_HistoriaZamowien.Margin = new Padding(3, 4, 3, 4);
+            button_HistoriaZamowien.Name = "button_HistoriaZamowien";
+            button_HistoriaZamowien.Size = new Size(271, 68);
+            button_HistoriaZamowien.TabIndex = 7;
+            button_HistoriaZamowien.Text = "Historia zamówień";
+            button_HistoriaZamowien.UseVisualStyleBackColor = true;
+            button_HistoriaZamowien.Click += button_zamow_material_Click;
+            // 
+            // label_ProszeWybracFirme
+            // 
+            label_ProszeWybracFirme.AutoSize = true;
+            label_ProszeWybracFirme.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
+            label_ProszeWybracFirme.Location = new Point(606, 34);
+            label_ProszeWybracFirme.Name = "label_ProszeWybracFirme";
+            label_ProszeWybracFirme.Size = new Size(292, 31);
+            label_ProszeWybracFirme.TabIndex = 27;
+            label_ProszeWybracFirme.Text = "Proszę wybrać firmę z listy";
+            label_ProszeWybracFirme.Visible = false;
+            label_ProszeWybracFirme.Click += label_ProszeWybracFirme_Click;
             // 
             // Form_ZaoLog
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1902, 1153);
-            Controls.Add(button_zamow_material);
+            ClientSize = new Size(1902, 1055);
+            Controls.Add(label_ProszeWybracFirme);
+            Controls.Add(button_HistoriaZamowien);
             Controls.Add(button_utworz_zamowienie);
             Controls.Add(btn_Dostawa);
             Controls.Add(panel_dane_firmy);
@@ -319,6 +333,7 @@
             panel_dane_firmy.ResumeLayout(false);
             panel_dane_firmy.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -343,6 +358,7 @@
         private Button button_usun_firme;
         private Button button_zaakceptuj_zmiany;
         private Button button_utworz_zamowienie;
-        private Button button_zamow_material;
+        private Button button_HistoriaZamowien;
+        private Label label_ProszeWybracFirme;
     }
 }

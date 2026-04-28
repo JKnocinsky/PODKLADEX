@@ -1,4 +1,5 @@
 ﻿using PodkladexApp.Models;
+using PodkladexApp.Produkcja;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,6 +28,17 @@ namespace PodkladexApp
             Form_Maszyny form = new Form_Maszyny(db);
             OpenChildForm(form);
         }
+
+        private void btn_wyp_Click(object sender, EventArgs e)
+        {
+            //Form_Wykres form = new Form_Wykres();
+            //form.Show();
+            Form_MaszynaWyp form = new Form_MaszynaWyp(db);
+            OpenChildForm(form);
+        }
+
+
+
         private void OpenChildForm(Form childForm)
         {
             Panel panel = tableLayoutPanel1.Controls["panel_Produkcja"] as Panel;
@@ -41,8 +53,6 @@ namespace PodkladexApp
             panel.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
-
-
         }
     }
 }

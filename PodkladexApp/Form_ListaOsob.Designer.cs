@@ -48,15 +48,15 @@
             textBox_pesel = new TextBox();
             panel_daneosoby = new Panel();
             label_idosoby = new Label();
-            btn_dodawanie = new Button();
             btn_usuwanie = new Button();
             comboBox_idosoby = new ComboBox();
-            button1 = new Button();
-            button2 = new Button();
+            button_Dodaj = new Button();
+            button_Edytuj = new Button();
             button_ArrowR = new Button();
             button_ArrowL = new Button();
             panel1 = new Panel();
-            button_wyczysc = new Button();
+            label1 = new Label();
+            button_Wyczysc = new Button();
             panel_daneosoby.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -64,146 +64,155 @@
             // label_imie
             // 
             label_imie.AutoSize = true;
-            label_imie.Location = new Point(28, 24);
+            label_imie.Location = new Point(32, 32);
             label_imie.Name = "label_imie";
-            label_imie.Size = new Size(30, 15);
+            label_imie.Size = new Size(38, 20);
             label_imie.TabIndex = 0;
             label_imie.Text = "Imię";
             // 
             // textBox_imie
             // 
-            textBox_imie.Location = new Point(164, 20);
+            textBox_imie.Location = new Point(187, 27);
+            textBox_imie.Margin = new Padding(3, 4, 3, 4);
             textBox_imie.Name = "textBox_imie";
-            textBox_imie.Size = new Size(554, 23);
+            textBox_imie.Size = new Size(633, 27);
             textBox_imie.TabIndex = 1;
             // 
             // label_nazwisko
             // 
             label_nazwisko.AutoSize = true;
-            label_nazwisko.Location = new Point(28, 63);
+            label_nazwisko.Location = new Point(32, 84);
             label_nazwisko.Name = "label_nazwisko";
-            label_nazwisko.Size = new Size(57, 15);
+            label_nazwisko.Size = new Size(72, 20);
             label_nazwisko.TabIndex = 0;
             label_nazwisko.Text = "Nazwisko";
             // 
             // label_nrtelefonu
             // 
             label_nrtelefonu.AutoSize = true;
-            label_nrtelefonu.Location = new Point(28, 101);
+            label_nrtelefonu.Location = new Point(32, 135);
             label_nrtelefonu.Name = "label_nrtelefonu";
-            label_nrtelefonu.Size = new Size(67, 15);
+            label_nrtelefonu.Size = new Size(84, 20);
             label_nrtelefonu.TabIndex = 0;
             label_nrtelefonu.Text = "Nr telefonu";
             // 
             // label_email
             // 
             label_email.AutoSize = true;
-            label_email.Location = new Point(28, 139);
+            label_email.Location = new Point(32, 185);
             label_email.Name = "label_email";
-            label_email.Size = new Size(74, 15);
+            label_email.Size = new Size(94, 20);
             label_email.TabIndex = 0;
             label_email.Text = "Adres E-mail";
             // 
             // label_miejscowosc
             // 
             label_miejscowosc.AutoSize = true;
-            label_miejscowosc.Location = new Point(28, 178);
+            label_miejscowosc.Location = new Point(32, 237);
             label_miejscowosc.Name = "label_miejscowosc";
-            label_miejscowosc.Size = new Size(75, 15);
+            label_miejscowosc.Size = new Size(93, 20);
             label_miejscowosc.TabIndex = 0;
             label_miejscowosc.Text = "Miejscowość";
             // 
             // label_kodpocztowy
             // 
             label_kodpocztowy.AutoSize = true;
-            label_kodpocztowy.Location = new Point(28, 215);
+            label_kodpocztowy.Location = new Point(32, 287);
             label_kodpocztowy.Name = "label_kodpocztowy";
-            label_kodpocztowy.Size = new Size(82, 15);
+            label_kodpocztowy.Size = new Size(104, 20);
             label_kodpocztowy.TabIndex = 0;
             label_kodpocztowy.Text = "Kod pocztowy";
             // 
             // label_ulica
             // 
             label_ulica.AutoSize = true;
-            label_ulica.Location = new Point(28, 253);
+            label_ulica.Location = new Point(32, 337);
             label_ulica.Name = "label_ulica";
-            label_ulica.Size = new Size(33, 15);
+            label_ulica.Size = new Size(42, 20);
             label_ulica.TabIndex = 0;
             label_ulica.Text = "Ulica";
             // 
             // label_numer
             // 
             label_numer.AutoSize = true;
-            label_numer.Location = new Point(28, 291);
+            label_numer.Location = new Point(32, 388);
             label_numer.Name = "label_numer";
-            label_numer.Size = new Size(44, 15);
+            label_numer.Size = new Size(54, 20);
             label_numer.TabIndex = 0;
             label_numer.Text = "Numer";
             // 
             // label_pesel
             // 
             label_pesel.AutoSize = true;
-            label_pesel.Location = new Point(28, 329);
+            label_pesel.Location = new Point(32, 439);
             label_pesel.Name = "label_pesel";
-            label_pesel.Size = new Size(38, 15);
+            label_pesel.Size = new Size(48, 20);
             label_pesel.TabIndex = 0;
             label_pesel.Text = "PESEL";
             // 
             // textBox_nazwisko
             // 
-            textBox_nazwisko.Location = new Point(164, 59);
+            textBox_nazwisko.Location = new Point(187, 79);
+            textBox_nazwisko.Margin = new Padding(3, 4, 3, 4);
             textBox_nazwisko.Name = "textBox_nazwisko";
-            textBox_nazwisko.Size = new Size(554, 23);
+            textBox_nazwisko.Size = new Size(633, 27);
             textBox_nazwisko.TabIndex = 1;
             // 
             // textBox_numertelefonu
             // 
-            textBox_numertelefonu.Location = new Point(164, 97);
+            textBox_numertelefonu.Location = new Point(187, 129);
+            textBox_numertelefonu.Margin = new Padding(3, 4, 3, 4);
             textBox_numertelefonu.Name = "textBox_numertelefonu";
-            textBox_numertelefonu.Size = new Size(554, 23);
+            textBox_numertelefonu.Size = new Size(633, 27);
             textBox_numertelefonu.TabIndex = 1;
             textBox_numertelefonu.TextChanged += textBox_numertelefonu_TextChanged;
             // 
             // textBox_email
             // 
-            textBox_email.Location = new Point(164, 135);
+            textBox_email.Location = new Point(187, 180);
+            textBox_email.Margin = new Padding(3, 4, 3, 4);
             textBox_email.Name = "textBox_email";
-            textBox_email.Size = new Size(554, 23);
+            textBox_email.Size = new Size(633, 27);
             textBox_email.TabIndex = 1;
             // 
             // textBox_miejscowosc
             // 
-            textBox_miejscowosc.Location = new Point(164, 174);
+            textBox_miejscowosc.Location = new Point(187, 232);
+            textBox_miejscowosc.Margin = new Padding(3, 4, 3, 4);
             textBox_miejscowosc.Name = "textBox_miejscowosc";
-            textBox_miejscowosc.Size = new Size(554, 23);
+            textBox_miejscowosc.Size = new Size(633, 27);
             textBox_miejscowosc.TabIndex = 1;
             // 
             // textBox_kodpocztowy
             // 
-            textBox_kodpocztowy.Location = new Point(164, 211);
+            textBox_kodpocztowy.Location = new Point(187, 281);
+            textBox_kodpocztowy.Margin = new Padding(3, 4, 3, 4);
             textBox_kodpocztowy.Name = "textBox_kodpocztowy";
-            textBox_kodpocztowy.Size = new Size(554, 23);
+            textBox_kodpocztowy.Size = new Size(633, 27);
             textBox_kodpocztowy.TabIndex = 1;
             // 
             // textBox_ulica
             // 
-            textBox_ulica.Location = new Point(164, 249);
+            textBox_ulica.Location = new Point(187, 332);
+            textBox_ulica.Margin = new Padding(3, 4, 3, 4);
             textBox_ulica.Name = "textBox_ulica";
-            textBox_ulica.Size = new Size(554, 23);
+            textBox_ulica.Size = new Size(633, 27);
             textBox_ulica.TabIndex = 1;
             // 
             // textBox_numer
             // 
-            textBox_numer.Location = new Point(164, 287);
+            textBox_numer.Location = new Point(187, 383);
+            textBox_numer.Margin = new Padding(3, 4, 3, 4);
             textBox_numer.Name = "textBox_numer";
-            textBox_numer.Size = new Size(554, 23);
+            textBox_numer.Size = new Size(633, 27);
             textBox_numer.TabIndex = 1;
             // 
             // textBox_pesel
             // 
-            textBox_pesel.Location = new Point(164, 325);
+            textBox_pesel.Location = new Point(187, 433);
+            textBox_pesel.Margin = new Padding(3, 4, 3, 4);
             textBox_pesel.Name = "textBox_pesel";
-            textBox_pesel.Size = new Size(554, 23);
+            textBox_pesel.Size = new Size(633, 27);
             textBox_pesel.TabIndex = 1;
             // 
             // panel_daneosoby
@@ -227,37 +236,29 @@
             panel_daneosoby.Controls.Add(label_nrtelefonu);
             panel_daneosoby.Controls.Add(label_nazwisko);
             panel_daneosoby.Controls.Add(label_imie);
-            panel_daneosoby.Location = new Point(41, 97);
+            panel_daneosoby.Location = new Point(47, 129);
+            panel_daneosoby.Margin = new Padding(3, 4, 3, 4);
             panel_daneosoby.Name = "panel_daneosoby";
-            panel_daneosoby.Size = new Size(736, 400);
+            panel_daneosoby.Size = new Size(841, 533);
             panel_daneosoby.TabIndex = 2;
             // 
             // label_idosoby
             // 
             label_idosoby.AutoSize = true;
-            label_idosoby.Location = new Point(72, 47);
+            label_idosoby.Location = new Point(82, 63);
             label_idosoby.Name = "label_idosoby";
-            label_idosoby.Size = new Size(41, 15);
+            label_idosoby.Size = new Size(52, 20);
             label_idosoby.TabIndex = 0;
             label_idosoby.Text = "Osoba";
-            // 
-            // btn_dodawanie
-            // 
-            btn_dodawanie.Location = new Point(43, 521);
-            btn_dodawanie.Name = "btn_dodawanie";
-            btn_dodawanie.Size = new Size(75, 23);
-            btn_dodawanie.TabIndex = 3;
-            btn_dodawanie.Text = "Dodawanie";
-            btn_dodawanie.UseVisualStyleBackColor = true;
-            btn_dodawanie.Click += btn_dodawanie_Click;
             // 
             // btn_usuwanie
             // 
             btn_usuwanie.BackColor = SystemColors.ControlLight;
             btn_usuwanie.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold);
-            btn_usuwanie.Location = new Point(706, 521);
+            btn_usuwanie.Location = new Point(805, 693);
+            btn_usuwanie.Margin = new Padding(3, 4, 3, 4);
             btn_usuwanie.Name = "btn_usuwanie";
-            btn_usuwanie.Size = new Size(73, 34);
+            btn_usuwanie.Size = new Size(83, 45);
             btn_usuwanie.TabIndex = 3;
             btn_usuwanie.Text = "Usuń";
             btn_usuwanie.UseVisualStyleBackColor = false;
@@ -266,13 +267,15 @@
             // comboBox_idosoby
             // 
             comboBox_idosoby.FormattingEnabled = true;
-            comboBox_idosoby.Location = new Point(207, 41);
+            comboBox_idosoby.Location = new Point(237, 55);
+            comboBox_idosoby.Margin = new Padding(3, 4, 3, 4);
             comboBox_idosoby.Name = "comboBox_idosoby";
-            comboBox_idosoby.Size = new Size(554, 23);
+            comboBox_idosoby.Size = new Size(633, 28);
             comboBox_idosoby.TabIndex = 4;
             comboBox_idosoby.SelectedIndexChanged += comboBox_idosoby_SelectedIndexChanged;
+            comboBox_idosoby.TextUpdate += comboBox_idosoby_TextUpdate;
             // 
-            // button1
+            // button_Dodaj
             // 
             button1.BackColor = SystemColors.ControlLight;
             button1.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold);
@@ -282,28 +285,29 @@
             button1.TabIndex = 3;
             button1.Text = "Dodaj rekord";
             button1.UseVisualStyleBackColor = false;
-            button1.Click += btn_wyczysc_Click;
+            button1.Click += btn_dodawanie_Click;
             // 
-            // button2
+            // button_Edytuj
             // 
             button2.BackColor = SystemColors.ControlLight;
             button2.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold);
-            button2.Location = new Point(285, 519);
+            button2.Location = new Point(391, 521);
             button2.Name = "button2";
             button2.Size = new Size(99, 34);
             button2.TabIndex = 3;
             button2.Text = "Edytuj";
             button2.UseVisualStyleBackColor = false;
-            button2.Click += btn_wyczysc_Click;
+            button2.Click += btn_edytowanie_Click;
             // 
             // button_ArrowR
             // 
             button_ArrowR.BackgroundImage = Properties.Resources.Arrow_right;
             button_ArrowR.BackgroundImageLayout = ImageLayout.Zoom;
             button_ArrowR.ImageAlign = ContentAlignment.TopCenter;
-            button_ArrowR.Location = new Point(649, 642);
+            button_ArrowR.Location = new Point(739, 804);
+            button_ArrowR.Margin = new Padding(3, 4, 3, 4);
             button_ArrowR.Name = "button_ArrowR";
-            button_ArrowR.Size = new Size(130, 50);
+            button_ArrowR.Size = new Size(149, 67);
             button_ArrowR.TabIndex = 5;
             button_ArrowR.UseVisualStyleBackColor = true;
             button_ArrowR.Click += button_ArrowR_Click;
@@ -312,9 +316,10 @@
             // 
             button_ArrowL.BackgroundImage = Properties.Resources.Arrow_left;
             button_ArrowL.BackgroundImageLayout = ImageLayout.Zoom;
-            button_ArrowL.Location = new Point(43, 642);
+            button_ArrowL.Location = new Point(47, 804);
+            button_ArrowL.Margin = new Padding(3, 4, 3, 4);
             button_ArrowL.Name = "button_ArrowL";
-            button_ArrowL.Size = new Size(130, 50);
+            button_ArrowL.Size = new Size(149, 67);
             button_ArrowL.TabIndex = 5;
             button_ArrowL.UseVisualStyleBackColor = true;
             button_ArrowL.Click += button_ArrowL_Click;
@@ -322,42 +327,34 @@
             // panel1
             // 
             panel1.AutoSize = true;
-            panel1.BackColor = SystemColors.ButtonFace;
+            panel1.BackColor = Color.WhiteSmoke;
+            panel1.Controls.Add(button_ArrowL);
+            panel1.Controls.Add(button_Dodaj);
+            panel1.Controls.Add(btn_usuwanie);
             panel1.Controls.Add(label_idosoby);
+            panel1.Controls.Add(button_ArrowR);
             panel1.Controls.Add(panel_daneosoby);
-            panel1.Controls.Add(button_wyczysc);
-            panel1.Controls.Add(button2);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(2, 2);
+            panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(804, 713);
+            panel1.Size = new Size(931, 899);
             panel1.TabIndex = 6;
-            // 
-            // button_wyczysc
-            // 
-            button_wyczysc.BackColor = SystemColors.ControlLight;
-            button_wyczysc.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold);
-            button_wyczysc.Location = new Point(464, 519);
-            button_wyczysc.Name = "button_wyczysc";
-            button_wyczysc.Size = new Size(162, 34);
-            button_wyczysc.TabIndex = 3;
-            button_wyczysc.Text = "Wyczyść pola";
-            button_wyczysc.UseVisualStyleBackColor = false;
-            button_wyczysc.Click += btn_wyczysc_Click;
             // 
             // Form_ListaOsob
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            ClientSize = new Size(808, 717);
-            Controls.Add(button_ArrowL);
-            Controls.Add(button_ArrowR);
+            BackColor = Color.Black;
+            ClientSize = new Size(935, 903);
             Controls.Add(comboBox_idosoby);
             Controls.Add(btn_usuwanie);
+            Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(btn_dodawanie);
             Controls.Add(panel1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Form_ListaOsob";
             Padding = new Padding(2);
             Text = "Lista osób  ";
@@ -391,14 +388,12 @@
         private TextBox textBox_pesel;
         private Panel panel_daneosoby;
         private Label label_idosoby;
-        private Button btn_dodawanie;
         private Button btn_usuwanie;
         private ComboBox comboBox_idosoby;
-        private Button button1;
-        private Button button2;
+        private Button button_Dodaj;
+        private Button button_Edytuj;
         private Button button_ArrowR;
         private Button button_ArrowL;
         private Panel panel1;
-        private Button button_wyczysc;
     }
 }

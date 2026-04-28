@@ -35,6 +35,8 @@
             button_otworz_rodzaj_obslugi = new Button();
             button_otworz_gwarancja = new Button();
             panel_UR = new Panel();
+            button_otworz_napawy = new Button();
+            button_otworz_ocena_stanu = new Button();
             SuspendLayout();
             // 
             // button_otworz_czesci_zamienne
@@ -95,7 +97,7 @@
             // button_otworz_gwarancja
             // 
             button_otworz_gwarancja.Font = new Font("Segoe UI", 14F);
-            button_otworz_gwarancja.Location = new Point(12, 318);
+            button_otworz_gwarancja.Location = new Point(12, 312);
             button_otworz_gwarancja.Name = "button_otworz_gwarancja";
             button_otworz_gwarancja.Size = new Size(212, 55);
             button_otworz_gwarancja.TabIndex = 7;
@@ -110,11 +112,35 @@
             panel_UR.Size = new Size(1673, 1160);
             panel_UR.TabIndex = 8;
             // 
+            // button_otworz_napawy
+            // 
+            button_otworz_napawy.Font = new Font("Segoe UI", 14F);
+            button_otworz_napawy.Location = new Point(13, 373);
+            button_otworz_napawy.Name = "button_otworz_napawy";
+            button_otworz_napawy.Size = new Size(212, 55);
+            button_otworz_napawy.TabIndex = 9;
+            button_otworz_napawy.Text = "Naprawy";
+            button_otworz_napawy.UseVisualStyleBackColor = true;
+            button_otworz_napawy.Click += button_otworz_napawy_Click;
+            // 
+            // button_otworz_ocena_stanu
+            // 
+            button_otworz_ocena_stanu.Font = new Font("Segoe UI", 14F);
+            button_otworz_ocena_stanu.Location = new Point(12, 434);
+            button_otworz_ocena_stanu.Name = "button_otworz_ocena_stanu";
+            button_otworz_ocena_stanu.Size = new Size(212, 58);
+            button_otworz_ocena_stanu.TabIndex = 10;
+            button_otworz_ocena_stanu.Text = "Ocena stanu technicznego";
+            button_otworz_ocena_stanu.UseVisualStyleBackColor = true;
+            button_otworz_ocena_stanu.Click += button_otworz_ocena_stanu_Click;
+            // 
             // Form_Utrzymanie_Ruchu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1904, 1161);
+            ClientSize = new Size(1684, 791);
+            Controls.Add(button_otworz_ocena_stanu);
+            Controls.Add(button_otworz_napawy);
             Controls.Add(panel_UR);
             Controls.Add(button_otworz_gwarancja);
             Controls.Add(button_otworz_rodzaj_obslugi);
@@ -136,5 +162,7 @@
         private Button button_otworz_rodzaj_obslugi;
         private Button button_otworz_gwarancja;
         private Panel panel_UR;
+        private Button button_otworz_napawy;
+        private Button button_otworz_ocena_stanu;
     }
 }
