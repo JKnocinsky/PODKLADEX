@@ -35,7 +35,6 @@
             label_KontProdZadP = new Label();
             comboBox_KontProdPrac = new ComboBox();
             textBox_KontProdRBH = new TextBox();
-            textBox_KontProdZat = new TextBox();
             textBox_KontProdOdpady = new TextBox();
             comboBox_KontProdZadP = new ComboBox();
             btn_KontProdDodaj = new Button();
@@ -44,6 +43,7 @@
             comboBox_KontProdKont = new ComboBox();
             label_KontProdKont = new Label();
             btn_KontProdPotwierdz = new Button();
+            checkBox_KontProdZat = new CheckBox();
             SuspendLayout();
             // 
             // label_KontProdPrac
@@ -111,13 +111,6 @@
             textBox_KontProdRBH.Size = new Size(125, 27);
             textBox_KontProdRBH.TabIndex = 6;
             // 
-            // textBox_KontProdZat
-            // 
-            textBox_KontProdZat.Location = new Point(607, 220);
-            textBox_KontProdZat.Name = "textBox_KontProdZat";
-            textBox_KontProdZat.Size = new Size(125, 27);
-            textBox_KontProdZat.TabIndex = 7;
-            // 
             // textBox_KontProdOdpady
             // 
             textBox_KontProdOdpady.Location = new Point(607, 301);
@@ -184,18 +177,29 @@
             // btn_KontProdPotwierdz
             // 
             btn_KontProdPotwierdz.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_KontProdPotwierdz.Location = new Point(43, 339);
+            btn_KontProdPotwierdz.Location = new Point(315, 524);
             btn_KontProdPotwierdz.Name = "btn_KontProdPotwierdz";
             btn_KontProdPotwierdz.Size = new Size(178, 68);
             btn_KontProdPotwierdz.TabIndex = 15;
             btn_KontProdPotwierdz.Text = "Potwierdź";
             btn_KontProdPotwierdz.UseVisualStyleBackColor = true;
             // 
+            // checkBox_KontProdZat
+            // 
+            checkBox_KontProdZat.AutoSize = true;
+            checkBox_KontProdZat.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            checkBox_KontProdZat.Location = new Point(607, 224);
+            checkBox_KontProdZat.Name = "checkBox_KontProdZat";
+            checkBox_KontProdZat.Size = new Size(18, 17);
+            checkBox_KontProdZat.TabIndex = 16;
+            checkBox_KontProdZat.UseVisualStyleBackColor = true;
+            // 
             // Form_KontrolaProd
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1199, 695);
+            Controls.Add(checkBox_KontProdZat);
             Controls.Add(btn_KontProdPotwierdz);
             Controls.Add(label_KontProdKont);
             Controls.Add(comboBox_KontProdKont);
@@ -204,7 +208,6 @@
             Controls.Add(btn_KontProdDodaj);
             Controls.Add(comboBox_KontProdZadP);
             Controls.Add(textBox_KontProdOdpady);
-            Controls.Add(textBox_KontProdZat);
             Controls.Add(textBox_KontProdRBH);
             Controls.Add(comboBox_KontProdPrac);
             Controls.Add(label_KontProdZadP);
@@ -227,7 +230,6 @@
         private Label label_KontProdZadP;
         private ComboBox comboBox_KontProdPrac;
         private TextBox textBox_KontProdRBH;
-        private TextBox textBox_KontProdZat;
         private TextBox textBox_KontProdOdpady;
         private ComboBox comboBox_KontProdZadP;
         private Button btn_KontProdDodaj;
@@ -236,5 +238,6 @@
         private ComboBox comboBox_KontProdKont;
         private Label label_KontProdKont;
         private Button btn_KontProdPotwierdz;
+        private CheckBox checkBox_KontProdZat;
     }
 }

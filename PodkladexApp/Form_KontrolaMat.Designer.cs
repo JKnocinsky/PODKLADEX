@@ -42,10 +42,10 @@
             btn_DodajKontMat = new Button();
             btn_EdytujKontMat = new Button();
             btn_UsunKontMat = new Button();
-            textBox_KontMatZat = new TextBox();
             label_KontMatKontrola = new Label();
             comboBox_KontMatKont = new ComboBox();
             btn_KontMatPotwierdz = new Button();
+            checkBox_KontrolaMatZat = new CheckBox();
             SuspendLayout();
             // 
             // comboBox_KontMatPrac
@@ -184,13 +184,6 @@
             btn_UsunKontMat.Text = "Usuń kontrole";
             btn_UsunKontMat.UseVisualStyleBackColor = true;
             // 
-            // textBox_KontMatZat
-            // 
-            textBox_KontMatZat.Location = new Point(553, 212);
-            textBox_KontMatZat.Name = "textBox_KontMatZat";
-            textBox_KontMatZat.Size = new Size(107, 27);
-            textBox_KontMatZat.TabIndex = 14;
-            // 
             // label_KontMatKontrola
             // 
             label_KontMatKontrola.AutoSize = true;
@@ -212,22 +205,32 @@
             // btn_KontMatPotwierdz
             // 
             btn_KontMatPotwierdz.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_KontMatPotwierdz.Location = new Point(28, 343);
+            btn_KontMatPotwierdz.Location = new Point(268, 592);
             btn_KontMatPotwierdz.Name = "btn_KontMatPotwierdz";
             btn_KontMatPotwierdz.Size = new Size(197, 76);
             btn_KontMatPotwierdz.TabIndex = 17;
             btn_KontMatPotwierdz.Text = "Potwierdź";
             btn_KontMatPotwierdz.UseVisualStyleBackColor = true;
             // 
+            // checkBox_KontrolaMatZat
+            // 
+            checkBox_KontrolaMatZat.AutoSize = true;
+            checkBox_KontrolaMatZat.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            checkBox_KontrolaMatZat.Location = new Point(553, 216);
+            checkBox_KontrolaMatZat.Name = "checkBox_KontrolaMatZat";
+            checkBox_KontrolaMatZat.Size = new Size(18, 17);
+            checkBox_KontrolaMatZat.TabIndex = 18;
+            checkBox_KontrolaMatZat.UseVisualStyleBackColor = true;
+            // 
             // Form_KontrolaMat
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1152, 863);
+            Controls.Add(checkBox_KontrolaMatZat);
             Controls.Add(btn_KontMatPotwierdz);
             Controls.Add(comboBox_KontMatKont);
             Controls.Add(label_KontMatKontrola);
-            Controls.Add(textBox_KontMatZat);
             Controls.Add(btn_UsunKontMat);
             Controls.Add(btn_EdytujKontMat);
             Controls.Add(btn_DodajKontMat);
@@ -265,9 +268,9 @@
         private Button btn_DodajKontMat;
         private Button btn_EdytujKontMat;
         private Button btn_UsunKontMat;
-        private TextBox textBox_KontMatZat;
         private Label label_KontMatKontrola;
         private ComboBox comboBox_KontMatKont;
         private Button btn_KontMatPotwierdz;
+        private CheckBox checkBox_KontrolaMatZat;
     }
 }

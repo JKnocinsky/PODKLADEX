@@ -55,6 +55,7 @@
             button_urlopy.TabIndex = 1;
             button_urlopy.Text = "Urlopy";
             button_urlopy.UseVisualStyleBackColor = true;
+            button_urlopy.Click += button_urlopy_Click;
             // 
             // button3
             // 
@@ -64,6 +65,7 @@
             button3.TabIndex = 2;
             button3.Text = "Szkolenia";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button_szkolenia_Click;
             // 
             // button4
             // 
@@ -73,6 +75,7 @@
             button4.TabIndex = 3;
             button4.Text = "Badania";
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button_badania_Click;
             // 
             // button5
             // 
@@ -82,6 +85,7 @@
             button5.TabIndex = 4;
             button5.Text = "Umowy";
             button5.UseVisualStyleBackColor = true;
+            button5.Click += button_umowy_Click;
             // 
             // button6
             // 

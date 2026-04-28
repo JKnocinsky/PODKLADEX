@@ -133,7 +133,7 @@
             // btn_MaterialPotwierdz
             // 
             btn_MaterialPotwierdz.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_MaterialPotwierdz.Location = new Point(12, 339);
+            btn_MaterialPotwierdz.Location = new Point(245, 315);
             btn_MaterialPotwierdz.Name = "btn_MaterialPotwierdz";
             btn_MaterialPotwierdz.Size = new Size(191, 81);
             btn_MaterialPotwierdz.TabIndex = 9;
