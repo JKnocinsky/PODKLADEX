@@ -76,13 +76,13 @@ namespace PodkladexApp.Zaopatrzenie
             button_Klient_prywatny.Name = "button_Klient_prywatny";
             button_Klient_prywatny.Size = new Size(150, 50);
             button_Klient_prywatny.TabIndex = 1;
-            button_Klient_prywatny.Text = "Klient prywatny";
+            button_Klient_prywatny.Text = "Klient";
             button_Klient_prywatny.UseVisualStyleBackColor = true;
             button_Klient_prywatny.Click += button_Klient_prywatny_Click;
             // 
             // button_klient_z_firmy
             // 
-            button_klient_z_firmy.Font = new Font("Segoe UI", 14F);
+            button_klient_z_firmy.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
             button_klient_z_firmy.Location = new Point(407, 13);
             button_klient_z_firmy.Margin = new Padding(3, 4, 3, 4);
             button_klient_z_firmy.Name = "button_klient_z_firmy";
@@ -151,7 +151,7 @@ namespace PodkladexApp.Zaopatrzenie
             // 
             label_nazwa_firmy.AutoSize = true;
             label_nazwa_firmy.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_nazwa_firmy.Location = new Point(42, 471);
+            label_nazwa_firmy.Location = new Point(42, 466);
             label_nazwa_firmy.Name = "label_nazwa_firmy";
             label_nazwa_firmy.Size = new Size(148, 31);
             label_nazwa_firmy.TabIndex = 19;
@@ -171,7 +171,7 @@ namespace PodkladexApp.Zaopatrzenie
             // 
             label_NIP.AutoSize = true;
             label_NIP.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_NIP.Location = new Point(626, 458);
+            label_NIP.Location = new Point(626, 466);
             label_NIP.Name = "label_NIP";
             label_NIP.Size = new Size(53, 31);
             label_NIP.TabIndex = 17;
@@ -180,7 +180,7 @@ namespace PodkladexApp.Zaopatrzenie
             // textBox_NIP
             // 
             textBox_NIP.Font = new Font("Segoe UI", 13.8F);
-            textBox_NIP.Location = new Point(685, 451);
+            textBox_NIP.Location = new Point(685, 462);
             textBox_NIP.Margin = new Padding(3, 4, 3, 4);
             textBox_NIP.Name = "textBox_NIP";
             textBox_NIP.Size = new Size(259, 38);
@@ -203,7 +203,7 @@ namespace PodkladexApp.Zaopatrzenie
             // 
             label_ulica.AutoSize = true;
             label_ulica.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_ulica.Location = new Point(115, 398);
+            label_ulica.Location = new Point(123, 385);
             label_ulica.Name = "label_ulica";
             label_ulica.Size = new Size(67, 31);
             label_ulica.TabIndex = 14;
@@ -223,7 +223,7 @@ namespace PodkladexApp.Zaopatrzenie
             // 
             label_miejscowosc.AutoSize = true;
             label_miejscowosc.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_miejscowosc.Location = new Point(41, 319);
+            label_miejscowosc.Location = new Point(49, 306);
             label_miejscowosc.Name = "label_miejscowosc";
             label_miejscowosc.Size = new Size(141, 31);
             label_miejscowosc.TabIndex = 12;
@@ -233,7 +233,7 @@ namespace PodkladexApp.Zaopatrzenie
             // 
             label_email.AutoSize = true;
             label_email.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_email.Location = new Point(100, 240);
+            label_email.Location = new Point(108, 226);
             label_email.Name = "label_email";
             label_email.Size = new Size(82, 31);
             label_email.TabIndex = 11;
@@ -244,7 +244,7 @@ namespace PodkladexApp.Zaopatrzenie
             // 
             label_numer_tel.AutoSize = true;
             label_numer_tel.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_numer_tel.Location = new Point(12, 161);
+            label_numer_tel.Location = new Point(12, 146);
             label_numer_tel.Name = "label_numer_tel";
             label_numer_tel.Size = new Size(178, 31);
             label_numer_tel.TabIndex = 10;
@@ -254,7 +254,7 @@ namespace PodkladexApp.Zaopatrzenie
             // 
             label_nazwisko.AutoSize = true;
             label_nazwisko.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_nazwisko.Location = new Point(523, 65);
+            label_nazwisko.Location = new Point(523, 66);
             label_nazwisko.Name = "label_nazwisko";
             label_nazwisko.Size = new Size(115, 31);
             label_nazwisko.TabIndex = 9;
@@ -265,7 +265,7 @@ namespace PodkladexApp.Zaopatrzenie
             // 
             label_imie.AutoSize = true;
             label_imie.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_imie.Location = new Point(117, 69);
+            label_imie.Location = new Point(130, 66);
             label_imie.Name = "label_imie";
             label_imie.Size = new Size(60, 31);
             label_imie.TabIndex = 8;
@@ -358,7 +358,7 @@ namespace PodkladexApp.Zaopatrzenie
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1902, 1153);
+            ClientSize = new Size(1902, 1055);
             Controls.Add(button_Wroc);
             Controls.Add(button_Klient_prywatny);
             Controls.Add(panel1);

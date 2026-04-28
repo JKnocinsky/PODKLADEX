@@ -79,7 +79,7 @@ namespace PodkladexApp.Zaopatrzenie
                     decimal iloscKg = numericUpDown_Ilosc.Value;
 
                     // TWOJE RÓWNANIE: (Cena za kg * 1.25 marży) * ilość w kg
-                    decimal surowaCena = (ostatniaCenaZakupu * 1.25m) * iloscKg;
+                    decimal surowaCena = (ostatniaCenaZakupu * 2) * iloscKg;
 
                     // NOWE: Zaokrąglenie do 2 miejsc po przecinku
                     decimal wyliczonaCena = Math.Round(surowaCena, 2);
