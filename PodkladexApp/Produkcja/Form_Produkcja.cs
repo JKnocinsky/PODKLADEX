@@ -41,8 +41,12 @@ namespace PodkladexApp
             panel.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
+        }
 
-
+        private void btn_wyp_Click(object sender, EventArgs e)
+        {
+            Form_Wykres form = new Form_Wykres();
+            form.Show();
         }
     }
 }
