@@ -1,5 +1,6 @@
 ﻿using PodkladexApp.Models; // Wymagane, aby widzieć klasę PodkladexContext i Firma
 using PodkladexApp.Zaopatrzenie;
+using ScottPlot;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -255,26 +256,8 @@ namespace PodkladexApp
 
         private void button_zamow_material_Click(object sender, EventArgs e)
         {
-
-        }
-        private void OpenChildForm(Form childForm)
-        {
-            if (activeForm != null)
-                activeForm.Close();
-
-            activeForm = childForm;
-            childForm.TopLevel = false;
-            childForm.FormBorderStyle = FormBorderStyle.None;
-
-            // Ręcznie ustalamy pozycję i rozmiar, żeby idealnie pasowało po prawej stronie 
-            // (wypełnia miejsce nad ukrytym panelem firm i comboboxem)
-            childForm.Location = new Point(337, 65);
-            childForm.Size = new Size(1920, 1200);
-
-            // KLUCZOWA ZMIANA: Dodajemy formularz do głównego okna (this), a nie do panel_dane_firmy!
-            this.Controls.Add(childForm);
-            childForm.BringToFront();
-            childForm.Show();
+            // Otwiera formularz historii zamówień wewnątrz głównego panelu
+            OpenChildForm(new Form_HistoriaZamowien());
         }
 
         private void button_utworz_zamowienie_Click(object sender, EventArgs e)
@@ -296,5 +279,31 @@ namespace PodkladexApp
         {
 
         }
+
+
+        private void OpenChildForm(Form childForm)
+        {
+            if (activeForm != null)
+                activeForm.Close();
+
+            activeForm = childForm;
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+
+            // Ręcznie ustalamy pozycję i rozmiar, żeby idealnie pasowało po prawej stronie 
+            // (wypełnia miejsce nad ukrytym panelem firm i comboboxem)
+            childForm.Location = new Point(337, 65);
+            childForm.Size = new Size(1920, 1200);
+
+            // KLUCZOWA ZMIANA: Dodajemy formularz do głównego okna (this), a nie do panel_dane_firmy!
+            this.Controls.Add(childForm);
+            childForm.BringToFront();
+            childForm.Show();
+        }
+
+
+
     }
+
+
 }

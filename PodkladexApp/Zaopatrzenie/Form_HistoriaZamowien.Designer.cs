@@ -28,20 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dataGridView__HistoriaZamowien = new DataGridView();
+            dataGridView_HistoriaZamowien = new DataGridView();
             dateTimePicker_Poczatek = new DateTimePicker();
             dateTimePicker_Koniec = new DateTimePicker();
             comboBox_sortowanie = new ComboBox();
-            ((System.ComponentModel.ISupportInitialize)dataGridView__HistoriaZamowien).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView_HistoriaZamowien).BeginInit();
             SuspendLayout();
             // 
             // dataGridView__HistoriaZamowien
             // 
-            dataGridView__HistoriaZamowien.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView__HistoriaZamowien.Location = new Point(42, 66);
-            dataGridView__HistoriaZamowien.Name = "dataGridView__HistoriaZamowien";
-            dataGridView__HistoriaZamowien.Size = new Size(692, 325);
-            dataGridView__HistoriaZamowien.TabIndex = 0;
+            dataGridView_HistoriaZamowien.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView_HistoriaZamowien.Location = new Point(42, 66);
+            dataGridView_HistoriaZamowien.Name = "dataGridView__HistoriaZamowien";
+            dataGridView_HistoriaZamowien.Size = new Size(692, 325);
+            dataGridView_HistoriaZamowien.TabIndex = 0;
             // 
             // dateTimePicker_Poczatek
             // 
@@ -49,6 +49,7 @@
             dateTimePicker_Poczatek.Name = "dateTimePicker_Poczatek";
             dateTimePicker_Poczatek.Size = new Size(200, 23);
             dateTimePicker_Poczatek.TabIndex = 1;
+            dateTimePicker_Poczatek.ValueChanged += dateTimePicker_Poczatek_ValueChanged;
             // 
             // dateTimePicker_Koniec
             // 
@@ -56,6 +57,7 @@
             dateTimePicker_Koniec.Name = "dateTimePicker_Koniec";
             dateTimePicker_Koniec.Size = new Size(200, 23);
             dateTimePicker_Koniec.TabIndex = 2;
+            dateTimePicker_Koniec.ValueChanged += dateTimePicker_Koniec_ValueChanged;
             // 
             // comboBox_sortowanie
             // 
@@ -73,17 +75,17 @@
             Controls.Add(comboBox_sortowanie);
             Controls.Add(dateTimePicker_Koniec);
             Controls.Add(dateTimePicker_Poczatek);
-            Controls.Add(dataGridView__HistoriaZamowien);
+            Controls.Add(dataGridView_HistoriaZamowien);
             Name = "Form_HistoriaZamowien";
             Text = "Historia zamówień";
             Load += Form_HistoriaZamowien_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridView__HistoriaZamowien).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView_HistoriaZamowien).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private DataGridView dataGridView__HistoriaZamowien;
+        private DataGridView dataGridView_HistoriaZamowien;
         private DateTimePicker dateTimePicker_Poczatek;
         private DateTimePicker dateTimePicker_Koniec;
         private ComboBox comboBox_sortowanie;
