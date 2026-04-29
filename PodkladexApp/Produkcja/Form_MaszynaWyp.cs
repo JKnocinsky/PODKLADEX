@@ -20,10 +20,15 @@ namespace PodkladexApp.Produkcja
             this.db = db;
             dgv_Wyposazenie.DataSource = db.Wyposazenie.ToList();
             dgv_Wyposazenie.Columns["IdWyposazenie"].Visible = false;
+            dgv_Wyposazenie.ClearSelection(); // Brak domyślnego wyboru
+
             cb_wyborMaszyny.DataSource = db.Maszyna.ToList();
             // Wyświetlaj w comboboxie nazwę maszyny, a wartością przypisz Id
             cb_wyborMaszyny.DisplayMember = "Nazwa";
             cb_wyborMaszyny.ValueMember = "IdMaszyna";
+            cb_wyborMaszyny.SelectedIndex = -1; // Brak domyślnego wyboru
+
+            dgv_wlasciwosci.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
         private void cb_wyborMaszyny_SelectedIndexChanged(object sender, EventArgs e)
@@ -113,7 +118,72 @@ namespace PodkladexApp.Produkcja
 
         private void btn_dodaj_Click(object sender, EventArgs e)
         {
-            Form_DodajWyposazenie form = new Form_DodajWyposazenie(db);
+            Button button = sender as Button;
+            Wyposazenie selectedWyposazenie = null;
+            Form_DodajWyposazenie form = new Form_DodajWyposazenie(db, button.Name, selectedWyposazenie);
+            form.ShowDialog();
+        }
+
+        private void dgv_Wyposazenie_SelectionChanged(object sender, EventArgs e)
+        {
+            // Jeśli brak zaznaczenia — wyczyść widok właściwości
+            if (dgv_Wyposazenie.SelectedRows.Count == 0)
+            {
+                dgv_wlasciwosci.DataSource = null;
+                dgv_wlasciwosci.Rows.Clear();
+                dgv_wlasciwosci.Columns.Clear();
+                return;
+            }
+
+            // Pobierz powiązany obiekt Wyposazenie z DataBoundItem
+            Wyposazenie selectedWyposazenie = dgv_Wyposazenie.SelectedRows
+                .Cast<DataGridViewRow>()
+                .Select(r => r.DataBoundItem as Wyposazenie)
+                .FirstOrDefault();
+
+            if (selectedWyposazenie == null)
+            {
+                dgv_wlasciwosci.DataSource = null;
+                dgv_wlasciwosci.Rows.Clear();
+                dgv_wlasciwosci.Columns.Clear();
+                return;
+            }
+
+            // Pobierz z bazy wszystkie powiązane właściwości i ustaw jako źródło danych
+            var props = db.WyposazenieWlasciwosci
+                .Where(ww => ww.IdWyposazenie == selectedWyposazenie.IdWyposazenie)
+                .Select(ww => new
+                {
+                    Nazwa = ww.IdWlasciwosciNavigation != null ? ww.IdWlasciwosciNavigation.NazwaParametru : string.Empty,
+                    Wartosc = ww.Wartosc
+                })
+                .ToList();
+
+            dgv_wlasciwosci.AutoGenerateColumns = true;
+            dgv_wlasciwosci.DataSource = props;
+
+            // Przyjazne nagłówki kolumn
+            if (dgv_wlasciwosci.Columns.Contains("Nazwa"))
+                dgv_wlasciwosci.Columns["Nazwa"].HeaderText = "Właściwość";
+            if (dgv_wlasciwosci.Columns.Contains("Wartosc"))
+                dgv_wlasciwosci.Columns["Wartosc"].HeaderText = "Wartość";
+        }
+
+        private void btn_edytuj_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            Wyposazenie selectedWyposazenie = dgv_Wyposazenie.SelectedRows
+                .Cast<DataGridViewRow>()
+                .Select(r => r.DataBoundItem as Wyposazenie)
+                .FirstOrDefault();
+
+            if (selectedWyposazenie == null)
+            {
+                MessageBox.Show("Proszę wybrać wyposażenie do edycji.", "Brak wyboru", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Form_DodajWyposazenie form = new Form_DodajWyposazenie(db, button.Name, selectedWyposazenie);
             form.ShowDialog();
         }
     }

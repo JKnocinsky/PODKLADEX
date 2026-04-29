@@ -38,9 +38,12 @@
             btn_przypisz = new Button();
             label2 = new Label();
             txtbox_wyszukaj = new TextBox();
+            label3 = new Label();
+            dgv_wlasciwosci = new DataGridView();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_Wyposazenie).BeginInit();
             tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgv_wlasciwosci).BeginInit();
             SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -53,18 +56,22 @@
             tableLayoutPanel1.Controls.Add(label1, 0, 0);
             tableLayoutPanel1.Controls.Add(cb_wyborMaszyny, 1, 0);
             tableLayoutPanel1.Controls.Add(dgv_Wyposazenie, 0, 2);
-            tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 2);
+            tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 5);
             tableLayoutPanel1.Controls.Add(label2, 0, 1);
             tableLayoutPanel1.Controls.Add(txtbox_wyszukaj, 1, 1);
+            tableLayoutPanel1.Controls.Add(label3, 0, 3);
+            tableLayoutPanel1.Controls.Add(dgv_wlasciwosci, 0, 4);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 5;
+            tableLayoutPanel1.RowCount = 7;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 5F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 5F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 70F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 35F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 5F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 30F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
             tableLayoutPanel1.Size = new Size(939, 747);
@@ -105,8 +112,10 @@
             dgv_Wyposazenie.Margin = new Padding(3, 4, 3, 4);
             dgv_Wyposazenie.Name = "dgv_Wyposazenie";
             dgv_Wyposazenie.RowHeadersWidth = 51;
-            dgv_Wyposazenie.Size = new Size(933, 514);
+            dgv_Wyposazenie.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv_Wyposazenie.Size = new Size(933, 253);
             dgv_Wyposazenie.TabIndex = 2;
+            dgv_Wyposazenie.SelectionChanged += dgv_Wyposazenie_SelectionChanged;
             // 
             // tableLayoutPanel2
             // 
@@ -152,6 +161,7 @@
             btn_edytuj.TabIndex = 1;
             btn_edytuj.Text = "Edytuj";
             btn_edytuj.UseVisualStyleBackColor = true;
+            btn_edytuj.Click += btn_edytuj_Click;
             // 
             // btn_przypisz
             // 
@@ -186,6 +196,30 @@
             txtbox_wyszukaj.TabIndex = 5;
             txtbox_wyszukaj.TextChanged += txtbox_wyszukaj_TextChanged;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Dock = DockStyle.Fill;
+            label3.Font = new Font("Segoe UI", 11F);
+            label3.Location = new Point(3, 335);
+            label3.Name = "label3";
+            label3.Size = new Size(153, 37);
+            label3.TabIndex = 6;
+            label3.Text = "Właściwości";
+            // 
+            // dgv_wlasciwosci
+            // 
+            dgv_wlasciwosci.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv_wlasciwosci.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgv_wlasciwosci.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            tableLayoutPanel1.SetColumnSpan(dgv_wlasciwosci, 2);
+            dgv_wlasciwosci.Dock = DockStyle.Fill;
+            dgv_wlasciwosci.Location = new Point(3, 375);
+            dgv_wlasciwosci.Name = "dgv_wlasciwosci";
+            dgv_wlasciwosci.RowHeadersWidth = 51;
+            dgv_wlasciwosci.Size = new Size(933, 218);
+            dgv_wlasciwosci.TabIndex = 7;
+            // 
             // Form_MaszynaWyp
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -200,6 +234,7 @@
             ((System.ComponentModel.ISupportInitialize)dgv_Wyposazenie).EndInit();
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgv_wlasciwosci).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -216,5 +251,7 @@
         private Button btn_dodaj;
         private Button btn_edytuj;
         private Button btn_przypisz;
+        private Label label3;
+        private DataGridView dgv_wlasciwosci;
     }
 }

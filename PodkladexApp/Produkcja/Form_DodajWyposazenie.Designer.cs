@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
+            lbl_tytul = new Label();
             lbl_nazwa = new Label();
             txtbox_Nazwa = new TextBox();
             cmb_wlasciwosc = new ComboBox();
             label2 = new Label();
             dgv_wlasciwosci = new DataGridView();
             btn_zapisz = new Button();
-            btn_edytuj = new Button();
             btn_zapiszZamknij = new Button();
             txtbox_wartosc = new TextBox();
             label3 = new Label();
@@ -44,15 +43,15 @@
             ((System.ComponentModel.ISupportInitialize)dgv_wlasciwosci).BeginInit();
             SuspendLayout();
             // 
-            // label1
+            // lbl_tytul
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 14.5F);
-            label1.Location = new Point(118, 23);
-            label1.Name = "label1";
-            label1.Size = new Size(230, 35);
-            label1.TabIndex = 0;
-            label1.Text = "Dodaj wyposażenie";
+            lbl_tytul.AutoSize = true;
+            lbl_tytul.Font = new Font("Segoe UI", 14.5F);
+            lbl_tytul.Location = new Point(118, 23);
+            lbl_tytul.Name = "lbl_tytul";
+            lbl_tytul.Size = new Size(230, 35);
+            lbl_tytul.TabIndex = 0;
+            lbl_tytul.Text = "Dodaj wyposażenie";
             // 
             // lbl_nazwa
             // 
@@ -93,12 +92,16 @@
             // 
             // dgv_wlasciwosci
             // 
+            dgv_wlasciwosci.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv_wlasciwosci.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgv_wlasciwosci.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_wlasciwosci.Location = new Point(20, 390);
             dgv_wlasciwosci.Name = "dgv_wlasciwosci";
             dgv_wlasciwosci.RowHeadersWidth = 51;
-            dgv_wlasciwosci.Size = new Size(428, 304);
+            dgv_wlasciwosci.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv_wlasciwosci.Size = new Size(428, 350);
             dgv_wlasciwosci.TabIndex = 5;
+            dgv_wlasciwosci.SelectionChanged += dgv_wlasciwosci_SelectionChanged;
             // 
             // btn_zapisz
             // 
@@ -110,16 +113,6 @@
             btn_zapisz.Text = "Zapisz";
             btn_zapisz.UseVisualStyleBackColor = true;
             btn_zapisz.Click += btn_zapisz_Click;
-            // 
-            // btn_edytuj
-            // 
-            btn_edytuj.Font = new Font("Segoe UI", 11F);
-            btn_edytuj.Location = new Point(20, 700);
-            btn_edytuj.Name = "btn_edytuj";
-            btn_edytuj.Size = new Size(201, 39);
-            btn_edytuj.TabIndex = 7;
-            btn_edytuj.Text = "Edytuj wartość";
-            btn_edytuj.UseVisualStyleBackColor = true;
             // 
             // btn_zapiszZamknij
             // 
@@ -178,14 +171,13 @@
             Controls.Add(label3);
             Controls.Add(txtbox_wartosc);
             Controls.Add(btn_zapiszZamknij);
-            Controls.Add(btn_edytuj);
             Controls.Add(btn_zapisz);
             Controls.Add(dgv_wlasciwosci);
             Controls.Add(label2);
             Controls.Add(cmb_wlasciwosc);
             Controls.Add(txtbox_Nazwa);
             Controls.Add(lbl_nazwa);
-            Controls.Add(label1);
+            Controls.Add(lbl_tytul);
             Name = "Form_DodajWyposazenie";
             Text = "Form_DodajWyposazenie";
             ((System.ComponentModel.ISupportInitialize)dgv_wlasciwosci).EndInit();
@@ -195,14 +187,13 @@
 
         #endregion
 
-        private Label label1;
+        private Label lbl_tytul;
         private Label lbl_nazwa;
         private TextBox txtbox_Nazwa;
         private ComboBox cmb_wlasciwosc;
         private Label label2;
         private DataGridView dgv_wlasciwosci;
         private Button btn_zapisz;
-        private Button btn_edytuj;
         private Button btn_zapiszZamknij;
         private TextBox txtbox_wartosc;
         private Label label3;
