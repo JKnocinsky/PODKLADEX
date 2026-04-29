@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Umowy));
             dataGridView_umowy = new DataGridView();
             comboBox_pracownik = new ComboBox();
             comboBox_rodzajUmowy = new ComboBox();
@@ -50,97 +51,58 @@
             // dataGridView_umowy
             // 
             dataGridView_umowy.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView_umowy.Location = new Point(2, 60);
+            resources.ApplyResources(dataGridView_umowy, "dataGridView_umowy");
             dataGridView_umowy.Name = "dataGridView_umowy";
-            dataGridView_umowy.Size = new Size(935, 246);
-            dataGridView_umowy.TabIndex = 0;
             // 
             // comboBox_pracownik
             // 
-            comboBox_pracownik.Font = new Font("Segoe UI", 14.25F);
+            resources.ApplyResources(comboBox_pracownik, "comboBox_pracownik");
             comboBox_pracownik.FormattingEnabled = true;
-            comboBox_pracownik.Location = new Point(192, 36);
             comboBox_pracownik.Name = "comboBox_pracownik";
-            comboBox_pracownik.Size = new Size(420, 33);
-            comboBox_pracownik.TabIndex = 1;
             comboBox_pracownik.TextUpdate += comboBox_pracownik_TextUpdate;
             // 
             // comboBox_rodzajUmowy
             // 
-            comboBox_rodzajUmowy.Font = new Font("Segoe UI", 14.25F);
+            resources.ApplyResources(comboBox_rodzajUmowy, "comboBox_rodzajUmowy");
             comboBox_rodzajUmowy.FormattingEnabled = true;
-            comboBox_rodzajUmowy.Location = new Point(192, 81);
             comboBox_rodzajUmowy.Name = "comboBox_rodzajUmowy";
-            comboBox_rodzajUmowy.Size = new Size(420, 33);
-            comboBox_rodzajUmowy.TabIndex = 2;
             // 
             // dateTimePicker_dataroz
             // 
-            dateTimePicker_dataroz.Font = new Font("Segoe UI", 14.25F);
-            dateTimePicker_dataroz.Location = new Point(220, 145);
+            resources.ApplyResources(dateTimePicker_dataroz, "dateTimePicker_dataroz");
             dateTimePicker_dataroz.Name = "dateTimePicker_dataroz";
-            dateTimePicker_dataroz.Size = new Size(337, 33);
-            dateTimePicker_dataroz.TabIndex = 3;
             // 
             // button_dodajUmowe
             // 
-            button_dodajUmowe.Font = new Font("Segoe UI", 14.25F);
-            button_dodajUmowe.Location = new Point(360, 250);
+            resources.ApplyResources(button_dodajUmowe, "button_dodajUmowe");
             button_dodajUmowe.Name = "button_dodajUmowe";
-            button_dodajUmowe.Size = new Size(140, 38);
-            button_dodajUmowe.TabIndex = 4;
-            button_dodajUmowe.Text = "Dodaj";
             button_dodajUmowe.UseVisualStyleBackColor = true;
             button_dodajUmowe.Click += button_dodajUmowe_Click;
             // 
             // dateTimePicker_datazak
             // 
-            dateTimePicker_datazak.CalendarFont = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            dateTimePicker_datazak.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            dateTimePicker_datazak.Location = new Point(220, 192);
+            resources.ApplyResources(dateTimePicker_datazak, "dateTimePicker_datazak");
             dateTimePicker_datazak.Name = "dateTimePicker_datazak";
-            dateTimePicker_datazak.Size = new Size(337, 33);
-            dateTimePicker_datazak.TabIndex = 3;
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 14.25F);
-            label1.Location = new Point(12, 39);
+            resources.ApplyResources(label1, "label1");
             label1.Name = "label1";
-            label1.Size = new Size(99, 25);
-            label1.TabIndex = 5;
-            label1.Text = "Pracownik";
             // 
             // label2
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 14.25F);
-            label2.Location = new Point(12, 84);
+            resources.ApplyResources(label2, "label2");
             label2.Name = "label2";
-            label2.Size = new Size(134, 25);
-            label2.TabIndex = 5;
-            label2.Text = "Rodzaj umowy";
             // 
             // label3
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 14.25F);
-            label3.Location = new Point(12, 192);
+            resources.ApplyResources(label3, "label3");
             label3.Name = "label3";
-            label3.Size = new Size(160, 25);
-            label3.TabIndex = 5;
-            label3.Text = "Data zakończenia";
             // 
             // label4
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 14.25F);
-            label4.Location = new Point(12, 145);
+            resources.ApplyResources(label4, "label4");
             label4.Name = "label4";
-            label4.Size = new Size(157, 25);
-            label4.TabIndex = 5;
-            label4.Text = "Data rozpoczęcia";
             // 
             // panel1
             // 
@@ -153,61 +115,42 @@
             panel1.Controls.Add(label1);
             panel1.Controls.Add(dateTimePicker_datazak);
             panel1.Controls.Add(button_dodajUmowe);
-            panel1.Location = new Point(12, 393);
+            resources.ApplyResources(panel1, "panel1");
             panel1.Name = "panel1";
-            panel1.Size = new Size(887, 306);
-            panel1.TabIndex = 6;
             // 
             // button_nowaumowa
             // 
-            button_nowaumowa.Font = new Font("Segoe UI", 14.25F);
-            button_nowaumowa.Location = new Point(314, 330);
+            resources.ApplyResources(button_nowaumowa, "button_nowaumowa");
             button_nowaumowa.Name = "button_nowaumowa";
-            button_nowaumowa.Size = new Size(255, 38);
-            button_nowaumowa.TabIndex = 4;
-            button_nowaumowa.Text = "Nowa umowa";
             button_nowaumowa.UseVisualStyleBackColor = true;
             button_nowaumowa.Click += button_nowaumowa_Click;
             // 
             // checkBox_tylkoAktywne
             // 
-            checkBox_tylkoAktywne.AutoSize = true;
-            checkBox_tylkoAktywne.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            checkBox_tylkoAktywne.Location = new Point(12, 12);
+            resources.ApplyResources(checkBox_tylkoAktywne, "checkBox_tylkoAktywne");
             checkBox_tylkoAktywne.Name = "checkBox_tylkoAktywne";
-            checkBox_tylkoAktywne.Size = new Size(265, 29);
-            checkBox_tylkoAktywne.TabIndex = 7;
-            checkBox_tylkoAktywne.Text = "Pokaż tylko aktywne umowy";
             checkBox_tylkoAktywne.UseVisualStyleBackColor = true;
             checkBox_tylkoAktywne.CheckedChanged += checkBox_tylkoAktywne_CheckedChanged;
             // 
             // comboBox_filtrPracownik
             // 
-            comboBox_filtrPracownik.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            resources.ApplyResources(comboBox_filtrPracownik, "comboBox_filtrPracownik");
             comboBox_filtrPracownik.FormattingEnabled = true;
-            comboBox_filtrPracownik.Location = new Point(608, 16);
             comboBox_filtrPracownik.Name = "comboBox_filtrPracownik";
-            comboBox_filtrPracownik.Size = new Size(314, 33);
-            comboBox_filtrPracownik.TabIndex = 8;
             comboBox_filtrPracownik.SelectedIndexChanged += comboBox_filtrPracownik_SelectedIndexChanged;
             comboBox_filtrPracownik.TextUpdate += comboBox_filtrPracownik_TextUpdate;
+            comboBox_filtrPracownik.Leave += comboBox_filtrPracownik_Leave;
             // 
             // label5
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 14.25F);
-            label5.Location = new Point(412, 19);
+            resources.ApplyResources(label5, "label5");
             label5.Name = "label5";
-            label5.Size = new Size(190, 25);
-            label5.TabIndex = 5;
-            label5.Text = "Filtruj po pracowniku";
             // 
             // Form_Umowy
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gainsboro;
-            ClientSize = new Size(934, 711);
             Controls.Add(comboBox_filtrPracownik);
             Controls.Add(checkBox_tylkoAktywne);
             Controls.Add(dataGridView_umowy);
@@ -215,7 +158,6 @@
             Controls.Add(button_nowaumowa);
             Controls.Add(label5);
             Name = "Form_Umowy";
-            Text = "Form_Umowy";
             Load += Form_Umowy_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView_umowy).EndInit();
             panel1.ResumeLayout(false);
