@@ -25,7 +25,7 @@ namespace PodkladexApp.Produkcja
 
         private void cb_wyborMaszyny_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cb_wyborMaszyny.SelectedItem != null)
+            if (cb_wyborMaszyny.SelectedItem != null)
             {
                 Maszyna selectedMaszyna = cb_wyborMaszyny.SelectedItem as Maszyna;
                 var wypMasz = db.MaszynaWyp.ToList();
@@ -37,10 +37,18 @@ namespace PodkladexApp.Produkcja
 
         private void cb_wyborMaszyny_TextChanged(object sender, EventArgs e)
         {
-            if(cb_wyborMaszyny.Text == "")
+            if (cb_wyborMaszyny.Text == "")
             {
                 dgv_Wyposazenie.DataSource = db.Wyposazenie.ToList();
             }
+        }
+
+        private void txtbox_wyszukaj_TextChanged(object sender, EventArgs e)
+        {
+            //List<Maszyna> maszyny = db.Maszyna.Where(m => m.Nazwa.Contains(txt_Nazwa_Maszyny.Text)).ToList();
+            //dgv_Maszyny.DataSource = maszyny;
+            List<Wyposazenie> wyposazenie = db.Wyposazenie.Where(w => w.Nazwa.Contains(txtbox_wyszukaj.Text)).ToList();
+            dgv_Wyposazenie.DataSource = wyposazenie;
         }
     }
 }
