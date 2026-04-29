@@ -27,6 +27,9 @@
     <Compile Update="Form_Obsluga.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Produkcja\Form_NormaProd.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
