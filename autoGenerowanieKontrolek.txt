@@ -1,0 +1,108 @@
+using DB_Test.Models;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+
+namespace DB_Test
+    //Pawel Sobolewski
+{
+    public partial class Form_Narzedzie : Form
+    {
+        // panel wymiary x635, y426
+        // y lbl 10, txt 7, btn 6 y+30
+        private DronPolContext context;
+        int y = 30;
+        public Form_Narzedzie(DronPolContext context)
+        {
+            InitializeComponent();
+            this.context = context;
+            List<Narzedzie> narzedzia = context.Narzedzie.ToList();
+
+            WypelnijPanel(narzedzia);
+        }
+
+        private void UsunNarzedzie(Narzedzie narzedzie)
+        {
+            context.Narzedzie.Remove(narzedzie);
+            context.SaveChanges();
+
+            List<Narzedzie> narzedzia = context.Narzedzie.ToList();
+
+            WypelnijPanel(narzedzia);
+        }
+
+        private void WypelnijPanel(List<Narzedzie> narzedzia)
+        {
+            panelNarzedzia.Controls.Clear();
+            foreach (var narzedzie in narzedzia)
+            {
+                //3x textbox, 3x label, button
+                Label lblNazwa = new Label();
+                panelNarzedzia.Controls.Add(lblNazwa);
+                lblNazwa.Size = new System.Drawing.Size(50, 15);
+                lblNazwa.Location = new System.Drawing.Point(3, 10 + ((narzedzie.IdNarzedzia - 1) * 30));
+                lblNazwa.Text = "Nazwa";
+
+                TextBox txtNazwa = new TextBox();
+                panelNarzedzia.Controls.Add(txtNazwa);
+                txtNazwa.Size = new System.Drawing.Size(100, 23);
+                txtNazwa.Location = new System.Drawing.Point(59, 7 + ((narzedzie.IdNarzedzia - 1) * 30));
+                txtNazwa.Text = narzedzie.Nazwa;
+
+                Label lblProducent = new Label();
+                panelNarzedzia.Controls.Add(lblProducent);
+                lblProducent.Size = new System.Drawing.Size(65, 15);
+                lblProducent.Location = new System.Drawing.Point(165, 10 + ((narzedzie.IdNarzedzia - 1) * 30));
+                lblProducent.Text = "Producent";
+
+                TextBox txtProducent = new TextBox();
+                panelNarzedzia.Controls.Add(txtProducent);
+                txtProducent.Size = new System.Drawing.Size(100, 23);
+                txtProducent.Location = new System.Drawing.Point(236, 7 + ((narzedzie.IdNarzedzia - 1) * 30));
+                txtProducent.Text = narzedzie.Producent;
+
+                Label lblLiczbaSztuk = new Label();
+                panelNarzedzia.Controls.Add(lblLiczbaSztuk);
+                lblLiczbaSztuk.Size = new System.Drawing.Size(75, 15);
+                lblLiczbaSztuk.Location = new System.Drawing.Point(342, 10 + ((narzedzie.IdNarzedzia - 1) * 30));
+                lblLiczbaSztuk.Text = "Liczba sztuk";
+
+                TextBox txtLiczbaSztuk = new TextBox();
+                panelNarzedzia.Controls.Add(txtLiczbaSztuk);
+                txtLiczbaSztuk.Size = new System.Drawing.Size(100, 23);
+                txtLiczbaSztuk.Location = new System.Drawing.Point(423, 7 + ((narzedzie.IdNarzedzia - 1) * 30));
+                txtLiczbaSztuk.Text = ObliczLiczbeSztuk(narzedzie.IdNarzedzia).ToString();
+
+                Button btnUsun = new Button();
+                panelNarzedzia.Controls.Add(btnUsun);
+                btnUsun.Size = new System.Drawing.Size(100, 23);
+                btnUsun.Location = new System.Drawing.Point(529, 6 + ((narzedzie.IdNarzedzia - 1) * 30));
+                btnUsun.Text = "Usuń";
+                btnUsun.Click += (sender, e) => UsunNarzedzie(narzedzie);
+            }
+
+
+        }
+
+        private int ObliczLiczbeSztuk(int idNarzedzia)
+        {
+            Narzedzie narzedzie = context.Narzedzie.Where(n => n.IdNarzedzia == idNarzedzia).FirstOrDefault();
+            int liczbaSztuk = narzedzie.LiczbaPoczatkowa;
+            List<UtylizacjaNarzedzia> utylizacje = context.UtylizacjaNarzedzia.Where(u => u.IdNarzedzia == idNarzedzia).ToList();
+            List<ZakupNarzedzia> zakupy = context.ZakupNarzedzia.Where(z => z.IdNarzedzia == idNarzedzia).ToList();
+            foreach (var utylizacja in utylizacje)
+            {
+                liczbaSztuk -= utylizacja.LiczbaSztuk;
+            }
+            foreach (var zakup in zakupy)
+            {
+                liczbaSztuk += zakup.LiczbaSztuk;
+            }
+            return liczbaSztuk;
+        }
+    }
+}
