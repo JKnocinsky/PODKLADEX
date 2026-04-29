@@ -40,7 +40,7 @@ namespace PodkladexApp
 
         private void btn_Produkcja_Click(object sender, EventArgs e)
         {
-            Form_Produkcja form_Produkcja = new Form_Produkcja(db);
+            Form_ProdukcjaMenu form_Produkcja = new Form_ProdukcjaMenu(db);
             OpenChildForm(form_Produkcja);
         }
 
