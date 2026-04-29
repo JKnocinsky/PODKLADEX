@@ -63,6 +63,7 @@
             comboBox_lista_rodzaj_obslug.Name = "comboBox_lista_rodzaj_obslug";
             comboBox_lista_rodzaj_obslug.Size = new Size(373, 33);
             comboBox_lista_rodzaj_obslug.TabIndex = 15;
+            comboBox_lista_rodzaj_obslug.SelectedIndexChanged += comboBox_lista_rodzaj_obslug_SeletedIndexChanged;
             // 
             // button_usun_obsluga
             // 

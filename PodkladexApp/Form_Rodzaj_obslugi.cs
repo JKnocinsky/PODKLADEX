@@ -67,6 +67,21 @@ namespace PodkladexApp
             flaga_edytuj = false;
             flaga_dodaj = false;
         }
+        private void comboBox_lista_rodzaj_obslug_SeletedIndexChanged(object sender, EventArgs e)
+        {
+            RodzajObslugi rodzajObslugi = comboBox_lista_rodzaj_obslug.SelectedItem as RodzajObslugi;
+            if (comboBox_lista_rodzaj_obslug.SelectedItem == null || comboBox_lista_rodzaj_obslug.SelectedIndex == -1)
+            {
+                textBox_nazwa_obslugi.Text = "";
+                textBox_opis_rodzaj_obslugi.Text = "";
+            }
+            else
+            {
+                textBox_nazwa_obslugi.Text = rodzajObslugi.Nazwa;
+                textBox_opis_rodzaj_obslugi.Text = rodzajObslugi.Opis;
+            }
+        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -78,12 +93,14 @@ namespace PodkladexApp
             {
                 Dodaj_czesc();
                 textBox_nazwa_obslugi.Clear();
+                textBox_opis_rodzaj_obslugi.Clear();
             }
             if (flaga_edytuj == true)
             {
                 Edytuj_czesc();
             }
         }
+        
         private void Usun_czesc()
         {
             
@@ -139,7 +156,6 @@ namespace PodkladexApp
                 if (textBox_nazwa_obslugi.Text == "" || textBox_nazwa_obslugi.Text == null)
                 {
                     MessageBox.Show("Nazwa jest pusta! Wpisz nazwę.", "Błąd");
-
                 }
                 else
                 {

@@ -16,6 +16,10 @@ namespace PodkladexApp
     public partial class Form_Gwarancja : Form
     {
         PodkladexContext context;
+
+        bool flaga_usun = false;
+        bool flaga_edytuj = false;
+        bool flaga_dodaj = false;
         public Form_Gwarancja(PodkladexContext context)
         {
             InitializeComponent();
@@ -23,72 +27,62 @@ namespace PodkladexApp
             comboBox_lista_gwarnacja_maszyny.DataSource = context.Maszyna.ToList();
             comboBox_lista_gwarnacja_maszyny.DisplayMember = "Nazwa";
             comboBox_lista_gwarnacja_maszyny.SelectedIndex = -1;
+            comboBox_lista_gwarnacja_maszyny.ValueMember = "IdMaszyna";
+
             comboBox_lista_firm.DataSource = context.Firma.ToList();
             comboBox_lista_firm.DisplayMember = "Nazwa";
             comboBox_lista_firm.SelectedIndex = -1;
-            button_potwierdz.Visible = false;
+
             button_dodaj_gwarancje.FlatStyle = FlatStyle.Standard;
             button_edytuj_gwarancje.FlatStyle = FlatStyle.Standard;
             button_usun_gwarancje.FlatStyle = FlatStyle.Standard;
-            dataGridView_gwarancja_info.Visible = false;
+
+            panel1.Visible = false;
+            panel2.Visible = false;
+
+            var lista = context.Gwarancja
+                .Select(g => new
+                {
+                    g.IdGwarancja,
+                    g.IdMaszyna,
+                    Maszyna = g.IdMaszynaNavigation.Nazwa,
+                    g.IdFirma,
+                    Firma = g.IdFirmaNavigation.Nazwa,
+                    g.CzasGwarancji,
+                    g.Warunki
+                })
+                    .ToList();
+            dataGridView_gwarancja_info.DataSource = lista;
+            dataGridView_gwarancja_info.Columns["IdGwarancja"].Visible = false;
+            dataGridView_gwarancja_info.Columns["IdMaszyna"].Visible = false;
+            dataGridView_gwarancja_info.Columns["IdFirma"].Visible = false;
+            dataGridView_gwarancja_info.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
 
-            label3.Visible = false;
-            label_lista_rodzajow.Visible = false;
-            comboBox_lista_gwarnacja_maszyny.Visible = false;
-            label1.Visible = false;
-            label2.Visible = false;
-            textBox_miesiace_gwarancji.Visible = false;
-            label_dodajczesc.Visible = false;
-            textBox_warunki_gwarancji.Visible=false;
-            comboBox_lista_firm.Visible = false;
-        }
 
-        private void button_powrot_z_gwarancja_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private void button_dodaj_gwarancje_Click(object sender, EventArgs e)
         {
+            panel1.Visible = true;
+
+            panel2.Visible = false;
+
             button_dodaj_gwarancje.FlatStyle = FlatStyle.Flat;
             button_edytuj_gwarancje.FlatStyle = FlatStyle.Standard;
             button_usun_gwarancje.FlatStyle = FlatStyle.Standard;
-            button_potwierdz.Visible = true;
-            dataGridView_gwarancja_info.Visible = false;
-            label3.Visible = false;
-            label_lista_rodzajow.Visible = true;
-            comboBox_lista_gwarnacja_maszyny.Visible = true;
-            label1.Visible = true;
-            label2.Visible = true;
-            textBox_miesiace_gwarancji.Visible = true;
-            label_dodajczesc.Visible = true;
-            textBox_warunki_gwarancji.Visible = true;
-            comboBox_lista_firm.Visible = true;
         }
+
 
         private void button_usun_gwarancje_Click(object sender, EventArgs e)
         {
             button_dodaj_gwarancje.FlatStyle = FlatStyle.Standard;
             button_edytuj_gwarancje.FlatStyle = FlatStyle.Standard;
             button_usun_gwarancje.FlatStyle = FlatStyle.Flat;
-            button_potwierdz.Visible = true;
-            dataGridView_gwarancja_info.Visible = true;
-            label3.Visible = true;
+            panel2.Visible = true;
+            panel1.Visible = false;
 
-            dataGridView_gwarancja_info.Visible = true;
-            label3.Visible = true;
-            button_potwierdz.Visible = true;
-            dataGridView_gwarancja_info.Visible = true;
-            label3.Visible = true;
-            label_lista_rodzajow.Visible = true;
-            comboBox_lista_gwarnacja_maszyny.Visible = true;
-            label1.Visible = true;
-            label2.Visible = true;
-            textBox_miesiace_gwarancji.Visible = true;
-            label_dodajczesc.Visible = true;
-            textBox_warunki_gwarancji.Visible = true;
-            comboBox_lista_firm.Visible = true;
+
         }
 
         private void button_edytuj_gwarancje_Click(object sender, EventArgs e)
@@ -96,20 +90,53 @@ namespace PodkladexApp
             button_dodaj_gwarancje.FlatStyle = FlatStyle.Standard;
             button_edytuj_gwarancje.FlatStyle = FlatStyle.Flat;
             button_usun_gwarancje.FlatStyle = FlatStyle.Standard;
-            button_potwierdz.Visible = true;
-            dataGridView_gwarancja_info.Visible = true;
-            label3.Visible = true;
-            button_potwierdz.Visible = true;
-            dataGridView_gwarancja_info.Visible = true;
-            label3.Visible = true;
-            label_lista_rodzajow.Visible = true;
-            comboBox_lista_gwarnacja_maszyny.Visible = true;
-            label1.Visible = true;
-            label2.Visible = true;
-            textBox_miesiace_gwarancji.Visible = true;
-            label_dodajczesc.Visible = true;
-            textBox_warunki_gwarancji.Visible = true;
-            comboBox_lista_firm.Visible = true;
+
+            panel1.Visible = true;
+            panel2.Visible = true;
+
+        }
+
+        private void button_potwierdz_Click(object sender, EventArgs e)
+        {
+            if (flaga_usun == true)
+            {
+                Usun_czesc();
+            }
+            if (flaga_dodaj == true)
+            {
+                Dodaj_czesc();
+
+            }
+            if (flaga_edytuj == true)
+            {
+                Edytuj_czesc();
+            }
+
+        }
+        private void Usun_czesc()
+        {
+
+        }
+        private void Edytuj_czesc()
+        {
+
+        }
+        private void Dodaj_czesc()
+        {
+
+        }
+
+        private void dataGridView_gwarancja_info_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView_gwarancja_info.CurrentRow != null)
+            {
+                var idMaszyny = dataGridView_gwarancja_info.CurrentRow.Cells["IdMaszyna"].Value;
+                comboBox_lista_gwarnacja_maszyny.SelectedValue = idMaszyny;
+            }
+        }
+        private void dataGridView_gwarancja_info_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+         
         }
     }
 }
