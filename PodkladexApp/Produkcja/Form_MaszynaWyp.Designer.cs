@@ -33,10 +33,14 @@
             cb_wyborMaszyny = new ComboBox();
             dgv_Wyposazenie = new DataGridView();
             tableLayoutPanel2 = new TableLayoutPanel();
+            btn_dodaj = new Button();
+            btn_edytuj = new Button();
+            btn_przypisz = new Button();
             label2 = new Label();
             txtbox_wyszukaj = new TextBox();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_Wyposazenie).BeginInit();
+            tableLayoutPanel2.SuspendLayout();
             SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -112,6 +116,9 @@
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
+            tableLayoutPanel2.Controls.Add(btn_dodaj, 0, 0);
+            tableLayoutPanel2.Controls.Add(btn_edytuj, 1, 0);
+            tableLayoutPanel2.Controls.Add(btn_przypisz, 2, 0);
             tableLayoutPanel2.Dock = DockStyle.Fill;
             tableLayoutPanel2.Location = new Point(3, 600);
             tableLayoutPanel2.Margin = new Padding(3, 4, 3, 4);
@@ -120,6 +127,43 @@
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel2.Size = new Size(933, 66);
             tableLayoutPanel2.TabIndex = 3;
+            // 
+            // btn_dodaj
+            // 
+            btn_dodaj.AutoSize = true;
+            btn_dodaj.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btn_dodaj.Dock = DockStyle.Fill;
+            btn_dodaj.Location = new Point(3, 3);
+            btn_dodaj.Name = "btn_dodaj";
+            btn_dodaj.Size = new Size(304, 60);
+            btn_dodaj.TabIndex = 0;
+            btn_dodaj.Text = "Dodaj";
+            btn_dodaj.UseVisualStyleBackColor = true;
+            btn_dodaj.Click += btn_dodaj_Click;
+            // 
+            // btn_edytuj
+            // 
+            btn_edytuj.AutoSize = true;
+            btn_edytuj.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btn_edytuj.Dock = DockStyle.Fill;
+            btn_edytuj.Location = new Point(313, 3);
+            btn_edytuj.Name = "btn_edytuj";
+            btn_edytuj.Size = new Size(305, 60);
+            btn_edytuj.TabIndex = 1;
+            btn_edytuj.Text = "Edytuj";
+            btn_edytuj.UseVisualStyleBackColor = true;
+            // 
+            // btn_przypisz
+            // 
+            btn_przypisz.AutoSize = true;
+            btn_przypisz.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btn_przypisz.Dock = DockStyle.Fill;
+            btn_przypisz.Location = new Point(624, 3);
+            btn_przypisz.Name = "btn_przypisz";
+            btn_przypisz.Size = new Size(306, 60);
+            btn_przypisz.TabIndex = 2;
+            btn_przypisz.Text = "Przypisz wyposażenie";
+            btn_przypisz.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -154,6 +198,8 @@
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_Wyposazenie).EndInit();
+            tableLayoutPanel2.ResumeLayout(false);
+            tableLayoutPanel2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -167,5 +213,8 @@
         private TableLayoutPanel tableLayoutPanel2;
         private Label label2;
         private TextBox txtbox_wyszukaj;
+        private Button btn_dodaj;
+        private Button btn_edytuj;
+        private Button btn_przypisz;
     }
 }
