@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace PodkladexApp.Zaopatrzenie
 {
-    public partial class Form_ZamowMaterial: Form
+    public partial class Form_HistoriaZamowien : Form
     {
-        public Form_ZamowMaterial()
+        public Form_HistoriaZamowien()
         {
             InitializeComponent();
+        }
+
+        private void Form_HistoriaZamowien_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

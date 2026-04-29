@@ -210,12 +210,12 @@ INSERT INTO Rodzaj_umowy (Nazwa, Opis) VALUES
 ('Umowa o dzielo', 'Projektowa');
 GO
 
-INSERT INTO Szkolenie (Nazwa, Opis, Czy_obowiazkowe, Waznosc_obowiazkowe) VALUES
-('BHP wstepne', 'Szkolenie wstepne BHP', 1, '2027-01-15'),
-('BHP okresowe', 'Szkolenie okresowe dla pracownikow produkcji', 1, '2027-06-01'),
-('Obsluga prasy', 'Szkolenie stanowiskowe dla operatorow pras', 1, '2027-03-31'),
-('Kontrola jakosci', 'Podstawy kontroli wyrobow i pomiarow', 0, NULL),
-('Pierwsza pomoc', 'Szkolenie z udzielania pierwszej pomocy', 0, '2027-09-30');
+INSERT INTO Szkolenie (Nazwa, Opis, Czy_obowiazkowe, Waznosc) VALUES
+('Szkolenie BHP wstępne', 'Szkolenie bezpieczeństwa i higieny pracy dla nowo zatrudnionych pracowników', 1, 365),
+('Szkolenie BHP okresowe', 'Okresowe szkolenie BHP dla pracowników administracyjno-biurowych i produkcyjnych', 1, 1095),
+('Szkolenie PPOŻ', 'Szkolenie z zakresu ochrony przeciwpożarowej i zasad ewakuacji', 1, 730),
+('Pierwsza pomoc', 'Szkolenie z udzielania pierwszej pomocy przedmedycznej', 1, 730),
+('Szkolenie z CAD', 'Szkolenie z oprogramowania CAD', 0, 1095);
 GO
 
 INSERT INTO Typ_zwolnienia (Nazwa, Opis) VALUES

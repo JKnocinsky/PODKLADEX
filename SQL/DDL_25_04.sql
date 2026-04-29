@@ -38,7 +38,7 @@ CREATE TABLE Szkolenie (
     Nazwa NVARCHAR(100) NOT NULL,
     Opis NVARCHAR(255) NULL,
     Czy_obowiazkowe BIT NULL,
-    Waznosc_obowiazkowe DATE NULL
+    Waznosc INT NULL
 );
 GO
 

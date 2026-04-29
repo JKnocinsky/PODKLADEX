@@ -39,6 +39,7 @@ namespace PodkladexApp
             // 2. Resetowanie widoczności standardowych elementów
             panel_dane_firmy.Visible = false;
             comboBox_Nazwa_firmy.Visible = false;
+            label_ProszeWybracFirme.Visible = false;
             comboBox_Nazwa_firmy.DataSource = null;
             comboBox_Nazwa_firmy.SelectedIndex = -1;
 
@@ -82,6 +83,7 @@ namespace PodkladexApp
 
             // 4. Odkrywamy ComboBox, ukrywamy panel do czasu wyboru
             comboBox_Nazwa_firmy.Visible = true;
+            label_ProszeWybracFirme.Visible = true;
             panel_dane_firmy.Visible = false;
         }
 
@@ -106,6 +108,7 @@ namespace PodkladexApp
 
                 // POKAZUJEMY PRZYCISK USUWANIA (bo jesteśmy w trybie edycji)
                 button_usun_firme.Visible = true;
+                label_ProszeWybracFirme.Visible = false;
             }
         }
 
@@ -287,6 +290,11 @@ namespace PodkladexApp
                 // Użyj formularzKoszyka.ShowDialog(); jeśli chcesz, aby użytkownik nie mógł 
                 // klikać niczego w głównym menu, dopóki nie zamknie procesu zamówienia.
             }
+        }
+
+        private void label_ProszeWybracFirme_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

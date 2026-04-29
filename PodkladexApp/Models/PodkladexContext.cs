@@ -995,7 +995,6 @@ public partial class PodkladexContext : DbContext
                 .IsRequired()
                 .HasMaxLength(100);
             entity.Property(e => e.Opis).HasMaxLength(255);
-            entity.Property(e => e.WaznoscObowiazkowe).HasColumnName("Waznosc_obowiazkowe");
         });
 
         modelBuilder.Entity<Typ>(entity =>

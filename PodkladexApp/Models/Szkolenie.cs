@@ -15,7 +15,7 @@ public partial class Szkolenie
 
     public bool? CzyObowiazkowe { get; set; }
 
-    public DateOnly? WaznoscObowiazkowe { get; set; }
+    public int? Waznosc { get; set; }
 
     public virtual ICollection<PracownikSzkolenia> PracownikSzkolenia { get; set; } = new List<PracownikSzkolenia>();
 }

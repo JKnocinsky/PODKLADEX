@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using PodkladexApp.Models; // <-- Wymagane, aby widzieć klasy takie jak PodkladexContext, Produkt, Material
 using System.ComponentModel;
 
+
 namespace PodkladexApp.Zaopatrzenie
 {
 
@@ -127,6 +128,7 @@ namespace PodkladexApp.Zaopatrzenie
         public Form_SzczegolyZamowienia()
         {
             InitializeComponent();
+
         }
 
         private void Form_SzczegolyZamowienia_Load(object sender, EventArgs e)

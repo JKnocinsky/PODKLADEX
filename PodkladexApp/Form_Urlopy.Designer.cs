@@ -44,6 +44,8 @@
             label_datarozp = new Label();
             comboBox_Rodzaj_Urlopu = new ComboBox();
             comboBox_Dane_Pracownika = new ComboBox();
+            comboBox_filtrPracownik = new ComboBox();
+            label_filtr = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView_urlopy).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -51,18 +53,20 @@
             // dataGridView_urlopy
             // 
             dataGridView_urlopy.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView_urlopy.Location = new Point(19, 58);
-            dataGridView_urlopy.Margin = new Padding(10);
+            dataGridView_urlopy.Location = new Point(17, 55);
+            dataGridView_urlopy.Margin = new Padding(9, 8, 9, 8);
             dataGridView_urlopy.Name = "dataGridView_urlopy";
             dataGridView_urlopy.RowHeadersWidth = 51;
-            dataGridView_urlopy.Size = new Size(788, 257);
+            dataGridView_urlopy.Size = new Size(899, 193);
             dataGridView_urlopy.TabIndex = 0;
             // 
             // button_odswiez
             // 
-            button_odswiez.Location = new Point(19, 326);
+            button_odswiez.Font = new Font("Segoe UI", 14.25F);
+            button_odswiez.Location = new Point(17, 268);
+            button_odswiez.Margin = new Padding(3, 2, 3, 2);
             button_odswiez.Name = "button_odswiez";
-            button_odswiez.Size = new Size(94, 29);
+            button_odswiez.Size = new Size(161, 51);
             button_odswiez.TabIndex = 1;
             button_odswiez.Text = "Odśwież";
             button_odswiez.UseVisualStyleBackColor = true;
@@ -70,9 +74,11 @@
             // 
             // button_zatwierdz
             // 
-            button_zatwierdz.Location = new Point(360, 326);
+            button_zatwierdz.Font = new Font("Segoe UI", 14.25F);
+            button_zatwierdz.Location = new Point(405, 268);
+            button_zatwierdz.Margin = new Padding(3, 2, 3, 2);
             button_zatwierdz.Name = "button_zatwierdz";
-            button_zatwierdz.Size = new Size(94, 29);
+            button_zatwierdz.Size = new Size(122, 51);
             button_zatwierdz.TabIndex = 2;
             button_zatwierdz.Text = "Zatwierdź";
             button_zatwierdz.UseVisualStyleBackColor = true;
@@ -81,9 +87,11 @@
             // checkBox_tylkoNiezatwierdzone
             // 
             checkBox_tylkoNiezatwierdzone.AutoSize = true;
-            checkBox_tylkoNiezatwierdzone.Location = new Point(19, 21);
+            checkBox_tylkoNiezatwierdzone.Font = new Font("Segoe UI", 14.25F);
+            checkBox_tylkoNiezatwierdzone.Location = new Point(17, 16);
+            checkBox_tylkoNiezatwierdzone.Margin = new Padding(3, 2, 3, 2);
             checkBox_tylkoNiezatwierdzone.Name = "checkBox_tylkoNiezatwierdzone";
-            checkBox_tylkoNiezatwierdzone.Size = new Size(239, 24);
+            checkBox_tylkoNiezatwierdzone.Size = new Size(295, 29);
             checkBox_tylkoNiezatwierdzone.TabIndex = 3;
             checkBox_tylkoNiezatwierdzone.Text = "Wyświetl tylko niezatwierdzone";
             checkBox_tylkoNiezatwierdzone.UseVisualStyleBackColor = true;
@@ -91,33 +99,40 @@
             // 
             // button_dodajWniosek
             // 
-            button_dodajWniosek.Location = new Point(701, 323);
+            button_dodajWniosek.Font = new Font("Segoe UI", 14.25F);
+            button_dodajWniosek.Location = new Point(754, 268);
+            button_dodajWniosek.Margin = new Padding(3, 2, 3, 2);
             button_dodajWniosek.Name = "button_dodajWniosek";
-            button_dodajWniosek.Size = new Size(94, 29);
+            button_dodajWniosek.Size = new Size(162, 51);
             button_dodajWniosek.TabIndex = 4;
             button_dodajWniosek.Text = "Dodaj wniosek";
             button_dodajWniosek.UseVisualStyleBackColor = true;
+            button_dodajWniosek.Click += button_dodajWniosek_Click;
             // 
             // dateTimePicker_datarozp
             // 
-            dateTimePicker_datarozp.Location = new Point(220, 112);
+            dateTimePicker_datarozp.Font = new Font("Segoe UI", 14.25F);
+            dateTimePicker_datarozp.Location = new Point(249, 102);
+            dateTimePicker_datarozp.Margin = new Padding(3, 2, 3, 2);
             dateTimePicker_datarozp.Name = "dateTimePicker_datarozp";
-            dateTimePicker_datarozp.Size = new Size(282, 27);
+            dateTimePicker_datarozp.Size = new Size(476, 33);
             dateTimePicker_datarozp.TabIndex = 0;
             // 
             // dateTimePicker_datazak
             // 
-            dateTimePicker_datazak.Location = new Point(220, 152);
+            dateTimePicker_datazak.Font = new Font("Segoe UI", 14.25F);
+            dateTimePicker_datazak.Location = new Point(249, 138);
+            dateTimePicker_datazak.Margin = new Padding(3, 2, 3, 2);
             dateTimePicker_datazak.Name = "dateTimePicker_datazak";
-            dateTimePicker_datazak.Size = new Size(282, 27);
+            dateTimePicker_datazak.Size = new Size(476, 33);
             dateTimePicker_datazak.TabIndex = 1;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(15, 23);
+            label1.Location = new Point(13, 17);
             label1.Name = "label1";
-            label1.Size = new Size(0, 20);
+            label1.Size = new Size(0, 15);
             label1.TabIndex = 2;
             // 
             // panel1
@@ -132,85 +147,121 @@
             panel1.Controls.Add(label1);
             panel1.Controls.Add(dateTimePicker_datazak);
             panel1.Controls.Add(dateTimePicker_datarozp);
-            panel1.Location = new Point(19, 361);
+            panel1.Location = new Point(17, 360);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(785, 283);
+            panel1.Size = new Size(905, 258);
             panel1.TabIndex = 5;
             // 
             // label_datazak
             // 
             label_datazak.AutoSize = true;
-            label_datazak.Location = new Point(13, 155);
+            label_datazak.Font = new Font("Segoe UI", 14.25F);
+            label_datazak.Location = new Point(8, 138);
             label_datazak.Name = "label_datazak";
-            label_datazak.Size = new Size(173, 20);
+            label_datazak.Size = new Size(221, 25);
             label_datazak.TabIndex = 4;
             label_datazak.Text = "Data zakończenia urlopu";
-            label_datazak.Click += label3_Click;
             // 
             // button_dodajWniosekdoZatwierdzenia
             // 
-            button_dodajWniosekdoZatwierdzenia.Location = new Point(263, 222);
+            button_dodajWniosekdoZatwierdzenia.Font = new Font("Segoe UI", 14.25F);
+            button_dodajWniosekdoZatwierdzenia.Location = new Point(290, 194);
+            button_dodajWniosekdoZatwierdzenia.Margin = new Padding(3, 2, 3, 2);
             button_dodajWniosekdoZatwierdzenia.Name = "button_dodajWniosekdoZatwierdzenia";
-            button_dodajWniosekdoZatwierdzenia.Size = new Size(239, 29);
+            button_dodajWniosekdoZatwierdzenia.Size = new Size(319, 51);
             button_dodajWniosekdoZatwierdzenia.TabIndex = 4;
             button_dodajWniosekdoZatwierdzenia.Text = "Dodaj wniosek do zatwierdzenia";
             button_dodajWniosekdoZatwierdzenia.UseVisualStyleBackColor = true;
+            button_dodajWniosekdoZatwierdzenia.Click += button_dodajWniosekdoZatwierdzenia_Click;
             // 
             // label_rodzajurlopu
             // 
             label_rodzajurlopu.AutoSize = true;
-            label_rodzajurlopu.Location = new Point(15, 68);
+            label_rodzajurlopu.Font = new Font("Segoe UI", 14.25F);
+            label_rodzajurlopu.Location = new Point(13, 70);
             label_rodzajurlopu.Name = "label_rodzajurlopu";
-            label_rodzajurlopu.Size = new Size(102, 20);
+            label_rodzajurlopu.Size = new Size(129, 25);
             label_rodzajurlopu.TabIndex = 4;
             label_rodzajurlopu.Text = "Rodzaj urlopu";
             // 
             // label_pracownik
             // 
             label_pracownik.AutoSize = true;
-            label_pracownik.Location = new Point(15, 34);
+            label_pracownik.Font = new Font("Segoe UI", 14.25F);
+            label_pracownik.Location = new Point(13, 33);
             label_pracownik.Name = "label_pracownik";
-            label_pracownik.Size = new Size(76, 20);
+            label_pracownik.Size = new Size(99, 25);
             label_pracownik.TabIndex = 4;
             label_pracownik.Text = "Pracownik";
             // 
             // label_datarozp
             // 
             label_datarozp.AutoSize = true;
-            label_datarozp.Location = new Point(13, 115);
+            label_datarozp.Font = new Font("Segoe UI", 14.25F);
+            label_datarozp.Location = new Point(8, 102);
             label_datarozp.Name = "label_datarozp";
-            label_datarozp.Size = new Size(172, 20);
+            label_datarozp.Size = new Size(218, 25);
             label_datarozp.TabIndex = 4;
             label_datarozp.Text = "Data rozpoczęcia urlopu";
             // 
             // comboBox_Rodzaj_Urlopu
             // 
+            comboBox_Rodzaj_Urlopu.Font = new Font("Segoe UI", 14.25F);
             comboBox_Rodzaj_Urlopu.FormattingEnabled = true;
-            comboBox_Rodzaj_Urlopu.Location = new Point(129, 65);
+            comboBox_Rodzaj_Urlopu.Location = new Point(162, 62);
+            comboBox_Rodzaj_Urlopu.Margin = new Padding(3, 2, 3, 2);
             comboBox_Rodzaj_Urlopu.Name = "comboBox_Rodzaj_Urlopu";
-            comboBox_Rodzaj_Urlopu.Size = new Size(596, 28);
+            comboBox_Rodzaj_Urlopu.Size = new Size(563, 33);
             comboBox_Rodzaj_Urlopu.TabIndex = 3;
-            comboBox_Rodzaj_Urlopu.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             // 
             // comboBox_Dane_Pracownika
             // 
+            comboBox_Dane_Pracownika.Font = new Font("Segoe UI", 14.25F);
             comboBox_Dane_Pracownika.FormattingEnabled = true;
-            comboBox_Dane_Pracownika.Location = new Point(129, 31);
+            comboBox_Dane_Pracownika.Location = new Point(162, 25);
+            comboBox_Dane_Pracownika.Margin = new Padding(3, 2, 3, 2);
             comboBox_Dane_Pracownika.Name = "comboBox_Dane_Pracownika";
-            comboBox_Dane_Pracownika.Size = new Size(596, 28);
+            comboBox_Dane_Pracownika.Size = new Size(563, 33);
             comboBox_Dane_Pracownika.TabIndex = 3;
+            comboBox_Dane_Pracownika.SelectedIndexChanged += comboBox_Dane_Pracownika_SelectedIndexChanged;
+            // 
+            // comboBox_filtrPracownik
+            // 
+            comboBox_filtrPracownik.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            comboBox_filtrPracownik.FormattingEnabled = true;
+            comboBox_filtrPracownik.Location = new Point(601, 15);
+            comboBox_filtrPracownik.Margin = new Padding(3, 2, 3, 2);
+            comboBox_filtrPracownik.Name = "comboBox_filtrPracownik";
+            comboBox_filtrPracownik.Size = new Size(315, 33);
+            comboBox_filtrPracownik.TabIndex = 5;
+            comboBox_filtrPracownik.SelectedIndexChanged += comboBox_filtrPracownik_SelectedIndexChanged;
+            // 
+            // label_filtr
+            // 
+            label_filtr.AutoSize = true;
+            label_filtr.Font = new Font("Segoe UI", 14.25F);
+            label_filtr.Location = new Point(493, 18);
+            label_filtr.Name = "label_filtr";
+            label_filtr.Size = new Size(103, 25);
+            label_filtr.TabIndex = 6;
+            label_filtr.Text = "Pracownik:";
             // 
             // Form_Urlopy
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(919, 698);
+            BackColor = Color.Gainsboro;
+            ClientSize = new Size(934, 711);
+            Controls.Add(label_filtr);
+            Controls.Add(comboBox_filtrPracownik);
             Controls.Add(panel1);
             Controls.Add(button_dodajWniosek);
             Controls.Add(checkBox_tylkoNiezatwierdzone);
             Controls.Add(button_zatwierdz);
             Controls.Add(button_odswiez);
             Controls.Add(dataGridView_urlopy);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Form_Urlopy";
             Text = "Form_Urlopy";
             Load += Form_Urlopy_Load;
@@ -239,5 +290,7 @@
         private Label label_rodzajurlopu;
         private ComboBox comboBox_Rodzaj_Urlopu;
         private Button button_dodajWniosekdoZatwierdzenia;
+        private ComboBox comboBox_filtrPracownik;
+        private Label label_filtr;
     }
 }
