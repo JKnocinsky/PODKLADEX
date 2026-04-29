@@ -22,8 +22,31 @@ namespace PodkladexApp.Zaopatrzenie
             InitializeComponent();
         }
 
+        private void UstawWygladTabeli()
+        {
+            // Ustawienie czcionki dla komórek z danymi (Segoe UI, 14px)
+            dataGridView_HistoriaZamowien.DefaultCellStyle.Font = new Font("Segoe UI", 14);
+
+            // Ustawienie czcionki dla nagłówków kolumn (Segoe UI, 14px, opcjonalnie pogrubiona)
+            dataGridView_HistoriaZamowien.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+
+            // Zwiększenie wysokości wierszy, żeby większa czcionka się swobodnie mieściła
+            dataGridView_HistoriaZamowien.RowTemplate.Height = 40;
+            dataGridView_HistoriaZamowien.ColumnHeadersHeight = 50;
+
+            // Żeby tekst ładnie mieścił się w komórkach (opcjonalne, ale polecane)
+            dataGridView_HistoriaZamowien.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            dateTimePicker_Poczatek.Font = new Font("Segoe UI", 14);
+            dateTimePicker_Koniec.Font = new Font("Segoe UI", 14);
+        }
+
         private void Form_HistoriaZamowien_Load(object sender, EventArgs e)
         {
+
+
+            UstawWygladTabeli();
+
             // Inicjalizacja zakresu dat w kontrolkach
             dateTimePicker_Poczatek.Value = DateTime.Now.AddMonths(-1);
             dateTimePicker_Koniec.Value = DateTime.Now;
@@ -47,40 +70,74 @@ namespace PodkladexApp.Zaopatrzenie
 
         private void WyswietlHistorieZamowien()
         {
-            // Konwersja dat z DateTimePicker na DateOnly (wymagane przez model Zamowienie)
+            // Zabezpieczenie przed błędem, jeśli ComboBox nie jest jeszcze zainicjalizowany
+            if (comboBox_sortowanie.SelectedIndex == -1) return;
+
+            // Konwersja dat z DateTimePicker na DateOnly (wymagane przez model)
             var dataOd = DateOnly.FromDateTime(dateTimePicker_Poczatek.Value);
             var dataDo = DateOnly.FromDateTime(dateTimePicker_Koniec.Value);
 
-            // Pobranie danych z bazy z wykorzystaniem właściwości nawigacyjnych
-            var historia = _context.Zamowienie
+            // 1. Pobranie danych z bazy (bez użycia .ToList(), aby posortować je w SQL, a nie w pamięci RAM)
+            var zapytanie = _context.Zamowienie
                 .Where(z => z.DataPrzyjeciaZ >= dataOd && z.DataPrzyjeciaZ <= dataDo)
                 .Select(z => new
                 {
-                    // Kolumna 1: Imię i nazwisko klienta z tabeli Osoba
+                    IdZamowienia = z.IdZamowienie,
+
+                    // Złączenie Imie i Nazwisko z tabeli Osoba
                     Klient = z.IdKlientNavigation.IdOsobaNavigation != null
                         ? z.IdKlientNavigation.IdOsobaNavigation.Imie + " " + z.IdKlientNavigation.IdOsobaNavigation.Nazwisko
                         : "Brak danych",
 
-                    // Kolumna 2: Data złożenia zamówienia
                     DataZlozenia = z.DataPrzyjeciaZ,
 
-                    // Kolumna 3: Cena zbiorcza (Suma Cena * Ilosc z detali)
-                    CenaZbiorcza = z.SzczegolyZamowienia.Sum(sz => sz.Cena * sz.Ilosc)
-                })
-                .ToList();
+                    // Suma całkowita dla danego zamówienia: Ilość * Cena
+                    CenaZbiorcza = z.SzczegolyZamowienia.Any()
+                                   ? z.SzczegolyZamowienia.Sum(sz => sz.Cena * sz.Ilosc)
+                                   : 0m
+                });
 
-            // Przypisanie danych do właściwej kontrolki DataGridView
-            dataGridView_HistoriaZamowien.DataSource = historia;
-
-            // Formatowanie nagłówków kolumn
-            if (dataGridView_HistoriaZamowien.Columns.Count > 0)
+            // 2. Logika sortowania za pomocą ComboBoxa
+            switch (comboBox_sortowanie.SelectedIndex)
             {
-                dataGridView_HistoriaZamowien.Columns["Klient"].HeaderText = "Klient (Imię i Nazwisko)";
-                dataGridView_HistoriaZamowien.Columns["DataZlozenia"].HeaderText = "Data zamówienia";
-                dataGridView_HistoriaZamowien.Columns["CenaZbiorcza"].HeaderText = "Wartość zamówienia";
-                dataGridView_HistoriaZamowien.Columns["CenaZbiorcza"].DefaultCellStyle.Format = "C2"; // Format walutowy
+                case 0: // "Data - od najnowszych"
+                    zapytanie = zapytanie.OrderByDescending(z => z.DataZlozenia);
+                    break;
+                case 1: // "Data - od najstarszych"
+                    zapytanie = zapytanie.OrderBy(z => z.DataZlozenia);
+                    break;
+                case 2: // "Cena - malejąco"
+                    zapytanie = zapytanie.OrderByDescending(z => z.CenaZbiorcza);
+                    break;
+                case 3: // "Cena - rosnąco"
+                    zapytanie = zapytanie.OrderBy(z => z.CenaZbiorcza);
+                    break;
+                case 4: // "Klient (A-Z)"
+                    zapytanie = zapytanie.OrderBy(z => z.Klient);
+                    break;
             }
 
+            // 3. Przypisanie gotowych (i posortowanych) danych do DataGridView
+            dataGridView_HistoriaZamowien.DataSource = zapytanie.ToList();
+
+            // 4. Formatowanie nagłówków kolumn
+            if (dataGridView_HistoriaZamowien.Columns.Count > 0)
+            {
+                if (dataGridView_HistoriaZamowien.Columns["IdZamowienia"] != null)
+                    dataGridView_HistoriaZamowien.Columns["IdZamowienia"].HeaderText = "ID Zamówienia";
+
+                if (dataGridView_HistoriaZamowien.Columns["Klient"] != null)
+                    dataGridView_HistoriaZamowien.Columns["Klient"].HeaderText = "Klient (Imię i Nazwisko)";
+
+                if (dataGridView_HistoriaZamowien.Columns["DataZlozenia"] != null)
+                    dataGridView_HistoriaZamowien.Columns["DataZlozenia"].HeaderText = "Data zamówienia";
+
+                if (dataGridView_HistoriaZamowien.Columns["CenaZbiorcza"] != null)
+                {
+                    dataGridView_HistoriaZamowien.Columns["CenaZbiorcza"].HeaderText = "Wartość zamówienia";
+                    dataGridView_HistoriaZamowien.Columns["CenaZbiorcza"].DefaultCellStyle.Format = "C2"; // Format walutowy (np. zł)
+                }
+            }
         }
 
         // Możesz dodać zdarzenia, aby odświeżać listę przy zmianie daty lub sortowania
@@ -99,6 +156,13 @@ namespace PodkladexApp.Zaopatrzenie
         }
 
         private void comboBox_sortowanie_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Za każdym razem, gdy zmienisz wartość w ComboBoxie, 
+            // lista pobierze się i posortuje na nowo automatycznie!
+            WyswietlHistorieZamowien();
+        }
+
+        private void label_data_Poczatku_Click(object sender, EventArgs e)
         {
 
         }
