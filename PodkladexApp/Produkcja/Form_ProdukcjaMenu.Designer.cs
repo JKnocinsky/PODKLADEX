@@ -39,6 +39,8 @@
             // 
             // tableLayoutPanel1
             // 
+            tableLayoutPanel1.AutoSize = true;
+            tableLayoutPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             tableLayoutPanel1.ColumnCount = 2;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 19.49064F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 80.50936F));
@@ -56,6 +58,9 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 7.5F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 7.5F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 70F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel1.Size = new Size(1684, 791);
             tableLayoutPanel1.TabIndex = 0;
             // 
@@ -103,6 +108,7 @@
             btn_normyP.TabIndex = 6;
             btn_normyP.Text = "Normy Produkcyjne";
             btn_normyP.UseVisualStyleBackColor = true;
+            btn_normyP.Click += btn_normyP_Click;
             // 
             // btn_prod
             // 
@@ -115,16 +121,17 @@
             btn_prod.Text = "Produkcja";
             btn_prod.UseVisualStyleBackColor = true;
             // 
-            // Form_Produkcja
+            // Form_ProdukcjaMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1684, 791);
             Controls.Add(tableLayoutPanel1);
-            Name = "Form_Produkcja";
+            Name = "Form_ProdukcjaMenu";
             Text = "Form_Produkcja";
             tableLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
