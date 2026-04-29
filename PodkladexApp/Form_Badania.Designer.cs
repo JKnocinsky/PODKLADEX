@@ -79,13 +79,13 @@
             panel1.Controls.Add(comboBox_pracownik);
             panel1.Location = new Point(24, 277);
             panel1.Name = "panel1";
-            panel1.Size = new Size(852, 376);
+            panel1.Size = new Size(852, 394);
             panel1.TabIndex = 10;
             // 
             // button_dodajBadanie
             // 
             button_dodajBadanie.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_dodajBadanie.Location = new Point(260, 331);
+            button_dodajBadanie.Location = new Point(323, 345);
             button_dodajBadanie.Name = "button_dodajBadanie";
             button_dodajBadanie.Size = new Size(143, 42);
             button_dodajBadanie.TabIndex = 5;
@@ -204,13 +204,14 @@
             comboBox_pracownik.Name = "comboBox_pracownik";
             comboBox_pracownik.Size = new Size(331, 33);
             comboBox_pracownik.TabIndex = 0;
+            comboBox_pracownik.TextUpdate += comboBox_pracownik_TextUpdate;
             // 
             // dataGridView_badania
             // 
             dataGridView_badania.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView_badania.Location = new Point(27, 69);
+            dataGridView_badania.Location = new Point(24, 69);
             dataGridView_badania.Name = "dataGridView_badania";
-            dataGridView_badania.Size = new Size(798, 150);
+            dataGridView_badania.Size = new Size(852, 154);
             dataGridView_badania.TabIndex = 9;
             // 
             // checkBox_tylkoNiewazne
@@ -229,7 +230,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.25F);
-            label1.Location = new Point(426, 16);
+            label1.Location = new Point(477, 21);
             label1.Name = "label1";
             label1.Size = new Size(190, 25);
             label1.TabIndex = 7;
@@ -239,16 +240,18 @@
             // 
             comboBox_filtrPracownik.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox_filtrPracownik.FormattingEnabled = true;
-            comboBox_filtrPracownik.Location = new Point(622, 16);
+            comboBox_filtrPracownik.Location = new Point(673, 21);
             comboBox_filtrPracownik.Name = "comboBox_filtrPracownik";
             comboBox_filtrPracownik.Size = new Size(203, 33);
             comboBox_filtrPracownik.TabIndex = 6;
             comboBox_filtrPracownik.SelectedIndexChanged += comboBox_filtrPracownik_SelectedIndexChanged;
+            comboBox_filtrPracownik.TextUpdate += comboBox_filtrPracownik_TextUpdate;
             // 
             // Form_Badania
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Gainsboro;
             ClientSize = new Size(903, 676);
             Controls.Add(button_noweBadanie);
             Controls.Add(panel1);

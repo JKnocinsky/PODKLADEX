@@ -1,5 +1,6 @@
 ﻿using PodkladexApp.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using Microsoft.EntityFrameworkCore;
@@ -8,8 +9,20 @@ namespace PodkladexApp
 {
     public partial class Form_Urlopy : Form
     {
-        private bool ladowanieFiltrow = false;
         private PodkladexContext db;
+
+        private bool ladowanieFiltrow = false;
+        private bool ladowanieComboPracownikow = false;
+
+        private List<PracownikComboBoxItem> listaPracownikow = new List<PracownikComboBoxItem>();
+
+        private class PracownikComboBoxItem
+        {
+            public int IdPracownik { get; set; }
+            public string Imie { get; set; }
+            public string Nazwisko { get; set; }
+            public string DanePracownika { get; set; }
+        }
 
         public Form_Urlopy()
         {
@@ -22,9 +35,10 @@ namespace PodkladexApp
             KonfigurujDataGridView();
             panel1.Visible = false;
 
+            ZaladujPracownikow();
             ZaladujPracownikowDoComboBox();
-            ZaladujRodzajeUrlopuDoComboBox();
             ZaladujPracownikowDoFiltra();
+            ZaladujRodzajeUrlopuDoComboBox();
             UstawDomyslneDaty();
             ZaladujWnioski();
         }
@@ -47,7 +61,8 @@ namespace PodkladexApp
                 Name = "IdWniosku",
                 HeaderText = "ID wniosku",
                 DataPropertyName = "IdWniosku",
-                FillWeight = 60
+                FillWeight = 60,
+                Visible = false
             });
 
             dataGridView_urlopy.Columns.Add(new DataGridViewTextBoxColumn
@@ -147,23 +162,20 @@ namespace PodkladexApp
             }
         }
 
-        private void ZaladujPracownikowDoComboBox()
+        private void ZaladujPracownikow()
         {
             try
             {
-                var pracownicy = db.Pracownik
+                listaPracownikow = db.Pracownik
                     .Include(p => p.IdOsobaNavigation)
-                    .Select(p => new
+                    .Select(p => new PracownikComboBoxItem
                     {
                         IdPracownik = p.IdPracownik,
+                        Imie = p.IdOsobaNavigation.Imie,
+                        Nazwisko = p.IdOsobaNavigation.Nazwisko,
                         DanePracownika = p.IdOsobaNavigation.Imie + " " + p.IdOsobaNavigation.Nazwisko
                     })
                     .ToList();
-
-                comboBox_Dane_Pracownika.DataSource = pracownicy;
-                comboBox_Dane_Pracownika.DisplayMember = "DanePracownika";
-                comboBox_Dane_Pracownika.ValueMember = "IdPracownik";
-                comboBox_Dane_Pracownika.SelectedIndex = -1;
             }
             catch (Exception ex)
             {
@@ -173,6 +185,76 @@ namespace PodkladexApp
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
+        }
+
+        private void UstawDaneComboBoxPracownikowDoDodawania(List<PracownikComboBoxItem> pracownicy)
+        {
+            ladowanieComboPracownikow = true;
+
+            comboBox_Dane_Pracownika.DataSource = null;
+            comboBox_Dane_Pracownika.DataSource = pracownicy;
+            comboBox_Dane_Pracownika.DisplayMember = "DanePracownika";
+            comboBox_Dane_Pracownika.ValueMember = "IdPracownik";
+            comboBox_Dane_Pracownika.SelectedIndex = -1;
+            comboBox_Dane_Pracownika.Text = "";
+
+            ladowanieComboPracownikow = false;
+        }
+
+        private void UstawDaneComboBoxPracownikowDoFiltra(List<PracownikComboBoxItem> pracownicy, bool ustawWszystkich = true)
+        {
+            try
+            {
+                ladowanieFiltrow = true;
+
+                var listaDoFiltra = new List<object>();
+
+                if (ustawWszystkich)
+                {
+                    listaDoFiltra.Add(new { IdPracownik = 0, DanePracownika = "Wszyscy pracownicy" });
+                }
+
+                foreach (var pracownik in pracownicy)
+                {
+                    listaDoFiltra.Add(new
+                    {
+                        IdPracownik = pracownik.IdPracownik,
+                        DanePracownika = pracownik.DanePracownika
+                    });
+                }
+
+                comboBox_filtrPracownik.DataSource = null;
+                comboBox_filtrPracownik.DataSource = listaDoFiltra;
+                comboBox_filtrPracownik.DisplayMember = "DanePracownika";
+                comboBox_filtrPracownik.ValueMember = "IdPracownik";
+
+                if (ustawWszystkich)
+                {
+                    comboBox_filtrPracownik.SelectedIndex = 0;
+                    comboBox_filtrPracownik.Text = "Wszyscy pracownicy";
+                }
+                else
+                {
+                    comboBox_filtrPracownik.SelectedIndex = -1;
+                    comboBox_filtrPracownik.Text = "";
+                }
+
+                ladowanieFiltrow = false;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Test");
+            }
+        }
+
+        private void ZaladujPracownikowDoComboBox()
+        {
+            UstawDaneComboBoxPracownikowDoDodawania(listaPracownikow);
+        }
+
+        private void ZaladujPracownikowDoFiltra()
+        {
+            UstawDaneComboBoxPracownikowDoFiltra(listaPracownikow, true);
         }
 
         private void ZaladujRodzajeUrlopuDoComboBox()
@@ -211,6 +293,7 @@ namespace PodkladexApp
         private void WyczyscPanelDodawania()
         {
             comboBox_Dane_Pracownika.SelectedIndex = -1;
+            comboBox_Dane_Pracownika.Text = "";
             comboBox_Rodzaj_Urlopu.SelectedIndex = -1;
             UstawDomyslneDaty();
         }
@@ -386,63 +469,94 @@ namespace PodkladexApp
                     MessageBoxIcon.Error);
             }
         }
-        private void ZaladujPracownikowDoFiltra()
+
+        private void comboBox_filtrPracownik_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!ladowanieFiltrow)
+                ZaladujWnioski();
+        }
+
+        private void comboBox_filtrPracownik_TextUpdate(object sender, EventArgs e)
         {
             try
             {
-                ladowanieFiltrow = true;
+                if (listaPracownikow == null)
+                    return;
 
-                var pracownicy = db.Pracownik
-                    .Include(p => p.IdOsobaNavigation)
-                    .Select(p => new
-                    {
-                        IdPracownik = p.IdPracownik,
-                        DanePracownika = p.IdOsobaNavigation.Imie + " " + p.IdOsobaNavigation.Nazwisko
-                    })
+                string wpisanyTekst = comboBox_filtrPracownik.Text.Trim();
+
+                var przefiltrowanaLista = listaPracownikow
+                    .Where(p =>
+                        p.Imie.Contains(wpisanyTekst, StringComparison.OrdinalIgnoreCase) ||
+                        p.Nazwisko.Contains(wpisanyTekst, StringComparison.OrdinalIgnoreCase) ||
+                        p.DanePracownika.Contains(wpisanyTekst, StringComparison.OrdinalIgnoreCase))
                     .ToList();
 
-                var listaDoFiltra = new List<object>();
-                listaDoFiltra.Add(new { IdPracownik = 0, DanePracownika = "Wszyscy pracownicy" });
+                UstawDaneComboBoxPracownikowDoFiltra(przefiltrowanaLista, false);
 
-                foreach (var pracownik in pracownicy)
+                comboBox_filtrPracownik.Text = wpisanyTekst;
+                comboBox_filtrPracownik.SelectionStart = comboBox_filtrPracownik.Text.Length;
+                comboBox_filtrPracownik.SelectionLength = 0;
+
+                if (przefiltrowanaLista.Count > 0)
                 {
-                    listaDoFiltra.Add(new
-                    {
-                        IdPracownik = pracownik.IdPracownik,
-                        DanePracownika = pracownik.DanePracownika
-                    });
+                    comboBox_filtrPracownik.DroppedDown = true;
+                    Cursor.Current = Cursors.Default;
                 }
-
-                comboBox_filtrPracownik.DataSource = null;
-                comboBox_filtrPracownik.DataSource = listaDoFiltra;
-                comboBox_filtrPracownik.DisplayMember = "DanePracownika";
-                comboBox_filtrPracownik.ValueMember = "IdPracownik";
-                comboBox_filtrPracownik.SelectedIndex = 0;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(
-                    "Błąd podczas ładowania pracowników do filtra:\n" + ex.Message,
-                    "Błąd",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
-            finally
-            {
-                ladowanieFiltrow = false;
-            }
-        }
-        private void comboBox_filtrPracownik_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (ladowanieFiltrow)
-                return;
 
-            ZaladujWnioski();
+                MessageBox.Show("Błąd filtra");
+            }
         }
 
         private void comboBox_Dane_Pracownika_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (ladowanieComboPracownikow)
+                return;
+        }
 
+        private void comboBox_Dane_Pracownika_TextUpdate(object sender, EventArgs e)
+        {
+            try
+            {
+                if (listaPracownikow == null)
+                    return;
+
+                string wpisanyTekst = comboBox_Dane_Pracownika.Text.Trim();
+
+                var przefiltrowanaLista = listaPracownikow
+                    .Where(p =>
+                        p.Imie.Contains(wpisanyTekst, StringComparison.OrdinalIgnoreCase) ||
+                        p.Nazwisko.Contains(wpisanyTekst, StringComparison.OrdinalIgnoreCase) ||
+                        p.DanePracownika.Contains(wpisanyTekst, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+                ladowanieComboPracownikow = true;
+
+                comboBox_Dane_Pracownika.DataSource = null;
+                comboBox_Dane_Pracownika.DataSource = przefiltrowanaLista;
+                comboBox_Dane_Pracownika.DisplayMember = "DanePracownika";
+                comboBox_Dane_Pracownika.ValueMember = "IdPracownik";
+                comboBox_Dane_Pracownika.SelectedIndex = -1;
+                comboBox_Dane_Pracownika.Text = wpisanyTekst;
+                comboBox_Dane_Pracownika.SelectionStart = comboBox_Dane_Pracownika.Text.Length;
+                comboBox_Dane_Pracownika.SelectionLength = 0;
+
+                if (przefiltrowanaLista.Count > 0)
+                {
+                    comboBox_Dane_Pracownika.DroppedDown = true;
+                    Cursor.Current = Cursors.Default;
+                }
+
+                ladowanieComboPracownikow = false;
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Błąd nazwy");
+            }
         }
     }
 }

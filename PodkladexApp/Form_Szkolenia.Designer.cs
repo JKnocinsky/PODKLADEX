@@ -58,6 +58,7 @@
             comboBox_filtrPracownik.Size = new Size(203, 33);
             comboBox_filtrPracownik.TabIndex = 0;
             comboBox_filtrPracownik.SelectedIndexChanged += comboBox_filtrPracownik_SelectedIndexChanged;
+            comboBox_filtrPracownik.TextUpdate += comboBox_filtrPracownik_TextUpdate;
             comboBox_filtrPracownik.SelectedValueChanged += comboBox_filtrPracownik_SelectedIndexChanged;
             // 
             // label1
@@ -87,7 +88,7 @@
             dataGridView_szkolenia.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView_szkolenia.Location = new Point(37, 77);
             dataGridView_szkolenia.Name = "dataGridView_szkolenia";
-            dataGridView_szkolenia.Size = new Size(798, 150);
+            dataGridView_szkolenia.Size = new Size(849, 168);
             dataGridView_szkolenia.TabIndex = 3;
             // 
             // panel1
@@ -103,15 +104,15 @@
             panel1.Controls.Add(label2);
             panel1.Controls.Add(comboBox_szkolenie);
             panel1.Controls.Add(comboBox_pracownik);
-            panel1.Location = new Point(34, 285);
+            panel1.Location = new Point(34, 312);
             panel1.Name = "panel1";
-            panel1.Size = new Size(852, 355);
+            panel1.Size = new Size(852, 328);
             panel1.TabIndex = 4;
             // 
             // button_dodajSzkolenie
             // 
             button_dodajSzkolenie.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_dodajSzkolenie.Location = new Point(282, 290);
+            button_dodajSzkolenie.Location = new Point(331, 281);
             button_dodajSzkolenie.Name = "button_dodajSzkolenie";
             button_dodajSzkolenie.Size = new Size(143, 42);
             button_dodajSzkolenie.TabIndex = 5;
@@ -215,11 +216,12 @@
             comboBox_pracownik.Name = "comboBox_pracownik";
             comboBox_pracownik.Size = new Size(331, 33);
             comboBox_pracownik.TabIndex = 0;
+            comboBox_pracownik.TextUpdate += comboBox_pracownik_TextUpdate;
             // 
             // button_noweSzkolenie
             // 
             button_noweSzkolenie.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_noweSzkolenie.Location = new Point(338, 237);
+            button_noweSzkolenie.Location = new Point(344, 251);
             button_noweSzkolenie.Name = "button_noweSzkolenie";
             button_noweSzkolenie.Size = new Size(183, 42);
             button_noweSzkolenie.TabIndex = 5;
