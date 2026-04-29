@@ -12,12 +12,12 @@ using System.Windows.Forms;
 
 namespace PodkladexApp
 {
-    public partial class Form_Produkcja : Form
+    public partial class Form_ProdukcjaMenu : Form
     {
         PodkladexContext db;
         Form activeForm = null;
 
-        public Form_Produkcja(PodkladexContext db)
+        public Form_ProdukcjaMenu(PodkladexContext db)
         {
             this.db = db;
             InitializeComponent();

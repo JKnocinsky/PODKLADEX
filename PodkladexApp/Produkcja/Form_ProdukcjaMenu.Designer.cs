@@ -1,6 +1,6 @@
 ﻿namespace PodkladexApp
 {
-    partial class Form_Produkcja
+    partial class Form_ProdukcjaMenu
     {
         /// <summary>
         /// Required designer variable.
