@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.EntityFrameworkCore.Migrations;
 using PodkladexApp.Models; // Przestrzeń nazw dla modeli: Zamowienie, Klient, Osoba
 
 namespace PodkladexApp.Zaopatrzenie
@@ -26,7 +27,21 @@ namespace PodkladexApp.Zaopatrzenie
             // Inicjalizacja zakresu dat w kontrolkach
             dateTimePicker_Poczatek.Value = DateTime.Now.AddMonths(-1);
             dateTimePicker_Koniec.Value = DateTime.Now;
+            // 2. Wypełnienie opcji sortowania w ComboBox
+            // Zabezpieczenie na wypadek, gdyby dodano je z poziomu Designera
+            if (comboBox_sortowanie.Items.Count == 0)
+            {
+                comboBox_sortowanie.Items.AddRange(new string[] {
+                    "Data - od najnowszych",
+                    "Data - od najstarszych",
+                    "Cena - malejąco",
+                    "Cena - rosnąco",
+                    "Klient (A-Z)"
+                });
+            }
 
+
+            comboBox_sortowanie.SelectedIndex = 0;
             WyswietlHistorieZamowien();
         }
 
@@ -65,6 +80,7 @@ namespace PodkladexApp.Zaopatrzenie
                 dataGridView_HistoriaZamowien.Columns["CenaZbiorcza"].HeaderText = "Wartość zamówienia";
                 dataGridView_HistoriaZamowien.Columns["CenaZbiorcza"].DefaultCellStyle.Format = "C2"; // Format walutowy
             }
+
         }
 
         // Możesz dodać zdarzenia, aby odświeżać listę przy zmianie daty lub sortowania
@@ -75,6 +91,16 @@ namespace PodkladexApp.Zaopatrzenie
         {
             _context.Dispose();
             base.OnFormClosed(e);
+        }
+
+        private void dataGridView_HistoriaZamowien_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void comboBox_sortowanie_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
