@@ -12,15 +12,23 @@ using System.Windows.Forms;
 
 namespace PodkladexApp
 {
-    public partial class Form_Produkcja : Form
+    public partial class Form_ProdukcjaMenu : Form
     {
         PodkladexContext db;
         Form activeForm = null;
 
-        public Form_Produkcja(PodkladexContext db)
+        public Form_ProdukcjaMenu(PodkladexContext db)
         {
             this.db = db;
             InitializeComponent();
+            //Panel panel = new Panel();
+            //tableLayoutPanel1.Controls.Add(panel,0,0);
+            //panel.Location = new Point(3, 3);
+            //panel.Size = new Size(1650, 800);
+            //panel.Anchor = AnchorStyles.Left | AnchorStyles.Top;
+            //panel.BorderStyle = BorderStyle.FixedSingle;
+            //panel.BackColor = Color.Transparent;
+            //panel.BringToFront();
         }
 
         private void btn_maszyny_Click(object sender, EventArgs e)
@@ -37,7 +45,11 @@ namespace PodkladexApp
             OpenChildForm(form);
         }
 
-
+        private void btn_normyP_Click(object sender, EventArgs e)
+        {
+            Form_NormaProd form = new Form_NormaProd(db);
+            OpenChildForm(form);
+        }
 
         private void OpenChildForm(Form childForm)
         {

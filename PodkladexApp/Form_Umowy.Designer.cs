@@ -63,6 +63,7 @@
             comboBox_pracownik.Name = "comboBox_pracownik";
             comboBox_pracownik.Size = new Size(420, 33);
             comboBox_pracownik.TabIndex = 1;
+            comboBox_pracownik.TextUpdate += comboBox_pracownik_TextUpdate;
             // 
             // comboBox_rodzajUmowy
             // 
@@ -189,16 +190,17 @@
             comboBox_filtrPracownik.Size = new Size(314, 33);
             comboBox_filtrPracownik.TabIndex = 8;
             comboBox_filtrPracownik.SelectedIndexChanged += comboBox_filtrPracownik_SelectedIndexChanged;
+            comboBox_filtrPracownik.TextUpdate += comboBox_filtrPracownik_TextUpdate;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 14.25F);
-            label5.Location = new Point(503, 19);
+            label5.Location = new Point(412, 19);
             label5.Name = "label5";
-            label5.Size = new Size(99, 25);
+            label5.Size = new Size(190, 25);
             label5.TabIndex = 5;
-            label5.Text = "Pracownik";
+            label5.Text = "Filtruj po pracowniku";
             // 
             // Form_Umowy
             // 

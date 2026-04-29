@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             dataGridView_urlopy = new DataGridView();
-            button_odswiez = new Button();
             button_zatwierdz = new Button();
             checkBox_tylkoNiezatwierdzone = new CheckBox();
             button_dodajWniosek = new Button();
@@ -60,27 +59,15 @@
             dataGridView_urlopy.Size = new Size(899, 193);
             dataGridView_urlopy.TabIndex = 0;
             // 
-            // button_odswiez
-            // 
-            button_odswiez.Font = new Font("Segoe UI", 14.25F);
-            button_odswiez.Location = new Point(17, 268);
-            button_odswiez.Margin = new Padding(3, 2, 3, 2);
-            button_odswiez.Name = "button_odswiez";
-            button_odswiez.Size = new Size(161, 51);
-            button_odswiez.TabIndex = 1;
-            button_odswiez.Text = "Odśwież";
-            button_odswiez.UseVisualStyleBackColor = true;
-            button_odswiez.Click += button_odswiez_Click;
-            // 
             // button_zatwierdz
             // 
             button_zatwierdz.Font = new Font("Segoe UI", 14.25F);
-            button_zatwierdz.Location = new Point(405, 268);
+            button_zatwierdz.Location = new Point(231, 268);
             button_zatwierdz.Margin = new Padding(3, 2, 3, 2);
             button_zatwierdz.Name = "button_zatwierdz";
-            button_zatwierdz.Size = new Size(122, 51);
+            button_zatwierdz.Size = new Size(203, 51);
             button_zatwierdz.TabIndex = 2;
-            button_zatwierdz.Text = "Zatwierdź";
+            button_zatwierdz.Text = "Zatwierdź wniosek";
             button_zatwierdz.UseVisualStyleBackColor = true;
             button_zatwierdz.Click += button_zatwierdz_Click;
             // 
@@ -100,7 +87,7 @@
             // button_dodajWniosek
             // 
             button_dodajWniosek.Font = new Font("Segoe UI", 14.25F);
-            button_dodajWniosek.Location = new Point(754, 268);
+            button_dodajWniosek.Location = new Point(527, 268);
             button_dodajWniosek.Margin = new Padding(3, 2, 3, 2);
             button_dodajWniosek.Name = "button_dodajWniosek";
             button_dodajWniosek.Size = new Size(162, 51);
@@ -225,6 +212,7 @@
             comboBox_Dane_Pracownika.Size = new Size(563, 33);
             comboBox_Dane_Pracownika.TabIndex = 3;
             comboBox_Dane_Pracownika.SelectedIndexChanged += comboBox_Dane_Pracownika_SelectedIndexChanged;
+            comboBox_Dane_Pracownika.TextUpdate += comboBox_Dane_Pracownika_TextUpdate;
             // 
             // comboBox_filtrPracownik
             // 
@@ -236,16 +224,17 @@
             comboBox_filtrPracownik.Size = new Size(315, 33);
             comboBox_filtrPracownik.TabIndex = 5;
             comboBox_filtrPracownik.SelectedIndexChanged += comboBox_filtrPracownik_SelectedIndexChanged;
+            comboBox_filtrPracownik.TextUpdate += comboBox_filtrPracownik_TextUpdate;
             // 
             // label_filtr
             // 
             label_filtr.AutoSize = true;
             label_filtr.Font = new Font("Segoe UI", 14.25F);
-            label_filtr.Location = new Point(493, 18);
+            label_filtr.Location = new Point(405, 20);
             label_filtr.Name = "label_filtr";
-            label_filtr.Size = new Size(103, 25);
+            label_filtr.Size = new Size(194, 25);
             label_filtr.TabIndex = 6;
-            label_filtr.Text = "Pracownik:";
+            label_filtr.Text = "Filtruj po pracowniku:";
             // 
             // Form_Urlopy
             // 
@@ -259,7 +248,6 @@
             Controls.Add(button_dodajWniosek);
             Controls.Add(checkBox_tylkoNiezatwierdzone);
             Controls.Add(button_zatwierdz);
-            Controls.Add(button_odswiez);
             Controls.Add(dataGridView_urlopy);
             Margin = new Padding(3, 2, 3, 2);
             Name = "Form_Urlopy";
@@ -275,7 +263,6 @@
         #endregion
 
         private DataGridView dataGridView_urlopy;
-        private Button button_odswiez;
         private Button button_zatwierdz;
         private CheckBox checkBox_tylkoNiezatwierdzone;
         private Button button_dodajWniosek;

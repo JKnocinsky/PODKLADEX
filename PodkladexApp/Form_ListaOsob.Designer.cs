@@ -77,6 +77,7 @@
             button_ArrowL.Size = new Size(130, 50);
             button_ArrowL.TabIndex = 12;
             button_ArrowL.UseVisualStyleBackColor = true;
+            button_ArrowL.Click += button_ArrowL_Click;
             // 
             // btn_usuwanie
             // 
@@ -88,6 +89,7 @@
             btn_usuwanie.TabIndex = 8;
             btn_usuwanie.Text = "Usuń osobę";
             btn_usuwanie.UseVisualStyleBackColor = false;
+            btn_usuwanie.Click += btn_usuwanie_Click;
             // 
             // label_idosoby
             // 
@@ -109,6 +111,7 @@
             button_Wyczysc.TabIndex = 9;
             button_Wyczysc.Text = "Wyczyść dane";
             button_Wyczysc.UseVisualStyleBackColor = false;
+            button_Wyczysc.Click += btn_wyczysc_Click;
             // 
             // button_Edytuj
             // 
@@ -121,6 +124,7 @@
             button_Edytuj.TabIndex = 10;
             button_Edytuj.Text = "Edytuj";
             button_Edytuj.UseVisualStyleBackColor = false;
+            button_Edytuj.Click += btn_edytowanie_Click;
             // 
             // button_ArrowR
             // 
@@ -132,6 +136,7 @@
             button_ArrowR.Size = new Size(130, 50);
             button_ArrowR.TabIndex = 13;
             button_ArrowR.UseVisualStyleBackColor = true;
+            button_ArrowR.Click += button_ArrowR_Click;
             // 
             // button_Dodaj
             // 
@@ -144,6 +149,7 @@
             button_Dodaj.TabIndex = 11;
             button_Dodaj.Text = "Dodaj rekord";
             button_Dodaj.UseVisualStyleBackColor = false;
+            button_Dodaj.Click += btn_dodawanie_Click;
             // 
             // panel_daneosoby
             // 
