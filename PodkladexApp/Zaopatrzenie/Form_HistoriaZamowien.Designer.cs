@@ -32,6 +32,9 @@
             dateTimePicker_Poczatek = new DateTimePicker();
             dateTimePicker_Koniec = new DateTimePicker();
             comboBox_sortowanie = new ComboBox();
+            label_data_Poczatku = new Label();
+            label_Data_konca = new Label();
+            label_Sortowanie = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView_HistoriaZamowien).BeginInit();
             SuspendLayout();
             // 
@@ -46,34 +49,73 @@
             // 
             // dateTimePicker_Poczatek
             // 
-            dateTimePicker_Poczatek.Location = new Point(219, 630);
+            dateTimePicker_Poczatek.CalendarFont = new Font("Segoe UI", 72F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            dateTimePicker_Poczatek.Format = DateTimePickerFormat.Short;
+            dateTimePicker_Poczatek.Location = new Point(416, 629);
             dateTimePicker_Poczatek.Name = "dateTimePicker_Poczatek";
-            dateTimePicker_Poczatek.Size = new Size(200, 23);
+            dateTimePicker_Poczatek.Size = new Size(150, 23);
             dateTimePicker_Poczatek.TabIndex = 1;
             dateTimePicker_Poczatek.ValueChanged += dateTimePicker_Poczatek_ValueChanged;
             // 
             // dateTimePicker_Koniec
             // 
-            dateTimePicker_Koniec.Location = new Point(458, 630);
+            dateTimePicker_Koniec.CalendarFont = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dateTimePicker_Koniec.Format = DateTimePickerFormat.Short;
+            dateTimePicker_Koniec.Location = new Point(714, 629);
             dateTimePicker_Koniec.Name = "dateTimePicker_Koniec";
-            dateTimePicker_Koniec.Size = new Size(200, 23);
+            dateTimePicker_Koniec.Size = new Size(150, 23);
             dateTimePicker_Koniec.TabIndex = 2;
             dateTimePicker_Koniec.ValueChanged += dateTimePicker_Koniec_ValueChanged;
             // 
             // comboBox_sortowanie
             // 
+            comboBox_sortowanie.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
             comboBox_sortowanie.FormattingEnabled = true;
-            comboBox_sortowanie.Location = new Point(739, 630);
+            comboBox_sortowanie.Location = new Point(485, 674);
             comboBox_sortowanie.Name = "comboBox_sortowanie";
-            comboBox_sortowanie.Size = new Size(121, 23);
+            comboBox_sortowanie.Size = new Size(379, 33);
             comboBox_sortowanie.TabIndex = 3;
             comboBox_sortowanie.SelectedIndexChanged += comboBox_sortowanie_SelectedIndexChanged;
+            // 
+            // label_data_Poczatku
+            // 
+            label_data_Poczatku.AutoSize = true;
+            label_data_Poczatku.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            label_data_Poczatku.Location = new Point(278, 628);
+            label_data_Poczatku.Name = "label_data_Poczatku";
+            label_data_Poczatku.Size = new Size(132, 25);
+            label_data_Poczatku.TabIndex = 4;
+            label_data_Poczatku.Text = "Data początku";
+            label_data_Poczatku.Click += label_data_Poczatku_Click;
+            // 
+            // label_Data_konca
+            // 
+            label_Data_konca.AutoSize = true;
+            label_Data_konca.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            label_Data_konca.Location = new Point(593, 628);
+            label_Data_konca.Name = "label_Data_konca";
+            label_Data_konca.Size = new Size(106, 25);
+            label_Data_konca.TabIndex = 5;
+            label_Data_konca.Text = "Data końca";
+            // 
+            // label_Sortowanie
+            // 
+            label_Sortowanie.AutoSize = true;
+            label_Sortowanie.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            label_Sortowanie.Location = new Point(372, 677);
+            label_Sortowanie.Name = "label_Sortowanie";
+            label_Sortowanie.Size = new Size(107, 25);
+            label_Sortowanie.TabIndex = 6;
+            label_Sortowanie.Text = "Sortowanie";
             // 
             // Form_HistoriaZamowien
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1191, 730);
+            Controls.Add(label_Sortowanie);
+            Controls.Add(label_Data_konca);
+            Controls.Add(label_data_Poczatku);
             Controls.Add(comboBox_sortowanie);
             Controls.Add(dateTimePicker_Koniec);
             Controls.Add(dateTimePicker_Poczatek);
@@ -83,6 +125,7 @@
             Load += Form_HistoriaZamowien_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView_HistoriaZamowien).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -91,5 +134,8 @@
         private DateTimePicker dateTimePicker_Poczatek;
         private DateTimePicker dateTimePicker_Koniec;
         private ComboBox comboBox_sortowanie;
+        private Label label_data_Poczatku;
+        private Label label_Data_konca;
+        private Label label_Sortowanie;
     }
 }
