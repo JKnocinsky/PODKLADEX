@@ -188,6 +188,7 @@
             textBox_pesel.Name = "textBox_pesel";
             textBox_pesel.Size = new Size(1129, 29);
             textBox_pesel.TabIndex = 1;
+            textBox_pesel.TextChanged += textBox_pesel_TextChanged;
             // 
             // textBox_numer
             // 
@@ -196,6 +197,7 @@
             textBox_numer.Name = "textBox_numer";
             textBox_numer.Size = new Size(1129, 29);
             textBox_numer.TabIndex = 1;
+            textBox_numer.TextChanged += textBox_numer_TextChanged;
             // 
             // textBox_ulica
             // 
@@ -212,6 +214,7 @@
             textBox_kodpocztowy.Name = "textBox_kodpocztowy";
             textBox_kodpocztowy.Size = new Size(1129, 29);
             textBox_kodpocztowy.TabIndex = 1;
+            textBox_kodpocztowy.TextChanged += textBox_kodpocztowy_TextChanged;
             // 
             // textBox_miejscowosc
             // 
@@ -220,6 +223,7 @@
             textBox_miejscowosc.Name = "textBox_miejscowosc";
             textBox_miejscowosc.Size = new Size(1129, 29);
             textBox_miejscowosc.TabIndex = 1;
+            textBox_miejscowosc.TextChanged += textBox_miejscowosc_TextChanged;
             // 
             // textBox_email
             // 
@@ -236,6 +240,7 @@
             textBox_numertelefonu.Name = "textBox_numertelefonu";
             textBox_numertelefonu.Size = new Size(1129, 29);
             textBox_numertelefonu.TabIndex = 1;
+            textBox_numertelefonu.TextChanged += textBox_numertelefonu_TextChanged;
             // 
             // textBox_nazwisko
             // 
@@ -244,6 +249,7 @@
             textBox_nazwisko.Name = "textBox_nazwisko";
             textBox_nazwisko.Size = new Size(1129, 29);
             textBox_nazwisko.TabIndex = 1;
+            textBox_nazwisko.TextChanged += textBox_nazwisko_TextChanged;
             // 
             // textBox_imie
             // 
@@ -252,6 +258,7 @@
             textBox_imie.Name = "textBox_imie";
             textBox_imie.Size = new Size(1129, 29);
             textBox_imie.TabIndex = 1;
+            textBox_imie.TextChanged += textBox_imie_TextChanged;
             // 
             // label_pesel
             // 

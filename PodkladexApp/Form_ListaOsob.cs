@@ -203,6 +203,19 @@ namespace PodkladexApp
                 return;
             }
 
+            if (!CzyWszystkiePolaUzupelnione())
+            {
+                MessageBox.Show(
+                    "Nie wszystkie pola zostały uzupełnione.",
+                    "Brak danych",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!CzyDaneOsobySaPoprawne())
+                return;
+
             DialogResult wynik = MessageBox.Show(
                 "Czy na pewno chcesz zapisać zmiany danych tej osoby?",
                 "Potwierdzenie edycji",
@@ -333,17 +346,90 @@ namespace PodkladexApp
             textBox_pesel.Text = "";
         }
 
+        private void textBox_imie_TextChanged(object sender, EventArgs e)
+        {
+            OdfiltrujTylkoLitery(textBox_imie);
+        }
+
+        private void textBox_nazwisko_TextChanged(object sender, EventArgs e)
+        {
+            OdfiltrujTylkoLitery(textBox_nazwisko);
+        }
+
+        private void textBox_miejscowosc_TextChanged(object sender, EventArgs e)
+        {
+            OdfiltrujTylkoLitery(textBox_miejscowosc);
+        }
+
         private void textBox_numertelefonu_TextChanged(object sender, EventArgs e)
         {
-            string numer = textBox_numertelefonu.Text;
+            OdfiltrujTylkoCyfry(textBox_numertelefonu, 15);
+        }
 
-            if (string.IsNullOrEmpty(numer))
-                return;
+        private void textBox_pesel_TextChanged(object sender, EventArgs e)
+        {
+            OdfiltrujTylkoCyfry(textBox_pesel, 11);
+        }
 
-            if (!numer.All(char.IsDigit))
+        private void textBox_kodpocztowy_TextChanged(object sender, EventArgs e)
+        {
+            string tekst = textBox_kodpocztowy.Text;
+            int pozycja = textBox_kodpocztowy.SelectionStart;
+
+            string przefiltrowany = new string(tekst.Where(c => char.IsDigit(c) || c == '-').ToArray());
+
+            if (przefiltrowany.Length > 6)
+                przefiltrowany = przefiltrowany.Substring(0, 6);
+
+            if (tekst != przefiltrowany)
             {
-                textBox_numertelefonu.Text = new string(numer.Where(char.IsDigit).ToArray());
-                textBox_numertelefonu.SelectionStart = textBox_numertelefonu.Text.Length;
+                textBox_kodpocztowy.Text = przefiltrowany;
+                textBox_kodpocztowy.SelectionStart = Math.Min(pozycja, textBox_kodpocztowy.Text.Length);
+            }
+        }
+
+        private void textBox_numer_TextChanged(object sender, EventArgs e)
+        {
+            string tekst = textBox_numer.Text;
+            int pozycja = textBox_numer.SelectionStart;
+
+            string przefiltrowany = new string(tekst.Where(c => char.IsLetterOrDigit(c) || c == '/' || c == '-').ToArray());
+
+            if (tekst != przefiltrowany)
+            {
+                textBox_numer.Text = przefiltrowany;
+                textBox_numer.SelectionStart = Math.Min(pozycja, textBox_numer.Text.Length);
+            }
+        }
+
+        private void OdfiltrujTylkoLitery(TextBox textBox)
+        {
+            string tekst = textBox.Text;
+            int pozycja = textBox.SelectionStart;
+
+            string przefiltrowany = new string(tekst.Where(c => char.IsLetter(c) || c == ' ' || c == '-').ToArray());
+
+            if (tekst != przefiltrowany)
+            {
+                textBox.Text = przefiltrowany;
+                textBox.SelectionStart = Math.Min(pozycja, textBox.Text.Length);
+            }
+        }
+
+        private void OdfiltrujTylkoCyfry(TextBox textBox, int maxDlugosc)
+        {
+            string tekst = textBox.Text;
+            int pozycja = textBox.SelectionStart;
+
+            string przefiltrowany = new string(tekst.Where(char.IsDigit).ToArray());
+
+            if (przefiltrowany.Length > maxDlugosc)
+                przefiltrowany = przefiltrowany.Substring(0, maxDlugosc);
+
+            if (tekst != przefiltrowany)
+            {
+                textBox.Text = przefiltrowany;
+                textBox.SelectionStart = Math.Min(pozycja, textBox.Text.Length);
             }
         }
 
@@ -389,6 +475,9 @@ namespace PodkladexApp
                 return;
             }
 
+            if (!CzyDaneOsobySaPoprawne())
+                return;
+
             string imie = textBox_imie.Text.Trim();
             string nazwisko = textBox_nazwisko.Text.Trim();
             string nrTelefonu = textBox_numertelefonu.Text.Trim();
@@ -414,7 +503,7 @@ namespace PodkladexApp
                 }
 
                 DialogResult wynik = MessageBox.Show(
-                    "Czy na pewno chcesz dodać nową osobę?",
+                    "Czy na pewno chcesz dodać nową osobę i od razu przypisać ją jako pracownika?",
                     "Potwierdzenie dodania",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
@@ -440,8 +529,16 @@ namespace PodkladexApp
                 db.Osoba.Add(nowaOsoba);
                 db.SaveChanges();
 
+                Pracownik nowyPracownik = new Pracownik
+                {
+                    IdOsoba = nowaOsoba.IdOsoba
+                };
+
+                db.Pracownik.Add(nowyPracownik);
+                db.SaveChanges();
+
                 MessageBox.Show(
-                    "Nowa osoba została dodana poprawnie.",
+                    "Nowa osoba została dodana poprawnie i przypisana jako pracownik.",
                     "Sukces",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
@@ -479,6 +576,71 @@ namespace PodkladexApp
                 && !string.IsNullOrWhiteSpace(textBox_ulica.Text)
                 && !string.IsNullOrWhiteSpace(textBox_numer.Text)
                 && !string.IsNullOrWhiteSpace(textBox_pesel.Text);
+        }
+
+        private bool CzyDaneOsobySaPoprawne()
+        {
+            if (textBox_pesel.Text.Length != 11)
+            {
+                MessageBox.Show(
+                    "PESEL musi składać się dokładnie z 11 cyfr.",
+                    "Błędny PESEL",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (!textBox_pesel.Text.All(char.IsDigit))
+            {
+                MessageBox.Show(
+                    "PESEL może zawierać wyłącznie cyfry.",
+                    "Błędny PESEL",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (!textBox_numertelefonu.Text.All(char.IsDigit))
+            {
+                MessageBox.Show(
+                    "Numer telefonu może zawierać wyłącznie cyfry.",
+                    "Błędny numer telefonu",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (textBox_numertelefonu.Text.Length < 9)
+            {
+                MessageBox.Show(
+                    "Numer telefonu powinien zawierać co najmniej 9 cyfr.",
+                    "Błędny numer telefonu",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (textBox_kodpocztowy.Text.Length != 6 || textBox_kodpocztowy.Text[2] != '-')
+            {
+                MessageBox.Show(
+                    "Kod pocztowy musi mieć format XX-XXX.",
+                    "Błędny kod pocztowy",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (!textBox_email.Text.Contains("@") || !textBox_email.Text.Contains("."))
+            {
+                MessageBox.Show(
+                    "Podaj poprawny adres e-mail.",
+                    "Błędny e-mail",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return false;
+            }
+
+            return true;
         }
 
         private void btn_wyczysc_Click(object sender, EventArgs e)

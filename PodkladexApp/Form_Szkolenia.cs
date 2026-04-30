@@ -452,12 +452,13 @@ namespace PodkladexApp
 
                 bool czyIstnieje = db.PracownikSzkolenia.Any(ps =>
                     ps.IdPracownik == idPracownik &&
-                    ps.IdSzkolenia == idSzkolenia);
+                    ps.IdSzkolenia == idSzkolenia &&
+                    ps.DataSzkolenia == dataSzkolenia);
 
                 if (czyIstnieje)
                 {
                     MessageBox.Show(
-                        "Dla tego pracownika istnieje już wpis tego szkolenia.",
+                        "Dla tego pracownika istnieje już wpis tego samego szkolenia z tą samą datą szkolenia.",
                         "Duplikat",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);

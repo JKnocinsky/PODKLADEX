@@ -219,6 +219,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Gainsboro;
             ClientSize = new Size(1424, 811);
             Controls.Add(formsPlot_bilans);
             Controls.Add(textBox_dochod);
