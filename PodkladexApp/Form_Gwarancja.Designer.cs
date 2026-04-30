@@ -48,7 +48,6 @@
             panel2 = new Panel();
             ((System.ComponentModel.ISupportInitialize)dataGridView_gwarancja_info).BeginInit();
             panel1.SuspendLayout();
-            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // label_lista_rodzajow
@@ -156,9 +155,9 @@
             // textBox_miesiace_gwarancji
             // 
             textBox_miesiace_gwarancji.Font = new Font("Segoe UI", 14F);
-            textBox_miesiace_gwarancji.Location = new Point(340, 74);
+            textBox_miesiace_gwarancji.Location = new Point(371, 74);
             textBox_miesiace_gwarancji.Name = "textBox_miesiace_gwarancji";
-            textBox_miesiace_gwarancji.Size = new Size(164, 32);
+            textBox_miesiace_gwarancji.Size = new Size(134, 32);
             textBox_miesiace_gwarancji.TabIndex = 32;
             // 
             // button_potwierdz
@@ -175,19 +174,19 @@
             // dataGridView_gwarancja_info
             // 
             dataGridView_gwarancja_info.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView_gwarancja_info.Location = new Point(11, 28);
+            dataGridView_gwarancja_info.Location = new Point(184, 283);
             dataGridView_gwarancja_info.Name = "dataGridView_gwarancja_info";
             dataGridView_gwarancja_info.RowHeadersWidth = 51;
-            dataGridView_gwarancja_info.Size = new Size(601, 252);
+            dataGridView_gwarancja_info.Size = new Size(678, 258);
             dataGridView_gwarancja_info.TabIndex = 35;
-            dataGridView_gwarancja_info.RowEnter += dataGridView_gwarancja_info_RowEnter;
+            dataGridView_gwarancja_info.CellContentClick += dataGridView_gwarancja_info_CellContentClick;
             dataGridView_gwarancja_info.SelectionChanged += dataGridView_gwarancja_info_SelectionChanged;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 14F);
-            label3.Location = new Point(11, 0);
+            label3.Location = new Point(184, 255);
             label3.Name = "label3";
             label3.Size = new Size(173, 25);
             label3.TabIndex = 36;
@@ -230,19 +229,19 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(label3);
-            panel2.Controls.Add(dataGridView_gwarancja_info);
-            panel2.Location = new Point(184, 258);
+            panel2.Location = new Point(1106, 553);
             panel2.Name = "panel2";
-            panel2.Size = new Size(615, 295);
+            panel2.Size = new Size(16, 10);
             panel2.TabIndex = 40;
             // 
             // Form_Gwarancja
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1267, 617);
+            ClientSize = new Size(1369, 633);
+            Controls.Add(label3);
             Controls.Add(panel2);
+            Controls.Add(dataGridView_gwarancja_info);
             Controls.Add(panel1);
             Controls.Add(button_potwierdz);
             Controls.Add(button_usun_gwarancje);
@@ -254,9 +253,8 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView_gwarancja_info).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

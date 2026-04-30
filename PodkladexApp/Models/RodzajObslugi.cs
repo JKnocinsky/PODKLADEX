@@ -14,4 +14,5 @@ public partial class RodzajObslugi
     public string Opis { get; set; }
 
     public virtual ICollection<Obsluga> Obsluga { get; set; } = new List<Obsluga>();
+    public string DisplayText => $"{Nazwa} - {Opis}";
 }

@@ -42,7 +42,7 @@
             // button_otworz_czesci_zamienne
             // 
             button_otworz_czesci_zamienne.Font = new Font("Segoe UI", 14F);
-            button_otworz_czesci_zamienne.Location = new Point(12, 6);
+            button_otworz_czesci_zamienne.Location = new Point(13, 6);
             button_otworz_czesci_zamienne.Name = "button_otworz_czesci_zamienne";
             button_otworz_czesci_zamienne.Size = new Size(212, 55);
             button_otworz_czesci_zamienne.TabIndex = 1;
@@ -53,7 +53,7 @@
             // button_otworz_awaria
             // 
             button_otworz_awaria.Font = new Font("Segoe UI", 14F);
-            button_otworz_awaria.Location = new Point(12, 67);
+            button_otworz_awaria.Location = new Point(13, 312);
             button_otworz_awaria.Name = "button_otworz_awaria";
             button_otworz_awaria.Size = new Size(212, 55);
             button_otworz_awaria.TabIndex = 2;
@@ -64,7 +64,7 @@
             // button_otworz_obsluga
             // 
             button_otworz_obsluga.Font = new Font("Segoe UI", 14F);
-            button_otworz_obsluga.Location = new Point(12, 128);
+            button_otworz_obsluga.Location = new Point(13, 251);
             button_otworz_obsluga.Name = "button_otworz_obsluga";
             button_otworz_obsluga.Size = new Size(212, 55);
             button_otworz_obsluga.TabIndex = 3;
@@ -75,7 +75,7 @@
             // button_otworz_normy_eksplatacyjne
             // 
             button_otworz_normy_eksplatacyjne.Font = new Font("Segoe UI", 14F);
-            button_otworz_normy_eksplatacyjne.Location = new Point(12, 251);
+            button_otworz_normy_eksplatacyjne.Location = new Point(13, 188);
             button_otworz_normy_eksplatacyjne.Name = "button_otworz_normy_eksplatacyjne";
             button_otworz_normy_eksplatacyjne.Size = new Size(212, 55);
             button_otworz_normy_eksplatacyjne.TabIndex = 5;
@@ -86,7 +86,7 @@
             // button_otworz_rodzaj_obslugi
             // 
             button_otworz_rodzaj_obslugi.Font = new Font("Segoe UI", 14F);
-            button_otworz_rodzaj_obslugi.Location = new Point(12, 189);
+            button_otworz_rodzaj_obslugi.Location = new Point(13, 67);
             button_otworz_rodzaj_obslugi.Name = "button_otworz_rodzaj_obslugi";
             button_otworz_rodzaj_obslugi.Size = new Size(212, 55);
             button_otworz_rodzaj_obslugi.TabIndex = 6;
@@ -97,7 +97,7 @@
             // button_otworz_gwarancja
             // 
             button_otworz_gwarancja.Font = new Font("Segoe UI", 14F);
-            button_otworz_gwarancja.Location = new Point(12, 312);
+            button_otworz_gwarancja.Location = new Point(13, 127);
             button_otworz_gwarancja.Name = "button_otworz_gwarancja";
             button_otworz_gwarancja.Size = new Size(212, 55);
             button_otworz_gwarancja.TabIndex = 7;
@@ -119,7 +119,7 @@
             button_otworz_napawy.Name = "button_otworz_napawy";
             button_otworz_napawy.Size = new Size(212, 55);
             button_otworz_napawy.TabIndex = 9;
-            button_otworz_napawy.Text = "Naprawy";
+            button_otworz_napawy.Text = "Naprawy - Raport";
             button_otworz_napawy.UseVisualStyleBackColor = true;
             button_otworz_napawy.Click += button_otworz_napawy_Click;
             // 
@@ -139,6 +139,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1684, 791);
+            Controls.Add(button_otworz_awaria);
             Controls.Add(button_otworz_ocena_stanu);
             Controls.Add(button_otworz_napawy);
             Controls.Add(panel_UR);
@@ -146,7 +147,6 @@
             Controls.Add(button_otworz_rodzaj_obslugi);
             Controls.Add(button_otworz_normy_eksplatacyjne);
             Controls.Add(button_otworz_obsluga);
-            Controls.Add(button_otworz_awaria);
             Controls.Add(button_otworz_czesci_zamienne);
             Name = "Form_Utrzymanie_Ruchu";
             Text = "Utrzymanie_Ruchu";

@@ -20,8 +20,7 @@ namespace PodkladexApp
         public Form_Rodzaj_obslugi(PodkladexContext context)
         {
             InitializeComponent();
-            panel_lista_rodzajow.Visible = false;
-            panel_nazwa_opis.Visible = false;
+            
             button_dodaj_obsluge.FlatStyle = FlatStyle.Standard;
             button_edytuj_czesc.FlatStyle = FlatStyle.Standard;
             button_usun_obsluga.FlatStyle = FlatStyle.Standard;
@@ -34,8 +33,7 @@ namespace PodkladexApp
 
         private void button_dodaj_obsluge_Click(object sender, EventArgs e)
         {
-            panel_lista_rodzajow.Visible = false;
-            panel_nazwa_opis.Visible = true;
+            
             button_dodaj_obsluge.FlatStyle = FlatStyle.Flat;
             button_edytuj_czesc.FlatStyle = FlatStyle.Standard;
             button_usun_obsluga.FlatStyle = FlatStyle.Standard;
@@ -46,8 +44,7 @@ namespace PodkladexApp
 
         private void button_edytuj_czesc_Click(object sender, EventArgs e)
         {
-            panel_lista_rodzajow.Visible = true;
-            panel_nazwa_opis.Visible = true;
+           
             button_dodaj_obsluge.FlatStyle = FlatStyle.Standard;
             button_edytuj_czesc.FlatStyle = FlatStyle.Flat;
             button_usun_obsluga.FlatStyle = FlatStyle.Standard;
@@ -58,8 +55,7 @@ namespace PodkladexApp
 
         private void button_usun_obsluga_Click(object sender, EventArgs e)
         {
-            panel_lista_rodzajow.Visible = true;
-            panel_nazwa_opis.Visible = false;
+           
             button_dodaj_obsluge.FlatStyle = FlatStyle.Standard;
             button_edytuj_czesc.FlatStyle = FlatStyle.Standard;
             button_usun_obsluga.FlatStyle = FlatStyle.Flat;
@@ -88,16 +84,19 @@ namespace PodkladexApp
             if (flaga_usun == true)
             {
                 Usun_czesc();
+                MessageBox.Show("Usunięto rodzaj obsługi.", "Informacja");
             }
             if (flaga_dodaj == true)
             {
                 Dodaj_czesc();
                 textBox_nazwa_obslugi.Clear();
                 textBox_opis_rodzaj_obslugi.Clear();
+                MessageBox.Show("Dodano rodzaj obsługi.", "Informacja");
             }
             if (flaga_edytuj == true)
             {
                 Edytuj_czesc();
+                MessageBox.Show("Zaktualizowano rodzaj obsługi.", "Informacja");
             }
         }
         
@@ -107,7 +106,7 @@ namespace PodkladexApp
             RodzajObslugi rodzajObslugi = new RodzajObslugi();
             if (comboBox_lista_rodzaj_obslug.SelectedItem == null || comboBox_lista_rodzaj_obslug.SelectedIndex == -1)
             {
-                MessageBox.Show("Nie wybrano części.", "Błąd");
+                MessageBox.Show("Nie wybrano obsługi.", "Błąd");
             }
             else
             {
@@ -146,7 +145,7 @@ namespace PodkladexApp
             RodzajObslugi rodzajObslugi = new RodzajObslugi();
             if (comboBox_lista_rodzaj_obslug.SelectedItem == null || comboBox_lista_rodzaj_obslug.SelectedIndex == -1)
             {
-                MessageBox.Show("Nie wybrano części.", "Błąd");
+                MessageBox.Show("Nie wybrano obsługi.", "Błąd");
             }
             else
             {
