@@ -87,12 +87,12 @@ CREATE TABLE Siatka_plac (
 GO
 
 CREATE TABLE Pracownik_szkolenia (
+    ID_pracownik_szkolenia INT IDENTITY(1,1) PRIMARY KEY,
     ID_pracownik INT NOT NULL FOREIGN KEY REFERENCES Pracownik(ID_pracownik),
     ID_szkolenia INT NOT NULL FOREIGN KEY REFERENCES Szkolenie(ID_szkolenia),
     Data_szkolenia DATE NOT NULL,
     Data_waznosci DATE NULL,
-    Cena_szkolenia DECIMAL(10,2) NOT NULL,
-    PRIMARY KEY (ID_pracownik, ID_szkolenia)
+    Cena_szkolenia DECIMAL(10,2) NOT NULL
 );
 GO
 
