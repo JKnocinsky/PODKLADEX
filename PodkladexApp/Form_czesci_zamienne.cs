@@ -25,8 +25,7 @@ namespace PodkladexApp
             comboBox_lista_czesci.DataSource = context.CzescZamienna.ToList();
             comboBox_lista_czesci.DisplayMember = "Nazwa";
             comboBox_lista_czesci.SelectedIndex = -1;
-            panel_lista.Visible = false;
-            panel_nazwa.Visible = false;
+           
             button_dodaj_czesc.FlatStyle = FlatStyle.Standard;
             button_edytuj_czesc.FlatStyle= FlatStyle.Standard;
             button_usun_czesc.FlatStyle=FlatStyle.Standard;
@@ -39,8 +38,7 @@ namespace PodkladexApp
 
         private void button_usun_czesc_Click(object sender, EventArgs e)
         {
-            panel_lista.Visible = true;
-            panel_nazwa.Visible = false;
+            
             button_dodaj_czesc.FlatStyle = FlatStyle.Standard;
             button_edytuj_czesc.FlatStyle = FlatStyle.Standard;
             button_usun_czesc.FlatStyle = FlatStyle.Flat;
@@ -51,8 +49,7 @@ namespace PodkladexApp
         }
         private void button_dodaj_czesc_Click(object sender, EventArgs e)
          {
-             panel_nazwa.Visible = true;
-             panel_lista.Visible = false;
+            
                     button_dodaj_czesc.FlatStyle = FlatStyle.Flat;
                     button_edytuj_czesc.FlatStyle = FlatStyle.Standard;
                     button_usun_czesc.FlatStyle = FlatStyle.Standard;
@@ -62,29 +59,31 @@ namespace PodkladexApp
         }
         private void button_edytuj_czesc_Click(object sender, EventArgs e)
         {
-            panel_lista.Visible = true;
-            panel_nazwa.Visible = true;
+            
             button_dodaj_czesc.FlatStyle = FlatStyle.Standard;
             button_edytuj_czesc.FlatStyle = FlatStyle.Flat;
             button_usun_czesc.FlatStyle = FlatStyle.Standard;
             flaga_edytuj = true;
             flaga_usun = false;
-            flaga_dodaj = false;
+            flaga_dodaj = false; 
         }
         private void button_potwierdz_Click(object sender, EventArgs e)
         {
             if (flaga_usun == true) 
             { 
-              Usun_czesc(); 
+              Usun_czesc();
+                MessageBox.Show("Usunięto część.", "Informacja");
             }
             if (flaga_dodaj == true) 
             { 
                Dodaj_czesc();
-               textBox_nazwa_czesci.Clear();
+                MessageBox.Show("Dodano część.", "Informacja");
+                textBox_nazwa_czesci.Clear();
             }
             if (flaga_edytuj == true) 
             { 
-                Edytuj_czesc(); 
+                Edytuj_czesc();
+                MessageBox.Show("Zaktualizowano część.", "Informacja");
             }
         }
 
