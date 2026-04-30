@@ -46,6 +46,7 @@
             label6 = new Label();
             label3 = new Label();
             formsPlot_bilans = new ScottPlot.WinForms.FormsPlot();
+            flowLayoutPanel_legenda = new FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)dataGridView_bilans).BeginInit();
             SuspendLayout();
             // 
@@ -99,16 +100,16 @@
             // dataGridView_bilans
             // 
             dataGridView_bilans.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView_bilans.Location = new Point(12, 354);
+            dataGridView_bilans.Location = new Point(12, 357);
             dataGridView_bilans.Name = "dataGridView_bilans";
-            dataGridView_bilans.Size = new Size(845, 373);
+            dataGridView_bilans.Size = new Size(866, 370);
             dataGridView_bilans.TabIndex = 2;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.25F);
-            label1.Location = new Point(898, 599);
+            label1.Location = new Point(1012, 616);
             label1.Name = "label1";
             label1.Size = new Size(99, 25);
             label1.TabIndex = 3;
@@ -128,7 +129,7 @@
             // 
             Dochod.AutoSize = true;
             Dochod.Font = new Font("Segoe UI", 14.25F);
-            Dochod.Location = new Point(898, 680);
+            Dochod.Location = new Point(1012, 697);
             Dochod.Name = "Dochod";
             Dochod.Size = new Size(78, 25);
             Dochod.TabIndex = 5;
@@ -137,7 +138,7 @@
             // textBox_przychody
             // 
             textBox_przychody.Font = new Font("Segoe UI", 14.25F);
-            textBox_przychody.Location = new Point(1003, 599);
+            textBox_przychody.Location = new Point(1117, 616);
             textBox_przychody.Name = "textBox_przychody";
             textBox_przychody.Size = new Size(277, 33);
             textBox_przychody.TabIndex = 6;
@@ -145,7 +146,7 @@
             // textBox_wydatki
             // 
             textBox_wydatki.Font = new Font("Segoe UI", 14.25F);
-            textBox_wydatki.Location = new Point(1003, 638);
+            textBox_wydatki.Location = new Point(1117, 655);
             textBox_wydatki.Name = "textBox_wydatki";
             textBox_wydatki.Size = new Size(277, 33);
             textBox_wydatki.TabIndex = 6;
@@ -153,7 +154,7 @@
             // textBox_dochod
             // 
             textBox_dochod.Font = new Font("Segoe UI", 14.25F);
-            textBox_dochod.Location = new Point(1003, 677);
+            textBox_dochod.Location = new Point(1117, 694);
             textBox_dochod.Name = "textBox_dochod";
             textBox_dochod.Size = new Size(277, 33);
             textBox_dochod.TabIndex = 6;
@@ -192,7 +193,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 14.25F);
-            label6.Location = new Point(898, 641);
+            label6.Location = new Point(1012, 658);
             label6.Name = "label6";
             label6.Size = new Size(80, 25);
             label6.TabIndex = 5;
@@ -210,10 +211,17 @@
             // 
             // formsPlot_bilans
             // 
-            formsPlot_bilans.Location = new Point(883, 121);
+            formsPlot_bilans.Location = new Point(648, 13);
             formsPlot_bilans.Name = "formsPlot_bilans";
-            formsPlot_bilans.Size = new Size(413, 248);
+            formsPlot_bilans.Size = new Size(764, 323);
             formsPlot_bilans.TabIndex = 7;
+            // 
+            // flowLayoutPanel_legenda
+            // 
+            flowLayoutPanel_legenda.Location = new Point(913, 357);
+            flowLayoutPanel_legenda.Name = "flowLayoutPanel_legenda";
+            flowLayoutPanel_legenda.Size = new Size(355, 253);
+            flowLayoutPanel_legenda.TabIndex = 9;
             // 
             // Form_BilansZiS
             // 
@@ -221,6 +229,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gainsboro;
             ClientSize = new Size(1424, 811);
+            Controls.Add(flowLayoutPanel_legenda);
             Controls.Add(formsPlot_bilans);
             Controls.Add(textBox_dochod);
             Controls.Add(textBox_wydatki);
@@ -267,5 +276,6 @@
         private Label label6;
         private Label label3;
         private ScottPlot.WinForms.FormsPlot formsPlot_bilans;
+        private FlowLayoutPanel flowLayoutPanel_legenda;
     }
 }

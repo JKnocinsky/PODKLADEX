@@ -1,10 +1,13 @@
 ﻿using PodkladexApp.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using ScottPlot;
 using System;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
-using ScottPlot;
+using DrawingColor = System.Drawing.Color;
+using FormsLabel = System.Windows.Forms.Label;
 
 namespace PodkladexApp
 {
@@ -19,6 +22,14 @@ namespace PodkladexApp
             db = new PodkladexContext();
             connectionString = db.Database.GetDbConnection().ConnectionString;
         }
+        private readonly DrawingColor[] koloryLegendy =
+        {
+            DrawingColor.SteelBlue,
+            DrawingColor.Orange,
+            DrawingColor.SeaGreen,
+            DrawingColor.IndianRed,
+            DrawingColor.MediumPurple
+        };
 
         private void Form_BilansZiS_Load(object sender, EventArgs e)
         {
@@ -27,66 +38,6 @@ namespace PodkladexApp
             KonfigurujDataGridView();
             WyczyscPodsumowanie();
             WyczyscWykres();
-        }
-
-        private void WyczyscWykres()
-        {
-            formsPlot_bilans.Plot.Clear();
-            formsPlot_bilans.Plot.Title("Struktura wydatków");
-            formsPlot_bilans.Refresh();
-        }
-
-        private void RysujWykresWydatkow(DataTable dt)
-        {
-            double kosztyDostaw = 0;
-            double kosztySzkolen = 0;
-            double kosztyBadan = 0;
-            double kosztyWysylek = 0;
-            double kosztyWynagrodzen = 0;
-
-            foreach (DataRow row in dt.Rows)
-            {
-                kosztyDostaw += row["KosztyDostaw"] != DBNull.Value
-                    ? Convert.ToDouble(row["KosztyDostaw"])
-                    : 0;
-
-                kosztySzkolen += row["KosztySzkolen"] != DBNull.Value
-                    ? Convert.ToDouble(row["KosztySzkolen"])
-                    : 0;
-
-                kosztyBadan += row["KosztyBadan"] != DBNull.Value
-                    ? Convert.ToDouble(row["KosztyBadan"])
-                    : 0;
-
-                kosztyWysylek += row["KosztyWysylek"] != DBNull.Value
-                    ? Convert.ToDouble(row["KosztyWysylek"])
-                    : 0;
-
-                kosztyWynagrodzen += row["KosztyWynagrodzen"] != DBNull.Value
-                    ? Convert.ToDouble(row["KosztyWynagrodzen"])
-                    : 0;
-            }
-
-            formsPlot_bilans.Plot.Clear();
-
-            double[] values =
-            {
-        kosztyDostaw,
-        kosztySzkolen,
-        kosztyBadan,
-        kosztyWysylek,
-        kosztyWynagrodzen
-    };
-
-            var pie = formsPlot_bilans.Plot.Add.Pie(values);
-
-            formsPlot_bilans.Plot.Title("Struktura wydatków");
-
-            // najważniejsze linie
-            formsPlot_bilans.Plot.Axes.AutoScale();
-            formsPlot_bilans.Plot.Axes.Margins(0.05, 0.05);
-
-            formsPlot_bilans.Refresh();
         }
 
         private void ZaladujMiesiace()
@@ -136,6 +87,15 @@ namespace PodkladexApp
             textBox_przychody.Text = "0,00 zł";
             textBox_wydatki.Text = "0,00 zł";
             textBox_dochod.Text = "0,00 zł";
+        }
+
+        private void WyczyscWykres()
+        {
+            formsPlot_bilans.Plot.Clear();
+            formsPlot_bilans.Plot.Title("Struktura wydatków");
+            formsPlot_bilans.Refresh();
+
+            flowLayoutPanel_legenda.Controls.Clear();
         }
 
         private void button_pokazBilans_Click(object sender, EventArgs e)
@@ -255,6 +215,123 @@ namespace PodkladexApp
             textBox_przychody.Text = sumaPrzychodow.ToString("N2") + " zł";
             textBox_wydatki.Text = sumaWydatkow.ToString("N2") + " zł";
             textBox_dochod.Text = sumaDochodu.ToString("N2") + " zł";
+        }
+
+        private void RysujWykresWydatkow(DataTable dt)
+        {
+            double kosztyDostaw = 0;
+            double kosztySzkolen = 0;
+            double kosztyBadan = 0;
+            double kosztyWysylek = 0;
+            double kosztyWynagrodzen = 0;
+
+            foreach (DataRow row in dt.Rows)
+            {
+                kosztyDostaw += row["KosztyDostaw"] != DBNull.Value
+                    ? Convert.ToDouble(row["KosztyDostaw"])
+                    : 0;
+
+                kosztySzkolen += row["KosztySzkolen"] != DBNull.Value
+                    ? Convert.ToDouble(row["KosztySzkolen"])
+                    : 0;
+
+                kosztyBadan += row["KosztyBadan"] != DBNull.Value
+                    ? Convert.ToDouble(row["KosztyBadan"])
+                    : 0;
+
+                kosztyWysylek += row["KosztyWysylek"] != DBNull.Value
+                    ? Convert.ToDouble(row["KosztyWysylek"])
+                    : 0;
+
+                kosztyWynagrodzen += row["KosztyWynagrodzen"] != DBNull.Value
+                    ? Convert.ToDouble(row["KosztyWynagrodzen"])
+                    : 0;
+            }
+
+            formsPlot_bilans.Plot.Clear();
+
+            double[] values =
+            {
+                kosztyDostaw,
+                kosztySzkolen,
+                kosztyBadan,
+                kosztyWysylek,
+                kosztyWynagrodzen
+            };
+
+            string[] labels =
+            {
+                "Dostawy",
+                "Szkolenia",
+                "Badania",
+                "Wysyłki",
+                "Wynagrodzenia"
+            };
+
+            var pie = formsPlot_bilans.Plot.Add.Pie(values);
+
+            formsPlot_bilans.Plot.Title("Struktura wydatków");
+            formsPlot_bilans.Plot.Axes.AutoScale();
+            formsPlot_bilans.Plot.Axes.Margins(0.05, 0.05);
+            formsPlot_bilans.Refresh();
+
+            UstawLegendeWydatkow(values, labels);
+        }
+
+        private void UstawLegendeWydatkow(double[] values, string[] labels)
+        {
+            flowLayoutPanel_legenda.Controls.Clear();
+
+            double suma = values.Sum();
+
+            if (suma <= 0)
+            {
+                FormsLabel brakDanych = new FormsLabel();
+                brakDanych.Text = "Brak danych do wyświetlenia.";
+                brakDanych.AutoSize = true;
+                flowLayoutPanel_legenda.Controls.Add(brakDanych);
+                return;
+            }
+
+            for (int i = 0; i < values.Length; i++)
+            {
+                if (values[i] <= 0)
+                    continue;
+
+                double procent = values[i] / suma * 100.0;
+                DodajWierszLegendy(
+                    koloryLegendy[i % koloryLegendy.Length],
+                    $"{labels[i]}: {values[i]:N2} zł ({procent:N1}%)");
+            }
+        }
+
+        private void DodajWierszLegendy(DrawingColor kolor, string tekst)
+        {
+            Panel wiersz = new Panel();
+            wiersz.Width = flowLayoutPanel_legenda.ClientSize.Width - 25;
+            wiersz.Height = 28;
+            wiersz.Margin = new Padding(3);
+
+            Panel probkaKoloru = new Panel();
+            probkaKoloru.BackColor = kolor;
+            probkaKoloru.Width = 18;
+            probkaKoloru.Height = 18;
+            probkaKoloru.Left = 3;
+            probkaKoloru.Top = 5;
+            probkaKoloru.BorderStyle = BorderStyle.FixedSingle;
+
+            FormsLabel opis = new FormsLabel();
+            opis.Text = tekst;
+            opis.AutoSize = false;
+            opis.Left = 28;
+            opis.Top = 4;
+            opis.Width = wiersz.Width - 32;
+            opis.Height = 20;
+
+            wiersz.Controls.Add(probkaKoloru);
+            wiersz.Controls.Add(opis);
+
+            flowLayoutPanel_legenda.Controls.Add(wiersz);
         }
 
         private void UstawNaglowkiKolumn()

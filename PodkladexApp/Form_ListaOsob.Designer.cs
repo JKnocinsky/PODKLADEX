@@ -30,7 +30,6 @@
         {
             comboBox_idosoby = new ComboBox();
             button_ArrowL = new Button();
-            btn_usuwanie = new Button();
             label_idosoby = new Label();
             button_Wyczysc = new Button();
             button_Edytuj = new Button();
@@ -81,18 +80,6 @@
             button_ArrowL.UseVisualStyleBackColor = true;
             button_ArrowL.Click += button_ArrowL_Click;
             // 
-            // btn_usuwanie
-            // 
-            btn_usuwanie.BackColor = SystemColors.ControlLight;
-            btn_usuwanie.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold);
-            btn_usuwanie.Location = new Point(983, 573);
-            btn_usuwanie.Name = "btn_usuwanie";
-            btn_usuwanie.Size = new Size(147, 46);
-            btn_usuwanie.TabIndex = 8;
-            btn_usuwanie.Text = "Usuń osobę";
-            btn_usuwanie.UseVisualStyleBackColor = false;
-            btn_usuwanie.Click += btn_usuwanie_Click;
-            // 
             // label_idosoby
             // 
             label_idosoby.AutoSize = true;
@@ -107,7 +94,7 @@
             // 
             button_Wyczysc.BackColor = SystemColors.ControlLight;
             button_Wyczysc.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold);
-            button_Wyczysc.Location = new Point(713, 573);
+            button_Wyczysc.Location = new Point(966, 573);
             button_Wyczysc.Margin = new Padding(3, 2, 3, 2);
             button_Wyczysc.Name = "button_Wyczysc";
             button_Wyczysc.Size = new Size(167, 46);
@@ -120,7 +107,7 @@
             // 
             button_Edytuj.BackColor = SystemColors.ControlLight;
             button_Edytuj.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold);
-            button_Edytuj.Location = new Point(513, 573);
+            button_Edytuj.Location = new Point(651, 573);
             button_Edytuj.Margin = new Padding(3, 2, 3, 2);
             button_Edytuj.Name = "button_Edytuj";
             button_Edytuj.Size = new Size(97, 46);
@@ -146,7 +133,7 @@
             // 
             button_Dodaj.BackColor = SystemColors.ControlLight;
             button_Dodaj.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold);
-            button_Dodaj.Location = new Point(268, 573);
+            button_Dodaj.Location = new Point(291, 573);
             button_Dodaj.Margin = new Padding(3, 2, 3, 2);
             button_Dodaj.Name = "button_Dodaj";
             button_Dodaj.Size = new Size(142, 46);
@@ -358,7 +345,6 @@
             BackColor = Color.Gainsboro;
             ClientSize = new Size(1424, 811);
             Controls.Add(button_ArrowL);
-            Controls.Add(btn_usuwanie);
             Controls.Add(label_idosoby);
             Controls.Add(button_Wyczysc);
             Controls.Add(button_Edytuj);
@@ -378,7 +364,6 @@
         #endregion
         private ComboBox comboBox_idosoby;
         private Button button_ArrowL;
-        private Button btn_usuwanie;
         private Label label_idosoby;
         private Button button_Wyczysc;
         private Button button_Edytuj;
