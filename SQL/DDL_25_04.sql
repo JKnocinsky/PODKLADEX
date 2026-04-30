@@ -17,13 +17,13 @@ CREATE TABLE Osoba (
     ID_osoba INT IDENTITY(1,1) PRIMARY KEY,
     Imie NVARCHAR(50) NOT NULL,
     Nazwisko NVARCHAR(50) NOT NULL,
-    Nr_telefonu NVARCHAR(15) NOT NULL, -- Zmiana na 15 znaków
+    Nr_telefonu NVARCHAR(15) NOT NULL,
     Adres_e_mail NVARCHAR(50) NOT NULL,
     Miejscowosc NVARCHAR(50) NOT NULL,
     Kod_pocztowy NVARCHAR(10) NOT NULL,
     Ulica NVARCHAR(50) NOT NULL,
     Numer NVARCHAR(10) NOT NULL,
-    PESEL CHAR(11) NOT NULL -- PESEL to zawsze 11 znaków
+    PESEL CHAR(11) NOT NULL UNIQUE
 );
 GO
 
