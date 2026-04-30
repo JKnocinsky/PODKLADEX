@@ -7,6 +7,8 @@ namespace PodkladexApp.Models;
 
 public partial class PracownikSzkolenia
 {
+    public int IdPracownikSzkolenia { get; set; }
+
     public int IdPracownik { get; set; }
 
     public int IdSzkolenia { get; set; }

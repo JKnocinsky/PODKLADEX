@@ -17,13 +17,13 @@ CREATE TABLE Osoba (
     ID_osoba INT IDENTITY(1,1) PRIMARY KEY,
     Imie NVARCHAR(50) NOT NULL,
     Nazwisko NVARCHAR(50) NOT NULL,
-    Nr_telefonu NVARCHAR(15) NOT NULL, -- Zmiana na 15 znaków
+    Nr_telefonu NVARCHAR(15) NOT NULL,
     Adres_e_mail NVARCHAR(50) NOT NULL,
     Miejscowosc NVARCHAR(50) NOT NULL,
     Kod_pocztowy NVARCHAR(10) NOT NULL,
     Ulica NVARCHAR(50) NOT NULL,
     Numer NVARCHAR(10) NOT NULL,
-    PESEL CHAR(11) NOT NULL -- PESEL to zawsze 11 znaków
+    PESEL CHAR(11) NOT NULL UNIQUE
 );
 GO
 
@@ -87,12 +87,12 @@ CREATE TABLE Siatka_plac (
 GO
 
 CREATE TABLE Pracownik_szkolenia (
+    ID_pracownik_szkolenia INT IDENTITY(1,1) PRIMARY KEY,
     ID_pracownik INT NOT NULL FOREIGN KEY REFERENCES Pracownik(ID_pracownik),
     ID_szkolenia INT NOT NULL FOREIGN KEY REFERENCES Szkolenie(ID_szkolenia),
     Data_szkolenia DATE NOT NULL,
     Data_waznosci DATE NULL,
-    Cena_szkolenia DECIMAL(10,2) NOT NULL,
-    PRIMARY KEY (ID_pracownik, ID_szkolenia)
+    Cena_szkolenia DECIMAL(10,2) NOT NULL
 );
 GO
 
@@ -417,7 +417,7 @@ CREATE TABLE Gwarancja (
     ID_gwarancja INT IDENTITY(1,1) PRIMARY KEY,
     ID_maszyna INT NOT NULL FOREIGN KEY REFERENCES Maszyna(ID_maszyna),
     ID_firma INT NOT NULL FOREIGN KEY REFERENCES Firma(ID_firma),
-    Czas_gwarancji DECIMAL(6,2) NOT NULL,
+    Czas_gwarancji INT NOT NULL,
     Warunki NVARCHAR(250) NULL
 );
 GO

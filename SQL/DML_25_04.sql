@@ -243,7 +243,7 @@ INSERT INTO Czesc_zamienna (Nazwa) VALUES
 GO
 
 INSERT INTO Rodzaj_obslugi (Nazwa, Opis) VALUES
-('Przeglad', 'Okresowy'),
+('Przegląd', 'Okresowy'),
 ('Naprawa', 'Planowana'),
 ('Inspekcja', 'Planowana'),
 ('Konserwacja', 'Zapobiegawcza');
@@ -441,15 +441,15 @@ GO
 
 -- Każda maszyna ma dokładnie jednš gwarancję (ID_maszyna od 1 do 9)
 INSERT INTO Gwarancja (ID_maszyna, ID_firma, Czas_gwarancji, Warunki) VALUES
-(1,1,12.00,'Standardowa gwarancja'),
-(2,1,12.00,'Standardowa gwarancja'),
-(3,2,24.00,'Rozszerzona gwarancja'),
-(4,3,12.00,'Standardowa gwarancja'),
-(5,4,12.00,'Standardowa gwarancja'),
-(6,5,12.00,'Standardowa gwarancja'),
-(7,6,12.00,'Standardowa gwarancja'),
-(8,7,24.00,'Rozszerzona gwarancja'),
-(9,8,12.00,'Standardowa gwarancja');
+(1,1,12,'Standardowa gwarancja'),
+(2,1,12,'Standardowa gwarancja'),
+(3,2,24,'Rozszerzona gwarancja'),
+(4,3,12,'Standardowa gwarancja'),
+(5,4,12,'Standardowa gwarancja'),
+(6,5,12,'Standardowa gwarancja'),
+(7,6,12,'Standardowa gwarancja'),
+(8,7,24,'Rozszerzona gwarancja'),
+(9,8,12,'Standardowa gwarancja');
 GO
 
 
@@ -510,6 +510,7 @@ INSERT INTO Czesci_przeglady (ID_czesci, ID_obsluga, Liczba, Opis) VALUES
 (1,1,1,''),
 (2,2,1,''),
 (3,3,1,''),
+(2,3,2,''),
 (1,4,2,'Braki'),
 (2,5,1,''),
 (3,6,2,'Uszkodzenie pierwszej części'),
