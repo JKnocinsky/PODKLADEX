@@ -417,7 +417,7 @@ CREATE TABLE Gwarancja (
     ID_gwarancja INT IDENTITY(1,1) PRIMARY KEY,
     ID_maszyna INT NOT NULL FOREIGN KEY REFERENCES Maszyna(ID_maszyna),
     ID_firma INT NOT NULL FOREIGN KEY REFERENCES Firma(ID_firma),
-    Czas_gwarancji DECIMAL(6,2) NOT NULL,
+    Czas_gwarancji INT NOT NULL,
     Warunki NVARCHAR(250) NULL
 );
 GO
