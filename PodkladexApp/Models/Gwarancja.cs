@@ -13,7 +13,7 @@ public partial class Gwarancja
 
     public int IdFirma { get; set; }
 
-    public decimal CzasGwarancji { get; set; }
+    public int CzasGwarancji { get; set; }
 
     public string Warunki { get; set; }
 
