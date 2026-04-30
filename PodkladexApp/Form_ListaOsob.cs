@@ -25,7 +25,6 @@ namespace PodkladexApp
             InitializeComponent();
 
             db = new PodkladexContext();
-
             ZaladujOsobyDoComboBox();
         }
 
@@ -44,7 +43,7 @@ namespace PodkladexApp
                     })
                     .ToList();
 
-                UstawDaneComboBox(listaOsob);
+                UstawDaneComboBox(listaOsob, "");
             }
             catch (Exception ex)
             {
@@ -52,15 +51,37 @@ namespace PodkladexApp
             }
         }
 
-        private void UstawDaneComboBox(List<OsobaComboBoxItem> osoby)
+        private List<OsobaComboBoxItem> PrzygotujListeBezPustejKolekcji(List<OsobaComboBoxItem> osoby)
+        {
+            if (osoby.Count > 0)
+                return osoby;
+
+            return new List<OsobaComboBoxItem>
+            {
+                new OsobaComboBoxItem
+                {
+                    IdOsoba = -1,
+                    Imie = "",
+                    Nazwisko = "",
+                    PelnaNazwa = "Brak wyników"
+                }
+            };
+        }
+
+        private void UstawDaneComboBox(List<OsobaComboBoxItem> osoby, string tekst = "")
         {
             ladowanieComboBox = true;
 
+            var listaDoUstawienia = PrzygotujListeBezPustejKolekcji(osoby);
+
             comboBox_idosoby.DataSource = null;
-            comboBox_idosoby.DataSource = osoby;
             comboBox_idosoby.DisplayMember = "PelnaNazwa";
             comboBox_idosoby.ValueMember = "IdOsoba";
+            comboBox_idosoby.DataSource = listaDoUstawienia;
             comboBox_idosoby.SelectedIndex = -1;
+            comboBox_idosoby.Text = tekst;
+            comboBox_idosoby.SelectionStart = comboBox_idosoby.Text.Length;
+            comboBox_idosoby.SelectionLength = 0;
 
             ladowanieComboBox = false;
         }
@@ -105,23 +126,43 @@ namespace PodkladexApp
 
             try
             {
-                if (comboBox_idosoby.SelectedValue is int idOsoby)
-                {
-                    ZaladujDaneOsobyDoPol(idOsoby);
-                }
+                int idOsoby = Convert.ToInt32(comboBox_idosoby.SelectedValue);
+
+                if (idOsoby == -1)
+                    return;
+
+                ZaladujDaneOsobyDoPol(idOsoby);
             }
             catch
             {
-                // zabezpieczenie na moment bindowania DataSource
             }
         }
 
         private void comboBox_idosoby_TextUpdate(object sender, EventArgs e)
         {
-            if (listaOsob == null)
+            if (ladowanieComboBox)
                 return;
 
-            string wpisanyTekst = comboBox_idosoby.Text.Trim();
+            string wpisanyTekst = comboBox_idosoby.Text;
+
+            BeginInvoke(new Action(() =>
+            {
+                FiltrujComboBoxOsob(wpisanyTekst);
+            }));
+        }
+
+        private void FiltrujComboBoxOsob(string wpisanyTekst)
+        {
+            if (ladowanieComboBox)
+                return;
+
+            wpisanyTekst = wpisanyTekst?.Trim() ?? "";
+
+            if (string.IsNullOrWhiteSpace(wpisanyTekst))
+            {
+                UstawDaneComboBox(listaOsob, "");
+                return;
+            }
 
             var przefiltrowanaLista = listaOsob
                 .Where(o =>
@@ -130,24 +171,21 @@ namespace PodkladexApp
                     o.PelnaNazwa.Contains(wpisanyTekst, StringComparison.OrdinalIgnoreCase))
                 .ToList();
 
-            ladowanieComboBox = true;
-
-            comboBox_idosoby.DataSource = null;
-            comboBox_idosoby.DataSource = przefiltrowanaLista;
-            comboBox_idosoby.DisplayMember = "PelnaNazwa";
-            comboBox_idosoby.ValueMember = "IdOsoba";
-            comboBox_idosoby.SelectedIndex = -1;
-            comboBox_idosoby.Text = wpisanyTekst;
-            comboBox_idosoby.SelectionStart = comboBox_idosoby.Text.Length;
-            comboBox_idosoby.SelectionLength = 0;
+            UstawDaneComboBox(przefiltrowanaLista, wpisanyTekst);
 
             if (przefiltrowanaLista.Count > 0)
             {
                 comboBox_idosoby.DroppedDown = true;
                 Cursor.Current = Cursors.Default;
             }
+        }
 
-            ladowanieComboBox = false;
+        private void comboBox_idosoby_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(comboBox_idosoby.Text))
+            {
+                UstawDaneComboBox(listaOsob, "");
+            }
         }
 
         private void btn_edytowanie_Click(object? sender, EventArgs e)
@@ -155,6 +193,13 @@ namespace PodkladexApp
             if (comboBox_idosoby.SelectedIndex == -1 || comboBox_idosoby.SelectedValue == null)
             {
                 MessageBox.Show("Wybierz osobę z listy.");
+                return;
+            }
+
+            int idOsoby = Convert.ToInt32(comboBox_idosoby.SelectedValue);
+            if (idOsoby <= 0)
+            {
+                MessageBox.Show("Wybierz poprawną osobę z listy.");
                 return;
             }
 
@@ -171,8 +216,6 @@ namespace PodkladexApp
 
             try
             {
-                int idOsoby = (int)comboBox_idosoby.SelectedValue;
-
                 var osoba = db.Osoba.FirstOrDefault(o => o.IdOsoba == idOsoby);
 
                 if (osoba == null)
@@ -216,6 +259,17 @@ namespace PodkladexApp
                 return;
             }
 
+            int idOsoby = Convert.ToInt32(comboBox_idosoby.SelectedValue);
+            if (idOsoby <= 0)
+            {
+                MessageBox.Show(
+                    "Wybierz poprawną osobę z listy.",
+                    "Brak wyboru",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
             DialogResult wynik = MessageBox.Show(
                 "Czy na pewno chcesz usunąć wybraną osobę?",
                 "Potwierdzenie usunięcia",
@@ -229,8 +283,6 @@ namespace PodkladexApp
 
             try
             {
-                int idOsoby = (int)comboBox_idosoby.SelectedValue;
-
                 var osoba = db.Osoba.FirstOrDefault(o => o.IdOsoba == idOsoby);
 
                 if (osoba == null)
@@ -433,7 +485,7 @@ namespace PodkladexApp
         {
             comboBox_idosoby.Text = "";
             comboBox_idosoby.SelectedIndex = -1;
-            UstawDaneComboBox(listaOsob);
+            UstawDaneComboBox(listaOsob, "");
             WyczyscPola();
         }
     }

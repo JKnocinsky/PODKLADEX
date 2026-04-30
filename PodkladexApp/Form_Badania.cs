@@ -225,13 +225,17 @@ namespace PodkladexApp
             ladowanieComboPracownikow = false;
         }
 
-        private void UstawDaneComboBoxPracownikowDoFiltra(List<PracownikComboBoxItem> pracownicy, bool ustawWszystkich = true, string tekst = "")
+        private void UstawDaneComboBoxPracownikowDoFiltra(
+            List<PracownikComboBoxItem> pracownicy,
+            bool dodajWszystkich = true,
+            bool ustawWszystkichJakoWybrane = false,
+            string tekst = "")
         {
             ladowanieFiltrow = true;
 
             var listaDoFiltra = new List<object>();
 
-            if (ustawWszystkich)
+            if (dodajWszystkich)
             {
                 listaDoFiltra.Add(new { IdPracownik = 0, DanePracownika = "Wszyscy pracownicy" });
             }
@@ -257,7 +261,7 @@ namespace PodkladexApp
             comboBox_filtrPracownik.ValueMember = "IdPracownik";
             comboBox_filtrPracownik.DataSource = listaDoFiltra;
 
-            if (ustawWszystkich && comboBox_filtrPracownik.Items.Count > 0)
+            if (ustawWszystkichJakoWybrane && comboBox_filtrPracownik.Items.Count > 0)
             {
                 comboBox_filtrPracownik.SelectedIndex = 0;
                 comboBox_filtrPracownik.Text = "Wszyscy pracownicy";
@@ -280,7 +284,7 @@ namespace PodkladexApp
 
         private void ZaladujPracownikowDoFiltra()
         {
-            UstawDaneComboBoxPracownikowDoFiltra(listaPracownikow, true);
+            UstawDaneComboBoxPracownikowDoFiltra(listaPracownikow, true, true);
         }
 
         private void ZaladujTypyBadanDoComboBox()
@@ -483,8 +487,7 @@ namespace PodkladexApp
 
             if (string.IsNullOrWhiteSpace(wpisanyTekst))
             {
-                UstawDaneComboBoxPracownikowDoFiltra(listaPracownikow, true);
-                ZaladujBadania();
+                UstawDaneComboBoxPracownikowDoFiltra(listaPracownikow, true, false, "");
                 return;
             }
 
@@ -495,12 +498,21 @@ namespace PodkladexApp
                     p.DanePracownika.Contains(wpisanyTekst, StringComparison.OrdinalIgnoreCase))
                 .ToList();
 
-            UstawDaneComboBoxPracownikowDoFiltra(przefiltrowanaLista, false, wpisanyTekst);
+            UstawDaneComboBoxPracownikowDoFiltra(przefiltrowanaLista, true, false, wpisanyTekst);
 
             if (przefiltrowanaLista.Count > 0)
             {
                 comboBox_filtrPracownik.DroppedDown = true;
                 Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void comboBox_filtrPracownik_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(comboBox_filtrPracownik.Text))
+            {
+                UstawDaneComboBoxPracownikowDoFiltra(listaPracownikow, true, true);
+                ZaladujBadania();
             }
         }
 
@@ -544,7 +556,7 @@ namespace PodkladexApp
 
             if (string.IsNullOrWhiteSpace(wpisanyTekst))
             {
-                UstawDaneComboBoxPracownikowDoDodawania(listaPracownikow);
+                UstawDaneComboBoxPracownikowDoDodawania(listaPracownikow, "");
                 return;
             }
 
@@ -561,6 +573,14 @@ namespace PodkladexApp
             {
                 comboBox_pracownik.DroppedDown = true;
                 Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void comboBox_pracownik_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(comboBox_pracownik.Text))
+            {
+                UstawDaneComboBoxPracownikowDoDodawania(listaPracownikow, "");
             }
         }
     }

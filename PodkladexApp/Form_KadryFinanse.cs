@@ -24,6 +24,7 @@ namespace PodkladexApp
             PrzygotujPrzycisk(button_szkolenia);
             PrzygotujPrzycisk(button_badania);
             PrzygotujPrzycisk(button_umowy);
+            PrzygotujPrzycisk(button_bilans);
         }
 
         private void PrzygotujPrzycisk(Button button)
@@ -44,6 +45,7 @@ namespace PodkladexApp
             UstawNieaktywnyPrzycisk(button_szkolenia);
             UstawNieaktywnyPrzycisk(button_badania);
             UstawNieaktywnyPrzycisk(button_umowy);
+            UstawNieaktywnyPrzycisk(button_bilans);
         }
 
         private void UstawNieaktywnyPrzycisk(Button button)
@@ -114,6 +116,12 @@ namespace PodkladexApp
         {
             UstawAktywnyPrzycisk(button_urlopy);
             OpenChildForm(new Form_Urlopy());
+        }
+
+        private void button_bilans_Click(object sender, EventArgs e)
+        {
+            UstawAktywnyPrzycisk(button_bilans);
+            OpenChildForm(new Form_BilansZiS());
         }
     }
 }

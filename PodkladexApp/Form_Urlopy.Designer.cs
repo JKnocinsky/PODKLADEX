@@ -56,13 +56,13 @@
             dataGridView_urlopy.Margin = new Padding(9, 8, 9, 8);
             dataGridView_urlopy.Name = "dataGridView_urlopy";
             dataGridView_urlopy.RowHeadersWidth = 51;
-            dataGridView_urlopy.Size = new Size(899, 193);
+            dataGridView_urlopy.Size = new Size(1390, 409);
             dataGridView_urlopy.TabIndex = 0;
             // 
             // button_zatwierdz
             // 
             button_zatwierdz.Font = new Font("Segoe UI", 14.25F);
-            button_zatwierdz.Location = new Point(231, 268);
+            button_zatwierdz.Location = new Point(473, 474);
             button_zatwierdz.Margin = new Padding(3, 2, 3, 2);
             button_zatwierdz.Name = "button_zatwierdz";
             button_zatwierdz.Size = new Size(203, 51);
@@ -75,7 +75,7 @@
             // 
             checkBox_tylkoNiezatwierdzone.AutoSize = true;
             checkBox_tylkoNiezatwierdzone.Font = new Font("Segoe UI", 14.25F);
-            checkBox_tylkoNiezatwierdzone.Location = new Point(17, 16);
+            checkBox_tylkoNiezatwierdzone.Location = new Point(17, 12);
             checkBox_tylkoNiezatwierdzone.Margin = new Padding(3, 2, 3, 2);
             checkBox_tylkoNiezatwierdzone.Name = "checkBox_tylkoNiezatwierdzone";
             checkBox_tylkoNiezatwierdzone.Size = new Size(295, 29);
@@ -87,7 +87,7 @@
             // button_dodajWniosek
             // 
             button_dodajWniosek.Font = new Font("Segoe UI", 14.25F);
-            button_dodajWniosek.Location = new Point(527, 268);
+            button_dodajWniosek.Location = new Point(769, 474);
             button_dodajWniosek.Margin = new Padding(3, 2, 3, 2);
             button_dodajWniosek.Name = "button_dodajWniosek";
             button_dodajWniosek.Size = new Size(162, 51);
@@ -99,7 +99,7 @@
             // dateTimePicker_datarozp
             // 
             dateTimePicker_datarozp.Font = new Font("Segoe UI", 14.25F);
-            dateTimePicker_datarozp.Location = new Point(249, 102);
+            dateTimePicker_datarozp.Location = new Point(588, 101);
             dateTimePicker_datarozp.Margin = new Padding(3, 2, 3, 2);
             dateTimePicker_datarozp.Name = "dateTimePicker_datarozp";
             dateTimePicker_datarozp.Size = new Size(476, 33);
@@ -108,7 +108,7 @@
             // dateTimePicker_datazak
             // 
             dateTimePicker_datazak.Font = new Font("Segoe UI", 14.25F);
-            dateTimePicker_datazak.Location = new Point(249, 138);
+            dateTimePicker_datazak.Location = new Point(588, 138);
             dateTimePicker_datazak.Margin = new Padding(3, 2, 3, 2);
             dateTimePicker_datazak.Name = "dateTimePicker_datazak";
             dateTimePicker_datazak.Size = new Size(476, 33);
@@ -134,17 +134,17 @@
             panel1.Controls.Add(label1);
             panel1.Controls.Add(dateTimePicker_datazak);
             panel1.Controls.Add(dateTimePicker_datarozp);
-            panel1.Location = new Point(17, 360);
+            panel1.Location = new Point(17, 545);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(905, 258);
+            panel1.Size = new Size(1395, 255);
             panel1.TabIndex = 5;
             // 
             // label_datazak
             // 
             label_datazak.AutoSize = true;
             label_datazak.Font = new Font("Segoe UI", 14.25F);
-            label_datazak.Location = new Point(8, 138);
+            label_datazak.Location = new Point(347, 143);
             label_datazak.Name = "label_datazak";
             label_datazak.Size = new Size(221, 25);
             label_datazak.TabIndex = 4;
@@ -153,7 +153,7 @@
             // button_dodajWniosekdoZatwierdzenia
             // 
             button_dodajWniosekdoZatwierdzenia.Font = new Font("Segoe UI", 14.25F);
-            button_dodajWniosekdoZatwierdzenia.Location = new Point(290, 194);
+            button_dodajWniosekdoZatwierdzenia.Location = new Point(542, 184);
             button_dodajWniosekdoZatwierdzenia.Margin = new Padding(3, 2, 3, 2);
             button_dodajWniosekdoZatwierdzenia.Name = "button_dodajWniosekdoZatwierdzenia";
             button_dodajWniosekdoZatwierdzenia.Size = new Size(319, 51);
@@ -166,7 +166,7 @@
             // 
             label_rodzajurlopu.AutoSize = true;
             label_rodzajurlopu.Font = new Font("Segoe UI", 14.25F);
-            label_rodzajurlopu.Location = new Point(13, 70);
+            label_rodzajurlopu.Location = new Point(347, 66);
             label_rodzajurlopu.Name = "label_rodzajurlopu";
             label_rodzajurlopu.Size = new Size(129, 25);
             label_rodzajurlopu.TabIndex = 4;
@@ -176,7 +176,7 @@
             // 
             label_pracownik.AutoSize = true;
             label_pracownik.Font = new Font("Segoe UI", 14.25F);
-            label_pracownik.Location = new Point(13, 33);
+            label_pracownik.Location = new Point(347, 31);
             label_pracownik.Name = "label_pracownik";
             label_pracownik.Size = new Size(99, 25);
             label_pracownik.TabIndex = 4;
@@ -186,7 +186,7 @@
             // 
             label_datarozp.AutoSize = true;
             label_datarozp.Font = new Font("Segoe UI", 14.25F);
-            label_datarozp.Location = new Point(8, 102);
+            label_datarozp.Location = new Point(347, 101);
             label_datarozp.Name = "label_datarozp";
             label_datarozp.Size = new Size(218, 25);
             label_datarozp.TabIndex = 4;
@@ -196,7 +196,7 @@
             // 
             comboBox_Rodzaj_Urlopu.Font = new Font("Segoe UI", 14.25F);
             comboBox_Rodzaj_Urlopu.FormattingEnabled = true;
-            comboBox_Rodzaj_Urlopu.Location = new Point(162, 62);
+            comboBox_Rodzaj_Urlopu.Location = new Point(510, 64);
             comboBox_Rodzaj_Urlopu.Margin = new Padding(3, 2, 3, 2);
             comboBox_Rodzaj_Urlopu.Name = "comboBox_Rodzaj_Urlopu";
             comboBox_Rodzaj_Urlopu.Size = new Size(563, 33);
@@ -206,7 +206,7 @@
             // 
             comboBox_Dane_Pracownika.Font = new Font("Segoe UI", 14.25F);
             comboBox_Dane_Pracownika.FormattingEnabled = true;
-            comboBox_Dane_Pracownika.Location = new Point(162, 25);
+            comboBox_Dane_Pracownika.Location = new Point(510, 27);
             comboBox_Dane_Pracownika.Margin = new Padding(3, 2, 3, 2);
             comboBox_Dane_Pracownika.Name = "comboBox_Dane_Pracownika";
             comboBox_Dane_Pracownika.Size = new Size(563, 33);
@@ -218,7 +218,7 @@
             // 
             comboBox_filtrPracownik.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox_filtrPracownik.FormattingEnabled = true;
-            comboBox_filtrPracownik.Location = new Point(601, 15);
+            comboBox_filtrPracownik.Location = new Point(1092, 11);
             comboBox_filtrPracownik.Margin = new Padding(3, 2, 3, 2);
             comboBox_filtrPracownik.Name = "comboBox_filtrPracownik";
             comboBox_filtrPracownik.Size = new Size(315, 33);
@@ -230,7 +230,7 @@
             // 
             label_filtr.AutoSize = true;
             label_filtr.Font = new Font("Segoe UI", 14.25F);
-            label_filtr.Location = new Point(405, 20);
+            label_filtr.Location = new Point(886, 14);
             label_filtr.Name = "label_filtr";
             label_filtr.Size = new Size(194, 25);
             label_filtr.TabIndex = 6;
@@ -241,7 +241,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gainsboro;
-            ClientSize = new Size(934, 711);
+            ClientSize = new Size(1424, 811);
             Controls.Add(label_filtr);
             Controls.Add(comboBox_filtrPracownik);
             Controls.Add(panel1);

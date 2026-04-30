@@ -54,7 +54,7 @@
             // button_noweBadanie
             // 
             button_noweBadanie.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_noweBadanie.Location = new Point(328, 229);
+            button_noweBadanie.Location = new Point(620, 391);
             button_noweBadanie.Name = "button_noweBadanie";
             button_noweBadanie.Size = new Size(183, 42);
             button_noweBadanie.TabIndex = 11;
@@ -77,15 +77,15 @@
             panel1.Controls.Add(label2);
             panel1.Controls.Add(comboBox_typBadania);
             panel1.Controls.Add(comboBox_pracownik);
-            panel1.Location = new Point(24, 277);
+            panel1.Location = new Point(276, 439);
             panel1.Name = "panel1";
-            panel1.Size = new Size(852, 394);
+            panel1.Size = new Size(852, 332);
             panel1.TabIndex = 10;
             // 
             // button_dodajBadanie
             // 
             button_dodajBadanie.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_dodajBadanie.Location = new Point(323, 345);
+            button_dodajBadanie.Location = new Point(355, 269);
             button_dodajBadanie.Name = "button_dodajBadanie";
             button_dodajBadanie.Size = new Size(143, 42);
             button_dodajBadanie.TabIndex = 5;
@@ -96,7 +96,7 @@
             // textBox_uwagi
             // 
             textBox_uwagi.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            textBox_uwagi.Location = new Point(235, 269);
+            textBox_uwagi.Location = new Point(370, 214);
             textBox_uwagi.Name = "textBox_uwagi";
             textBox_uwagi.Size = new Size(331, 33);
             textBox_uwagi.TabIndex = 6;
@@ -104,7 +104,7 @@
             // textBox_koszt
             // 
             textBox_koszt.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            textBox_koszt.Location = new Point(235, 230);
+            textBox_koszt.Location = new Point(370, 175);
             textBox_koszt.Name = "textBox_koszt";
             textBox_koszt.Size = new Size(331, 33);
             textBox_koszt.TabIndex = 6;
@@ -113,7 +113,7 @@
             // 
             dateTimePicker_dataBadania.CalendarFont = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             dateTimePicker_dataBadania.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            dateTimePicker_dataBadania.Location = new Point(235, 146);
+            dateTimePicker_dataBadania.Location = new Point(370, 91);
             dateTimePicker_dataBadania.Name = "dateTimePicker_dataBadania";
             dateTimePicker_dataBadania.Size = new Size(331, 33);
             dateTimePicker_dataBadania.TabIndex = 5;
@@ -122,7 +122,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 14.25F);
-            label7.Location = new Point(17, 272);
+            label7.Location = new Point(152, 217);
             label7.Name = "label7";
             label7.Size = new Size(65, 25);
             label7.TabIndex = 1;
@@ -132,7 +132,7 @@
             // 
             dateTimePicker_dataWaznosci.CalendarFont = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             dateTimePicker_dataWaznosci.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            dateTimePicker_dataWaznosci.Location = new Point(235, 187);
+            dateTimePicker_dataWaznosci.Location = new Point(370, 132);
             dateTimePicker_dataWaznosci.Name = "dateTimePicker_dataWaznosci";
             dateTimePicker_dataWaznosci.Size = new Size(331, 33);
             dateTimePicker_dataWaznosci.TabIndex = 5;
@@ -141,7 +141,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 14.25F);
-            label6.Location = new Point(17, 233);
+            label6.Location = new Point(152, 178);
             label6.Name = "label6";
             label6.Size = new Size(128, 25);
             label6.TabIndex = 1;
@@ -151,7 +151,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 14.25F);
-            label5.Location = new Point(17, 193);
+            label5.Location = new Point(152, 138);
             label5.Name = "label5";
             label5.Size = new Size(133, 25);
             label5.TabIndex = 1;
@@ -161,7 +161,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 14.25F);
-            label4.Location = new Point(17, 152);
+            label4.Location = new Point(152, 97);
             label4.Name = "label4";
             label4.Size = new Size(124, 25);
             label4.TabIndex = 1;
@@ -171,7 +171,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 14.25F);
-            label3.Location = new Point(17, 99);
+            label3.Location = new Point(152, 55);
             label3.Name = "label3";
             label3.Size = new Size(141, 25);
             label3.TabIndex = 1;
@@ -181,7 +181,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 14.25F);
-            label2.Location = new Point(17, 38);
+            label2.Location = new Point(152, 13);
             label2.Name = "label2";
             label2.Size = new Size(99, 25);
             label2.TabIndex = 1;
@@ -191,7 +191,7 @@
             // 
             comboBox_typBadania.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox_typBadania.FormattingEnabled = true;
-            comboBox_typBadania.Location = new Point(235, 96);
+            comboBox_typBadania.Location = new Point(370, 52);
             comboBox_typBadania.Name = "comboBox_typBadania";
             comboBox_typBadania.Size = new Size(331, 33);
             comboBox_typBadania.TabIndex = 0;
@@ -200,7 +200,7 @@
             // 
             comboBox_pracownik.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox_pracownik.FormattingEnabled = true;
-            comboBox_pracownik.Location = new Point(235, 38);
+            comboBox_pracownik.Location = new Point(370, 13);
             comboBox_pracownik.Name = "comboBox_pracownik";
             comboBox_pracownik.Size = new Size(331, 33);
             comboBox_pracownik.TabIndex = 0;
@@ -209,16 +209,16 @@
             // dataGridView_badania
             // 
             dataGridView_badania.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView_badania.Location = new Point(24, 69);
+            dataGridView_badania.Location = new Point(17, 55);
             dataGridView_badania.Name = "dataGridView_badania";
-            dataGridView_badania.Size = new Size(852, 154);
+            dataGridView_badania.Size = new Size(1390, 330);
             dataGridView_badania.TabIndex = 9;
             // 
             // checkBox_tylkoNiewazne
             // 
             checkBox_tylkoNiewazne.AutoSize = true;
             checkBox_tylkoNiewazne.Font = new Font("Segoe UI", 14.25F);
-            checkBox_tylkoNiewazne.Location = new Point(27, 12);
+            checkBox_tylkoNiewazne.Location = new Point(17, 12);
             checkBox_tylkoNiewazne.Name = "checkBox_tylkoNiewazne";
             checkBox_tylkoNiewazne.Size = new Size(210, 29);
             checkBox_tylkoNiewazne.TabIndex = 8;
@@ -230,19 +230,19 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.25F);
-            label1.Location = new Point(477, 21);
+            label1.Location = new Point(886, 14);
             label1.Name = "label1";
-            label1.Size = new Size(190, 25);
+            label1.Size = new Size(194, 25);
             label1.TabIndex = 7;
-            label1.Text = "Filtruj po pracowniku";
+            label1.Text = "Filtruj po pracowniku:";
             // 
             // comboBox_filtrPracownik
             // 
             comboBox_filtrPracownik.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox_filtrPracownik.FormattingEnabled = true;
-            comboBox_filtrPracownik.Location = new Point(673, 21);
+            comboBox_filtrPracownik.Location = new Point(1092, 11);
             comboBox_filtrPracownik.Name = "comboBox_filtrPracownik";
-            comboBox_filtrPracownik.Size = new Size(203, 33);
+            comboBox_filtrPracownik.Size = new Size(315, 33);
             comboBox_filtrPracownik.TabIndex = 6;
             comboBox_filtrPracownik.SelectedIndexChanged += comboBox_filtrPracownik_SelectedIndexChanged;
             comboBox_filtrPracownik.TextUpdate += comboBox_filtrPracownik_TextUpdate;
@@ -252,7 +252,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gainsboro;
-            ClientSize = new Size(903, 676);
+            ClientSize = new Size(1424, 811);
             Controls.Add(button_noweBadanie);
             Controls.Add(panel1);
             Controls.Add(dataGridView_badania);

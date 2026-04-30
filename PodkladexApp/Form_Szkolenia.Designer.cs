@@ -53,9 +53,9 @@
             // 
             comboBox_filtrPracownik.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox_filtrPracownik.FormattingEnabled = true;
-            comboBox_filtrPracownik.Location = new Point(632, 24);
+            comboBox_filtrPracownik.Location = new Point(1092, 11);
             comboBox_filtrPracownik.Name = "comboBox_filtrPracownik";
-            comboBox_filtrPracownik.Size = new Size(203, 33);
+            comboBox_filtrPracownik.Size = new Size(315, 33);
             comboBox_filtrPracownik.TabIndex = 0;
             comboBox_filtrPracownik.SelectedIndexChanged += comboBox_filtrPracownik_SelectedIndexChanged;
             comboBox_filtrPracownik.TextUpdate += comboBox_filtrPracownik_TextUpdate;
@@ -65,17 +65,17 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.25F);
-            label1.Location = new Point(436, 24);
+            label1.Location = new Point(886, 14);
             label1.Name = "label1";
-            label1.Size = new Size(190, 25);
+            label1.Size = new Size(194, 25);
             label1.TabIndex = 1;
-            label1.Text = "Filtruj po pracowniku";
+            label1.Text = "Filtruj po pracowniku:";
             // 
             // checkBox_tylkoNiewazne
             // 
             checkBox_tylkoNiewazne.AutoSize = true;
             checkBox_tylkoNiewazne.Font = new Font("Segoe UI", 14.25F);
-            checkBox_tylkoNiewazne.Location = new Point(37, 20);
+            checkBox_tylkoNiewazne.Location = new Point(17, 12);
             checkBox_tylkoNiewazne.Name = "checkBox_tylkoNiewazne";
             checkBox_tylkoNiewazne.Size = new Size(210, 29);
             checkBox_tylkoNiewazne.TabIndex = 2;
@@ -86,9 +86,9 @@
             // dataGridView_szkolenia
             // 
             dataGridView_szkolenia.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView_szkolenia.Location = new Point(37, 77);
+            dataGridView_szkolenia.Location = new Point(17, 55);
             dataGridView_szkolenia.Name = "dataGridView_szkolenia";
-            dataGridView_szkolenia.Size = new Size(849, 168);
+            dataGridView_szkolenia.Size = new Size(1390, 409);
             dataGridView_szkolenia.TabIndex = 3;
             // 
             // panel1
@@ -104,15 +104,15 @@
             panel1.Controls.Add(label2);
             panel1.Controls.Add(comboBox_szkolenie);
             panel1.Controls.Add(comboBox_pracownik);
-            panel1.Location = new Point(34, 312);
+            panel1.Location = new Point(303, 518);
             panel1.Name = "panel1";
-            panel1.Size = new Size(852, 328);
+            panel1.Size = new Size(852, 283);
             panel1.TabIndex = 4;
             // 
             // button_dodajSzkolenie
             // 
             button_dodajSzkolenie.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_dodajSzkolenie.Location = new Point(331, 281);
+            button_dodajSzkolenie.Location = new Point(348, 230);
             button_dodajSzkolenie.Name = "button_dodajSzkolenie";
             button_dodajSzkolenie.Size = new Size(143, 42);
             button_dodajSzkolenie.TabIndex = 5;
@@ -123,7 +123,7 @@
             // textBox_cenaSzkolenia
             // 
             textBox_cenaSzkolenia.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            textBox_cenaSzkolenia.Location = new Point(235, 230);
+            textBox_cenaSzkolenia.Location = new Point(252, 179);
             textBox_cenaSzkolenia.Name = "textBox_cenaSzkolenia";
             textBox_cenaSzkolenia.Size = new Size(331, 33);
             textBox_cenaSzkolenia.TabIndex = 6;
@@ -132,7 +132,7 @@
             // 
             dateTimePicker_dataSzkolenia.CalendarFont = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             dateTimePicker_dataSzkolenia.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            dateTimePicker_dataSzkolenia.Location = new Point(235, 146);
+            dateTimePicker_dataSzkolenia.Location = new Point(252, 95);
             dateTimePicker_dataSzkolenia.Name = "dateTimePicker_dataSzkolenia";
             dateTimePicker_dataSzkolenia.Size = new Size(331, 33);
             dateTimePicker_dataSzkolenia.TabIndex = 5;
@@ -142,7 +142,7 @@
             // 
             dateTimePicker_dataWaznosci.CalendarFont = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             dateTimePicker_dataWaznosci.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            dateTimePicker_dataWaznosci.Location = new Point(235, 187);
+            dateTimePicker_dataWaznosci.Location = new Point(252, 136);
             dateTimePicker_dataWaznosci.Name = "dateTimePicker_dataWaznosci";
             dateTimePicker_dataWaznosci.Size = new Size(331, 33);
             dateTimePicker_dataWaznosci.TabIndex = 5;
@@ -152,7 +152,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 14.25F);
-            label6.Location = new Point(17, 233);
+            label6.Location = new Point(34, 182);
             label6.Name = "label6";
             label6.Size = new Size(139, 25);
             label6.TabIndex = 1;
@@ -162,7 +162,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 14.25F);
-            label5.Location = new Point(17, 193);
+            label5.Location = new Point(34, 142);
             label5.Name = "label5";
             label5.Size = new Size(133, 25);
             label5.TabIndex = 1;
@@ -172,7 +172,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 14.25F);
-            label4.Location = new Point(17, 152);
+            label4.Location = new Point(34, 101);
             label4.Name = "label4";
             label4.Size = new Size(157, 25);
             label4.TabIndex = 1;
@@ -182,7 +182,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 14.25F);
-            label3.Location = new Point(17, 99);
+            label3.Location = new Point(34, 59);
             label3.Name = "label3";
             label3.Size = new Size(164, 25);
             label3.TabIndex = 1;
@@ -192,7 +192,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 14.25F);
-            label2.Location = new Point(17, 38);
+            label2.Location = new Point(34, 17);
             label2.Name = "label2";
             label2.Size = new Size(99, 25);
             label2.TabIndex = 1;
@@ -202,7 +202,7 @@
             // 
             comboBox_szkolenie.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox_szkolenie.FormattingEnabled = true;
-            comboBox_szkolenie.Location = new Point(235, 96);
+            comboBox_szkolenie.Location = new Point(252, 56);
             comboBox_szkolenie.Name = "comboBox_szkolenie";
             comboBox_szkolenie.Size = new Size(331, 33);
             comboBox_szkolenie.TabIndex = 0;
@@ -212,7 +212,7 @@
             // 
             comboBox_pracownik.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox_pracownik.FormattingEnabled = true;
-            comboBox_pracownik.Location = new Point(235, 38);
+            comboBox_pracownik.Location = new Point(252, 17);
             comboBox_pracownik.Name = "comboBox_pracownik";
             comboBox_pracownik.Size = new Size(331, 33);
             comboBox_pracownik.TabIndex = 0;
@@ -221,7 +221,7 @@
             // button_noweSzkolenie
             // 
             button_noweSzkolenie.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_noweSzkolenie.Location = new Point(344, 251);
+            button_noweSzkolenie.Location = new Point(618, 470);
             button_noweSzkolenie.Name = "button_noweSzkolenie";
             button_noweSzkolenie.Size = new Size(183, 42);
             button_noweSzkolenie.TabIndex = 5;
@@ -234,7 +234,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gainsboro;
-            ClientSize = new Size(934, 711);
+            ClientSize = new Size(1424, 811);
             Controls.Add(button_noweSzkolenie);
             Controls.Add(panel1);
             Controls.Add(dataGridView_szkolenia);
