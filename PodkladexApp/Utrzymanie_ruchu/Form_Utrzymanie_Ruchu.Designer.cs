@@ -128,7 +128,7 @@
             button_otworz_ocena_stanu.Font = new Font("Segoe UI", 14F);
             button_otworz_ocena_stanu.Location = new Point(12, 434);
             button_otworz_ocena_stanu.Name = "button_otworz_ocena_stanu";
-            button_otworz_ocena_stanu.Size = new Size(212, 58);
+            button_otworz_ocena_stanu.Size = new Size(212, 68);
             button_otworz_ocena_stanu.TabIndex = 10;
             button_otworz_ocena_stanu.Text = "Ocena stanu technicznego";
             button_otworz_ocena_stanu.UseVisualStyleBackColor = true;

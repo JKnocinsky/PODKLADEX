@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Form_Obsluga.cs">
+    <Compile Update="Utrzymanie_ruchu\Form_Obsluga.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Produkcja\Form_NormaProd.cs">
