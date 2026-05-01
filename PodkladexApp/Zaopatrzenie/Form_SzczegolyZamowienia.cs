@@ -95,7 +95,7 @@ namespace PodkladexApp.Zaopatrzenie
                 }
             }
         }
-        
+
 
 
         private void ZablokujReszteFormularza(bool stan)
@@ -455,5 +455,15 @@ namespace PodkladexApp.Zaopatrzenie
 
         private void textBox_Uwagi_TextChanged(object sender, EventArgs e) { }
         private void dataGridView_Koszyk_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
+
+        private void button_powrot_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button_usun_z_zamowienia_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
