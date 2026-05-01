@@ -40,6 +40,11 @@ namespace PodkladexApp
 
         private void UkryjWszystko()
         {
+            // Reset kolorów przycisków głównego menu
+            btn_DodajMaterial.BackColor = SystemColors.Control;
+            btn_EdytujMat.BackColor = SystemColors.Control;
+            btn_UsunMat.BackColor = SystemColors.Control;
+
             // Ukrywanie i resetowanie stanu pól tekstowych
             textBox_DodajNazweMat.Visible = false;
             textBox_DodajNazweMat.ReadOnly = false;
@@ -83,6 +88,10 @@ namespace PodkladexApp
             aktualnyTryb = TrybPracy.Dodawanie;
             UkryjWszystko();
 
+            // Podświetlenie aktywnego przycisku i zmiana tekstu akcji
+            btn_DodajMaterial.BackColor = Color.LightSkyBlue;
+            btn_MaterialPotwierdz.Text = "Dodaj nowy materiał";
+
             label_NazwaMat.Visible = true;
             textBox_DodajNazweMat.Visible = true;
 
@@ -99,6 +108,10 @@ namespace PodkladexApp
         {
             aktualnyTryb = TrybPracy.Edycja;
             UkryjWszystko();
+
+            // Podświetlenie aktywnego przycisku i zmiana tekstu akcji
+            btn_EdytujMat.BackColor = Color.LightSkyBlue;
+            btn_MaterialPotwierdz.Text = "Zapisz zmiany";
 
             label_DodajUsun.Visible = true;
             comboBox_MaterialLista.Visible = true;
@@ -119,6 +132,10 @@ namespace PodkladexApp
         {
             aktualnyTryb = TrybPracy.Usuwanie;
             UkryjWszystko();
+
+            // Podświetlenie aktywnego przycisku i zmiana tekstu akcji
+            btn_UsunMat.BackColor = Color.LightSkyBlue;
+            btn_MaterialPotwierdz.Text = "Usuń materiał";
 
             // Pokaż listę wyboru
             label_DodajUsun.Visible = true;
