@@ -15,6 +15,29 @@ namespace PodkladexApp
     public partial class Form_Nowa_Firma : Form
 
     {
+        // Flaga pamiętająca tryb pracy
+        private bool czyTrybEdycji = false;
+
+        private void UstawWidokPoczatkowy()
+        {
+            // Ukrywamy panel z textboxami i przyciskiem "Zaakceptuj"
+            panel_dane_firmy.Visible = false;
+
+            // Ukrywamy comboboxa do wyboru firmy i jego labela
+            comboBox_Nazwa_firmy.Visible = false;
+            label_ProszeWybracFirme.Visible = false;
+
+            // Czyszczenie zawartości
+            textBox_NazwaFirmy.Clear();
+            textBox_NIP_firmy.Clear();
+            textBox_Miejscowosc_firmy.Clear();
+            textBox_Kod_pocztowy_firmy.Clear();
+            textBox_Ulica_firmy.Clear();
+            textBox_Numer_firmy.Clear();
+        }
+
+
+
         // 1. Inicjalizacja połączenia z bazą danych (Entity Framework Core)
         private PodkladexContext _db = new PodkladexContext();
 
@@ -444,12 +467,32 @@ namespace PodkladexApp
 
         private void button_Dodaj_firme_Click(object sender, EventArgs e)
         {
+            // Ustawiamy tryb na dodawanie
+            czyTrybEdycji = false;
 
+            UstawWidokPoczatkowy(); // Ukrywa comboboxa i czyści pola
+
+            // Odkrywamy TYLKO panel z textboxami i przyciskiem zatwierdzenia
+            panel_dane_firmy.Visible = true;
         }
 
         private void button_Edytuj_dane_firmy_Click(object sender, EventArgs e)
         {
+            // Ustawiamy tryb na edycję
+            czyTrybEdycji = true;
 
+            UstawWidokPoczatkowy(); // Ukrywa panel z textboxami (pojawi się dopiero po wyborze firmy)
+
+            // Odkrywamy TYLKO comboboxa i jego labela
+            comboBox_Nazwa_firmy.Visible = true;
+            label_ProszeWybracFirme.Visible = true;
+
+            // Pobranie danych z bazy i załadowanie do ComboBoxa
+            var listaFirm = _db.Firma.ToList();
+            comboBox_Nazwa_firmy.DataSource = listaFirm;
+            comboBox_Nazwa_firmy.DisplayMember = "Nazwa";
+            comboBox_Nazwa_firmy.ValueMember = "IdFirma";
+            comboBox_Nazwa_firmy.SelectedIndex = -1; // Zostawiamy puste na start
         }
     }
 }
