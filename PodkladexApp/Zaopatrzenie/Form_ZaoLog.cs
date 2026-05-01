@@ -69,6 +69,9 @@ namespace PodkladexApp
         // =========================================================================
         private void button_Edytuj_firmy_Click(object sender, EventArgs e)
         {
+            // Otwiera formularz historii zamówień wewnątrz głównego panelu
+            OpenChildForm(new Form_Nowa_Firma());
+            /*
             // 1. Pobieramy firmy z bazy
             ResetujWidok();
             var listaFirm = _db.Firma.ToList();
@@ -86,6 +89,7 @@ namespace PodkladexApp
             comboBox_Nazwa_firmy.Visible = true;
             label_ProszeWybracFirme.Visible = true;
             panel_dane_firmy.Visible = false;
+            */
         }
 
         // =========================================================================
@@ -131,6 +135,7 @@ namespace PodkladexApp
         private void label_NIP_Click(object sender, EventArgs e) { }
         private void Form_ZaoLog_Load(object sender, EventArgs e) { }
 
+        /*
         private void button_usun_firme_Click(object sender, EventArgs e)
         {
             // Sprawdzamy, czy w ogóle edytujemy istniejącą firmę (czy coś jest wybrane w ComboBox)
@@ -239,6 +244,7 @@ namespace PodkladexApp
             // POWRÓT DO DOMYŚLNEGO WIDOKU PO ZAPISIE LUB EDYCJI
             ResetujWidok();
         }
+        */
 
         private void btn_Dostawa_Click(object sender, EventArgs e)
         {

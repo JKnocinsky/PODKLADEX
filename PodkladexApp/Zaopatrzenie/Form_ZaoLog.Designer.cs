@@ -121,7 +121,8 @@
             button_usun_firme.TabIndex = 6;
             button_usun_firme.Text = "Usuń firmę";
             button_usun_firme.UseVisualStyleBackColor = true;
-            button_usun_firme.Click += button_usun_firme_Click;
+            button_usun_firme.Visible = false;
+
             // 
             // button_zaakceptuj_zmiany
             // 
@@ -133,7 +134,7 @@
             button_zaakceptuj_zmiany.TabIndex = 5;
             button_zaakceptuj_zmiany.Text = "Zaakceptuj zmiany";
             button_zaakceptuj_zmiany.UseVisualStyleBackColor = true;
-            button_zaakceptuj_zmiany.Click += button_zaakceptuj_zmiany_Click;
+
             // 
             // label_NIP
             // 

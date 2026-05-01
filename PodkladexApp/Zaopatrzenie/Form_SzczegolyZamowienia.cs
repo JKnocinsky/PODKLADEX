@@ -17,6 +17,40 @@ namespace PodkladexApp.Zaopatrzenie
 
     public partial class Form_SzczegolyZamowienia : Form
     {
+
+        private void dataGridView_Koszyk_SelectionChanged(object sender, EventArgs e)
+        {
+            // Sprawdzamy, czy jakikolwiek wiersz jest zaznaczony
+            if (dataGridView_Koszyk.SelectedRows.Count > 0)
+            {
+                // 1. Włączamy przyciski, bo mamy co edytować/usunąć
+                button_usun_z_zamowienia.Enabled = true;
+                button_edytuj_zamowienie.Enabled = true;
+
+                // 2. Pobieramy zaznaczoną pozycję z naszej listy _koszyk
+                int index = dataGridView_Koszyk.SelectedRows[0].Index;
+                PozycjaKoszyka zaznaczonaPozycja = _koszyk[index];
+
+                // 3. Ładujemy dane z powrotem do kontrolek
+                comboBox_Produkt.SelectedValue = zaznaczonaPozycja.IdProduktu;
+                // Uwaga: Zmiana produktu w ComboBoxie automatycznie wyzwala SelectedIndexChanged, 
+                // co odświeża listę materiałów. Dlatego przypisanie materiału robimy po produkcie.
+                comboBox_Material.SelectedValue = zaznaczonaPozycja.IdMaterialu;
+
+                numericUpDown_Ilosc.Value = zaznaczonaPozycja.Ilosc;
+                // Cena wyliczy się sama dzięki eventom ValueChanged, ale dla pewności możemy ją przypisać
+                numericUpDown_Cena.Value = zaznaczonaPozycja.Cena;
+                textBox_Uwagi.Text = zaznaczonaPozycja.Uwagi;
+            }
+            else
+            {
+                // Jeśli zaznaczenie zniknie (np. po usunięciu ostatniego elementu), wyszarzamy przyciski
+                button_usun_z_zamowienia.Enabled = false;
+                button_edytuj_zamowienie.Enabled = false;
+            }
+        }
+
+
         private void DopasujWymiaryKontrolki()
         {
             // ==================================================
@@ -105,6 +139,10 @@ namespace PodkladexApp.Zaopatrzenie
             numericUpDown_Cena.Enabled = stan;
             textBox_Uwagi.Enabled = stan;
             button_DodajPozycje.Enabled = stan;
+            // Domyślnie wyłączamy przyciski edycji i usuwania
+            button_usun_z_zamowienia.Enabled = false;
+            // Jeśli przycisk edycji nazywa się inaczej, podmień poniższą nazwę:
+            button_edytuj_zamowienie.Enabled = false;
         }
 
 
@@ -458,12 +496,73 @@ namespace PodkladexApp.Zaopatrzenie
 
         private void button_powrot_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void button_usun_z_zamowienia_Click(object sender, EventArgs e)
         {
+            if (dataGridView_Koszyk.SelectedRows.Count > 0)
+            {
+                DialogResult odpowiedz = MessageBox.Show(
+                    "Wariacie, na pewno chcesz wyrzucić tę pozycję z koszyka?",
+                    "Potwierdzenie usunięcia",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
 
+                if (odpowiedz == DialogResult.Yes)
+                {
+                    // Usuwamy pozycję z listy
+                    int index = dataGridView_Koszyk.SelectedRows[0].Index;
+                    _koszyk.RemoveAt(index);
+
+                    // Sprawdzamy czy koszyk opustoszał
+                    if (_koszyk.Count == 0)
+                    {
+                        dataGridView_Koszyk.Visible = false;
+                    }
+                    else
+                    {
+                        DopasujWymiaryKontrolki();
+                    }
+                }
+            }
+        }
+
+
+        private void button_edytuj_zamowienie_Click(object sender, EventArgs e)
+        {
+            if (dataGridView_Koszyk.SelectedRows.Count > 0)
+            {
+                // Sprawdzamy, czy kontrolki są poprawnie wypełnione
+                if (comboBox_Produkt.SelectedItem is Produkt p && comboBox_Material.SelectedItem is Material m)
+                {
+                    // Pobieramy indeks i obiekt, który aktualnie edytujemy
+                    int index = dataGridView_Koszyk.SelectedRows[0].Index;
+                    PozycjaKoszyka edytowanaPozycja = _koszyk[index];
+
+                    // Nieniszczące nadpisanie danych nowymi wartościami z kontrolek
+                    edytowanaPozycja.IdProduktu = p.IdProdukt;
+                    edytowanaPozycja.NazwaProduktu = p.Nazwa;
+                    edytowanaPozycja.IdMaterialu = m.IdMaterial;
+                    edytowanaPozycja.NazwaMaterialu = m.Nazwa;
+                    edytowanaPozycja.Ilosc = (int)numericUpDown_Ilosc.Value;
+                    edytowanaPozycja.Cena = numericUpDown_Cena.Value;
+                    edytowanaPozycja.Uwagi = textBox_Uwagi.Text;
+
+                    // BARDZO WAŻNE: BindingList nie wie samo z siebie, że zmieniliśmy właściwości wewnątrz obiektu.
+                    // ResetItem wymusza na DataGridView odświeżenie tego konkretnego wiersza.
+                    _koszyk.ResetItem(index);
+
+                    // Dopasowujemy wymiary tabeli, bo mogła się zmienić długość tekstu (np. uwag)
+                    DopasujWymiaryKontrolki();
+
+                    MessageBox.Show("Pozycja zamówienia została zaktualizowana!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Wybierz poprawnie produkt oraz materiał z list rozwijanych.", "Błąd danych", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
         }
     }
 }

@@ -43,6 +43,7 @@
             label_cena_pozycji = new Label();
             button_usun_z_zamowienia = new Button();
             button_powrot = new Button();
+            button_edytuj_zamowienie = new Button();
             ((System.ComponentModel.ISupportInitialize)numericUpDown_Ilosc).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown_Cena).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView_Koszyk).BeginInit();
@@ -127,6 +128,7 @@
             dataGridView_Koszyk.Size = new Size(969, 414);
             dataGridView_Koszyk.TabIndex = 6;
             dataGridView_Koszyk.CellContentClick += dataGridView_Koszyk_CellContentClick;
+            dataGridView_Koszyk.SelectionChanged += dataGridView_Koszyk_SelectionChanged;
             // 
             // button_PrzejdzDalej
             // 
@@ -217,11 +219,25 @@
             button_powrot.UseVisualStyleBackColor = true;
             button_powrot.Click += button_powrot_Click;
             // 
+            // button_edytuj_zamowienie
+            // 
+            button_edytuj_zamowienie.Cursor = Cursors.Hand;
+            button_edytuj_zamowienie.Font = new Font("Segoe UI", 14F);
+            button_edytuj_zamowienie.Location = new Point(227, 428);
+            button_edytuj_zamowienie.Margin = new Padding(3, 2, 3, 2);
+            button_edytuj_zamowienie.Name = "button_edytuj_zamowienie";
+            button_edytuj_zamowienie.Size = new Size(250, 50);
+            button_edytuj_zamowienie.TabIndex = 15;
+            button_edytuj_zamowienie.Text = "Edytuj zamówienie";
+            button_edytuj_zamowienie.UseVisualStyleBackColor = true;
+            button_edytuj_zamowienie.Click += button_edytuj_zamowienie_Click;
+            // 
             // Form_SzczegolyZamowienia
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1664, 791);
+            Controls.Add(button_edytuj_zamowienie);
             Controls.Add(button_powrot);
             Controls.Add(button_usun_z_zamowienia);
             Controls.Add(label_cena_pozycji);
@@ -265,5 +281,6 @@
         private Label label_cena_pozycji;
         private Button button_usun_z_zamowienia;
         private Button button_powrot;
+        private Button button_edytuj_zamowienie;
     }
 }
