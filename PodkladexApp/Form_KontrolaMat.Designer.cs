@@ -47,6 +47,7 @@
             btn_KontMatPomiar = new Button();
             DGV_PomiaryMat = new DataGridView();
             panel_DodawaniePomiaru = new Panel();
+            btn_UsunPomiar = new Button();
             btn_EdytujPomiar = new Button();
             btn_ZakonczKontrole = new Button();
             btn_PomiarMatDodaj = new Button();
@@ -72,7 +73,7 @@
             // 
             // textBox_KontMatRBH
             // 
-            textBox_KontMatRBH.Location = new Point(114, 310);
+            textBox_KontMatRBH.Location = new Point(422, 310);
             textBox_KontMatRBH.Name = "textBox_KontMatRBH";
             textBox_KontMatRBH.Size = new Size(100, 23);
             textBox_KontMatRBH.TabIndex = 1;
@@ -91,7 +92,7 @@
             // 
             label_KontMatRBH.AutoSize = true;
             label_KontMatRBH.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_KontMatRBH.Location = new Point(61, 309);
+            label_KontMatRBH.Location = new Point(369, 309);
             label_KontMatRBH.Name = "label_KontMatRBH";
             label_KontMatRBH.Size = new Size(47, 25);
             label_KontMatRBH.TabIndex = 3;
@@ -101,7 +102,7 @@
             // 
             label_KontMatZat.AutoSize = true;
             label_KontMatZat.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_KontMatZat.Location = new Point(598, 309);
+            label_KontMatZat.Location = new Point(596, 309);
             label_KontMatZat.Name = "label_KontMatZat";
             label_KontMatZat.Size = new Size(127, 25);
             label_KontMatZat.TabIndex = 4;
@@ -111,7 +112,7 @@
             // 
             label_KontMatOdpady.AutoSize = true;
             label_KontMatOdpady.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_KontMatOdpady.Location = new Point(314, 309);
+            label_KontMatOdpady.Location = new Point(116, 309);
             label_KontMatOdpady.Name = "label_KontMatOdpady";
             label_KontMatOdpady.Size = new Size(78, 25);
             label_KontMatOdpady.TabIndex = 5;
@@ -155,7 +156,7 @@
             // 
             // textBox_KontMatOdpady
             // 
-            textBox_KontMatOdpady.Location = new Point(398, 310);
+            textBox_KontMatOdpady.Location = new Point(200, 310);
             textBox_KontMatOdpady.Name = "textBox_KontMatOdpady";
             textBox_KontMatOdpady.Size = new Size(100, 23);
             textBox_KontMatOdpady.TabIndex = 10;
@@ -195,7 +196,7 @@
             // 
             checkBox_KontrolaMatZat.AutoSize = true;
             checkBox_KontrolaMatZat.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            checkBox_KontrolaMatZat.Location = new Point(731, 315);
+            checkBox_KontrolaMatZat.Location = new Point(729, 314);
             checkBox_KontrolaMatZat.Margin = new Padding(3, 2, 3, 2);
             checkBox_KontrolaMatZat.Name = "checkBox_KontrolaMatZat";
             checkBox_KontrolaMatZat.Size = new Size(15, 14);
@@ -230,6 +231,7 @@
             // 
             // panel_DodawaniePomiaru
             // 
+            panel_DodawaniePomiaru.Controls.Add(btn_UsunPomiar);
             panel_DodawaniePomiaru.Controls.Add(btn_EdytujPomiar);
             panel_DodawaniePomiaru.Controls.Add(btn_ZakonczKontrole);
             panel_DodawaniePomiaru.Controls.Add(btn_PomiarMatDodaj);
@@ -249,10 +251,21 @@
             panel_DodawaniePomiaru.Size = new Size(854, 436);
             panel_DodawaniePomiaru.TabIndex = 22;
             // 
+            // btn_UsunPomiar
+            // 
+            btn_UsunPomiar.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            btn_UsunPomiar.Location = new Point(332, 60);
+            btn_UsunPomiar.Margin = new Padding(3, 2, 3, 2);
+            btn_UsunPomiar.Name = "btn_UsunPomiar";
+            btn_UsunPomiar.Size = new Size(172, 57);
+            btn_UsunPomiar.TabIndex = 28;
+            btn_UsunPomiar.Text = "Usuń pomiar";
+            btn_UsunPomiar.UseVisualStyleBackColor = true;
+            // 
             // btn_EdytujPomiar
             // 
             btn_EdytujPomiar.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_EdytujPomiar.Location = new Point(607, 60);
+            btn_EdytujPomiar.Location = new Point(551, 60);
             btn_EdytujPomiar.Margin = new Padding(3, 2, 3, 2);
             btn_EdytujPomiar.Name = "btn_EdytujPomiar";
             btn_EdytujPomiar.Size = new Size(172, 57);
@@ -274,7 +287,7 @@
             // btn_PomiarMatDodaj
             // 
             btn_PomiarMatDodaj.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_PomiarMatDodaj.Location = new Point(408, 60);
+            btn_PomiarMatDodaj.Location = new Point(113, 60);
             btn_PomiarMatDodaj.Margin = new Padding(3, 2, 3, 2);
             btn_PomiarMatDodaj.Name = "btn_PomiarMatDodaj";
             btn_PomiarMatDodaj.Size = new Size(172, 57);
@@ -284,7 +297,7 @@
             // 
             // textBox_PomiarMatWartosc
             // 
-            textBox_PomiarMatWartosc.Location = new Point(242, 76);
+            textBox_PomiarMatWartosc.Location = new Point(630, 18);
             textBox_PomiarMatWartosc.Margin = new Padding(3, 2, 3, 2);
             textBox_PomiarMatWartosc.Name = "textBox_PomiarMatWartosc";
             textBox_PomiarMatWartosc.Size = new Size(110, 23);
@@ -293,17 +306,17 @@
             // comboBox_PomiarMatWlasc
             // 
             comboBox_PomiarMatWlasc.FormattingEnabled = true;
-            comboBox_PomiarMatWlasc.Location = new Point(242, 10);
+            comboBox_PomiarMatWlasc.Location = new Point(186, 18);
             comboBox_PomiarMatWlasc.Margin = new Padding(3, 2, 3, 2);
             comboBox_PomiarMatWlasc.Name = "comboBox_PomiarMatWlasc";
-            comboBox_PomiarMatWlasc.Size = new Size(338, 23);
+            comboBox_PomiarMatWlasc.Size = new Size(178, 23);
             comboBox_PomiarMatWlasc.TabIndex = 24;
             // 
             // label_PomiarMatWartosc
             // 
             label_PomiarMatWartosc.AutoSize = true;
             label_PomiarMatWartosc.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_PomiarMatWartosc.Location = new Point(61, 76);
+            label_PomiarMatWartosc.Location = new Point(449, 18);
             label_PomiarMatWartosc.Name = "label_PomiarMatWartosc";
             label_PomiarMatWartosc.Size = new Size(173, 25);
             label_PomiarMatWartosc.TabIndex = 23;
@@ -313,7 +326,7 @@
             // 
             label_PomiarMatWlasc.AutoSize = true;
             label_PomiarMatWlasc.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_PomiarMatWlasc.Location = new Point(61, 10);
+            label_PomiarMatWlasc.Location = new Point(61, 18);
             label_PomiarMatWlasc.Name = "label_PomiarMatWlasc";
             label_PomiarMatWlasc.Size = new Size(109, 25);
             label_PomiarMatWlasc.TabIndex = 22;
@@ -411,5 +424,6 @@
         private Button btn_Edytuj;
         private Button btn_Anuluj;
         private Button btn_EdytujPomiar;
+        private Button btn_UsunPomiar;
     }
 }

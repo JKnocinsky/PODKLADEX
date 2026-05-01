@@ -23,6 +23,7 @@ namespace PodkladexApp
             _context = db;
 
             this.Load += Form_KontrolaMat_Load;
+
             this.btn_DodajKontMat.Click += btn_DodajKontMat_Click;
             this.btn_EdytujKontMat.Click += btn_EdytujKontMat_Click;
             this.btn_Edytuj.Click += btn_Edytuj_Click;
@@ -30,10 +31,13 @@ namespace PodkladexApp
             this.btn_KontMatPomiar.Click += btn_KontMatPomiar_Click;
             this.btn_PomiarMatDodaj.Click += btn_PomiarMatDodaj_Click;
             this.btn_EdytujPomiar.Click += btn_EdytujPomiar_Click;
+            this.btn_UsunPomiar.Click += btn_UsunPomiar_Click;
             this.btn_ZakonczKontrole.Click += btn_ZakonczKontrole_Click;
             this.btn_Anuluj.Click += btn_Anuluj_Click;
 
             this.DGV_PomiaryMat.CellFormatting += DGV_PomiaryMat_CellFormatting;
+
+            this.comboBox_KontMatZadP.SelectedIndexChanged += comboBox_KontMatZadP_SelectedIndexChanged;
         }
 
         private void Form_KontrolaMat_Load(object sender, EventArgs e)
@@ -98,6 +102,33 @@ namespace PodkladexApp
             comboBox_KontMatMaterial.Visible = true;
             btn_KontMatPotwierdz.Visible = true;
             btn_Anuluj.Visible = true;
+        }
+
+        private void comboBox_KontMatZadP_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox_KontMatZadP.SelectedValue is int idZadania)
+            {
+                var produkcja = _context.Produkcja
+                    .Include(p => p.IdNormyPNavigation)
+                    .FirstOrDefault(p => p.IdZadanieP == idZadania);
+
+                if (produkcja != null)
+                {
+                    int idMaterialu = produkcja.IdNormyPNavigation.IdMaterial;
+
+                    comboBox_KontMatMaterial.DataSource = _context.Material.Where(m => m.IdMaterial == idMaterialu).ToList();
+                    comboBox_KontMatMaterial.DisplayMember = "Nazwa";
+                    comboBox_KontMatMaterial.ValueMember = "IdMaterial";
+                    comboBox_KontMatMaterial.SelectedValue = idMaterialu;
+                }
+                else
+                {
+                    comboBox_KontMatMaterial.DataSource = _context.Material.ToList();
+                    comboBox_KontMatMaterial.DisplayMember = "Nazwa";
+                    comboBox_KontMatMaterial.ValueMember = "IdMaterial";
+                    comboBox_KontMatMaterial.SelectedIndex = -1;
+                }
+            }
         }
 
         private void btn_DodajKontMat_Click(object sender, EventArgs e)
@@ -206,7 +237,6 @@ namespace PodkladexApp
 
                 btn_KontMatPomiar.Visible = true;
                 btn_KontMatPomiar.Enabled = true;
-                btn_Anuluj.Visible = false;
 
                 OdswiezGornaTabele();
                 MessageBox.Show("Nagłówek zapisany. Możesz przejść do pomiarów.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -247,6 +277,39 @@ namespace PodkladexApp
                 textBox_PomiarMatWartosc.Text = pomiar.WartoscZmierzona.ToString();
 
                 btn_PomiarMatDodaj.Text = "Zapisz zmianę";
+            }
+        }
+
+        private void btn_UsunPomiar_Click(object sender, EventArgs e)
+        {
+            if (DGV_PomiaryMat.CurrentRow == null)
+            {
+                MessageBox.Show("Wybierz z listy pomiar, który chcesz usunąć.", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            var result = MessageBox.Show("Czy na pewno chcesz trwale usunąć ten pomiar?", "Potwierdzenie usunięcia", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                int idPomiaru = (int)DGV_PomiaryMat.CurrentRow.Cells["ID"].Value;
+                var pomiar = _context.PomiarMat.Find(idPomiaru);
+
+                if (pomiar != null)
+                {
+                    _context.PomiarMat.Remove(pomiar);
+                    _context.SaveChanges();
+
+                    // Resetowanie trybu edycji, jeśli usuwamy właśnie modyfikowany rekord
+                    if (_aktualneIdPomiaru == idPomiaru)
+                    {
+                        _aktualneIdPomiaru = 0;
+                        textBox_PomiarMatWartosc.Clear();
+                        btn_PomiarMatDodaj.Text = "Dodaj pomiar";
+                    }
+
+                    OdswiezTabelePomiarow();
+                }
             }
         }
 
@@ -394,11 +457,13 @@ namespace PodkladexApp
                 .Include(k => k.IdPracownikNavigation.IdOsobaNavigation)
                 .Include(k => k.IdMaterialNavigation)
                 .Include(k => k.IdZadaniePNavigation.IdMaszynaNavigation)
+                .Include(k => k.IdZadaniePNavigation.Produkcja)
                 .Where(k => k.IdZadaniePNavigation.IdMaszynaNavigation.Nazwa.Contains("Gilotyna"))
                 .Select(k => new {
                     ID = k.IdKontrolaMat,
                     Pracownik = k.IdPracownikNavigation.IdOsobaNavigation.Imie + " " + k.IdPracownikNavigation.IdOsobaNavigation.Nazwisko,
                     Zadanie = k.IdZadanieP,
+                    Wyprodukowano = k.IdZadaniePNavigation.Produkcja.Any() ? (decimal?)k.IdZadaniePNavigation.Produkcja.FirstOrDefault().Wyprodukowano : null,
                     Material = k.IdMaterialNavigation.Nazwa,
                     Odpady = k.Odpady,
                     Zat = k.Zatwierdzone ? "TAK" : "NIE"
