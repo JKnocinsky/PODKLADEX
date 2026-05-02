@@ -37,7 +37,11 @@ namespace PodkladexApp
             Form_KontrolaProd formKontrolaProd = new Form_KontrolaProd(context);
             OpenChildForm(formKontrolaProd);
         }
-
+        private void btn_Efektywnosc_Click(object sender, EventArgs e)
+        {
+            Form_Efektywnosc formEfektywnosc = new Form_Efektywnosc(context);
+            OpenChildForm(formEfektywnosc);
+        }
 
         private void OpenChildForm(Form childForm)
         {

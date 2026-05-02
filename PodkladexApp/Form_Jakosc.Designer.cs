@@ -32,6 +32,7 @@
             btn_KontrolaMat = new Button();
             panel_Jakosc = new Panel();
             btn_KontrolaProd = new Button();
+            btn_Efektywnosc = new Button();
             SuspendLayout();
             // 
             // btn_Material
@@ -48,7 +49,7 @@
             // btn_KontrolaMat
             // 
             btn_KontrolaMat.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_KontrolaMat.Location = new Point(12, 94);
+            btn_KontrolaMat.Location = new Point(12, 96);
             btn_KontrolaMat.Name = "btn_KontrolaMat";
             btn_KontrolaMat.Size = new Size(195, 66);
             btn_KontrolaMat.TabIndex = 2;
@@ -66,7 +67,7 @@
             // btn_KontrolaProd
             // 
             btn_KontrolaProd.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_KontrolaProd.Location = new Point(12, 177);
+            btn_KontrolaProd.Location = new Point(12, 180);
             btn_KontrolaProd.Name = "btn_KontrolaProd";
             btn_KontrolaProd.Size = new Size(195, 66);
             btn_KontrolaProd.TabIndex = 5;
@@ -74,11 +75,23 @@
             btn_KontrolaProd.UseVisualStyleBackColor = true;
             btn_KontrolaProd.Click += btn_KontrolaProd_Click;
             // 
+            // btn_Efektywnosc
+            // 
+            btn_Efektywnosc.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            btn_Efektywnosc.Location = new Point(12, 264);
+            btn_Efektywnosc.Name = "btn_Efektywnosc";
+            btn_Efektywnosc.Size = new Size(195, 66);
+            btn_Efektywnosc.TabIndex = 6;
+            btn_Efektywnosc.Text = "Efektywność produkcji";
+            btn_Efektywnosc.UseVisualStyleBackColor = true;
+            btn_Efektywnosc.Click += btn_Efektywnosc_Click;
+            // 
             // Form_Jakosc
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1198, 791);
+            Controls.Add(btn_Efektywnosc);
             Controls.Add(btn_KontrolaProd);
             Controls.Add(panel_Jakosc);
             Controls.Add(btn_KontrolaMat);
@@ -94,5 +107,6 @@
         private Button btn_KontrolaMat;
         private Panel panel_Jakosc;
         private Button btn_KontrolaProd;
+        private Button btn_Efektywnosc;
     }
 }
