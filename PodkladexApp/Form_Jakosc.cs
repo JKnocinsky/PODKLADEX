@@ -42,6 +42,11 @@ namespace PodkladexApp
             Form_Efektywnosc formEfektywnosc = new Form_Efektywnosc(context);
             OpenChildForm(formEfektywnosc);
         }
+        private void btn_RaportKontrola_Click(object sender, EventArgs e)
+        {
+            Form_RaportKontrola formRaportKontrola = new Form_RaportKontrola(context);
+            OpenChildForm(formRaportKontrola);
+        }
 
         private void OpenChildForm(Form childForm)
         {
@@ -57,7 +62,10 @@ namespace PodkladexApp
             childForm.Show();
         }
 
+        private void Form_Jakosc_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 
 }

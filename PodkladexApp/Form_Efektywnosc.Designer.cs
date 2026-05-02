@@ -101,7 +101,7 @@
             DGV_Efektywnosc.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DGV_Efektywnosc.Location = new Point(42, 146);
             DGV_Efektywnosc.Name = "DGV_Efektywnosc";
-            DGV_Efektywnosc.Size = new Size(872, 248);
+            DGV_Efektywnosc.Size = new Size(1017, 248);
             DGV_Efektywnosc.TabIndex = 6;
             // 
             // label_Sortowanie
