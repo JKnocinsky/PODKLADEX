@@ -504,7 +504,7 @@ namespace PodkladexApp.Zaopatrzenie
             if (dataGridView_Koszyk.SelectedRows.Count > 0)
             {
                 DialogResult odpowiedz = MessageBox.Show(
-                    "Wariacie, na pewno chcesz wyrzucić tę pozycję z koszyka?",
+                    "Czy na pewno chcesz usunąć tę pozycję z koszyka?",
                     "Potwierdzenie usunięcia",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
