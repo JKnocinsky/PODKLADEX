@@ -102,11 +102,13 @@ namespace PodkladexApp.Zaopatrzenie
             if (comboBox_Material.SelectedValue is int idMaterialu)
             {
                 // 1. Łączymy SzczegolyDostawy z Dostawa (JOIN), 
-                // filtrujemy po materiale, sortujemy po dacie z tabeli Dostawa i wyciągamy cenę.
+                // filtrujemy po materiale.
+                // 2. Sortujemy GŁÓWNIE po dacie (malejąco), 
+                // a W DRUGIEJ KOLEJNOŚCI po cenie (malejąco) na wypadek tych samych dat.
                 var ostatniaCenaZakupu = (from sd in _db.SzczegolyDostawy
                                           join d in _db.Dostawa on sd.IdDostawa equals d.IdDostawa
                                           where sd.IdMaterial == idMaterialu
-                                          orderby d.DataDostawy descending
+                                          orderby d.DataDostawy descending, sd.Cena descending
                                           select sd.Cena).FirstOrDefault();
 
                 if (ostatniaCenaZakupu > 0)
