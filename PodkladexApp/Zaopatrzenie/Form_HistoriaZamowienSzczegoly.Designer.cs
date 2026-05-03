@@ -55,7 +55,6 @@
             textBox_DataZlozenia.Name = "textBox_DataZlozenia";
             textBox_DataZlozenia.Size = new Size(250, 33);
             textBox_DataZlozenia.TabIndex = 1;
-            textBox_DataZlozenia.TextChanged += textBox_DataZlozenia_TextChanged;
             // 
             // textBox_DataZrealizowania
             // 
@@ -64,7 +63,6 @@
             textBox_DataZrealizowania.Name = "textBox_DataZrealizowania";
             textBox_DataZrealizowania.Size = new Size(250, 33);
             textBox_DataZrealizowania.TabIndex = 2;
-            textBox_DataZrealizowania.TextChanged += textBox_DataZrealizowania_TextChanged;
             // 
             // dataGridView_Koszyk
             // 
@@ -73,7 +71,6 @@
             dataGridView_Koszyk.Name = "dataGridView_Koszyk";
             dataGridView_Koszyk.Size = new Size(702, 410);
             dataGridView_Koszyk.TabIndex = 3;
-            dataGridView_Koszyk.CellContentClick += dataGridView_Koszyk_CellContentClick;
             // 
             // panel_Firmy
             // 
@@ -83,7 +80,6 @@
             panel_Firmy.Name = "panel_Firmy";
             panel_Firmy.Size = new Size(420, 254);
             panel_Firmy.TabIndex = 4;
-            panel_Firmy.Paint += panel_Firmy_Paint;
             // 
             // textBox_NIP
             // 
@@ -92,7 +88,6 @@
             textBox_NIP.Name = "textBox_NIP";
             textBox_NIP.Size = new Size(250, 33);
             textBox_NIP.TabIndex = 6;
-            textBox_NIP.TextChanged += textBox_NIP_TextChanged;
             // 
             // textBox_NazwaFirmy
             // 
@@ -101,7 +96,6 @@
             textBox_NazwaFirmy.Name = "textBox_NazwaFirmy";
             textBox_NazwaFirmy.Size = new Size(250, 33);
             textBox_NazwaFirmy.TabIndex = 5;
-            textBox_NazwaFirmy.TextChanged += textBox_NazwaFirmy_TextChanged;
             // 
             // Form_HistoriaZamowienSzczegoly
             // 
