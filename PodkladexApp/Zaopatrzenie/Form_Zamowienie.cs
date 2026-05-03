@@ -54,7 +54,7 @@ namespace PodkladexApp.Zaopatrzenie
 
             // Autouzupełnianie dla Email (lub numeru telefonu/PESELu)
             AutoCompleteStringCollection emailKolekcja = new AutoCompleteStringCollection();
-            var emaile = _db.Osoba.Select(o => o.AdresEMail).ToArray(); // Upewnij się, jak dokładnie EF nazwał to pole, np. AdresEMail
+            var emaile = _db.Osoba.Select(o => o.AdresEMail).ToArray();
             emailKolekcja.AddRange(emaile);
 
             textBox_email.AutoCompleteCustomSource = emailKolekcja;
@@ -92,7 +92,6 @@ namespace PodkladexApp.Zaopatrzenie
         private void textBox_nazwa_firmy_TextChanged(object sender, EventArgs e) { }
         private void textBox_NIP_TextChanged(object sender, EventArgs e) { }
 
-        // Podepnij to pod zdarzenie LEAVE dla textBox_NIP
         // --- ZDARZENIA DLA EMAIL (OSOBA) ---
         private void textBox_email_Leave(object sender, EventArgs e)
         {
@@ -126,9 +125,35 @@ namespace PodkladexApp.Zaopatrzenie
         }
 
         // DODAJ PRZYCISK "Zapisz" W DESIGNERZE I PODEPNIJ TO ZDARZENIE
-        // DODAJ PRZYCISK "Zapisz" W DESIGNERZE I PODEPNIJ TO ZDARZENIE
         private void button_zapisz_Click(object sender, EventArgs e)
         {
+            // ==========================================
+            // 0. WALIDACJA - SPRAWDZENIE CZY POLA SĄ WYPEŁNIONE
+            // ==========================================
+            if (string.IsNullOrWhiteSpace(textBox_imie.Text) ||
+                string.IsNullOrWhiteSpace(textBox_Nazwisko.Text) ||
+                string.IsNullOrWhiteSpace(textBox_Numer_telefonu.Text) ||
+                string.IsNullOrWhiteSpace(textBox_email.Text) ||
+                string.IsNullOrWhiteSpace(textBox_Miejscowosc.Text) ||
+                string.IsNullOrWhiteSpace(textBox_kod_pocztowy.Text) ||
+                string.IsNullOrWhiteSpace(textBox_ulica.Text) ||
+                string.IsNullOrWhiteSpace(textBox_numer.Text))
+            {
+                MessageBox.Show("Proszę uzupełnić wszystkie podstawowe dane kontaktowe i adresowe.", "Braki w formularzu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; // Przerywamy zapisywanie
+            }
+
+            if (czyFirma)
+            {
+                if (string.IsNullOrWhiteSpace(textBox_nazwa_firmy.Text) ||
+                    string.IsNullOrWhiteSpace(textBox_NIP.Text))
+                {
+                    MessageBox.Show("Wybrano opcję zakupu na firmę. Proszę uzupełnić Nazwę firmy oraz NIP.", "Braki w formularzu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return; // Przerywamy zapisywanie
+                }
+            }
+            // ==========================================
+
             // 1. Sprawdzamy, czy osoba już istnieje w bazie po Emailu
             var osoba = _db.Osoba.FirstOrDefault(o => o.AdresEMail == textBox_email.Text);
 
@@ -141,12 +166,12 @@ namespace PodkladexApp.Zaopatrzenie
                     Nazwisko = textBox_Nazwisko.Text,
                     NrTelefonu = textBox_Numer_telefonu.Text,
                     AdresEMail = textBox_email.Text,
-                    // ZAWSZE pobieramy adres dla Osoby z tych kontrolek
+                    // Adres z kontrolek
                     Miejscowosc = textBox_Miejscowosc.Text,
                     KodPocztowy = textBox_kod_pocztowy.Text,
                     Ulica = textBox_ulica.Text,
                     Numer = textBox_numer.Text,
-                    Pesel = "00000000000" // <--- Pamiętaj o podpięciu TextBoxa
+                    Pesel = null // Zmienione na null zgodnie z Twoją bazą danych
                 };
                 _db.Osoba.Add(osoba);
             }
@@ -161,7 +186,6 @@ namespace PodkladexApp.Zaopatrzenie
                     osoba.KodPocztowy != textBox_kod_pocztowy.Text ||
                     osoba.Ulica != textBox_ulica.Text ||
                     osoba.Numer != textBox_numer.Text;
-                // || osoba.Pesel != textBox_PESEL.Text; // Odkomentuj, gdy dodasz PESEL
 
                 if (czyDaneZmienione)
                 {
@@ -171,17 +195,15 @@ namespace PodkladexApp.Zaopatrzenie
                         Imie = textBox_imie.Text,
                         Nazwisko = textBox_Nazwisko.Text,
                         NrTelefonu = textBox_Numer_telefonu.Text,
-                        AdresEMail = textBox_email.Text, // Zachowujemy ten sam email
+                        AdresEMail = textBox_email.Text,
                         Miejscowosc = textBox_Miejscowosc.Text,
                         KodPocztowy = textBox_kod_pocztowy.Text,
                         Ulica = textBox_ulica.Text,
                         Numer = textBox_numer.Text,
-                        Pesel = "00000000000"
+                        Pesel = null
                     };
                     _db.Osoba.Add(osoba);
                 }
-                // Jeśli czyDaneZmienione == false, zmienna 'osoba' nadal trzyma stary rekord z bazy,
-                // więc nie dodajemy go ponownie, po prostu zostanie podpięty pod nowe zamówienie/klienta.
             }
 
             // Zapisujemy zmiany (wygeneruje to nowe IdOsoba, jeśli obiekt został dodany)
@@ -197,7 +219,7 @@ namespace PodkladexApp.Zaopatrzenie
             }
 
             // 3. Logika Firmy
-            if (czyFirma && !string.IsNullOrWhiteSpace(textBox_NIP.Text))
+            if (czyFirma)
             {
                 var firma = _db.Firma.FirstOrDefault(f => f.Nip == textBox_NIP.Text);
 
@@ -207,7 +229,7 @@ namespace PodkladexApp.Zaopatrzenie
                     {
                         Nazwa = textBox_nazwa_firmy.Text,
                         Nip = textBox_NIP.Text,
-                        // --- TUTAJ ROBIMY MYK: PRZYPISUJEMY TEN SAM ADRES CO OSOBIE ---
+                        // PRZYPISANIE WSPÓLNEGO ADRESU RÓWNIEŻ DLA FIRMY
                         Miejscowosc = textBox_Miejscowosc.Text,
                         KodPocztowy = textBox_kod_pocztowy.Text,
                         Ulica = textBox_ulica.Text,
@@ -218,7 +240,7 @@ namespace PodkladexApp.Zaopatrzenie
                 }
                 else
                 {
-                    // Aktualizujemy dane firmy, jeśli już istnieje, również wspólnym adresem
+                    // Aktualizujemy dane firmy wspólnym adresem
                     firma.Nazwa = textBox_nazwa_firmy.Text;
                     firma.Miejscowosc = textBox_Miejscowosc.Text;
                     firma.KodPocztowy = textBox_kod_pocztowy.Text;
@@ -244,25 +266,25 @@ namespace PodkladexApp.Zaopatrzenie
 
             // Finalny zapis relacji Klient-Firma
             _db.SaveChanges();
-            // === DODANY KOD: 5. Tworzenie nagłówka zamówienia ===
+
+            // === 5. Tworzenie nagłówka zamówienia ===
             var zamowienie = new Zamowienie()
             {
-                IdKlient = klient.IdKlient, // Zmienna 'klient' z Twojego kodu powyżej
+                IdKlient = klient.IdKlient,
                 DataPrzyjeciaZ = DateOnly.FromDateTime(DateTime.Today),
                 DataZrealizowaniaZ = null
             };
             _db.Zamowienie.Add(zamowienie);
             _db.SaveChanges(); // Zapisujemy, aby baza wygenerowała IdZamowienie
 
-            // === DODANY KOD: 6. Zapisywanie produktów z koszyka ===
-            // Upewniamy się, że koszyk został przekazany i nie jest pusty
+            // === 6. Zapisywanie produktów z koszyka ===
             if (_produktyDoZapisania != null && _produktyDoZapisania.Count > 0)
             {
                 foreach (var poz in _produktyDoZapisania)
                 {
                     var szczegol = new SzczegolyZamowienia()
                     {
-                        IdZamowienie = zamowienie.IdZamowienie, // Powiązanie z nagłówkiem z kroku 5
+                        IdZamowienie = zamowienie.IdZamowienie,
                         IdProdukt = poz.IdProduktu,
                         IdMaterial = poz.IdMaterialu,
                         Ilosc = poz.Ilosc,
@@ -275,15 +297,9 @@ namespace PodkladexApp.Zaopatrzenie
                 _db.SaveChanges(); // Ostateczny zapis wszystkich szczegółów do bazy
             }
 
-            // Opcjonalnie: Ustawienie flagi sukcesu i zamknięcie tego okna (Krok 2)
-            // Jeśli chcesz, aby okno zamknęło się po kliknięciu "OK" w MessageBox,
-            // przenieś te dwie linijki POD MessageBox.Show
-
             MessageBox.Show("Dane zostały poprawnie zapisane!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.DialogResult = DialogResult.OK;
             this.Close();
-            // Odświeżenie list podpowiedzi
-            // ZaladujPodpowiedzi(); // You can't call this after this.Close(), so I moved it or you can remove it.
         }
 
         private void UzupelnijDaneOsoby()
@@ -302,9 +318,6 @@ namespace PodkladexApp.Zaopatrzenie
                 textBox_kod_pocztowy.Text = znalezionaOsoba.KodPocztowy;
                 textBox_ulica.Text = znalezionaOsoba.Ulica;
                 textBox_numer.Text = znalezionaOsoba.Numer;
-
-                // Pamiętaj o dodaniu pola PESEL!
-                // textBox_PESEL.Text = znalezionaOsoba.Pesel; 
             }
         }
 
@@ -318,10 +331,11 @@ namespace PodkladexApp.Zaopatrzenie
             if (znalezionaFirma != null)
             {
                 textBox_nazwa_firmy.Text = znalezionaFirma.Nazwa;
-
                 // Jeśli firma ma u Ciebie w bazie swój własny adres, możesz go tu też uzupełnić:
-                // textBox_Miejscowosc.Text = znalezionaFirma.Miejscowosc;
-                // itp.
+                textBox_Miejscowosc.Text = znalezionaFirma.Miejscowosc;
+                textBox_kod_pocztowy.Text = znalezionaFirma.KodPocztowy;
+                textBox_ulica.Text = znalezionaFirma.Ulica;
+                textBox_numer.Text = znalezionaFirma.Numer;
             }
         }
 

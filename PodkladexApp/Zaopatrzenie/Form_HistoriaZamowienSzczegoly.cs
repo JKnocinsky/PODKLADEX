@@ -144,5 +144,10 @@ namespace PodkladexApp.Zaopatrzenie
             _db.Dispose();
             base.OnFormClosed(e);
         }
+
+        private void label_Firma_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
