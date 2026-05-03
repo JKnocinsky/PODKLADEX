@@ -50,6 +50,7 @@
             button_utworz_zamowienie = new Button();
             button_HistoriaZamowien = new Button();
             label_ProszeWybracFirme = new Label();
+            button_StanyMagazynowe = new Button();
             panel_dane_firmy.SuspendLayout();
             SuspendLayout();
             // 
@@ -303,11 +304,23 @@
             label_ProszeWybracFirme.Visible = false;
             label_ProszeWybracFirme.Click += label_ProszeWybracFirme_Click;
             // 
+            // button_StanyMagazynowe
+            // 
+            button_StanyMagazynowe.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            button_StanyMagazynowe.Location = new Point(48, 524);
+            button_StanyMagazynowe.Name = "button_StanyMagazynowe";
+            button_StanyMagazynowe.Size = new Size(250, 60);
+            button_StanyMagazynowe.TabIndex = 28;
+            button_StanyMagazynowe.Text = "Stany magazynowe";
+            button_StanyMagazynowe.UseVisualStyleBackColor = true;
+            button_StanyMagazynowe.Click += button_StanyMagazynowe_Click;
+            // 
             // Form_ZaoLog
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1664, 791);
+            Controls.Add(button_StanyMagazynowe);
             Controls.Add(label_ProszeWybracFirme);
             Controls.Add(button_HistoriaZamowien);
             Controls.Add(button_utworz_zamowienie);
@@ -349,5 +362,6 @@
         private Button button_utworz_zamowienie;
         private Button button_HistoriaZamowien;
         private Label label_ProszeWybracFirme;
+        private Button button_StanyMagazynowe;
     }
 }

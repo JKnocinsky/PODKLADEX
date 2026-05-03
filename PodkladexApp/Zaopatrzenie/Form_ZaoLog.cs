@@ -307,8 +307,10 @@ namespace PodkladexApp
             childForm.Show();
         }
 
-
-
+        private void button_StanyMagazynowe_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Form_Magazyn());
+        }
     }
 
 
