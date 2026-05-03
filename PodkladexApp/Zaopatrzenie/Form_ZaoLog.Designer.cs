@@ -57,21 +57,22 @@
             // 
             button_Nowa_firma.Cursor = Cursors.Hand;
             button_Nowa_firma.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_Nowa_firma.Location = new Point(48, 229);
+            button_Nowa_firma.Location = new Point(48, 729);
             button_Nowa_firma.Name = "button_Nowa_firma";
-            button_Nowa_firma.Size = new Size(250, 50);
+            button_Nowa_firma.Size = new Size(250, 60);
             button_Nowa_firma.TabIndex = 0;
             button_Nowa_firma.Text = "Dodaj nową firmę";
             button_Nowa_firma.UseVisualStyleBackColor = true;
+            button_Nowa_firma.Visible = false;
             button_Nowa_firma.Click += button_Nowa_firma_Click_1;
             // 
             // button_Edytuj_firmy
             // 
             button_Edytuj_firmy.Cursor = Cursors.Hand;
             button_Edytuj_firmy.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_Edytuj_firmy.Location = new Point(48, 311);
+            button_Edytuj_firmy.Location = new Point(48, 287);
             button_Edytuj_firmy.Name = "button_Edytuj_firmy";
-            button_Edytuj_firmy.Size = new Size(250, 50);
+            button_Edytuj_firmy.Size = new Size(250, 60);
             button_Edytuj_firmy.TabIndex = 1;
             button_Edytuj_firmy.Text = "Edytuj dane firmy";
             button_Edytuj_firmy.UseVisualStyleBackColor = true;
@@ -86,6 +87,7 @@
             comboBox_Nazwa_firmy.Name = "comboBox_Nazwa_firmy";
             comboBox_Nazwa_firmy.Size = new Size(885, 33);
             comboBox_Nazwa_firmy.TabIndex = 3;
+            comboBox_Nazwa_firmy.Visible = false;
             comboBox_Nazwa_firmy.SelectedIndexChanged += comboBox_Nazwa_firmy_SelectedIndexChanged;
             // 
             // panel_dane_firmy
@@ -114,27 +116,25 @@
             // button_usun_firme
             // 
             button_usun_firme.Cursor = Cursors.Hand;
-            button_usun_firme.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold | FontStyle.Italic);
+            button_usun_firme.Font = new Font("Segoe UI", 14.25F);
             button_usun_firme.Location = new Point(598, 330);
             button_usun_firme.Name = "button_usun_firme";
-            button_usun_firme.Size = new Size(229, 55);
+            button_usun_firme.Size = new Size(250, 60);
             button_usun_firme.TabIndex = 6;
             button_usun_firme.Text = "Usuń firmę";
             button_usun_firme.UseVisualStyleBackColor = true;
             button_usun_firme.Visible = false;
-
             // 
             // button_zaakceptuj_zmiany
             // 
             button_zaakceptuj_zmiany.Cursor = Cursors.Hand;
-            button_zaakceptuj_zmiany.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold | FontStyle.Italic);
+            button_zaakceptuj_zmiany.Font = new Font("Segoe UI", 14.25F);
             button_zaakceptuj_zmiany.Location = new Point(598, 215);
             button_zaakceptuj_zmiany.Name = "button_zaakceptuj_zmiany";
-            button_zaakceptuj_zmiany.Size = new Size(229, 55);
+            button_zaakceptuj_zmiany.Size = new Size(250, 60);
             button_zaakceptuj_zmiany.TabIndex = 5;
             button_zaakceptuj_zmiany.Text = "Zaakceptuj zmiany";
             button_zaakceptuj_zmiany.UseVisualStyleBackColor = true;
-
             // 
             // label_NIP
             // 
@@ -259,9 +259,9 @@
             // btn_Dostawa
             // 
             btn_Dostawa.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_Dostawa.Location = new Point(48, 400);
+            btn_Dostawa.Location = new Point(48, 398);
             btn_Dostawa.Name = "btn_Dostawa";
-            btn_Dostawa.Size = new Size(250, 50);
+            btn_Dostawa.Size = new Size(250, 60);
             btn_Dostawa.TabIndex = 5;
             btn_Dostawa.Text = "Dodaj/Edytuj dostawę";
             btn_Dostawa.UseVisualStyleBackColor = true;
@@ -273,7 +273,7 @@
             button_utworz_zamowienie.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             button_utworz_zamowienie.Location = new Point(48, 65);
             button_utworz_zamowienie.Name = "button_utworz_zamowienie";
-            button_utworz_zamowienie.Size = new Size(250, 50);
+            button_utworz_zamowienie.Size = new Size(250, 60);
             button_utworz_zamowienie.TabIndex = 6;
             button_utworz_zamowienie.Text = "Nowe zamówienie";
             button_utworz_zamowienie.UseVisualStyleBackColor = true;
@@ -283,9 +283,9 @@
             // 
             button_HistoriaZamowien.Cursor = Cursors.Hand;
             button_HistoriaZamowien.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_HistoriaZamowien.Location = new Point(48, 147);
+            button_HistoriaZamowien.Location = new Point(48, 176);
             button_HistoriaZamowien.Name = "button_HistoriaZamowien";
-            button_HistoriaZamowien.Size = new Size(250, 50);
+            button_HistoriaZamowien.Size = new Size(250, 60);
             button_HistoriaZamowien.TabIndex = 7;
             button_HistoriaZamowien.Text = "Historia zamówień";
             button_HistoriaZamowien.UseVisualStyleBackColor = true;

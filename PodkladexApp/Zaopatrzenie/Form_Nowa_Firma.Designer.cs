@@ -64,7 +64,7 @@ namespace PodkladexApp
             // 
             comboBox_Nazwa_firmy.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
             comboBox_Nazwa_firmy.FormattingEnabled = true;
-            comboBox_Nazwa_firmy.Location = new Point(298, 83);
+            comboBox_Nazwa_firmy.Location = new Point(328, 100);
             comboBox_Nazwa_firmy.Margin = new Padding(3, 2, 3, 2);
             comboBox_Nazwa_firmy.Name = "comboBox_Nazwa_firmy";
             comboBox_Nazwa_firmy.Size = new Size(885, 33);
@@ -75,9 +75,9 @@ namespace PodkladexApp
             // 
             button_usun_firme.Cursor = Cursors.Hand;
             button_usun_firme.Font = new Font("Segoe UI", 14.25F);
-            button_usun_firme.Location = new Point(598, 177);
+            button_usun_firme.Location = new Point(599, 174);
             button_usun_firme.Name = "button_usun_firme";
-            button_usun_firme.Size = new Size(229, 55);
+            button_usun_firme.Size = new Size(250, 60);
             button_usun_firme.TabIndex = 6;
             button_usun_firme.Text = "Usuń firmę";
             button_usun_firme.UseVisualStyleBackColor = true;
@@ -87,9 +87,9 @@ namespace PodkladexApp
             // 
             button_zaakceptuj_zmiany.Cursor = Cursors.Hand;
             button_zaakceptuj_zmiany.Font = new Font("Segoe UI", 14.25F);
-            button_zaakceptuj_zmiany.Location = new Point(598, 72);
+            button_zaakceptuj_zmiany.Location = new Point(599, 69);
             button_zaakceptuj_zmiany.Name = "button_zaakceptuj_zmiany";
-            button_zaakceptuj_zmiany.Size = new Size(229, 55);
+            button_zaakceptuj_zmiany.Size = new Size(250, 60);
             button_zaakceptuj_zmiany.TabIndex = 5;
             button_zaakceptuj_zmiany.Text = "Zaakceptuj zmiany";
             button_zaakceptuj_zmiany.UseVisualStyleBackColor = true;
@@ -177,7 +177,7 @@ namespace PodkladexApp
             // 
             label_ProszeWybracFirme.AutoSize = true;
             label_ProszeWybracFirme.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_ProszeWybracFirme.Location = new Point(676, 43);
+            label_ProszeWybracFirme.Location = new Point(706, 60);
             label_ProszeWybracFirme.Name = "label_ProszeWybracFirme";
             label_ProszeWybracFirme.Size = new Size(239, 25);
             label_ProszeWybracFirme.TabIndex = 30;
@@ -241,9 +241,9 @@ namespace PodkladexApp
             // 
             button_Dodaj_firme.Cursor = Cursors.Hand;
             button_Dodaj_firme.Font = new Font("Segoe UI", 14.25F);
-            button_Dodaj_firme.Location = new Point(38, 23);
+            button_Dodaj_firme.Location = new Point(38, 45);
             button_Dodaj_firme.Name = "button_Dodaj_firme";
-            button_Dodaj_firme.Size = new Size(229, 55);
+            button_Dodaj_firme.Size = new Size(250, 60);
             button_Dodaj_firme.TabIndex = 31;
             button_Dodaj_firme.Text = "Dodaj nową firmę";
             button_Dodaj_firme.UseVisualStyleBackColor = true;
@@ -253,9 +253,9 @@ namespace PodkladexApp
             // 
             button_Edytuj_dane_firmy.Cursor = Cursors.Hand;
             button_Edytuj_dane_firmy.Font = new Font("Segoe UI", 14.25F);
-            button_Edytuj_dane_firmy.Location = new Point(38, 122);
+            button_Edytuj_dane_firmy.Location = new Point(38, 141);
             button_Edytuj_dane_firmy.Name = "button_Edytuj_dane_firmy";
-            button_Edytuj_dane_firmy.Size = new Size(229, 55);
+            button_Edytuj_dane_firmy.Size = new Size(250, 60);
             button_Edytuj_dane_firmy.TabIndex = 32;
             button_Edytuj_dane_firmy.Text = "Edytuj dane firmy";
             button_Edytuj_dane_firmy.UseVisualStyleBackColor = true;

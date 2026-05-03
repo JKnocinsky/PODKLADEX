@@ -126,6 +126,7 @@ namespace PodkladexApp.Zaopatrzenie
         }
 
         // DODAJ PRZYCISK "Zapisz" W DESIGNERZE I PODEPNIJ TO ZDARZENIE
+        // DODAJ PRZYCISK "Zapisz" W DESIGNERZE I PODEPNIJ TO ZDARZENIE
         private void button_zapisz_Click(object sender, EventArgs e)
         {
             // 1. Sprawdzamy, czy osoba już istnieje w bazie po Emailu
@@ -140,6 +141,7 @@ namespace PodkladexApp.Zaopatrzenie
                     Nazwisko = textBox_Nazwisko.Text,
                     NrTelefonu = textBox_Numer_telefonu.Text,
                     AdresEMail = textBox_email.Text,
+                    // ZAWSZE pobieramy adres dla Osoby z tych kontrolek
                     Miejscowosc = textBox_Miejscowosc.Text,
                     KodPocztowy = textBox_kod_pocztowy.Text,
                     Ulica = textBox_ulica.Text,
@@ -195,7 +197,7 @@ namespace PodkladexApp.Zaopatrzenie
             }
 
             // 3. Logika Firmy
-            if (czyFirma)
+            if (czyFirma && !string.IsNullOrWhiteSpace(textBox_NIP.Text))
             {
                 var firma = _db.Firma.FirstOrDefault(f => f.Nip == textBox_NIP.Text);
 
@@ -204,8 +206,10 @@ namespace PodkladexApp.Zaopatrzenie
                     firma = new Firma()
                     {
                         Nazwa = textBox_nazwa_firmy.Text,
-                        // DODAJ TE POLA:
+                        Nip = textBox_NIP.Text,
+                        // --- TUTAJ ROBIMY MYK: PRZYPISUJEMY TEN SAM ADRES CO OSOBIE ---
                         Miejscowosc = textBox_Miejscowosc.Text,
+                        KodPocztowy = textBox_kod_pocztowy.Text,
                         Ulica = textBox_ulica.Text,
                         Numer = textBox_numer.Text
                     };
@@ -214,10 +218,7 @@ namespace PodkladexApp.Zaopatrzenie
                 }
                 else
                 {
-                    // Pytanie: Czy dla firmy (np. przy zmianie adresu firmy) 
-                    // też chcesz tworzyć nową firmę z tym samym NIPem, aby chronić historię?
-                    // Jeśli tak, zrób to analogicznie jak z osobą. 
-                    // Na ten moment zostawiłem nadpisywanie:
+                    // Aktualizujemy dane firmy, jeśli już istnieje, również wspólnym adresem
                     firma.Nazwa = textBox_nazwa_firmy.Text;
                     firma.Miejscowosc = textBox_Miejscowosc.Text;
                     firma.KodPocztowy = textBox_kod_pocztowy.Text;
@@ -277,12 +278,12 @@ namespace PodkladexApp.Zaopatrzenie
             // Opcjonalnie: Ustawienie flagi sukcesu i zamknięcie tego okna (Krok 2)
             // Jeśli chcesz, aby okno zamknęło się po kliknięciu "OK" w MessageBox,
             // przenieś te dwie linijki POD MessageBox.Show
+
+            MessageBox.Show("Dane zostały poprawnie zapisane!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.DialogResult = DialogResult.OK;
             this.Close();
-            MessageBox.Show("Dane zostały poprawnie zapisane!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             // Odświeżenie list podpowiedzi
-            ZaladujPodpowiedzi();
+            // ZaladujPodpowiedzi(); // You can't call this after this.Close(), so I moved it or you can remove it.
         }
 
         private void UzupelnijDaneOsoby()

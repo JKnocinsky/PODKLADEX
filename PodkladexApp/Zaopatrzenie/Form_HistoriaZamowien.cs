@@ -16,21 +16,7 @@ namespace PodkladexApp.Zaopatrzenie
     {
         private int _idZamowienia;
 
-        public partial class Form_HistoriaZamowienSzczegoly : Form
-        {
-            private int _idZamowienia;
 
-            // TUTA JEST KLUCZ: Ta nazwa musi być w 100% identyczna z nazwą klasy wyżej!
-            public Form_HistoriaZamowienSzczegoly(int idZamowienia)
-            {
-                _idZamowienia = idZamowienia;
-
-                // Testowy tytuł okna
-                this.Text = $"Szczegóły zamówienia nr {_idZamowienia}";
-            }
-
-            // ... reszta kodu (jeśli jakaś jest) ...
-        }
         // Instancja kontekstu bazy danych
         private PodkladexContext _context = new PodkladexContext();
 

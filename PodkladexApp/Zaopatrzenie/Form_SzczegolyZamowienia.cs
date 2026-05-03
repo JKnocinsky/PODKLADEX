@@ -369,6 +369,9 @@ namespace PodkladexApp.Zaopatrzenie
         {
             StringBuilder raport = new StringBuilder();
 
+            // Używamy HashSet do przechowywania unikalnych komunikatów o braku normy
+            HashSet<string> unikalneBrakiNorm = new HashSet<string>();
+
             // Grupujemy koszyk po ID materiału, aby zsumować ile łącznie potrzebujemy danego surowca
             var grupyMaterialow = _koszyk.GroupBy(k => new { k.IdMaterialu, k.NazwaMaterialu }).ToList();
 
@@ -397,7 +400,11 @@ namespace PodkladexApp.Zaopatrzenie
                     }
                     else
                     {
-                        raport.AppendLine($"- UWAGA: Brak normy w systemie dla pary: {poz.NazwaProduktu} + {poz.NazwaMaterialu}.");
+                        // Zamiast od razu dodawać do raportu, dodajemy do HashSetu
+                        // Dzięki temu, nawet jeśli ten sam produkt/materiał pojawi się 10 razy,
+                        // komunikat zostanie zapamiętany tylko raz.
+                        string brakNormyKomunikat = $"- UWAGA: Brak normy w systemie dla pary: {poz.NazwaProduktu} + {poz.NazwaMaterialu}.";
+                        unikalneBrakiNorm.Add(brakNormyKomunikat);
                     }
                 }
 
@@ -412,17 +419,21 @@ namespace PodkladexApp.Zaopatrzenie
                 {
                     decimal brakuje = laczneZapotrzebowanie - stanMagazynu;
 
-                    // =========================================================
-                    // NOWE: Pobieranie wartości nominalnej brakującego materiału
-                    // =========================================================
+                    // POBIERANIE WARTOŚCI NOMINALNEJ DLA WSKAZANIA GRUBOŚCI MATERIAŁU
                     var wartoscNominalna = _db.MaterialWlasciwosci
                                               .Where(mw => mw.IdMaterial == idMat)
                                               .Select(mw => mw.WartoscNominalna)
                                               .FirstOrDefault();
 
-                    // Dodajemy wartość nominalną do tekstu w raporcie
+                    // Dodajemy informację o braku materiału do raportu
                     raport.AppendLine($"- {grupa.Key.NazwaMaterialu} (Grubość: {wartoscNominalna}): BRAKUJE {Math.Round(brakuje, 2)} kg (Zapotrzebowanie: {Math.Round(laczneZapotrzebowanie, 2)} kg | Na stanie: {Math.Round(stanMagazynu, 2)} kg)");
                 }
+            }
+
+            // Teraz, na samym końcu, dodajemy WSZYSTKIE UNIKALNE komunikaty o brakach norm do głównego raportu
+            foreach (var brakNormy in unikalneBrakiNorm)
+            {
+                raport.AppendLine(brakNormy);
             }
 
             return raport.ToString();
