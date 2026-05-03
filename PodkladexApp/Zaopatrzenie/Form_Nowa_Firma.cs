@@ -231,8 +231,7 @@ namespace PodkladexApp
                 panel_dane_firmy.Visible = true;
 
                 // POKAZUJEMY PRZYCISK USUWANIA (bo jesteśmy w trybie edycji)
-                button_usun_firme.Visible = true;
-                label_ProszeWybracFirme.Visible = false;
+                //button_usun_firme.Visible = true;
             }
         }
 
@@ -241,7 +240,7 @@ namespace PodkladexApp
 
         }
 
-        private void button_usun_firme_Click(object sender, EventArgs e)
+        /*private void button_usun_firme_Click(object sender, EventArgs e)
         {
             // Sprawdzamy, czy w ogóle edytujemy istniejącą firmę (czy coś jest wybrane w ComboBox)
             if (comboBox_Nazwa_firmy.SelectedItem != null && comboBox_Nazwa_firmy.SelectedItem is Firma wybranaFirma)
@@ -299,6 +298,7 @@ namespace PodkladexApp
                 MessageBox.Show("Wybierz najpierw firmę z listy.");
             }
         }
+        */
 
         private void button_zaakceptuj_zmiany_Click(object sender, EventArgs e)
         {
@@ -354,7 +354,7 @@ namespace PodkladexApp
         {
 
         }
-
+        /*
         private void button_usun_firme_Click_2(object sender, EventArgs e)
         {
             // Sprawdzamy, czy w ogóle edytujemy istniejącą firmę (czy coś jest wybrane w ComboBox)
@@ -413,7 +413,7 @@ namespace PodkladexApp
                 MessageBox.Show("Wybierz najpierw firmę z listy.");
             }
         }
-
+        */
 
         private void button_zaakceptuj_zmiany_Click_1(object sender, EventArgs e)
         {

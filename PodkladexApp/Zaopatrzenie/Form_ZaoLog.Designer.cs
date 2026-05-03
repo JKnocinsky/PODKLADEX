@@ -71,7 +71,7 @@
             // 
             button_Edytuj_firmy.Cursor = Cursors.Hand;
             button_Edytuj_firmy.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_Edytuj_firmy.Location = new Point(48, 287);
+            button_Edytuj_firmy.Location = new Point(48, 293);
             button_Edytuj_firmy.Name = "button_Edytuj_firmy";
             button_Edytuj_firmy.Size = new Size(250, 60);
             button_Edytuj_firmy.TabIndex = 1;
@@ -260,11 +260,11 @@
             // btn_Dostawa
             // 
             btn_Dostawa.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_Dostawa.Location = new Point(48, 398);
+            btn_Dostawa.Location = new Point(48, 407);
             btn_Dostawa.Name = "btn_Dostawa";
             btn_Dostawa.Size = new Size(250, 60);
             btn_Dostawa.TabIndex = 5;
-            btn_Dostawa.Text = "Dodaj/Edytuj dostawę";
+            btn_Dostawa.Text = "Dodaj dostawę";
             btn_Dostawa.UseVisualStyleBackColor = true;
             btn_Dostawa.Click += btn_Dostawa_Click;
             // 
@@ -284,7 +284,7 @@
             // 
             button_HistoriaZamowien.Cursor = Cursors.Hand;
             button_HistoriaZamowien.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_HistoriaZamowien.Location = new Point(48, 176);
+            button_HistoriaZamowien.Location = new Point(48, 179);
             button_HistoriaZamowien.Name = "button_HistoriaZamowien";
             button_HistoriaZamowien.Size = new Size(250, 60);
             button_HistoriaZamowien.TabIndex = 7;
@@ -307,7 +307,7 @@
             // button_StanyMagazynowe
             // 
             button_StanyMagazynowe.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_StanyMagazynowe.Location = new Point(48, 524);
+            button_StanyMagazynowe.Location = new Point(48, 521);
             button_StanyMagazynowe.Name = "button_StanyMagazynowe";
             button_StanyMagazynowe.Size = new Size(250, 60);
             button_StanyMagazynowe.TabIndex = 28;

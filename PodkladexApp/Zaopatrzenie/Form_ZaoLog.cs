@@ -248,8 +248,8 @@ namespace PodkladexApp
 
         private void btn_Dostawa_Click(object sender, EventArgs e)
         {
-            Form_Dostawa form_Dostawa = new Form_Dostawa();
-            form_Dostawa.Show();
+            Form_ZamowMaterial form_ZamowMaterial = new Form_ZamowMaterial();
+            form_ZamowMaterial.Show();
         }
 
 

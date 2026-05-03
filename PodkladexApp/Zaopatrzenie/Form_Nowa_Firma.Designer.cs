@@ -81,7 +81,8 @@ namespace PodkladexApp
             button_usun_firme.TabIndex = 6;
             button_usun_firme.Text = "Usuń firmę";
             button_usun_firme.UseVisualStyleBackColor = true;
-            button_usun_firme.Click += button_usun_firme_Click_2;
+            button_usun_firme.Visible = false;
+
             // 
             // button_zaakceptuj_zmiany
             // 
