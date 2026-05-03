@@ -123,7 +123,7 @@ CREATE TABLE Umowa (
     ID_umowa INT IDENTITY(1,1) PRIMARY KEY,
     ID_pracownik INT NOT NULL FOREIGN KEY REFERENCES Pracownik(ID_pracownik),
     Data_roz DATE NOT NULL,
-    Data_zak DATE NULL,
+    Data_zak DATE NOT NULL,
     ID_rodzaju INT NOT NULL FOREIGN KEY REFERENCES Rodzaj_umowy(ID_rodzaju)
 );
 GO
