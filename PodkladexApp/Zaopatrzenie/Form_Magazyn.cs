@@ -94,16 +94,32 @@ namespace PodkladexApp.Zaopatrzenie // <--- TU WPISZ SWÓJ NAMESPACE
 
                 dataGridView_Magazyn.DataSource = wynik;
 
+                // --- Opcjonalne upiększenia kolumn (jeśli tabela cokolwiek wczytała) ---
                 if (dataGridView_Magazyn.Columns.Count > 0)
                 {
-                    dataGridView_Magazyn.Columns["IdMaterial"].Visible = false;
+                    dataGridView_Magazyn.Columns["IdMaterial"].Visible = false; // Ukrywamy brzydkie ID
 
+                    // Np. szerokości, żeby opis zajął więcej miejsca
                     dataGridView_Magazyn.Columns["Nazwa"].HeaderText = "Materiał";
                     dataGridView_Magazyn.Columns["Opis"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                     dataGridView_Magazyn.Columns["Dostawy"].HeaderText = "Suma dostaw [kg]";
                     dataGridView_Magazyn.Columns["Zuzycie"].HeaderText = "Zużycie [kg]";
                     dataGridView_Magazyn.Columns["StanAktualny"].HeaderText = "Na stanie [kg]";
 
+                    // ==========================================
+                    // NOWE: WYMUSZENIE DWÓCH MIEJSC PO PRZECINKU
+                    // ==========================================
+                    // "N2" oznacza format liczbowy (Number) z 2 miejscami po przecinku
+                    dataGridView_Magazyn.Columns["Dostawy"].DefaultCellStyle.Format = "N2";
+                    dataGridView_Magazyn.Columns["Zuzycie"].DefaultCellStyle.Format = "N2";
+                    dataGridView_Magazyn.Columns["StanAktualny"].DefaultCellStyle.Format = "N2";
+
+                    // Wyrównanie liczb do prawej strony (standard w księgowości i magazynach)
+                    dataGridView_Magazyn.Columns["Dostawy"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dataGridView_Magazyn.Columns["Zuzycie"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dataGridView_Magazyn.Columns["StanAktualny"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+                    // Fajny "myk" - kolorowanie kolumny StanAktualny na np. jasnoniebiesko, by się wyróżniała
                     dataGridView_Magazyn.Columns["StanAktualny"].DefaultCellStyle.BackColor = Color.LightCyan;
                     dataGridView_Magazyn.Columns["StanAktualny"].DefaultCellStyle.Font = new Font("Segoe UI", 12, FontStyle.Bold);
                 }
@@ -143,6 +159,11 @@ namespace PodkladexApp.Zaopatrzenie // <--- TU WPISZ SWÓJ NAMESPACE
         {
             _db.Dispose(); // Niezwykle ważne, aby nie ubijać pamięci
             base.OnFormClosed(e);
+        }
+
+        private void dataGridView_Magazyn_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

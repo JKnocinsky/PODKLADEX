@@ -44,6 +44,7 @@
             dataGridView_Magazyn.Name = "dataGridView_Magazyn";
             dataGridView_Magazyn.Size = new Size(1040, 556);
             dataGridView_Magazyn.TabIndex = 0;
+            dataGridView_Magazyn.CellContentClick += dataGridView_Magazyn_CellContentClick;
             // 
             // textBox_Wyszukaj
             // 

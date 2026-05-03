@@ -36,6 +36,9 @@
             label_Data_konca = new Label();
             label_Sortowanie = new Label();
             button_Szczegoly = new Button();
+            radioButton_Wszyscy = new RadioButton();
+            radioButton_Firmy = new RadioButton();
+            radioButton_Osoby = new RadioButton();
             ((System.ComponentModel.ISupportInitialize)dataGridView_HistoriaZamowien).BeginInit();
             SuspendLayout();
             // 
@@ -74,7 +77,7 @@
             // 
             comboBox_sortowanie.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
             comboBox_sortowanie.FormattingEnabled = true;
-            comboBox_sortowanie.Location = new Point(274, 672);
+            comboBox_sortowanie.Location = new Point(150, 676);
             comboBox_sortowanie.Name = "comboBox_sortowanie";
             comboBox_sortowanie.Size = new Size(379, 33);
             comboBox_sortowanie.TabIndex = 3;
@@ -105,7 +108,7 @@
             // 
             label_Sortowanie.AutoSize = true;
             label_Sortowanie.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_Sortowanie.Location = new Point(161, 675);
+            label_Sortowanie.Location = new Point(37, 679);
             label_Sortowanie.Name = "label_Sortowanie";
             label_Sortowanie.Size = new Size(107, 25);
             label_Sortowanie.TabIndex = 6;
@@ -115,7 +118,7 @@
             // 
             button_Szczegoly.Enabled = false;
             button_Szczegoly.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_Szczegoly.Location = new Point(764, 650);
+            button_Szczegoly.Location = new Point(827, 612);
             button_Szczegoly.Name = "button_Szczegoly";
             button_Szczegoly.Size = new Size(250, 50);
             button_Szczegoly.TabIndex = 7;
@@ -123,11 +126,49 @@
             button_Szczegoly.UseVisualStyleBackColor = true;
             button_Szczegoly.Click += button1_Click;
             // 
+            // radioButton_Wszyscy
+            // 
+            radioButton_Wszyscy.AutoSize = true;
+            radioButton_Wszyscy.Checked = true;
+            radioButton_Wszyscy.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            radioButton_Wszyscy.Location = new Point(551, 680);
+            radioButton_Wszyscy.Name = "radioButton_Wszyscy";
+            radioButton_Wszyscy.Size = new Size(159, 29);
+            radioButton_Wszyscy.TabIndex = 8;
+            radioButton_Wszyscy.TabStop = true;
+            radioButton_Wszyscy.Text = "Wszyscy klienci";
+            radioButton_Wszyscy.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_Firmy
+            // 
+            radioButton_Firmy.AutoSize = true;
+            radioButton_Firmy.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            radioButton_Firmy.Location = new Point(740, 680);
+            radioButton_Firmy.Name = "radioButton_Firmy";
+            radioButton_Firmy.Size = new Size(124, 29);
+            radioButton_Firmy.TabIndex = 9;
+            radioButton_Firmy.Text = "Tylko Firmy";
+            radioButton_Firmy.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_Osoby
+            // 
+            radioButton_Osoby.AutoSize = true;
+            radioButton_Osoby.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            radioButton_Osoby.Location = new Point(890, 680);
+            radioButton_Osoby.Name = "radioButton_Osoby";
+            radioButton_Osoby.Size = new Size(212, 29);
+            radioButton_Osoby.TabIndex = 10;
+            radioButton_Osoby.Text = "Tylko Klienci Prywatni";
+            radioButton_Osoby.UseVisualStyleBackColor = true;
+            // 
             // Form_HistoriaZamowien
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1184, 731);
+            Controls.Add(radioButton_Osoby);
+            Controls.Add(radioButton_Firmy);
+            Controls.Add(radioButton_Wszyscy);
             Controls.Add(button_Szczegoly);
             Controls.Add(label_Sortowanie);
             Controls.Add(label_Data_konca);
@@ -154,5 +195,8 @@
         private Label label_Data_konca;
         private Label label_Sortowanie;
         private Button button_Szczegoly;
+        private RadioButton radioButton_Wszyscy;
+        private RadioButton radioButton_Firmy;
+        private RadioButton radioButton_Osoby;
     }
 }

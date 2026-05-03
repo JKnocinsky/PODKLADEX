@@ -16,10 +16,8 @@ namespace PodkladexApp.Zaopatrzenie
     {
         private int _idZamowienia;
 
-
         // Instancja kontekstu bazy danych
         private PodkladexContext _context = new PodkladexContext();
-
 
         public Form_HistoriaZamowien()
         {
@@ -47,15 +45,20 @@ namespace PodkladexApp.Zaopatrzenie
 
         private void Form_HistoriaZamowien_Load(object sender, EventArgs e)
         {
-
-
             UstawWygladTabeli();
 
             // Inicjalizacja zakresu dat w kontrolkach
             dateTimePicker_Poczatek.Value = DateTime.Now.AddMonths(-1);
             dateTimePicker_Koniec.Value = DateTime.Now;
-            // 2. Wypełnienie opcji sortowania w ComboBox
-            // Zabezpieczenie na wypadek, gdyby dodano je z poziomu Designera
+
+            // =======================================================
+            // PODPIĘCIE ZDARZEŃ (Żeby odświeżało się samo przy kliknięciu)
+            // =======================================================
+            radioButton_Wszyscy.CheckedChanged += radioButton_Wszyscy_CheckedChanged;
+            radioButton_Firmy.CheckedChanged += radioButton_Firmy_CheckedChanged;
+            radioButton_Osoby.CheckedChanged += radioButton_Osoby_CheckedChanged;
+
+            // Wypełnienie opcji sortowania w ComboBox
             if (comboBox_sortowanie.Items.Count == 0)
             {
                 comboBox_sortowanie.Items.AddRange(new string[] {
@@ -66,7 +69,6 @@ namespace PodkladexApp.Zaopatrzenie
                     "Klient (A-Z)"
                 });
             }
-
 
             comboBox_sortowanie.SelectedIndex = 0;
             WyswietlHistorieZamowien();
@@ -81,27 +83,45 @@ namespace PodkladexApp.Zaopatrzenie
             var dataOd = DateOnly.FromDateTime(dateTimePicker_Poczatek.Value);
             var dataDo = DateOnly.FromDateTime(dateTimePicker_Koniec.Value);
 
-            // 1. Pobranie danych z bazy (bez użycia .ToList(), aby posortować je w SQL, a nie w pamięci RAM)
-            var zapytanie = _context.Zamowienie
+            // 1. ZBUDOWANIE BAZY ZAPYTANIA (Filtrowanie daty)
+            var zapytanieBaza = _context.Zamowienie
                 .Where(z => z.DataPrzyjeciaZ >= dataOd && z.DataPrzyjeciaZ <= dataDo)
-                .Select(z => new
-                {
-                    IdZamowienia = z.IdZamowienie,
+                .AsQueryable();
 
-                    // Złączenie Imie i Nazwisko z tabeli Osoba
-                    Klient = z.IdKlientNavigation.IdOsobaNavigation != null
+            // ====================================================
+            // 2. NOWE: FILTROWANIE PO TYPIE KLIENTA (RadioButtony)
+            // ====================================================
+            if (radioButton_Firmy.Checked)
+            {
+                // Tylko zamówienia klientów, którzy mają aktywne powiązanie z firmą
+                zapytanieBaza = zapytanieBaza.Where(z => z.IdKlientNavigation.KlientFirma.Any(kf => kf.DataKoniec == null));
+            }
+            else if (radioButton_Osoby.Checked)
+            {
+                // Tylko zamówienia klientów prywatnych (brak aktywnego powiązania z firmą)
+                zapytanieBaza = zapytanieBaza.Where(z => !z.IdKlientNavigation.KlientFirma.Any(kf => kf.DataKoniec == null));
+            }
+            // Jeśli radioButton_Wszyscy.Checked jest True, po prostu omijamy filtry (ładuje wszystko)
+
+            // 3. MAPOWANIE DO WIDOKU W TABELI (Select)
+            var zapytanie = zapytanieBaza.Select(z => new
+            {
+                IdZamowienia = z.IdZamowienie,
+
+                Klient = z.IdKlientNavigation.KlientFirma.Any(kf => kf.DataKoniec == null)
+                    ? z.IdKlientNavigation.KlientFirma.FirstOrDefault(kf => kf.DataKoniec == null).IdFirmaNavigation.Nazwa
+                    : (z.IdKlientNavigation.IdOsobaNavigation != null
                         ? z.IdKlientNavigation.IdOsobaNavigation.Imie + " " + z.IdKlientNavigation.IdOsobaNavigation.Nazwisko
-                        : "Brak danych",
+                        : "Brak danych"),
 
-                    DataZlozenia = z.DataPrzyjeciaZ,
+                DataZlozenia = z.DataPrzyjeciaZ,
 
-                    // Suma całkowita dla danego zamówienia: Ilość * Cena
-                    CenaZbiorcza = z.SzczegolyZamowienia.Any()
-                                   ? z.SzczegolyZamowienia.Sum(sz => sz.Cena * sz.Ilosc)
-                                   : 0m
-                });
+                CenaZbiorcza = z.SzczegolyZamowienia.Any()
+                               ? z.SzczegolyZamowienia.Sum(sz => sz.Cena * sz.Ilosc)
+                               : 0m
+            });
 
-            // 2. Logika sortowania za pomocą ComboBoxa
+            // 4. Logika sortowania za pomocą ComboBoxa
             switch (comboBox_sortowanie.SelectedIndex)
             {
                 case 0: // "Data - od najnowszych"
@@ -121,17 +141,17 @@ namespace PodkladexApp.Zaopatrzenie
                     break;
             }
 
-            // 3. Przypisanie gotowych (i posortowanych) danych do DataGridView
+            // 5. Przypisanie gotowych (i posortowanych) danych do DataGridView
             dataGridView_HistoriaZamowien.DataSource = zapytanie.ToList();
 
-            // 4. Formatowanie nagłówków kolumn
+            // 6. Formatowanie nagłówków kolumn
             if (dataGridView_HistoriaZamowien.Columns.Count > 0)
             {
                 if (dataGridView_HistoriaZamowien.Columns["IdZamowienia"] != null)
                     dataGridView_HistoriaZamowien.Columns["IdZamowienia"].HeaderText = "ID Zamówienia";
 
                 if (dataGridView_HistoriaZamowien.Columns["Klient"] != null)
-                    dataGridView_HistoriaZamowien.Columns["Klient"].HeaderText = "Klient (Imię i Nazwisko)";
+                    dataGridView_HistoriaZamowien.Columns["Klient"].HeaderText = "Klient";
 
                 if (dataGridView_HistoriaZamowien.Columns["DataZlozenia"] != null)
                     dataGridView_HistoriaZamowien.Columns["DataZlozenia"].HeaderText = "Data zamówienia";
@@ -144,9 +164,16 @@ namespace PodkladexApp.Zaopatrzenie
             }
         }
 
-        // Możesz dodać zdarzenia, aby odświeżać listę przy zmianie daty lub sortowania
+        // =======================================================
+        // ZDARZENIA (EVENTY)
+        // =======================================================
         private void dateTimePicker_Poczatek_ValueChanged(object sender, EventArgs e) => WyswietlHistorieZamowien();
         private void dateTimePicker_Koniec_ValueChanged(object sender, EventArgs e) => WyswietlHistorieZamowien();
+
+        // Dodane zdarzenia odświeżające listę po przełączeniu opcji (podepnij je w Designerze!)
+        private void radioButton_Wszyscy_CheckedChanged(object sender, EventArgs e) => WyswietlHistorieZamowien();
+        private void radioButton_Firmy_CheckedChanged(object sender, EventArgs e) => WyswietlHistorieZamowien();
+        private void radioButton_Osoby_CheckedChanged(object sender, EventArgs e) => WyswietlHistorieZamowien();
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
@@ -159,41 +186,30 @@ namespace PodkladexApp.Zaopatrzenie
 
         }
 
-        // ... wcześniejszy kod ...
-
-        // To zdarzenie odpala się za każdym razem, gdy użytkownik klika w inny wiersz tabeli
         private void dataGridView_HistoriaZamowien_SelectionChanged(object sender, EventArgs e)
         {
-            // Sprawdzamy, czy w tabeli jest zaznaczony DOKŁADNIE jeden wiersz
             if (dataGridView_HistoriaZamowien.SelectedRows.Count == 1)
             {
-                button_Szczegoly.Enabled = true; // Odblokuj przycisk
+                button_Szczegoly.Enabled = true;
             }
             else
             {
-                button_Szczegoly.Enabled = false; // Zablokuj przycisk (np. jeśli użytkownik odznaczy lub zaznaczy wiele)
+                button_Szczegoly.Enabled = false;
             }
         }
 
-        // To się dzieje, gdy klikniemy odblokowany przycisk "Szczegóły"
         private void button_Szczegoly_Click(object sender, EventArgs e)
         {
-            // Zabezpieczenie (choć przycisk jest zablokowany, gdy nie ma wyboru, lepiej uważać)
             if (dataGridView_HistoriaZamowien.SelectedRows.Count == 1)
             {
-                // Wyciągamy zaznaczony wiersz
                 DataGridViewRow row = dataGridView_HistoriaZamowien.SelectedRows[0];
 
-                // UWAGA: Żeby to zadziałało, musimy się upewnić, że kolumna "IdZamowienia" 
-                // istnieje w DataGridView. Wcześniej ją ukrywaliśmy (Visible = false), ale dane TAM SĄ!
                 if (row.Cells["IdZamowienia"].Value != null)
                 {
-                    // Pobieramy to ukryte ID z komórki
                     int idWybranegoZamowienia = Convert.ToInt32(row.Cells["IdZamowienia"].Value);
 
-                    // Tworzymy i otwieramy nowy formularz, przekazując mu ID!
                     Form_HistoriaZamowienSzczegoly formSzczegoly = new Form_HistoriaZamowienSzczegoly(idWybranegoZamowienia);
-                    formSzczegoly.ShowDialog(); // ShowDialog blokuje stary formularz, dopóki ten nie zostanie zamknięty (polecane)
+                    formSzczegoly.ShowDialog();
                 }
                 else
                 {
@@ -202,12 +218,8 @@ namespace PodkladexApp.Zaopatrzenie
             }
         }
 
-        // ... reszta kodu ...
-
         private void comboBox_sortowanie_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Za każdym razem, gdy zmienisz wartość w ComboBoxie, 
-            // lista pobierze się i posortuje na nowo automatycznie!
             WyswietlHistorieZamowien();
         }
 
@@ -218,22 +230,16 @@ namespace PodkladexApp.Zaopatrzenie
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // Zabezpieczenie (choć przycisk jest zablokowany, gdy nie ma wyboru, lepiej uważać)
             if (dataGridView_HistoriaZamowien.SelectedRows.Count == 1)
             {
-                // Wyciągamy zaznaczony wiersz
                 DataGridViewRow row = dataGridView_HistoriaZamowien.SelectedRows[0];
 
-                // UWAGA: Żeby to zadziałało, musimy się upewnić, że kolumna "IdZamowienia" 
-                // istnieje w DataGridView. Wcześniej ją ukrywaliśmy (Visible = false), ale dane TAM SĄ!
                 if (row.Cells["IdZamowienia"].Value != null)
                 {
-                    // Pobieramy to ukryte ID z komórki
                     int idWybranegoZamowienia = Convert.ToInt32(row.Cells["IdZamowienia"].Value);
 
-                    // Tworzymy i otwieramy nowy formularz, przekazując mu ID!
                     Form_HistoriaZamowienSzczegoly formSzczegoly = new Form_HistoriaZamowienSzczegoly(idWybranegoZamowienia);
-                    formSzczegoly.ShowDialog(); // ShowDialog blokuje stary formularz, dopóki ten nie zostanie zamknięty (polecane)
+                    formSzczegoly.ShowDialog();
                 }
                 else
                 {
