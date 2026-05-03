@@ -228,7 +228,7 @@
             button_edytuj_zamowienie.Name = "button_edytuj_zamowienie";
             button_edytuj_zamowienie.Size = new Size(250, 50);
             button_edytuj_zamowienie.TabIndex = 15;
-            button_edytuj_zamowienie.Text = "Edytuj zamówienie";
+            button_edytuj_zamowienie.Text = "Edytuj pozycje";
             button_edytuj_zamowienie.UseVisualStyleBackColor = true;
             button_edytuj_zamowienie.Click += button_edytuj_zamowienie_Click;
             // 

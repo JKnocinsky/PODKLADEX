@@ -14,8 +14,26 @@ namespace PodkladexApp.Zaopatrzenie
 {
     public partial class Form_HistoriaZamowien : Form
     {
+        private int _idZamowienia;
+
+        public partial class Form_HistoriaZamowienSzczegoly : Form
+        {
+            private int _idZamowienia;
+
+            // TUTA JEST KLUCZ: Ta nazwa musi być w 100% identyczna z nazwą klasy wyżej!
+            public Form_HistoriaZamowienSzczegoly(int idZamowienia)
+            {
+                _idZamowienia = idZamowienia;
+
+                // Testowy tytuł okna
+                this.Text = $"Szczegóły zamówienia nr {_idZamowienia}";
+            }
+
+            // ... reszta kodu (jeśli jakaś jest) ...
+        }
         // Instancja kontekstu bazy danych
         private PodkladexContext _context = new PodkladexContext();
+
 
         public Form_HistoriaZamowien()
         {
@@ -155,6 +173,51 @@ namespace PodkladexApp.Zaopatrzenie
 
         }
 
+        // ... wcześniejszy kod ...
+
+        // To zdarzenie odpala się za każdym razem, gdy użytkownik klika w inny wiersz tabeli
+        private void dataGridView_HistoriaZamowien_SelectionChanged(object sender, EventArgs e)
+        {
+            // Sprawdzamy, czy w tabeli jest zaznaczony DOKŁADNIE jeden wiersz
+            if (dataGridView_HistoriaZamowien.SelectedRows.Count == 1)
+            {
+                button_Szczegoly.Enabled = true; // Odblokuj przycisk
+            }
+            else
+            {
+                button_Szczegoly.Enabled = false; // Zablokuj przycisk (np. jeśli użytkownik odznaczy lub zaznaczy wiele)
+            }
+        }
+
+        // To się dzieje, gdy klikniemy odblokowany przycisk "Szczegóły"
+        private void button_Szczegoly_Click(object sender, EventArgs e)
+        {
+            // Zabezpieczenie (choć przycisk jest zablokowany, gdy nie ma wyboru, lepiej uważać)
+            if (dataGridView_HistoriaZamowien.SelectedRows.Count == 1)
+            {
+                // Wyciągamy zaznaczony wiersz
+                DataGridViewRow row = dataGridView_HistoriaZamowien.SelectedRows[0];
+
+                // UWAGA: Żeby to zadziałało, musimy się upewnić, że kolumna "IdZamowienia" 
+                // istnieje w DataGridView. Wcześniej ją ukrywaliśmy (Visible = false), ale dane TAM SĄ!
+                if (row.Cells["IdZamowienia"].Value != null)
+                {
+                    // Pobieramy to ukryte ID z komórki
+                    int idWybranegoZamowienia = Convert.ToInt32(row.Cells["IdZamowienia"].Value);
+
+                    // Tworzymy i otwieramy nowy formularz, przekazując mu ID!
+                    Form_HistoriaZamowienSzczegoly formSzczegoly = new Form_HistoriaZamowienSzczegoly(idWybranegoZamowienia);
+                    formSzczegoly.ShowDialog(); // ShowDialog blokuje stary formularz, dopóki ten nie zostanie zamknięty (polecane)
+                }
+                else
+                {
+                    MessageBox.Show("Nie można odnaleźć ID tego zamówienia.");
+                }
+            }
+        }
+
+        // ... reszta kodu ...
+
         private void comboBox_sortowanie_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Za każdym razem, gdy zmienisz wartość w ComboBoxie, 
@@ -165,6 +228,32 @@ namespace PodkladexApp.Zaopatrzenie
         private void label_data_Poczatku_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Zabezpieczenie (choć przycisk jest zablokowany, gdy nie ma wyboru, lepiej uważać)
+            if (dataGridView_HistoriaZamowien.SelectedRows.Count == 1)
+            {
+                // Wyciągamy zaznaczony wiersz
+                DataGridViewRow row = dataGridView_HistoriaZamowien.SelectedRows[0];
+
+                // UWAGA: Żeby to zadziałało, musimy się upewnić, że kolumna "IdZamowienia" 
+                // istnieje w DataGridView. Wcześniej ją ukrywaliśmy (Visible = false), ale dane TAM SĄ!
+                if (row.Cells["IdZamowienia"].Value != null)
+                {
+                    // Pobieramy to ukryte ID z komórki
+                    int idWybranegoZamowienia = Convert.ToInt32(row.Cells["IdZamowienia"].Value);
+
+                    // Tworzymy i otwieramy nowy formularz, przekazując mu ID!
+                    Form_HistoriaZamowienSzczegoly formSzczegoly = new Form_HistoriaZamowienSzczegoly(idWybranegoZamowienia);
+                    formSzczegoly.ShowDialog(); // ShowDialog blokuje stary formularz, dopóki ten nie zostanie zamknięty (polecane)
+                }
+                else
+                {
+                    MessageBox.Show("Nie można odnaleźć ID tego zamówienia.");
+                }
+            }
         }
     }
 }
