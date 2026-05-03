@@ -37,6 +37,7 @@
             DGV_Efektywnosc = new DataGridView();
             label_Sortowanie = new Label();
             comboBox_Sortowanie = new ComboBox();
+            formsPlot_Efektywnosc = new ScottPlot.WinForms.FormsPlot();
             ((System.ComponentModel.ISupportInitialize)DGV_Efektywnosc).BeginInit();
             SuspendLayout();
             // 
@@ -122,11 +123,19 @@
             comboBox_Sortowanie.Size = new Size(159, 23);
             comboBox_Sortowanie.TabIndex = 8;
             // 
+            // formsPlot_Efektywnosc
+            // 
+            formsPlot_Efektywnosc.Location = new Point(42, 417);
+            formsPlot_Efektywnosc.Name = "formsPlot_Efektywnosc";
+            formsPlot_Efektywnosc.Size = new Size(1017, 540);
+            formsPlot_Efektywnosc.TabIndex = 9;
+            // 
             // Form_Efektywnosc
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1337, 758);
+            ClientSize = new Size(1322, 1007);
+            Controls.Add(formsPlot_Efektywnosc);
             Controls.Add(comboBox_Sortowanie);
             Controls.Add(label_Sortowanie);
             Controls.Add(DGV_Efektywnosc);
@@ -154,5 +163,6 @@
         private DataGridView DGV_Efektywnosc;
         private Label label_Sortowanie;
         private ComboBox comboBox_Sortowanie;
+        private ScottPlot.WinForms.FormsPlot formsPlot_Efektywnosc;
     }
 }

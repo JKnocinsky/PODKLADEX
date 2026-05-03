@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Microsoft.EntityFrameworkCore;
+using ScottPlot;
 
 namespace PodkladexApp
 {
@@ -59,7 +60,6 @@ namespace PodkladexApp
             comboBox_FiltrPracownik.DisplayMember = "Nazwa";
             comboBox_FiltrPracownik.ValueMember = "IdPracownik";
 
-            // Definiowanie opcji sortowania
             var opcjeSortowania = new List<string>
             {
                 "Pracownik A-Z",
@@ -79,7 +79,7 @@ namespace PodkladexApp
         {
             comboBox_FiltrMaszyna.SelectedIndex = -1;
             comboBox_FiltrPracownik.SelectedIndex = -1;
-            comboBox_Sortowanie.SelectedIndex = 2; // Domyślnie sortuj po najwyższej efektywności
+            comboBox_Sortowanie.SelectedIndex = 2;
             OdswiezDane();
         }
 
@@ -95,7 +95,6 @@ namespace PodkladexApp
 
         private void OdswiezDane()
         {
-            // Pobieranie danych z tabeli Produkcja
             var query = _context.Produkcja
                 .Include(p => p.IdZadaniePNavigation.IdMaszynaNavigation)
                 .Include(p => p.IdPracownikNavigation.IdOsobaNavigation)
@@ -117,51 +116,82 @@ namespace PodkladexApp
                 Zadanie = p.IdZadanieP,
                 Pracownik = p.IdPracownikNavigation.IdOsobaNavigation.Imie + " " + p.IdPracownikNavigation.IdOsobaNavigation.Nazwisko,
                 Maszyna = p.IdZadaniePNavigation.IdMaszynaNavigation.Nazwa,
-                Wyprodukowano_kg = p.Wyprodukowano,
-                Odpady_kg = p.Odpady,
-                Efektywnosc = (p.Wyprodukowano + p.Odpady) > 0
-                    ? Math.Round((p.Wyprodukowano / (p.Wyprodukowano + p.Odpady)) * 100, 2)
+                Wyprodukowano_kg = (double)p.Wyprodukowano,
+                Odpady_kg = (double)p.Odpady,
+                Efektywnosc = (double)(p.Wyprodukowano + p.Odpady) > 0
+                    ? Math.Round(((double)p.Wyprodukowano / ((double)p.Wyprodukowano + (double)p.Odpady)) * 100, 2)
                     : 0
             }).ToList();
 
-            // Zastosowanie sortowania wybranego w comboBox_Sortowanie
             string wybraneSortowanie = comboBox_Sortowanie.SelectedItem?.ToString();
-
-            var danePosortowane = suroweDane.AsEnumerable();
+            List<dynamic> daneLista;
 
             switch (wybraneSortowanie)
             {
-                case "Pracownik A-Z":
-                    danePosortowane = suroweDane.OrderBy(x => x.Pracownik);
-                    break;
-                case "Maszyna A-Z":
-                    danePosortowane = suroweDane.OrderBy(x => x.Maszyna);
-                    break;
-                case "Efektywność (od najwyższej)":
-                    danePosortowane = suroweDane.OrderByDescending(x => x.Efektywnosc);
-                    break;
-                case "Efektywność (od najniższej)":
-                    danePosortowane = suroweDane.OrderBy(x => x.Efektywnosc);
-                    break;
-                case "Największa produkcja [kg]":
-                    danePosortowane = suroweDane.OrderByDescending(x => x.Wyprodukowano_kg);
-                    break;
-                default:
-                    danePosortowane = suroweDane.OrderByDescending(x => x.ID);
-                    break;
+                case "Pracownik A-Z": daneLista = suroweDane.OrderBy(x => x.Pracownik).Cast<dynamic>().ToList(); break;
+                case "Maszyna A-Z": daneLista = suroweDane.OrderBy(x => x.Maszyna).Cast<dynamic>().ToList(); break;
+                case "Efektywność (od najwyższej)": daneLista = suroweDane.OrderByDescending(x => x.Efektywnosc).Cast<dynamic>().ToList(); break;
+                case "Efektywność (od najniższej)": daneLista = suroweDane.OrderBy(x => x.Efektywnosc).Cast<dynamic>().ToList(); break;
+                case "Największa produkcja [kg]": daneLista = suroweDane.OrderByDescending(x => x.Wyprodukowano_kg).Cast<dynamic>().ToList(); break;
+                default: daneLista = suroweDane.OrderByDescending(x => x.ID).Cast<dynamic>().ToList(); break;
             }
 
-            DGV_Efektywnosc.DataSource = danePosortowane.ToList();
+            DGV_Efektywnosc.DataSource = daneLista;
 
             if (DGV_Efektywnosc.Columns.Count > 0)
             {
                 DGV_Efektywnosc.Columns["ID"].Visible = false;
                 DGV_Efektywnosc.Columns["Zadanie"].Visible = false;
-
                 DGV_Efektywnosc.Columns["Wyprodukowano_kg"].HeaderText = "Wyprodukowano [kg]";
                 DGV_Efektywnosc.Columns["Odpady_kg"].HeaderText = "Odpady [kg]";
                 DGV_Efektywnosc.Columns["Efektywnosc"].HeaderText = "Efektywność [%]";
             }
+
+            AktualizujWykres(daneLista);
+        }
+
+        private void AktualizujWykres(List<dynamic> dane)
+        {
+            formsPlot_Efektywnosc.Plot.Clear();
+
+            if (dane.Count == 0)
+            {
+                formsPlot_Efektywnosc.Refresh();
+                return;
+            }
+
+            var daneWykres = dane.Take(15).ToList();
+
+            double[] wartosciEfektywnosci = daneWykres.Select(x => (double)x.Efektywnosc).ToArray();
+            string[] etykiety = daneWykres.Select(x => $"{x.Maszyna}\n({x.Pracownik})").ToArray();
+
+            var bars = formsPlot_Efektywnosc.Plot.Add.Bars(wartosciEfektywnosci);
+
+            foreach (var bar in bars.Bars)
+            {
+                bar.FillColor = ScottPlot.Colors.DodgerBlue;
+                bar.Label = bar.Value.ToString();
+            }
+            bars.ValueLabelStyle.Bold = true;
+
+            ScottPlot.Tick[] ticks = new ScottPlot.Tick[etykiety.Length];
+            for (int i = 0; i < etykiety.Length; i++)
+            {
+                ticks[i] = new ScottPlot.Tick(i, etykiety[i]);
+            }
+
+            formsPlot_Efektywnosc.Plot.Axes.Bottom.TickGenerator = new ScottPlot.TickGenerators.NumericManual(ticks);
+            formsPlot_Efektywnosc.Plot.Axes.Bottom.TickLabelStyle.Rotation = 45;
+            formsPlot_Efektywnosc.Plot.Axes.Bottom.MinimumSize = 80;
+
+            // Resetowanie kamery wykresu, aby pokazała wszystkie słupki (od -1 do liczby rekordów)
+            formsPlot_Efektywnosc.Plot.Axes.SetLimitsX(-1, daneWykres.Count);
+            formsPlot_Efektywnosc.Plot.Axes.SetLimitsY(0, 115);
+
+            formsPlot_Efektywnosc.Plot.YLabel("Efektywność [%]");
+            formsPlot_Efektywnosc.Plot.Title("Efektywność produkcji wg rekordów");
+
+            formsPlot_Efektywnosc.Refresh();
         }
     }
 }
