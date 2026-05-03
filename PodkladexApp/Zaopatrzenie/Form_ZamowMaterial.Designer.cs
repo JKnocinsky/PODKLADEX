@@ -34,16 +34,18 @@
             label_cena_pozycji = new Label();
             label_Materiał = new Label();
             label_Liczba = new Label();
-            label_Uwagi = new Label();
+            label_Pracownik = new Label();
             button_PrzejdzDalej = new Button();
             dataGridView_Koszyk = new DataGridView();
             button_DodajPozycje = new Button();
-            textBox_Uwagi = new TextBox();
             numericUpDown_Cena = new NumericUpDown();
             numericUpDown_Ilosc = new NumericUpDown();
             comboBox_Material = new ComboBox();
             dateTimePicker_data = new DateTimePicker();
             label_data = new Label();
+            comboBox_Firma = new ComboBox();
+            label_Firma = new Label();
+            comboBox1 = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView_Koszyk).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown_Cena).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown_Ilosc).BeginInit();
@@ -89,7 +91,7 @@
             // 
             label_cena_pozycji.AutoSize = true;
             label_cena_pozycji.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_cena_pozycji.Location = new Point(20, 274);
+            label_cena_pozycji.Location = new Point(39, 274);
             label_cena_pozycji.Name = "label_cena_pozycji";
             label_cena_pozycji.Size = new Size(56, 25);
             label_cena_pozycji.TabIndex = 28;
@@ -109,21 +111,21 @@
             // 
             label_Liczba.AutoSize = true;
             label_Liczba.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_Liczba.Location = new Point(356, 188);
+            label_Liczba.Location = new Point(377, 189);
             label_Liczba.Name = "label_Liczba";
             label_Liczba.Size = new Size(66, 25);
             label_Liczba.TabIndex = 25;
             label_Liczba.Text = "Liczba";
             // 
-            // label_Uwagi
+            // label_Pracownik
             // 
-            label_Uwagi.AutoSize = true;
-            label_Uwagi.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_Uwagi.Location = new Point(20, 366);
-            label_Uwagi.Name = "label_Uwagi";
-            label_Uwagi.Size = new Size(66, 25);
-            label_Uwagi.TabIndex = 24;
-            label_Uwagi.Text = "Uwagi";
+            label_Pracownik.AutoSize = true;
+            label_Pracownik.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
+            label_Pracownik.Location = new Point(47, 366);
+            label_Pracownik.Name = "label_Pracownik";
+            label_Pracownik.Size = new Size(101, 25);
+            label_Pracownik.TabIndex = 24;
+            label_Pracownik.Text = "Pracownik";
             // 
             // button_PrzejdzDalej
             // 
@@ -159,71 +161,99 @@
             button_DodajPozycje.Text = "Dodaj do zamówienia";
             button_DodajPozycje.UseVisualStyleBackColor = true;
             // 
-            // textBox_Uwagi
-            // 
-            textBox_Uwagi.Font = new Font("Segoe UI", 14F);
-            textBox_Uwagi.Location = new Point(96, 363);
-            textBox_Uwagi.Margin = new Padding(3, 2, 3, 2);
-            textBox_Uwagi.Name = "textBox_Uwagi";
-            textBox_Uwagi.Size = new Size(525, 32);
-            textBox_Uwagi.TabIndex = 20;
-            // 
             // numericUpDown_Cena
             // 
             numericUpDown_Cena.DecimalPlaces = 2;
             numericUpDown_Cena.Font = new Font("Segoe UI", 13.8F);
-            numericUpDown_Cena.Location = new Point(101, 270);
+            numericUpDown_Cena.Location = new Point(112, 272);
             numericUpDown_Cena.Margin = new Padding(3, 2, 3, 2);
             numericUpDown_Cena.Maximum = new decimal(new int[] { 1874919423, 2328306, 0, 0 });
             numericUpDown_Cena.Name = "numericUpDown_Cena";
             numericUpDown_Cena.Size = new Size(200, 32);
             numericUpDown_Cena.TabIndex = 19;
+            numericUpDown_Cena.ValueChanged += numericUpDown_Cena_ValueChanged;
             // 
             // numericUpDown_Ilosc
             // 
             numericUpDown_Ilosc.Font = new Font("Segoe UI", 13.8F);
-            numericUpDown_Ilosc.Location = new Point(431, 184);
+            numericUpDown_Ilosc.Location = new Point(463, 185);
             numericUpDown_Ilosc.Margin = new Padding(3, 2, 3, 2);
             numericUpDown_Ilosc.Maximum = new decimal(new int[] { 10000000, 0, 0, 0 });
             numericUpDown_Ilosc.Name = "numericUpDown_Ilosc";
             numericUpDown_Ilosc.Size = new Size(200, 32);
             numericUpDown_Ilosc.TabIndex = 18;
             numericUpDown_Ilosc.ThousandsSeparator = true;
+            numericUpDown_Ilosc.ValueChanged += numericUpDown_Ilosc_ValueChanged;
             // 
             // comboBox_Material
             // 
             comboBox_Material.Font = new Font("Segoe UI", 14F);
             comboBox_Material.FormattingEnabled = true;
-            comboBox_Material.Location = new Point(101, 185);
+            comboBox_Material.Location = new Point(101, 184);
             comboBox_Material.Margin = new Padding(3, 2, 3, 2);
             comboBox_Material.Name = "comboBox_Material";
-            comboBox_Material.Size = new Size(200, 33);
+            comboBox_Material.Size = new Size(259, 33);
             comboBox_Material.TabIndex = 17;
+            comboBox_Material.SelectedIndexChanged += comboBox_Material_SelectedIndexChanged;
             // 
             // dateTimePicker_data
             // 
             dateTimePicker_data.CalendarFont = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            dateTimePicker_data.Location = new Point(431, 279);
+            dateTimePicker_data.Location = new Point(473, 281);
             dateTimePicker_data.MinDate = new DateTime(2026, 5, 3, 0, 0, 0, 0);
             dateTimePicker_data.Name = "dateTimePicker_data";
             dateTimePicker_data.Size = new Size(200, 23);
             dateTimePicker_data.TabIndex = 32;
+            dateTimePicker_data.ValueChanged += dateTimePicker_data_ValueChanged;
             // 
             // label_data
             // 
             label_data.AutoSize = true;
             label_data.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_data.Location = new Point(356, 279);
+            label_data.Location = new Point(383, 279);
             label_data.Name = "label_data";
-            label_data.Size = new Size(56, 25);
+            label_data.Size = new Size(55, 25);
             label_data.TabIndex = 33;
-            label_data.Text = "Cena";
+            label_data.Text = "Data";
+            // 
+            // comboBox_Firma
+            // 
+            comboBox_Firma.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            comboBox_Firma.FormattingEnabled = true;
+            comboBox_Firma.Location = new Point(165, 77);
+            comboBox_Firma.Name = "comboBox_Firma";
+            comboBox_Firma.Size = new Size(400, 33);
+            comboBox_Firma.TabIndex = 34;
+            comboBox_Firma.SelectedIndexChanged += comboBox_Firma_SelectedIndexChanged;
+            // 
+            // label_Firma
+            // 
+            label_Firma.AutoSize = true;
+            label_Firma.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
+            label_Firma.Location = new Point(51, 80);
+            label_Firma.Name = "label_Firma";
+            label_Firma.Size = new Size(97, 25);
+            label_Firma.TabIndex = 35;
+            label_Firma.Text = "Dostawca";
+            // 
+            // comboBox1
+            // 
+            comboBox1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(165, 366);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(400, 33);
+            comboBox1.TabIndex = 36;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // Form_ZamowMaterial
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1664, 791);
+            Controls.Add(comboBox1);
+            Controls.Add(label_Firma);
+            Controls.Add(comboBox_Firma);
             Controls.Add(label_data);
             Controls.Add(dateTimePicker_data);
             Controls.Add(button_edytuj_zamowienie);
@@ -232,16 +262,15 @@
             Controls.Add(label_cena_pozycji);
             Controls.Add(label_Materiał);
             Controls.Add(label_Liczba);
-            Controls.Add(label_Uwagi);
+            Controls.Add(label_Pracownik);
             Controls.Add(button_PrzejdzDalej);
             Controls.Add(dataGridView_Koszyk);
             Controls.Add(button_DodajPozycje);
-            Controls.Add(textBox_Uwagi);
             Controls.Add(numericUpDown_Cena);
             Controls.Add(numericUpDown_Ilosc);
             Controls.Add(comboBox_Material);
             Name = "Form_ZamowMaterial";
-            Text = "Form1";
+            Text = "Zamawianie materiałów";
             ((System.ComponentModel.ISupportInitialize)dataGridView_Koszyk).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown_Cena).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown_Ilosc).EndInit();
@@ -257,15 +286,17 @@
         private Label label_cena_pozycji;
         private Label label_Materiał;
         private Label label_Liczba;
-        private Label label_Uwagi;
+        private Label label_Pracownik;
         private Button button_PrzejdzDalej;
         private DataGridView dataGridView_Koszyk;
         private Button button_DodajPozycje;
-        private TextBox textBox_Uwagi;
         private NumericUpDown numericUpDown_Cena;
         private NumericUpDown numericUpDown_Ilosc;
         private ComboBox comboBox_Material;
         private DateTimePicker dateTimePicker_data;
         private Label label_data;
+        private ComboBox comboBox_Firma;
+        private Label label_Firma;
+        private ComboBox comboBox1;
     }
 }
