@@ -39,8 +39,8 @@ namespace PodkladexApp.Zaopatrzenie // <--- TU WPISZ SWÓJ NAMESPACE
             dataGridView_Magazyn.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             // Czcionki i wysokość, żeby to wyglądało "pro"
-            dataGridView_Magazyn.DefaultCellStyle.Font = new Font("Segoe UI", 12);
-            dataGridView_Magazyn.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            dataGridView_Magazyn.DefaultCellStyle.Font = new Font("Segoe UI", 14);
+            dataGridView_Magazyn.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             dataGridView_Magazyn.RowTemplate.Height = 35;
             dataGridView_Magazyn.ColumnHeadersHeight = 45;
         }
@@ -75,53 +75,63 @@ namespace PodkladexApp.Zaopatrzenie // <--- TU WPISZ SWÓJ NAMESPACE
                     zapytanie = zapytanie.Where(m => m.RodzajMaterialu == wybranyRodzaj);
                 }
 
-                // Wyciągamy dane i mapujemy na ładny format, żeby kolumny pięknie się nazywały
-                var wynik = zapytanie.Select(s => new
+                // 1. Łączymy zapytanie z widoku z tabelą Material, aby dostać się do właściwości
+                var daneZabaza = zapytanie.Join(_db.Material,
+                    stan => stan.IdMaterial,
+                    mat => mat.IdMaterial,
+                    (stan, mat) => new
+                    {
+                        stan.IdMaterial,
+                        stan.NazwaMaterialu,
+                        stan.OpisMaterialu,
+                        stan.RodzajMaterialu,
+                        stan.CalkowiteDostawy,
+                        stan.CalkowiteZuzycie,
+                        stan.AktualnyStan,
+                        // Zabezpieczamy się na wypadek braku wymiaru rzutując na ułamek "nullowalny"
+                        WartoscNominalna = mat.MaterialWlasciwosci.Select(mw => (decimal?)mw.WartoscNominalna).FirstOrDefault()
+                    }).ToList(); // Pobieramy do pamięci RAM, żeby LINQ nie "wywaliło" się na klejeniu stringów
+
+                // 2. Mapujemy na ostateczny, ładny format
+                var wynik = daneZabaza.Select(s => new
                 {
                     s.IdMaterial,
-                    Nazwa = s.NazwaMaterialu,
+
+                    // NOWE: Sklejona nazwa wg Twojego życzenia
+                    Nazwa = s.NazwaMaterialu + " || " + (s.WartoscNominalna != null ? s.WartoscNominalna.ToString() : "Brak wymiaru"),
+
                     Opis = s.OpisMaterialu,
                     Rodzaj = s.RodzajMaterialu,
-
-                    // Te dwa okazały się twardym decimalem, więc zdejmujemy z nich ?? 0m
                     Dostawy = Math.Round(s.CalkowiteDostawy, 2),
                     Zuzycie = Math.Round(s.CalkowiteZuzycie, 2),
-
-                    // A ten jeden wciąż jest decimal?, więc zostawiamy jego ubezpieczenie
                     StanAktualny = Math.Round(s.AktualnyStan ?? 0m, 2)
-
                 }).ToList();
 
                 dataGridView_Magazyn.DataSource = wynik;
 
-                // --- Opcjonalne upiększenia kolumn (jeśli tabela cokolwiek wczytała) ---
+                // --- Opcjonalne upiększenia kolumn ---
                 if (dataGridView_Magazyn.Columns.Count > 0)
                 {
                     dataGridView_Magazyn.Columns["IdMaterial"].Visible = false; // Ukrywamy brzydkie ID
 
-                    // Np. szerokości, żeby opis zajął więcej miejsca
+                    // Nazwa nagłówka zostaje nienaruszona
                     dataGridView_Magazyn.Columns["Nazwa"].HeaderText = "Materiał";
+
                     dataGridView_Magazyn.Columns["Opis"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                     dataGridView_Magazyn.Columns["Dostawy"].HeaderText = "Suma dostaw [kg]";
                     dataGridView_Magazyn.Columns["Zuzycie"].HeaderText = "Zużycie [kg]";
                     dataGridView_Magazyn.Columns["StanAktualny"].HeaderText = "Na stanie [kg]";
 
-                    // ==========================================
-                    // NOWE: WYMUSZENIE DWÓCH MIEJSC PO PRZECINKU
-                    // ==========================================
-                    // "N2" oznacza format liczbowy (Number) z 2 miejscami po przecinku
                     dataGridView_Magazyn.Columns["Dostawy"].DefaultCellStyle.Format = "N2";
                     dataGridView_Magazyn.Columns["Zuzycie"].DefaultCellStyle.Format = "N2";
                     dataGridView_Magazyn.Columns["StanAktualny"].DefaultCellStyle.Format = "N2";
 
-                    // Wyrównanie liczb do prawej strony (standard w księgowości i magazynach)
                     dataGridView_Magazyn.Columns["Dostawy"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                     dataGridView_Magazyn.Columns["Zuzycie"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                     dataGridView_Magazyn.Columns["StanAktualny"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-                    // Fajny "myk" - kolorowanie kolumny StanAktualny na np. jasnoniebiesko, by się wyróżniała
                     dataGridView_Magazyn.Columns["StanAktualny"].DefaultCellStyle.BackColor = Color.LightCyan;
-                    dataGridView_Magazyn.Columns["StanAktualny"].DefaultCellStyle.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+                    dataGridView_Magazyn.Columns["StanAktualny"].DefaultCellStyle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
                 }
             }
             catch (Exception ex)

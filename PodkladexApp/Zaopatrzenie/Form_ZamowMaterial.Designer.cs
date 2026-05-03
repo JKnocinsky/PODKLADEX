@@ -91,7 +91,7 @@
             // 
             label_cena_pozycji.AutoSize = true;
             label_cena_pozycji.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_cena_pozycji.Location = new Point(39, 274);
+            label_cena_pozycji.Location = new Point(375, 250);
             label_cena_pozycji.Name = "label_cena_pozycji";
             label_cena_pozycji.Size = new Size(56, 25);
             label_cena_pozycji.TabIndex = 28;
@@ -101,7 +101,7 @@
             // 
             label_Materiał.AutoSize = true;
             label_Materiał.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_Materiał.Location = new Point(11, 187);
+            label_Materiał.Location = new Point(75, 173);
             label_Materiał.Name = "label_Materiał";
             label_Materiał.Size = new Size(84, 25);
             label_Materiał.TabIndex = 27;
@@ -111,7 +111,7 @@
             // 
             label_Liczba.AutoSize = true;
             label_Liczba.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_Liczba.Location = new Point(377, 189);
+            label_Liczba.Location = new Point(15, 250);
             label_Liczba.Name = "label_Liczba";
             label_Liczba.Size = new Size(66, 25);
             label_Liczba.TabIndex = 25;
@@ -121,7 +121,7 @@
             // 
             label_Pracownik.AutoSize = true;
             label_Pracownik.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_Pracownik.Location = new Point(47, 366);
+            label_Pracownik.Location = new Point(58, 394);
             label_Pracownik.Name = "label_Pracownik";
             label_Pracownik.Size = new Size(101, 25);
             label_Pracownik.TabIndex = 24;
@@ -148,6 +148,7 @@
             dataGridView_Koszyk.RowHeadersWidth = 51;
             dataGridView_Koszyk.Size = new Size(969, 414);
             dataGridView_Koszyk.TabIndex = 22;
+            dataGridView_Koszyk.CellContentClick += dataGridView_Koszyk_CellContentClick;
             // 
             // button_DodajPozycje
             // 
@@ -165,7 +166,7 @@
             // 
             numericUpDown_Cena.DecimalPlaces = 2;
             numericUpDown_Cena.Font = new Font("Segoe UI", 13.8F);
-            numericUpDown_Cena.Location = new Point(112, 272);
+            numericUpDown_Cena.Location = new Point(448, 246);
             numericUpDown_Cena.Margin = new Padding(3, 2, 3, 2);
             numericUpDown_Cena.Maximum = new decimal(new int[] { 1874919423, 2328306, 0, 0 });
             numericUpDown_Cena.Name = "numericUpDown_Cena";
@@ -176,7 +177,7 @@
             // numericUpDown_Ilosc
             // 
             numericUpDown_Ilosc.Font = new Font("Segoe UI", 13.8F);
-            numericUpDown_Ilosc.Location = new Point(463, 185);
+            numericUpDown_Ilosc.Location = new Point(101, 246);
             numericUpDown_Ilosc.Margin = new Padding(3, 2, 3, 2);
             numericUpDown_Ilosc.Maximum = new decimal(new int[] { 10000000, 0, 0, 0 });
             numericUpDown_Ilosc.Name = "numericUpDown_Ilosc";
@@ -189,20 +190,21 @@
             // 
             comboBox_Material.Font = new Font("Segoe UI", 14F);
             comboBox_Material.FormattingEnabled = true;
-            comboBox_Material.Location = new Point(101, 184);
+            comboBox_Material.Location = new Point(165, 170);
             comboBox_Material.Margin = new Padding(3, 2, 3, 2);
             comboBox_Material.Name = "comboBox_Material";
-            comboBox_Material.Size = new Size(259, 33);
+            comboBox_Material.Size = new Size(400, 33);
             comboBox_Material.TabIndex = 17;
             comboBox_Material.SelectedIndexChanged += comboBox_Material_SelectedIndexChanged;
             // 
             // dateTimePicker_data
             // 
             dateTimePicker_data.CalendarFont = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            dateTimePicker_data.Location = new Point(473, 281);
+            dateTimePicker_data.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dateTimePicker_data.Location = new Point(215, 323);
             dateTimePicker_data.MinDate = new DateTime(2026, 5, 3, 0, 0, 0, 0);
             dateTimePicker_data.Name = "dateTimePicker_data";
-            dateTimePicker_data.Size = new Size(200, 23);
+            dateTimePicker_data.Size = new Size(273, 33);
             dateTimePicker_data.TabIndex = 32;
             dateTimePicker_data.ValueChanged += dateTimePicker_data_ValueChanged;
             // 
@@ -210,7 +212,7 @@
             // 
             label_data.AutoSize = true;
             label_data.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_data.Location = new Point(383, 279);
+            label_data.Location = new Point(154, 326);
             label_data.Name = "label_data";
             label_data.Size = new Size(55, 25);
             label_data.TabIndex = 33;
@@ -230,7 +232,7 @@
             // 
             label_Firma.AutoSize = true;
             label_Firma.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_Firma.Location = new Point(51, 80);
+            label_Firma.Location = new Point(62, 80);
             label_Firma.Name = "label_Firma";
             label_Firma.Size = new Size(97, 25);
             label_Firma.TabIndex = 35;
@@ -240,7 +242,7 @@
             // 
             comboBox1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(165, 366);
+            comboBox1.Location = new Point(165, 394);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(400, 33);
             comboBox1.TabIndex = 36;
