@@ -489,15 +489,15 @@ CREATE TABLE Czesci_przeglady (
 );
 GO
 
--- Widok dla stanu magazynowego
-GO
 CREATE VIEW AktualnyStanMagazynu AS
 WITH Dostawy_Suma AS (
     SELECT 
-        ID_material, 
-        SUM(Liczba) AS Suma_Dostaw
-    FROM Szczegoly_dostawy
-    GROUP BY ID_material
+        sd.ID_material, 
+        SUM(sd.Liczba) AS Suma_Dostaw
+    FROM Szczegoly_dostawy sd
+    JOIN Dostawa d ON sd.ID_dostawa = d.ID_dostawa -- Łączymy z nagłówkiem dostawy
+    WHERE d.Data_dostawy <= CAST(GETDATE() AS DATE) -- Bierzemy tylko dostawy, które już dotarły (dzisiaj lub wcześniej)
+    GROUP BY sd.ID_material
 ),
 Zuzycie_Suma AS (
     SELECT 
