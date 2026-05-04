@@ -51,6 +51,7 @@
             button_HistoriaZamowien = new Button();
             label_ProszeWybracFirme = new Label();
             button_StanyMagazynowe = new Button();
+            button_HistoriaDostaw = new Button();
             panel_dane_firmy.SuspendLayout();
             SuspendLayout();
             // 
@@ -71,7 +72,7 @@
             // 
             button_Edytuj_firmy.Cursor = Cursors.Hand;
             button_Edytuj_firmy.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_Edytuj_firmy.Location = new Point(48, 293);
+            button_Edytuj_firmy.Location = new Point(48, 287);
             button_Edytuj_firmy.Name = "button_Edytuj_firmy";
             button_Edytuj_firmy.Size = new Size(250, 60);
             button_Edytuj_firmy.TabIndex = 1;
@@ -260,7 +261,7 @@
             // btn_Dostawa
             // 
             btn_Dostawa.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_Dostawa.Location = new Point(48, 407);
+            btn_Dostawa.Location = new Point(48, 398);
             btn_Dostawa.Name = "btn_Dostawa";
             btn_Dostawa.Size = new Size(250, 60);
             btn_Dostawa.TabIndex = 5;
@@ -284,7 +285,7 @@
             // 
             button_HistoriaZamowien.Cursor = Cursors.Hand;
             button_HistoriaZamowien.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_HistoriaZamowien.Location = new Point(48, 179);
+            button_HistoriaZamowien.Location = new Point(48, 176);
             button_HistoriaZamowien.Name = "button_HistoriaZamowien";
             button_HistoriaZamowien.Size = new Size(250, 60);
             button_HistoriaZamowien.TabIndex = 7;
@@ -307,7 +308,7 @@
             // button_StanyMagazynowe
             // 
             button_StanyMagazynowe.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_StanyMagazynowe.Location = new Point(48, 521);
+            button_StanyMagazynowe.Location = new Point(48, 620);
             button_StanyMagazynowe.Name = "button_StanyMagazynowe";
             button_StanyMagazynowe.Size = new Size(250, 60);
             button_StanyMagazynowe.TabIndex = 28;
@@ -315,11 +316,23 @@
             button_StanyMagazynowe.UseVisualStyleBackColor = true;
             button_StanyMagazynowe.Click += button_StanyMagazynowe_Click;
             // 
+            // button_HistoriaDostaw
+            // 
+            button_HistoriaDostaw.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            button_HistoriaDostaw.Location = new Point(48, 509);
+            button_HistoriaDostaw.Name = "button_HistoriaDostaw";
+            button_HistoriaDostaw.Size = new Size(250, 60);
+            button_HistoriaDostaw.TabIndex = 29;
+            button_HistoriaDostaw.Text = "Historia dostaw";
+            button_HistoriaDostaw.UseVisualStyleBackColor = true;
+            button_HistoriaDostaw.Click += button_HistoriaDostaw_Click;
+            // 
             // Form_ZaoLog
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1664, 791);
+            Controls.Add(button_HistoriaDostaw);
             Controls.Add(button_StanyMagazynowe);
             Controls.Add(label_ProszeWybracFirme);
             Controls.Add(button_HistoriaZamowien);
@@ -363,5 +376,6 @@
         private Button button_HistoriaZamowien;
         private Label label_ProszeWybracFirme;
         private Button button_StanyMagazynowe;
+        private Button button_HistoriaDostaw;
     }
 }

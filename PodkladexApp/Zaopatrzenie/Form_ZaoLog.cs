@@ -311,6 +311,11 @@ namespace PodkladexApp
         {
             OpenChildForm(new Form_Magazyn());
         }
+
+        private void button_HistoriaDostaw_Click(object sender, EventArgs e)
+        {
+           OpenChildForm(new Form_HistoriaDostaw());
+        }
     }
 
 
