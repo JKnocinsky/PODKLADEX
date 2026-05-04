@@ -39,7 +39,12 @@
             radioButton_Wszyscy = new RadioButton();
             radioButton_Firmy = new RadioButton();
             radioButton_Osoby = new RadioButton();
+            panel1 = new Panel();
+            radioButton_StatusWszystkie = new RadioButton();
+            radioButton_StatusWToku = new RadioButton();
+            radioButton_StatusZakonczone = new RadioButton();
             ((System.ComponentModel.ISupportInitialize)dataGridView_HistoriaZamowien).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // dataGridView_HistoriaZamowien
@@ -161,11 +166,57 @@
             radioButton_Osoby.Text = "Tylko Klienci Prywatni";
             radioButton_Osoby.UseVisualStyleBackColor = true;
             // 
+            // panel1
+            // 
+            panel1.Controls.Add(radioButton_StatusZakonczone);
+            panel1.Controls.Add(radioButton_StatusWToku);
+            panel1.Controls.Add(radioButton_StatusWszystkie);
+            panel1.Location = new Point(551, 715);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(551, 65);
+            panel1.TabIndex = 11;
+            // 
+            // radioButton_StatusWszystkie
+            // 
+            radioButton_StatusWszystkie.AutoSize = true;
+            radioButton_StatusWszystkie.Checked = true;
+            radioButton_StatusWszystkie.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            radioButton_StatusWszystkie.Location = new Point(0, 24);
+            radioButton_StatusWszystkie.Name = "radioButton_StatusWszystkie";
+            radioButton_StatusWszystkie.Size = new Size(158, 29);
+            radioButton_StatusWszystkie.TabIndex = 9;
+            radioButton_StatusWszystkie.TabStop = true;
+            radioButton_StatusWszystkie.Text = "Dowolny status";
+            radioButton_StatusWszystkie.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_StatusWToku
+            // 
+            radioButton_StatusWToku.AutoSize = true;
+            radioButton_StatusWToku.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            radioButton_StatusWToku.Location = new Point(189, 24);
+            radioButton_StatusWToku.Name = "radioButton_StatusWToku";
+            radioButton_StatusWToku.Size = new Size(128, 29);
+            radioButton_StatusWToku.TabIndex = 10;
+            radioButton_StatusWToku.Text = "W realizacji";
+            radioButton_StatusWToku.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_StatusZakonczone
+            // 
+            radioButton_StatusZakonczone.AutoSize = true;
+            radioButton_StatusZakonczone.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            radioButton_StatusZakonczone.Location = new Point(339, 24);
+            radioButton_StatusZakonczone.Name = "radioButton_StatusZakonczone";
+            radioButton_StatusZakonczone.Size = new Size(143, 29);
+            radioButton_StatusZakonczone.TabIndex = 11;
+            radioButton_StatusZakonczone.Text = "Zrealizowane";
+            radioButton_StatusZakonczone.UseVisualStyleBackColor = true;
+            // 
             // Form_HistoriaZamowien
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1184, 731);
+            ClientSize = new Size(1184, 780);
+            Controls.Add(panel1);
             Controls.Add(radioButton_Osoby);
             Controls.Add(radioButton_Firmy);
             Controls.Add(radioButton_Wszyscy);
@@ -181,6 +232,8 @@
             Text = "Historia zamówień";
             Load += Form_HistoriaZamowien_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView_HistoriaZamowien).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -198,5 +251,9 @@
         private RadioButton radioButton_Wszyscy;
         private RadioButton radioButton_Firmy;
         private RadioButton radioButton_Osoby;
+        private Panel panel1;
+        private RadioButton radioButton_StatusZakonczone;
+        private RadioButton radioButton_StatusWToku;
+        private RadioButton radioButton_StatusWszystkie;
     }
 }
