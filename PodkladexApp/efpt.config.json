@@ -241,6 +241,50 @@
       {
          "Name": "[dbo].[AktualnyStanMagazynu]",
          "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[Widok_Maszyna_Obslugi]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[Widok_Maszyna_Zadania_Produkcyjne]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[Widok_Pracownik_Zadania_Produkcyjne]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[Widok_Produkcja_Planowanie_Obliczenia]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[Widok_Produkcja_Procent_Realizacji]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[Widok_Produkcja_Procent_Zaplanowania]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[Widok_Produkcja_Realizacja_Obliczenia]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[Widok_Suma_Odpady_Zamowienia]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[Widok_Suma_RBH_Maszyna]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[Widok_Suma_RBH_Pracownik]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[Widok_Zamowienia_Zadania]",
+         "ObjectType": 3
       }
    ],
    "UiHint": null,

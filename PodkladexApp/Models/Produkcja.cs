@@ -13,9 +13,9 @@ public partial class Produkcja
 
     public decimal Rbh { get; set; }
 
-    public decimal Wyprodukowano { get; set; }
+    public decimal? Wyprodukowano { get; set; }
 
-    public decimal Odpady { get; set; }
+    public decimal? Odpady { get; set; }
 
     public int IdZadanieP { get; set; }
 

@@ -33,22 +33,95 @@ namespace PodkladexApp
 
         private void btn_maszyny_Click(object sender, EventArgs e)
         {
+            RemoveProdButtons();
             Form_Maszyny form = new Form_Maszyny(db);
             OpenChildForm(form);
         }
 
         private void btn_wyp_Click(object sender, EventArgs e)
         {
-            //Form_Wykres form = new Form_Wykres();
-            //form.Show();
+            RemoveProdButtons();
             Form_MaszynaWyp form = new Form_MaszynaWyp(db);
             OpenChildForm(form);
         }
 
         private void btn_normyP_Click(object sender, EventArgs e)
         {
+            RemoveProdButtons();
             Form_NormaProd form = new Form_NormaProd(db);
             OpenChildForm(form);
+        }
+
+        private void btn_prod_Click(object sender, EventArgs e)
+        {
+            // Usuń wszystkie kontrolki które znajdują się w wierszach 5 i 6 tableLayoutPanel1
+            var toRemove = tableLayoutPanel1.Controls
+                .Cast<Control>()
+                .Where(c =>
+                {
+                    var pos = tableLayoutPanel1.GetPositionFromControl(c);
+                    return pos.Row == 5 || pos.Row == 6;
+                })
+                .ToList();
+
+            foreach (var ctrl in toRemove)
+            {
+                tableLayoutPanel1.Controls.Remove(ctrl);
+                ctrl.Dispose();
+            }
+
+            var btnZaplanuj = new Button
+            {
+                Name = "btn_zaplanujProd",
+                Text = "Zaplanuj produkcję",
+                AutoSize = true,
+                Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom,
+                Font = new Font("Segoe UI", 14.5F),
+                Size = new Size(300, 69)
+            };
+
+            // attach click handler to create and show Form_ProdukcjaZaplanuj
+            btnZaplanuj.Click += btnZaplanuj_Click;
+
+            tableLayoutPanel1.Controls.Add(btnZaplanuj, 0, 5);
+            btnZaplanuj.BringToFront();
+
+            var btnZatwierdz = new Button
+            {
+                Name = "btn_zatwierdzProd",
+                Text = "Zatwierdź produkcję",
+                AutoSize = true,
+                Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom,
+                Font = new Font("Segoe UI", 14.5F),
+                Size = new Size(300, 69)
+            };
+
+            tableLayoutPanel1.Controls.Add(btnZatwierdz, 0, 6);
+            btnZatwierdz.BringToFront();
+        }
+
+        // click handler: tworzy Form_ProdukcjaZaplanuj przekazując db i otwiera go w panelu
+        private void btnZaplanuj_Click(object? sender, EventArgs e)
+        {
+            var form = new Form_ProdukcjaZaplanuj(db);
+            OpenChildForm(form);
+        }
+
+        // Usuwa przyciski utworzone przez btn_prod (jeśli istnieją)
+        private void RemoveProdButtons()
+        {
+            if (tableLayoutPanel1 == null) return;
+
+            var names = new[] { "btn_zaplanujProd", "btn_zatwierdzProd" };
+            foreach (var name in names)
+            {
+                var found = tableLayoutPanel1.Controls.Find(name, true);
+                foreach (Control c in found)
+                {
+                    tableLayoutPanel1.Controls.Remove(c);
+                    c.Dispose();
+                }
+            }
         }
 
         private void OpenChildForm(Form childForm)
