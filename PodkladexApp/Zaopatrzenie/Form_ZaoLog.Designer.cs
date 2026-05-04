@@ -72,7 +72,7 @@
             // 
             button_Edytuj_firmy.Cursor = Cursors.Hand;
             button_Edytuj_firmy.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_Edytuj_firmy.Location = new Point(48, 287);
+            button_Edytuj_firmy.Location = new Point(12, 234);
             button_Edytuj_firmy.Name = "button_Edytuj_firmy";
             button_Edytuj_firmy.Size = new Size(250, 60);
             button_Edytuj_firmy.TabIndex = 1;
@@ -261,7 +261,7 @@
             // btn_Dostawa
             // 
             btn_Dostawa.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_Dostawa.Location = new Point(48, 398);
+            btn_Dostawa.Location = new Point(12, 345);
             btn_Dostawa.Name = "btn_Dostawa";
             btn_Dostawa.Size = new Size(250, 60);
             btn_Dostawa.TabIndex = 5;
@@ -273,7 +273,7 @@
             // 
             button_utworz_zamowienie.Cursor = Cursors.Hand;
             button_utworz_zamowienie.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_utworz_zamowienie.Location = new Point(48, 65);
+            button_utworz_zamowienie.Location = new Point(12, 12);
             button_utworz_zamowienie.Name = "button_utworz_zamowienie";
             button_utworz_zamowienie.Size = new Size(250, 60);
             button_utworz_zamowienie.TabIndex = 6;
@@ -285,7 +285,7 @@
             // 
             button_HistoriaZamowien.Cursor = Cursors.Hand;
             button_HistoriaZamowien.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_HistoriaZamowien.Location = new Point(48, 176);
+            button_HistoriaZamowien.Location = new Point(12, 123);
             button_HistoriaZamowien.Name = "button_HistoriaZamowien";
             button_HistoriaZamowien.Size = new Size(250, 60);
             button_HistoriaZamowien.TabIndex = 7;
@@ -308,7 +308,7 @@
             // button_StanyMagazynowe
             // 
             button_StanyMagazynowe.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_StanyMagazynowe.Location = new Point(48, 620);
+            button_StanyMagazynowe.Location = new Point(12, 567);
             button_StanyMagazynowe.Name = "button_StanyMagazynowe";
             button_StanyMagazynowe.Size = new Size(250, 60);
             button_StanyMagazynowe.TabIndex = 28;
@@ -319,7 +319,7 @@
             // button_HistoriaDostaw
             // 
             button_HistoriaDostaw.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button_HistoriaDostaw.Location = new Point(48, 509);
+            button_HistoriaDostaw.Location = new Point(12, 456);
             button_HistoriaDostaw.Name = "button_HistoriaDostaw";
             button_HistoriaDostaw.Size = new Size(250, 60);
             button_HistoriaDostaw.TabIndex = 29;

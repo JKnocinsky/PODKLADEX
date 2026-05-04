@@ -5,6 +5,7 @@ using System.Drawing; // POTRZEBNE DO USTAWIANIA CZCIONEK (Font)
 using System.Linq;
 using System.Windows.Forms;
 using Microsoft.EntityFrameworkCore;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PodkladexApp.Zaopatrzenie
 {
@@ -50,17 +51,21 @@ namespace PodkladexApp.Zaopatrzenie
             textBox_DataZlozenia.ReadOnly = true;
             textBox_DataZrealizowania.ReadOnly = true;
 
-            // Jeśli nazwałeś TextBoxy na firmę inaczej, popraw te nazwy poniżej:
             textBox_NazwaFirmy.ReadOnly = true;
             textBox_NIP.ReadOnly = true;
+
+            // Zablokowanie pól adresowych
+            textBox_Miejscowosc.ReadOnly = true; // Miejscowość
+            textBox_Ulica.ReadOnly = true;
+            textBox_Numer.ReadOnly = true;
+            textBox_KodPocztowy.ReadOnly = true;
         }
 
         private void ZaladujDaneZamowienia()
         {
             try
             {
-                // Pobieramy dane łącząc z Klientem, Osobą, oraz powiązaniami Klient_Firma i Firma[cite: 9]
-                // UWAGA NA NAZWY! Jeśli EF nazwał kolekcję w liczbie mnogiej (np. KlientFirmas), podmień "KlientFirma" na "KlientFirmas".
+                // Pobieramy dane łącząc z Klientem, Osobą, oraz powiązaniami Klient_Firma i Firma
                 var zamowienie = _db.Zamowienie
                                     .Include(z => z.IdKlientNavigation)
                                         .ThenInclude(k => k.IdOsobaNavigation)
@@ -71,17 +76,31 @@ namespace PodkladexApp.Zaopatrzenie
 
                 if (zamowienie != null)
                 {
-                    // --- UZUPEŁNIANIE DANYCH KLIENTA I DAT ---
+                    // --- UZUPEŁNIANIE DANYCH KLIENTA (OSOBY) I ADRESU ---
                     if (zamowienie.IdKlientNavigation != null && zamowienie.IdKlientNavigation.IdOsobaNavigation != null)
                     {
                         var osoba = zamowienie.IdKlientNavigation.IdOsobaNavigation;
                         textBox_Klient.Text = $"{osoba.Imie} {osoba.Nazwisko}";
+
+                        // Ładowanie danych adresowych Z TABELI OSOBA
+                        textBox_Miejscowosc.Text = osoba.Miejscowosc;
+                        textBox_Ulica.Text = osoba.Ulica;
+                        textBox_Numer.Text = osoba.Numer;
+                        // Jeśli w Entity Framework właściwość nazywa się inaczej (np. Kod_pocztowy), podmień to poniżej:
+                        textBox_KodPocztowy.Text = osoba.KodPocztowy;
                     }
                     else
                     {
                         textBox_Klient.Text = "Brak przypisanego klienta/osoby";
+
+                        // Czyszczenie pól adresowych w przypadku braku osoby
+                        textBox_Miejscowosc.Clear();
+                        textBox_Ulica.Clear();
+                        textBox_Numer.Clear();
+                        textBox_KodPocztowy.Clear();
                     }
 
+                    // --- DATY ---
                     textBox_DataZlozenia.Text = zamowienie.DataPrzyjeciaZ.ToString("dd.MM.yyyy");
 
                     textBox_DataZrealizowania.Text = zamowienie.DataZrealizowaniaZ.HasValue
@@ -89,13 +108,13 @@ namespace PodkladexApp.Zaopatrzenie
                         : "W trakcie realizacji";
 
                     // --- LOGIKA WYŚWIETLANIA FIRMY ---
-                    // Szukamy aktualnego powiązania (takiego, gdzie DataKoniec jest NULL)[cite: 9]
+                    // Szukamy aktualnego powiązania (takiego, gdzie DataKoniec jest NULL)
                     var aktywnePowiazanie = zamowienie.IdKlientNavigation?.KlientFirma?
                                                       .FirstOrDefault(kf => kf.DataKoniec == null);
 
                     if (aktywnePowiazanie != null && aktywnePowiazanie.IdFirmaNavigation != null)
                     {
-                        // Klient ma firmę - pokazujemy panel i ładujemy dane
+                        // Klient ma firmę - pokazujemy panel i ładujemy TYLKO nazwę i NIP
                         panel_Firmy.Visible = true;
                         textBox_NazwaFirmy.Text = aktywnePowiazanie.IdFirmaNavigation.Nazwa;
                         textBox_NIP.Text = aktywnePowiazanie.IdFirmaNavigation.Nip;
@@ -105,7 +124,7 @@ namespace PodkladexApp.Zaopatrzenie
                         // Klient nie ma przypisanej aktywnej firmy - ukrywamy cały panel
                         panel_Firmy.Visible = false;
 
-                        // Zabezpieczające czyszczenie pól
+                        // Zabezpieczające czyszczenie pól firmowych
                         textBox_NazwaFirmy.Clear();
                         textBox_NIP.Clear();
                     }
@@ -145,9 +164,10 @@ namespace PodkladexApp.Zaopatrzenie
             base.OnFormClosed(e);
         }
 
-        private void label_Firma_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void label_Firma_Click(object sender, EventArgs e) { }
+        private void textBox_Ulica_TextChanged(object sender, EventArgs e) { }
+        private void textBox1_TextChanged(object sender, EventArgs e) { }
+        private void textBox_KodPocztowy_TextChanged(object sender, EventArgs e) { }
+        private void textBox_Numer_TextChanged(object sender, EventArgs e) { }
     }
 }

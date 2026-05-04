@@ -61,6 +61,15 @@ namespace PodkladexApp.Zaopatrzenie
             button_Szczegoly.Click -= button_Szczegoly_Click;
             button_Szczegoly.Click += button_Szczegoly_Click;
 
+
+            // TWARDE PODPIĘCIE ZMIANY DATY
+            dateTimePicker_Poczatek.ValueChanged -= dateTimePicker_Poczatek_ValueChanged;
+            dateTimePicker_Poczatek.ValueChanged += dateTimePicker_Poczatek_ValueChanged;
+
+            dateTimePicker_Koniec.ValueChanged -= dateTimePicker_Koniec_ValueChanged;
+            dateTimePicker_Koniec.ValueChanged += dateTimePicker_Koniec_ValueChanged;
+
+
             // Ustawienia początkowe
             button_Szczegoly.Click -= button_Szczegoly_Click;
             button_Szczegoly.Click += button_Szczegoly_Click;
