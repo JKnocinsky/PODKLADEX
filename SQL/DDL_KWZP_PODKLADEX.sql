@@ -373,8 +373,8 @@ CREATE TABLE Produkcja (
     ID_produkcja INT IDENTITY(1,1) PRIMARY KEY,
     ID_pracownik INT NOT NULL FOREIGN KEY REFERENCES Pracownik(ID_pracownik),
     RBH DECIMAL(10,2) NOT NULL, -- Ujednolicenie precyzji
-    Wyprodukowano DECIMAL(10,2) NOT NULL,
-    Odpady DECIMAL(10,2) NOT NULL,
+    Wyprodukowano DECIMAL(10,2) NULL,
+    Odpady DECIMAL(10,2) NULL,
     ID_zadanieP INT NOT NULL FOREIGN KEY REFERENCES Zadanie_produkcyjne(ID_zadanieP),
     ID_normyP INT NOT NULL FOREIGN KEY REFERENCES Norma_prod(ID_normaP)
 );
@@ -519,4 +519,216 @@ FROM Material m
 LEFT JOIN Rodzaj_materialu rm ON m.ID_rodzaj = rm.ID_rodzaj
 LEFT JOIN Dostawy_Suma d ON m.ID_material = d.ID_material
 LEFT JOIN Zuzycie_Suma z ON m.ID_material = z.ID_material;
+GO
+
+-- ==========================================
+-- WIDOK DLA ZAMÓWIEŃ I ZADAŃ PRODUKCYJNYCH
+-- ==========================================
+CREATE VIEW Widok_Zamowienia_Zadania AS
+SELECT
+    Z.ID_zamowienie,
+    ZP.Data_zadania,
+    M.Nazwa AS Nazwa_Maszyny,
+    CONCAT(O.Imie, ' ', O.Nazwisko) AS Pracownik,
+    P.RBH,
+    Prod.Nazwa AS Nazwa_Produktu,
+    (P.RBH * NP.Ilosc / NP.Czas) AS Obliczona_Ilosc_Wyprodukowana
+FROM
+    Zamowienie Z
+JOIN
+    Zadanie_produkcyjne ZP ON Z.ID_zamowienie = ZP.ID_zamowienie
+JOIN
+    Maszyna M ON ZP.ID_maszyna = M.ID_maszyna
+JOIN
+    Produkcja P ON ZP.ID_zadanieP = P.ID_zadanieP
+JOIN
+    Pracownik Pr ON P.ID_pracownik = Pr.ID_pracownik
+JOIN
+    Osoba O ON Pr.ID_osoba = O.ID_osoba
+JOIN
+    Norma_prod NP ON P.ID_normyP = NP.ID_normaP
+JOIN
+    Produkt Prod ON NP.ID_produkt = Prod.ID_produkt;
+GO
+
+-- ==========================================
+-- WIDOK ZAMÓWIEŃ, PRODUKTÓW I OBLICZEŃ
+-- ==========================================
+CREATE VIEW Widok_Produkcja_Planowanie_Obliczenia AS
+SELECT TOP 100 PERCENT
+    Z.ID_zamowienie,
+    Prod.Nazwa AS Nazwa_Produktu,
+    ROUND(SUM(sz.Ilosc), 2) AS Ilosc_zamowienia,
+    ROUND(SUM(ISNULL(km.Odpady, 0)), 2) AS Suma_Odpady,
+    ROUND(SUM(ISNULL(p.RBH * NP.Ilosc / NULLIF(NP.Czas, 0), 0)), 2) AS Zaplanowane_RBH,
+    ROUND(CASE WHEN SUM(ISNULL(sz.Ilosc, 0)) + SUM(ISNULL(km.Odpady, 0)) = 0
+        THEN NULL
+        ELSE SUM(ISNULL(p.RBH * NP.Ilosc / NULLIF(NP.Czas, 0), 0))
+            / (SUM(ISNULL(sz.Ilosc, 0)) + SUM(ISNULL(km.Odpady, 0)))
+            * 100
+    END, 2) AS Procent_Zaplanowanej_Produkcji
+FROM Zamowienie Z
+JOIN Szczegoly_zamowienia sz ON Z.ID_zamowienie = sz.ID_zamowienie
+JOIN Produkt Prod ON sz.ID_produkt = Prod.ID_produkt
+LEFT JOIN Zadanie_produkcyjne ZP ON ZP.ID_zamowienie = Z.ID_zamowienie
+LEFT JOIN Kontrola_mat km ON ZP.ID_zadanieP = km.ID_zadanieP
+LEFT JOIN Norma_prod NP ON Prod.ID_produkt = NP.ID_produkt
+LEFT JOIN Produkcja p ON NP.ID_normaP = p.ID_normyP AND p.ID_zadanieP = ZP.ID_zadanieP
+GROUP BY
+    Z.ID_zamowienie,
+    Prod.Nazwa
+ORDER BY
+    Z.ID_zamowienie;
+GO
+
+-- ==========================================
+-- WIDOK REALIZACJI PRODUKCJI
+-- ==========================================
+CREATE VIEW Widok_Produkcja_Realizacja_Obliczenia AS
+SELECT TOP 100 PERCENT
+    Z.ID_zamowienie,
+    Prod.Nazwa AS Nazwa_Produktu,
+    ROUND(SUM(sz.Ilosc), 2) AS Ilosc_zamowienia,
+    ROUND(SUM(ISNULL(km.Odpady, 0)), 2) AS Suma_Odpady,
+    ROUND(SUM(ISNULL(p.Wyprodukowano, 0)), 2) AS Suma_Wyprodukowano,
+    ROUND(CASE WHEN SUM(ISNULL(sz.Ilosc, 0)) + SUM(ISNULL(km.Odpady, 0)) = 0
+        THEN NULL
+        ELSE SUM(ISNULL(p.Wyprodukowano, 0))
+            / (SUM(ISNULL(sz.Ilosc, 0)) + SUM(ISNULL(km.Odpady, 0)))
+            * 100
+    END, 2) AS Wartosc_Formula
+FROM Zamowienie Z
+JOIN Szczegoly_zamowienia sz ON Z.ID_zamowienie = sz.ID_zamowienie
+JOIN Produkt Prod ON sz.ID_produkt = Prod.ID_produkt
+LEFT JOIN Zadanie_produkcyjne ZP ON ZP.ID_zamowienie = Z.ID_zamowienie
+LEFT JOIN Kontrola_mat km ON ZP.ID_zadanieP = km.ID_zadanieP
+LEFT JOIN Norma_prod NP ON Prod.ID_produkt = NP.ID_produkt
+LEFT JOIN Produkcja p ON NP.ID_normaP = p.ID_normyP AND p.ID_zadanieP = ZP.ID_zadanieP
+GROUP BY
+    Z.ID_zamowienie,
+    Prod.Nazwa
+ORDER BY
+    Z.ID_zamowienie ASC,
+    Prod.Nazwa ASC;
+GO
+
+-- ==========================================
+-- WIDOK ŚREDNIEJ WARTOŚCI FORMUŁY DLA ZAMÓWIEŃ
+-- ==========================================
+CREATE VIEW Widok_Produkcja_Procent_Realizacji AS
+SELECT
+    ID_zamowienie,
+    AVG(Wartosc_Formula) AS Srednia_Wartosc_Formula
+FROM Widok_Produkcja_Realizacja_Obliczenia
+GROUP BY
+    ID_zamowienie;
+GO
+
+CREATE VIEW Widok_Produkcja_Procent_Zaplanowania AS
+SELECT
+    ID_zamowienie,
+    AVG(Procent_Zaplanowanej_Produkcji) AS Srednia_Wartosc_Formula
+FROM Widok_Produkcja_Planowanie_Obliczenia
+GROUP BY
+    ID_zamowienie;
+GO
+
+-- ==========================================
+-- WIDOK SUMY ODPADÓW DLA ZAMÓWIEŃ
+-- ==========================================
+CREATE VIEW Widok_Suma_Odpady_Zamowienia AS
+SELECT
+    Z.ID_zamowienie,
+    ROUND(
+        ISNULL(km.SumOdpady, 0) + ISNULL(p.SumOdpady, 0), 2
+    ) AS Suma_Odpady
+FROM Zamowienie Z
+LEFT JOIN (
+    SELECT
+        ZP.ID_zamowienie,
+        SUM(km.Odpady) AS SumOdpady
+    FROM Zadanie_produkcyjne ZP
+    JOIN Kontrola_mat km ON ZP.ID_zadanieP = km.ID_zadanieP
+    GROUP BY ZP.ID_zamowienie
+) km ON Z.ID_zamowienie = km.ID_zamowienie
+LEFT JOIN (
+    SELECT
+        ZP.ID_zamowienie,
+        SUM(p.Odpady) AS SumOdpady
+    FROM Zadanie_produkcyjne ZP
+    JOIN Produkcja p ON ZP.ID_zadanieP = p.ID_zadanieP
+    GROUP BY ZP.ID_zamowienie
+) p ON Z.ID_zamowienie = p.ID_zamowienie;
+GO
+
+-- ==========================================
+-- WIDOK SUMY RBH DLA MASZYN PO DATACH
+-- ==========================================
+CREATE VIEW Widok_Suma_RBH_Maszyna AS
+SELECT
+    ZP.Data_zadania AS DATA,
+    ZP.ID_maszyna,
+    SUM(P.RBH) AS Suma_RBH
+FROM
+    Zadanie_produkcyjne ZP
+JOIN
+    Produkcja P ON ZP.ID_zadanieP = P.ID_zadanieP
+GROUP BY
+    ZP.Data_zadania, ZP.ID_maszyna;
+GO
+
+-- ==========================================
+-- WIDOK SUMY RBH DLA PRACOWNIKÓW PO DATACH
+-- ==========================================
+CREATE VIEW Widok_Suma_RBH_Pracownik AS
+SELECT
+    ZP.Data_zadania AS DATA,
+    P.ID_pracownik,
+    SUM(P.RBH) AS Suma_RBH
+FROM
+    Zadanie_produkcyjne ZP
+JOIN
+    Produkcja P ON ZP.ID_zadanieP = P.ID_zadanieP
+GROUP BY
+    ZP.Data_zadania, P.ID_pracownik;
+GO
+
+-- ==========================================
+-- WIDOK MASZYNY Z ZADANIAMI PRODUKCYJNYMI
+-- ==========================================
+CREATE VIEW Widok_Maszyna_Zadania_Produkcyjne AS
+SELECT
+    M.ID_maszyna,
+    M.Nazwa AS Nazwa_Maszyny,
+    ZP.Data_zadania
+FROM Maszyna M
+JOIN Zadanie_produkcyjne ZP ON M.ID_maszyna = ZP.ID_maszyna;
+GO
+
+-- ==========================================
+-- WIDOK MASZYNY Z OBSŁUGAMI
+-- ==========================================
+CREATE VIEW Widok_Maszyna_Obslugi AS
+SELECT
+    M.ID_maszyna,
+    M.Nazwa AS Nazwa_Maszyny,
+    O.Data_poczatek,
+    O.Data_koniec
+FROM Maszyna M
+JOIN Obsluga O ON M.ID_maszyna = O.ID_maszyna;
+GO
+
+-- ==========================================
+-- WIDOK PRACOWNIK Z ZADANIAMI PRODUKCYJNYMI
+-- ==========================================
+CREATE VIEW Widok_Pracownik_Zadania_Produkcyjne AS
+SELECT
+    P.ID_pracownik,
+    O.Imie,
+    O.Nazwisko,
+    ZP.Data_zadania
+FROM Pracownik P
+JOIN Osoba O ON P.ID_osoba = O.ID_osoba
+JOIN Produkcja Prod ON Prod.ID_pracownik = P.ID_pracownik
+JOIN Zadanie_produkcyjne ZP ON Prod.ID_zadanieP = ZP.ID_zadanieP;
 GO
