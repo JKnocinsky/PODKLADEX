@@ -11,11 +11,11 @@ public partial class WidokProdukcjaPlanowanieObliczenia
 
     public string NazwaProduktu { get; set; }
 
-    public decimal? IloscZamowienia { get; set; }
+    public decimal IloscZamowienia { get; set; }
 
     public decimal? SumaOdpady { get; set; }
 
-    public decimal? ZaplanowaneRbh { get; set; }
+    public decimal? ZaplanowanaProdukcja { get; set; }
 
     public decimal? ProcentZaplanowanejProdukcji { get; set; }
 }
