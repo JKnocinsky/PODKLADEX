@@ -76,7 +76,7 @@
             checkedListBox2.Location = new Point(345, 40);
             checkedListBox2.Margin = new Padding(3, 2, 3, 2);
             checkedListBox2.Name = "checkedListBox2";
-            checkedListBox2.Size = new Size(184, 85);
+            checkedListBox2.Size = new Size(270, 85);
             checkedListBox2.TabIndex = 2;
             checkedListBox2.ItemCheck += checkedListBox2_ItemCheck;
             // 
@@ -87,7 +87,7 @@
             dataGridView1.Margin = new Padding(3, 2, 3, 2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(682, 241);
+            dataGridView1.Size = new Size(1220, 410);
             dataGridView1.TabIndex = 4;
             // 
             // label3
@@ -103,9 +103,9 @@
             // button1
             // 
             button1.Font = new Font("Segoe UI", 14F);
-            button1.Location = new Point(535, 40);
+            button1.Location = new Point(621, 40);
             button1.Name = "button1";
-            button1.Size = new Size(159, 85);
+            button1.Size = new Size(208, 85);
             button1.TabIndex = 6;
             button1.Text = "Odznacz wszystko";
             button1.UseVisualStyleBackColor = true;
@@ -115,7 +115,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(902, 520);
+            ClientSize = new Size(1222, 717);
             Controls.Add(button1);
             Controls.Add(label3);
             Controls.Add(dataGridView1);

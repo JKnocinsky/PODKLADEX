@@ -1,5 +1,6 @@
 ﻿using PodkladexApp.Models;
 using PodkladexApp.Models;
+using ScottPlot.AxisLimitManagers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -76,10 +77,13 @@ namespace PodkladexApp
             dataGridView_gwarancja_info.Columns["CzasGwarancji"].HeaderText = "Czas Gwarancji";
             dataGridView_gwarancja_info.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView_gwarancja_info.Columns["CzasGwarancji"].Width = 100;
-            dataGridView_gwarancja_info.Columns["Maszyna"].Width = 100;
-            dataGridView_gwarancja_info.Columns["Firma"].Width = 150;
-            dataGridView_gwarancja_info.Columns["Warunki"].Width = 250;
-            dataGridView_gwarancja_info.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView_gwarancja_info.Columns["Maszyna"].Width = 150;
+            dataGridView_gwarancja_info.Columns["Firma"].Width = 250;
+            dataGridView_gwarancja_info.Columns["Warunki"].AutoSizeMode =
+    DataGridViewAutoSizeColumnMode.Fill;
+
+            dataGridView_gwarancja_info.Font = new Font("Segoe UI", 14);
+            dataGridView_gwarancja_info.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
         }
         private void button_dodaj_gwarancje_Click(object sender, EventArgs e)

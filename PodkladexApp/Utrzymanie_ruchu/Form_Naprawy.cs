@@ -22,7 +22,7 @@ namespace PodkladexApp
             var lista = context.RodzajObslugi.ToList(); // albo Twoje źródło danych
 
             checkedListBox1.DataSource = lista;
-            checkedListBox1.DisplayMember = "DisplayText";
+            checkedListBox1.DisplayMember = "Nazwa";
             checkedListBox1.ValueMember = "IdRodzajObslugi";
 
             var listaMaszyn = context.Maszyna.ToList(); // Twoje źródło danych
@@ -31,10 +31,6 @@ namespace PodkladexApp
             checkedListBox2.DisplayMember = "Nazwa";        // co widać
             checkedListBox2.ValueMember = "IdMaszyna";
             FiltrujObslugi();
-
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-
         }
 
         private void FiltrujObslugi()
@@ -89,9 +85,23 @@ namespace PodkladexApp
             dataGridView1.Columns["DataPoczatek"].HeaderText = "Data Rozpoczęcia";
             dataGridView1.Columns["Czesci"].HeaderText = "Użyte części";
 
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridView1.Font = new Font("Segoe UI", 14);
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // proporcje
+            dataGridView1.Columns["Maszyna"].FillWeight = 120;
+            dataGridView1.Columns["Rodzaj"].FillWeight = 120;
+
+            dataGridView1.Columns["DataPoczatek"].FillWeight = 110;
+            dataGridView1.Columns["DataKoniec"].FillWeight = 110;
+
+            dataGridView1.Columns["Uwagi"].FillWeight = 150;
+
+            // 🔥 NAJWAŻNIEJSZE — dużo miejsca
+            dataGridView1.Columns["Czesci"].FillWeight = 300;
 
         }
 

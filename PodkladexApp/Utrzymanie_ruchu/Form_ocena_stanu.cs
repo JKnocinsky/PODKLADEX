@@ -123,15 +123,17 @@ namespace PodkladexApp
 
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
 
-            dataGridView1.Columns["Maszyna"].Width = 80;
-            dataGridView1.Columns["RodzajObslugi"].Width = 80;
-            dataGridView1.Columns["DataStart"].Width = 80;
-            dataGridView1.Columns["DataKoniec"].Width = 80;
+            dataGridView1.Columns["Maszyna"].Width = 100;
+            dataGridView1.Columns["RodzajObslugi"].Width = 100;
+            dataGridView1.Columns["DataStart"].Width = 115;
+            dataGridView1.Columns["DataKoniec"].Width = 120;
             dataGridView1.Columns["Czesci"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.Columns["RodzajObslugi"].HeaderText = "Rodzaj Obsługi";
             dataGridView1.Columns["DataStart"].HeaderText = "Data Rozpoczęcia";
             dataGridView1.Columns["DataKoniec"].HeaderText = "Data Zakończenia";
             dataGridView1.Columns["Czesci"].HeaderText = "Użyte Części";
+            dataGridView1.Font = new Font("Segoe UI", 14);
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
         }
         private void ZaladujAwarieDlaMaszyny()
         {
@@ -166,15 +168,17 @@ namespace PodkladexApp
             dataGridView2.Columns["IdAwaria"].Visible = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
 
-            dataGridView2.Columns["Maszyna"].Width = 80;
-            dataGridView2.Columns["Opis"].Width = 80;
-            dataGridView2.Columns["DataZgloszenia"].Width = 80;
-            dataGridView2.Columns["DataUsuniecia"].Width = 80;
+            dataGridView2.Columns["Maszyna"].Width = 100;
+            dataGridView2.Columns["Opis"].Width = 100;
+            dataGridView2.Columns["DataZgloszenia"].Width = 110;
+            dataGridView2.Columns["DataUsuniecia"].Width = 110;
             dataGridView2.Columns["Czesci"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             dataGridView2.Columns["DataZgloszenia"].HeaderText = "Data Zgłoszenia";
             dataGridView2.Columns["DataUsuniecia"].HeaderText = "Data Usunięcia";
             dataGridView2.Columns["Czesci"].HeaderText = "Użyte Części";
+            dataGridView2.Font = new Font("Segoe UI", 14);
+            dataGridView2.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
         }
         private void ZaladujProdukcjeDlaMaszyny()
@@ -201,6 +205,8 @@ namespace PodkladexApp
             dataGridView3.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView3.Columns["IdZadanieP"].Visible = false;
             dataGridView3.Columns["RBH"].HeaderText = "Godziny";
+            dataGridView3.Font = new Font("Segoe UI", 14);
+            dataGridView3.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
 
         }

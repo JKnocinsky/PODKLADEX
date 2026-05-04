@@ -67,7 +67,7 @@
             comboBox_lista_gwarnacja_maszyny.FormattingEnabled = true;
             comboBox_lista_gwarnacja_maszyny.Location = new Point(11, 35);
             comboBox_lista_gwarnacja_maszyny.Name = "comboBox_lista_gwarnacja_maszyny";
-            comboBox_lista_gwarnacja_maszyny.Size = new Size(227, 33);
+            comboBox_lista_gwarnacja_maszyny.Size = new Size(327, 33);
             comboBox_lista_gwarnacja_maszyny.TabIndex = 27;
             // 
             // button_usun_gwarancje
@@ -108,7 +108,7 @@
             textBox_warunki_gwarancji.Location = new Point(11, 169);
             textBox_warunki_gwarancji.Multiline = true;
             textBox_warunki_gwarancji.Name = "textBox_warunki_gwarancji";
-            textBox_warunki_gwarancji.Size = new Size(493, 73);
+            textBox_warunki_gwarancji.Size = new Size(876, 73);
             textBox_warunki_gwarancji.TabIndex = 23;
             // 
             // button_dodaj_gwarancje
@@ -126,7 +126,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14F);
-            label1.Location = new Point(244, 7);
+            label1.Location = new Point(344, 4);
             label1.Name = "label1";
             label1.Size = new Size(246, 25);
             label1.TabIndex = 31;
@@ -137,9 +137,9 @@
             comboBox_lista_firm.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox_lista_firm.Font = new Font("Segoe UI", 14F);
             comboBox_lista_firm.FormattingEnabled = true;
-            comboBox_lista_firm.Location = new Point(244, 35);
+            comboBox_lista_firm.Location = new Point(344, 35);
             comboBox_lista_firm.Name = "comboBox_lista_firm";
-            comboBox_lista_firm.Size = new Size(260, 33);
+            comboBox_lista_firm.Size = new Size(352, 33);
             comboBox_lista_firm.TabIndex = 30;
             // 
             // label2
@@ -155,7 +155,7 @@
             // textBox_miesiace_gwarancji
             // 
             textBox_miesiace_gwarancji.Font = new Font("Segoe UI", 14F);
-            textBox_miesiace_gwarancji.Location = new Point(371, 74);
+            textBox_miesiace_gwarancji.Location = new Point(344, 74);
             textBox_miesiace_gwarancji.Name = "textBox_miesiace_gwarancji";
             textBox_miesiace_gwarancji.Size = new Size(134, 32);
             textBox_miesiace_gwarancji.TabIndex = 32;
@@ -177,7 +177,7 @@
             dataGridView_gwarancja_info.Location = new Point(184, 283);
             dataGridView_gwarancja_info.Name = "dataGridView_gwarancja_info";
             dataGridView_gwarancja_info.RowHeadersWidth = 51;
-            dataGridView_gwarancja_info.Size = new Size(678, 258);
+            dataGridView_gwarancja_info.Size = new Size(887, 324);
             dataGridView_gwarancja_info.TabIndex = 35;
             dataGridView_gwarancja_info.CellContentClick += dataGridView_gwarancja_info_CellContentClick;
             dataGridView_gwarancja_info.SelectionChanged += dataGridView_gwarancja_info_SelectionChanged;
@@ -205,7 +205,7 @@
             // textBox_uruchomienie
             // 
             textBox_uruchomienie.Font = new Font("Segoe UI", 14F);
-            textBox_uruchomienie.Location = new Point(340, 109);
+            textBox_uruchomienie.Location = new Point(314, 112);
             textBox_uruchomienie.Name = "textBox_uruchomienie";
             textBox_uruchomienie.Size = new Size(164, 32);
             textBox_uruchomienie.TabIndex = 37;
@@ -224,12 +224,12 @@
             panel1.Controls.Add(textBox_miesiace_gwarancji);
             panel1.Location = new Point(184, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(517, 250);
+            panel1.Size = new Size(887, 250);
             panel1.TabIndex = 39;
             // 
             // panel2
             // 
-            panel2.Location = new Point(1106, 553);
+            panel2.Location = new Point(1218, 24);
             panel2.Name = "panel2";
             panel2.Size = new Size(16, 10);
             panel2.TabIndex = 40;

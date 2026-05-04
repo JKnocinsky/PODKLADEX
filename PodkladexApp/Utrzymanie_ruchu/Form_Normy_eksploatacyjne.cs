@@ -289,6 +289,8 @@ namespace PodkladexApp
             dataGridView1.Columns["PrzebiegNorma"].Visible = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.Font = new Font("Segoe UI", 14);
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
         }
         private void ZaladujMaszyny()
         {
