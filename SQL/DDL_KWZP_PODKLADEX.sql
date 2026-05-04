@@ -558,9 +558,9 @@ CREATE VIEW Widok_Produkcja_Planowanie_Obliczenia AS
 SELECT TOP 100 PERCENT
     Z.ID_zamowienie,
     Prod.Nazwa AS Nazwa_Produktu,
-    ROUND(SUM(sz.Ilosc), 2) AS Ilosc_zamowienia,
+    ROUND(sz.Ilosc, 2) AS Ilosc_zamowienia,
     ROUND(SUM(ISNULL(km.Odpady, 0)), 2) AS Suma_Odpady,
-    ROUND(SUM(ISNULL(p.RBH * NP.Ilosc / NULLIF(NP.Czas, 0), 0)), 2) AS Zaplanowane_RBH,
+    ROUND(SUM(ISNULL(p.RBH * NP.Ilosc / NULLIF(NP.Czas, 0), 0)), 2) AS Zaplanowana_Produkcja,
     ROUND(CASE WHEN SUM(ISNULL(sz.Ilosc, 0)) + SUM(ISNULL(km.Odpady, 0)) = 0
         THEN NULL
         ELSE SUM(ISNULL(p.RBH * NP.Ilosc / NULLIF(NP.Czas, 0), 0))
@@ -576,7 +576,8 @@ LEFT JOIN Norma_prod NP ON Prod.ID_produkt = NP.ID_produkt
 LEFT JOIN Produkcja p ON NP.ID_normaP = p.ID_normyP AND p.ID_zadanieP = ZP.ID_zadanieP
 GROUP BY
     Z.ID_zamowienie,
-    Prod.Nazwa
+    Prod.Nazwa,
+	sz.Ilosc
 ORDER BY
     Z.ID_zamowienie;
 GO
