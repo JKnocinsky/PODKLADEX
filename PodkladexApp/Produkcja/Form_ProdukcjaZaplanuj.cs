@@ -191,7 +191,7 @@ namespace PodkladexApp.Produkcja
                     w.NazwaProduktu,
                     IloscZamowienia = w.IloscZamowienia,
                     SumaOdpady = w.SumaOdpady,
-                    ZaplanowaneRbh = w.ZaplanowaneRbh,
+                    ZaplanowanaProdukcja = w.ZaplanowanaProdukcja,
                     ProcentZaplanowanejProdukcji = w.ProcentZaplanowanejProdukcji
                 })
                 .ToList();
@@ -200,7 +200,7 @@ namespace PodkladexApp.Produkcja
             dtg_zaplanujProd.AutoResizeColumns();
 
             // Formatowanie kolumn: dwie cyfry po przecinku
-            var colRbh = dtg_zaplanujProd.Columns["ZaplanowaneRbh"];
+            var colRbh = dtg_zaplanujProd.Columns["ZaplanowanaProdukcja"];
             if (colRbh != null)
             {
                 colRbh.DefaultCellStyle.Format = "N2";
