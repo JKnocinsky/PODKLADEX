@@ -37,6 +37,9 @@
             panel_UR = new Panel();
             button_otworz_napawy = new Button();
             button_otworz_ocena_stanu = new Button();
+            button1 = new Button();
+            button2 = new Button();
+            button3 = new Button();
             SuspendLayout();
             // 
             // button_otworz_czesci_zamienne
@@ -115,9 +118,9 @@
             // button_otworz_napawy
             // 
             button_otworz_napawy.Font = new Font("Segoe UI", 14F);
-            button_otworz_napawy.Location = new Point(13, 373);
+            button_otworz_napawy.Location = new Point(12, 459);
             button_otworz_napawy.Name = "button_otworz_napawy";
-            button_otworz_napawy.Size = new Size(212, 55);
+            button_otworz_napawy.Size = new Size(212, 66);
             button_otworz_napawy.TabIndex = 9;
             button_otworz_napawy.Text = "Naprawy - Raport";
             button_otworz_napawy.UseVisualStyleBackColor = true;
@@ -126,19 +129,55 @@
             // button_otworz_ocena_stanu
             // 
             button_otworz_ocena_stanu.Font = new Font("Segoe UI", 14F);
-            button_otworz_ocena_stanu.Location = new Point(12, 434);
+            button_otworz_ocena_stanu.Location = new Point(13, 373);
             button_otworz_ocena_stanu.Name = "button_otworz_ocena_stanu";
-            button_otworz_ocena_stanu.Size = new Size(212, 68);
+            button_otworz_ocena_stanu.Size = new Size(212, 80);
             button_otworz_ocena_stanu.TabIndex = 10;
             button_otworz_ocena_stanu.Text = "Ocena stanu technicznego";
             button_otworz_ocena_stanu.UseVisualStyleBackColor = true;
             button_otworz_ocena_stanu.Click += button_otworz_ocena_stanu_Click;
+            // 
+            // button1
+            // 
+            button1.Font = new Font("Segoe UI", 14F);
+            button1.Location = new Point(12, 701);
+            button1.Name = "button1";
+            button1.Size = new Size(212, 68);
+            button1.TabIndex = 11;
+            button1.Text = "Przestój maszyn - Raport";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // button2
+            // 
+            button2.Font = new Font("Segoe UI", 14F);
+            button2.Location = new Point(12, 616);
+            button2.Name = "button2";
+            button2.Size = new Size(212, 79);
+            button2.TabIndex = 12;
+            button2.Text = "Zużycie części - Raport";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // button3
+            // 
+            button3.Font = new Font("Segoe UI", 14F);
+            button3.Location = new Point(12, 531);
+            button3.Name = "button3";
+            button3.Size = new Size(212, 79);
+            button3.TabIndex = 13;
+            button3.Text = "Awaryjność - Raport";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // Form_Utrzymanie_Ruchu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1684, 791);
+            Controls.Add(button3);
+            Controls.Add(button2);
+            Controls.Add(button1);
             Controls.Add(button_otworz_awaria);
             Controls.Add(button_otworz_ocena_stanu);
             Controls.Add(button_otworz_napawy);
@@ -164,5 +203,8 @@
         private Panel panel_UR;
         private Button button_otworz_napawy;
         private Button button_otworz_ocena_stanu;
+        private Button button1;
+        private Button button2;
+        private Button button3;
     }
 }

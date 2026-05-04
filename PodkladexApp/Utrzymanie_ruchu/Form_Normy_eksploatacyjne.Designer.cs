@@ -209,7 +209,7 @@
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(3, 104);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(632, 216);
+            dataGridView1.Size = new Size(821, 324);
             dataGridView1.TabIndex = 40;
             dataGridView1.CellClick += dataGridView1_CellClick;
             // 
@@ -223,13 +223,13 @@
             panel1.Controls.Add(label4);
             panel1.Location = new Point(172, 136);
             panel1.Name = "panel1";
-            panel1.Size = new Size(643, 388);
+            panel1.Size = new Size(832, 519);
             panel1.TabIndex = 41;
             // 
             // button5
             // 
             button5.Font = new Font("Segoe UI", 14F);
-            button5.Location = new Point(164, 326);
+            button5.Location = new Point(280, 434);
             button5.Name = "button5";
             button5.Size = new Size(305, 55);
             button5.TabIndex = 44;
@@ -240,9 +240,9 @@
             // button2
             // 
             button2.Font = new Font("Segoe UI", 14F);
-            button2.Location = new Point(476, 10);
+            button2.Location = new Point(477, 16);
             button2.Name = "button2";
-            button2.Size = new Size(159, 88);
+            button2.Size = new Size(318, 67);
             button2.TabIndex = 41;
             button2.Text = "Godziny pracy maszyny poza produkcją";
             button2.UseVisualStyleBackColor = true;
@@ -265,7 +265,7 @@
             panel2.Controls.Add(button3);
             panel2.Controls.Add(textBox1);
             panel2.Controls.Add(label3);
-            panel2.Location = new Point(821, 136);
+            panel2.Location = new Point(1002, 136);
             panel2.Name = "panel2";
             panel2.Size = new Size(200, 171);
             panel2.TabIndex = 42;
@@ -285,7 +285,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1077, 536);
+            ClientSize = new Size(1214, 726);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(button1);

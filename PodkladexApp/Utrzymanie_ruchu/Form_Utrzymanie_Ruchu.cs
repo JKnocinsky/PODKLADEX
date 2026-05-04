@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PodkladexApp.Models;
+using PodkladexApp.Utrzymanie_ruchu;
 
 namespace PodkladexApp
 {
@@ -19,14 +20,17 @@ namespace PodkladexApp
         {
             InitializeComponent();
             context = db;
-            button_otworz_awaria.FlatStyle=FlatStyle.System;
-            button_otworz_czesci_zamienne.FlatStyle=FlatStyle.System;
-            button_otworz_gwarancja.FlatStyle=FlatStyle.System;
+            button_otworz_awaria.FlatStyle = FlatStyle.System;
+            button_otworz_czesci_zamienne.FlatStyle = FlatStyle.System;
+            button_otworz_gwarancja.FlatStyle = FlatStyle.System;
             button_otworz_napawy.FlatStyle = FlatStyle.System;
-            button_otworz_normy_eksplatacyjne.FlatStyle=FlatStyle.System;
-            button_otworz_obsluga.FlatStyle=FlatStyle.System;
-            button_otworz_ocena_stanu.FlatStyle=FlatStyle.System;
-            button_otworz_rodzaj_obslugi.FlatStyle=FlatStyle.System;
+            button_otworz_normy_eksplatacyjne.FlatStyle = FlatStyle.System;
+            button_otworz_obsluga.FlatStyle = FlatStyle.System;
+            button_otworz_ocena_stanu.FlatStyle = FlatStyle.System;
+            button_otworz_rodzaj_obslugi.FlatStyle = FlatStyle.System;
+            button1.FlatStyle = FlatStyle.System;
+            button2.FlatStyle = FlatStyle.System;
+            button3.FlatStyle = FlatStyle.System;
         }
 
         private void button_otworz_czesci_zamienne_Click(object sender, EventArgs e)
@@ -41,6 +45,9 @@ namespace PodkladexApp
             button_otworz_obsluga.FlatStyle = FlatStyle.System;
             button_otworz_ocena_stanu.FlatStyle = FlatStyle.System;
             button_otworz_rodzaj_obslugi.FlatStyle = FlatStyle.System;
+            button1.FlatStyle = FlatStyle.System;
+            button2.FlatStyle = FlatStyle.System;
+            button3.FlatStyle = FlatStyle.System;
         }
 
         private void button_otworz_awaria_Click(object sender, EventArgs e)
@@ -55,6 +62,9 @@ namespace PodkladexApp
             button_otworz_obsluga.FlatStyle = FlatStyle.System;
             button_otworz_ocena_stanu.FlatStyle = FlatStyle.System;
             button_otworz_rodzaj_obslugi.FlatStyle = FlatStyle.System;
+            button1.FlatStyle = FlatStyle.System;
+            button2.FlatStyle = FlatStyle.System;
+            button3.FlatStyle = FlatStyle.System;
         }
 
         private void button_otworz_obsluga_Click(object sender, EventArgs e)
@@ -69,6 +79,9 @@ namespace PodkladexApp
             button_otworz_obsluga.FlatStyle = FlatStyle.Flat;
             button_otworz_ocena_stanu.FlatStyle = FlatStyle.System;
             button_otworz_rodzaj_obslugi.FlatStyle = FlatStyle.System;
+            button1.FlatStyle = FlatStyle.System;
+            button2.FlatStyle = FlatStyle.System;
+            button3.FlatStyle = FlatStyle.System;
 
         }
 
@@ -84,6 +97,9 @@ namespace PodkladexApp
             button_otworz_obsluga.FlatStyle = FlatStyle.System;
             button_otworz_ocena_stanu.FlatStyle = FlatStyle.System;
             button_otworz_rodzaj_obslugi.FlatStyle = FlatStyle.Flat;
+            button1.FlatStyle = FlatStyle.System;
+            button2.FlatStyle = FlatStyle.System;
+            button3.FlatStyle = FlatStyle.System;
         }
 
         private void button_otworz_normy_eksplatacyjne_Click(object sender, EventArgs e)
@@ -98,6 +114,9 @@ namespace PodkladexApp
             button_otworz_obsluga.FlatStyle = FlatStyle.System;
             button_otworz_ocena_stanu.FlatStyle = FlatStyle.System;
             button_otworz_rodzaj_obslugi.FlatStyle = FlatStyle.System;
+            button1.FlatStyle = FlatStyle.System;
+            button2.FlatStyle = FlatStyle.System;
+            button3.FlatStyle = FlatStyle.System;
         }
 
         private void button_otworz_gwarancja_Click(object sender, EventArgs e)
@@ -112,6 +131,9 @@ namespace PodkladexApp
             button_otworz_obsluga.FlatStyle = FlatStyle.System;
             button_otworz_ocena_stanu.FlatStyle = FlatStyle.System;
             button_otworz_rodzaj_obslugi.FlatStyle = FlatStyle.System;
+            button1.FlatStyle = FlatStyle.System;
+            button2.FlatStyle = FlatStyle.System;
+            button3.FlatStyle = FlatStyle.System;
         }
         private void button_otworz_napawy_Click(object sender, EventArgs e)
         {
@@ -125,6 +147,9 @@ namespace PodkladexApp
             button_otworz_obsluga.FlatStyle = FlatStyle.System;
             button_otworz_ocena_stanu.FlatStyle = FlatStyle.System;
             button_otworz_rodzaj_obslugi.FlatStyle = FlatStyle.System;
+            button1.FlatStyle = FlatStyle.System;
+            button2.FlatStyle = FlatStyle.System;
+            button3.FlatStyle = FlatStyle.System;
         }
         private void button_otworz_ocena_stanu_Click(object sender, EventArgs e)
         {
@@ -138,6 +163,9 @@ namespace PodkladexApp
             button_otworz_obsluga.FlatStyle = FlatStyle.System;
             button_otworz_ocena_stanu.FlatStyle = FlatStyle.Flat;
             button_otworz_rodzaj_obslugi.FlatStyle = FlatStyle.System;
+            button1.FlatStyle = FlatStyle.System;
+            button2.FlatStyle = FlatStyle.System;
+            button3.FlatStyle = FlatStyle.System;
         }
 
 
@@ -153,6 +181,58 @@ namespace PodkladexApp
             panel_UR.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form_Awaryjnosc formAwaryjnosc= new Form_Awaryjnosc(context);
+            OpenChildForm(formAwaryjnosc);
+            button_otworz_awaria.FlatStyle = FlatStyle.System;
+            button_otworz_czesci_zamienne.FlatStyle = FlatStyle.System;
+            button_otworz_gwarancja.FlatStyle = FlatStyle.System;
+            button_otworz_napawy.FlatStyle = FlatStyle.System;
+            button_otworz_normy_eksplatacyjne.FlatStyle = FlatStyle.System;
+            button_otworz_obsluga.FlatStyle = FlatStyle.System;
+            button_otworz_ocena_stanu.FlatStyle = FlatStyle.System;
+            button_otworz_rodzaj_obslugi.FlatStyle = FlatStyle.System;
+            button1.FlatStyle = FlatStyle.System;
+            button2.FlatStyle = FlatStyle.System;
+            button3.FlatStyle = FlatStyle.Flat;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+           
+            Form_Zuzycie_czesci formZuzycie = new Form_Zuzycie_czesci(context);
+            OpenChildForm(formZuzycie);
+            button_otworz_awaria.FlatStyle = FlatStyle.System;
+            button_otworz_czesci_zamienne.FlatStyle = FlatStyle.System;
+            button_otworz_gwarancja.FlatStyle = FlatStyle.System;
+            button_otworz_napawy.FlatStyle = FlatStyle.System;
+            button_otworz_normy_eksplatacyjne.FlatStyle = FlatStyle.System;
+            button_otworz_obsluga.FlatStyle = FlatStyle.System;
+            button_otworz_ocena_stanu.FlatStyle = FlatStyle.System;
+            button_otworz_rodzaj_obslugi.FlatStyle = FlatStyle.System;
+            button1.FlatStyle = FlatStyle.System;
+            button2.FlatStyle = FlatStyle.Flat;
+            button3.FlatStyle = FlatStyle.System;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form_Przestoj formPrzestoj = new Form_Przestoj(context);
+            OpenChildForm(formPrzestoj);
+            button_otworz_awaria.FlatStyle = FlatStyle.System;
+            button_otworz_czesci_zamienne.FlatStyle = FlatStyle.System;
+            button_otworz_gwarancja.FlatStyle = FlatStyle.System;
+            button_otworz_napawy.FlatStyle = FlatStyle.System;
+            button_otworz_normy_eksplatacyjne.FlatStyle = FlatStyle.System;
+            button_otworz_obsluga.FlatStyle = FlatStyle.System;
+            button_otworz_ocena_stanu.FlatStyle = FlatStyle.System;
+            button_otworz_rodzaj_obslugi.FlatStyle = FlatStyle.System;
+            button1.FlatStyle = FlatStyle.Flat;
+            button2.FlatStyle = FlatStyle.System;
+            button3.FlatStyle = FlatStyle.System;
         }
     }
 }

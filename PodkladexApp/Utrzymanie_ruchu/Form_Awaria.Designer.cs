@@ -42,8 +42,6 @@
             label_liczba = new Label();
             label_czesc = new Label();
             cbox_czesc = new ComboBox();
-            label_opis2 = new Label();
-            tbox_opis_awaria_czesc = new TextBox();
             dataGridView1 = new DataGridView();
             button_zglos_awarie = new Button();
             button_dodaj_czesc = new Button();
@@ -68,17 +66,17 @@
             // txtb_opis_awaria
             // 
             txtb_opis_awaria.Font = new Font("Segoe UI", 14F);
-            txtb_opis_awaria.Location = new Point(216, 95);
+            txtb_opis_awaria.Location = new Point(224, 93);
             txtb_opis_awaria.Multiline = true;
             txtb_opis_awaria.Name = "txtb_opis_awaria";
-            txtb_opis_awaria.Size = new Size(277, 91);
+            txtb_opis_awaria.Size = new Size(490, 91);
             txtb_opis_awaria.TabIndex = 0;
             // 
             // label_opis
             // 
             label_opis.AutoSize = true;
             label_opis.Font = new Font("Segoe UI", 14F);
-            label_opis.Location = new Point(216, 67);
+            label_opis.Location = new Point(224, 68);
             label_opis.Name = "label_opis";
             label_opis.Size = new Size(50, 25);
             label_opis.TabIndex = 1;
@@ -87,6 +85,7 @@
             // dtp_data_zgloszenia
             // 
             dtp_data_zgloszenia.Font = new Font("Segoe UI", 14F);
+            dtp_data_zgloszenia.Format = DateTimePickerFormat.Short;
             dtp_data_zgloszenia.Location = new Point(2, 95);
             dtp_data_zgloszenia.Name = "dtp_data_zgloszenia";
             dtp_data_zgloszenia.Size = new Size(209, 32);
@@ -115,6 +114,7 @@
             // dtp_data_usuniecia
             // 
             dtp_data_usuniecia.Font = new Font("Segoe UI", 14F);
+            dtp_data_usuniecia.Format = DateTimePickerFormat.Short;
             dtp_data_usuniecia.Location = new Point(2, 154);
             dtp_data_usuniecia.Name = "dtp_data_usuniecia";
             dtp_data_usuniecia.Size = new Size(209, 32);
@@ -127,7 +127,7 @@
             cbox_osoby.FormattingEnabled = true;
             cbox_osoby.Location = new Point(2, 32);
             cbox_osoby.Name = "cbox_osoby";
-            cbox_osoby.Size = new Size(209, 33);
+            cbox_osoby.Size = new Size(346, 33);
             cbox_osoby.TabIndex = 6;
             // 
             // label_osoby
@@ -144,7 +144,7 @@
             // 
             label_maszyna.AutoSize = true;
             label_maszyna.Font = new Font("Segoe UI", 14F);
-            label_maszyna.Location = new Point(216, 4);
+            label_maszyna.Location = new Point(354, 4);
             label_maszyna.Name = "label_maszyna";
             label_maszyna.Size = new Size(86, 25);
             label_maszyna.TabIndex = 9;
@@ -155,15 +155,15 @@
             cbox_maszyna.DropDownStyle = ComboBoxStyle.DropDownList;
             cbox_maszyna.Font = new Font("Segoe UI", 14F);
             cbox_maszyna.FormattingEnabled = true;
-            cbox_maszyna.Location = new Point(216, 32);
+            cbox_maszyna.Location = new Point(354, 32);
             cbox_maszyna.Name = "cbox_maszyna";
-            cbox_maszyna.Size = new Size(277, 33);
+            cbox_maszyna.Size = new Size(360, 33);
             cbox_maszyna.TabIndex = 8;
             // 
             // num_ud_liczba_czesci
             // 
             num_ud_liczba_czesci.Font = new Font("Segoe UI", 14F);
-            num_ud_liczba_czesci.Location = new Point(419, 26);
+            num_ud_liczba_czesci.Location = new Point(419, 28);
             num_ud_liczba_czesci.Margin = new Padding(3, 4, 3, 4);
             num_ud_liczba_czesci.Name = "num_ud_liczba_czesci";
             num_ud_liczba_czesci.Size = new Size(69, 32);
@@ -199,33 +199,15 @@
             cbox_czesc.Size = new Size(190, 33);
             cbox_czesc.TabIndex = 12;
             // 
-            // label_opis2
-            // 
-            label_opis2.AutoSize = true;
-            label_opis2.Font = new Font("Segoe UI", 14F);
-            label_opis2.Location = new Point(501, 3);
-            label_opis2.Name = "label_opis2";
-            label_opis2.Size = new Size(50, 25);
-            label_opis2.TabIndex = 15;
-            label_opis2.Text = "Opis";
-            // 
-            // tbox_opis_awaria_czesc
-            // 
-            tbox_opis_awaria_czesc.Font = new Font("Segoe UI", 14F);
-            tbox_opis_awaria_czesc.Location = new Point(501, 28);
-            tbox_opis_awaria_czesc.Multiline = true;
-            tbox_opis_awaria_czesc.Name = "tbox_opis_awaria_czesc";
-            tbox_opis_awaria_czesc.Size = new Size(213, 32);
-            tbox_opis_awaria_czesc.TabIndex = 14;
-            // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(224, 67);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(490, 124);
+            dataGridView1.Size = new Size(657, 280);
             dataGridView1.TabIndex = 16;
+            dataGridView1.CellClick += dataGridView1_CellClick;
             // 
             // button_zglos_awarie
             // 
@@ -258,13 +240,11 @@
             panel_posredniczaca.Controls.Add(num_ud_liczba_czesci);
             panel_posredniczaca.Controls.Add(label_liczba);
             panel_posredniczaca.Controls.Add(cbox_czesc);
-            panel_posredniczaca.Controls.Add(label_opis2);
             panel_posredniczaca.Controls.Add(label_czesc);
-            panel_posredniczaca.Controls.Add(tbox_opis_awaria_czesc);
-            panel_posredniczaca.Location = new Point(-1, 367);
+            panel_posredniczaca.Location = new Point(208, 283);
             panel_posredniczaca.Margin = new Padding(3, 2, 3, 2);
             panel_posredniczaca.Name = "panel_posredniczaca";
-            panel_posredniczaca.Size = new Size(727, 204);
+            panel_posredniczaca.Size = new Size(881, 350);
             panel_posredniczaca.TabIndex = 19;
             // 
             // button_usun_czesc
@@ -276,6 +256,7 @@
             button_usun_czesc.TabIndex = 21;
             button_usun_czesc.Text = "Usuń Część";
             button_usun_czesc.UseVisualStyleBackColor = true;
+            button_usun_czesc.Click += button_usun_czesc_Click;
             // 
             // button_edycja_czesc
             // 
@@ -286,6 +267,7 @@
             button_edycja_czesc.TabIndex = 20;
             button_edycja_czesc.Text = "Edytuj Część";
             button_edycja_czesc.UseVisualStyleBackColor = true;
+            button_edycja_czesc.Click += button_edycja_czesc_Click;
             // 
             // button_dodaj_czesc_awaria_posredniczaca
             // 
@@ -296,12 +278,13 @@
             button_dodaj_czesc_awaria_posredniczaca.TabIndex = 19;
             button_dodaj_czesc_awaria_posredniczaca.Text = "Dodaj Część";
             button_dodaj_czesc_awaria_posredniczaca.UseVisualStyleBackColor = true;
+            button_dodaj_czesc_awaria_posredniczaca.Click += button_dodaj_czesc_awaria_posredniczaca_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14F);
-            label1.Location = new Point(2, 0);
+            label1.Location = new Point(0, 0);
             label1.Name = "label1";
             label1.Size = new Size(124, 25);
             label1.TabIndex = 18;
@@ -312,10 +295,11 @@
             comboBox_lista_awarii.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox_lista_awarii.Font = new Font("Segoe UI", 14F);
             comboBox_lista_awarii.FormattingEnabled = true;
-            comboBox_lista_awarii.Location = new Point(3, 28);
+            comboBox_lista_awarii.Location = new Point(0, 28);
             comboBox_lista_awarii.Name = "comboBox_lista_awarii";
             comboBox_lista_awarii.Size = new Size(492, 33);
             comboBox_lista_awarii.TabIndex = 17;
+            comboBox_lista_awarii.SelectedIndexChanged += comboBox_lista_awarii_SelectedIndexChanged;
             // 
             // button_edytuj_awarie
             // 
@@ -345,7 +329,7 @@
             panel_wybor_awarii.Controls.Add(label1);
             panel_wybor_awarii.Location = new Point(221, 206);
             panel_wybor_awarii.Name = "panel_wybor_awarii";
-            panel_wybor_awarii.Size = new Size(505, 102);
+            panel_wybor_awarii.Size = new Size(727, 72);
             panel_wybor_awarii.TabIndex = 22;
             // 
             // panel_awaria_info
@@ -362,7 +346,7 @@
             panel_awaria_info.Controls.Add(cbox_maszyna);
             panel_awaria_info.Location = new Point(221, 10);
             panel_awaria_info.Name = "panel_awaria_info";
-            panel_awaria_info.Size = new Size(505, 190);
+            panel_awaria_info.Size = new Size(727, 190);
             panel_awaria_info.TabIndex = 23;
             // 
             // button_potwierdz
@@ -374,12 +358,13 @@
             button_potwierdz.TabIndex = 24;
             button_potwierdz.Text = "Potwierdź";
             button_potwierdz.UseVisualStyleBackColor = true;
+            button_potwierdz.Click += button_potwierdz_Click;
             // 
             // Form_Awaria
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(927, 644);
+            ClientSize = new Size(1101, 644);
             Controls.Add(button_potwierdz);
             Controls.Add(panel_awaria_info);
             Controls.Add(panel_wybor_awarii);
@@ -390,7 +375,6 @@
             Controls.Add(button_zglos_awarie);
             Name = "Form_Awaria";
             Text = "Awaria";
-            Load += Form_Awaria_Load;
             ((System.ComponentModel.ISupportInitialize)num_ud_liczba_czesci).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panel_posredniczaca.ResumeLayout(false);
@@ -418,8 +402,6 @@
         private Label label_liczba;
         private Label label_czesc;
         private ComboBox cbox_czesc;
-        private Label label_opis2;
-        private TextBox tbox_opis_awaria_czesc;
         private DataGridView dataGridView1;
         private Button button_zglos_awarie;
         private Button button_dodaj_czesc;
