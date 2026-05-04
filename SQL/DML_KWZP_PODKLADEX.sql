@@ -209,7 +209,9 @@ INSERT INTO Szkolenie (Nazwa, Opis, Czy_obowiazkowe, Waznosc) VALUES
 ('Szkolenie BHP okresowe', 'Okresowe szkolenie BHP dla pracowników administracyjno-biurowych i produkcyjnych', 1, 1095),
 ('Szkolenie PPOŻ', 'Szkolenie z zakresu ochrony przeciwpożarowej i zasad ewakuacji', 1, 730),
 ('Pierwsza pomoc', 'Szkolenie z udzielania pierwszej pomocy przedmedycznej', 1, 730),
-('Szkolenie z CAD', 'Szkolenie z oprogramowania CAD', 0, 1095);
+('Szkolenie z CAD', 'Szkolenie z oprogramowania CAD', 0, 1095),
+('Szkolenie stanowiskowe - Prasa', 'Szkolenie upważniające do pracy przy prasach', 0, 1095),
+('Szkolenie stanowiskowe - Nożyce gilotynowe', 'Szkolenie upważniające do pracy przy nożycach gilotynowych', 0, 1095);
 GO
 
 INSERT INTO Typ_zwolnienia (Nazwa, Opis) VALUES
@@ -340,15 +342,15 @@ GO
 -- 20. MASZYNA / TYP / WYPOSAZENIE (Korekta dat zakupu/uruchomienia przed marcem 2024)
 -- ==========================================
 INSERT INTO Maszyna (Nazwa, Uwagi, Data_zakupu, Data_uruchomienia, Data_wylaczenia) VALUES
-('Prasa_1',NULL,'2024-01-15','2024-02-01',NULL),
-('Prasa_2',NULL,'2024-01-15','2024-02-01',NULL),
-('Gilotyna_1',NULL,'2024-01-15','2024-02-01',NULL),
-('Prasa_3',NULL,'2024-01-15','2024-02-01',NULL),
-('Prasa_4',NULL,'2024-01-15','2024-02-01',NULL),
-('Gilotyna_2',NULL,'2024-01-15','2024-02-01',NULL),
-('Prasa_5',NULL,'2024-01-15','2024-02-01',NULL),
-('Gilotyna_3',NULL,'2024-01-15','2024-02-01',NULL),
-('Prasa_6',NULL,'2024-01-15','2024-02-01',NULL);
+('Prasa_1',NULL,'2024-01-15','2024-01-17',NULL),
+('Prasa_2',NULL,'2024-01-15','2024-01-17',NULL),
+('Gilotyna_1',NULL,'2024-01-15','2024-01-16',NULL),
+('Prasa_3',NULL,'2024-02-03','2024-02-04',NULL),
+('Prasa_4',NULL,'2024-02-03','2024-02-05',NULL),
+('Gilotyna_2',NULL,'2024-02-10','2024-02-10',NULL),
+('Prasa_5',NULL,'2024-02-26','2024-02-29',NULL),
+('Gilotyna_3',NULL,'2024-02-28','2024-02-29',NULL),
+('Prasa_6',NULL,'2024-03-01','2024-03-02',NULL);
 GO
 
 INSERT INTO Typ (Nazwa) VALUES
@@ -410,15 +412,18 @@ GO
 -- ==========================================
 -- Normy ustalone jeszcze przed produkcja (2024-01-xx zamiast 2025-xx-xx)
 INSERT INTO Norma_prod (ID_produkt, ID_material, Ilosc_mat, Ilosc, Czas, Data_) VALUES
-(1,1,260.00,250.00,1.20,'2024-01-04'),
-(2,2,325.00,312.00,1.00,'2024-01-07'),
-(1,2,210.00,199.00,0.99,'2024-01-13'),
-(2,1,415.00,400.00,1.50,'2024-01-01'),
-(3,2,160.00,150.00,0.80,'2024-01-11'),
-(1,3,620.00,600.00,2.10,'2024-01-20'),
-(2,3,290.00,275.00,1.30,'2024-01-17'),
-(3,1,345.00,330.00,1.10,'2024-01-30'),
-(1,2,520.00,500.00,1.80,'2024-01-10');
+(1,1,26.00,25.00,1.20,'2024-01-18'),
+(2,2,32.50,31.20,1.00,'2024-01-19'),
+(1,2,21.00,19.90,0.99,'2024-01-18'),
+(2,1,41.00,40.00,1.50,'2024-01-17'),
+(3,2,16.00,15.00,0.80,'2024-02-05'),
+(1,3,60.00,50.00,2.10,'2024-02-06'),
+(2,3,29.00,27.50,1.30,'2024-02-11'),
+(3,1,34.50,33.00,1.10,'2024-03-01'),
+(3,3,52.00,50.00,1.80,'2024-03-02'),
+(4,3,70.00,55.00,2.40,'2024-01-20'),
+(4,1,35.00,30.00,1.10,'2024-01-21'),
+(4,2,45.00,40.00,1.30,'2024-02-12');
 GO
 
 INSERT INTO Maszyna_wyp (ID_normaP, ID_maszyna, ID_wyposazenie) VALUES
@@ -430,7 +435,10 @@ INSERT INTO Maszyna_wyp (ID_normaP, ID_maszyna, ID_wyposazenie) VALUES
 (6,5,5),
 (7,6,6),
 (8,7,7),
-(9,8,8);
+(9,8,8),
+(10,9,9),
+(11,9,9),
+(12,9,9);
 GO
 
 -- Każda maszyna ma dokładnie jednš gwarancję (ID_maszyna od 1 do 9)
@@ -555,16 +563,17 @@ INSERT INTO Zadanie_produkcyjne (ID_maszyna, Data_zadania, ID_zamowienie) VALUES
 GO
 
 INSERT INTO Produkcja (ID_pracownik, RBH, Wyprodukowano, Odpady, ID_zadanieP, ID_normyP) VALUES 
-(1, 8.00, 500.00, 100.00, 1, 1), 
-(2, 4.50, 200.00, 50.00, 5, 2), 
-(1, 12.00, 800.00, 150.00, 2, 3), 
-(3, 6.25, 350.00, 100.00, 1, 4),
-(1, 8.50, 700.00, 150.00, 5, 5),
-(2, 5.00, 400.00, 100.00, 6, 3), 
-(3, 10.00, 600.00, 100.00, 7, 2), 
-(1, 7.50, 600.00, 100.00, 8, 1), 
-(2, 4.00, 300.00, 50.00, 9, 4), 
-(3, 8.00, 800.00, 200.00, 10, 5);
+(1, 2.18, 500.00, 100.00, 1, 10), 
+(2, 0.37, 200.00, 50.00, 2, 11), 
+(1, 1.44, 800.00, 150.00, 3, 9), 
+(3, 0.95, 350.00, 100.00, 4, 7),
+(1, 1.49, 700.00, 150.00, 5, 3),
+(2, 0.65, 400.00, 100.00, 6, 10), 
+(3, 0.81, 600.00, 100.00, 7, 12), 
+(1, 0.36, 600.00, 100.00, 8, 9), 
+(2, 0.56, 300.00, 50.00, 9, 4), 
+
+(3, 1.26, 800.00, 200.00, 10, 6);
 GO
 
 INSERT INTO Szczegoly_zamowienia (ID_zamowienie, ID_produkt, Ilosc, ID_material, Uwagi, Cena) VALUES 
