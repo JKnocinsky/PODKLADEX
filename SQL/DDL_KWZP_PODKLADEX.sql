@@ -532,12 +532,14 @@ GO
 CREATE VIEW Widok_Zamowienia_Zadania AS
 SELECT
     Z.ID_zamowienie,
+    P.ID_produkcja,
     ZP.Data_zadania,
     M.Nazwa AS Nazwa_Maszyny,
     CONCAT(O.Imie, ' ', O.Nazwisko) AS Pracownik,
     P.RBH,
     Prod.Nazwa AS Nazwa_Produktu,
-    (P.RBH * NP.Ilosc / NP.Czas) AS Obliczona_Ilosc_Wyprodukowana
+    ROUND((P.RBH * NP.Ilosc / NP.Czas), 2) AS Obliczona_Ilosc_Wyprodukowana,
+    ROUND((P.RBH * NP.Ilosc_mat / NP.Czas), 2) AS Obliczona_Ilosc_Odpadow 
 FROM
     Zamowienie Z
 JOIN
@@ -569,7 +571,7 @@ SELECT TOP 100 PERCENT
     ROUND(CASE WHEN SUM(ISNULL(sz.Ilosc, 0)) + SUM(ISNULL(km.Odpady, 0)) = 0
         THEN NULL
         ELSE SUM(ISNULL(p.RBH * NP.Ilosc / NULLIF(NP.Czas, 0), 0))
-            / (SUM(ISNULL(sz.Ilosc, 0)) + SUM(ISNULL(km.Odpady, 0)))
+            / (ISNULL(sz.Ilosc, 0) + SUM(ISNULL(km.Odpady, 0)))
             * 100
     END, 2) AS Procent_Zaplanowanej_Produkcji
 FROM Zamowienie Z
@@ -594,13 +596,13 @@ CREATE VIEW Widok_Produkcja_Realizacja_Obliczenia AS
 SELECT TOP 100 PERCENT
     Z.ID_zamowienie,
     Prod.Nazwa AS Nazwa_Produktu,
-    ROUND(SUM(sz.Ilosc), 2) AS Ilosc_zamowienia,
+    ROUND(sz.Ilosc, 2) AS Ilosc_zamowienia,
     ROUND(SUM(ISNULL(km.Odpady, 0)), 2) AS Suma_Odpady,
     ROUND(SUM(ISNULL(p.Wyprodukowano, 0)), 2) AS Suma_Wyprodukowano,
     ROUND(CASE WHEN SUM(ISNULL(sz.Ilosc, 0)) + SUM(ISNULL(km.Odpady, 0)) = 0
         THEN NULL
         ELSE SUM(ISNULL(p.Wyprodukowano, 0))
-            / (SUM(ISNULL(sz.Ilosc, 0)) + SUM(ISNULL(km.Odpady, 0)))
+            / (ISNULL(sz.Ilosc, 0) + SUM(ISNULL(km.Odpady, 0)))
             * 100
     END, 2) AS Wartosc_Formula
 FROM Zamowienie Z
@@ -612,7 +614,8 @@ LEFT JOIN Norma_prod NP ON Prod.ID_produkt = NP.ID_produkt
 LEFT JOIN Produkcja p ON NP.ID_normaP = p.ID_normyP AND p.ID_zadanieP = ZP.ID_zadanieP
 GROUP BY
     Z.ID_zamowienie,
-    Prod.Nazwa
+    Prod.Nazwa,
+    sz.Ilosc
 ORDER BY
     Z.ID_zamowienie ASC,
     Prod.Nazwa ASC;
@@ -737,4 +740,20 @@ FROM Pracownik P
 JOIN Osoba O ON P.ID_osoba = O.ID_osoba
 JOIN Produkcja Prod ON Prod.ID_pracownik = P.ID_pracownik
 JOIN Zadanie_produkcyjne ZP ON Prod.ID_zadanieP = ZP.ID_zadanieP;
+GO
+
+-- ==========================================
+-- WIDOK ZAMÓWIENIE ZADANIE PRODUKCJA
+-- ==========================================
+CREATE VIEW Widok_Zamowienie_Zadanie_Produkcja AS
+SELECT
+    Z.ID_zamowienie,
+    ZP.ID_zadanieP,
+    ZP.Data_zadania,
+    P.ID_produkcja,
+    P.Wyprodukowano,
+    P.Odpady
+FROM Zamowienie Z
+JOIN Zadanie_produkcyjne ZP ON Z.ID_zamowienie = ZP.ID_zamowienie
+JOIN Produkcja P ON ZP.ID_zadanieP = P.ID_zadanieP;
 GO
