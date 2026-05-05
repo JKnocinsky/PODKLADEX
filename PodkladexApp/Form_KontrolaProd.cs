@@ -17,6 +17,11 @@ namespace PodkladexApp
         private int _aktualneIdKontroli = 0;
         private int _aktualneIdPomiaru = 0;
 
+        // Zmienne do logiki obliczeniowej
+        private decimal aktualnaMasaNominalna = 0;
+        private bool isUpdatingOdpady = false;
+        private bool czyWymuszonoZatwierdzenie = false;
+
         public Form_KontrolaProd(PodkladexContext db)
         {
             InitializeComponent();
@@ -36,6 +41,11 @@ namespace PodkladexApp
             this.btn_Anuluj.Click += btn_Anuluj_Click;
 
             this.DGV_PomiaryProd.CellFormatting += DGV_PomiaryProd_CellFormatting;
+
+            // Zdarzenia dla przeliczania odpadów i wymuszenia
+            this.textBox_KontProdOdpadySzt.TextChanged += textBox_KontProdOdpadySzt_TextChanged;
+            this.textBox_KontProdOdpady.TextChanged += textBox_KontProdOdpadyKg_TextChanged;
+            this.btn_WymusZatwierdzenie.Click += btn_WymusZatwierdzenie_Click;
         }
 
         private void Form_KontrolaProd_Load(object sender, EventArgs e)
@@ -50,6 +60,8 @@ namespace PodkladexApp
             aktualnyTryb = TrybPracy.Brak;
             _aktualneIdKontroli = 0;
             _aktualneIdPomiaru = 0;
+            aktualnaMasaNominalna = 0;
+            czyWymuszonoZatwierdzenie = false;
 
             btn_DodajKontProd.Enabled = true;
             btn_EdytujKontProd.Enabled = true;
@@ -74,15 +86,25 @@ namespace PodkladexApp
             btn_KontProdPomiar.Visible = false;
             btn_KontProdPomiar.Enabled = true;
             btn_Anuluj.Visible = false;
+            btn_WymusZatwierdzenie.Visible = false;
 
             panel_DodawaniePomiaru.Visible = false;
 
             textBox_KontProdRBH.Clear();
+
+            isUpdatingOdpady = true;
             textBox_KontProdOdpady.Clear();
+            textBox_KontProdOdpadySzt.Clear();
+            isUpdatingOdpady = false;
+
             checkBox_KontrolaProdZat.Checked = false;
             textBox_PomiarProdWartosc.Clear();
 
             btn_PomiarProdDodaj.Text = "Dodaj pomiar";
+
+            progressBar_Postep.Value = 0;
+            label_PostepInfo.Text = "Postęp kontroli: 0%";
+            btn_ZakonczKontrole.Enabled = false;
         }
 
         private void PokazPolaNaglowka()
@@ -150,11 +172,24 @@ namespace PodkladexApp
                 comboBox_KontProdZadP.Enabled = false;
 
                 textBox_KontProdRBH.Text = wybrana.Rbh?.ToString();
+
+                // Pobieranie masy i przeliczanie
+                AktualizujPostepIWage();
+
+                isUpdatingOdpady = true;
                 textBox_KontProdOdpady.Text = wybrana.Odpady?.ToString();
+                if (wybrana.Odpady.HasValue && aktualnaMasaNominalna > 0)
+                {
+                    textBox_KontProdOdpadySzt.Text = Math.Round((decimal)wybrana.Odpady / aktualnaMasaNominalna, 0).ToString();
+                }
+                isUpdatingOdpady = false;
+
                 checkBox_KontrolaProdZat.Checked = wybrana.Zatwierdzone;
 
                 btn_KontProdPomiar.Enabled = true;
                 btn_KontProdPomiar.Visible = true;
+                btn_WymusZatwierdzenie.Visible = true;
+                btn_WymusZatwierdzenie.Enabled = true;
             }
         }
 
@@ -196,7 +231,10 @@ namespace PodkladexApp
 
                 btn_KontProdPomiar.Visible = true;
                 btn_KontProdPomiar.Enabled = true;
+                btn_WymusZatwierdzenie.Visible = true;
+                btn_WymusZatwierdzenie.Enabled = true;
 
+                AktualizujPostepIWage();
                 OdswiezGornaTabele();
                 MessageBox.Show("Nagłówek zapisany. Możesz przejść do pomiarów.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -210,6 +248,7 @@ namespace PodkladexApp
         {
             panel_DodawaniePomiaru.Visible = true;
             OdswiezTabelePomiarow();
+            AktualizujPostepIWage();
             btn_KontProdPomiar.Enabled = false;
         }
 
@@ -267,6 +306,7 @@ namespace PodkladexApp
                     }
 
                     OdswiezTabelePomiarow();
+                    AktualizujPostepIWage();
                 }
             }
         }
@@ -306,15 +346,129 @@ namespace PodkladexApp
                 btn_PomiarProdDodaj.Text = "Dodaj pomiar";
 
                 OdswiezTabelePomiarow();
+                AktualizujPostepIWage();
             }
             catch { MessageBox.Show("Niepoprawny format liczby.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
+        private void AktualizujPostepIWage()
+        {
+            if (_aktualneIdKontroli == 0) return;
+
+            var kontrola = _context.KontrolaProd
+                .Include(k => k.IdZadaniePNavigation.Produkcja)
+                    .ThenInclude(pr => pr.IdNormyPNavigation)
+                .FirstOrDefault(k => k.IdKontrolaProd == _aktualneIdKontroli);
+
+            if (kontrola == null || !kontrola.IdZadaniePNavigation.Produkcja.Any()) return;
+
+            var produkcja = kontrola.IdZadaniePNavigation.Produkcja.FirstOrDefault();
+            int idProduktu = produkcja?.IdNormyPNavigation?.IdProdukt ?? 0;
+            decimal wyprodukowanoKg = produkcja?.Wyprodukowano ?? 0;
+
+            if (idProduktu > 0)
+            {
+                var wymogMasy = _context.ProduktWlasciwosci.FirstOrDefault(pw => pw.IdProdukt == idProduktu && pw.IdWlasciwosci == 8);
+                aktualnaMasaNominalna = wymogMasy?.WartoscNominalna ?? 0;
+
+                int celPomiarow = 0;
+
+                if (aktualnaMasaNominalna > 0)
+                {
+                    decimal sztukiCalkowite = wyprodukowanoKg / aktualnaMasaNominalna;
+                    int sztukiDoSprawdzenia = (int)Math.Ceiling(sztukiCalkowite * 0.10m);
+                    int liczbaWlasciwosci = _context.ProduktWlasciwosci.Count(pw => pw.IdProdukt == idProduktu);
+
+                    celPomiarow = sztukiDoSprawdzenia * liczbaWlasciwosci;
+                }
+
+                int wykonanePomiary = _context.Pomiar.Count(p => p.IdKontrolaProd == _aktualneIdKontroli);
+
+                int procent = 0;
+                if (celPomiarow > 0)
+                {
+                    procent = (int)((double)wykonanePomiary / celPomiarow * 100);
+                    if (procent > 100) procent = 100;
+                }
+                else
+                {
+                    procent = 100;
+                }
+
+                progressBar_Postep.Value = procent;
+                label_PostepInfo.Text = $"Postęp kontroli: {procent}% ({wykonanePomiary} / {celPomiarow} wymaganych pomiarów dla 10% partii)";
+
+                SprawdzWarunkiZatwierdzenia(procent);
+            }
+        }
+
+        private void SprawdzWarunkiZatwierdzenia(int procent)
+        {
+            if (procent == 100 || czyWymuszonoZatwierdzenie)
+            {
+                btn_ZakonczKontrole.Enabled = true;
+            }
+            else
+            {
+                btn_ZakonczKontrole.Enabled = false;
+            }
+        }
+
+        private void btn_WymusZatwierdzenie_Click(object sender, EventArgs e)
+        {
+            var dialogResult = MessageBox.Show("Czy na pewno chcesz wymusić możliwość zakończenia kontroli przed wykonaniem wszystkich wymaganych pomiarów (10% wyprodukowanej partii)?",
+                                               "Wymuszenie zatwierdzenia",
+                                               MessageBoxButtons.YesNo,
+                                               MessageBoxIcon.Warning);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                czyWymuszonoZatwierdzenie = true;
+                btn_WymusZatwierdzenie.Enabled = false;
+                AktualizujPostepIWage();
+            }
+        }
+
+        // Przeliczanie Sztuki -> Kilogramy
+        private void textBox_KontProdOdpadySzt_TextChanged(object sender, EventArgs e)
+        {
+            if (isUpdatingOdpady || aktualnaMasaNominalna == 0) return;
+
+            isUpdatingOdpady = true;
+            if (decimal.TryParse(textBox_KontProdOdpadySzt.Text.Replace('.', ','), out decimal sztuki))
+            {
+                decimal odpadyKg = sztuki * aktualnaMasaNominalna;
+                textBox_KontProdOdpady.Text = odpadyKg.ToString("N5");
+            }
+            else
+            {
+                textBox_KontProdOdpady.Clear();
+            }
+            isUpdatingOdpady = false;
+        }
+
+        // Przeliczanie Kilogramy -> Sztuki
+        private void textBox_KontProdOdpadyKg_TextChanged(object sender, EventArgs e)
+        {
+            if (isUpdatingOdpady || aktualnaMasaNominalna == 0) return;
+
+            isUpdatingOdpady = true;
+            if (decimal.TryParse(textBox_KontProdOdpady.Text.Replace('.', ','), out decimal kg))
+            {
+                decimal sztuki = Math.Round(kg / aktualnaMasaNominalna, 0);
+                textBox_KontProdOdpadySzt.Text = sztuki.ToString();
+            }
+            else
+            {
+                textBox_KontProdOdpadySzt.Clear();
+            }
+            isUpdatingOdpady = false;
         }
 
         private void OdswiezTabelePomiarow()
         {
             int idZadania = (int)comboBox_KontProdZadP.SelectedValue;
 
-            // Dynamiczne wyciąganie ID_Produktu przez relację z zadaniem
             int idProdukt = _context.Produkcja
                 .Where(p => p.IdZadanieP == idZadania)
                 .Select(p => p.IdNormyPNavigation.IdProdukt)
