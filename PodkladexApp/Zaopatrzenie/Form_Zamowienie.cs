@@ -7,67 +7,144 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
+using Microsoft.EntityFrameworkCore;
 using PodkladexApp.Models;
 
 namespace PodkladexApp.Zaopatrzenie
 {
     public partial class Form_Zamowienie : Form
     {
-
         private List<Form_SzczegolyZamowienia.PozycjaKoszyka> _produktyDoZapisania;
+        private PodkladexContext _db = new PodkladexContext();
+
+        private bool czyFirma = false;
 
         public Form_Zamowienie(List<Form_SzczegolyZamowienia.PozycjaKoszyka> koszyk)
         {
             InitializeComponent();
             _produktyDoZapisania = koszyk;
+            this.Load += Form_Zamowienie_Load;
         }
-
-        // 1. Deklaracja połączenia z bazą
-        private PodkladexContext _db = new PodkladexContext();
-
-        // Flaga określająca typ klienta (domyślnie false = prywatny)
-        private bool czyFirma = false;
 
         public Form_Zamowienie()
         {
             InitializeComponent();
+            this.Load += Form_Zamowienie_Load;
         }
 
         private void Form_Zamowienie_Load(object sender, EventArgs e)
         {
-            panel1.Visible = false;
+            czyFirma = false;
+            panel1.Visible = true;
+            label_nazwa_firmy.Visible = false; textBox_nazwa_firmy.Visible = false;
+            label_NIP.Visible = false; textBox_NIP.Visible = false;
 
-            // 2. Ładowanie podpowiedzi z bazy danych
-            ZaladujPodpowiedzi();
+            // FIZYCZNE ZABLOKOWANIE MAKSYMALNEJ DŁUGOŚCI ZNAKÓW
+            textBox_NIP.MaxLength = 13;
+            textBox_Numer_telefonu.MaxLength = 11;
+            textBox_kod_pocztowy.MaxLength = 6;
+
+            // =======================================================
+            // TWARDE PODPIĘCIE ZDARZEŃ FORMATUJĄCYCH I AKCJI
+            // =======================================================
+            textBox_Numer_telefonu.TextChanged -= textBox_Numer_telefonu_TextChanged;
+            textBox_Numer_telefonu.TextChanged += textBox_Numer_telefonu_TextChanged;
+
+            textBox_kod_pocztowy.TextChanged -= textBox_kod_pocztowy_TextChanged;
+            textBox_kod_pocztowy.TextChanged += textBox_kod_pocztowy_TextChanged;
+
+            textBox_NIP.TextChanged -= textBox_NIP_TextChanged;
+            textBox_NIP.TextChanged += textBox_NIP_TextChanged;
+
+            textBox_email.Leave -= textBox_email_Leave;
+            textBox_email.Leave += textBox_email_Leave;
+            textBox_email.KeyDown -= textBox_email_KeyDown;
+            textBox_email.KeyDown += textBox_email_KeyDown;
+
+            textBox_NIP.Leave -= textBox_NIP_Leave;
+            textBox_NIP.Leave += textBox_NIP_Leave;
+            textBox_NIP.KeyDown -= textBox_NIP_KeyDown;
+            textBox_NIP.KeyDown += textBox_NIP_KeyDown;
+
+            ZaladujPodpowiedziNIP();
+            OdswiezPodpowiedziEmail();
         }
 
-        private void ZaladujPodpowiedzi()
+        // ==========================================
+        // DYNAMICZNE PODPOWIEDZI KONTROLEK
+        // ==========================================
+        private void ZaladujPodpowiedziNIP()
         {
-            // Autouzupełnianie dla NIP
             AutoCompleteStringCollection nipKolekcja = new AutoCompleteStringCollection();
-            var nipy = _db.Firma.Select(f => f.Nip).ToArray();
+            var nipy = _db.Firma.Where(f => !string.IsNullOrEmpty(f.Nip)).Select(f => f.Nip).ToArray();
             nipKolekcja.AddRange(nipy);
 
             textBox_NIP.AutoCompleteCustomSource = nipKolekcja;
             textBox_NIP.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             textBox_NIP.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
-            // Autouzupełnianie dla Email (lub numeru telefonu/PESELu)
-            AutoCompleteStringCollection emailKolekcja = new AutoCompleteStringCollection();
-            var emaile = _db.Osoba.Select(o => o.AdresEMail).ToArray();
-            emailKolekcja.AddRange(emaile);
-
-            textBox_email.AutoCompleteCustomSource = emailKolekcja;
-            textBox_email.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            textBox_email.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
 
+        private void OdswiezPodpowiedziEmail()
+        {
+            try
+            {
+                AutoCompleteStringCollection emailKolekcja = new AutoCompleteStringCollection();
+                var dzisiaj = DateOnly.FromDateTime(DateTime.Today);
+
+                // Zbieramy do pamięci RAM wszystkie e-maile
+                var wszystkieEmaile = _db.Osoba
+                    .Where(o => !string.IsNullOrEmpty(o.AdresEMail))
+                    .Select(o => o.AdresEMail)
+                    .Distinct()
+                    .ToList();
+
+                // Zbieramy do pamięci RAM tylko te e-maile, które mają powiązaną aktywną firmę
+                var emaileFirmowe = _db.KlientFirma
+                    .Include(kf => kf.IdKlientNavigation)
+                        .ThenInclude(k => k.IdOsobaNavigation)
+                    .Where(kf => kf.DataKoniec == null || kf.DataKoniec >= dzisiaj)
+                    .Where(kf => kf.IdKlientNavigation != null && kf.IdKlientNavigation.IdOsobaNavigation != null)
+                    .Select(kf => kf.IdKlientNavigation.IdOsobaNavigation.AdresEMail)
+                    .Where(e => !string.IsNullOrEmpty(e))
+                    .Distinct()
+                    .ToList();
+
+                string[] emaile;
+
+                if (czyFirma)
+                {
+                    emaile = emaileFirmowe.ToArray();
+                }
+                else
+                {
+                    // Odejmowanie zbiorów w pamięci C# (bezpieczne dla Entity Framework)
+                    emaile = wszystkieEmaile.Except(emaileFirmowe).ToArray();
+                }
+
+                emailKolekcja.AddRange(emaile);
+                textBox_email.AutoCompleteCustomSource = emailKolekcja;
+                textBox_email.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                textBox_email.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Błąd ładowania podpowiedzi: {ex.Message}");
+            }
+        }
+
+        // ==========================================
+        // PRZEŁĄCZNIKI TYPU KLIENTA
+        // ==========================================
         private void button_Klient_prywatny_Click(object sender, EventArgs e)
         {
             czyFirma = false;
             panel1.Visible = true;
             label_nazwa_firmy.Visible = false; textBox_nazwa_firmy.Visible = false;
             label_NIP.Visible = false; textBox_NIP.Visible = false;
+
+            button_czyszczenie_Click(null, null);
+            OdswiezPodpowiedziEmail();
         }
 
         private void button_klient_z_firmy_Click(object sender, EventArgs e)
@@ -76,47 +153,78 @@ namespace PodkladexApp.Zaopatrzenie
             panel1.Visible = true;
             label_nazwa_firmy.Visible = true; textBox_nazwa_firmy.Visible = true;
             label_NIP.Visible = true; textBox_NIP.Visible = true;
+
+            button_czyszczenie_Click(null, null);
+            OdswiezPodpowiedziEmail();
         }
 
-
         // ==========================================
-        // Puste zdarzenia wygenerowane przez designera
+        // AUTOMATYCZNE FORMATOWANIE W LOCIE
         // ==========================================
-        private void label1_Click(object sender, EventArgs e) { }
-        private void textBox_imie_TextChanged(object sender, EventArgs e) { }
-        private void textBox_Numer_telefonu_TextChanged(object sender, EventArgs e) { }
-        private void textBox_email_TextChanged(object sender, EventArgs e) { }
-        private void textBox_Miejscowosc_TextChanged(object sender, EventArgs e) { }
-        private void textBox_kod_pocztowy_TextChanged(object sender, EventArgs e) { }
-        private void panel1_Paint(object sender, PaintEventArgs e) { }
-        private void textBox_nazwa_firmy_TextChanged(object sender, EventArgs e) { }
-        private void textBox_NIP_TextChanged(object sender, EventArgs e) { }
-
-        // --- ZDARZENIA DLA EMAIL (OSOBA) ---
-        private void textBox_email_Leave(object sender, EventArgs e)
+        private void textBox_Numer_telefonu_TextChanged(object sender, EventArgs e)
         {
-            UzupelnijDaneOsoby();
-        }
+            string raw = new string(textBox_Numer_telefonu.Text.Where(char.IsDigit).ToArray());
+            if (raw.Length > 9) raw = raw.Substring(0, 9);
 
-        private void textBox_email_KeyDown(object sender, KeyEventArgs e)
-        {
-            // Jeśli użytkownik wciśnie Enter
-            if (e.KeyCode == Keys.Enter)
+            string formatted = raw;
+            if (raw.Length > 3) formatted = raw.Insert(3, "-");
+            if (raw.Length > 6) formatted = formatted.Insert(7, "-");
+
+            if (textBox_Numer_telefonu.Text != formatted)
             {
-                UzupelnijDaneOsoby();
-                e.SuppressKeyPress = true; // Zapobiega systemowemu piknięciu "ding"
+                textBox_Numer_telefonu.Text = formatted;
+                textBox_Numer_telefonu.SelectionStart = textBox_Numer_telefonu.Text.Length;
             }
         }
 
-        // --- ZDARZENIA DLA NIP (FIRMA) ---
-        private void textBox_NIP_Leave(object sender, EventArgs e)
+        private void textBox_kod_pocztowy_TextChanged(object sender, EventArgs e)
         {
-            UzupelnijDaneFirmy();
+            string raw = new string(textBox_kod_pocztowy.Text.Where(char.IsDigit).ToArray());
+            if (raw.Length > 5) raw = raw.Substring(0, 5);
+
+            string formatted = raw;
+            if (raw.Length > 2) formatted = raw.Insert(2, "-");
+
+            if (textBox_kod_pocztowy.Text != formatted)
+            {
+                textBox_kod_pocztowy.Text = formatted;
+                textBox_kod_pocztowy.SelectionStart = textBox_kod_pocztowy.Text.Length;
+            }
         }
 
+        private void textBox_NIP_TextChanged(object sender, EventArgs e)
+        {
+            string raw = new string(textBox_NIP.Text.Where(char.IsDigit).ToArray());
+            if (raw.Length > 10) raw = raw.Substring(0, 10);
+
+            string formatted = raw;
+            if (raw.Length > 3) formatted = formatted.Insert(3, "-");
+            if (raw.Length > 6) formatted = formatted.Insert(7, "-");
+            if (raw.Length > 8) formatted = formatted.Insert(10, "-");
+
+            if (textBox_NIP.Text != formatted)
+            {
+                textBox_NIP.Text = formatted;
+                textBox_NIP.SelectionStart = textBox_NIP.Text.Length;
+            }
+        }
+
+        // ==========================================
+        // POBIERANIE DANYCH Z BAZY PO WPISANIU
+        // ==========================================
+        private void textBox_email_Leave(object sender, EventArgs e) => UzupelnijDaneOsoby();
+        private void textBox_email_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                UzupelnijDaneOsoby();
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void textBox_NIP_Leave(object sender, EventArgs e) => UzupelnijDaneFirmy();
         private void textBox_NIP_KeyDown(object sender, KeyEventArgs e)
         {
-            // Jeśli użytkownik wciśnie Enter
             if (e.KeyCode == Keys.Enter)
             {
                 UzupelnijDaneFirmy();
@@ -124,12 +232,82 @@ namespace PodkladexApp.Zaopatrzenie
             }
         }
 
-        // DODAJ PRZYCISK "Zapisz" W DESIGNERZE I PODEPNIJ TO ZDARZENIE
+        private void UzupelnijDaneOsoby()
+        {
+            if (string.IsNullOrWhiteSpace(textBox_email.Text)) return;
+
+            try
+            {
+                // Zawsze pobieramy NAJŚWIEŻSZY adres zapisany dla danego maila w tabeli Osoba
+                var znalezionaOsoba = _db.Osoba
+                    .Where(o => o.AdresEMail == textBox_email.Text)
+                    .OrderByDescending(o => o.IdOsoba)
+                    .FirstOrDefault();
+
+                if (znalezionaOsoba != null)
+                {
+                    textBox_imie.Text = znalezionaOsoba.Imie;
+                    textBox_Nazwisko.Text = znalezionaOsoba.Nazwisko;
+                    textBox_Numer_telefonu.Text = znalezionaOsoba.NrTelefonu;
+                    textBox_Miejscowosc.Text = znalezionaOsoba.Miejscowosc;
+                    textBox_kod_pocztowy.Text = znalezionaOsoba.KodPocztowy;
+                    textBox_ulica.Text = znalezionaOsoba.Ulica;
+                    textBox_numer.Text = znalezionaOsoba.Numer;
+
+                    if (czyFirma)
+                    {
+                        var dzisiaj = DateOnly.FromDateTime(DateTime.Today);
+
+                        // Szukamy powiązania po e-mailu (ponieważ IdOsoba może generować się nowe dla historii)
+                        var powiazanieFirmowe = _db.KlientFirma
+                            .Include(kf => kf.IdFirmaNavigation)
+                            .Include(kf => kf.IdKlientNavigation)
+                                .ThenInclude(k => k.IdOsobaNavigation)
+                            .Where(kf => kf.IdKlientNavigation.IdOsobaNavigation.AdresEMail == textBox_email.Text)
+                            .Where(kf => kf.DataKoniec == null || kf.DataKoniec >= dzisiaj)
+                            .OrderByDescending(kf => kf.IdKlientFirma)
+                            .FirstOrDefault();
+
+                        if (powiazanieFirmowe != null && powiazanieFirmowe.IdFirmaNavigation != null)
+                        {
+                            textBox_nazwa_firmy.Text = powiazanieFirmowe.IdFirmaNavigation.Nazwa;
+                            textBox_NIP.Text = powiazanieFirmowe.IdFirmaNavigation.Nip;
+                        }
+                        else
+                        {
+                            textBox_nazwa_firmy.Clear();
+                            textBox_NIP.Clear();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Błąd uzupełniania danych: {ex.Message}");
+            }
+        }
+
+        private void UzupelnijDaneFirmy()
+        {
+            if (string.IsNullOrWhiteSpace(textBox_NIP.Text)) return;
+
+            var znalezionaFirma = _db.Firma.FirstOrDefault(f => f.Nip == textBox_NIP.Text);
+
+            if (znalezionaFirma != null)
+            {
+                textBox_nazwa_firmy.Text = znalezionaFirma.Nazwa;
+                textBox_Miejscowosc.Text = znalezionaFirma.Miejscowosc;
+                textBox_kod_pocztowy.Text = znalezionaFirma.KodPocztowy;
+                textBox_ulica.Text = znalezionaFirma.Ulica;
+                textBox_numer.Text = znalezionaFirma.Numer;
+            }
+        }
+
+        // ==========================================
+        // GŁÓWNA LOGIKA ZAPISU (Przycisk Zapisz)
+        // ==========================================
         private void button_zapisz_Click(object sender, EventArgs e)
         {
-            // ==========================================
-            // 0. WALIDACJA - SPRAWDZENIE CZY POLA SĄ WYPEŁNIONE
-            // ==========================================
             if (string.IsNullOrWhiteSpace(textBox_imie.Text) ||
                 string.IsNullOrWhiteSpace(textBox_Nazwisko.Text) ||
                 string.IsNullOrWhiteSpace(textBox_Numer_telefonu.Text) ||
@@ -140,7 +318,25 @@ namespace PodkladexApp.Zaopatrzenie
                 string.IsNullOrWhiteSpace(textBox_numer.Text))
             {
                 MessageBox.Show("Proszę uzupełnić wszystkie podstawowe dane kontaktowe i adresowe.", "Braki w formularzu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return; // Przerywamy zapisywanie
+                return;
+            }
+
+            if (!Regex.IsMatch(textBox_email.Text, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            {
+                MessageBox.Show("Podano niepoprawny format adresu e-mail.", "Błąd walidacji", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (textBox_kod_pocztowy.Text.Length != 6)
+            {
+                MessageBox.Show("Kod pocztowy jest niekompletny.", "Błąd walidacji", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (textBox_Numer_telefonu.Text.Length != 11)
+            {
+                MessageBox.Show("Numer telefonu musi składać się z 9 cyfr.", "Błąd walidacji", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
             if (czyFirma)
@@ -149,47 +345,27 @@ namespace PodkladexApp.Zaopatrzenie
                     string.IsNullOrWhiteSpace(textBox_NIP.Text))
                 {
                     MessageBox.Show("Wybrano opcję zakupu na firmę. Proszę uzupełnić Nazwę firmy oraz NIP.", "Braki w formularzu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return; // Przerywamy zapisywanie
+                    return;
+                }
+
+                if (textBox_NIP.Text.Length != 13)
+                {
+                    MessageBox.Show("Numer NIP musi składać się dokładnie z 10 cyfr.", "Błąd walidacji", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
             }
-            // ==========================================
 
-            // 1. Sprawdzamy, czy osoba już istnieje w bazie po Emailu
-            var osoba = _db.Osoba.FirstOrDefault(o => o.AdresEMail == textBox_email.Text);
-
-            if (osoba == null)
+            try
             {
-                // Osoba nie istnieje -> Tworzymy nową
-                osoba = new Osoba()
-                {
-                    Imie = textBox_imie.Text,
-                    Nazwisko = textBox_Nazwisko.Text,
-                    NrTelefonu = textBox_Numer_telefonu.Text,
-                    AdresEMail = textBox_email.Text,
-                    // Adres z kontrolek
-                    Miejscowosc = textBox_Miejscowosc.Text,
-                    KodPocztowy = textBox_kod_pocztowy.Text,
-                    Ulica = textBox_ulica.Text,
-                    Numer = textBox_numer.Text,
-                    Pesel = null // Zmienione na null zgodnie z Twoją bazą danych
-                };
-                _db.Osoba.Add(osoba);
-            }
-            else
-            {
-                // Osoba istnieje -> Sprawdzamy, czy którekolwiek z danych uległy zmianie
-                bool czyDaneZmienione =
-                    osoba.Imie != textBox_imie.Text ||
-                    osoba.Nazwisko != textBox_Nazwisko.Text ||
-                    osoba.NrTelefonu != textBox_Numer_telefonu.Text ||
-                    osoba.Miejscowosc != textBox_Miejscowosc.Text ||
-                    osoba.KodPocztowy != textBox_kod_pocztowy.Text ||
-                    osoba.Ulica != textBox_ulica.Text ||
-                    osoba.Numer != textBox_numer.Text;
+                // --- 1. OSOBA (Inteligentne klonowanie / używanie istniejącej) ---
+                var osoba = _db.Osoba
+                    .Where(o => o.AdresEMail == textBox_email.Text)
+                    .OrderByDescending(o => o.IdOsoba)
+                    .FirstOrDefault();
 
-                if (czyDaneZmienione)
+                if (osoba == null)
                 {
-                    // Dane się zmieniły! Tworzymy nowy rekord w bazie, aby nie nadpisać historii
+                    // Całkowicie nowy klient
                     osoba = new Osoba()
                     {
                         Imie = textBox_imie.Text,
@@ -203,178 +379,177 @@ namespace PodkladexApp.Zaopatrzenie
                         Pesel = null
                     };
                     _db.Osoba.Add(osoba);
-                }
-            }
-
-            // Zapisujemy zmiany (wygeneruje to nowe IdOsoba, jeśli obiekt został dodany)
-            _db.SaveChanges();
-
-            // 2. Szukamy czy ta osoba jest już Klientem (używamy aktualnego osoba.IdOsoba)
-            var klient = _db.Klient.FirstOrDefault(k => k.IdOsoba == osoba.IdOsoba);
-            if (klient == null)
-            {
-                klient = new Klient() { IdOsoba = osoba.IdOsoba };
-                _db.Klient.Add(klient);
-                _db.SaveChanges(); // Zapisujemy, aby uzyskać IdKlienta
-            }
-
-            // 3. Logika Firmy
-            if (czyFirma)
-            {
-                var firma = _db.Firma.FirstOrDefault(f => f.Nip == textBox_NIP.Text);
-
-                if (firma == null)
-                {
-                    firma = new Firma()
-                    {
-                        Nazwa = textBox_nazwa_firmy.Text,
-                        Nip = textBox_NIP.Text,
-                        // PRZYPISANIE WSPÓLNEGO ADRESU RÓWNIEŻ DLA FIRMY
-                        Miejscowosc = textBox_Miejscowosc.Text,
-                        KodPocztowy = textBox_kod_pocztowy.Text,
-                        Ulica = textBox_ulica.Text,
-                        Numer = textBox_numer.Text
-                    };
-                    _db.Firma.Add(firma);
-                    _db.SaveChanges();
+                    _db.SaveChanges(); // Generuje nowe ID
                 }
                 else
                 {
-                    // Aktualizujemy dane firmy wspólnym adresem
-                    firma.Nazwa = textBox_nazwa_firmy.Text;
-                    firma.Miejscowosc = textBox_Miejscowosc.Text;
-                    firma.KodPocztowy = textBox_kod_pocztowy.Text;
-                    firma.Ulica = textBox_ulica.Text;
-                    firma.Numer = textBox_numer.Text;
-                }
+                    // Klient z tym mailem jest w bazie. Sprawdzamy, czy zmienił dane adresowe.
+                    bool czyDaneZmienione =
+                        osoba.Imie != textBox_imie.Text ||
+                        osoba.Nazwisko != textBox_Nazwisko.Text ||
+                        osoba.NrTelefonu != textBox_Numer_telefonu.Text ||
+                        osoba.Miejscowosc != textBox_Miejscowosc.Text ||
+                        osoba.KodPocztowy != textBox_kod_pocztowy.Text ||
+                        osoba.Ulica != textBox_ulica.Text ||
+                        osoba.Numer != textBox_numer.Text;
 
-                _db.SaveChanges(); // Zapisuje zmiany dla firmy
-
-                // 4. Łączymy Klienta z Firmą w tabeli pośredniej
-                var klientFirma = _db.KlientFirma.FirstOrDefault(kf => kf.IdKlient == klient.IdKlient && kf.IdFirma == firma.IdFirma);
-                if (klientFirma == null)
-                {
-                    klientFirma = new KlientFirma()
+                    if (czyDaneZmienione)
                     {
-                        IdKlient = klient.IdKlient,
-                        IdFirma = firma.IdFirma,
-                        DataPocz = DateOnly.FromDateTime(DateTime.Today) // <--- Tutaj przypisujemy dzisiejszą datę początku
-                    };
-                    _db.KlientFirma.Add(klientFirma);
+                        // Klient zmienił adres! Tworzymy nową iterację Osoby (nowe ID).
+                        osoba = new Osoba()
+                        {
+                            Imie = textBox_imie.Text,
+                            Nazwisko = textBox_Nazwisko.Text,
+                            NrTelefonu = textBox_Numer_telefonu.Text,
+                            AdresEMail = textBox_email.Text,
+                            Miejscowosc = textBox_Miejscowosc.Text,
+                            KodPocztowy = textBox_kod_pocztowy.Text,
+                            Ulica = textBox_ulica.Text,
+                            Numer = textBox_numer.Text,
+                            Pesel = null
+                        };
+                        _db.Osoba.Add(osoba);
+                        _db.SaveChanges(); // Generuje nowe ID
+                    }
+                    // Jeśli !czyDaneZmienione -> program nie robi kompletnie nic, 
+                    // zmienna `osoba` przechowuje stare, poprawne ID.
                 }
-            }
 
-            // Finalny zapis relacji Klient-Firma
-            _db.SaveChanges();
-
-            // === 5. Tworzenie nagłówka zamówienia ===
-            var zamowienie = new Zamowienie()
-            {
-                IdKlient = klient.IdKlient,
-                DataPrzyjeciaZ = DateOnly.FromDateTime(DateTime.Today),
-                DataZrealizowaniaZ = null
-            };
-            _db.Zamowienie.Add(zamowienie);
-            _db.SaveChanges(); // Zapisujemy, aby baza wygenerowała IdZamowienie
-
-            // === 6. Zapisywanie produktów z koszyka ===
-            if (_produktyDoZapisania != null && _produktyDoZapisania.Count > 0)
-            {
-                foreach (var poz in _produktyDoZapisania)
+                // --- 2. KLIENT ---
+                var klient = _db.Klient.FirstOrDefault(k => k.IdOsoba == osoba.IdOsoba);
+                if (klient == null)
                 {
-                    var szczegol = new SzczegolyZamowienia()
-                    {
-                        IdZamowienie = zamowienie.IdZamowienie,
-                        IdProdukt = poz.IdProduktu,
-                        IdMaterial = poz.IdMaterialu,
-                        Ilosc = poz.Ilosc,
-                        Cena = poz.Cena,
-                        Uwagi = poz.Uwagi
-                    };
-                    _db.SzczegolyZamowienia.Add(szczegol);
+                    klient = new Klient() { IdOsoba = osoba.IdOsoba };
+                    _db.Klient.Add(klient);
+                    _db.SaveChanges();
                 }
 
-                _db.SaveChanges(); // Ostateczny zapis wszystkich szczegółów do bazy
+                // --- 3. FIRMA I POWIĄZANIE ---
+                if (czyFirma)
+                {
+                    var firma = _db.Firma.FirstOrDefault(f => f.Nip == textBox_NIP.Text);
+
+                    if (firma == null)
+                    {
+                        firma = new Firma()
+                        {
+                            Nazwa = textBox_nazwa_firmy.Text,
+                            Nip = textBox_NIP.Text,
+                            Miejscowosc = textBox_Miejscowosc.Text,
+                            KodPocztowy = textBox_kod_pocztowy.Text,
+                            Ulica = textBox_ulica.Text,
+                            Numer = textBox_numer.Text
+                        };
+                        _db.Firma.Add(firma);
+                        _db.SaveChanges();
+                    }
+                    else
+                    {
+                        // Przy firmie robimy zawsze update, bo NIP musi być unikalny dla jednego podmiotu
+                        firma.Nazwa = textBox_nazwa_firmy.Text;
+                        firma.Miejscowosc = textBox_Miejscowosc.Text;
+                        firma.KodPocztowy = textBox_kod_pocztowy.Text;
+                        firma.Ulica = textBox_ulica.Text;
+                        firma.Numer = textBox_numer.Text;
+                        _db.Firma.Update(firma);
+                        _db.SaveChanges();
+                    }
+
+                    var dzisiaj = DateOnly.FromDateTime(DateTime.Today);
+                    var klientFirma = _db.KlientFirma.FirstOrDefault(kf => kf.IdKlient == klient.IdKlient && kf.IdFirma == firma.IdFirma);
+
+                    if (klientFirma == null)
+                    {
+                        klientFirma = new KlientFirma()
+                        {
+                            IdKlient = klient.IdKlient,
+                            IdFirma = firma.IdFirma,
+                            DataPocz = dzisiaj
+                        };
+                        _db.KlientFirma.Add(klientFirma);
+                    }
+                    else if (klientFirma.DataKoniec != null && klientFirma.DataKoniec < dzisiaj)
+                    {
+                        var nowePowiazanie = new KlientFirma()
+                        {
+                            IdKlient = klient.IdKlient,
+                            IdFirma = firma.IdFirma,
+                            DataPocz = dzisiaj
+                        };
+                        _db.KlientFirma.Add(nowePowiazanie);
+                    }
+                    _db.SaveChanges();
+                }
+
+                // --- 4. ZAMÓWIENIE I SZCZEGÓŁY ---
+                var zamowienie = new Zamowienie()
+                {
+                    IdKlient = klient.IdKlient,
+                    DataPrzyjeciaZ = DateOnly.FromDateTime(DateTime.Today),
+                    DataZrealizowaniaZ = null
+                };
+                _db.Zamowienie.Add(zamowienie);
+                _db.SaveChanges();
+
+                if (_produktyDoZapisania != null && _produktyDoZapisania.Count > 0)
+                {
+                    foreach (var poz in _produktyDoZapisania)
+                    {
+                        var szczegol = new SzczegolyZamowienia()
+                        {
+                            IdZamowienie = zamowienie.IdZamowienie,
+                            IdProdukt = poz.IdProduktu,
+                            IdMaterial = poz.IdMaterialu,
+                            Ilosc = poz.Ilosc,
+                            Cena = poz.Cena,
+                            Uwagi = poz.Uwagi
+                        };
+                        _db.SzczegolyZamowienia.Add(szczegol);
+                    }
+                    _db.SaveChanges();
+                }
+
+                MessageBox.Show("Dane zostały poprawnie zapisane!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
-
-            MessageBox.Show("Dane zostały poprawnie zapisane!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.DialogResult = DialogResult.OK;
-            this.Close();
-        }
-
-        private void UzupelnijDaneOsoby()
-        {
-            if (string.IsNullOrWhiteSpace(textBox_email.Text)) return;
-
-            // Szukamy osoby o podanym emailu
-            var znalezionaOsoba = _db.Osoba.FirstOrDefault(o => o.AdresEMail == textBox_email.Text);
-
-            if (znalezionaOsoba != null)
+            catch (Exception ex)
             {
-                textBox_imie.Text = znalezionaOsoba.Imie;
-                textBox_Nazwisko.Text = znalezionaOsoba.Nazwisko;
-                textBox_Numer_telefonu.Text = znalezionaOsoba.NrTelefonu;
-                textBox_Miejscowosc.Text = znalezionaOsoba.Miejscowosc;
-                textBox_kod_pocztowy.Text = znalezionaOsoba.KodPocztowy;
-                textBox_ulica.Text = znalezionaOsoba.Ulica;
-                textBox_numer.Text = znalezionaOsoba.Numer;
+                MessageBox.Show($"Wystąpił błąd podczas zapisu: {ex.Message}\n\nInner Exception: {ex.InnerException?.Message}", "Błąd bazy danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void UzupelnijDaneFirmy()
-        {
-            if (string.IsNullOrWhiteSpace(textBox_NIP.Text)) return;
-
-            // Szukamy firmy o podanym NIPie
-            var znalezionaFirma = _db.Firma.FirstOrDefault(f => f.Nip == textBox_NIP.Text);
-
-            if (znalezionaFirma != null)
-            {
-                textBox_nazwa_firmy.Text = znalezionaFirma.Nazwa;
-                // Jeśli firma ma u Ciebie w bazie swój własny adres, możesz go tu też uzupełnić:
-                textBox_Miejscowosc.Text = znalezionaFirma.Miejscowosc;
-                textBox_kod_pocztowy.Text = znalezionaFirma.KodPocztowy;
-                textBox_ulica.Text = znalezionaFirma.Ulica;
-                textBox_numer.Text = znalezionaFirma.Numer;
-            }
-        }
-
-        private void label_imie_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label_nazwisko_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        // ==========================================
+        // PRZYCISKI POMOCNICZE
+        // ==========================================
         private void button_czyszczenie_Click(object sender, EventArgs e)
         {
-            // Czyszczenie danych klienta (osoby)
             textBox_imie.Clear();
             textBox_Nazwisko.Clear();
             textBox_Numer_telefonu.Clear();
             textBox_email.Clear();
-
-            // Czyszczenie danych adresowych
             textBox_Miejscowosc.Clear();
             textBox_kod_pocztowy.Clear();
             textBox_ulica.Clear();
             textBox_numer.Clear();
-
-            // Czyszczenie danych firmowych
             textBox_nazwa_firmy.Clear();
             textBox_NIP.Clear();
-
         }
 
         private void button_Wroc_Click(object sender, EventArgs e)
         {
-            // Ustawiamy wynik na Cancel (oznacza, że nie zapisaliśmy) i zamykamy formularz.
-            // To uruchomi zdarzenie FormClosed w KROKU 1, które z powrotem pokaże koszyk!
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
+
+        // Puste zdarzenia wygenerowane przez designera 
+        private void label_imie_Click(object sender, EventArgs e) { }
+        private void label_nazwisko_Click(object sender, EventArgs e) { }
+        private void textBox_imie_TextChanged(object sender, EventArgs e) { }
+        private void textBox_email_TextChanged(object sender, EventArgs e) { }
+        private void textBox_Miejscowosc_TextChanged(object sender, EventArgs e) { }
+        private void panel1_Paint(object sender, PaintEventArgs e) { }
+        private void textBox_nazwa_firmy_TextChanged(object sender, EventArgs e) { }
+        private void label1_Click(object sender, EventArgs e) { }
     }
 }
