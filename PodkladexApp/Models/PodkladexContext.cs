@@ -187,7 +187,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Awaria>(entity =>
         {
-            entity.HasKey(e => e.IdAwaria).HasName("PK__Awaria__8D4FCB83F552C580");
+            entity.HasKey(e => e.IdAwaria).HasName("PK__Awaria__8D4FCB83809B30B0");
 
             entity.Property(e => e.IdAwaria).HasColumnName("ID_awaria");
             entity.Property(e => e.DataUsuniecia).HasColumnName("Data_usuniecia");
@@ -201,17 +201,17 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdMaszynaNavigation).WithMany(p => p.Awaria)
                 .HasForeignKey(d => d.IdMaszyna)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Awaria__ID_maszy__503BEA1C");
+                .HasConstraintName("FK__Awaria__ID_maszy__4F47C5E3");
 
             entity.HasOne(d => d.IdPracownikNavigation).WithMany(p => p.Awaria)
                 .HasForeignKey(d => d.IdPracownik)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Awaria__ID_praco__51300E55");
+                .HasConstraintName("FK__Awaria__ID_praco__503BEA1C");
         });
 
         modelBuilder.Entity<BadanieMedyczne>(entity =>
         {
-            entity.HasKey(e => e.IdBadanieMedyczne).HasName("PK__Badanie___D27847BA8FE4DAB3");
+            entity.HasKey(e => e.IdBadanieMedyczne).HasName("PK__Badanie___D27847BA8A0A01E7");
 
             entity.ToTable("Badanie_medyczne");
 
@@ -226,17 +226,17 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdPracownikNavigation).WithMany(p => p.BadanieMedyczne)
                 .HasForeignKey(d => d.IdPracownik)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Badanie_m__ID_pr__46E78A0C");
+                .HasConstraintName("FK__Badanie_m__ID_pr__45F365D3");
 
             entity.HasOne(d => d.IdTypBadaniaMedNavigation).WithMany(p => p.BadanieMedyczne)
                 .HasForeignKey(d => d.IdTypBadaniaMed)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Badanie_m__ID_ty__47DBAE45");
+                .HasConstraintName("FK__Badanie_m__ID_ty__46E78A0C");
         });
 
         modelBuilder.Entity<CzescZamienna>(entity =>
         {
-            entity.HasKey(e => e.IdCzesci).HasName("PK__Czesc_za__3566F799C4B788C2");
+            entity.HasKey(e => e.IdCzesci).HasName("PK__Czesc_za__3566F799EC5E85DC");
 
             entity.ToTable("Czesc_zamienna");
 
@@ -248,7 +248,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<CzesciAwaria>(entity =>
         {
-            entity.HasKey(e => e.IdCzesciAwaria).HasName("PK__Czesci_a__2A11CA5C0FC604EB");
+            entity.HasKey(e => e.IdCzesciAwaria).HasName("PK__Czesci_a__2A11CA5CCBF99FD5");
 
             entity.ToTable("Czesci_awaria");
 
@@ -259,17 +259,17 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdAwariaNavigation).WithMany(p => p.CzesciAwaria)
                 .HasForeignKey(d => d.IdAwaria)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Czesci_aw__ID_aw__55009F39");
+                .HasConstraintName("FK__Czesci_aw__ID_aw__540C7B00");
 
             entity.HasOne(d => d.IdCzesciNavigation).WithMany(p => p.CzesciAwaria)
                 .HasForeignKey(d => d.IdCzesci)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Czesci_aw__ID_cz__540C7B00");
+                .HasConstraintName("FK__Czesci_aw__ID_cz__531856C7");
         });
 
         modelBuilder.Entity<CzesciPrzeglady>(entity =>
         {
-            entity.HasKey(e => e.IdCzesciPrzeglady).HasName("PK__Czesci_p__025E78FC38AE9B24");
+            entity.HasKey(e => e.IdCzesciPrzeglady).HasName("PK__Czesci_p__025E78FC99F66D82");
 
             entity.ToTable("Czesci_przeglady");
 
@@ -281,17 +281,17 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdCzesciNavigation).WithMany(p => p.CzesciPrzeglady)
                 .HasForeignKey(d => d.IdCzesci)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Czesci_pr__ID_cz__6442E2C9");
+                .HasConstraintName("FK__Czesci_pr__ID_cz__634EBE90");
 
             entity.HasOne(d => d.IdObslugaNavigation).WithMany(p => p.CzesciPrzeglady)
                 .HasForeignKey(d => d.IdObsluga)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Czesci_pr__ID_ob__65370702");
+                .HasConstraintName("FK__Czesci_pr__ID_ob__6442E2C9");
         });
 
         modelBuilder.Entity<Dostawa>(entity =>
         {
-            entity.HasKey(e => e.IdDostawa).HasName("PK__Dostawa__6D63311296B88F3E");
+            entity.HasKey(e => e.IdDostawa).HasName("PK__Dostawa__6D633112DED87E44");
 
             entity.Property(e => e.IdDostawa).HasColumnName("ID_dostawa");
             entity.Property(e => e.DataDostawy).HasColumnName("Data_dostawy");
@@ -301,19 +301,19 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdFirmaNavigation).WithMany(p => p.Dostawa)
                 .HasForeignKey(d => d.IdFirma)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Dostawa__ID_firm__07C12930");
+                .HasConstraintName("FK__Dostawa__ID_firm__06CD04F7");
 
             entity.HasOne(d => d.IdPracownikNavigation).WithMany(p => p.Dostawa)
                 .HasForeignKey(d => d.IdPracownik)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Dostawa__ID_prac__08B54D69");
+                .HasConstraintName("FK__Dostawa__ID_prac__07C12930");
         });
 
         modelBuilder.Entity<Firma>(entity =>
         {
-            entity.HasKey(e => e.IdFirma).HasName("PK__Firma__30DD244A7DDB293C");
+            entity.HasKey(e => e.IdFirma).HasName("PK__Firma__30DD244AADE2D5DD");
 
-            entity.HasIndex(e => e.Nip, "UQ__Firma__C7DEC3C6437E8370").IsUnique();
+            entity.HasIndex(e => e.Nip, "UQ__Firma__C7DEC3C660E4639B").IsUnique();
 
             entity.Property(e => e.IdFirma).HasColumnName("ID_firma");
             entity.Property(e => e.KodPocztowy)
@@ -334,7 +334,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Gwarancja>(entity =>
         {
-            entity.HasKey(e => e.IdGwarancja).HasName("PK__Gwarancj__06520D254E18BB6D");
+            entity.HasKey(e => e.IdGwarancja).HasName("PK__Gwarancj__06520D25623E7CA9");
 
             entity.Property(e => e.IdGwarancja).HasColumnName("ID_gwarancja");
             entity.Property(e => e.CzasGwarancji).HasColumnName("Czas_gwarancji");
@@ -345,17 +345,17 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdFirmaNavigation).WithMany(p => p.Gwarancja)
                 .HasForeignKey(d => d.IdFirma)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Gwarancja__ID_fi__4B7734FF");
+                .HasConstraintName("FK__Gwarancja__ID_fi__4A8310C6");
 
             entity.HasOne(d => d.IdMaszynaNavigation).WithMany(p => p.Gwarancja)
                 .HasForeignKey(d => d.IdMaszyna)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Gwarancja__ID_ma__4A8310C6");
+                .HasConstraintName("FK__Gwarancja__ID_ma__498EEC8D");
         });
 
         modelBuilder.Entity<Jednostka>(entity =>
         {
-            entity.HasKey(e => e.IdJednostki).HasName("PK__Jednostk__B50E042F22ADD4E3");
+            entity.HasKey(e => e.IdJednostki).HasName("PK__Jednostk__B50E042F8C405749");
 
             entity.Property(e => e.IdJednostki).HasColumnName("ID_jednostki");
             entity.Property(e => e.NazwaJednostki)
@@ -366,19 +366,19 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Klient>(entity =>
         {
-            entity.HasKey(e => e.IdKlient).HasName("PK__Klient__7382667EBF7FDA71");
+            entity.HasKey(e => e.IdKlient).HasName("PK__Klient__7382667E480E8C5C");
 
             entity.Property(e => e.IdKlient).HasColumnName("ID_klient");
             entity.Property(e => e.IdOsoba).HasColumnName("ID_osoba");
 
             entity.HasOne(d => d.IdOsobaNavigation).WithMany(p => p.Klient)
                 .HasForeignKey(d => d.IdOsoba)
-                .HasConstraintName("FK__Klient__ID_osoba__6383C8BA");
+                .HasConstraintName("FK__Klient__ID_osoba__628FA481");
         });
 
         modelBuilder.Entity<KlientFirma>(entity =>
         {
-            entity.HasKey(e => e.IdKlientFirma).HasName("PK__Klient_f__2AAE6DA752410F47");
+            entity.HasKey(e => e.IdKlientFirma).HasName("PK__Klient_f__2AAE6DA72F49F8F1");
 
             entity.ToTable("Klient_firma");
 
@@ -390,16 +390,16 @@ public partial class PodkladexContext : DbContext
 
             entity.HasOne(d => d.IdFirmaNavigation).WithMany(p => p.KlientFirma)
                 .HasForeignKey(d => d.IdFirma)
-                .HasConstraintName("FK__Klient_fi__ID_fi__6754599E");
+                .HasConstraintName("FK__Klient_fi__ID_fi__66603565");
 
             entity.HasOne(d => d.IdKlientNavigation).WithMany(p => p.KlientFirma)
                 .HasForeignKey(d => d.IdKlient)
-                .HasConstraintName("FK__Klient_fi__ID_kl__66603565");
+                .HasConstraintName("FK__Klient_fi__ID_kl__656C112C");
         });
 
         modelBuilder.Entity<KontrolaMat>(entity =>
         {
-            entity.HasKey(e => e.IdKontrolaMat).HasName("PK__Kontrola__5856399F492074CE");
+            entity.HasKey(e => e.IdKontrolaMat).HasName("PK__Kontrola__5856399F3656D557");
 
             entity.ToTable("Kontrola_mat");
 
@@ -415,22 +415,22 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdMaterialNavigation).WithMany(p => p.KontrolaMat)
                 .HasForeignKey(d => d.IdMaterial)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Kontrola___ID_ma__29221CFB");
+                .HasConstraintName("FK__Kontrola___ID_ma__282DF8C2");
 
             entity.HasOne(d => d.IdPracownikNavigation).WithMany(p => p.KontrolaMat)
                 .HasForeignKey(d => d.IdPracownik)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Kontrola___ID_pr__2739D489");
+                .HasConstraintName("FK__Kontrola___ID_pr__2645B050");
 
             entity.HasOne(d => d.IdZadaniePNavigation).WithMany(p => p.KontrolaMat)
                 .HasForeignKey(d => d.IdZadanieP)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Kontrola___ID_za__282DF8C2");
+                .HasConstraintName("FK__Kontrola___ID_za__2739D489");
         });
 
         modelBuilder.Entity<KontrolaProd>(entity =>
         {
-            entity.HasKey(e => e.IdKontrolaProd).HasName("PK__Kontrola__3831EE8946BD60A8");
+            entity.HasKey(e => e.IdKontrolaProd).HasName("PK__Kontrola__3831EE892DF9536B");
 
             entity.ToTable("Kontrola_prod");
 
@@ -445,17 +445,17 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdPracownikNavigation).WithMany(p => p.KontrolaProd)
                 .HasForeignKey(d => d.IdPracownik)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Kontrola___ID_pr__2BFE89A6");
+                .HasConstraintName("FK__Kontrola___ID_pr__2B0A656D");
 
             entity.HasOne(d => d.IdZadaniePNavigation).WithMany(p => p.KontrolaProd)
                 .HasForeignKey(d => d.IdZadanieP)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Kontrola___ID_za__2CF2ADDF");
+                .HasConstraintName("FK__Kontrola___ID_za__2BFE89A6");
         });
 
         modelBuilder.Entity<Maszyna>(entity =>
         {
-            entity.HasKey(e => e.IdMaszyna).HasName("PK__Maszyna__38E0F77A8A9A7942");
+            entity.HasKey(e => e.IdMaszyna).HasName("PK__Maszyna__38E0F77ACAB112B0");
 
             entity.Property(e => e.IdMaszyna).HasColumnName("ID_maszyna");
             entity.Property(e => e.DataUruchomienia).HasColumnName("Data_uruchomienia");
@@ -469,7 +469,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<MaszynaTyp>(entity =>
         {
-            entity.HasKey(e => e.IdMaszynaTyp).HasName("PK__Maszyna___EFC428C582658C27");
+            entity.HasKey(e => e.IdMaszynaTyp).HasName("PK__Maszyna___EFC428C5CE707FA3");
 
             entity.ToTable("Maszyna_typ");
 
@@ -480,17 +480,17 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdMaszynaNavigation).WithMany(p => p.MaszynaTyp)
                 .HasForeignKey(d => d.IdMaszyna)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Maszyna_t__ID_ma__3D2915A8");
+                .HasConstraintName("FK__Maszyna_t__ID_ma__3C34F16F");
 
             entity.HasOne(d => d.IdTypNavigation).WithMany(p => p.MaszynaTyp)
                 .HasForeignKey(d => d.IdTyp)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Maszyna_t__ID_ty__3C34F16F");
+                .HasConstraintName("FK__Maszyna_t__ID_ty__3B40CD36");
         });
 
         modelBuilder.Entity<MaszynaWyp>(entity =>
         {
-            entity.HasKey(e => e.IdMaszynaWyp).HasName("PK__Maszyna___EC15EAC3EE91E001");
+            entity.HasKey(e => e.IdMaszynaWyp).HasName("PK__Maszyna___EC15EAC3FE296EF0");
 
             entity.ToTable("Maszyna_wyp");
 
@@ -502,22 +502,22 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdMaszynaNavigation).WithMany(p => p.MaszynaWyp)
                 .HasForeignKey(d => d.IdMaszyna)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Maszyna_w__ID_ma__46B27FE2");
+                .HasConstraintName("FK__Maszyna_w__ID_ma__45BE5BA9");
 
             entity.HasOne(d => d.IdNormaPNavigation).WithMany(p => p.MaszynaWyp)
                 .HasForeignKey(d => d.IdNormaP)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Maszyna_w__ID_no__45BE5BA9");
+                .HasConstraintName("FK__Maszyna_w__ID_no__44CA3770");
 
             entity.HasOne(d => d.IdWyposazenieNavigation).WithMany(p => p.MaszynaWyp)
                 .HasForeignKey(d => d.IdWyposazenie)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Maszyna_w__ID_wy__47A6A41B");
+                .HasConstraintName("FK__Maszyna_w__ID_wy__46B27FE2");
         });
 
         modelBuilder.Entity<Material>(entity =>
         {
-            entity.HasKey(e => e.IdMaterial).HasName("PK__Material__DF8526108F3461C0");
+            entity.HasKey(e => e.IdMaterial).HasName("PK__Material__DF8526109BC8C8EC");
 
             entity.Property(e => e.IdMaterial).HasColumnName("ID_material");
             entity.Property(e => e.IdRodzaj).HasColumnName("ID_rodzaj");
@@ -529,12 +529,12 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdRodzajNavigation).WithMany(p => p.Material)
                 .HasForeignKey(d => d.IdRodzaj)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Material__ID_rod__01142BA1");
+                .HasConstraintName("FK__Material__ID_rod__00200768");
         });
 
         modelBuilder.Entity<MaterialWlasciwosci>(entity =>
         {
-            entity.HasKey(e => e.IdMaterialWlasciwosci).HasName("PK__Material__6D0188716188766E");
+            entity.HasKey(e => e.IdMaterialWlasciwosci).HasName("PK__Material__6D01887169A306B6");
 
             entity.ToTable("Material_wlasciwosci");
 
@@ -554,17 +554,17 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdMaterialNavigation).WithMany(p => p.MaterialWlasciwosci)
                 .HasForeignKey(d => d.IdMaterial)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Material___ID_ma__04E4BC85");
+                .HasConstraintName("FK__Material___ID_ma__03F0984C");
 
             entity.HasOne(d => d.IdWlasciwosciNavigation).WithMany(p => p.MaterialWlasciwosci)
                 .HasForeignKey(d => d.IdWlasciwosci)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Material___ID_wl__03F0984C");
+                .HasConstraintName("FK__Material___ID_wl__02FC7413");
         });
 
         modelBuilder.Entity<Norma>(entity =>
         {
-            entity.HasKey(e => e.IdNormy).HasName("PK__Norma__E42B5C522B98BCC5");
+            entity.HasKey(e => e.IdNormy).HasName("PK__Norma__E42B5C52CAEB7073");
 
             entity.Property(e => e.IdNormy).HasColumnName("ID_normy");
             entity.Property(e => e.Nazwa)
@@ -577,7 +577,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<NormaProd>(entity =>
         {
-            entity.HasKey(e => e.IdNormaP).HasName("PK__Norma_pr__FD73E488D6C89AED");
+            entity.HasKey(e => e.IdNormaP).HasName("PK__Norma_pr__FD73E488376B4246");
 
             entity.ToTable("Norma_prod");
 
@@ -594,17 +594,17 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdMaterialNavigation).WithMany(p => p.NormaProd)
                 .HasForeignKey(d => d.IdMaterial)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Norma_pro__ID_ma__245D67DE");
+                .HasConstraintName("FK__Norma_pro__ID_ma__236943A5");
 
             entity.HasOne(d => d.IdProduktNavigation).WithMany(p => p.NormaProd)
                 .HasForeignKey(d => d.IdProdukt)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Norma_pro__ID_pr__236943A5");
+                .HasConstraintName("FK__Norma_pro__ID_pr__22751F6C");
         });
 
         modelBuilder.Entity<NormyEksploatacyjne>(entity =>
         {
-            entity.HasKey(e => e.IdNormyEkspl).HasName("PK__Normy_ek__63D2F7FEFB7F8C3E");
+            entity.HasKey(e => e.IdNormyEkspl).HasName("PK__Normy_ek__63D2F7FEC1F51C11");
 
             entity.ToTable("Normy_eksploatacyjne");
 
@@ -620,7 +620,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<NormyMaszyna>(entity =>
         {
-            entity.HasKey(e => e.IdNormyMaszyna).HasName("PK__Normy_ma__F353B32B62F965F8");
+            entity.HasKey(e => e.IdNormyMaszyna).HasName("PK__Normy_ma__F353B32B51F211EA");
 
             entity.ToTable("Normy_maszyna");
 
@@ -632,17 +632,17 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdMaszynaNavigation).WithMany(p => p.NormyMaszyna)
                 .HasForeignKey(d => d.IdMaszyna)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Normy_mas__ID_ma__6166761E");
+                .HasConstraintName("FK__Normy_mas__ID_ma__607251E5");
 
             entity.HasOne(d => d.IdNormyEksplNavigation).WithMany(p => p.NormyMaszyna)
                 .HasForeignKey(d => d.IdNormyEkspl)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Normy_mas__ID_no__607251E5");
+                .HasConstraintName("FK__Normy_mas__ID_no__5F7E2DAC");
         });
 
         modelBuilder.Entity<Obsluga>(entity =>
         {
-            entity.HasKey(e => e.IdObsluga).HasName("PK__Obsluga__5F5AD4764FFA2072");
+            entity.HasKey(e => e.IdObsluga).HasName("PK__Obsluga__5F5AD476DBF1B659");
 
             entity.Property(e => e.IdObsluga).HasColumnName("ID_obsluga");
             entity.Property(e => e.DataKoniec).HasColumnName("Data_koniec");
@@ -656,24 +656,26 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdMaszynaNavigation).WithMany(p => p.Obsluga)
                 .HasForeignKey(d => d.IdMaszyna)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Obsluga__ID_masz__59C55456");
+                .HasConstraintName("FK__Obsluga__ID_masz__58D1301D");
 
             entity.HasOne(d => d.IdPracownikNavigation).WithMany(p => p.Obsluga)
                 .HasForeignKey(d => d.IdPracownik)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Obsluga__ID_prac__5AB9788F");
+                .HasConstraintName("FK__Obsluga__ID_prac__59C55456");
 
             entity.HasOne(d => d.IdRodzajObslugiNavigation).WithMany(p => p.Obsluga)
                 .HasForeignKey(d => d.IdRodzajObslugi)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Obsluga__ID_rodz__5BAD9CC8");
+                .HasConstraintName("FK__Obsluga__ID_rodz__5AB9788F");
         });
 
         modelBuilder.Entity<Osoba>(entity =>
         {
-            entity.HasKey(e => e.IdOsoba).HasName("PK__Osoba__7573A697358F9A8A");
+            entity.HasKey(e => e.IdOsoba).HasName("PK__Osoba__7573A697C7CC861C");
 
-            entity.HasIndex(e => e.Pesel, "UQ__Osoba__4F16EE7F03046341").IsUnique();
+            entity.HasIndex(e => e.Pesel, "UQ_Osoba_Pesel")
+                .IsUnique()
+                .HasFilter("([PESEL] IS NOT NULL)");
 
             entity.Property(e => e.IdOsoba).HasColumnName("ID_osoba");
             entity.Property(e => e.AdresEMail)
@@ -705,7 +707,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Pomiar>(entity =>
         {
-            entity.HasKey(e => e.IdPomiar).HasName("PK__Pomiar__D471E709182E8D76");
+            entity.HasKey(e => e.IdPomiar).HasName("PK__Pomiar__D471E709A2BADF67");
 
             entity.Property(e => e.IdPomiar).HasColumnName("ID_Pomiar");
             entity.Property(e => e.IdKontrolaProd).HasColumnName("ID_Kontrola_prod");
@@ -717,17 +719,17 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdKontrolaProdNavigation).WithMany(p => p.Pomiar)
                 .HasForeignKey(d => d.IdKontrolaProd)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Pomiar__ID_Kontr__2FCF1A8A");
+                .HasConstraintName("FK__Pomiar__ID_Kontr__2EDAF651");
 
             entity.HasOne(d => d.IdWlasciwosciNavigation).WithMany(p => p.Pomiar)
                 .HasForeignKey(d => d.IdWlasciwosci)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Pomiar__ID_wlasc__30C33EC3");
+                .HasConstraintName("FK__Pomiar__ID_wlasc__2FCF1A8A");
         });
 
         modelBuilder.Entity<PomiarMat>(entity =>
         {
-            entity.HasKey(e => e.IdPomiarMat).HasName("PK__Pomiar_m__84650180F1C939CB");
+            entity.HasKey(e => e.IdPomiarMat).HasName("PK__Pomiar_m__846501804790978A");
 
             entity.ToTable("Pomiar_mat");
 
@@ -741,17 +743,17 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdKontrolaMatNavigation).WithMany(p => p.PomiarMat)
                 .HasForeignKey(d => d.IdKontrolaMat)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Pomiar_ma__ID_Ko__339FAB6E");
+                .HasConstraintName("FK__Pomiar_ma__ID_Ko__32AB8735");
 
             entity.HasOne(d => d.IdWlasciwosciNavigation).WithMany(p => p.PomiarMat)
                 .HasForeignKey(d => d.IdWlasciwosci)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Pomiar_ma__ID_wl__3493CFA7");
+                .HasConstraintName("FK__Pomiar_ma__ID_wl__339FAB6E");
         });
 
         modelBuilder.Entity<Pracownik>(entity =>
         {
-            entity.HasKey(e => e.IdPracownik).HasName("PK__Pracowni__4AE49B6E02ED0AA9");
+            entity.HasKey(e => e.IdPracownik).HasName("PK__Pracowni__4AE49B6EC1688A0D");
 
             entity.Property(e => e.IdPracownik).HasColumnName("ID_pracownik");
             entity.Property(e => e.IdOsoba).HasColumnName("ID_osoba");
@@ -759,12 +761,12 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdOsobaNavigation).WithMany(p => p.Pracownik)
                 .HasForeignKey(d => d.IdOsoba)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Pracownik__ID_os__3A81B327");
+                .HasConstraintName("FK__Pracownik__ID_os__398D8EEE");
         });
 
         modelBuilder.Entity<PracownikSzkolenia>(entity =>
         {
-            entity.HasKey(e => e.IdPracownikSzkolenia).HasName("PK__Pracowni__C68FD1497D82D7EE");
+            entity.HasKey(e => e.IdPracownikSzkolenia).HasName("PK__Pracowni__C68FD149FBA54A0A");
 
             entity.ToTable("Pracownik_szkolenia");
 
@@ -780,17 +782,17 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdPracownikNavigation).WithMany(p => p.PracownikSzkolenia)
                 .HasForeignKey(d => d.IdPracownik)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Pracownik__ID_pr__4D94879B");
+                .HasConstraintName("FK__Pracownik__ID_pr__4CA06362");
 
             entity.HasOne(d => d.IdSzkoleniaNavigation).WithMany(p => p.PracownikSzkolenia)
                 .HasForeignKey(d => d.IdSzkolenia)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Pracownik__ID_sz__4E88ABD4");
+                .HasConstraintName("FK__Pracownik__ID_sz__4D94879B");
         });
 
         modelBuilder.Entity<Produkcja>(entity =>
         {
-            entity.HasKey(e => e.IdProdukcja).HasName("PK__Produkcj__69A3FC993ED487CD");
+            entity.HasKey(e => e.IdProdukcja).HasName("PK__Produkcj__69A3FC994DF60201");
 
             entity.Property(e => e.IdProdukcja).HasColumnName("ID_produkcja");
             entity.Property(e => e.IdNormyP).HasColumnName("ID_normyP");
@@ -805,22 +807,22 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdNormyPNavigation).WithMany(p => p.Produkcja)
                 .HasForeignKey(d => d.IdNormyP)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Produkcja__ID_no__395884C4");
+                .HasConstraintName("FK__Produkcja__ID_no__3864608B");
 
             entity.HasOne(d => d.IdPracownikNavigation).WithMany(p => p.Produkcja)
                 .HasForeignKey(d => d.IdPracownik)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Produkcja__ID_pr__37703C52");
+                .HasConstraintName("FK__Produkcja__ID_pr__367C1819");
 
             entity.HasOne(d => d.IdZadaniePNavigation).WithMany(p => p.Produkcja)
                 .HasForeignKey(d => d.IdZadanieP)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Produkcja__ID_za__3864608B");
+                .HasConstraintName("FK__Produkcja__ID_za__37703C52");
         });
 
         modelBuilder.Entity<Produkt>(entity =>
         {
-            entity.HasKey(e => e.IdProdukt).HasName("PK__Produkt__FD71AB0D61060919");
+            entity.HasKey(e => e.IdProdukt).HasName("PK__Produkt__FD71AB0DC9E5C264");
 
             entity.Property(e => e.IdProdukt).HasColumnName("ID_produkt");
             entity.Property(e => e.Nazwa)
@@ -830,7 +832,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<ProduktNorma>(entity =>
         {
-            entity.HasKey(e => e.IdProduktyNormy).HasName("PK__Produkt___4247AF0F29E53F43");
+            entity.HasKey(e => e.IdProduktyNormy).HasName("PK__Produkt___4247AF0F3892EA9E");
 
             entity.ToTable("Produkt_Norma");
 
@@ -841,17 +843,17 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdNormyNavigation).WithMany(p => p.ProduktNorma)
                 .HasForeignKey(d => d.IdNormy)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Produkt_N__ID_no__1BC821DD");
+                .HasConstraintName("FK__Produkt_N__ID_no__1AD3FDA4");
 
             entity.HasOne(d => d.IdProduktNavigation).WithMany(p => p.ProduktNorma)
                 .HasForeignKey(d => d.IdProdukt)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Produkt_N__ID_pr__1CBC4616");
+                .HasConstraintName("FK__Produkt_N__ID_pr__1BC821DD");
         });
 
         modelBuilder.Entity<ProduktWlasciwosci>(entity =>
         {
-            entity.HasKey(e => e.IdProduktyWlasciwosci).HasName("PK__Produkt___AA8BF2349D61F8BD");
+            entity.HasKey(e => e.IdProduktyWlasciwosci).HasName("PK__Produkt___AA8BF234EB814BB0");
 
             entity.ToTable("Produkt_wlasciwosci");
 
@@ -871,17 +873,17 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdProduktNavigation).WithMany(p => p.ProduktWlasciwosci)
                 .HasForeignKey(d => d.IdProdukt)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Produkt_w__ID_pr__208CD6FA");
+                .HasConstraintName("FK__Produkt_w__ID_pr__1F98B2C1");
 
             entity.HasOne(d => d.IdWlasciwosciNavigation).WithMany(p => p.ProduktWlasciwosci)
                 .HasForeignKey(d => d.IdWlasciwosci)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Produkt_w__ID_wl__1F98B2C1");
+                .HasConstraintName("FK__Produkt_w__ID_wl__1EA48E88");
         });
 
         modelBuilder.Entity<RodzajMaterialu>(entity =>
         {
-            entity.HasKey(e => e.IdRodzaj).HasName("PK__Rodzaj_m__5605F872E2F66881");
+            entity.HasKey(e => e.IdRodzaj).HasName("PK__Rodzaj_m__5605F872AFCB980B");
 
             entity.ToTable("Rodzaj_materialu");
 
@@ -893,7 +895,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<RodzajObslugi>(entity =>
         {
-            entity.HasKey(e => e.IdRodzajObslugi).HasName("PK__Rodzaj_o__CCBEB0F8E0435D12");
+            entity.HasKey(e => e.IdRodzajObslugi).HasName("PK__Rodzaj_o__CCBEB0F8588D2626");
 
             entity.ToTable("Rodzaj_obslugi");
 
@@ -908,7 +910,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<RodzajUmowy>(entity =>
         {
-            entity.HasKey(e => e.IdRodzaju).HasName("PK__Rodzaj_u__5001DC837E8F3F70");
+            entity.HasKey(e => e.IdRodzaju).HasName("PK__Rodzaj_u__5001DC8364D7DD15");
 
             entity.ToTable("Rodzaj_umowy");
 
@@ -923,7 +925,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<SiatkaPlac>(entity =>
         {
-            entity.HasKey(e => e.IdSiatkaPlac).HasName("PK__Siatka_p__487C8DBE7CF3D85A");
+            entity.HasKey(e => e.IdSiatkaPlac).HasName("PK__Siatka_p__487C8DBE0CFFE97E");
 
             entity.ToTable("Siatka_plac");
 
@@ -936,12 +938,12 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdPracownikNavigation).WithMany(p => p.SiatkaPlac)
                 .HasForeignKey(d => d.IdPracownik)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Siatka_pl__ID_pr__4AB81AF0");
+                .HasConstraintName("FK__Siatka_pl__ID_pr__49C3F6B7");
         });
 
         modelBuilder.Entity<SzczegolyDostawy>(entity =>
         {
-            entity.HasKey(e => e.IdSzczegolyDostawy).HasName("PK__Szczegol__C5FC719BD5726E3D");
+            entity.HasKey(e => e.IdSzczegolyDostawy).HasName("PK__Szczegol__C5FC719B07CA6340");
 
             entity.ToTable("Szczegoly_dostawy");
 
@@ -954,17 +956,17 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdDostawaNavigation).WithMany(p => p.SzczegolyDostawy)
                 .HasForeignKey(d => d.IdDostawa)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Szczegoly__ID_do__0B91BA14");
+                .HasConstraintName("FK__Szczegoly__ID_do__0A9D95DB");
 
             entity.HasOne(d => d.IdMaterialNavigation).WithMany(p => p.SzczegolyDostawy)
                 .HasForeignKey(d => d.IdMaterial)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Szczegoly__ID_ma__0C85DE4D");
+                .HasConstraintName("FK__Szczegoly__ID_ma__0B91BA14");
         });
 
         modelBuilder.Entity<SzczegolyZamowienia>(entity =>
         {
-            entity.HasKey(e => e.IdSzczegolyZamowienia).HasName("PK__Szczegol__2D26C34839F531C4");
+            entity.HasKey(e => e.IdSzczegolyZamowienia).HasName("PK__Szczegol__2D26C3480104A7AC");
 
             entity.ToTable("Szczegoly_zamowienia");
 
@@ -979,22 +981,22 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdMaterialNavigation).WithMany(p => p.SzczegolyZamowienia)
                 .HasForeignKey(d => d.IdMaterial)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Szczegoly__ID_ma__114A936A");
+                .HasConstraintName("FK__Szczegoly__ID_ma__10566F31");
 
             entity.HasOne(d => d.IdProduktNavigation).WithMany(p => p.SzczegolyZamowienia)
                 .HasForeignKey(d => d.IdProdukt)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Szczegoly__ID_pr__10566F31");
+                .HasConstraintName("FK__Szczegoly__ID_pr__0F624AF8");
 
             entity.HasOne(d => d.IdZamowienieNavigation).WithMany(p => p.SzczegolyZamowienia)
                 .HasForeignKey(d => d.IdZamowienie)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Szczegoly__ID_za__0F624AF8");
+                .HasConstraintName("FK__Szczegoly__ID_za__0E6E26BF");
         });
 
         modelBuilder.Entity<Szkolenie>(entity =>
         {
-            entity.HasKey(e => e.IdSzkolenia).HasName("PK__Szkoleni__8655159D19BE3DC4");
+            entity.HasKey(e => e.IdSzkolenia).HasName("PK__Szkoleni__8655159D78CB09CE");
 
             entity.Property(e => e.IdSzkolenia).HasColumnName("ID_szkolenia");
             entity.Property(e => e.CzyObowiazkowe).HasColumnName("Czy_obowiazkowe");
@@ -1006,7 +1008,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Typ>(entity =>
         {
-            entity.HasKey(e => e.IdTyp).HasName("PK__Typ__1FBE66786F925EE4");
+            entity.HasKey(e => e.IdTyp).HasName("PK__Typ__1FBE6678C8C8F2EF");
 
             entity.Property(e => e.IdTyp).HasColumnName("ID_typ");
             entity.Property(e => e.Nazwa)
@@ -1016,7 +1018,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<TypBadaniaMed>(entity =>
         {
-            entity.HasKey(e => e.IdTypBadaniaMed).HasName("PK__Typ_bada__E8E973F3967789E3");
+            entity.HasKey(e => e.IdTypBadaniaMed).HasName("PK__Typ_bada__E8E973F39F5A3D3E");
 
             entity.ToTable("Typ_badania_med");
 
@@ -1029,7 +1031,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<TypWlasciwosci>(entity =>
         {
-            entity.HasKey(e => e.IdTypWlasciwosci).HasName("PK__Typ_wlas__637DFEB77FE254A3");
+            entity.HasKey(e => e.IdTypWlasciwosci).HasName("PK__Typ_wlas__637DFEB7C1982A1C");
 
             entity.ToTable("Typ_wlasciwosci");
 
@@ -1041,17 +1043,17 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdTypNavigation).WithMany(p => p.TypWlasciwosci)
                 .HasForeignKey(d => d.IdTyp)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Typ_wlasc__ID_ty__7A672E12");
+                .HasConstraintName("FK__Typ_wlasc__ID_ty__797309D9");
 
             entity.HasOne(d => d.IdWlasciwosciNavigation).WithMany(p => p.TypWlasciwosci)
                 .HasForeignKey(d => d.IdWlasciwosci)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Typ_wlasc__ID_wl__797309D9");
+                .HasConstraintName("FK__Typ_wlasc__ID_wl__787EE5A0");
         });
 
         modelBuilder.Entity<TypZwolnienia>(entity =>
         {
-            entity.HasKey(e => e.IdTypZwolnienia).HasName("PK__Typ_zwol__3E15685923E7B373");
+            entity.HasKey(e => e.IdTypZwolnienia).HasName("PK__Typ_zwol__3E156859C0BD3C1A");
 
             entity.ToTable("Typ_zwolnienia");
 
@@ -1064,7 +1066,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Umowa>(entity =>
         {
-            entity.HasKey(e => e.IdUmowa).HasName("PK__Umowa__D2EDF6FB6872FBF2");
+            entity.HasKey(e => e.IdUmowa).HasName("PK__Umowa__D2EDF6FBFCE429C5");
 
             entity.Property(e => e.IdUmowa).HasColumnName("ID_umowa");
             entity.Property(e => e.DataRoz).HasColumnName("Data_roz");
@@ -1075,17 +1077,17 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdPracownikNavigation).WithMany(p => p.Umowa)
                 .HasForeignKey(d => d.IdPracownik)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Umowa__ID_pracow__59063A47");
+                .HasConstraintName("FK__Umowa__ID_pracow__5812160E");
 
             entity.HasOne(d => d.IdRodzajuNavigation).WithMany(p => p.Umowa)
                 .HasForeignKey(d => d.IdRodzaju)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Umowa__ID_rodzaj__59FA5E80");
+                .HasConstraintName("FK__Umowa__ID_rodzaj__59063A47");
         });
 
         modelBuilder.Entity<Urlop>(entity =>
         {
-            entity.HasKey(e => e.IdUrlopu).HasName("PK__Urlop__595D2971397C77A5");
+            entity.HasKey(e => e.IdUrlopu).HasName("PK__Urlop__595D29713C48C8D2");
 
             entity.Property(e => e.IdUrlopu).HasColumnName("ID_urlopu");
             entity.Property(e => e.Nazwa)
@@ -1095,7 +1097,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<UrlopUmowa>(entity =>
         {
-            entity.HasKey(e => e.IdUrlopUmowa).HasName("PK__Urlop_um__59C9C2FC932C75ED");
+            entity.HasKey(e => e.IdUrlopUmowa).HasName("PK__Urlop_um__59C9C2FC6292A0A9");
 
             entity.ToTable("Urlop_umowa");
 
@@ -1109,12 +1111,12 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdUmowyNavigation).WithMany(p => p.UrlopUmowa)
                 .HasForeignKey(d => d.IdUmowy)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Urlop_umo__ID_um__5CD6CB2B");
+                .HasConstraintName("FK__Urlop_umo__ID_um__5BE2A6F2");
 
             entity.HasOne(d => d.IdUrlopuNavigation).WithMany(p => p.UrlopUmowa)
                 .HasForeignKey(d => d.IdUrlopu)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Urlop_umo__ID_ur__5DCAEF64");
+                .HasConstraintName("FK__Urlop_umo__ID_ur__5CD6CB2B");
         });
 
         modelBuilder.Entity<WidokMaszynaObslugi>(entity =>
@@ -1303,7 +1305,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Wlasciwosc>(entity =>
         {
-            entity.HasKey(e => e.IdWlasciwosci).HasName("PK__Wlasciwo__BE19C14600B92B4A");
+            entity.HasKey(e => e.IdWlasciwosci).HasName("PK__Wlasciwo__BE19C1466EE8AD56");
 
             entity.Property(e => e.IdWlasciwosci).HasColumnName("ID_wlasciwosci");
             entity.Property(e => e.IdJednostki).HasColumnName("ID_jednostki");
@@ -1315,12 +1317,12 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdJednostkiNavigation).WithMany(p => p.Wlasciwosc)
                 .HasForeignKey(d => d.IdJednostki)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Wlasciwos__ID_je__74AE54BC");
+                .HasConstraintName("FK__Wlasciwos__ID_je__73BA3083");
         });
 
         modelBuilder.Entity<WniosekUrlopowy>(entity =>
         {
-            entity.HasKey(e => e.IdWniosku).HasName("PK__Wniosek___9D9F4BAF1B01EDFB");
+            entity.HasKey(e => e.IdWniosku).HasName("PK__Wniosek___9D9F4BAF9CB04AFC");
 
             entity.ToTable("Wniosek_urlopowy");
 
@@ -1334,17 +1336,17 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdPracownikNavigation).WithMany(p => p.WniosekUrlopowy)
                 .HasForeignKey(d => d.IdPracownik)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Wniosek_u__ID_pr__534D60F1");
+                .HasConstraintName("FK__Wniosek_u__ID_pr__52593CB8");
 
             entity.HasOne(d => d.IdUrlopuNavigation).WithMany(p => p.WniosekUrlopowy)
                 .HasForeignKey(d => d.IdUrlopu)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Wniosek_u__ID_ur__5441852A");
+                .HasConstraintName("FK__Wniosek_u__ID_ur__534D60F1");
         });
 
         modelBuilder.Entity<Wyposazenie>(entity =>
         {
-            entity.HasKey(e => e.IdWyposazenie).HasName("PK__Wyposaze__39E58E71A0484F07");
+            entity.HasKey(e => e.IdWyposazenie).HasName("PK__Wyposaze__39E58E716818DC5F");
 
             entity.Property(e => e.IdWyposazenie).HasColumnName("ID_wyposazenie");
             entity.Property(e => e.Nazwa)
@@ -1355,7 +1357,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<WyposazenieWlasciwosci>(entity =>
         {
-            entity.HasKey(e => e.IdWyposWlasc).HasName("PK__Wyposaze__9B217424662F58C7");
+            entity.HasKey(e => e.IdWyposWlasc).HasName("PK__Wyposaze__9B21742464989859");
 
             entity.ToTable("Wyposazenie_wlasciwosci");
 
@@ -1367,17 +1369,17 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdWlasciwosciNavigation).WithMany(p => p.WyposazenieWlasciwosci)
                 .HasForeignKey(d => d.IdWlasciwosci)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Wyposazen__ID_wl__41EDCAC5");
+                .HasConstraintName("FK__Wyposazen__ID_wl__40F9A68C");
 
             entity.HasOne(d => d.IdWyposazenieNavigation).WithMany(p => p.WyposazenieWlasciwosci)
                 .HasForeignKey(d => d.IdWyposazenie)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Wyposazen__ID_wy__42E1EEFE");
+                .HasConstraintName("FK__Wyposazen__ID_wy__41EDCAC5");
         });
 
         modelBuilder.Entity<Wysylka>(entity =>
         {
-            entity.HasKey(e => e.IdWysylka).HasName("PK__Wysylka__ED56F2DAFA4920D3");
+            entity.HasKey(e => e.IdWysylka).HasName("PK__Wysylka__ED56F2DA94F01476");
 
             entity.Property(e => e.IdWysylka).HasColumnName("ID_wysylka");
             entity.Property(e => e.Cena).HasColumnType("decimal(10, 2)");
@@ -1386,7 +1388,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<WysylkaZamowienie>(entity =>
         {
-            entity.HasKey(e => e.IdWysylkaZamowienie).HasName("PK__Wysylka___0DE61031C4BF6D6E");
+            entity.HasKey(e => e.IdWysylkaZamowienie).HasName("PK__Wysylka___0DE6103151394459");
 
             entity.ToTable("Wysylka_zamowienie");
 
@@ -1397,17 +1399,17 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdWysylkaNavigation).WithMany(p => p.WysylkaZamowienie)
                 .HasForeignKey(d => d.IdWysylka)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Wysylka_z__ID_wy__6FE99F9F");
+                .HasConstraintName("FK__Wysylka_z__ID_wy__6EF57B66");
 
             entity.HasOne(d => d.IdZamowienieNavigation).WithMany(p => p.WysylkaZamowienie)
                 .HasForeignKey(d => d.IdZamowienie)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Wysylka_z__ID_za__6EF57B66");
+                .HasConstraintName("FK__Wysylka_z__ID_za__6E01572D");
         });
 
         modelBuilder.Entity<ZadanieProdukcyjne>(entity =>
         {
-            entity.HasKey(e => e.IdZadanieP).HasName("PK__Zadanie___40247834386484D7");
+            entity.HasKey(e => e.IdZadanieP).HasName("PK__Zadanie___4024783461C5D72E");
 
             entity.ToTable("Zadanie_produkcyjne");
 
@@ -1419,17 +1421,17 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdMaszynaNavigation).WithMany(p => p.ZadanieProdukcyjne)
                 .HasForeignKey(d => d.IdMaszyna)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Zadanie_p__ID_ma__160F4887");
+                .HasConstraintName("FK__Zadanie_p__ID_ma__151B244E");
 
             entity.HasOne(d => d.IdZamowienieNavigation).WithMany(p => p.ZadanieProdukcyjne)
                 .HasForeignKey(d => d.IdZamowienie)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Zadanie_p__ID_za__17036CC0");
+                .HasConstraintName("FK__Zadanie_p__ID_za__160F4887");
         });
 
         modelBuilder.Entity<Zamowienie>(entity =>
         {
-            entity.HasKey(e => e.IdZamowienie).HasName("PK__Zamowien__7BF8C9EF42317A25");
+            entity.HasKey(e => e.IdZamowienie).HasName("PK__Zamowien__7BF8C9EF5C6DCA19");
 
             entity.Property(e => e.IdZamowienie).HasColumnName("ID_zamowienie");
             entity.Property(e => e.DataPrzyjeciaZ).HasColumnName("Data_przyjecia_z");
@@ -1439,12 +1441,12 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdKlientNavigation).WithMany(p => p.Zamowienie)
                 .HasForeignKey(d => d.IdKlient)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Zamowieni__ID_kl__6C190EBB");
+                .HasConstraintName("FK__Zamowieni__ID_kl__6B24EA82");
         });
 
         modelBuilder.Entity<ZwolnienieLekarskie>(entity =>
         {
-            entity.HasKey(e => e.IdZwolnienie).HasName("PK__Zwolnien__3A67E027D99BECF4");
+            entity.HasKey(e => e.IdZwolnienie).HasName("PK__Zwolnien__3A67E0279B2D27FD");
 
             entity.ToTable("Zwolnienie_lekarskie");
 
@@ -1458,12 +1460,12 @@ public partial class PodkladexContext : DbContext
             entity.HasOne(d => d.IdPracownikNavigation).WithMany(p => p.ZwolnienieLekarskie)
                 .HasForeignKey(d => d.IdPracownik)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Zwolnieni__ID_pr__4316F928");
+                .HasConstraintName("FK__Zwolnieni__ID_pr__4222D4EF");
 
             entity.HasOne(d => d.IdTypZwolnieniaNavigation).WithMany(p => p.ZwolnienieLekarskie)
                 .HasForeignKey(d => d.IdTypZwolnienia)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Zwolnieni__ID_ty__440B1D61");
+                .HasConstraintName("FK__Zwolnieni__ID_ty__4316F928");
         });
 
         OnModelCreatingPartial(modelBuilder);

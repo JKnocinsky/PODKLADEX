@@ -92,14 +92,14 @@ namespace PodkladexApp.Zaopatrzenie
                 AutoCompleteStringCollection emailKolekcja = new AutoCompleteStringCollection();
                 var dzisiaj = DateOnly.FromDateTime(DateTime.Today);
 
-                // 1. Zbieramy WSZYSTKIE e-maile z bazy do pamięci RAM
+                // Zbieramy do pamięci RAM wszystkie e-maile
                 var wszystkieEmaile = _db.Osoba
                     .Where(o => !string.IsNullOrEmpty(o.AdresEMail))
                     .Select(o => o.AdresEMail)
                     .Distinct()
                     .ToList();
 
-                // 2. Zbieramy tylko te E-MAILE, które mają aktywne powiązanie z firmą (do pamięci RAM)
+                // Zbieramy do pamięci RAM tylko te e-maile, które mają powiązaną aktywną firmę
                 var emaileFirmowe = _db.KlientFirma
                     .Include(kf => kf.IdKlientNavigation)
                         .ThenInclude(k => k.IdOsobaNavigation)
@@ -114,12 +114,11 @@ namespace PodkladexApp.Zaopatrzenie
 
                 if (czyFirma)
                 {
-                    // Pokazujemy tylko emaile firmowe
                     emaile = emaileFirmowe.ToArray();
                 }
                 else
                 {
-                    // Magia: używamy .Except() na lokalnych listach w RAMie! To eliminuje błędy bazy danych EF Core.
+                    // Odejmowanie zbiorów w pamięci C# (bezpieczne dla Entity Framework)
                     emaile = wszystkieEmaile.Except(emaileFirmowe).ToArray();
                 }
 
@@ -239,24 +238,11 @@ namespace PodkladexApp.Zaopatrzenie
 
             try
             {
-                // Bierzemy dane adresowe z najnowszego zamówienia danego klienta
-                var znalezionaOsoba = _db.Zamowienie
-                    .Include(z => z.IdKlientNavigation)
-                        .ThenInclude(k => k.IdOsobaNavigation)
-                    .Where(z => z.IdKlientNavigation.IdOsobaNavigation.AdresEMail == textBox_email.Text)
-                    .OrderByDescending(z => z.DataPrzyjeciaZ)
-                    .ThenByDescending(z => z.IdZamowienie)
-                    .Select(z => z.IdKlientNavigation.IdOsobaNavigation)
+                // Zawsze pobieramy NAJŚWIEŻSZY adres zapisany dla danego maila w tabeli Osoba
+                var znalezionaOsoba = _db.Osoba
+                    .Where(o => o.AdresEMail == textBox_email.Text)
+                    .OrderByDescending(o => o.IdOsoba)
                     .FirstOrDefault();
-
-                // Zabezpieczenie: jeśli nie ma zamówień, bierzemy najnowszą iterację osoby po Emailu
-                if (znalezionaOsoba == null)
-                {
-                    znalezionaOsoba = _db.Osoba
-                        .Where(o => o.AdresEMail == textBox_email.Text)
-                        .OrderByDescending(o => o.IdOsoba)
-                        .FirstOrDefault();
-                }
 
                 if (znalezionaOsoba != null)
                 {
@@ -272,7 +258,7 @@ namespace PodkladexApp.Zaopatrzenie
                     {
                         var dzisiaj = DateOnly.FromDateTime(DateTime.Today);
 
-                        // Szukamy firmy po EMAILU, a nie po ID, ponieważ IdOsoba może się zmieniać!
+                        // Szukamy powiązania po e-mailu (ponieważ IdOsoba może generować się nowe dla historii)
                         var powiazanieFirmowe = _db.KlientFirma
                             .Include(kf => kf.IdFirmaNavigation)
                             .Include(kf => kf.IdKlientNavigation)
@@ -371,23 +357,15 @@ namespace PodkladexApp.Zaopatrzenie
 
             try
             {
-                // --- 1. OSOBA (Ochrona historii starych zamówień) ---
-                var osoba = _db.Zamowienie
-                    .Include(z => z.IdKlientNavigation)
-                        .ThenInclude(k => k.IdOsobaNavigation)
-                    .Where(z => z.IdKlientNavigation.IdOsobaNavigation.AdresEMail == textBox_email.Text)
-                    .OrderByDescending(z => z.DataPrzyjeciaZ)
-                    .ThenByDescending(z => z.IdZamowienie)
-                    .Select(z => z.IdKlientNavigation.IdOsobaNavigation)
+                // --- 1. OSOBA (Inteligentne klonowanie / używanie istniejącej) ---
+                var osoba = _db.Osoba
+                    .Where(o => o.AdresEMail == textBox_email.Text)
+                    .OrderByDescending(o => o.IdOsoba)
                     .FirstOrDefault();
 
                 if (osoba == null)
                 {
-                    osoba = _db.Osoba.OrderByDescending(o => o.IdOsoba).FirstOrDefault(o => o.AdresEMail == textBox_email.Text);
-                }
-
-                if (osoba == null)
-                {
+                    // Całkowicie nowy klient
                     osoba = new Osoba()
                     {
                         Imie = textBox_imie.Text,
@@ -401,9 +379,11 @@ namespace PodkladexApp.Zaopatrzenie
                         Pesel = null
                     };
                     _db.Osoba.Add(osoba);
+                    _db.SaveChanges(); // Generuje nowe ID
                 }
                 else
                 {
+                    // Klient z tym mailem jest w bazie. Sprawdzamy, czy zmienił dane adresowe.
                     bool czyDaneZmienione =
                         osoba.Imie != textBox_imie.Text ||
                         osoba.Nazwisko != textBox_Nazwisko.Text ||
@@ -415,6 +395,7 @@ namespace PodkladexApp.Zaopatrzenie
 
                     if (czyDaneZmienione)
                     {
+                        // Klient zmienił adres! Tworzymy nową iterację Osoby (nowe ID).
                         osoba = new Osoba()
                         {
                             Imie = textBox_imie.Text,
@@ -428,10 +409,11 @@ namespace PodkladexApp.Zaopatrzenie
                             Pesel = null
                         };
                         _db.Osoba.Add(osoba);
+                        _db.SaveChanges(); // Generuje nowe ID
                     }
+                    // Jeśli !czyDaneZmienione -> program nie robi kompletnie nic, 
+                    // zmienna `osoba` przechowuje stare, poprawne ID.
                 }
-
-                _db.SaveChanges(); // Generuje nowe ID dla nowej osoby
 
                 // --- 2. KLIENT ---
                 var klient = _db.Klient.FirstOrDefault(k => k.IdOsoba == osoba.IdOsoba);
@@ -463,18 +445,17 @@ namespace PodkladexApp.Zaopatrzenie
                     }
                     else
                     {
+                        // Przy firmie robimy zawsze update, bo NIP musi być unikalny dla jednego podmiotu
                         firma.Nazwa = textBox_nazwa_firmy.Text;
                         firma.Miejscowosc = textBox_Miejscowosc.Text;
                         firma.KodPocztowy = textBox_kod_pocztowy.Text;
                         firma.Ulica = textBox_ulica.Text;
                         firma.Numer = textBox_numer.Text;
                         _db.Firma.Update(firma);
+                        _db.SaveChanges();
                     }
 
-                    _db.SaveChanges();
-
                     var dzisiaj = DateOnly.FromDateTime(DateTime.Today);
-
                     var klientFirma = _db.KlientFirma.FirstOrDefault(kf => kf.IdKlient == klient.IdKlient && kf.IdFirma == firma.IdFirma);
 
                     if (klientFirma == null)
@@ -497,9 +478,8 @@ namespace PodkladexApp.Zaopatrzenie
                         };
                         _db.KlientFirma.Add(nowePowiazanie);
                     }
+                    _db.SaveChanges();
                 }
-
-                _db.SaveChanges();
 
                 // --- 4. ZAMÓWIENIE I SZCZEGÓŁY ---
                 var zamowienie = new Zamowienie()
