@@ -300,7 +300,6 @@ namespace PodkladexApp
                     _context.PomiarMat.Remove(pomiar);
                     _context.SaveChanges();
 
-                    // Resetowanie trybu edycji, jeśli usuwamy właśnie modyfikowany rekord
                     if (_aktualneIdPomiaru == idPomiaru)
                     {
                         _aktualneIdPomiaru = 0;
@@ -367,6 +366,10 @@ namespace PodkladexApp
                     Max = _context.MaterialWlasciwosci.Where(m => m.IdMaterial == idMat && m.IdWlasciwosci == p.IdWlasciwosci).Select(m => (decimal?)m.WartoscMaksymalna).FirstOrDefault(),
                     Status = ""
                 }).ToList();
+
+            if (DGV_PomiaryMat.Columns.Contains("Min")) DGV_PomiaryMat.Columns["Min"].DefaultCellStyle.Format = "N2";
+            if (DGV_PomiaryMat.Columns.Contains("Max")) DGV_PomiaryMat.Columns["Max"].DefaultCellStyle.Format = "N2";
+            if (DGV_PomiaryMat.Columns.Contains("Wartosc")) DGV_PomiaryMat.Columns["Wartosc"].DefaultCellStyle.Format = "N2";
         }
 
         private void DGV_PomiaryMat_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

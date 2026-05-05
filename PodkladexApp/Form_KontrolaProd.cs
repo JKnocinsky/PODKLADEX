@@ -332,6 +332,10 @@ namespace PodkladexApp
                     Max = _context.ProduktWlasciwosci.Where(m => m.IdProdukt == idProdukt && m.IdWlasciwosci == p.IdWlasciwosci).Select(m => (decimal?)m.WartoscMaksymalna).FirstOrDefault(),
                     Status = ""
                 }).ToList();
+
+            if (DGV_PomiaryProd.Columns.Contains("Min")) DGV_PomiaryProd.Columns["Min"].DefaultCellStyle.Format = "N2";
+            if (DGV_PomiaryProd.Columns.Contains("Max")) DGV_PomiaryProd.Columns["Max"].DefaultCellStyle.Format = "N2";
+            if (DGV_PomiaryProd.Columns.Contains("Wartosc")) DGV_PomiaryProd.Columns["Wartosc"].DefaultCellStyle.Format = "N2";
         }
 
         private void DGV_PomiaryProd_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
