@@ -23,9 +23,14 @@ CREATE TABLE Osoba (
     Kod_pocztowy NVARCHAR(10) NULL,
     Ulica NVARCHAR(50) NULL,
     Numer NVARCHAR(10) NULL,
-    PESEL CHAR(11) NULL UNIQUE
+    PESEL CHAR(11) NULL -- Usunięto słowo UNIQUE z tej linijki
 );
-GO
+GO --
+
+-- Tworzymy nowy indeks, który wymusza unikalność tylko dla uzupełnionych peseli
+CREATE UNIQUE NONCLUSTERED INDEX UQ_Osoba_Pesel 
+ON Osoba(PESEL) 
+WHERE PESEL IS NOT NULL;
 
 CREATE TABLE Pracownik (
     ID_pracownik INT IDENTITY(1,1) PRIMARY KEY,
