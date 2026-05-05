@@ -114,7 +114,6 @@
             label_Firma.Size = new Size(59, 25);
             label_Firma.TabIndex = 10;
             label_Firma.Text = "Firma";
-            label_Firma.Click += label_Firma_Click;
             // 
             // textBox_NazwaFirmy
             // 
@@ -179,7 +178,6 @@
             textBox_Miejscowosc.Name = "textBox_Miejscowosc";
             textBox_Miejscowosc.Size = new Size(250, 33);
             textBox_Miejscowosc.TabIndex = 11;
-            textBox_Miejscowosc.TextChanged += textBox1_TextChanged;
             // 
             // textBox_KodPocztowy
             // 
@@ -188,7 +186,6 @@
             textBox_KodPocztowy.Name = "textBox_KodPocztowy";
             textBox_KodPocztowy.Size = new Size(174, 33);
             textBox_KodPocztowy.TabIndex = 13;
-            textBox_KodPocztowy.TextChanged += textBox_KodPocztowy_TextChanged;
             // 
             // label1
             // 
@@ -217,7 +214,6 @@
             textBox_Ulica.Name = "textBox_Ulica";
             textBox_Ulica.Size = new Size(250, 33);
             textBox_Ulica.TabIndex = 15;
-            textBox_Ulica.TextChanged += textBox_Ulica_TextChanged;
             // 
             // textBox_Numer
             // 
@@ -226,7 +222,6 @@
             textBox_Numer.Name = "textBox_Numer";
             textBox_Numer.Size = new Size(174, 33);
             textBox_Numer.TabIndex = 17;
-            textBox_Numer.TextChanged += textBox_Numer_TextChanged;
             // 
             // label_Numer
             // 
