@@ -35,8 +35,8 @@
             label2 = new Label();
             dgv_produktyZamowienie = new DataGridView();
             label3 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
+            txt_rbh = new TextBox();
+            txt_doWyprod = new TextBox();
             btn_zapisz = new Button();
             label4 = new Label();
             label5 = new Label();
@@ -109,22 +109,22 @@
             label3.TabIndex = 6;
             label3.Text = "Produkty";
             // 
-            // textBox1
+            // txt_rbh
             // 
-            textBox1.Font = new Font("Segoe UI", 11F);
-            textBox1.Location = new Point(99, 598);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(125, 32);
-            textBox1.TabIndex = 7;
+            txt_rbh.Font = new Font("Segoe UI", 11F);
+            txt_rbh.Location = new Point(99, 598);
+            txt_rbh.Name = "txt_rbh";
+            txt_rbh.Size = new Size(125, 32);
+            txt_rbh.TabIndex = 7;
             // 
-            // textBox2
+            // txt_doWyprod
             // 
-            textBox2.Font = new Font("Segoe UI", 11F);
-            textBox2.Location = new Point(318, 598);
-            textBox2.Name = "textBox2";
-            textBox2.ReadOnly = true;
-            textBox2.Size = new Size(125, 32);
-            textBox2.TabIndex = 8;
+            txt_doWyprod.Font = new Font("Segoe UI", 11F);
+            txt_doWyprod.Location = new Point(318, 598);
+            txt_doWyprod.Name = "txt_doWyprod";
+            txt_doWyprod.ReadOnly = true;
+            txt_doWyprod.Size = new Size(125, 32);
+            txt_doWyprod.TabIndex = 8;
             // 
             // btn_zapisz
             // 
@@ -173,8 +173,8 @@
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(btn_zapisz);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(txt_doWyprod);
+            Controls.Add(txt_rbh);
             Controls.Add(label3);
             Controls.Add(dgv_produktyZamowienie);
             Controls.Add(label2);
@@ -198,8 +198,8 @@
         private Label label2;
         private DataGridView dgv_produktyZamowienie;
         private Label label3;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox txt_rbh;
+        private TextBox txt_doWyprod;
         private Button btn_zapisz;
         private Label label4;
         private Label label5;

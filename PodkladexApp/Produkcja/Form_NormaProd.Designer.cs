@@ -19,7 +19,6 @@
             tlpBottom = new TableLayoutPanel();
             btn_dodaj = new Button();
             btn_edytuj = new Button();
-            btn_usun = new Button();
             tlpTop = new TableLayoutPanel();
             label1 = new Label();
             cmb_filtr = new ComboBox();
@@ -81,14 +80,12 @@
             // tlpBottom
             // 
             tlpBottom.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            tlpBottom.ColumnCount = 3;
-            tlpBottom.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tlpBottom.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tlpBottom.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tlpBottom.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 23F));
+            tlpBottom.ColumnCount = 2;
+            tlpBottom.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpBottom.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpBottom.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
             tlpBottom.Controls.Add(btn_dodaj, 0, 0);
             tlpBottom.Controls.Add(btn_edytuj, 1, 0);
-            tlpBottom.Controls.Add(btn_usun, 2, 0);
             tlpBottom.Dock = DockStyle.Fill;
             tlpBottom.Location = new Point(3, 684);
             tlpBottom.Margin = new Padding(3, 4, 3, 4);
@@ -106,7 +103,7 @@
             btn_dodaj.Location = new Point(3, 4);
             btn_dodaj.Margin = new Padding(3, 4, 3, 4);
             btn_dodaj.Name = "btn_dodaj";
-            btn_dodaj.Size = new Size(362, 52);
+            btn_dodaj.Size = new Size(546, 52);
             btn_dodaj.TabIndex = 2;
             btn_dodaj.Text = "Dodaj";
             btn_dodaj.UseVisualStyleBackColor = true;
@@ -117,28 +114,14 @@
             btn_edytuj.AutoSize = true;
             btn_edytuj.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btn_edytuj.Dock = DockStyle.Fill;
-            btn_edytuj.Location = new Point(371, 4);
+            btn_edytuj.Location = new Point(555, 4);
             btn_edytuj.Margin = new Padding(3, 4, 3, 4);
             btn_edytuj.Name = "btn_edytuj";
-            btn_edytuj.Size = new Size(362, 52);
+            btn_edytuj.Size = new Size(546, 52);
             btn_edytuj.TabIndex = 3;
             btn_edytuj.Text = "Edytuj";
             btn_edytuj.UseVisualStyleBackColor = true;
-            btn_edytuj.Click += btn_dodaj_Click;
-            // 
-            // btn_usun
-            // 
-            btn_usun.AutoSize = true;
-            btn_usun.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btn_usun.Dock = DockStyle.Fill;
-            btn_usun.Location = new Point(739, 4);
-            btn_usun.Margin = new Padding(3, 4, 3, 4);
-            btn_usun.Name = "btn_usun";
-            btn_usun.Size = new Size(362, 52);
-            btn_usun.TabIndex = 4;
-            btn_usun.Text = "Usuń";
-            btn_usun.UseVisualStyleBackColor = true;
-            btn_usun.Click += btn_dodaj_Click;
+            btn_edytuj.Click += btn_edytuj_Click;
             // 
             // tlpTop
             // 
@@ -197,6 +180,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(1110, 851);
             Controls.Add(panel1);
@@ -222,7 +206,6 @@
         private TableLayoutPanel tlpBottom;
         private Button btn_dodaj;
         private Button btn_edytuj;
-        private Button btn_usun;
         private TableLayoutPanel tlpTop;
         private Label label1;
         private ComboBox cmb_filtr;

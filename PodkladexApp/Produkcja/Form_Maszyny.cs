@@ -67,24 +67,7 @@ namespace PodkladexApp
             }
             else
             {
-                DataGridViewRow row = dgv_Maszyny.SelectedRows.Count > 0 ? dgv_Maszyny.SelectedRows[0] : null;
-
-                if (row == null)
-                {
-                    MessageBox.Show("Proszę wybrać maszynę z listy.");
-                }
-                else
-                {
-                    selectedMaszyna = row.DataBoundItem as Maszyna;
-                    var confirmResult = MessageBox.Show("Czy na pewno chcesz usunąć tę maszynę?", "Potwierdzenie usunięcia", MessageBoxButtons.YesNo);
-                    if (confirmResult == DialogResult.Yes)
-                    {
-                        db.Maszyna.Remove(selectedMaszyna);
-                        db.SaveChanges();
-                    }
-                    dgv_Maszyny.DataSource = db.Maszyna.ToList();
-                    dgv_Maszyny.Refresh();
-                }
+                //DataGridViewRow row = dgv_Maszyny.SelectedRows.Count > 0 ? dgv_Maszyny.SelectedRows[0] : null;
             }
             // wybór maszyny z DataGridView
         }
