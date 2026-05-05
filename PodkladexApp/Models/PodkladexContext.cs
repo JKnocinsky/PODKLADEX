@@ -544,13 +544,13 @@ public partial class PodkladexContext : DbContext
             entity.Property(e => e.IdMaterial).HasColumnName("ID_material");
             entity.Property(e => e.IdWlasciwosci).HasColumnName("ID_wlasciwosci");
             entity.Property(e => e.WartoscMaksymalna)
-                .HasColumnType("decimal(6, 2)")
+                .HasColumnType("decimal(10, 5)")
                 .HasColumnName("Wartosc_maksymalna");
             entity.Property(e => e.WartoscMinimalna)
-                .HasColumnType("decimal(6, 2)")
+                .HasColumnType("decimal(10, 5)")
                 .HasColumnName("Wartosc_minimalna");
             entity.Property(e => e.WartoscNominalna)
-                .HasColumnType("decimal(6, 2)")
+                .HasColumnType("decimal(10, 5)")
                 .HasColumnName("Wartosc_nominalna");
 
             entity.HasOne(d => d.IdMaterialNavigation).WithMany(p => p.MaterialWlasciwosci)
@@ -868,13 +868,13 @@ public partial class PodkladexContext : DbContext
             entity.Property(e => e.IdProdukt).HasColumnName("ID_produkt");
             entity.Property(e => e.IdWlasciwosci).HasColumnName("ID_wlasciwosci");
             entity.Property(e => e.WartoscMaksymalna)
-                .HasColumnType("decimal(6, 2)")
+                .HasColumnType("decimal(10, 5)")
                 .HasColumnName("Wartosc_maksymalna");
             entity.Property(e => e.WartoscMinimalna)
-                .HasColumnType("decimal(6, 2)")
+                .HasColumnType("decimal(10, 5)")
                 .HasColumnName("Wartosc_minimalna");
             entity.Property(e => e.WartoscNominalna)
-                .HasColumnType("decimal(6, 2)")
+                .HasColumnType("decimal(10, 5)")
                 .HasColumnName("Wartosc_nominalna");
 
             entity.HasOne(d => d.IdProduktNavigation).WithMany(p => p.ProduktWlasciwosci)
