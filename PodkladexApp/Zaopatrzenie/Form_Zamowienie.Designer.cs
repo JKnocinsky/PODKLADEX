@@ -121,7 +121,6 @@ namespace PodkladexApp.Zaopatrzenie
             panel1.Name = "panel1";
             panel1.Size = new Size(1467, 977);
             panel1.TabIndex = 3;
-            panel1.Paint += panel1_Paint;
             // 
             // button_czyszczenie
             // 
@@ -165,7 +164,6 @@ namespace PodkladexApp.Zaopatrzenie
             textBox_nazwa_firmy.Name = "textBox_nazwa_firmy";
             textBox_nazwa_firmy.Size = new Size(285, 38);
             textBox_nazwa_firmy.TabIndex = 18;
-            textBox_nazwa_firmy.TextChanged += textBox_nazwa_firmy_TextChanged;
             // 
             // label_NIP
             // 
@@ -185,7 +183,6 @@ namespace PodkladexApp.Zaopatrzenie
             textBox_NIP.Name = "textBox_NIP";
             textBox_NIP.Size = new Size(259, 38);
             textBox_NIP.TabIndex = 16;
-            textBox_NIP.TextChanged += textBox_NIP_TextChanged;
             textBox_NIP.KeyDown += textBox_NIP_KeyDown;
             textBox_NIP.Leave += textBox_NIP_Leave;
             // 
@@ -238,7 +235,6 @@ namespace PodkladexApp.Zaopatrzenie
             label_email.Size = new Size(82, 31);
             label_email.TabIndex = 11;
             label_email.Text = "E-mail";
-            label_email.Click += label1_Click;
             // 
             // label_numer_tel
             // 
@@ -308,7 +304,6 @@ namespace PodkladexApp.Zaopatrzenie
             textBox_Miejscowosc.Name = "textBox_Miejscowosc";
             textBox_Miejscowosc.Size = new Size(285, 38);
             textBox_Miejscowosc.TabIndex = 4;
-            textBox_Miejscowosc.TextChanged += textBox_Miejscowosc_TextChanged;
             // 
             // textBox_email
             // 
@@ -318,7 +313,6 @@ namespace PodkladexApp.Zaopatrzenie
             textBox_email.Name = "textBox_email";
             textBox_email.Size = new Size(366, 38);
             textBox_email.TabIndex = 3;
-            textBox_email.TextChanged += textBox_email_TextChanged;
             textBox_email.KeyDown += textBox_email_KeyDown;
             textBox_email.Leave += textBox_email_Leave;
             // 
@@ -340,7 +334,6 @@ namespace PodkladexApp.Zaopatrzenie
             textBox_imie.Name = "textBox_imie";
             textBox_imie.Size = new Size(283, 38);
             textBox_imie.TabIndex = 1;
-            textBox_imie.TextChanged += textBox_imie_TextChanged;
             // 
             // button_Wroc
             // 
