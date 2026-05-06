@@ -302,8 +302,6 @@ namespace PodkladexApp.Zaopatrzenie
             textBox_email.Name = "textBox_email";
             textBox_email.Size = new Size(321, 32);
             textBox_email.TabIndex = 3;
-            textBox_email.KeyDown += textBox_email_KeyDown;
-            textBox_email.Leave += textBox_email_Leave;
             // 
             // textBox_Numer_telefonu
             // 
@@ -342,6 +340,7 @@ namespace PodkladexApp.Zaopatrzenie
             button_Uzupelnianie.TabIndex = 21;
             button_Uzupelnianie.Text = "Sprawdź rejestr";
             button_Uzupelnianie.UseVisualStyleBackColor = true;
+            button_Uzupelnianie.Click += button_Uzupelnianie_Click;
             // 
             // Form_Zamowienie
             // 
