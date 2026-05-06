@@ -80,6 +80,8 @@
             // 
             // btn_wyp
             // 
+            btn_wyp.AutoSize = true;
+            btn_wyp.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btn_wyp.Dock = DockStyle.Fill;
             btn_wyp.Font = new Font("Segoe UI", 14.5F);
             btn_wyp.Location = new Point(3, 82);
@@ -92,6 +94,8 @@
             // 
             // btn_maszyny
             // 
+            btn_maszyny.AutoSize = true;
+            btn_maszyny.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btn_maszyny.Dock = DockStyle.Fill;
             btn_maszyny.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             btn_maszyny.Location = new Point(3, 4);
@@ -105,6 +109,8 @@
             // 
             // btn_normyP
             // 
+            btn_normyP.AutoSize = true;
+            btn_normyP.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btn_normyP.Dock = DockStyle.Fill;
             btn_normyP.Font = new Font("Segoe UI", 14.5F);
             btn_normyP.Location = new Point(3, 241);
@@ -118,6 +124,8 @@
             // 
             // btn_prod
             // 
+            btn_prod.AutoSize = true;
+            btn_prod.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btn_prod.Dock = DockStyle.Fill;
             btn_prod.Font = new Font("Segoe UI", 14.5F);
             btn_prod.Location = new Point(3, 320);

@@ -186,5 +186,11 @@ namespace PodkladexApp.Produkcja
             Form_DodajWyposazenie form = new Form_DodajWyposazenie(db, button.Name, selectedWyposazenie);
             form.ShowDialog();
         }
+
+        private void btn_przypisz_Click(object sender, EventArgs e)
+        {
+            Form_PrzypiszWyp form = new Form_PrzypiszWyp(db);
+            form.ShowDialog();
+        }
     }
 }

@@ -42,7 +42,7 @@ namespace PodkladexApp.Produkcja
                     wlasciwosciBindingList = new BindingList<ParamDto>();
                     dgv_wlasciwosci.DataSource = wlasciwosciBindingList;
 
-                    lbl_nazwa.Text = "Dodaj wyposażenie";
+                    lbl_tytul.Text = "Dodaj wyposażenie";
                     break;
                 case "btn_edytuj":
                     btn = 2;
@@ -62,7 +62,7 @@ namespace PodkladexApp.Produkcja
 
                     txtbox_Nazwa.Text = wyposazenie.Nazwa;
 
-                    lbl_nazwa.Text = "Edytuj wyposażenie";
+                    lbl_tytul.Text = "Edytuj wyposażenie";
                     break;
                 default:
                     btn = 0;

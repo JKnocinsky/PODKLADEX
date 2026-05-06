@@ -246,9 +246,9 @@ CREATE TABLE Material_wlasciwosci (
     ID_material_wlasciwosci INT IDENTITY(1,1) PRIMARY KEY,
     ID_wlasciwosci INT NOT NULL FOREIGN KEY REFERENCES Wlasciwosc(ID_wlasciwosci),
     ID_material INT NOT NULL FOREIGN KEY REFERENCES Material(ID_material),
-    Wartosc_minimalna DECIMAL(6,2) NOT NULL,
-    Wartosc_maksymalna DECIMAL(6,2) NOT NULL,
-    Wartosc_nominalna DECIMAL(6,2) NOT NULL
+    Wartosc_minimalna DECIMAL(10, 5) NOT NULL,
+    Wartosc_maksymalna DECIMAL(10, 5) NOT NULL,
+    Wartosc_nominalna DECIMAL(10, 5) NOT NULL
 );
 GO
 
@@ -320,9 +320,9 @@ CREATE TABLE Produkt_wlasciwosci (
     ID_produkty_wlasciwosci INT IDENTITY(1,1) PRIMARY KEY,    
     ID_wlasciwosci INT NOT NULL FOREIGN KEY REFERENCES Wlasciwosc(ID_wlasciwosci),
     ID_produkt INT NOT NULL FOREIGN KEY REFERENCES Produkt(ID_produkt),
-    Wartosc_minimalna DECIMAL(6,2) NOT NULL,
-    Wartosc_maksymalna DECIMAL(6,2) NOT NULL,
-    Wartosc_nominalna DECIMAL(6,2) NOT NULL
+    Wartosc_minimalna DECIMAL(10, 5) NOT NULL,
+    Wartosc_maksymalna DECIMAL(10, 5) NOT NULL,
+    Wartosc_nominalna DECIMAL(10, 5) NOT NULL
 );
 GO
 

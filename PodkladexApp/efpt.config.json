@@ -285,6 +285,10 @@
       {
          "Name": "[dbo].[Widok_Zamowienia_Zadania]",
          "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[Widok_Zamowienie_Zadanie_Produkcja]",
+         "ObjectType": 3
       }
    ],
    "UiHint": null,

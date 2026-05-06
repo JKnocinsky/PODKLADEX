@@ -174,6 +174,7 @@
             btn_przypisz.TabIndex = 2;
             btn_przypisz.Text = "Przypisz wyposażenie";
             btn_przypisz.UseVisualStyleBackColor = true;
+            btn_przypisz.Click += btn_przypisz_Click;
             // 
             // label2
             // 
@@ -224,6 +225,8 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(939, 747);
             Controls.Add(tableLayoutPanel1);
             Margin = new Padding(3, 4, 3, 4);

@@ -9,6 +9,8 @@ public partial class WidokZamowieniaZadania
 {
     public int IdZamowienie { get; set; }
 
+    public int IdProdukcja { get; set; }
+
     public DateOnly DataZadania { get; set; }
 
     public string NazwaMaszyny { get; set; }
@@ -20,4 +22,6 @@ public partial class WidokZamowieniaZadania
     public string NazwaProduktu { get; set; }
 
     public decimal? ObliczonaIloscWyprodukowana { get; set; }
+
+    public decimal? ObliczonaIloscOdpadow { get; set; }
 }

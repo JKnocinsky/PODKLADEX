@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.EntityFrameworkCore;
+using PodkladexApp.Produkcja;
 
 namespace PodkladexApp
 {
@@ -66,56 +67,31 @@ namespace PodkladexApp
 
         private void btn_dodaj_Click(object sender, EventArgs e)
         {
+            Form_DodajNormProd formDodaj = new Form_DodajNormProd(bd);
+            formDodaj.FormClosed += (s, args) => LoadNormyGrid(); // Odśwież po zamknięciu
+                formDodaj.ShowDialog();
+        }
 
-            Button button = sender as Button;
-            Maszyna selectedMaszyna = null;
-
-            if (button.Text == "Edytuj")
+        private void btn_edytuj_Click(object sender, EventArgs e)
+        {
+            if (dgv_NormyProd.SelectedRows.Count == 0)
             {
-                DataGridViewRow row = dgv_NormyProd.SelectedRows.Count > 0 ? dgv_NormyProd.SelectedRows[0] : null;
-
-                if (row == null)
-                {
-                    MessageBox.Show("Proszę wybrać maszynę z listy.");
-                }
-                else
-                {
-                    selectedMaszyna = row.DataBoundItem as Maszyna;
-                }
-
-                // otwarcie formularza dodawania maszyny z przekazaniem nazwy przycisku oraz maszny
-                Form_DodajMaszyne FD = new Form_DodajMaszyne(bd, button.Name, selectedMaszyna);
-                FD.ShowDialog();
+                MessageBox.Show("Wybierz normę do edycji.", "Brak wyboru", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            else if (button.Text == "Dodaj")
+
+            var selectedNormaId = Convert.ToInt32(dgv_NormyProd.SelectedRows[0].Cells["IdNormaP"].Value);
+            var wybranaNorma = bd.NormaProd.Find(selectedNormaId);
+
+            if (wybranaNorma == null)
             {
-                Form_DodajMaszyne FD = new Form_DodajMaszyne(bd, button.Name);
-                FD.ShowDialog();
-                dgv_NormyProd.DataSource = bd.Maszyna.ToList();
-                dgv_NormyProd.Refresh();
+                MessageBox.Show("Nie znaleziono wybranej normy.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            else
-            {
-                DataGridViewRow row = dgv_NormyProd.SelectedRows.Count > 0 ? dgv_NormyProd.SelectedRows[0] : null;
 
-                if (row == null)
-                {
-                    MessageBox.Show("Proszę wybrać maszynę z listy.");
-                }
-                else
-                {
-                    selectedMaszyna = row.DataBoundItem as Maszyna;
-                    var confirmResult = MessageBox.Show("Czy na pewno chcesz usunąć tę maszynę?", "Potwierdzenie usunięcia", MessageBoxButtons.YesNo);
-                    if (confirmResult == DialogResult.Yes)
-                    {
-                        bd.Maszyna.Remove(selectedMaszyna);
-                        bd.SaveChanges();
-                    }
-                    dgv_NormyProd.DataSource = bd.Maszyna.ToList();
-                    dgv_NormyProd.Refresh();
-                }
-            }
-            // wybór maszyny z DataGridView
+            Form_DodajNormProd formDodaj = new Form_DodajNormProd(bd, wybranaNorma);
+            formDodaj.FormClosed += (s, args) => LoadNormyGrid(); // Odśwież po zamknięciu
+                formDodaj.ShowDialog();
         }
 
         private void btn_MaszWyp_Click(object sender, EventArgs e)
@@ -145,8 +121,8 @@ namespace PodkladexApp
             {
                 case "Produkt":
                     {
-                        
-                        
+
+
                         int idProd = Convert.ToInt32(cmb_wybieranie.SelectedValue);
                         var normyEntities = bd.NormaProd
                             .Include(n => n.IdProduktNavigation)

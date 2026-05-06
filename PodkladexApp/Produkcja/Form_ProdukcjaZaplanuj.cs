@@ -198,6 +198,13 @@ namespace PodkladexApp.Produkcja
 
             dtg_zaplanujProd.DataSource = list;
             dtg_zaplanujProd.AutoResizeColumns();
+            dtg_zaplanujProd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            dtg_zaplanujProd.Columns["IdZamowienie"].HeaderText = "Zamówienie";
+            dtg_zaplanujProd.Columns["NazwaProduktu"].HeaderText = "Produkt";
+            dtg_zaplanujProd.Columns["IloscZamowienia"].HeaderText = "Zamówiono";
+            dtg_zaplanujProd.Columns["SumaOdpady"].HeaderText = "Odrzucono";
+            dtg_zaplanujProd.Columns["ZaplanowanaProdukcja"].HeaderText = "Zaplanowano produkcję";
+            dtg_zaplanujProd.Columns["ProcentZaplanowanejProdukcji"].HeaderText = "Procent realizacji";
 
             // Formatowanie kolumn: dwie cyfry po przecinku
             var colRbh = dtg_zaplanujProd.Columns["ZaplanowanaProdukcja"];

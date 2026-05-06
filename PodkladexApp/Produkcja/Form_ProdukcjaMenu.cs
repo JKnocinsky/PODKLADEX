@@ -96,6 +96,8 @@ namespace PodkladexApp
                 Size = new Size(300, 69)
             };
 
+            btnZatwierdz.Click += btnZatwierdz_Click;
+
             tableLayoutPanel1.Controls.Add(btnZatwierdz, 0, 6);
             btnZatwierdz.BringToFront();
         }
@@ -107,6 +109,11 @@ namespace PodkladexApp
             OpenChildForm(form);
         }
 
+        private void btnZatwierdz_Click(object? sender, EventArgs e)
+        {
+            var form = new Form_ProdukcjaZatwierdz(db);
+            OpenChildForm(form);
+        }
         // Usuwa przyciski utworzone przez btn_prod (jeśli istnieją)
         private void RemoveProdButtons()
         {
