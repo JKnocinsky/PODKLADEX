@@ -19,7 +19,6 @@ namespace PodkladexApp
 
         // Zmienne do logiki obliczeniowej
         private decimal aktualnaMasaNominalna = 0;
-        private bool isUpdatingOdpady = false;
         private bool czyWymuszonoZatwierdzenie = false;
         private bool isProgrammaticCheck = false;
 
@@ -44,9 +43,8 @@ namespace PodkladexApp
             this.DGV_PomiaryProd.CellFormatting += DGV_PomiaryProd_CellFormatting;
             this.btn_WymusZatwierdzenie.Click += btn_WymusZatwierdzenie_Click;
 
-            // Zdarzenia dla ręcznego przeliczania odpadów i walidacji zatwierdzenia
-            this.textBox_KontProdOdpadySzt.TextChanged += textBox_KontProdOdpadySzt_TextChanged;
-            this.textBox_KontProdOdpady.TextChanged += textBox_KontProdOdpadyKg_TextChanged;
+            // Zdarzenia
+            this.textBox_OdpadyWizualneSzt.TextChanged += textBox_OdpadyWizualneSzt_TextChanged;
             this.checkBox_KontrolaProdZat.CheckedChanged += checkBox_KontrolaProdZat_CheckedChanged;
         }
 
@@ -94,10 +92,10 @@ namespace PodkladexApp
 
             textBox_KontProdRBH.Clear();
 
-            isUpdatingOdpady = true;
+            textBox_OdpadyWizualneSzt.Clear();
+            textBox_OdpadyPomiarySzt.Clear();
             textBox_KontProdOdpady.Clear();
             textBox_KontProdOdpadySzt.Clear();
-            isUpdatingOdpady = false;
 
             isProgrammaticCheck = true;
             checkBox_KontrolaProdZat.Checked = false;
@@ -174,16 +172,26 @@ namespace PodkladexApp
                 textBox_KontProdRBH.Text = wybrana.Rbh?.ToString();
 
                 AktualizujPostepIWage();
+                PrzeliczOdpadyZeZlychPomiarow();
 
-                isUpdatingOdpady = true;
-                textBox_KontProdOdpady.Text = wybrana.Odpady?.ToString();
+                // Odtwarzanie podziału odpadów z bazy
                 if (wybrana.Odpady.HasValue && aktualnaMasaNominalna > 0)
                 {
-                    textBox_KontProdOdpadySzt.Text = Math.Round((decimal)wybrana.Odpady / aktualnaMasaNominalna, 0).ToString();
-                }
-                isUpdatingOdpady = false;
+                    int totalSzt = (int)Math.Round((decimal)wybrana.Odpady / aktualnaMasaNominalna, 0);
+                    int pomiarySzt = 0;
+                    int.TryParse(textBox_OdpadyPomiarySzt.Text, out pomiarySzt);
 
-                PrzeliczOdpadyZeZlychPomiarow();
+                    int wizualneSzt = totalSzt - pomiarySzt;
+                    if (wizualneSzt < 0) wizualneSzt = 0;
+
+                    textBox_OdpadyWizualneSzt.Text = wizualneSzt > 0 ? wizualneSzt.ToString() : "";
+                }
+                else
+                {
+                    textBox_OdpadyWizualneSzt.Clear();
+                }
+
+                AktualizujLaczneOdpady();
 
                 isProgrammaticCheck = true;
                 checkBox_KontrolaProdZat.Checked = wybrana.Zatwierdzone;
@@ -380,16 +388,30 @@ namespace PodkladexApp
                 }
             }
 
-            int wpisane = 0;
-            int.TryParse(textBox_KontProdOdpadySzt.Text.Replace('.', ','), out wpisane);
+            textBox_OdpadyPomiarySzt.Text = liczbaZlychSztuk > 0 ? liczbaZlychSztuk.ToString() : "";
+            AktualizujLaczneOdpady();
+        }
 
-            if (liczbaZlychSztuk > wpisane || string.IsNullOrWhiteSpace(textBox_KontProdOdpadySzt.Text))
-            {
-                isUpdatingOdpady = true;
-                textBox_KontProdOdpadySzt.Text = liczbaZlychSztuk.ToString();
-                textBox_KontProdOdpady.Text = (liczbaZlychSztuk * aktualnaMasaNominalna).ToString("N5");
-                isUpdatingOdpady = false;
-            }
+        private void AktualizujLaczneOdpady()
+        {
+            if (aktualnaMasaNominalna == 0) return;
+
+            int wizualne = 0;
+            int.TryParse(textBox_OdpadyWizualneSzt.Text, out wizualne);
+
+            int pomiary = 0;
+            int.TryParse(textBox_OdpadyPomiarySzt.Text, out pomiary);
+
+            int lacznieSzt = wizualne + pomiary;
+            decimal lacznieKg = lacznieSzt * aktualnaMasaNominalna;
+
+            textBox_KontProdOdpadySzt.Text = lacznieSzt > 0 ? lacznieSzt.ToString() : "";
+            textBox_KontProdOdpady.Text = lacznieKg > 0 ? lacznieKg.ToString("N5") : "";
+        }
+
+        private void textBox_OdpadyWizualneSzt_TextChanged(object sender, EventArgs e)
+        {
+            AktualizujLaczneOdpady();
         }
 
         private void AktualizujPostepIWage()
@@ -458,36 +480,6 @@ namespace PodkladexApp
                 checkBox_KontrolaProdZat.Checked = false;
                 isProgrammaticCheck = false;
             }
-        }
-
-        private void textBox_KontProdOdpadySzt_TextChanged(object sender, EventArgs e)
-        {
-            if (isUpdatingOdpady || aktualnaMasaNominalna == 0) return;
-            isUpdatingOdpady = true;
-            if (decimal.TryParse(textBox_KontProdOdpadySzt.Text.Replace('.', ','), out decimal szt))
-            {
-                textBox_KontProdOdpady.Text = (szt * aktualnaMasaNominalna).ToString("N5");
-            }
-            else
-            {
-                textBox_KontProdOdpady.Clear();
-            }
-            isUpdatingOdpady = false;
-        }
-
-        private void textBox_KontProdOdpadyKg_TextChanged(object sender, EventArgs e)
-        {
-            if (isUpdatingOdpady || aktualnaMasaNominalna == 0) return;
-            isUpdatingOdpady = true;
-            if (decimal.TryParse(textBox_KontProdOdpady.Text.Replace('.', ','), out decimal kg))
-            {
-                textBox_KontProdOdpadySzt.Text = Math.Round(kg / aktualnaMasaNominalna, 0).ToString();
-            }
-            else
-            {
-                textBox_KontProdOdpadySzt.Clear();
-            }
-            isUpdatingOdpady = false;
         }
 
         private void OdswiezTabelePomiarow()

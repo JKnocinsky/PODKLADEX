@@ -142,6 +142,7 @@ namespace PodkladexApp
                     Pracownik = k.IdPracownikNavigation.IdOsobaNavigation.Imie + " " + k.IdPracownikNavigation.IdOsobaNavigation.Nazwisko,
                     Maszyna = k.IdZadaniePNavigation.IdMaszynaNavigation.Nazwa,
                     Obiekt_Kontrolowany = k.IdMaterialNavigation.Nazwa,
+                    Odpady = k.Odpady,
                     Status = k.Zatwierdzone ? "ZATWIERDZONE" : "W TOKU"
                 }).ToList();
 
@@ -167,6 +168,7 @@ namespace PodkladexApp
                     Maszyna = k.IdZadaniePNavigation.IdMaszynaNavigation.Nazwa,
                     Obiekt_Kontrolowany = k.IdZadaniePNavigation.Produkcja.Any() && k.IdZadaniePNavigation.Produkcja.FirstOrDefault().IdNormyPNavigation != null
                               ? k.IdZadaniePNavigation.Produkcja.FirstOrDefault().IdNormyPNavigation.IdProduktNavigation.Nazwa : "Brak produktu",
+                    Odpady = k.Odpady,
                     Status = k.Zatwierdzone ? "ZATWIERDZONE" : "W TOKU"
                 }).ToList();
 
@@ -192,6 +194,12 @@ namespace PodkladexApp
             if (DGV_Kontrole.Columns.Contains("ID")) DGV_Kontrole.Columns["ID"].Visible = false;
             if (DGV_Kontrole.Columns.Contains("Obiekt_Kontrolowany")) DGV_Kontrole.Columns["Obiekt_Kontrolowany"].HeaderText = "Obiekt Kontrolowany";
             if (DGV_Kontrole.Columns.Contains("Data_Zadania")) DGV_Kontrole.Columns["Data_Zadania"].HeaderText = "Data Zadania";
+
+            if (DGV_Kontrole.Columns.Contains("Odpady"))
+            {
+                DGV_Kontrole.Columns["Odpady"].HeaderText = "Odpady [kg]";
+                DGV_Kontrole.Columns["Odpady"].DefaultCellStyle.Format = "N5";
+            }
         }
 
         private void DGV_Kontrole_SelectionChanged(object sender, EventArgs e)
