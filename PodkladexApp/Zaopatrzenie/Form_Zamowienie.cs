@@ -510,7 +510,8 @@ namespace PodkladexApp.Zaopatrzenie
                             IdProdukt = poz.IdProduktu,
                             IdMaterial = poz.IdMaterialu,
                             Ilosc = poz.Ilosc,
-                            Cena = poz.Cena,
+                            // ZAPIS CENY ZA 1 KG, WYLICZANEJ Z WARTOŚCI ZBIORCZEJ KOSZYKA
+                            Cena = (poz.Ilosc > 0) ? Math.Round(poz.Cena / (decimal)poz.Ilosc, 2) : 0,
                             Uwagi = poz.Uwagi
                         };
                         _db.SzczegolyZamowienia.Add(szczegol);
@@ -544,7 +545,6 @@ namespace PodkladexApp.Zaopatrzenie
             textBox_nazwa_firmy.Clear();
             textBox_NIP.Clear();
 
-            // Zablokowanie z powrotem wszystkich pól po ich wyczyszczeniu
             ZablokujPola();
         }
 
@@ -586,7 +586,6 @@ namespace PodkladexApp.Zaopatrzenie
             {
                 MessageBox.Show("Brak klienta w bazie danych. Proszę wprowadzić nowe dane ręcznie.", "Nowy klient", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Czyszczenie na wypadek zmiany maila na nieistniejący, gdy wcześniej był poprawny
                 textBox_imie.Clear();
                 textBox_Nazwisko.Clear();
                 textBox_Numer_telefonu.Clear();
@@ -598,8 +597,12 @@ namespace PodkladexApp.Zaopatrzenie
                 textBox_NIP.Clear();
             }
 
-            // ODBLOKOWANIE TEXTBOXÓW
             OdblokujPola();
+        }
+
+        private void textBox_nazwa_firmy_TextChanged_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

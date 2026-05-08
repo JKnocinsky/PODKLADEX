@@ -54,6 +54,7 @@
             button_Szczegoly.TabIndex = 19;
             button_Szczegoly.Text = "Szczegóły zamówienia";
             button_Szczegoly.UseVisualStyleBackColor = true;
+            button_Szczegoly.Click += button_Szczegoly_Click_1;
             // 
             // label_Sortowanie
             // 

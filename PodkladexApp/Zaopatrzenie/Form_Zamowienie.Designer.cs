@@ -33,6 +33,7 @@ namespace PodkladexApp.Zaopatrzenie
             button_Klient_prywatny = new Button();
             button_klient_z_firmy = new Button();
             panel1 = new Panel();
+            button_Uzupelnianie = new Button();
             button_czyszczenie = new Button();
             button_zapisz = new Button();
             label_nazwa_firmy = new Label();
@@ -55,7 +56,6 @@ namespace PodkladexApp.Zaopatrzenie
             textBox_Numer_telefonu = new TextBox();
             textBox_imie = new TextBox();
             button_Wroc = new Button();
-            button_Uzupelnianie = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -120,6 +120,17 @@ namespace PodkladexApp.Zaopatrzenie
             panel1.Size = new Size(1284, 733);
             panel1.TabIndex = 3;
             // 
+            // button_Uzupelnianie
+            // 
+            button_Uzupelnianie.Font = new Font("Segoe UI", 14F);
+            button_Uzupelnianie.Location = new Point(548, 23);
+            button_Uzupelnianie.Name = "button_Uzupelnianie";
+            button_Uzupelnianie.Size = new Size(162, 52);
+            button_Uzupelnianie.TabIndex = 21;
+            button_Uzupelnianie.Text = "Sprawdź rejestr";
+            button_Uzupelnianie.UseVisualStyleBackColor = true;
+            button_Uzupelnianie.Click += button_Uzupelnianie_Click;
+            // 
             // button_czyszczenie
             // 
             button_czyszczenie.Font = new Font("Segoe UI", 14F);
@@ -159,6 +170,7 @@ namespace PodkladexApp.Zaopatrzenie
             textBox_nazwa_firmy.Name = "textBox_nazwa_firmy";
             textBox_nazwa_firmy.Size = new Size(250, 32);
             textBox_nazwa_firmy.TabIndex = 18;
+            textBox_nazwa_firmy.TextChanged += textBox_nazwa_firmy_TextChanged_1;
             // 
             // label_NIP
             // 
@@ -330,17 +342,6 @@ namespace PodkladexApp.Zaopatrzenie
             button_Wroc.Text = "Powrót";
             button_Wroc.UseVisualStyleBackColor = true;
             button_Wroc.Click += button_Wroc_Click;
-            // 
-            // button_Uzupelnianie
-            // 
-            button_Uzupelnianie.Font = new Font("Segoe UI", 14F);
-            button_Uzupelnianie.Location = new Point(548, 23);
-            button_Uzupelnianie.Name = "button_Uzupelnianie";
-            button_Uzupelnianie.Size = new Size(162, 52);
-            button_Uzupelnianie.TabIndex = 21;
-            button_Uzupelnianie.Text = "Sprawdź rejestr";
-            button_Uzupelnianie.UseVisualStyleBackColor = true;
-            button_Uzupelnianie.Click += button_Uzupelnianie_Click;
             // 
             // Form_Zamowienie
             // 
