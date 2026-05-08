@@ -34,9 +34,15 @@
             cmb_wybor = new ComboBox();
             dtg_zaplanujProd = new DataGridView();
             tableLayoutPanel2 = new TableLayoutPanel();
-            pb_procentZaplanowania = new ProgressBar();
             btn_zaplanuj = new Button();
+            pb_procentZaplanowania = new ProgressBar();
             lbl_wybraneZam = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            pb_realizacja = new ProgressBar();
+            btn_zatwierdz = new Button();
+            lbl_procent_plan = new Label();
+            lbl_procent_realiz = new Label();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dtg_zaplanujProd).BeginInit();
             tableLayoutPanel2.SuspendLayout();
@@ -59,10 +65,11 @@
             tableLayoutPanel1.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 3;
+            tableLayoutPanel1.RowCount = 4;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 5F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 5F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 90F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 70F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
             tableLayoutPanel1.Size = new Size(1149, 862);
             tableLayoutPanel1.TabIndex = 0;
             // 
@@ -97,54 +104,57 @@
             // 
             // dtg_zaplanujProd
             // 
-            dtg_zaplanujProd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            dtg_zaplanujProd.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dtg_zaplanujProd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dtg_zaplanujProd.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dtg_zaplanujProd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             tableLayoutPanel1.SetColumnSpan(dtg_zaplanujProd, 2);
             dtg_zaplanujProd.Dock = DockStyle.Fill;
             dtg_zaplanujProd.Location = new Point(3, 89);
+            dtg_zaplanujProd.MultiSelect = false;
             dtg_zaplanujProd.Name = "dtg_zaplanujProd";
             dtg_zaplanujProd.RowHeadersWidth = 51;
             dtg_zaplanujProd.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dtg_zaplanujProd.Size = new Size(797, 770);
+            dtg_zaplanujProd.Size = new Size(797, 597);
             dtg_zaplanujProd.TabIndex = 3;
             // 
             // tableLayoutPanel2
             // 
             tableLayoutPanel2.AutoSize = true;
             tableLayoutPanel2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            tableLayoutPanel2.ColumnCount = 1;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel2.Controls.Add(pb_procentZaplanowania, 0, 1);
-            tableLayoutPanel2.Controls.Add(btn_zaplanuj, 0, 2);
+            tableLayoutPanel2.ColumnCount = 2;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 75F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel2.Controls.Add(btn_zaplanuj, 0, 3);
+            tableLayoutPanel2.Controls.Add(pb_procentZaplanowania, 0, 2);
             tableLayoutPanel2.Controls.Add(lbl_wybraneZam, 0, 0);
+            tableLayoutPanel2.Controls.Add(label2, 0, 1);
+            tableLayoutPanel2.Controls.Add(label3, 0, 4);
+            tableLayoutPanel2.Controls.Add(pb_realizacja, 0, 5);
+            tableLayoutPanel2.Controls.Add(btn_zatwierdz, 0, 6);
+            tableLayoutPanel2.Controls.Add(lbl_procent_plan, 1, 2);
+            tableLayoutPanel2.Controls.Add(lbl_procent_realiz, 1, 5);
             tableLayoutPanel2.Dock = DockStyle.Fill;
             tableLayoutPanel2.Location = new Point(806, 3);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 4;
+            tableLayoutPanel2.RowCount = 8;
             tableLayoutPanel1.SetRowSpan(tableLayoutPanel2, 3);
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 5F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 70F));
-            tableLayoutPanel2.Size = new Size(340, 856);
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 5F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 40F));
+            tableLayoutPanel2.Size = new Size(340, 683);
             tableLayoutPanel2.TabIndex = 4;
-            // 
-            // pb_procentZaplanowania
-            // 
-            pb_procentZaplanowania.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            pb_procentZaplanowania.Location = new Point(3, 113);
-            pb_procentZaplanowania.Name = "pb_procentZaplanowania";
-            pb_procentZaplanowania.Size = new Size(334, 29);
-            pb_procentZaplanowania.TabIndex = 0;
             // 
             // btn_zaplanuj
             // 
             btn_zaplanuj.Anchor = AnchorStyles.None;
             btn_zaplanuj.AutoSize = true;
             btn_zaplanuj.Font = new Font("Segoe UI", 11F);
-            btn_zaplanuj.Location = new Point(59, 190);
+            btn_zaplanuj.Location = new Point(16, 181);
             btn_zaplanuj.Name = "btn_zaplanuj";
             btn_zaplanuj.Size = new Size(222, 45);
             btn_zaplanuj.TabIndex = 1;
@@ -152,16 +162,85 @@
             btn_zaplanuj.UseVisualStyleBackColor = true;
             btn_zaplanuj.Click += btn_zaplanuj_Click;
             // 
+            // pb_procentZaplanowania
+            // 
+            pb_procentZaplanowania.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            pb_procentZaplanowania.Location = new Point(3, 121);
+            pb_procentZaplanowania.Name = "pb_procentZaplanowania";
+            pb_procentZaplanowania.Size = new Size(249, 29);
+            pb_procentZaplanowania.TabIndex = 0;
+            // 
             // lbl_wybraneZam
             // 
-            lbl_wybraneZam.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            lbl_wybraneZam.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lbl_wybraneZam.AutoSize = true;
             lbl_wybraneZam.Font = new Font("Segoe UI", 11F);
-            lbl_wybraneZam.Location = new Point(3, 60);
+            lbl_wybraneZam.Location = new Point(3, 43);
             lbl_wybraneZam.Name = "lbl_wybraneZam";
-            lbl_wybraneZam.Size = new Size(63, 25);
+            lbl_wybraneZam.Size = new Size(249, 25);
             lbl_wybraneZam.TabIndex = 2;
             lbl_wybraneZam.Text = "label2";
+            lbl_wybraneZam.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            label2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label2.AutoSize = true;
+            label2.Location = new Point(3, 82);
+            label2.Name = "label2";
+            label2.Size = new Size(160, 20);
+            label2.TabIndex = 3;
+            label2.Text = "Poziom rozplanowania";
+            // 
+            // label3
+            // 
+            label3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label3.AutoSize = true;
+            label3.Location = new Point(3, 252);
+            label3.Name = "label3";
+            label3.Size = new Size(121, 20);
+            label3.TabIndex = 4;
+            label3.Text = "Poziom realizacji";
+            // 
+            // pb_realizacja
+            // 
+            pb_realizacja.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            pb_realizacja.Location = new Point(3, 291);
+            pb_realizacja.Name = "pb_realizacja";
+            pb_realizacja.Size = new Size(249, 29);
+            pb_realizacja.TabIndex = 5;
+            // 
+            // btn_zatwierdz
+            // 
+            btn_zatwierdz.Anchor = AnchorStyles.None;
+            btn_zatwierdz.Font = new Font("Segoe UI", 11F);
+            btn_zatwierdz.Location = new Point(16, 351);
+            btn_zatwierdz.Name = "btn_zatwierdz";
+            btn_zatwierdz.Size = new Size(222, 45);
+            btn_zatwierdz.TabIndex = 6;
+            btn_zatwierdz.Text = "Zatwierdź";
+            btn_zatwierdz.UseVisualStyleBackColor = true;
+            btn_zatwierdz.Click += btn_zatwierdz_Click;
+            // 
+            // lbl_procent_plan
+            // 
+            lbl_procent_plan.Anchor = AnchorStyles.Left;
+            lbl_procent_plan.AutoSize = true;
+            lbl_procent_plan.Location = new Point(258, 126);
+            lbl_procent_plan.Name = "lbl_procent_plan";
+            lbl_procent_plan.Size = new Size(50, 20);
+            lbl_procent_plan.TabIndex = 7;
+            lbl_procent_plan.Text = "label4";
+            // 
+            // lbl_procent_realiz
+            // 
+            lbl_procent_realiz.Anchor = AnchorStyles.Left;
+            lbl_procent_realiz.AutoSize = true;
+            lbl_procent_realiz.Location = new Point(258, 296);
+            lbl_procent_realiz.Name = "lbl_procent_realiz";
+            lbl_procent_realiz.Size = new Size(50, 20);
+            lbl_procent_realiz.TabIndex = 8;
+            lbl_procent_realiz.Text = "label5";
             // 
             // Form_ProdukcjaZaplanuj
             // 
@@ -191,5 +270,11 @@
         private ProgressBar pb_procentZaplanowania;
         private Button btn_zaplanuj;
         private Label lbl_wybraneZam;
+        private Label label2;
+        private Label label3;
+        private ProgressBar pb_realizacja;
+        private Button btn_zatwierdz;
+        private Label lbl_procent_plan;
+        private Label lbl_procent_realiz;
     }
 }

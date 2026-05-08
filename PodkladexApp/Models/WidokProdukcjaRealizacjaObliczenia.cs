@@ -11,7 +11,7 @@ public partial class WidokProdukcjaRealizacjaObliczenia
 
     public string NazwaProduktu { get; set; }
 
-    public decimal? IloscZamowienia { get; set; }
+    public decimal IloscZamowienia { get; set; }
 
     public decimal? SumaOdpady { get; set; }
 

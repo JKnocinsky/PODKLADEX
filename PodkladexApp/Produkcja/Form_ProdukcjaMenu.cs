@@ -21,19 +21,41 @@ namespace PodkladexApp
         {
             this.db = db;
             InitializeComponent();
-            //Panel panel = new Panel();
-            //tableLayoutPanel1.Controls.Add(panel,0,0);
-            //panel.Location = new Point(3, 3);
-            //panel.Size = new Size(1650, 800);
-            //panel.Anchor = AnchorStyles.Left | AnchorStyles.Top;
-            //panel.BorderStyle = BorderStyle.FixedSingle;
-            //panel.BackColor = Color.Transparent;
-            //panel.BringToFront();
+
+            // KLUCZOWE: Na starcie ustawiamy wysokość wierszy 5 i 6 na 0, 
+            // aby pozostałe przyciski nie były nienaturalnie rozciągnięte.
+            HideProductionRows();
+        }
+
+        private void HideProductionRows()
+        {
+            tableLayoutPanel1.SuspendLayout();
+            // Sprawdzamy czy panel ma wystarczającą liczbę wierszy
+            if (tableLayoutPanel1.RowStyles.Count > 6)
+            {
+                // Ustawiamy wysokość na 0 (Absolute), co sprawia, że wiersze znikają z layoutu
+                tableLayoutPanel1.RowStyles[5] = new RowStyle(SizeType.Absolute, 0);
+                tableLayoutPanel1.RowStyles[6] = new RowStyle(SizeType.Absolute, 0);
+            }
+            tableLayoutPanel1.ResumeLayout(true);
+        }
+
+        private void ShowProductionRows()
+        {
+            tableLayoutPanel1.SuspendLayout();
+            // Przywracamy wysokość wierszy do wartości procentowej zgodnej z resztą menu (np. 14%)
+            if (tableLayoutPanel1.RowStyles.Count > 6)
+            {
+                tableLayoutPanel1.RowStyles[5] = new RowStyle(SizeType.Percent, 14.28f);
+                tableLayoutPanel1.RowStyles[6] = new RowStyle(SizeType.Percent, 14.28f);
+            }
+            tableLayoutPanel1.ResumeLayout(true);
         }
 
         private void btn_maszyny_Click(object sender, EventArgs e)
         {
             RemoveProdButtons();
+            HideProductionRows(); // Zwijamy wiersze 5 i 6 przy wyborze innej opcji
             Form_Maszyny form = new Form_Maszyny(db);
             OpenChildForm(form);
         }
@@ -41,6 +63,7 @@ namespace PodkladexApp
         private void btn_wyp_Click(object sender, EventArgs e)
         {
             RemoveProdButtons();
+            HideProductionRows();
             Form_MaszynaWyp form = new Form_MaszynaWyp(db);
             OpenChildForm(form);
         }
@@ -48,17 +71,19 @@ namespace PodkladexApp
         private void btn_normyP_Click(object sender, EventArgs e)
         {
             RemoveProdButtons();
+            HideProductionRows();
             Form_NormaProd form = new Form_NormaProd(db);
             OpenChildForm(form);
         }
 
         private void btn_prod_Click(object sender, EventArgs e)
         {
-            // Usuń wszystkie kontrolki które znajdują się w wierszach 5 i 6 tableLayoutPanel1
+            tableLayoutPanel1.SuspendLayout();
+
+            // 1. Usuwamy stare kontrolki, jeśli istniały
             var toRemove = tableLayoutPanel1.Controls
                 .Cast<Control>()
-                .Where(c =>
-                {
+                .Where(c => {
                     var pos = tableLayoutPanel1.GetPositionFromControl(c);
                     return pos.Row == 5 || pos.Row == 6;
                 })
@@ -70,39 +95,36 @@ namespace PodkladexApp
                 ctrl.Dispose();
             }
 
+            // 2. Tworzymy przyciski z Dock = Fill (znacznie stabilniejszy niż Anchor przy zmianach rozmiaru)
             var btnZaplanuj = new Button
             {
                 Name = "btn_zaplanujProd",
-                Text = "Zaplanuj produkcję",
-                AutoSize = true,
-                Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom,
+                Text = "Zaplanuj i zatwierdź produkcję",
+                Dock = DockStyle.Fill,
                 Font = new Font("Segoe UI", 14.5F),
-                Size = new Size(300, 69)
+                Margin = new Padding(10)
             };
-
-            // attach click handler to create and show Form_ProdukcjaZaplanuj
             btnZaplanuj.Click += btnZaplanuj_Click;
-
-            tableLayoutPanel1.Controls.Add(btnZaplanuj, 0, 5);
-            btnZaplanuj.BringToFront();
 
             var btnZatwierdz = new Button
             {
                 Name = "btn_zatwierdzProd",
-                Text = "Zatwierdź produkcję",
-                AutoSize = true,
-                Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom,
+                Text = "Rozlicz produkcję",
+                Dock = DockStyle.Fill,
                 Font = new Font("Segoe UI", 14.5F),
-                Size = new Size(300, 69)
+                Margin = new Padding(10)
             };
-
             btnZatwierdz.Click += btnZatwierdz_Click;
 
+            // 3. Dodajemy kontrolki i rozwijamy wiersze
+            tableLayoutPanel1.Controls.Add(btnZaplanuj, 0, 5);
             tableLayoutPanel1.Controls.Add(btnZatwierdz, 0, 6);
-            btnZatwierdz.BringToFront();
+
+            ShowProductionRows(); // To wymusi na panelu prawidłowy podział miejsca i "ściśnie" resztę przycisków
+
+            tableLayoutPanel1.ResumeLayout(true);
         }
 
-        // click handler: tworzy Form_ProdukcjaZaplanuj przekazując db i otwiera go w panelu
         private void btnZaplanuj_Click(object? sender, EventArgs e)
         {
             var form = new Form_ProdukcjaZaplanuj(db);
@@ -114,11 +136,9 @@ namespace PodkladexApp
             var form = new Form_ProdukcjaZatwierdz(db);
             OpenChildForm(form);
         }
-        // Usuwa przyciski utworzone przez btn_prod (jeśli istnieją)
+
         private void RemoveProdButtons()
         {
-            if (tableLayoutPanel1 == null) return;
-
             var names = new[] { "btn_zaplanujProd", "btn_zatwierdzProd" };
             foreach (var name in names)
             {
@@ -141,10 +161,14 @@ namespace PodkladexApp
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
             childForm.Dock = DockStyle.Fill;
-            panel.Controls.Add(childForm);
-            panel.Tag = childForm;
-            childForm.BringToFront();
-            childForm.Show();
+
+            if (panel != null)
+            {
+                panel.Controls.Add(childForm);
+                panel.Tag = childForm;
+                childForm.BringToFront();
+                childForm.Show();
+            }
         }
     }
 }

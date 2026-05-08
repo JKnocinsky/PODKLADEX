@@ -41,7 +41,12 @@
             label4 = new Label();
             label5 = new Label();
             label6 = new Label();
+            dtg_info = new DataGridView();
+            label7 = new Label();
+            cmb_wyp = new ComboBox();
+            label8 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgv_produktyZamowienie).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dtg_info).BeginInit();
             SuspendLayout();
             // 
             // dtp_Data
@@ -74,7 +79,7 @@
             // 
             cmb_pracownik.Font = new Font("Segoe UI", 11F);
             cmb_pracownik.FormattingEnabled = true;
-            cmb_pracownik.Location = new Point(132, 240);
+            cmb_pracownik.Location = new Point(132, 316);
             cmb_pracownik.Name = "cmb_pracownik";
             cmb_pracownik.Size = new Size(278, 33);
             cmb_pracownik.TabIndex = 3;
@@ -82,7 +87,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(132, 217);
+            label2.Location = new Point(132, 293);
             label2.Name = "label2";
             label2.Size = new Size(76, 20);
             label2.TabIndex = 4;
@@ -90,10 +95,10 @@
             // 
             // dgv_produktyZamowienie
             // 
-            dgv_produktyZamowienie.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            dgv_produktyZamowienie.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_produktyZamowienie.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgv_produktyZamowienie.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_produktyZamowienie.Location = new Point(44, 324);
+            dgv_produktyZamowienie.Location = new Point(44, 401);
             dgv_produktyZamowienie.Name = "dgv_produktyZamowienie";
             dgv_produktyZamowienie.RowHeadersWidth = 51;
             dgv_produktyZamowienie.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -103,7 +108,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(44, 301);
+            label3.Location = new Point(43, 378);
             label3.Name = "label3";
             label3.Size = new Size(67, 20);
             label3.TabIndex = 6;
@@ -112,7 +117,7 @@
             // txt_rbh
             // 
             txt_rbh.Font = new Font("Segoe UI", 11F);
-            txt_rbh.Location = new Point(99, 598);
+            txt_rbh.Location = new Point(103, 648);
             txt_rbh.Name = "txt_rbh";
             txt_rbh.Size = new Size(125, 32);
             txt_rbh.TabIndex = 7;
@@ -120,7 +125,7 @@
             // txt_doWyprod
             // 
             txt_doWyprod.Font = new Font("Segoe UI", 11F);
-            txt_doWyprod.Location = new Point(318, 598);
+            txt_doWyprod.Location = new Point(322, 648);
             txt_doWyprod.Name = "txt_doWyprod";
             txt_doWyprod.ReadOnly = true;
             txt_doWyprod.Size = new Size(125, 32);
@@ -140,7 +145,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(99, 575);
+            label4.Location = new Point(103, 625);
             label4.Name = "label4";
             label4.Size = new Size(38, 20);
             label4.TabIndex = 10;
@@ -149,7 +154,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(318, 575);
+            label5.Location = new Point(322, 625);
             label5.Name = "label5";
             label5.Size = new Size(146, 20);
             label5.TabIndex = 11;
@@ -164,11 +169,54 @@
             label6.TabIndex = 12;
             label6.Text = "Data";
             // 
+            // dtg_info
+            // 
+            dtg_info.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dtg_info.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dtg_info.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dtg_info.Location = new Point(570, 101);
+            dtg_info.Name = "dtg_info";
+            dtg_info.RowHeadersWidth = 51;
+            dtg_info.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dtg_info.Size = new Size(481, 579);
+            dtg_info.TabIndex = 13;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(570, 78);
+            label7.Name = "label7";
+            label7.Size = new Size(35, 20);
+            label7.TabIndex = 14;
+            label7.Text = "Info";
+            // 
+            // cmb_wyp
+            // 
+            cmb_wyp.Font = new Font("Segoe UI", 11F);
+            cmb_wyp.FormattingEnabled = true;
+            cmb_wyp.Location = new Point(132, 235);
+            cmb_wyp.Name = "cmb_wyp";
+            cmb_wyp.Size = new Size(278, 33);
+            cmb_wyp.TabIndex = 15;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(132, 212);
+            label8.Name = "label8";
+            label8.Size = new Size(97, 20);
+            label8.TabIndex = 16;
+            label8.Text = "Wyposażenie";
+            // 
             // Form_ProdukcjaZaplanujPodform
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(536, 794);
+            ClientSize = new Size(1119, 794);
+            Controls.Add(label8);
+            Controls.Add(cmb_wyp);
+            Controls.Add(label7);
+            Controls.Add(dtg_info);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label4);
@@ -185,6 +233,7 @@
             Name = "Form_ProdukcjaZaplanujPodform";
             Text = "Form_ProdukcjaZaplanujPodform";
             ((System.ComponentModel.ISupportInitialize)dgv_produktyZamowienie).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dtg_info).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -204,5 +253,9 @@
         private Label label4;
         private Label label5;
         private Label label6;
+        private DataGridView dtg_info;
+        private Label label7;
+        private ComboBox cmb_wyp;
+        private Label label8;
     }
 }

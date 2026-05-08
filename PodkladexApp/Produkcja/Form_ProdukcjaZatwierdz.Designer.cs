@@ -106,7 +106,7 @@
             // 
             // dgv_produkcja
             // 
-            dgv_produkcja.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            dgv_produkcja.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_produkcja.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgv_produkcja.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             tableLayoutPanel1.SetColumnSpan(dgv_produkcja, 2);

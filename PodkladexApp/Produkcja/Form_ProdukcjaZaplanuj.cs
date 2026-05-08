@@ -198,7 +198,7 @@ namespace PodkladexApp.Produkcja
 
             dtg_zaplanujProd.DataSource = list;
             dtg_zaplanujProd.AutoResizeColumns();
-            dtg_zaplanujProd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            dtg_zaplanujProd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dtg_zaplanujProd.Columns["IdZamowienie"].HeaderText = "Zamówienie";
             dtg_zaplanujProd.Columns["NazwaProduktu"].HeaderText = "Produkt";
             dtg_zaplanujProd.Columns["IloscZamowienia"].HeaderText = "Zamówiono";

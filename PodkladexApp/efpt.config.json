@@ -283,6 +283,14 @@
          "ObjectType": 3
       },
       {
+         "Name": "[dbo].[Widok_Wszyscy_Pracownicy_RBH]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[Widok_Wszystkie_Maszyny_RBH]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[dbo].[Widok_Zamowienia_Zadania]",
          "ObjectType": 3
       },
