@@ -252,5 +252,42 @@ namespace PodkladexApp.Produkcja
             Form_ProdukcjaZaplanujPodform form = new Form_ProdukcjaZaplanujPodform(db, idZamowienie);
             form.ShowDialog();
         }
+
+        private void btn_zatwierdz_Click(object sender, EventArgs e)
+        {
+            if (dtg_zaplanujProd.CurrentRow == null)
+            {
+                MessageBox.Show("Proszę wybrać zamówienie z listy.", "Brak wyboru", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var idCell = dtg_zaplanujProd.CurrentRow.Cells["IdZamowienie"];
+            if (idCell?.Value != null && int.TryParse(idCell.Value.ToString(), out int idZamowienie))
+            {
+                // Sprawdzenie stopnia realizacji z WidokProdukcjaProcentRealizacji
+                var stanRealizacji = db.WidokProdukcjaProcentRealizacji
+                    .AsNoTracking()
+                    .FirstOrDefault(w => w.IdZamowienie == idZamowienie);
+
+                // Zastosowano 0m (decimal) zamiast 0 (int), aby uniknąć błędów typów
+                if (stanRealizacji == null || (stanRealizacji.SredniaWartoscFormula ?? 0m) < 100m)
+                {
+                    decimal aktualnyProcent = stanRealizacji?.SredniaWartoscFormula ?? 0m;
+                    MessageBox.Show($"Nie można zatwierdzić zamówienia, które nie zostało zrealizowane w 100%.\nAktualny stan: {aktualnyProcent:N2}%",
+                        "Błąd zatwierdzania", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                var zamowienie = db.Zamowienie.FirstOrDefault(z => z.IdZamowienie == idZamowienie);
+                if (zamowienie != null)
+                {
+                    // Ustawienie dzisiejszej daty w polu DataZrealizowaniaZ
+                    zamowienie.DataZrealizowaniaZ = DateOnly.FromDateTime(DateTime.Now);
+                    db.SaveChanges();
+
+                    MessageBox.Show($"Zamówienie nr {idZamowienie} zostało pomyślnie zrealizowane.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
     }
 }
