@@ -46,6 +46,11 @@ namespace PodkladexApp.Zaopatrzenie
             textBox_kod_pocztowy.MaxLength = 6;
 
             // =======================================================
+            // WYGASZENIE TEXTBOXÓW NA STARCIE (oprócz Email)
+            // =======================================================
+            ZablokujPola();
+
+            // =======================================================
             // TWARDE PODPIĘCIE ZDARZEŃ FORMATUJĄCYCH I AKCJI
             // =======================================================
             textBox_Numer_telefonu.TextChanged -= textBox_Numer_telefonu_TextChanged;
@@ -57,11 +62,7 @@ namespace PodkladexApp.Zaopatrzenie
             textBox_NIP.TextChanged -= textBox_NIP_TextChanged;
             textBox_NIP.TextChanged += textBox_NIP_TextChanged;
 
-            textBox_email.Leave -= textBox_email_Leave;
-            textBox_email.Leave += textBox_email_Leave;
-            textBox_email.KeyDown -= textBox_email_KeyDown;
-            textBox_email.KeyDown += textBox_email_KeyDown;
-
+            // NIP zostawiamy, żeby po odblokowaniu formularza podpowiadał firmę
             textBox_NIP.Leave -= textBox_NIP_Leave;
             textBox_NIP.Leave += textBox_NIP_Leave;
             textBox_NIP.KeyDown -= textBox_NIP_KeyDown;
@@ -69,6 +70,35 @@ namespace PodkladexApp.Zaopatrzenie
 
             ZaladujPodpowiedziNIP();
             OdswiezPodpowiedziEmail();
+        }
+
+        // ==========================================
+        // METODY POMOCNICZE BLOKOWANIA PÓL
+        // ==========================================
+        private void ZablokujPola()
+        {
+            textBox_imie.Enabled = false;
+            textBox_Nazwisko.Enabled = false;
+            textBox_Numer_telefonu.Enabled = false;
+            textBox_Miejscowosc.Enabled = false;
+            textBox_kod_pocztowy.Enabled = false;
+            textBox_ulica.Enabled = false;
+            textBox_numer.Enabled = false;
+            textBox_nazwa_firmy.Enabled = false;
+            textBox_NIP.Enabled = false;
+        }
+
+        private void OdblokujPola()
+        {
+            textBox_imie.Enabled = true;
+            textBox_Nazwisko.Enabled = true;
+            textBox_Numer_telefonu.Enabled = true;
+            textBox_Miejscowosc.Enabled = true;
+            textBox_kod_pocztowy.Enabled = true;
+            textBox_ulica.Enabled = true;
+            textBox_numer.Enabled = true;
+            textBox_nazwa_firmy.Enabled = true;
+            textBox_NIP.Enabled = true;
         }
 
         // ==========================================
@@ -92,14 +122,12 @@ namespace PodkladexApp.Zaopatrzenie
                 AutoCompleteStringCollection emailKolekcja = new AutoCompleteStringCollection();
                 var dzisiaj = DateOnly.FromDateTime(DateTime.Today);
 
-                // Zbieramy do pamięci RAM wszystkie e-maile
                 var wszystkieEmaile = _db.Osoba
                     .Where(o => !string.IsNullOrEmpty(o.AdresEMail))
                     .Select(o => o.AdresEMail)
                     .Distinct()
                     .ToList();
 
-                // Zbieramy do pamięci RAM tylko te e-maile, które mają powiązaną aktywną firmę
                 var emaileFirmowe = _db.KlientFirma
                     .Include(kf => kf.IdKlientNavigation)
                         .ThenInclude(k => k.IdOsobaNavigation)
@@ -118,7 +146,6 @@ namespace PodkladexApp.Zaopatrzenie
                 }
                 else
                 {
-                    // Odejmowanie zbiorów w pamięci C# (bezpieczne dla Entity Framework)
                     emaile = wszystkieEmaile.Except(emaileFirmowe).ToArray();
                 }
 
@@ -210,18 +237,8 @@ namespace PodkladexApp.Zaopatrzenie
         }
 
         // ==========================================
-        // POBIERANIE DANYCH Z BAZY PO WPISANIU
+        // POBIERANIE DANYCH Z BAZY (Po odblokowaniu)
         // ==========================================
-        private void textBox_email_Leave(object sender, EventArgs e) => UzupelnijDaneOsoby();
-        private void textBox_email_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                UzupelnijDaneOsoby();
-                e.SuppressKeyPress = true;
-            }
-        }
-
         private void textBox_NIP_Leave(object sender, EventArgs e) => UzupelnijDaneFirmy();
         private void textBox_NIP_KeyDown(object sender, KeyEventArgs e)
         {
@@ -238,7 +255,6 @@ namespace PodkladexApp.Zaopatrzenie
 
             try
             {
-                // Zawsze pobieramy NAJŚWIEŻSZY adres zapisany dla danego maila w tabeli Osoba
                 var znalezionaOsoba = _db.Osoba
                     .Where(o => o.AdresEMail == textBox_email.Text)
                     .OrderByDescending(o => o.IdOsoba)
@@ -258,7 +274,6 @@ namespace PodkladexApp.Zaopatrzenie
                     {
                         var dzisiaj = DateOnly.FromDateTime(DateTime.Today);
 
-                        // Szukamy powiązania po e-mailu (ponieważ IdOsoba może generować się nowe dla historii)
                         var powiazanieFirmowe = _db.KlientFirma
                             .Include(kf => kf.IdFirmaNavigation)
                             .Include(kf => kf.IdKlientNavigation)
@@ -365,7 +380,6 @@ namespace PodkladexApp.Zaopatrzenie
 
                 if (osoba == null)
                 {
-                    // Całkowicie nowy klient
                     osoba = new Osoba()
                     {
                         Imie = textBox_imie.Text,
@@ -379,11 +393,10 @@ namespace PodkladexApp.Zaopatrzenie
                         Pesel = null
                     };
                     _db.Osoba.Add(osoba);
-                    _db.SaveChanges(); // Generuje nowe ID
+                    _db.SaveChanges();
                 }
                 else
                 {
-                    // Klient z tym mailem jest w bazie. Sprawdzamy, czy zmienił dane adresowe.
                     bool czyDaneZmienione =
                         osoba.Imie != textBox_imie.Text ||
                         osoba.Nazwisko != textBox_Nazwisko.Text ||
@@ -395,7 +408,6 @@ namespace PodkladexApp.Zaopatrzenie
 
                     if (czyDaneZmienione)
                     {
-                        // Klient zmienił adres! Tworzymy nową iterację Osoby (nowe ID).
                         osoba = new Osoba()
                         {
                             Imie = textBox_imie.Text,
@@ -409,10 +421,8 @@ namespace PodkladexApp.Zaopatrzenie
                             Pesel = null
                         };
                         _db.Osoba.Add(osoba);
-                        _db.SaveChanges(); // Generuje nowe ID
+                        _db.SaveChanges();
                     }
-                    // Jeśli !czyDaneZmienione -> program nie robi kompletnie nic, 
-                    // zmienna `osoba` przechowuje stare, poprawne ID.
                 }
 
                 // --- 2. KLIENT ---
@@ -445,7 +455,6 @@ namespace PodkladexApp.Zaopatrzenie
                     }
                     else
                     {
-                        // Przy firmie robimy zawsze update, bo NIP musi być unikalny dla jednego podmiotu
                         firma.Nazwa = textBox_nazwa_firmy.Text;
                         firma.Miejscowosc = textBox_Miejscowosc.Text;
                         firma.KodPocztowy = textBox_kod_pocztowy.Text;
@@ -501,7 +510,8 @@ namespace PodkladexApp.Zaopatrzenie
                             IdProdukt = poz.IdProduktu,
                             IdMaterial = poz.IdMaterialu,
                             Ilosc = poz.Ilosc,
-                            Cena = poz.Cena,
+                            // ZAPIS CENY ZA 1 KG, WYLICZANEJ Z WARTOŚCI ZBIORCZEJ KOSZYKA
+                            Cena = (poz.Ilosc > 0) ? Math.Round(poz.Cena / (decimal)poz.Ilosc, 2) : 0,
                             Uwagi = poz.Uwagi
                         };
                         _db.SzczegolyZamowienia.Add(szczegol);
@@ -534,6 +544,8 @@ namespace PodkladexApp.Zaopatrzenie
             textBox_numer.Clear();
             textBox_nazwa_firmy.Clear();
             textBox_NIP.Clear();
+
+            ZablokujPola();
         }
 
         private void button_Wroc_Click(object sender, EventArgs e)
@@ -551,5 +563,46 @@ namespace PodkladexApp.Zaopatrzenie
         private void panel1_Paint(object sender, PaintEventArgs e) { }
         private void textBox_nazwa_firmy_TextChanged(object sender, EventArgs e) { }
         private void label1_Click(object sender, EventArgs e) { }
+
+        // ==========================================
+        // PRZYCISK: UZUPEŁNIANIE I ODBLOKOWYWANIE TEXTBOXÓW
+        // ==========================================
+        private void button_Uzupelnianie_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBox_email.Text))
+            {
+                MessageBox.Show("Proszę wpisać adres e-mail przed uzupełnieniem.", "Brak danych", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var czyIstnieje = _db.Osoba.Any(o => o.AdresEMail == textBox_email.Text);
+
+            if (czyIstnieje)
+            {
+                UzupelnijDaneOsoby();
+                MessageBox.Show("Znaleziono klienta w bazie! Dane zostały uzupełnione.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Brak klienta w bazie danych. Proszę wprowadzić nowe dane ręcznie.", "Nowy klient", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                textBox_imie.Clear();
+                textBox_Nazwisko.Clear();
+                textBox_Numer_telefonu.Clear();
+                textBox_Miejscowosc.Clear();
+                textBox_kod_pocztowy.Clear();
+                textBox_ulica.Clear();
+                textBox_numer.Clear();
+                textBox_nazwa_firmy.Clear();
+                textBox_NIP.Clear();
+            }
+
+            OdblokujPola();
+        }
+
+        private void textBox_nazwa_firmy_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

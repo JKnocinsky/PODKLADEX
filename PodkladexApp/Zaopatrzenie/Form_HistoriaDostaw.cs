@@ -203,7 +203,7 @@ namespace PodkladexApp.Zaopatrzenie
                     dataGridView_HistoriaZamowien.Columns["Materialy"].DefaultCellStyle.WrapMode = DataGridViewTriState.False;
                 }
 
-                
+
             }
             catch (Exception ex)
             {
@@ -301,8 +301,8 @@ namespace PodkladexApp.Zaopatrzenie
                 {
                     int idWybranejDostawy = Convert.ToInt32(row.Cells["IdZamowienia"].Value);
 
-                    // Form_HistoriaDostawSzczegoly formSzczegoly = new Form_HistoriaDostawSzczegoly(idWybranejDostawy);
-                    // formSzczegoly.ShowDialog();
+                   Form_HistoriaDostawSzczegoly formSzczegoly = new Form_HistoriaDostawSzczegoly(idWybranejDostawy);
+                   formSzczegoly.ShowDialog();
 
                     WyswietlHistorieZamowien();
                 }
@@ -315,5 +315,10 @@ namespace PodkladexApp.Zaopatrzenie
 
         private void dataGridView_HistoriaZamowien_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
         private void label_data_Poczatku_Click(object sender, EventArgs e) { }
+
+        private void button_Szczegoly_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
