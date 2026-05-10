@@ -42,6 +42,9 @@
             btn_funkcja = new Button();
             cmb_typ = new ComboBox();
             label1 = new Label();
+            cb_dataUr = new CheckBox();
+            cb_dataWy = new CheckBox();
+            cb_dataZa = new CheckBox();
             SuspendLayout();
             // 
             // txtbox_Nazwa
@@ -158,7 +161,7 @@
             btn_funkcja.TabIndex = 11;
             btn_funkcja.Text = "Zatwierdź";
             btn_funkcja.UseVisualStyleBackColor = true;
-            btn_funkcja.Click += btn_funkcja_Click;
+            btn_funkcja.Click += btn_Zapisz_Click;
             // 
             // cmb_typ
             // 
@@ -179,11 +182,45 @@
             label1.TabIndex = 13;
             label1.Text = "Typ";
             // 
+            // cb_dataUr
+            // 
+            cb_dataUr.Checked = true;
+            cb_dataUr.CheckState = CheckState.Checked;
+            cb_dataUr.Location = new Point(36, 401);
+            cb_dataUr.Name = "cb_dataUr";
+            cb_dataUr.Size = new Size(27, 27);
+            cb_dataUr.TabIndex = 14;
+            cb_dataUr.UseVisualStyleBackColor = true;
+            // 
+            // cb_dataWy
+            // 
+            cb_dataWy.Checked = true;
+            cb_dataWy.CheckState = CheckState.Checked;
+            cb_dataWy.Location = new Point(36, 496);
+            cb_dataWy.Name = "cb_dataWy";
+            cb_dataWy.Size = new Size(27, 27);
+            cb_dataWy.TabIndex = 15;
+            cb_dataWy.Text = "checkBox1";
+            cb_dataWy.UseVisualStyleBackColor = true;
+            // 
+            // cb_dataZa
+            // 
+            cb_dataZa.Checked = true;
+            cb_dataZa.CheckState = CheckState.Checked;
+            cb_dataZa.Location = new Point(36, 306);
+            cb_dataZa.Name = "cb_dataZa";
+            cb_dataZa.Size = new Size(27, 27);
+            cb_dataZa.TabIndex = 16;
+            cb_dataZa.UseVisualStyleBackColor = true;
+            // 
             // Form_DodajMaszyne
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(459, 764);
+            Controls.Add(cb_dataZa);
+            Controls.Add(cb_dataWy);
+            Controls.Add(cb_dataUr);
             Controls.Add(label1);
             Controls.Add(cmb_typ);
             Controls.Add(btn_funkcja);
@@ -221,5 +258,8 @@
         private Button btn_funkcja;
         private ComboBox cmb_typ;
         private Label label1;
+        private CheckBox cb_dataUr;
+        private CheckBox cb_dataWy;
+        private CheckBox cb_dataZa;
     }
 }

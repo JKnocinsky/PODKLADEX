@@ -47,10 +47,10 @@ namespace PodkladexApp
                 .Select(n => new
                 {
                     // Pierwsza kolumna: nazwy maszyn powiązanych z tą normą (po przecinku jeśli więcej niż jedna)
-                    Maszyna = string.Join(", ", n.MaszynaWyp
-                        .Select(mw => mw.IdMaszynaNavigation != null ? mw.IdMaszynaNavigation.Nazwa : string.Empty)
-                        .Where(s => !string.IsNullOrEmpty(s))),
-                    n.IdNormaP,
+                    //Maszyna = string.Join(", ", n.MaszynaWyp
+                    //    .Select(mw => mw.IdMaszynaNavigation != null ? mw.IdMaszynaNavigation.Nazwa : string.Empty)
+                    //    .Where(s => !string.IsNullOrEmpty(s))),
+                    //n.IdNormaP,
                     Produkt = n.IdProduktNavigation != null ? n.IdProduktNavigation.Nazwa : string.Empty,
                     Material = n.IdMaterialNavigation != null ? n.IdMaterialNavigation.Nazwa : string.Empty,
                     n.IloscMat,
@@ -61,6 +61,7 @@ namespace PodkladexApp
                 .ToList();
 
             dgv_NormyProd.DataSource = normy;
+            //dgv_NormyProd.DataSource = normyEntities;
             if (dgv_NormyProd.Columns.Contains("IdNormaP"))
                 dgv_NormyProd.Columns["IdNormaP"].Visible = false;
         }
@@ -69,7 +70,7 @@ namespace PodkladexApp
         {
             Form_DodajNormProd formDodaj = new Form_DodajNormProd(bd);
             formDodaj.FormClosed += (s, args) => LoadNormyGrid(); // Odśwież po zamknięciu
-                formDodaj.ShowDialog();
+            formDodaj.ShowDialog();
         }
 
         private void btn_edytuj_Click(object sender, EventArgs e)

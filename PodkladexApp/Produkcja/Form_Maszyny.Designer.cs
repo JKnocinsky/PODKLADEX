@@ -19,7 +19,6 @@
             tlpBottom = new TableLayoutPanel();
             btn_dodaj = new Button();
             btn_edytuj = new Button();
-            btn_MaszWyp = new Button();
             tlpTop = new TableLayoutPanel();
             label1 = new Label();
             txt_Nazwa_Maszyny = new TextBox();
@@ -80,14 +79,12 @@
             // tlpBottom
             // 
             tlpBottom.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            tlpBottom.ColumnCount = 3;
-            tlpBottom.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tlpBottom.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tlpBottom.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tlpBottom.ColumnCount = 2;
+            tlpBottom.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpBottom.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tlpBottom.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
             tlpBottom.Controls.Add(btn_dodaj, 0, 0);
             tlpBottom.Controls.Add(btn_edytuj, 1, 0);
-            tlpBottom.Controls.Add(btn_MaszWyp, 2, 0);
             tlpBottom.Dock = DockStyle.Fill;
             tlpBottom.Location = new Point(3, 712);
             tlpBottom.Margin = new Padding(3, 4, 3, 4);
@@ -105,7 +102,7 @@
             btn_dodaj.Location = new Point(3, 4);
             btn_dodaj.Margin = new Padding(3, 4, 3, 4);
             btn_dodaj.Name = "btn_dodaj";
-            btn_dodaj.Size = new Size(362, 44);
+            btn_dodaj.Size = new Size(546, 44);
             btn_dodaj.TabIndex = 2;
             btn_dodaj.Text = "Dodaj";
             btn_dodaj.UseVisualStyleBackColor = true;
@@ -116,28 +113,14 @@
             btn_edytuj.AutoSize = true;
             btn_edytuj.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btn_edytuj.Dock = DockStyle.Fill;
-            btn_edytuj.Location = new Point(371, 4);
+            btn_edytuj.Location = new Point(555, 4);
             btn_edytuj.Margin = new Padding(3, 4, 3, 4);
             btn_edytuj.Name = "btn_edytuj";
-            btn_edytuj.Size = new Size(362, 44);
+            btn_edytuj.Size = new Size(546, 44);
             btn_edytuj.TabIndex = 3;
             btn_edytuj.Text = "Edytuj";
             btn_edytuj.UseVisualStyleBackColor = true;
             btn_edytuj.Click += btn_dodaj_Click;
-            // 
-            // btn_MaszWyp
-            // 
-            btn_MaszWyp.AutoSize = true;
-            btn_MaszWyp.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btn_MaszWyp.Dock = DockStyle.Fill;
-            btn_MaszWyp.Location = new Point(739, 4);
-            btn_MaszWyp.Margin = new Padding(3, 4, 3, 4);
-            btn_MaszWyp.Name = "btn_MaszWyp";
-            btn_MaszWyp.Size = new Size(362, 44);
-            btn_MaszWyp.TabIndex = 5;
-            btn_MaszWyp.Text = "Wyświetl wyposażenie";
-            btn_MaszWyp.UseVisualStyleBackColor = true;
-            btn_MaszWyp.Click += btn_MaszWyp_Click;
             // 
             // tlpTop
             // 
@@ -208,6 +191,5 @@
         private TableLayoutPanel tlpTop;
         private Label label1;
         private TextBox txt_Nazwa_Maszyny;
-        private Button btn_MaszWyp;
     }
 }

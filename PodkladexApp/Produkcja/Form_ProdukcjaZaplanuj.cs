@@ -56,6 +56,7 @@ namespace PodkladexApp.Produkcja
         private void Dtg_zaplanujProd_SelectionChanged(object? sender, EventArgs e)
         {
             UpdateProgressBarFromSelection();
+            UpdateRealizationProgressBarFromSelection();
         }
 
         private void UpdateProgressBarFromSelection()
@@ -121,6 +122,8 @@ namespace PodkladexApp.Produkcja
                         break;
                 }
 
+
+
                 // Zaokrąglij i obetnij do zakresu 0..100
                 var percentInt = (int)Math.Round((double)percentDecimal);
                 if (percentInt < pb_procentZaplanowania.Minimum) percentInt = pb_procentZaplanowania.Minimum;
@@ -132,6 +135,38 @@ namespace PodkladexApp.Produkcja
             {
                 // W razie błędu ustaw domyślną wartość
                 try { pb_procentZaplanowania.Value = 0; lbl_wybraneZam.Text = string.Empty; } catch { }
+            }
+        }
+
+        private void UpdateRealizationProgressBarFromSelection()
+        {
+            if (dtg_zaplanujProd.CurrentRow != null && dtg_zaplanujProd.Columns.Contains("IdZamowienie"))
+            {
+                var idCell = dtg_zaplanujProd.CurrentRow.Cells["IdZamowienie"];
+                if (idCell?.Value != null && int.TryParse(idCell.Value.ToString(), out int idZamowienie))
+                {
+                    var realizacja = db.WidokProdukcjaProcentRealizacji
+                        .AsNoTracking()
+                        .FirstOrDefault(w => w.IdZamowienie == idZamowienie);
+
+                    if (realizacja != null)
+                    {
+                        decimal val = realizacja.SredniaWartoscFormula ?? 0m;
+                        int intVal = (int)Math.Min(100, Math.Max(0, val));
+                        pb_realizacja.Value = intVal;
+
+                        var lblRealizacja = Controls.Find("lbl_realizacja", true).FirstOrDefault() as Label;
+                        if (lblRealizacja != null) lblRealizacja.Text = $"{val:N2}%";
+                    }
+                    else
+                    {
+                        pb_realizacja.Value = 0;
+                    }
+                }
+            }
+            else
+            {
+                pb_realizacja.Value = 0;
             }
         }
 
@@ -251,6 +286,7 @@ namespace PodkladexApp.Produkcja
             // Przekaż IdZamowienie do podformularza
             Form_ProdukcjaZaplanujPodform form = new Form_ProdukcjaZaplanujPodform(db, idZamowienie);
             form.ShowDialog();
+            LoadGrid(refreshCombo: false);
         }
 
         private void btn_zatwierdz_Click(object sender, EventArgs e)
@@ -287,6 +323,7 @@ namespace PodkladexApp.Produkcja
 
                     MessageBox.Show($"Zamówienie nr {idZamowienie} zostało pomyślnie zrealizowane.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+                LoadGrid(refreshCombo: false);
             }
         }
     }
