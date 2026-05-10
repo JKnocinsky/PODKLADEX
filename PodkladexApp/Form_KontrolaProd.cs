@@ -43,6 +43,9 @@ namespace PodkladexApp
             this.DGV_PomiaryProd.CellFormatting += DGV_PomiaryProd_CellFormatting;
             this.btn_WymusZatwierdzenie.Click += btn_WymusZatwierdzenie_Click;
 
+            // NOWE: Zdarzenie dla przycisku generowania
+            this.btn_GenerujPomiary.Click += btn_GenerujPomiary_Click;
+
             // Zdarzenia
             this.textBox_OdpadyWizualneSzt.TextChanged += textBox_OdpadyWizualneSzt_TextChanged;
             this.checkBox_KontrolaProdZat.CheckedChanged += checkBox_KontrolaProdZat_CheckedChanged;
@@ -96,6 +99,9 @@ namespace PodkladexApp
             textBox_OdpadyPomiarySzt.Clear();
             textBox_KontProdOdpady.Clear();
             textBox_KontProdOdpadySzt.Clear();
+
+            // Czyszczenie nowego pola generatora
+            if (textBox_IloscSztukGeneruj != null) textBox_IloscSztukGeneruj.Clear();
 
             isProgrammaticCheck = true;
             checkBox_KontrolaProdZat.Checked = false;
@@ -174,7 +180,6 @@ namespace PodkladexApp
                 AktualizujPostepIWage();
                 PrzeliczOdpadyZeZlychPomiarow();
 
-                // Odtwarzanie podziału odpadów z bazy
                 if (wybrana.Odpady.HasValue && aktualnaMasaNominalna > 0)
                 {
                     int totalSzt = (int)Math.Round((decimal)wybrana.Odpady / aktualnaMasaNominalna, 0);
@@ -269,6 +274,69 @@ namespace PodkladexApp
         private void btn_Anuluj_Click(object sender, EventArgs e)
         {
             UstawStanPoczatkowy();
+        }
+
+        // NOWA METODA - Generator Pomiarów
+        private void btn_GenerujPomiary_Click(object sender, EventArgs e)
+        {
+            if (_aktualneIdKontroli == 0) return;
+
+            if (!int.TryParse(textBox_IloscSztukGeneruj.Text, out int iloscSztuk) || iloscSztuk <= 0)
+            {
+                MessageBox.Show("Wpisz poprawną liczbę sztuk dodatnich do wygenerowania.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int idZadania = (int)comboBox_KontProdZadP.SelectedValue;
+            var prodInfo = _context.Produkcja.Include(p => p.IdNormyPNavigation).FirstOrDefault(p => p.IdZadanieP == idZadania);
+            int idProdukt = prodInfo?.IdNormyPNavigation?.IdProdukt ?? 0;
+
+            if (idProdukt == 0) return;
+
+            var normy = _context.ProduktWlasciwosci.Where(pw => pw.IdProdukt == idProdukt).ToList();
+            if (!normy.Any())
+            {
+                MessageBox.Show("Brak zdefiniowanych norm dla tego produktu.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Random rnd = new Random();
+
+            for (int i = 0; i < iloscSztuk; i++)
+            {
+                foreach (var norma in normy)
+                {
+                    decimal min = norma.WartoscMinimalna;
+                    decimal max = norma.WartoscMaksymalna;
+                    decimal rozstep = max - min;
+
+                    // Jeśli rozstep wynosi 0 (np. wymagany konkretny wymiar bez tolerancji), wymuszamy minimalną losowość
+                    if (rozstep == 0) rozstep = 0.1m;
+
+                    // Poszerzamy zakres losowania, żeby ok. 15% pomiarów wylądowało jako "NIEZGODNE" dla lepszej prezentacji
+                    decimal losowaneMin = min - (rozstep * 0.15m);
+                    decimal losowaneMax = max + (rozstep * 0.15m);
+
+                    decimal wartoscWygenerowana = losowaneMin + (decimal)rnd.NextDouble() * (losowaneMax - losowaneMin);
+
+                    // Zaokrąglamy wynik do 2 miejsc po przecinku, by wyglądało naturalnie jak z suwmiarki
+                    wartoscWygenerowana = Math.Round(wartoscWygenerowana, 2);
+
+                    _context.Pomiar.Add(new Pomiar
+                    {
+                        IdKontrolaProd = _aktualneIdKontroli,
+                        IdWlasciwosci = norma.IdWlasciwosci,
+                        WartoscZmierzona = wartoscWygenerowana
+                    });
+                }
+            }
+
+            _context.SaveChanges();
+            OdswiezTabelePomiarow();
+            AktualizujPostepIWage();
+            PrzeliczOdpadyZeZlychPomiarow();
+
+            MessageBox.Show($"Pomyślnie wygenerowano symulację dla {iloscSztuk} szt. (łącznie dodano {iloscSztuk * normy.Count} wymiarów).", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btn_EdytujPomiar_Click(object sender, EventArgs e)

@@ -32,6 +32,10 @@
             btn_Edytuj = new Button();
             label_ListaKontroli = new Label();
             panel_DodawaniePomiaru = new Panel();
+            textBox_OdpadyPomiarySzt = new TextBox();
+            textBox_OdpadyWizualneSzt = new TextBox();
+            label_OdpadyPomiarySzt = new Label();
+            label_OdpadyWizualneSzt = new Label();
             btn_WymusZatwierdzenie = new Button();
             label_PostepInfo = new Label();
             progressBar_Postep = new ProgressBar();
@@ -61,10 +65,9 @@
             label_KontProdZadP = new Label();
             label_KontProdPrac = new Label();
             comboBox_KontProdPrac = new ComboBox();
-            label_OdpadyWizualneSzt = new Label();
-            label_OdpadyPomiarySzt = new Label();
-            textBox_OdpadyWizualneSzt = new TextBox();
-            textBox_OdpadyPomiarySzt = new TextBox();
+            label1 = new Label();
+            textBox_IloscSztukGeneruj = new TextBox();
+            btn_GenerujPomiary = new Button();
             panel_DodawaniePomiaru.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DGV_PomiaryProd).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DGV_KontProdKontrole).BeginInit();
@@ -102,6 +105,9 @@
             // 
             // panel_DodawaniePomiaru
             // 
+            panel_DodawaniePomiaru.Controls.Add(btn_GenerujPomiary);
+            panel_DodawaniePomiaru.Controls.Add(textBox_IloscSztukGeneruj);
+            panel_DodawaniePomiaru.Controls.Add(label1);
             panel_DodawaniePomiaru.Controls.Add(textBox_OdpadyPomiarySzt);
             panel_DodawaniePomiaru.Controls.Add(textBox_OdpadyWizualneSzt);
             panel_DodawaniePomiaru.Controls.Add(label_OdpadyPomiarySzt);
@@ -130,6 +136,41 @@
             panel_DodawaniePomiaru.Name = "panel_DodawaniePomiaru";
             panel_DodawaniePomiaru.Size = new Size(1207, 585);
             panel_DodawaniePomiaru.TabIndex = 37;
+            // 
+            // textBox_OdpadyPomiarySzt
+            // 
+            textBox_OdpadyPomiarySzt.Location = new Point(1068, 219);
+            textBox_OdpadyPomiarySzt.Name = "textBox_OdpadyPomiarySzt";
+            textBox_OdpadyPomiarySzt.ReadOnly = true;
+            textBox_OdpadyPomiarySzt.Size = new Size(100, 23);
+            textBox_OdpadyPomiarySzt.TabIndex = 37;
+            // 
+            // textBox_OdpadyWizualneSzt
+            // 
+            textBox_OdpadyWizualneSzt.Location = new Point(1068, 167);
+            textBox_OdpadyWizualneSzt.Name = "textBox_OdpadyWizualneSzt";
+            textBox_OdpadyWizualneSzt.Size = new Size(100, 23);
+            textBox_OdpadyWizualneSzt.TabIndex = 36;
+            // 
+            // label_OdpadyPomiarySzt
+            // 
+            label_OdpadyPomiarySzt.AutoSize = true;
+            label_OdpadyPomiarySzt.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            label_OdpadyPomiarySzt.Location = new Point(910, 217);
+            label_OdpadyPomiarySzt.Name = "label_OdpadyPomiarySzt";
+            label_OdpadyPomiarySzt.Size = new Size(152, 25);
+            label_OdpadyPomiarySzt.TabIndex = 35;
+            label_OdpadyPomiarySzt.Text = "Złe pomiary [szt]";
+            // 
+            // label_OdpadyWizualneSzt
+            // 
+            label_OdpadyWizualneSzt.AutoSize = true;
+            label_OdpadyWizualneSzt.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            label_OdpadyWizualneSzt.Location = new Point(837, 165);
+            label_OdpadyWizualneSzt.Name = "label_OdpadyWizualneSzt";
+            label_OdpadyWizualneSzt.Size = new Size(235, 25);
+            label_OdpadyWizualneSzt.TabIndex = 34;
+            label_OdpadyWizualneSzt.Text = "Braki pozapomiarowe [szt]";
             // 
             // btn_WymusZatwierdzenie
             // 
@@ -407,40 +448,33 @@
             comboBox_KontProdPrac.Size = new Size(371, 23);
             comboBox_KontProdPrac.TabIndex = 26;
             // 
-            // label_OdpadyWizualneSzt
+            // label1
             // 
-            label_OdpadyWizualneSzt.AutoSize = true;
-            label_OdpadyWizualneSzt.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_OdpadyWizualneSzt.Location = new Point(837, 165);
-            label_OdpadyWizualneSzt.Name = "label_OdpadyWizualneSzt";
-            label_OdpadyWizualneSzt.Size = new Size(235, 25);
-            label_OdpadyWizualneSzt.TabIndex = 34;
-            label_OdpadyWizualneSzt.Text = "Braki pozapomiarowe [szt]";
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            label1.Location = new Point(837, 32);
+            label1.Name = "label1";
+            label1.Size = new Size(227, 25);
+            label1.TabIndex = 38;
+            label1.Text = "Liczba sztuk do symulacji:";
             // 
-            // label_OdpadyPomiarySzt
+            // textBox_IloscSztukGeneruj
             // 
-            label_OdpadyPomiarySzt.AutoSize = true;
-            label_OdpadyPomiarySzt.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_OdpadyPomiarySzt.Location = new Point(910, 217);
-            label_OdpadyPomiarySzt.Name = "label_OdpadyPomiarySzt";
-            label_OdpadyPomiarySzt.Size = new Size(152, 25);
-            label_OdpadyPomiarySzt.TabIndex = 35;
-            label_OdpadyPomiarySzt.Text = "Złe pomiary [szt]";
+            textBox_IloscSztukGeneruj.Location = new Point(1070, 34);
+            textBox_IloscSztukGeneruj.Name = "textBox_IloscSztukGeneruj";
+            textBox_IloscSztukGeneruj.Size = new Size(100, 23);
+            textBox_IloscSztukGeneruj.TabIndex = 39;
             // 
-            // textBox_OdpadyWizualneSzt
+            // btn_GenerujPomiary
             // 
-            textBox_OdpadyWizualneSzt.Location = new Point(1068, 167);
-            textBox_OdpadyWizualneSzt.Name = "textBox_OdpadyWizualneSzt";
-            textBox_OdpadyWizualneSzt.Size = new Size(100, 23);
-            textBox_OdpadyWizualneSzt.TabIndex = 36;
-            // 
-            // textBox_OdpadyPomiarySzt
-            // 
-            textBox_OdpadyPomiarySzt.Location = new Point(1068, 219);
-            textBox_OdpadyPomiarySzt.Name = "textBox_OdpadyPomiarySzt";
-            textBox_OdpadyPomiarySzt.ReadOnly = true;
-            textBox_OdpadyPomiarySzt.Size = new Size(100, 23);
-            textBox_OdpadyPomiarySzt.TabIndex = 37;
+            btn_GenerujPomiary.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            btn_GenerujPomiary.Location = new Point(928, 71);
+            btn_GenerujPomiary.Margin = new Padding(3, 2, 3, 2);
+            btn_GenerujPomiary.Name = "btn_GenerujPomiary";
+            btn_GenerujPomiary.Size = new Size(172, 57);
+            btn_GenerujPomiary.TabIndex = 40;
+            btn_GenerujPomiary.Text = "Generuj Pomiary";
+            btn_GenerujPomiary.UseVisualStyleBackColor = true;
             // 
             // Form_KontrolaProd
             // 
@@ -510,5 +544,8 @@
         private TextBox textBox_OdpadyWizualneSzt;
         private Label label_OdpadyPomiarySzt;
         private Label label_OdpadyWizualneSzt;
+        private Button btn_GenerujPomiary;
+        private TextBox textBox_IloscSztukGeneruj;
+        private Label label1;
     }
 }
