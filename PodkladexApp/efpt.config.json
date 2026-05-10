@@ -271,6 +271,10 @@
          "ObjectType": 3
       },
       {
+         "Name": "[dbo].[Widok_Produkcja_Zestawienie_Efektow]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[dbo].[Widok_Suma_Odpady_Zamowienia]",
          "ObjectType": 3
       },
@@ -280,14 +284,6 @@
       },
       {
          "Name": "[dbo].[Widok_Suma_RBH_Pracownik]",
-         "ObjectType": 3
-      },
-      {
-         "Name": "[dbo].[Widok_Wszyscy_Pracownicy_RBH]",
-         "ObjectType": 3
-      },
-      {
-         "Name": "[dbo].[Widok_Wszystkie_Maszyny_RBH]",
          "ObjectType": 3
       },
       {

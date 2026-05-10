@@ -125,15 +125,13 @@ public partial class PodkladexContext : DbContext
 
     public virtual DbSet<WidokProdukcjaRealizacjaObliczenia> WidokProdukcjaRealizacjaObliczenia { get; set; }
 
+    public virtual DbSet<WidokProdukcjaZestawienieEfektow> WidokProdukcjaZestawienieEfektow { get; set; }
+
     public virtual DbSet<WidokSumaOdpadyZamowienia> WidokSumaOdpadyZamowienia { get; set; }
 
     public virtual DbSet<WidokSumaRbhMaszyna> WidokSumaRbhMaszyna { get; set; }
 
     public virtual DbSet<WidokSumaRbhPracownik> WidokSumaRbhPracownik { get; set; }
-
-    public virtual DbSet<WidokWszyscyPracownicyRbh> WidokWszyscyPracownicyRbh { get; set; }
-
-    public virtual DbSet<WidokWszystkieMaszynyRbh> WidokWszystkieMaszynyRbh { get; set; }
 
     public virtual DbSet<WidokZamowieniaZadania> WidokZamowieniaZadania { get; set; }
 
@@ -193,7 +191,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Awaria>(entity =>
         {
-            entity.HasKey(e => e.IdAwaria).HasName("PK__Awaria__8D4FCB83DF012FD3");
+            entity.HasKey(e => e.IdAwaria).HasName("PK__Awaria__8D4FCB8360C58B9F");
 
             entity.Property(e => e.IdAwaria).HasColumnName("ID_awaria");
             entity.Property(e => e.DataUsuniecia).HasColumnName("Data_usuniecia");
@@ -217,7 +215,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<BadanieMedyczne>(entity =>
         {
-            entity.HasKey(e => e.IdBadanieMedyczne).HasName("PK__Badanie___D27847BAF385AE9A");
+            entity.HasKey(e => e.IdBadanieMedyczne).HasName("PK__Badanie___D27847BA09EC660A");
 
             entity.ToTable("Badanie_medyczne");
 
@@ -242,7 +240,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<CzescZamienna>(entity =>
         {
-            entity.HasKey(e => e.IdCzesci).HasName("PK__Czesc_za__3566F799E7935D5F");
+            entity.HasKey(e => e.IdCzesci).HasName("PK__Czesc_za__3566F7998E2C769C");
 
             entity.ToTable("Czesc_zamienna");
 
@@ -254,7 +252,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<CzesciAwaria>(entity =>
         {
-            entity.HasKey(e => e.IdCzesciAwaria).HasName("PK__Czesci_a__2A11CA5C59792D70");
+            entity.HasKey(e => e.IdCzesciAwaria).HasName("PK__Czesci_a__2A11CA5CD6998ACF");
 
             entity.ToTable("Czesci_awaria");
 
@@ -275,7 +273,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<CzesciPrzeglady>(entity =>
         {
-            entity.HasKey(e => e.IdCzesciPrzeglady).HasName("PK__Czesci_p__025E78FC1AFE05B1");
+            entity.HasKey(e => e.IdCzesciPrzeglady).HasName("PK__Czesci_p__025E78FC335DA6DB");
 
             entity.ToTable("Czesci_przeglady");
 
@@ -297,7 +295,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Dostawa>(entity =>
         {
-            entity.HasKey(e => e.IdDostawa).HasName("PK__Dostawa__6D633112255F8CED");
+            entity.HasKey(e => e.IdDostawa).HasName("PK__Dostawa__6D633112FE2606B2");
 
             entity.Property(e => e.IdDostawa).HasColumnName("ID_dostawa");
             entity.Property(e => e.DataDostawy).HasColumnName("Data_dostawy");
@@ -317,9 +315,9 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Firma>(entity =>
         {
-            entity.HasKey(e => e.IdFirma).HasName("PK__Firma__30DD244AED335E19");
+            entity.HasKey(e => e.IdFirma).HasName("PK__Firma__30DD244A47A2902C");
 
-            entity.HasIndex(e => e.Nip, "UQ__Firma__C7DEC3C6B1AB1EC2").IsUnique();
+            entity.HasIndex(e => e.Nip, "UQ__Firma__C7DEC3C619BDE0F9").IsUnique();
 
             entity.Property(e => e.IdFirma).HasColumnName("ID_firma");
             entity.Property(e => e.KodPocztowy)
@@ -340,7 +338,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Gwarancja>(entity =>
         {
-            entity.HasKey(e => e.IdGwarancja).HasName("PK__Gwarancj__06520D255D0A8DEE");
+            entity.HasKey(e => e.IdGwarancja).HasName("PK__Gwarancj__06520D259AAE0EA4");
 
             entity.Property(e => e.IdGwarancja).HasColumnName("ID_gwarancja");
             entity.Property(e => e.CzasGwarancji).HasColumnName("Czas_gwarancji");
@@ -361,7 +359,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Jednostka>(entity =>
         {
-            entity.HasKey(e => e.IdJednostki).HasName("PK__Jednostk__B50E042F3EC99041");
+            entity.HasKey(e => e.IdJednostki).HasName("PK__Jednostk__B50E042F3E7C310C");
 
             entity.Property(e => e.IdJednostki).HasColumnName("ID_jednostki");
             entity.Property(e => e.NazwaJednostki)
@@ -372,7 +370,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Klient>(entity =>
         {
-            entity.HasKey(e => e.IdKlient).HasName("PK__Klient__7382667E498B22F3");
+            entity.HasKey(e => e.IdKlient).HasName("PK__Klient__7382667E91BB6B92");
 
             entity.Property(e => e.IdKlient).HasColumnName("ID_klient");
             entity.Property(e => e.IdOsoba).HasColumnName("ID_osoba");
@@ -384,7 +382,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<KlientFirma>(entity =>
         {
-            entity.HasKey(e => e.IdKlientFirma).HasName("PK__Klient_f__2AAE6DA71A0536AE");
+            entity.HasKey(e => e.IdKlientFirma).HasName("PK__Klient_f__2AAE6DA719A70F71");
 
             entity.ToTable("Klient_firma");
 
@@ -405,7 +403,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<KontrolaMat>(entity =>
         {
-            entity.HasKey(e => e.IdKontrolaMat).HasName("PK__Kontrola__5856399FEB3D1A2F");
+            entity.HasKey(e => e.IdKontrolaMat).HasName("PK__Kontrola__5856399FAA8B6C95");
 
             entity.ToTable("Kontrola_mat");
 
@@ -436,7 +434,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<KontrolaProd>(entity =>
         {
-            entity.HasKey(e => e.IdKontrolaProd).HasName("PK__Kontrola__3831EE893F6C0A92");
+            entity.HasKey(e => e.IdKontrolaProd).HasName("PK__Kontrola__3831EE895C2D09FC");
 
             entity.ToTable("Kontrola_prod");
 
@@ -461,7 +459,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Maszyna>(entity =>
         {
-            entity.HasKey(e => e.IdMaszyna).HasName("PK__Maszyna__38E0F77A4690F4DE");
+            entity.HasKey(e => e.IdMaszyna).HasName("PK__Maszyna__38E0F77AD7B9C808");
 
             entity.Property(e => e.IdMaszyna).HasColumnName("ID_maszyna");
             entity.Property(e => e.DataUruchomienia).HasColumnName("Data_uruchomienia");
@@ -475,7 +473,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<MaszynaTyp>(entity =>
         {
-            entity.HasKey(e => e.IdMaszynaTyp).HasName("PK__Maszyna___EFC428C5A04D027F");
+            entity.HasKey(e => e.IdMaszynaTyp).HasName("PK__Maszyna___EFC428C5A3FEDAE8");
 
             entity.ToTable("Maszyna_typ");
 
@@ -496,7 +494,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<MaszynaWyp>(entity =>
         {
-            entity.HasKey(e => e.IdMaszynaWyp).HasName("PK__Maszyna___EC15EAC32EAC3767");
+            entity.HasKey(e => e.IdMaszynaWyp).HasName("PK__Maszyna___EC15EAC318BDF6C1");
 
             entity.ToTable("Maszyna_wyp");
 
@@ -523,7 +521,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Material>(entity =>
         {
-            entity.HasKey(e => e.IdMaterial).HasName("PK__Material__DF852610814317D6");
+            entity.HasKey(e => e.IdMaterial).HasName("PK__Material__DF852610A3B2BCCE");
 
             entity.Property(e => e.IdMaterial).HasColumnName("ID_material");
             entity.Property(e => e.IdRodzaj).HasColumnName("ID_rodzaj");
@@ -540,7 +538,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<MaterialWlasciwosci>(entity =>
         {
-            entity.HasKey(e => e.IdMaterialWlasciwosci).HasName("PK__Material__6D01887182E7D5ED");
+            entity.HasKey(e => e.IdMaterialWlasciwosci).HasName("PK__Material__6D0188717C6206CD");
 
             entity.ToTable("Material_wlasciwosci");
 
@@ -570,7 +568,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Norma>(entity =>
         {
-            entity.HasKey(e => e.IdNormy).HasName("PK__Norma__E42B5C527F50CE47");
+            entity.HasKey(e => e.IdNormy).HasName("PK__Norma__E42B5C526FE9581C");
 
             entity.Property(e => e.IdNormy).HasColumnName("ID_normy");
             entity.Property(e => e.Nazwa)
@@ -583,7 +581,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<NormaProd>(entity =>
         {
-            entity.HasKey(e => e.IdNormaP).HasName("PK__Norma_pr__FD73E4884710ACC5");
+            entity.HasKey(e => e.IdNormaP).HasName("PK__Norma_pr__FD73E4889F5FAD34");
 
             entity.ToTable("Norma_prod");
 
@@ -610,7 +608,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<NormyEksploatacyjne>(entity =>
         {
-            entity.HasKey(e => e.IdNormyEkspl).HasName("PK__Normy_ek__63D2F7FE13FEEE45");
+            entity.HasKey(e => e.IdNormyEkspl).HasName("PK__Normy_ek__63D2F7FE0FA2A29B");
 
             entity.ToTable("Normy_eksploatacyjne");
 
@@ -626,7 +624,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<NormyMaszyna>(entity =>
         {
-            entity.HasKey(e => e.IdNormyMaszyna).HasName("PK__Normy_ma__F353B32BDA1BFB09");
+            entity.HasKey(e => e.IdNormyMaszyna).HasName("PK__Normy_ma__F353B32B16AEA7C9");
 
             entity.ToTable("Normy_maszyna");
 
@@ -648,7 +646,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Obsluga>(entity =>
         {
-            entity.HasKey(e => e.IdObsluga).HasName("PK__Obsluga__5F5AD47635D1F37F");
+            entity.HasKey(e => e.IdObsluga).HasName("PK__Obsluga__5F5AD4764AE2F7B8");
 
             entity.Property(e => e.IdObsluga).HasColumnName("ID_obsluga");
             entity.Property(e => e.DataKoniec).HasColumnName("Data_koniec");
@@ -677,7 +675,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Osoba>(entity =>
         {
-            entity.HasKey(e => e.IdOsoba).HasName("PK__Osoba__7573A697ED0BCEE2");
+            entity.HasKey(e => e.IdOsoba).HasName("PK__Osoba__7573A6972774B6D1");
 
             entity.HasIndex(e => e.Pesel, "UQ_Osoba_Pesel")
                 .IsUnique()
@@ -713,7 +711,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Pomiar>(entity =>
         {
-            entity.HasKey(e => e.IdPomiar).HasName("PK__Pomiar__D471E709463C8838");
+            entity.HasKey(e => e.IdPomiar).HasName("PK__Pomiar__D471E7096460880E");
 
             entity.Property(e => e.IdPomiar).HasColumnName("ID_Pomiar");
             entity.Property(e => e.IdKontrolaProd).HasColumnName("ID_Kontrola_prod");
@@ -735,7 +733,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<PomiarMat>(entity =>
         {
-            entity.HasKey(e => e.IdPomiarMat).HasName("PK__Pomiar_m__84650180A9C822D0");
+            entity.HasKey(e => e.IdPomiarMat).HasName("PK__Pomiar_m__846501800DD9F7EC");
 
             entity.ToTable("Pomiar_mat");
 
@@ -759,7 +757,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Pracownik>(entity =>
         {
-            entity.HasKey(e => e.IdPracownik).HasName("PK__Pracowni__4AE49B6E2C5BA48D");
+            entity.HasKey(e => e.IdPracownik).HasName("PK__Pracowni__4AE49B6E70519D2D");
 
             entity.Property(e => e.IdPracownik).HasColumnName("ID_pracownik");
             entity.Property(e => e.IdOsoba).HasColumnName("ID_osoba");
@@ -772,7 +770,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<PracownikSzkolenia>(entity =>
         {
-            entity.HasKey(e => e.IdPracownikSzkolenia).HasName("PK__Pracowni__C68FD149D26E271F");
+            entity.HasKey(e => e.IdPracownikSzkolenia).HasName("PK__Pracowni__C68FD149712B3DF7");
 
             entity.ToTable("Pracownik_szkolenia");
 
@@ -798,7 +796,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Produkcja>(entity =>
         {
-            entity.HasKey(e => e.IdProdukcja).HasName("PK__Produkcj__69A3FC996B87D65B");
+            entity.HasKey(e => e.IdProdukcja).HasName("PK__Produkcj__69A3FC9910FD6F39");
 
             entity.Property(e => e.IdProdukcja).HasColumnName("ID_produkcja");
             entity.Property(e => e.IdNormyP).HasColumnName("ID_normyP");
@@ -828,7 +826,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Produkt>(entity =>
         {
-            entity.HasKey(e => e.IdProdukt).HasName("PK__Produkt__FD71AB0D783BC60A");
+            entity.HasKey(e => e.IdProdukt).HasName("PK__Produkt__FD71AB0DD274609C");
 
             entity.Property(e => e.IdProdukt).HasColumnName("ID_produkt");
             entity.Property(e => e.Nazwa)
@@ -838,7 +836,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<ProduktNorma>(entity =>
         {
-            entity.HasKey(e => e.IdProduktyNormy).HasName("PK__Produkt___4247AF0F86921A23");
+            entity.HasKey(e => e.IdProduktyNormy).HasName("PK__Produkt___4247AF0FE57F5EA8");
 
             entity.ToTable("Produkt_Norma");
 
@@ -859,7 +857,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<ProduktWlasciwosci>(entity =>
         {
-            entity.HasKey(e => e.IdProduktyWlasciwosci).HasName("PK__Produkt___AA8BF234444BB27C");
+            entity.HasKey(e => e.IdProduktyWlasciwosci).HasName("PK__Produkt___AA8BF234FD523A78");
 
             entity.ToTable("Produkt_wlasciwosci");
 
@@ -889,7 +887,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<RodzajMaterialu>(entity =>
         {
-            entity.HasKey(e => e.IdRodzaj).HasName("PK__Rodzaj_m__5605F87215A7FD7B");
+            entity.HasKey(e => e.IdRodzaj).HasName("PK__Rodzaj_m__5605F872057E13CC");
 
             entity.ToTable("Rodzaj_materialu");
 
@@ -901,7 +899,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<RodzajObslugi>(entity =>
         {
-            entity.HasKey(e => e.IdRodzajObslugi).HasName("PK__Rodzaj_o__CCBEB0F8CBE0FEFB");
+            entity.HasKey(e => e.IdRodzajObslugi).HasName("PK__Rodzaj_o__CCBEB0F8E5CF73FA");
 
             entity.ToTable("Rodzaj_obslugi");
 
@@ -916,7 +914,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<RodzajUmowy>(entity =>
         {
-            entity.HasKey(e => e.IdRodzaju).HasName("PK__Rodzaj_u__5001DC831E512C1C");
+            entity.HasKey(e => e.IdRodzaju).HasName("PK__Rodzaj_u__5001DC83B38DAD8D");
 
             entity.ToTable("Rodzaj_umowy");
 
@@ -931,7 +929,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<SiatkaPlac>(entity =>
         {
-            entity.HasKey(e => e.IdSiatkaPlac).HasName("PK__Siatka_p__487C8DBEEBE48FB7");
+            entity.HasKey(e => e.IdSiatkaPlac).HasName("PK__Siatka_p__487C8DBED074F604");
 
             entity.ToTable("Siatka_plac");
 
@@ -949,7 +947,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<SzczegolyDostawy>(entity =>
         {
-            entity.HasKey(e => e.IdSzczegolyDostawy).HasName("PK__Szczegol__C5FC719BB02D9833");
+            entity.HasKey(e => e.IdSzczegolyDostawy).HasName("PK__Szczegol__C5FC719B5F562921");
 
             entity.ToTable("Szczegoly_dostawy");
 
@@ -972,7 +970,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<SzczegolyZamowienia>(entity =>
         {
-            entity.HasKey(e => e.IdSzczegolyZamowienia).HasName("PK__Szczegol__2D26C3486A635640");
+            entity.HasKey(e => e.IdSzczegolyZamowienia).HasName("PK__Szczegol__2D26C34850519F29");
 
             entity.ToTable("Szczegoly_zamowienia");
 
@@ -1002,7 +1000,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Szkolenie>(entity =>
         {
-            entity.HasKey(e => e.IdSzkolenia).HasName("PK__Szkoleni__8655159D583A617A");
+            entity.HasKey(e => e.IdSzkolenia).HasName("PK__Szkoleni__8655159DB36B6778");
 
             entity.Property(e => e.IdSzkolenia).HasColumnName("ID_szkolenia");
             entity.Property(e => e.CzyObowiazkowe).HasColumnName("Czy_obowiazkowe");
@@ -1014,7 +1012,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Typ>(entity =>
         {
-            entity.HasKey(e => e.IdTyp).HasName("PK__Typ__1FBE6678CCF74307");
+            entity.HasKey(e => e.IdTyp).HasName("PK__Typ__1FBE6678C7F0577C");
 
             entity.Property(e => e.IdTyp).HasColumnName("ID_typ");
             entity.Property(e => e.Nazwa)
@@ -1024,7 +1022,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<TypBadaniaMed>(entity =>
         {
-            entity.HasKey(e => e.IdTypBadaniaMed).HasName("PK__Typ_bada__E8E973F37D01D5D9");
+            entity.HasKey(e => e.IdTypBadaniaMed).HasName("PK__Typ_bada__E8E973F34496692E");
 
             entity.ToTable("Typ_badania_med");
 
@@ -1037,7 +1035,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<TypWlasciwosci>(entity =>
         {
-            entity.HasKey(e => e.IdTypWlasciwosci).HasName("PK__Typ_wlas__637DFEB77A1588DF");
+            entity.HasKey(e => e.IdTypWlasciwosci).HasName("PK__Typ_wlas__637DFEB77BD57489");
 
             entity.ToTable("Typ_wlasciwosci");
 
@@ -1059,7 +1057,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<TypZwolnienia>(entity =>
         {
-            entity.HasKey(e => e.IdTypZwolnienia).HasName("PK__Typ_zwol__3E15685938D0F90C");
+            entity.HasKey(e => e.IdTypZwolnienia).HasName("PK__Typ_zwol__3E156859BDD9DE29");
 
             entity.ToTable("Typ_zwolnienia");
 
@@ -1072,7 +1070,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Umowa>(entity =>
         {
-            entity.HasKey(e => e.IdUmowa).HasName("PK__Umowa__D2EDF6FB3291F89D");
+            entity.HasKey(e => e.IdUmowa).HasName("PK__Umowa__D2EDF6FB28D9B8D5");
 
             entity.Property(e => e.IdUmowa).HasColumnName("ID_umowa");
             entity.Property(e => e.DataRoz).HasColumnName("Data_roz");
@@ -1093,7 +1091,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Urlop>(entity =>
         {
-            entity.HasKey(e => e.IdUrlopu).HasName("PK__Urlop__595D2971BE103B86");
+            entity.HasKey(e => e.IdUrlopu).HasName("PK__Urlop__595D2971BA53209D");
 
             entity.Property(e => e.IdUrlopu).HasColumnName("ID_urlopu");
             entity.Property(e => e.Nazwa)
@@ -1103,7 +1101,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<UrlopUmowa>(entity =>
         {
-            entity.HasKey(e => e.IdUrlopUmowa).HasName("PK__Urlop_um__59C9C2FC78D7BFC8");
+            entity.HasKey(e => e.IdUrlopUmowa).HasName("PK__Urlop_um__59C9C2FC418D974E");
 
             entity.ToTable("Urlop_umowa");
 
@@ -1244,6 +1242,33 @@ public partial class PodkladexContext : DbContext
                 .HasColumnName("Wartosc_Formula");
         });
 
+        modelBuilder.Entity<WidokProdukcjaZestawienieEfektow>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("Widok_Produkcja_Zestawienie_Efektow");
+
+            entity.Property(e => e.IdZamowienie).HasColumnName("ID_zamowienie");
+            entity.Property(e => e.OczekiwanaProdukcja)
+                .HasColumnType("decimal(38, 15)")
+                .HasColumnName("Oczekiwana_Produkcja");
+            entity.Property(e => e.OczekiwaneOdpady)
+                .HasColumnType("decimal(38, 15)")
+                .HasColumnName("Oczekiwane_Odpady");
+            entity.Property(e => e.OczekiwaneZuzycieMaterialu)
+                .HasColumnType("decimal(38, 15)")
+                .HasColumnName("Oczekiwane_Zuzycie_Materialu");
+            entity.Property(e => e.RealnaProdukcja)
+                .HasColumnType("decimal(38, 2)")
+                .HasColumnName("Realna_Produkcja");
+            entity.Property(e => e.RealneOdpady)
+                .HasColumnType("decimal(38, 2)")
+                .HasColumnName("Realne_Odpady");
+            entity.Property(e => e.RealneZuzycieMaterialu)
+                .HasColumnType("decimal(38, 2)")
+                .HasColumnName("Realne_Zuzycie_Materialu");
+        });
+
         modelBuilder.Entity<WidokSumaOdpadyZamowienia>(entity =>
         {
             entity
@@ -1277,42 +1302,6 @@ public partial class PodkladexContext : DbContext
 
             entity.Property(e => e.Data).HasColumnName("DATA");
             entity.Property(e => e.IdPracownik).HasColumnName("ID_pracownik");
-            entity.Property(e => e.SumaRbh)
-                .HasColumnType("decimal(38, 2)")
-                .HasColumnName("Suma_RBH");
-        });
-
-        modelBuilder.Entity<WidokWszyscyPracownicyRbh>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToView("Widok_Wszyscy_Pracownicy_RBH");
-
-            entity.Property(e => e.DataPracy).HasColumnName("Data_Pracy");
-            entity.Property(e => e.IdPracownik).HasColumnName("ID_pracownik");
-            entity.Property(e => e.Imie)
-                .IsRequired()
-                .HasMaxLength(50);
-            entity.Property(e => e.Nazwisko)
-                .IsRequired()
-                .HasMaxLength(50);
-            entity.Property(e => e.SumaRbh)
-                .HasColumnType("decimal(38, 2)")
-                .HasColumnName("Suma_RBH");
-        });
-
-        modelBuilder.Entity<WidokWszystkieMaszynyRbh>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToView("Widok_Wszystkie_Maszyny_RBH");
-
-            entity.Property(e => e.DataPracy).HasColumnName("Data_Pracy");
-            entity.Property(e => e.IdMaszyna).HasColumnName("ID_maszyna");
-            entity.Property(e => e.NazwaMaszyny)
-                .IsRequired()
-                .HasMaxLength(50)
-                .HasColumnName("Nazwa_Maszyny");
             entity.Property(e => e.SumaRbh)
                 .HasColumnType("decimal(38, 2)")
                 .HasColumnName("Suma_RBH");
@@ -1365,7 +1354,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Wlasciwosc>(entity =>
         {
-            entity.HasKey(e => e.IdWlasciwosci).HasName("PK__Wlasciwo__BE19C146827FF031");
+            entity.HasKey(e => e.IdWlasciwosci).HasName("PK__Wlasciwo__BE19C146CE3D9431");
 
             entity.Property(e => e.IdWlasciwosci).HasColumnName("ID_wlasciwosci");
             entity.Property(e => e.IdJednostki).HasColumnName("ID_jednostki");
@@ -1382,7 +1371,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<WniosekUrlopowy>(entity =>
         {
-            entity.HasKey(e => e.IdWniosku).HasName("PK__Wniosek___9D9F4BAF3DE7AACE");
+            entity.HasKey(e => e.IdWniosku).HasName("PK__Wniosek___9D9F4BAF340FB19E");
 
             entity.ToTable("Wniosek_urlopowy");
 
@@ -1406,7 +1395,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Wyposazenie>(entity =>
         {
-            entity.HasKey(e => e.IdWyposazenie).HasName("PK__Wyposaze__39E58E71B6B9B142");
+            entity.HasKey(e => e.IdWyposazenie).HasName("PK__Wyposaze__39E58E71826C6A27");
 
             entity.Property(e => e.IdWyposazenie).HasColumnName("ID_wyposazenie");
             entity.Property(e => e.Nazwa)
@@ -1417,7 +1406,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<WyposazenieWlasciwosci>(entity =>
         {
-            entity.HasKey(e => e.IdWyposWlasc).HasName("PK__Wyposaze__9B217424A269E031");
+            entity.HasKey(e => e.IdWyposWlasc).HasName("PK__Wyposaze__9B217424EC4FC586");
 
             entity.ToTable("Wyposazenie_wlasciwosci");
 
@@ -1439,7 +1428,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Wysylka>(entity =>
         {
-            entity.HasKey(e => e.IdWysylka).HasName("PK__Wysylka__ED56F2DAADE15484");
+            entity.HasKey(e => e.IdWysylka).HasName("PK__Wysylka__ED56F2DA3EEBCB60");
 
             entity.Property(e => e.IdWysylka).HasColumnName("ID_wysylka");
             entity.Property(e => e.Cena).HasColumnType("decimal(10, 2)");
@@ -1448,7 +1437,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<WysylkaZamowienie>(entity =>
         {
-            entity.HasKey(e => e.IdWysylkaZamowienie).HasName("PK__Wysylka___0DE610319836708E");
+            entity.HasKey(e => e.IdWysylkaZamowienie).HasName("PK__Wysylka___0DE61031E004D846");
 
             entity.ToTable("Wysylka_zamowienie");
 
@@ -1469,7 +1458,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<ZadanieProdukcyjne>(entity =>
         {
-            entity.HasKey(e => e.IdZadanieP).HasName("PK__Zadanie___40247834FB338DEA");
+            entity.HasKey(e => e.IdZadanieP).HasName("PK__Zadanie___40247834896EC07B");
 
             entity.ToTable("Zadanie_produkcyjne");
 
@@ -1491,7 +1480,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<Zamowienie>(entity =>
         {
-            entity.HasKey(e => e.IdZamowienie).HasName("PK__Zamowien__7BF8C9EF4DA3B262");
+            entity.HasKey(e => e.IdZamowienie).HasName("PK__Zamowien__7BF8C9EF73944EE7");
 
             entity.Property(e => e.IdZamowienie).HasColumnName("ID_zamowienie");
             entity.Property(e => e.DataPrzyjeciaZ).HasColumnName("Data_przyjecia_z");
@@ -1506,7 +1495,7 @@ public partial class PodkladexContext : DbContext
 
         modelBuilder.Entity<ZwolnienieLekarskie>(entity =>
         {
-            entity.HasKey(e => e.IdZwolnienie).HasName("PK__Zwolnien__3A67E0271F357D47");
+            entity.HasKey(e => e.IdZwolnienie).HasName("PK__Zwolnien__3A67E027EEF298C2");
 
             entity.ToTable("Zwolnienie_lekarskie");
 

@@ -55,12 +55,12 @@ namespace PodkladexApp
                 }
 
                 // otwarcie formularza dodawania maszyny z przekazaniem nazwy przycisku oraz maszny
-                Form_DodajMaszyne FD = new Form_DodajMaszyne(db, button.Name, selectedMaszyna);
+                Form_DodajMaszyne FD = new Form_DodajMaszyne(db, selectedMaszyna);
                 FD.ShowDialog();
             }
             else if (button.Text == "Dodaj")
             {
-                Form_DodajMaszyne FD = new Form_DodajMaszyne(db, button.Name);
+                Form_DodajMaszyne FD = new Form_DodajMaszyne(db);
                 FD.ShowDialog();
                 dgv_Maszyny.DataSource = db.Maszyna.ToList();
                 dgv_Maszyny.Refresh();
@@ -76,11 +76,6 @@ namespace PodkladexApp
         {
             List<Maszyna> maszyny = db.Maszyna.Where(m => m.Nazwa.Contains(txt_Nazwa_Maszyny.Text)).ToList();
             dgv_Maszyny.DataSource = maszyny;
-        }
-
-        private void btn_MaszWyp_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
