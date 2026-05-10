@@ -43,7 +43,7 @@ namespace PodkladexApp
             this.DGV_PomiaryProd.CellFormatting += DGV_PomiaryProd_CellFormatting;
             this.btn_WymusZatwierdzenie.Click += btn_WymusZatwierdzenie_Click;
 
-            // NOWE: Zdarzenie dla przycisku generowania
+            // Zdarzenie dla przycisku generowania
             this.btn_GenerujPomiary.Click += btn_GenerujPomiary_Click;
 
             // Zdarzenia
@@ -100,7 +100,6 @@ namespace PodkladexApp
             textBox_KontProdOdpady.Clear();
             textBox_KontProdOdpadySzt.Clear();
 
-            // Czyszczenie nowego pola generatora
             if (textBox_IloscSztukGeneruj != null) textBox_IloscSztukGeneruj.Clear();
 
             isProgrammaticCheck = true;
@@ -276,14 +275,14 @@ namespace PodkladexApp
             UstawStanPoczatkowy();
         }
 
-        // NOWA METODA - Generator Pomiarów
+        // Generator Pomiarów bez Masy (ID = 8)
         private void btn_GenerujPomiary_Click(object sender, EventArgs e)
         {
             if (_aktualneIdKontroli == 0) return;
 
-            if (!int.TryParse(textBox_IloscSztukGeneruj.Text, out int iloscSztuk) || iloscSztuk <= 0)
+            if (!int.TryParse(textBox_IloscSztukGeneruj.Text, out int iloscPomiarow) || iloscPomiarow <= 0)
             {
-                MessageBox.Show("Wpisz poprawną liczbę sztuk dodatnich do wygenerowania.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Wpisz poprawną liczbę pomiarów do wygenerowania.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -293,42 +292,43 @@ namespace PodkladexApp
 
             if (idProdukt == 0) return;
 
-            var normy = _context.ProduktWlasciwosci.Where(pw => pw.IdProdukt == idProdukt).ToList();
+            // Wykluczamy właściwość Masa (ID = 8) z listy wymiarów do losowania
+            var normy = _context.ProduktWlasciwosci
+                .Where(pw => pw.IdProdukt == idProdukt && pw.IdWlasciwosci != 8)
+                .ToList();
+
             if (!normy.Any())
             {
-                MessageBox.Show("Brak zdefiniowanych norm dla tego produktu.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Brak zdefiniowanych norm wymiarowych dla tego produktu.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             Random rnd = new Random();
 
-            for (int i = 0; i < iloscSztuk; i++)
+            for (int i = 0; i < iloscPomiarow; i++)
             {
-                foreach (var norma in normy)
+                int randomIndex = rnd.Next(normy.Count);
+                var wylosowanaNorma = normy[randomIndex];
+
+                decimal min = wylosowanaNorma.WartoscMinimalna;
+                decimal max = wylosowanaNorma.WartoscMaksymalna;
+                decimal rozstep = max - min;
+
+                if (rozstep == 0) rozstep = 0.1m;
+
+                decimal losowaneMin = min - (rozstep * 0.15m);
+                decimal losowaneMax = max + (rozstep * 0.15m);
+
+                decimal wartoscWygenerowana = losowaneMin + (decimal)rnd.NextDouble() * (losowaneMax - losowaneMin);
+
+                wartoscWygenerowana = Math.Round(wartoscWygenerowana, 2);
+
+                _context.Pomiar.Add(new Pomiar
                 {
-                    decimal min = norma.WartoscMinimalna;
-                    decimal max = norma.WartoscMaksymalna;
-                    decimal rozstep = max - min;
-
-                    // Jeśli rozstep wynosi 0 (np. wymagany konkretny wymiar bez tolerancji), wymuszamy minimalną losowość
-                    if (rozstep == 0) rozstep = 0.1m;
-
-                    // Poszerzamy zakres losowania, żeby ok. 15% pomiarów wylądowało jako "NIEZGODNE" dla lepszej prezentacji
-                    decimal losowaneMin = min - (rozstep * 0.15m);
-                    decimal losowaneMax = max + (rozstep * 0.15m);
-
-                    decimal wartoscWygenerowana = losowaneMin + (decimal)rnd.NextDouble() * (losowaneMax - losowaneMin);
-
-                    // Zaokrąglamy wynik do 2 miejsc po przecinku, by wyglądało naturalnie jak z suwmiarki
-                    wartoscWygenerowana = Math.Round(wartoscWygenerowana, 2);
-
-                    _context.Pomiar.Add(new Pomiar
-                    {
-                        IdKontrolaProd = _aktualneIdKontroli,
-                        IdWlasciwosci = norma.IdWlasciwosci,
-                        WartoscZmierzona = wartoscWygenerowana
-                    });
-                }
+                    IdKontrolaProd = _aktualneIdKontroli,
+                    IdWlasciwosci = wylosowanaNorma.IdWlasciwosci,
+                    WartoscZmierzona = wartoscWygenerowana
+                });
             }
 
             _context.SaveChanges();
@@ -336,7 +336,7 @@ namespace PodkladexApp
             AktualizujPostepIWage();
             PrzeliczOdpadyZeZlychPomiarow();
 
-            MessageBox.Show($"Pomyślnie wygenerowano symulację dla {iloscSztuk} szt. (łącznie dodano {iloscSztuk * normy.Count} wymiarów).", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"Pomyślnie wygenerowano {iloscPomiarow} losowych pomiarów.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btn_EdytujPomiar_Click(object sender, EventArgs e)
@@ -504,7 +504,10 @@ namespace PodkladexApp
                 if (aktualnaMasaNominalna > 0)
                 {
                     int wymaganeSztuki = (int)Math.Ceiling((wyprodukowanoKg / aktualnaMasaNominalna) * 0.10m);
-                    int liczbaParametrow = _context.ProduktWlasciwosci.Count(pw => pw.IdProdukt == idProdukt);
+
+                    // Zmiana przy określaniu celu z uwzględnieniem ignorowania masy
+                    int liczbaParametrow = _context.ProduktWlasciwosci.Count(pw => pw.IdProdukt == idProdukt && pw.IdWlasciwosci != 8);
+
                     int cel = wymaganeSztuki * liczbaParametrow;
                     int zrobione = _context.Pomiar.Count(p => p.IdKontrolaProd == _aktualneIdKontroli);
 
