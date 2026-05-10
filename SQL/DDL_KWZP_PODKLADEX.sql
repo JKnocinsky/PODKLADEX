@@ -757,3 +757,34 @@ FROM Zamowienie Z
 JOIN Zadanie_produkcyjne ZP ON Z.ID_zamowienie = ZP.ID_zamowienie
 JOIN Produkcja P ON ZP.ID_zadanieP = P.ID_zadanieP;
 GO
+
+-- ======================================================
+-- ZMODERNIZOWANY WIDOK ZESTAWIENIA EFEKTÓW PRODUKCJI
+-- ======================================================
+CREATE VIEW Widok_Produkcja_Zestawienie_Efektow AS
+SELECT 
+    ZP.ID_zamowienie,
+    
+    -- 1. Oczekiwane Zużycie Materiału (RBH * Norma_mat)
+    ROUND(SUM(P.RBH * (N.Ilosc_mat / NULLIF(N.Czas, 0))), 2) AS Oczekiwane_Zuzycie_Materialu,
+    
+    -- 2. Oczekiwana Produkcja (RBH * Norma_prod)
+    ROUND(SUM(P.RBH * (N.Ilosc / NULLIF(N.Czas, 0))), 2) AS Oczekiwana_Produkcja,
+    
+    -- 3. Oczekiwane Odpady (Różnica między oczekiwanym zużyciem a oczekiwaną produkcją)
+    ROUND(SUM(P.RBH * (N.Ilosc_mat / NULLIF(N.Czas, 0))) - SUM(P.RBH * (N.Ilosc / NULLIF(N.Czas, 0))), 2) AS Oczekiwane_Odpady,
+    
+    -- 4. Realne Zużycie Materiału (Suma wyprodukowanych i odpadów)
+    ROUND(SUM(ISNULL(P.Odpady, 0) + ISNULL(P.Wyprodukowano, 0)), 2) AS Realne_Zuzycie_Materialu,
+    
+    -- 5. Realna Produkcja
+    ROUND(SUM(ISNULL(P.Wyprodukowano, 0)), 2) AS Realna_Produkcja,
+    
+    -- 6. Realne Odpady
+    ROUND(SUM(ISNULL(P.Odpady, 0)), 2) AS Realne_Odpady
+
+FROM Produkcja P
+JOIN Zadanie_produkcyjne ZP ON P.ID_zadanieP = ZP.ID_zadanieP
+JOIN Norma_prod N ON P.ID_normyP = N.ID_normaP
+GROUP BY ZP.ID_zamowienie;
+GO
