@@ -157,7 +157,8 @@ namespace PodkladexApp.Zaopatrzenie
                         var grubo = mat?.MaterialWlasciwosci?.FirstOrDefault()?.WartoscNominalna;
                         var rodzaj = mat?.IdRodzajNavigation?.Nazwa;
 
-                        return $"{mat?.Nazwa ?? "Nieznany"} || {(grubo.HasValue ? grubo.Value.ToString() : "Brak wymiaru")} || {(rodzaj ?? "Brak rodzaju")}";
+                        // ZMIANA TUTAJ: Dodano "F2" przy formatowaniu wartości nominalnej
+                        return $"{mat?.Nazwa ?? "Nieznany"} || {(grubo.HasValue ? grubo.Value.ToString("F2") : "Brak wymiaru")} || {(rodzaj ?? "Brak rodzaju")}";
                     }))
                 }).ToList();
 
@@ -301,8 +302,8 @@ namespace PodkladexApp.Zaopatrzenie
                 {
                     int idWybranejDostawy = Convert.ToInt32(row.Cells["IdZamowienia"].Value);
 
-                   Form_HistoriaDostawSzczegoly formSzczegoly = new Form_HistoriaDostawSzczegoly(idWybranejDostawy);
-                   formSzczegoly.ShowDialog();
+                    Form_HistoriaDostawSzczegoly formSzczegoly = new Form_HistoriaDostawSzczegoly(idWybranejDostawy);
+                    formSzczegoly.ShowDialog();
 
                     WyswietlHistorieZamowien();
                 }

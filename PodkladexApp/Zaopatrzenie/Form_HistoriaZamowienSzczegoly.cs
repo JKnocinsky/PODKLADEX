@@ -107,12 +107,22 @@ namespace PodkladexApp.Zaopatrzenie
                         {
                             Produkt = sz.IdProduktNavigation?.Nazwa ?? "Brak",
                             Materiał = sz.IdMaterialNavigation?.Nazwa ?? "Brak",
-                            Ilość = sz.Ilosc,
+                            Liczba = sz.Ilosc,
                             Cena = sz.Cena,
                             Uwagi = sz.Uwagi
                         }).ToList();
 
                     dataGridView_Koszyk.DataSource = listaZakupow;
+
+                    // --- ZMIANA NAGŁÓWKÓW ---
+                    if (dataGridView_Koszyk.Columns["Liczba"] != null)
+                    {
+                        dataGridView_Koszyk.Columns["Liczba"].HeaderText = "Liczba [kg]";
+                    }
+                    if (dataGridView_Koszyk.Columns["Cena"] != null)
+                    {
+                        dataGridView_Koszyk.Columns["Cena"].HeaderText = "Wartość [zł]";
+                    }
                 }
             }
             catch (Exception ex)

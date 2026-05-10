@@ -193,8 +193,8 @@ namespace PodkladexApp.Zaopatrzenie
 
                 if (dataGridView_HistoriaZamowien.Columns["CenaZbiorcza"] != null)
                 {
-                    dataGridView_HistoriaZamowien.Columns["CenaZbiorcza"].HeaderText = "Wartość zamówienia";
-                    dataGridView_HistoriaZamowien.Columns["CenaZbiorcza"].DefaultCellStyle.Format = "C2";
+                    dataGridView_HistoriaZamowien.Columns["CenaZbiorcza"].HeaderText = "Wartość zamówienia [zł]";
+                    dataGridView_HistoriaZamowien.Columns["CenaZbiorcza"].DefaultCellStyle.Format = "N2";
                 }
             }
         }

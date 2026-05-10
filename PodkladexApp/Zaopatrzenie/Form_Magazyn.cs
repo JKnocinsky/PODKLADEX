@@ -11,7 +11,6 @@ namespace PodkladexApp.Zaopatrzenie // <--- TU WPISZ SWÓJ NAMESPACE
     public partial class Form_Magazyn : Form
     {
         // 1. Obiekt bazy
-        // 1. Obiekt bazy
         private PodkladexContext _db = new PodkladexContext();
 
         public Form_Magazyn()
@@ -25,8 +24,6 @@ namespace PodkladexApp.Zaopatrzenie // <--- TU WPISZ SWÓJ NAMESPACE
             ZaladujRodzajeDoFiltru();
             OdswiezTabelke();
         }
-
-        // Metodę Form_Magazyn_Load możesz w ogóle usunąć z kodu, nie będzie nam już potrzebna!
 
         private void KonfigurujWidok()
         {
@@ -43,6 +40,10 @@ namespace PodkladexApp.Zaopatrzenie // <--- TU WPISZ SWÓJ NAMESPACE
             dataGridView_Magazyn.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             dataGridView_Magazyn.RowTemplate.Height = 35;
             dataGridView_Magazyn.ColumnHeadersHeight = 45;
+
+            // NOWE: Podpięcie zdarzenia odblokowującego/blokującego przyciski
+            dataGridView_Magazyn.SelectionChanged -= dataGridView_Magazyn_SelectionChanged;
+            dataGridView_Magazyn.SelectionChanged += dataGridView_Magazyn_SelectionChanged;
         }
 
         private void ZaladujRodzajeDoFiltru()
@@ -97,8 +98,8 @@ namespace PodkladexApp.Zaopatrzenie // <--- TU WPISZ SWÓJ NAMESPACE
                 {
                     s.IdMaterial,
 
-                    // NOWE: Sklejona nazwa wg Twojego życzenia
-                    Nazwa = s.NazwaMaterialu + " || " + (s.WartoscNominalna != null ? s.WartoscNominalna.ToString() : "Brak wymiaru"),
+                    // ZMIANA: Sklejona nazwa z grubością do dwóch miejsc po przecinku (F2)
+                    Nazwa = s.NazwaMaterialu + " || " + (s.WartoscNominalna.HasValue ? s.WartoscNominalna.Value.ToString("F2") : "Brak wymiaru"),
 
                     Opis = s.OpisMaterialu,
                     Rodzaj = s.RodzajMaterialu,
@@ -144,6 +145,23 @@ namespace PodkladexApp.Zaopatrzenie // <--- TU WPISZ SWÓJ NAMESPACE
         // ZDARZENIA (EVENTY) KONTROLEK
         // Pamiętaj, aby podpiąć je w Designerze! (lub dopisz do nich "Handles" w VB.NET, ale to C#)
         // =====================================
+
+        // NOWE: Zarządzanie przyciskami w zależności od zaznaczenia
+        private void dataGridView_Magazyn_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView_Magazyn.SelectedRows.Count > 0)
+            {
+                // Wpisz tutaj nazwy swoich przycisków, np.:
+                // button_Szczegoly.Enabled = true;
+                // button_ZrobCosInnego.Enabled = true;
+            }
+            else
+            {
+                // Wpisz tutaj nazwy swoich przycisków, np.:
+                // button_Szczegoly.Enabled = false;
+                // button_ZrobCosInnego.Enabled = false;
+            }
+        }
 
         // Gdy wpisujemy literki, tablica odświeża się od razu
         private void textBox_Wyszukaj_TextChanged(object sender, EventArgs e)

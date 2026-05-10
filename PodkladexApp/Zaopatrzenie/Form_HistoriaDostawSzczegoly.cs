@@ -72,7 +72,18 @@ namespace PodkladexApp.Zaopatrzenie
                     {
                         var osoba = dostawa.IdPracownikNavigation.IdOsobaNavigation;
                         textBox_Osoba.Text = $"{osoba.Imie} {osoba.Nazwisko}";
-                        textBox_NumerTelefonu.Text = osoba.NrTelefonu ?? "Brak telefonu";
+
+                        // Formatowanie numeru telefonu (XXX-XXX-XXX)
+                        string tel = osoba.NrTelefonu;
+                        if (!string.IsNullOrEmpty(tel))
+                        {
+                            string rawTel = new string(tel.Where(char.IsDigit).ToArray());
+                            if (rawTel.Length == 9)
+                            {
+                                tel = rawTel.Insert(3, "-").Insert(7, "-");
+                            }
+                        }
+                        textBox_NumerTelefonu.Text = string.IsNullOrEmpty(tel) ? "Brak telefonu" : tel;
                     }
                     else
                     {
@@ -81,14 +92,24 @@ namespace PodkladexApp.Zaopatrzenie
                     }
 
                     // --- DATA DOSTAWY ---
-                    // Zakładam, że w modelu jest to typ DateOnly lub DateTime
                     textBox_DataDostawy.Text = dostawa.DataDostawy.ToString("dd.MM.yyyy");
 
                     // --- DANE FIRMY DOSTAWCZEJ ---
                     if (dostawa.IdFirmaNavigation != null)
                     {
                         textBox_NazwaFirmy.Text = dostawa.IdFirmaNavigation.Nazwa;
-                        textBox_NIP.Text = dostawa.IdFirmaNavigation.Nip;
+
+                        // Formatowanie NIP (XXX-XXX-XX-XX)
+                        string nip = dostawa.IdFirmaNavigation.Nip;
+                        if (!string.IsNullOrEmpty(nip))
+                        {
+                            string rawNip = new string(nip.Where(char.IsDigit).ToArray());
+                            if (rawNip.Length == 10)
+                            {
+                                nip = rawNip.Insert(3, "-").Insert(7, "-").Insert(10, "-");
+                            }
+                        }
+                        textBox_NIP.Text = nip;
                     }
                     else
                     {
@@ -111,14 +132,22 @@ namespace PodkladexApp.Zaopatrzenie
 
                     dataGridView_Koszyk.DataSource = listaDostarczonychMaterialow;
 
-                    // --- FORMATOWANIE KOSZYKA (WALUTY) ---
+                    // --- FORMATOWANIE KOSZYKA I ZMIANA NAGŁÓWKÓW ---
+                    if (dataGridView_Koszyk.Columns["Ilość"] != null)
+                    {
+                        dataGridView_Koszyk.Columns["Ilość"].HeaderText = "Liczba [kg]";
+                    }
+
                     if (dataGridView_Koszyk.Columns["Cena"] != null)
                     {
-                        dataGridView_Koszyk.Columns["Cena"].DefaultCellStyle.Format = "C2";
+                        dataGridView_Koszyk.Columns["Cena"].HeaderText = "Cena za kilogram [zł]";
+                        dataGridView_Koszyk.Columns["Cena"].DefaultCellStyle.Format = "N2"; // Liczba z 2 miejscami po przecinku
                     }
+
                     if (dataGridView_Koszyk.Columns["Wartość"] != null)
                     {
-                        dataGridView_Koszyk.Columns["Wartość"].DefaultCellStyle.Format = "C2";
+                        dataGridView_Koszyk.Columns["Wartość"].HeaderText = "Wartość [zł]";
+                        dataGridView_Koszyk.Columns["Wartość"].DefaultCellStyle.Format = "N2"; // Liczba z 2 miejscami po przecinku
                     }
                 }
                 else

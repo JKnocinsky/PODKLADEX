@@ -22,6 +22,7 @@ namespace PodkladexApp.Zaopatrzenie
         private void dataGridView_Koszyk_SelectionChanged(object sender, EventArgs e)
         {
             // Jeśli zaznaczono dokładnie jeden wiersz, skopiuj z niego dane do okienek wprowadzania
+            // oraz ODBLOKUJ PRZYCISKI
             if (dataGridView_Koszyk.SelectedRows.Count == 1)
             {
                 var wybranyElement = (ElementKoszykaDostawy)dataGridView_Koszyk.SelectedRows[0].DataBoundItem;
@@ -29,6 +30,16 @@ namespace PodkladexApp.Zaopatrzenie
                 comboBox_Material.SelectedValue = wybranyElement.IdMaterialu;
                 numericUpDown_Ilosc.Value = wybranyElement.Liczba;
                 numericUpDown_Cena.Value = wybranyElement.CenaZaKg;
+
+                // Odblokowanie przycisków
+                button_usun_z_zamowienia.Enabled = true;
+                button_edytuj_zamowienie.Enabled = true;
+            }
+            else
+            {
+                // Zablokowanie przycisków, jeśli nic nie jest zaznaczone
+                button_usun_z_zamowienia.Enabled = false;
+                button_edytuj_zamowienie.Enabled = false;
             }
         }
 
@@ -42,6 +53,10 @@ namespace PodkladexApp.Zaopatrzenie
 
         private void Form_ZamowMaterial_Load(object sender, EventArgs e)
         {
+            // --- BLOKADA PRZYCISKÓW NA STARCIE ---
+            button_usun_z_zamowienia.Enabled = false;
+            button_edytuj_zamowienie.Enabled = false;
+
             // 1. Podpięcie koszyka pod DataGridView
             dataGridView_Koszyk.DataSource = _koszyk;
             FormatujTabele();
@@ -68,12 +83,13 @@ namespace PodkladexApp.Zaopatrzenie
             comboBox1.SelectedIndex = -1;
 
             // 4. Ładowanie Materiałów do wyboru
+            // ZMIANA: Formatowanie grubości materiału na dwa miejsca po przecinku (:F2)
             var materialyZGruboscia = _db.Material
                 .Select(m => new
                 {
                     IdMaterial = m.IdMaterial,
                     PelnaNazwa = m.Nazwa + " || " +
-                                 (m.MaterialWlasciwosci.Any() ? m.MaterialWlasciwosci.FirstOrDefault().WartoscNominalna.ToString() : "Brak wymiaru") + " || " +
+                                 (m.MaterialWlasciwosci.Any() ? $"{m.MaterialWlasciwosci.FirstOrDefault().WartoscNominalna:F2}" : "Brak wymiaru") + " || " +
                                  (m.IdRodzajNavigation != null ? m.IdRodzajNavigation.Nazwa : "Brak rodzaju")
                 }).ToList();
 

@@ -81,7 +81,7 @@
             dataGridView_Koszyk.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView_Koszyk.Location = new Point(501, 50);
             dataGridView_Koszyk.Name = "dataGridView_Koszyk";
-            dataGridView_Koszyk.Size = new Size(702, 410);
+            dataGridView_Koszyk.Size = new Size(861, 410);
             dataGridView_Koszyk.TabIndex = 3;
             // 
             // panel_Firmy
@@ -182,7 +182,7 @@
             // textBox_KodPocztowy
             // 
             textBox_KodPocztowy.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            textBox_KodPocztowy.Location = new Point(1029, 475);
+            textBox_KodPocztowy.Location = new Point(1143, 475);
             textBox_KodPocztowy.Name = "textBox_KodPocztowy";
             textBox_KodPocztowy.Size = new Size(174, 33);
             textBox_KodPocztowy.TabIndex = 13;
@@ -191,7 +191,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label1.Location = new Point(893, 478);
+            label1.Location = new Point(1007, 478);
             label1.Name = "label1";
             label1.Size = new Size(130, 25);
             label1.TabIndex = 14;
@@ -218,7 +218,7 @@
             // textBox_Numer
             // 
             textBox_Numer.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            textBox_Numer.Location = new Point(1029, 539);
+            textBox_Numer.Location = new Point(1143, 539);
             textBox_Numer.Name = "textBox_Numer";
             textBox_Numer.Size = new Size(174, 33);
             textBox_Numer.TabIndex = 17;
@@ -227,7 +227,7 @@
             // 
             label_Numer.AutoSize = true;
             label_Numer.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_Numer.Location = new Point(953, 547);
+            label_Numer.Location = new Point(1067, 547);
             label_Numer.Name = "label_Numer";
             label_Numer.Size = new Size(70, 25);
             label_Numer.TabIndex = 18;
@@ -237,7 +237,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1234, 641);
+            ClientSize = new Size(1384, 661);
             Controls.Add(label_Numer);
             Controls.Add(textBox_Numer);
             Controls.Add(label_Ulica);
