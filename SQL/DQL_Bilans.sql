@@ -81,44 +81,68 @@ WszystkieDaty AS
 
     UNION
 
-    SELECT CAST(d.Data_dostawy AS date)
+    SELECT CAST(d.Data_dostawy AS date) AS DataZdarzenia
     FROM Dostawa d
 
     UNION
 
-    SELECT CAST(ps.Data_szkolenia AS date)
+    SELECT CAST(ps.Data_szkolenia AS date) AS DataZdarzenia
     FROM Pracownik_szkolenia ps
 
     UNION
 
-    SELECT CAST(bm.Data_badania AS date)
+    SELECT CAST(bm.Data_badania AS date) AS DataZdarzenia
     FROM Badanie_medyczne bm
 
     UNION
 
-    SELECT CAST(w.Data_nadania AS date)
+    SELECT CAST(w.Data_nadania AS date) AS DataZdarzenia
     FROM Wysylka w
 
     UNION
 
-    SELECT CAST(sp.Data_pocz AS date)
+    SELECT CAST(sp.Data_pocz AS date) AS DataZdarzenia
     FROM Siatka_plac sp
 
     UNION
 
-    SELECT CAST(ISNULL(sp.Data_koniec, GETDATE()) AS date)
+    SELECT CAST(ISNULL(sp.Data_koniec, GETDATE()) AS date) AS DataZdarzenia
     FROM Siatka_plac sp
+),
+
+ZakresDat AS
+(
+    SELECT
+        DATEFROMPARTS(YEAR(MIN(DataZdarzenia)), MONTH(MIN(DataZdarzenia)), 1) AS DataOd,
+        DATEFROMPARTS(YEAR(MAX(DataZdarzenia)), MONTH(MAX(DataZdarzenia)), 1) AS DataDo
+    FROM WszystkieDaty
+    WHERE DataZdarzenia IS NOT NULL
+),
+
+Liczby AS
+(
+    SELECT TOP (
+        SELECT
+            CASE
+                WHEN DataOd IS NULL OR DataDo IS NULL THEN 0
+                ELSE DATEDIFF(MONTH, DataOd, DataDo) + 1
+            END
+        FROM ZakresDat
+    )
+        ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) - 1 AS Nr
+    FROM sys.all_objects
 ),
 
 Miesiace AS
 (
-    SELECT DISTINCT
-        YEAR(DataZdarzenia) AS Rok,
-        MONTH(DataZdarzenia) AS Miesiac,
-        DATEFROMPARTS(YEAR(DataZdarzenia), MONTH(DataZdarzenia), 1) AS PierwszyDzienMiesiaca,
-        EOMONTH(DataZdarzenia) AS OstatniDzienMiesiaca
-    FROM WszystkieDaty
-    WHERE DataZdarzenia IS NOT NULL
+    SELECT
+        YEAR(DATEADD(MONTH, l.Nr, z.DataOd)) AS Rok,
+        MONTH(DATEADD(MONTH, l.Nr, z.DataOd)) AS Miesiac,
+        CAST(DATEADD(MONTH, l.Nr, z.DataOd) AS date) AS PierwszyDzienMiesiaca,
+        CAST(EOMONTH(DATEADD(MONTH, l.Nr, z.DataOd)) AS date) AS OstatniDzienMiesiaca
+    FROM ZakresDat z
+    INNER JOIN Liczby l
+        ON DATEADD(MONTH, l.Nr, z.DataOd) <= z.DataDo
 ),
 
 KosztyWynagrodzen AS
