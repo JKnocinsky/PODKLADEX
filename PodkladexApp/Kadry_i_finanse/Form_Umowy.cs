@@ -1,9 +1,10 @@
-﻿using PodkladexApp.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using PodkladexApp.Kadry_i_finanse;
+using PodkladexApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using Microsoft.EntityFrameworkCore;
 
 namespace PodkladexApp
 {
@@ -15,6 +16,11 @@ namespace PodkladexApp
         private bool ladowanieComboPracownikow = false;
 
         private int? edytowaneIdUmowy = null;
+
+        private int? wybraneIdPracownikDoSiatkiPlac = null;
+        private DateOnly? wybranaDataRozUmowyDoSiatkiPlac = null;
+        private DateOnly? wybranaDataZakUmowyDoSiatkiPlac = null;
+        private string wybraneDanePracownikaDoSiatkiPlac = "";
 
         private List<PracownikComboBoxItem> listaPracownikow = new List<PracownikComboBoxItem>();
 
@@ -29,21 +35,33 @@ namespace PodkladexApp
         public Form_Umowy()
         {
             InitializeComponent();
+
             db = new PodkladexContext();
+
             panel1.Visible = false;
+
+            if (Controls.Find("button_siatkaPlac", true).Length > 0)
+            {
+                Controls.Find("button_siatkaPlac", true)[0].Visible = false;
+                Controls.Find("button_siatkaPlac", true)[0].Enabled = false;
+            }
         }
 
         private void Form_Umowy_Load(object sender, EventArgs e)
         {
             KonfigurujDataGridView();
+
             ZaladujPracownikow();
             ZaladujPracownikowDoComboBox();
             ZaladujPracownikowDoFiltra();
             ZaladujRodzajeUmowDoComboBox();
+
             UstawDomyslneDaty();
             UstawTrybDodawania();
+
             ZaladujUmowy();
 
+            dataGridView_umowy.CellDoubleClick -= dataGridView_umowy_CellDoubleClick;
             dataGridView_umowy.CellDoubleClick += dataGridView_umowy_CellDoubleClick;
         }
 
@@ -108,7 +126,7 @@ namespace PodkladexApp
             {
                 var zapytanie = db.Umowa
                     .Include(u => u.IdPracownikNavigation)
-                        .ThenInclude(p => p.IdOsobaNavigation)
+                    .ThenInclude(p => p.IdOsobaNavigation)
                     .Include(u => u.IdRodzajuNavigation)
                     .AsQueryable();
 
@@ -125,11 +143,14 @@ namespace PodkladexApp
                 if (checkBox_tylkoAktywne.Checked)
                 {
                     DateOnly dzis = DateOnly.FromDateTime(DateTime.Today);
+
                     zapytanie = zapytanie.Where(u => u.DataRoz <= dzis && u.DataZak >= dzis);
                 }
 
                 var daneZBazy = zapytanie
-                    .OrderBy(u => u.DataRoz)
+                    .OrderBy(u => u.IdPracownikNavigation.IdOsobaNavigation.Nazwisko)
+                    .ThenBy(u => u.IdPracownikNavigation.IdOsobaNavigation.Imie)
+                    .ThenByDescending(u => u.DataRoz)
                     .ToList();
 
                 var lista = daneZBazy
@@ -209,6 +230,7 @@ namespace PodkladexApp
             comboBox_pracownik.DisplayMember = "DanePracownika";
             comboBox_pracownik.ValueMember = "IdPracownik";
             comboBox_pracownik.DataSource = listaDoUstawienia;
+
             comboBox_pracownik.SelectedIndex = -1;
             comboBox_pracownik.Text = tekst;
             comboBox_pracownik.SelectionStart = comboBox_pracownik.Text.Length;
@@ -229,12 +251,20 @@ namespace PodkladexApp
 
             if (dodajWszystkich)
             {
-                listaDoFiltra.Add(new { IdPracownik = 0, DanePracownika = "Wszyscy pracownicy" });
+                listaDoFiltra.Add(new
+                {
+                    IdPracownik = 0,
+                    DanePracownika = "Wszyscy pracownicy"
+                });
             }
 
             if (pracownicy.Count == 0)
             {
-                listaDoFiltra.Add(new { IdPracownik = -1, DanePracownika = "Brak wyników" });
+                listaDoFiltra.Add(new
+                {
+                    IdPracownik = -1,
+                    DanePracownika = "Brak wyników"
+                });
             }
             else
             {
@@ -317,15 +347,50 @@ namespace PodkladexApp
             comboBox_pracownik.SelectedIndex = -1;
             comboBox_pracownik.Text = "";
             comboBox_rodzajUmowy.SelectedIndex = -1;
+
             UstawDomyslneDaty();
+        }
+
+        private void UkryjPrzyciskSiatkaPlac()
+        {
+            Control[] kontrolki = Controls.Find("button_siatkaPlac", true);
+
+            if (kontrolki.Length > 0)
+            {
+                kontrolki[0].Visible = false;
+                kontrolki[0].Enabled = false;
+            }
+        }
+
+        private void PokazPrzyciskSiatkaPlac()
+        {
+            Control[] kontrolki = Controls.Find("button_siatkaPlac", true);
+
+            if (kontrolki.Length > 0)
+            {
+                kontrolki[0].Visible = true;
+                kontrolki[0].Enabled = true;
+            }
+        }
+
+        private void WyczyscDaneSiatkiPlac()
+        {
+            wybraneIdPracownikDoSiatkiPlac = null;
+            wybranaDataRozUmowyDoSiatkiPlac = null;
+            wybranaDataZakUmowyDoSiatkiPlac = null;
+            wybraneDanePracownikaDoSiatkiPlac = "";
         }
 
         private void UstawTrybDodawania()
         {
             edytowaneIdUmowy = null;
 
+            WyczyscDaneSiatkiPlac();
+
             button_dodajUmowe.Visible = true;
             button_zatwierdzZmiany.Visible = false;
+
+            UkryjPrzyciskSiatkaPlac();
 
             comboBox_pracownik.Enabled = true;
         }
@@ -335,6 +400,8 @@ namespace PodkladexApp
             button_dodajUmowe.Visible = false;
             button_zatwierdzZmiany.Visible = true;
 
+            PokazPrzyciskSiatkaPlac();
+
             comboBox_pracownik.Enabled = false;
         }
 
@@ -342,7 +409,10 @@ namespace PodkladexApp
         {
             try
             {
-                var umowa = db.Umowa.FirstOrDefault(u => u.IdUmowa == idUmowy);
+                var umowa = db.Umowa
+                    .Include(u => u.IdPracownikNavigation)
+                    .ThenInclude(p => p.IdOsobaNavigation)
+                    .FirstOrDefault(u => u.IdUmowa == idUmowy);
 
                 if (umowa == null)
                 {
@@ -351,6 +421,7 @@ namespace PodkladexApp
                         "Błąd",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
+
                     return;
                 }
 
@@ -360,6 +431,21 @@ namespace PodkladexApp
                 ZaladujRodzajeUmowDoComboBox();
 
                 edytowaneIdUmowy = umowa.IdUmowa;
+
+                wybraneIdPracownikDoSiatkiPlac = umowa.IdPracownik;
+                wybranaDataRozUmowyDoSiatkiPlac = umowa.DataRoz;
+                wybranaDataZakUmowyDoSiatkiPlac = umowa.DataZak;
+
+                if (umowa.IdPracownikNavigation != null && umowa.IdPracownikNavigation.IdOsobaNavigation != null)
+                {
+                    wybraneDanePracownikaDoSiatkiPlac =
+                        umowa.IdPracownikNavigation.IdOsobaNavigation.Imie + " " +
+                        umowa.IdPracownikNavigation.IdOsobaNavigation.Nazwisko;
+                }
+                else
+                {
+                    wybraneDanePracownikaDoSiatkiPlac = "Pracownik ID: " + umowa.IdPracownik;
+                }
 
                 comboBox_pracownik.SelectedValue = umowa.IdPracownik;
                 comboBox_rodzajUmowy.SelectedValue = umowa.IdRodzaju;
@@ -378,7 +464,7 @@ namespace PodkladexApp
             }
         }
 
-        private void button_dodajUmowe_Click(object sender, EventArgs e)
+        private bool SprawdzDaneUmowy()
         {
             if (comboBox_pracownik.SelectedValue == null || Convert.ToInt32(comboBox_pracownik.SelectedValue) <= 0)
             {
@@ -387,7 +473,8 @@ namespace PodkladexApp
                     "Brak danych",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
-                return;
+
+                return false;
             }
 
             if (comboBox_rodzajUmowy.SelectedValue == null)
@@ -397,7 +484,8 @@ namespace PodkladexApp
                     "Brak danych",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
-                return;
+
+                return false;
             }
 
             if (dateTimePicker_datazak.Value.Date < dateTimePicker_dataroz.Value.Date)
@@ -407,8 +495,17 @@ namespace PodkladexApp
                     "Błędne daty",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
-                return;
+
+                return false;
             }
+
+            return true;
+        }
+
+        private void button_dodajUmowe_Click(object sender, EventArgs e)
+        {
+            if (!SprawdzDaneUmowy())
+                return;
 
             try
             {
@@ -456,6 +553,7 @@ namespace PodkladexApp
                     "Brak danych",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
+
                 return;
             }
 
@@ -466,6 +564,7 @@ namespace PodkladexApp
                     "Brak danych",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
+
                 return;
             }
 
@@ -476,6 +575,7 @@ namespace PodkladexApp
                     "Błędne daty",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
+
                 return;
             }
 
@@ -499,6 +599,7 @@ namespace PodkladexApp
                         "Błąd",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
+
                     return;
                 }
 
@@ -529,6 +630,31 @@ namespace PodkladexApp
             }
         }
 
+        private void button_siatkaPlac_Click(object sender, EventArgs e)
+        {
+            if (edytowaneIdUmowy == null ||
+                wybraneIdPracownikDoSiatkiPlac == null ||
+                wybranaDataRozUmowyDoSiatkiPlac == null ||
+                wybranaDataZakUmowyDoSiatkiPlac == null)
+            {
+                MessageBox.Show(
+                    "Najpierw wybierz umowę z tabeli.",
+                    "Brak wybranej umowy",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            Form_SiatkaPlac formularz = new Form_SiatkaPlac(
+                wybraneIdPracownikDoSiatkiPlac.Value,
+                wybranaDataRozUmowyDoSiatkiPlac.Value,
+                wybranaDataZakUmowyDoSiatkiPlac.Value,
+                wybraneDanePracownikaDoSiatkiPlac);
+
+            formularz.ShowDialog();
+        }
+
         private void button_nowaumowa_Click(object sender, EventArgs e)
         {
             panel1.Visible = !panel1.Visible;
@@ -538,6 +664,11 @@ namespace PodkladexApp
                 WyczyscPolaDodawania();
                 ZaladujPracownikowDoComboBox();
                 ZaladujRodzajeUmowDoComboBox();
+                UstawTrybDodawania();
+            }
+            else
+            {
+                WyczyscPolaDodawania();
                 UstawTrybDodawania();
             }
         }
@@ -553,6 +684,7 @@ namespace PodkladexApp
                     return;
 
                 int idUmowy = Convert.ToInt32(dataGridView_umowy.Rows[e.RowIndex].Cells["IdUmowa"].Value);
+
                 ZaladujUmoweDoEdycji(idUmowy);
             }
             catch (Exception ex)
@@ -574,6 +706,7 @@ namespace PodkladexApp
                 return;
 
             int id = Convert.ToInt32(comboBox_filtrPracownik.SelectedValue);
+
             if (id == -1)
                 return;
 
@@ -640,6 +773,7 @@ namespace PodkladexApp
                 return;
 
             int id = Convert.ToInt32(comboBox_pracownik.SelectedValue);
+
             if (id == -1)
                 return;
         }

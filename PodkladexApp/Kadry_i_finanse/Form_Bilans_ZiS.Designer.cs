@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             comboBox_miesiacOd = new ComboBox();
             comboBox_rokOd = new ComboBox();
             comboBox_miesiacDo = new ComboBox();
@@ -55,42 +57,42 @@
             // 
             comboBox_miesiacOd.Font = new Font("Segoe UI", 14.25F);
             comboBox_miesiacOd.FormattingEnabled = true;
-            comboBox_miesiacOd.Location = new Point(146, 56);
+            comboBox_miesiacOd.Location = new Point(148, 57);
             comboBox_miesiacOd.Name = "comboBox_miesiacOd";
-            comboBox_miesiacOd.Size = new Size(474, 33);
+            comboBox_miesiacOd.Size = new Size(366, 33);
             comboBox_miesiacOd.TabIndex = 0;
             // 
             // comboBox_rokOd
             // 
             comboBox_rokOd.Font = new Font("Segoe UI", 14.25F);
             comboBox_rokOd.FormattingEnabled = true;
-            comboBox_rokOd.Location = new Point(146, 95);
+            comboBox_rokOd.Location = new Point(148, 96);
             comboBox_rokOd.Name = "comboBox_rokOd";
-            comboBox_rokOd.Size = new Size(474, 33);
+            comboBox_rokOd.Size = new Size(366, 33);
             comboBox_rokOd.TabIndex = 0;
             // 
             // comboBox_miesiacDo
             // 
             comboBox_miesiacDo.Font = new Font("Segoe UI", 14.25F);
             comboBox_miesiacDo.FormattingEnabled = true;
-            comboBox_miesiacDo.Location = new Point(146, 157);
+            comboBox_miesiacDo.Location = new Point(148, 158);
             comboBox_miesiacDo.Name = "comboBox_miesiacDo";
-            comboBox_miesiacDo.Size = new Size(474, 33);
+            comboBox_miesiacDo.Size = new Size(366, 33);
             comboBox_miesiacDo.TabIndex = 0;
             // 
             // comboBox_rokDo
             // 
             comboBox_rokDo.Font = new Font("Segoe UI", 14.25F);
             comboBox_rokDo.FormattingEnabled = true;
-            comboBox_rokDo.Location = new Point(146, 196);
+            comboBox_rokDo.Location = new Point(148, 197);
             comboBox_rokDo.Name = "comboBox_rokDo";
-            comboBox_rokDo.Size = new Size(474, 33);
+            comboBox_rokDo.Size = new Size(366, 33);
             comboBox_rokDo.TabIndex = 0;
             // 
             // button_pokazBilans
             // 
             button_pokazBilans.Font = new Font("Segoe UI", 14.25F);
-            button_pokazBilans.Location = new Point(261, 265);
+            button_pokazBilans.Location = new Point(120, 258);
             button_pokazBilans.Name = "button_pokazBilans";
             button_pokazBilans.Size = new Size(269, 36);
             button_pokazBilans.TabIndex = 1;
@@ -100,25 +102,41 @@
             // 
             // dataGridView_bilans
             // 
-            dataGridView_bilans.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dataGridView_bilans.DefaultCellStyle = dataGridViewCellStyle1;
-            dataGridView_bilans.Location = new Point(12, 357);
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView_bilans.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridView_bilans.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridView_bilans.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridView_bilans.Location = new Point(12, 461);
             dataGridView_bilans.Name = "dataGridView_bilans";
-            dataGridView_bilans.Size = new Size(961, 370);
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dataGridView_bilans.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridView_bilans.Size = new Size(1390, 322);
             dataGridView_bilans.TabIndex = 2;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.25F);
-            label1.Location = new Point(979, 621);
+            label1.Location = new Point(54, 331);
             label1.Name = "label1";
             label1.Size = new Size(99, 25);
             label1.TabIndex = 3;
@@ -128,7 +146,7 @@
             // 
             label_przychody.AutoSize = true;
             label_przychody.Font = new Font("Segoe UI", 14.25F);
-            label_przychody.Location = new Point(29, 59);
+            label_przychody.Location = new Point(31, 60);
             label_przychody.Name = "label_przychody";
             label_przychody.Size = new Size(112, 25);
             label_przychody.TabIndex = 4;
@@ -138,7 +156,7 @@
             // 
             Dochod.AutoSize = true;
             Dochod.Font = new Font("Segoe UI", 14.25F);
-            Dochod.Location = new Point(979, 702);
+            Dochod.Location = new Point(54, 412);
             Dochod.Name = "Dochod";
             Dochod.Size = new Size(78, 25);
             Dochod.TabIndex = 5;
@@ -147,7 +165,7 @@
             // textBox_przychody
             // 
             textBox_przychody.Font = new Font("Segoe UI", 14.25F);
-            textBox_przychody.Location = new Point(1084, 621);
+            textBox_przychody.Location = new Point(159, 331);
             textBox_przychody.Name = "textBox_przychody";
             textBox_przychody.Size = new Size(277, 33);
             textBox_przychody.TabIndex = 6;
@@ -155,7 +173,7 @@
             // textBox_wydatki
             // 
             textBox_wydatki.Font = new Font("Segoe UI", 14.25F);
-            textBox_wydatki.Location = new Point(1084, 660);
+            textBox_wydatki.Location = new Point(159, 370);
             textBox_wydatki.Name = "textBox_wydatki";
             textBox_wydatki.Size = new Size(277, 33);
             textBox_wydatki.TabIndex = 6;
@@ -163,7 +181,7 @@
             // textBox_dochod
             // 
             textBox_dochod.Font = new Font("Segoe UI", 14.25F);
-            textBox_dochod.Location = new Point(1084, 699);
+            textBox_dochod.Location = new Point(159, 409);
             textBox_dochod.Name = "textBox_dochod";
             textBox_dochod.Size = new Size(277, 33);
             textBox_dochod.TabIndex = 6;
@@ -172,7 +190,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 14.25F);
-            label2.Location = new Point(92, 98);
+            label2.Location = new Point(94, 99);
             label2.Name = "label2";
             label2.Size = new Size(50, 25);
             label2.TabIndex = 4;
@@ -182,7 +200,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 14.25F);
-            label4.Location = new Point(29, 157);
+            label4.Location = new Point(31, 158);
             label4.Name = "label4";
             label4.Size = new Size(112, 25);
             label4.TabIndex = 4;
@@ -192,7 +210,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 14.25F);
-            label5.Location = new Point(92, 199);
+            label5.Location = new Point(94, 200);
             label5.Name = "label5";
             label5.Size = new Size(50, 25);
             label5.TabIndex = 4;
@@ -202,7 +220,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 14.25F);
-            label6.Location = new Point(979, 663);
+            label6.Location = new Point(54, 373);
             label6.Name = "label6";
             label6.Size = new Size(80, 25);
             label6.TabIndex = 5;
@@ -212,7 +230,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 14.25F);
-            label3.Location = new Point(261, 13);
+            label3.Location = new Point(173, 13);
             label3.Name = "label3";
             label3.Size = new Size(231, 25);
             label3.TabIndex = 4;
@@ -220,15 +238,15 @@
             // 
             // formsPlot_bilans
             // 
-            formsPlot_bilans.Location = new Point(648, 13);
+            formsPlot_bilans.Location = new Point(553, 13);
             formsPlot_bilans.Name = "formsPlot_bilans";
-            formsPlot_bilans.Size = new Size(764, 323);
+            formsPlot_bilans.Size = new Size(433, 413);
             formsPlot_bilans.TabIndex = 7;
             // 
             // flowLayoutPanel_legenda
             // 
             flowLayoutPanel_legenda.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            flowLayoutPanel_legenda.Location = new Point(979, 357);
+            flowLayoutPanel_legenda.Location = new Point(997, 99);
             flowLayoutPanel_legenda.Name = "flowLayoutPanel_legenda";
             flowLayoutPanel_legenda.Size = new Size(415, 253);
             flowLayoutPanel_legenda.TabIndex = 9;

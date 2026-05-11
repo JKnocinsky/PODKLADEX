@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Umowy));
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Umowy));
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             dataGridView_umowy = new DataGridView();
             comboBox_pracownik = new ComboBox();
             comboBox_rodzajUmowy = new ComboBox();
@@ -42,6 +43,7 @@
             label3 = new Label();
             label4 = new Label();
             panel1 = new Panel();
+            button_siatkaPlac = new Button();
             button_zatwierdzZmiany = new Button();
             button_nowaumowa = new Button();
             checkBox_tylkoAktywne = new CheckBox();
@@ -55,17 +57,25 @@
             // 
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 238);
             dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridView_umowy.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView_umowy.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridView_umowy.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(dataGridView_umowy, "dataGridView_umowy");
             dataGridView_umowy.Name = "dataGridView_umowy";
-            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            dataGridView_umowy.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dataGridView_umowy.RowsDefaultCellStyle = dataGridViewCellStyle3;
             // 
             // comboBox_pracownik
             // 
@@ -119,6 +129,7 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(button_siatkaPlac);
             panel1.Controls.Add(button_zatwierdzZmiany);
             panel1.Controls.Add(label4);
             panel1.Controls.Add(comboBox_pracownik);
@@ -131,6 +142,13 @@
             panel1.Controls.Add(button_dodajUmowe);
             resources.ApplyResources(panel1, "panel1");
             panel1.Name = "panel1";
+            // 
+            // button_siatkaPlac
+            // 
+            resources.ApplyResources(button_siatkaPlac, "button_siatkaPlac");
+            button_siatkaPlac.Name = "button_siatkaPlac";
+            button_siatkaPlac.UseVisualStyleBackColor = true;
+            button_siatkaPlac.Click += button_siatkaPlac_Click;
             // 
             // button_zatwierdzZmiany
             // 
@@ -205,5 +223,6 @@
         private ComboBox comboBox_filtrPracownik;
         private Label label5;
         private Button button_zatwierdzZmiany;
+        private Button button_siatkaPlac;
     }
 }

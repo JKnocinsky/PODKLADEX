@@ -162,7 +162,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;comboBox_pracownik.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="comboBox_rodzajUmowy.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 14.25pt</value>
@@ -186,7 +186,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;comboBox_rodzajUmowy.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="dateTimePicker_dataroz.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 14.25pt</value>
@@ -210,7 +210,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;dateTimePicker_dataroz.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="button_dodajUmowe.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 14.25pt</value>
@@ -237,7 +237,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;button_dodajUmowe.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="dateTimePicker_datazak.CalendarFont" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 14.25pt</value>
@@ -264,7 +264,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;dateTimePicker_datazak.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -294,7 +294,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -324,7 +324,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -354,7 +354,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -384,17 +384,47 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
+  </data>
+  <data name="button_siatkaPlac.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 14.25pt</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="button_siatkaPlac.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="button_siatkaPlac.Location" type="System.Drawing.Point, System.Drawing">
+    <value>746, 191</value>
+  </data>
+  <data name="button_siatkaPlac.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 38</value>
+  </data>
+  <data name="button_siatkaPlac.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="button_siatkaPlac.Text" xml:space="preserve">
+    <value>Siatka płac</value>
+  </data>
+  <data name="&gt;&gt;button_siatkaPlac.Name" xml:space="preserve">
+    <value>button_siatkaPlac</value>
+  </data>
+  <data name="&gt;&gt;button_siatkaPlac.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button_siatkaPlac.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;button_siatkaPlac.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="button_zatwierdzZmiany.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 14.25pt</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="button_zatwierdzZmiany.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="button_zatwierdzZmiany.Location" type="System.Drawing.Point, System.Drawing">
-    <value>590, 191</value>
+    <value>527, 191</value>
   </data>
   <data name="button_zatwierdzZmiany.Size" type="System.Drawing.Size, System.Drawing">
     <value>198, 38</value>
@@ -415,7 +445,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;button_zatwierdzZmiany.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 557</value>
