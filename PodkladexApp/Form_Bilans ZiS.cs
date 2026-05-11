@@ -60,7 +60,7 @@ namespace PodkladexApp
             comboBox_rokOd.Items.Clear();
             comboBox_rokDo.Items.Clear();
 
-            for (int i = 2024; i <= 2035; i++)
+            for (int i = 2020; i <= 2099; i++)
             {
                 comboBox_rokOd.Items.Add(i);
                 comboBox_rokDo.Items.Add(i);
