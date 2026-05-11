@@ -23,9 +23,14 @@ CREATE TABLE Osoba (
     Kod_pocztowy NVARCHAR(10) NULL,
     Ulica NVARCHAR(50) NULL,
     Numer NVARCHAR(10) NULL,
-    PESEL CHAR(11) NULL UNIQUE
+    PESEL CHAR(11) NULL -- Usunięto słowo UNIQUE z tej linijki
 );
-GO
+GO --
+
+-- Tworzymy nowy indeks, który wymusza unikalność tylko dla uzupełnionych peseli
+CREATE UNIQUE NONCLUSTERED INDEX UQ_Osoba_Pesel 
+ON Osoba(PESEL) 
+WHERE PESEL IS NOT NULL;
 
 CREATE TABLE Pracownik (
     ID_pracownik INT IDENTITY(1,1) PRIMARY KEY,
@@ -241,9 +246,9 @@ CREATE TABLE Material_wlasciwosci (
     ID_material_wlasciwosci INT IDENTITY(1,1) PRIMARY KEY,
     ID_wlasciwosci INT NOT NULL FOREIGN KEY REFERENCES Wlasciwosc(ID_wlasciwosci),
     ID_material INT NOT NULL FOREIGN KEY REFERENCES Material(ID_material),
-    Wartosc_minimalna DECIMAL(6,2) NOT NULL,
-    Wartosc_maksymalna DECIMAL(6,2) NOT NULL,
-    Wartosc_nominalna DECIMAL(6,2) NOT NULL
+    Wartosc_minimalna DECIMAL(10, 5) NOT NULL,
+    Wartosc_maksymalna DECIMAL(10, 5) NOT NULL,
+    Wartosc_nominalna DECIMAL(10, 5) NOT NULL
 );
 GO
 
@@ -315,9 +320,9 @@ CREATE TABLE Produkt_wlasciwosci (
     ID_produkty_wlasciwosci INT IDENTITY(1,1) PRIMARY KEY,    
     ID_wlasciwosci INT NOT NULL FOREIGN KEY REFERENCES Wlasciwosc(ID_wlasciwosci),
     ID_produkt INT NOT NULL FOREIGN KEY REFERENCES Produkt(ID_produkt),
-    Wartosc_minimalna DECIMAL(6,2) NOT NULL,
-    Wartosc_maksymalna DECIMAL(6,2) NOT NULL,
-    Wartosc_nominalna DECIMAL(6,2) NOT NULL
+    Wartosc_minimalna DECIMAL(10, 5) NOT NULL,
+    Wartosc_maksymalna DECIMAL(10, 5) NOT NULL,
+    Wartosc_nominalna DECIMAL(10, 5) NOT NULL
 );
 GO
 
@@ -527,12 +532,14 @@ GO
 CREATE VIEW Widok_Zamowienia_Zadania AS
 SELECT
     Z.ID_zamowienie,
+    P.ID_produkcja,
     ZP.Data_zadania,
     M.Nazwa AS Nazwa_Maszyny,
     CONCAT(O.Imie, ' ', O.Nazwisko) AS Pracownik,
     P.RBH,
     Prod.Nazwa AS Nazwa_Produktu,
-    (P.RBH * NP.Ilosc / NP.Czas) AS Obliczona_Ilosc_Wyprodukowana
+    ROUND((P.RBH * NP.Ilosc / NP.Czas), 2) AS Obliczona_Ilosc_Wyprodukowana,
+    ROUND((P.RBH * NP.Ilosc_mat / NP.Czas), 2) AS Obliczona_Ilosc_Odpadow 
 FROM
     Zamowienie Z
 JOIN
@@ -564,7 +571,7 @@ SELECT TOP 100 PERCENT
     ROUND(CASE WHEN SUM(ISNULL(sz.Ilosc, 0)) + SUM(ISNULL(km.Odpady, 0)) = 0
         THEN NULL
         ELSE SUM(ISNULL(p.RBH * NP.Ilosc / NULLIF(NP.Czas, 0), 0))
-            / (SUM(ISNULL(sz.Ilosc, 0)) + SUM(ISNULL(km.Odpady, 0)))
+            / (ISNULL(sz.Ilosc, 0) + SUM(ISNULL(km.Odpady, 0)))
             * 100
     END, 2) AS Procent_Zaplanowanej_Produkcji
 FROM Zamowienie Z
@@ -589,13 +596,13 @@ CREATE VIEW Widok_Produkcja_Realizacja_Obliczenia AS
 SELECT TOP 100 PERCENT
     Z.ID_zamowienie,
     Prod.Nazwa AS Nazwa_Produktu,
-    ROUND(SUM(sz.Ilosc), 2) AS Ilosc_zamowienia,
+    ROUND(sz.Ilosc, 2) AS Ilosc_zamowienia,
     ROUND(SUM(ISNULL(km.Odpady, 0)), 2) AS Suma_Odpady,
     ROUND(SUM(ISNULL(p.Wyprodukowano, 0)), 2) AS Suma_Wyprodukowano,
     ROUND(CASE WHEN SUM(ISNULL(sz.Ilosc, 0)) + SUM(ISNULL(km.Odpady, 0)) = 0
         THEN NULL
         ELSE SUM(ISNULL(p.Wyprodukowano, 0))
-            / (SUM(ISNULL(sz.Ilosc, 0)) + SUM(ISNULL(km.Odpady, 0)))
+            / (ISNULL(sz.Ilosc, 0) + SUM(ISNULL(km.Odpady, 0)))
             * 100
     END, 2) AS Wartosc_Formula
 FROM Zamowienie Z
@@ -607,7 +614,8 @@ LEFT JOIN Norma_prod NP ON Prod.ID_produkt = NP.ID_produkt
 LEFT JOIN Produkcja p ON NP.ID_normaP = p.ID_normyP AND p.ID_zadanieP = ZP.ID_zadanieP
 GROUP BY
     Z.ID_zamowienie,
-    Prod.Nazwa
+    Prod.Nazwa,
+    sz.Ilosc
 ORDER BY
     Z.ID_zamowienie ASC,
     Prod.Nazwa ASC;
@@ -732,4 +740,51 @@ FROM Pracownik P
 JOIN Osoba O ON P.ID_osoba = O.ID_osoba
 JOIN Produkcja Prod ON Prod.ID_pracownik = P.ID_pracownik
 JOIN Zadanie_produkcyjne ZP ON Prod.ID_zadanieP = ZP.ID_zadanieP;
+GO
+
+-- ==========================================
+-- WIDOK ZAMÓWIENIE ZADANIE PRODUKCJA
+-- ==========================================
+CREATE VIEW Widok_Zamowienie_Zadanie_Produkcja AS
+SELECT
+    Z.ID_zamowienie,
+    ZP.ID_zadanieP,
+    ZP.Data_zadania,
+    P.ID_produkcja,
+    P.Wyprodukowano,
+    P.Odpady
+FROM Zamowienie Z
+JOIN Zadanie_produkcyjne ZP ON Z.ID_zamowienie = ZP.ID_zamowienie
+JOIN Produkcja P ON ZP.ID_zadanieP = P.ID_zadanieP;
+GO
+
+-- ======================================================
+-- ZMODERNIZOWANY WIDOK ZESTAWIENIA EFEKTÓW PRODUKCJI
+-- ======================================================
+CREATE VIEW Widok_Produkcja_Zestawienie_Efektow AS
+SELECT 
+    ZP.ID_zamowienie,
+    
+    -- 1. Oczekiwane Zużycie Materiału (RBH * Norma_mat)
+    ROUND(SUM(P.RBH * (N.Ilosc_mat / NULLIF(N.Czas, 0))), 2) AS Oczekiwane_Zuzycie_Materialu,
+    
+    -- 2. Oczekiwana Produkcja (RBH * Norma_prod)
+    ROUND(SUM(P.RBH * (N.Ilosc / NULLIF(N.Czas, 0))), 2) AS Oczekiwana_Produkcja,
+    
+    -- 3. Oczekiwane Odpady (Różnica między oczekiwanym zużyciem a oczekiwaną produkcją)
+    ROUND(SUM(P.RBH * (N.Ilosc_mat / NULLIF(N.Czas, 0))) - SUM(P.RBH * (N.Ilosc / NULLIF(N.Czas, 0))), 2) AS Oczekiwane_Odpady,
+    
+    -- 4. Realne Zużycie Materiału (Suma wyprodukowanych i odpadów)
+    ROUND(SUM(ISNULL(P.Odpady, 0) + ISNULL(P.Wyprodukowano, 0)), 2) AS Realne_Zuzycie_Materialu,
+    
+    -- 5. Realna Produkcja
+    ROUND(SUM(ISNULL(P.Wyprodukowano, 0)), 2) AS Realna_Produkcja,
+    
+    -- 6. Realne Odpady
+    ROUND(SUM(ISNULL(P.Odpady, 0)), 2) AS Realne_Odpady
+
+FROM Produkcja P
+JOIN Zadanie_produkcyjne ZP ON P.ID_zadanieP = ZP.ID_zadanieP
+JOIN Norma_prod N ON P.ID_normyP = N.ID_normaP
+GROUP BY ZP.ID_zamowienie;
 GO

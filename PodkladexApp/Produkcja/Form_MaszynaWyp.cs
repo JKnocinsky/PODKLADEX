@@ -1,5 +1,6 @@
 ﻿using PodkladexApp.Models;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,6 +30,17 @@ namespace PodkladexApp.Produkcja
             cb_wyborMaszyny.SelectedIndex = -1; // Brak domyślnego wyboru
 
             dgv_wlasciwosci.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        }
+
+        private void Load_dgvWyposazenie()
+        {
+            dgv_Wyposazenie.DataSource = db.Wyposazenie.ToList();
+            if (dgv_Wyposazenie.Columns.Contains("IdWyposazenie"))
+                dgv_Wyposazenie.Columns["IdWyposazenie"].Visible = false;
+            if (dgv_Wyposazenie.Columns.Contains("MaszynaWyp"))
+                dgv_Wyposazenie.Columns["MaszynaWyp"].Visible = false;
+            if (dgv_Wyposazenie.Columns.Contains("WyposazenieWlasciwosci"))
+                dgv_Wyposazenie.Columns["WyposazenieWlasciwosci"].Visible = false;
         }
 
         private void cb_wyborMaszyny_SelectedIndexChanged(object sender, EventArgs e)
@@ -122,6 +134,7 @@ namespace PodkladexApp.Produkcja
             Wyposazenie selectedWyposazenie = null;
             Form_DodajWyposazenie form = new Form_DodajWyposazenie(db, button.Name, selectedWyposazenie);
             form.ShowDialog();
+            Load_dgvWyposazenie();
         }
 
         private void dgv_Wyposazenie_SelectionChanged(object sender, EventArgs e)
@@ -185,6 +198,13 @@ namespace PodkladexApp.Produkcja
 
             Form_DodajWyposazenie form = new Form_DodajWyposazenie(db, button.Name, selectedWyposazenie);
             form.ShowDialog();
+            Load_dgvWyposazenie();
         }
+
+        //private void btn_przypisz_Click(object sender, EventArgs e)
+        //{
+        //    Form_PrzypiszWyp form = new Form_PrzypiszWyp(db);
+        //    form.ShowDialog();
+        //}
     }
 }

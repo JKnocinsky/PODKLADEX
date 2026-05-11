@@ -81,7 +81,7 @@
             dataGridView_Koszyk.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView_Koszyk.Location = new Point(501, 50);
             dataGridView_Koszyk.Name = "dataGridView_Koszyk";
-            dataGridView_Koszyk.Size = new Size(702, 410);
+            dataGridView_Koszyk.Size = new Size(861, 410);
             dataGridView_Koszyk.TabIndex = 3;
             // 
             // panel_Firmy
@@ -114,7 +114,6 @@
             label_Firma.Size = new Size(59, 25);
             label_Firma.TabIndex = 10;
             label_Firma.Text = "Firma";
-            label_Firma.Click += label_Firma_Click;
             // 
             // textBox_NazwaFirmy
             // 
@@ -179,22 +178,20 @@
             textBox_Miejscowosc.Name = "textBox_Miejscowosc";
             textBox_Miejscowosc.Size = new Size(250, 33);
             textBox_Miejscowosc.TabIndex = 11;
-            textBox_Miejscowosc.TextChanged += textBox1_TextChanged;
             // 
             // textBox_KodPocztowy
             // 
             textBox_KodPocztowy.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            textBox_KodPocztowy.Location = new Point(1029, 475);
+            textBox_KodPocztowy.Location = new Point(1143, 475);
             textBox_KodPocztowy.Name = "textBox_KodPocztowy";
             textBox_KodPocztowy.Size = new Size(174, 33);
             textBox_KodPocztowy.TabIndex = 13;
-            textBox_KodPocztowy.TextChanged += textBox_KodPocztowy_TextChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label1.Location = new Point(893, 478);
+            label1.Location = new Point(1007, 478);
             label1.Name = "label1";
             label1.Size = new Size(130, 25);
             label1.TabIndex = 14;
@@ -217,22 +214,20 @@
             textBox_Ulica.Name = "textBox_Ulica";
             textBox_Ulica.Size = new Size(250, 33);
             textBox_Ulica.TabIndex = 15;
-            textBox_Ulica.TextChanged += textBox_Ulica_TextChanged;
             // 
             // textBox_Numer
             // 
             textBox_Numer.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            textBox_Numer.Location = new Point(1029, 539);
+            textBox_Numer.Location = new Point(1143, 539);
             textBox_Numer.Name = "textBox_Numer";
             textBox_Numer.Size = new Size(174, 33);
             textBox_Numer.TabIndex = 17;
-            textBox_Numer.TextChanged += textBox_Numer_TextChanged;
             // 
             // label_Numer
             // 
             label_Numer.AutoSize = true;
             label_Numer.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_Numer.Location = new Point(953, 547);
+            label_Numer.Location = new Point(1067, 547);
             label_Numer.Name = "label_Numer";
             label_Numer.Size = new Size(70, 25);
             label_Numer.TabIndex = 18;
@@ -242,7 +237,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1215, 629);
+            ClientSize = new Size(1384, 661);
             Controls.Add(label_Numer);
             Controls.Add(textBox_Numer);
             Controls.Add(label_Ulica);

@@ -35,7 +35,6 @@
             tableLayoutPanel2 = new TableLayoutPanel();
             btn_dodaj = new Button();
             btn_edytuj = new Button();
-            btn_przypisz = new Button();
             label2 = new Label();
             txtbox_wyszukaj = new TextBox();
             label3 = new Label();
@@ -120,14 +119,13 @@
             // tableLayoutPanel2
             // 
             tableLayoutPanel2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            tableLayoutPanel2.ColumnCount = 3;
+            tableLayoutPanel2.ColumnCount = 2;
             tableLayoutPanel1.SetColumnSpan(tableLayoutPanel2, 2);
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 49.99999F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50.0000076F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
             tableLayoutPanel2.Controls.Add(btn_dodaj, 0, 0);
             tableLayoutPanel2.Controls.Add(btn_edytuj, 1, 0);
-            tableLayoutPanel2.Controls.Add(btn_przypisz, 2, 0);
             tableLayoutPanel2.Dock = DockStyle.Fill;
             tableLayoutPanel2.Location = new Point(3, 600);
             tableLayoutPanel2.Margin = new Padding(3, 4, 3, 4);
@@ -144,7 +142,7 @@
             btn_dodaj.Dock = DockStyle.Fill;
             btn_dodaj.Location = new Point(3, 3);
             btn_dodaj.Name = "btn_dodaj";
-            btn_dodaj.Size = new Size(304, 60);
+            btn_dodaj.Size = new Size(460, 60);
             btn_dodaj.TabIndex = 0;
             btn_dodaj.Text = "Dodaj";
             btn_dodaj.UseVisualStyleBackColor = true;
@@ -155,25 +153,13 @@
             btn_edytuj.AutoSize = true;
             btn_edytuj.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btn_edytuj.Dock = DockStyle.Fill;
-            btn_edytuj.Location = new Point(313, 3);
+            btn_edytuj.Location = new Point(469, 3);
             btn_edytuj.Name = "btn_edytuj";
-            btn_edytuj.Size = new Size(305, 60);
+            btn_edytuj.Size = new Size(461, 60);
             btn_edytuj.TabIndex = 1;
             btn_edytuj.Text = "Edytuj";
             btn_edytuj.UseVisualStyleBackColor = true;
             btn_edytuj.Click += btn_edytuj_Click;
-            // 
-            // btn_przypisz
-            // 
-            btn_przypisz.AutoSize = true;
-            btn_przypisz.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btn_przypisz.Dock = DockStyle.Fill;
-            btn_przypisz.Location = new Point(624, 3);
-            btn_przypisz.Name = "btn_przypisz";
-            btn_przypisz.Size = new Size(306, 60);
-            btn_przypisz.TabIndex = 2;
-            btn_przypisz.Text = "Przypisz wyposażenie";
-            btn_przypisz.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -224,6 +210,8 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(939, 747);
             Controls.Add(tableLayoutPanel1);
             Margin = new Padding(3, 4, 3, 4);
@@ -250,7 +238,6 @@
         private TextBox txtbox_wyszukaj;
         private Button btn_dodaj;
         private Button btn_edytuj;
-        private Button btn_przypisz;
         private Label label3;
         private DataGridView dgv_wlasciwosci;
     }

@@ -271,6 +271,10 @@
          "ObjectType": 3
       },
       {
+         "Name": "[dbo].[Widok_Produkcja_Zestawienie_Efektow]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[dbo].[Widok_Suma_Odpady_Zamowienia]",
          "ObjectType": 3
       },
@@ -284,6 +288,10 @@
       },
       {
          "Name": "[dbo].[Widok_Zamowienia_Zadania]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[Widok_Zamowienie_Zadanie_Produkcja]",
          "ObjectType": 3
       }
    ],

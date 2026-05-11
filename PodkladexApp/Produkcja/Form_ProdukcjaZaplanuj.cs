@@ -56,6 +56,7 @@ namespace PodkladexApp.Produkcja
         private void Dtg_zaplanujProd_SelectionChanged(object? sender, EventArgs e)
         {
             UpdateProgressBarFromSelection();
+            UpdateRealizationProgressBarFromSelection();
         }
 
         private void UpdateProgressBarFromSelection()
@@ -121,6 +122,8 @@ namespace PodkladexApp.Produkcja
                         break;
                 }
 
+
+
                 // Zaokrąglij i obetnij do zakresu 0..100
                 var percentInt = (int)Math.Round((double)percentDecimal);
                 if (percentInt < pb_procentZaplanowania.Minimum) percentInt = pb_procentZaplanowania.Minimum;
@@ -132,6 +135,38 @@ namespace PodkladexApp.Produkcja
             {
                 // W razie błędu ustaw domyślną wartość
                 try { pb_procentZaplanowania.Value = 0; lbl_wybraneZam.Text = string.Empty; } catch { }
+            }
+        }
+
+        private void UpdateRealizationProgressBarFromSelection()
+        {
+            if (dtg_zaplanujProd.CurrentRow != null && dtg_zaplanujProd.Columns.Contains("IdZamowienie"))
+            {
+                var idCell = dtg_zaplanujProd.CurrentRow.Cells["IdZamowienie"];
+                if (idCell?.Value != null && int.TryParse(idCell.Value.ToString(), out int idZamowienie))
+                {
+                    var realizacja = db.WidokProdukcjaProcentRealizacji
+                        .AsNoTracking()
+                        .FirstOrDefault(w => w.IdZamowienie == idZamowienie);
+
+                    if (realizacja != null)
+                    {
+                        decimal val = realizacja.SredniaWartoscFormula ?? 0m;
+                        int intVal = (int)Math.Min(100, Math.Max(0, val));
+                        pb_realizacja.Value = intVal;
+
+                        var lblRealizacja = Controls.Find("lbl_realizacja", true).FirstOrDefault() as Label;
+                        if (lblRealizacja != null) lblRealizacja.Text = $"{val:N2}%";
+                    }
+                    else
+                    {
+                        pb_realizacja.Value = 0;
+                    }
+                }
+            }
+            else
+            {
+                pb_realizacja.Value = 0;
             }
         }
 
@@ -198,6 +233,13 @@ namespace PodkladexApp.Produkcja
 
             dtg_zaplanujProd.DataSource = list;
             dtg_zaplanujProd.AutoResizeColumns();
+            dtg_zaplanujProd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dtg_zaplanujProd.Columns["IdZamowienie"].HeaderText = "Zamówienie";
+            dtg_zaplanujProd.Columns["NazwaProduktu"].HeaderText = "Produkt";
+            dtg_zaplanujProd.Columns["IloscZamowienia"].HeaderText = "Zamówiono";
+            dtg_zaplanujProd.Columns["SumaOdpady"].HeaderText = "Odrzucono";
+            dtg_zaplanujProd.Columns["ZaplanowanaProdukcja"].HeaderText = "Zaplanowano produkcję";
+            dtg_zaplanujProd.Columns["ProcentZaplanowanejProdukcji"].HeaderText = "Procent realizacji";
 
             // Formatowanie kolumn: dwie cyfry po przecinku
             var colRbh = dtg_zaplanujProd.Columns["ZaplanowanaProdukcja"];
@@ -244,6 +286,45 @@ namespace PodkladexApp.Produkcja
             // Przekaż IdZamowienie do podformularza
             Form_ProdukcjaZaplanujPodform form = new Form_ProdukcjaZaplanujPodform(db, idZamowienie);
             form.ShowDialog();
+            LoadGrid(refreshCombo: false);
+        }
+
+        private void btn_zatwierdz_Click(object sender, EventArgs e)
+        {
+            if (dtg_zaplanujProd.CurrentRow == null)
+            {
+                MessageBox.Show("Proszę wybrać zamówienie z listy.", "Brak wyboru", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var idCell = dtg_zaplanujProd.CurrentRow.Cells["IdZamowienie"];
+            if (idCell?.Value != null && int.TryParse(idCell.Value.ToString(), out int idZamowienie))
+            {
+                // Sprawdzenie stopnia realizacji z WidokProdukcjaProcentRealizacji
+                var stanRealizacji = db.WidokProdukcjaProcentRealizacji
+                    .AsNoTracking()
+                    .FirstOrDefault(w => w.IdZamowienie == idZamowienie);
+
+                // Zastosowano 0m (decimal) zamiast 0 (int), aby uniknąć błędów typów
+                if (stanRealizacji == null || (stanRealizacji.SredniaWartoscFormula ?? 0m) < 100m)
+                {
+                    decimal aktualnyProcent = stanRealizacji?.SredniaWartoscFormula ?? 0m;
+                    MessageBox.Show($"Nie można zatwierdzić zamówienia, które nie zostało zrealizowane w 100%.\nAktualny stan: {aktualnyProcent:N2}%",
+                        "Błąd zatwierdzania", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                var zamowienie = db.Zamowienie.FirstOrDefault(z => z.IdZamowienie == idZamowienie);
+                if (zamowienie != null)
+                {
+                    // Ustawienie dzisiejszej daty w polu DataZrealizowaniaZ
+                    zamowienie.DataZrealizowaniaZ = DateOnly.FromDateTime(DateTime.Now);
+                    db.SaveChanges();
+
+                    MessageBox.Show($"Zamówienie nr {idZamowienie} zostało pomyślnie zrealizowane.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                LoadGrid(refreshCombo: false);
+            }
         }
     }
 }

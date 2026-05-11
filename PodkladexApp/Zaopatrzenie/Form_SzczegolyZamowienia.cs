@@ -23,24 +23,24 @@ namespace PodkladexApp.Zaopatrzenie
             // Sprawdzamy, czy jakikolwiek wiersz jest zaznaczony
             if (dataGridView_Koszyk.SelectedRows.Count > 0)
             {
-                // 1. Włączamy przyciski, bo mamy co edytować/usunąć
-                button_usun_z_zamowienia.Enabled = true;
-                button_edytuj_zamowienie.Enabled = true;
-
-                // 2. Pobieramy zaznaczoną pozycję z naszej listy _koszyk
+                // 1. Pobieramy zaznaczoną pozycję z naszej listy _koszyk
                 int index = dataGridView_Koszyk.SelectedRows[0].Index;
                 PozycjaKoszyka zaznaczonaPozycja = _koszyk[index];
 
-                // 3. Ładujemy dane z powrotem do kontrolek
+                // 2. Ładujemy dane z powrotem do kontrolek
+                // UWAGA: Zmiana w ComboBoxie odpali zdarzenie, które wywoła ZablokujReszteFormularza()
+                // i na ułamek sekundy wyłączy nam przyciski edycji i usuwania.
                 comboBox_Produkt.SelectedValue = zaznaczonaPozycja.IdProduktu;
-                // Uwaga: Zmiana produktu w ComboBoxie automatycznie wyzwala SelectedIndexChanged, 
-                // co odświeża listę materiałów. Dlatego przypisanie materiału robimy po produkcie.
                 comboBox_Material.SelectedValue = zaznaczonaPozycja.IdMaterialu;
 
                 numericUpDown_Ilosc.Value = zaznaczonaPozycja.Ilosc;
-                // Cena wyliczy się sama dzięki eventom ValueChanged, ale dla pewności możemy ją przypisać
                 numericUpDown_Cena.Value = zaznaczonaPozycja.Cena;
                 textBox_Uwagi.Text = zaznaczonaPozycja.Uwagi;
+
+                // 3. DLATEGO WŁAŚNIE włączamy przyciski na samym końcu! 
+                // Nadpisujemy tym samym blokadę z metody ZablokujReszteFormularza.
+                button_usun_z_zamowienia.Enabled = true;
+                button_edytuj_zamowienie.Enabled = true;
             }
             else
             {
@@ -428,7 +428,7 @@ namespace PodkladexApp.Zaopatrzenie
                                               .FirstOrDefault();
 
                     // Dodajemy informację o braku materiału do raportu
-                    raport.AppendLine($"- {grupa.Key.NazwaMaterialu} (Grubość: {wartoscNominalna}): BRAKUJE {Math.Round(brakuje, 2)} kg (Zapotrzebowanie: {Math.Round(laczneZapotrzebowanie, 2)} kg | Na stanie: {Math.Round(stanMagazynu, 2)} kg)");
+                    raport.AppendLine($"- {grupa.Key.NazwaMaterialu} (Grubość: {wartoscNominalna:F2}): BRAKUJE {Math.Round(brakuje, 2)} kg (Zapotrzebowanie: {Math.Round(laczneZapotrzebowanie, 2)} kg | Na stanie: {Math.Round(stanMagazynu, 2)} kg)");
                 }
             }
 
@@ -478,7 +478,7 @@ namespace PodkladexApp.Zaopatrzenie
 
                     // Tworzymy spersonalizowany komunikat
                     string wiadomosc = $"Brak materiałów o zgodnej grubości dla wybranego produktu!\n\n" +
-                                       $"Wymagana wartość nominalna to: {wymaganaGrubosc}";
+                                       $"Wymagana wartość nominalna to: {wymaganaGrubosc:F2}";
 
                     MessageBox.Show(wiadomosc, "Brak odpowiedniego materiału", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

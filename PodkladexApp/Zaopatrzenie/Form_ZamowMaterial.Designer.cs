@@ -91,11 +91,11 @@
             // 
             label_cena_pozycji.AutoSize = true;
             label_cena_pozycji.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_cena_pozycji.Location = new Point(375, 250);
+            label_cena_pozycji.Location = new Point(325, 250);
             label_cena_pozycji.Name = "label_cena_pozycji";
-            label_cena_pozycji.Size = new Size(56, 25);
+            label_cena_pozycji.Size = new Size(163, 25);
             label_cena_pozycji.TabIndex = 28;
-            label_cena_pozycji.Text = "Cena";
+            label_cena_pozycji.Text = "Cena za kilogram";
             // 
             // label_Materiał
             // 
@@ -111,11 +111,11 @@
             // 
             label_Liczba.AutoSize = true;
             label_Liczba.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_Liczba.Location = new Point(15, 250);
+            label_Liczba.Location = new Point(2, 248);
             label_Liczba.Name = "label_Liczba";
-            label_Liczba.Size = new Size(66, 25);
+            label_Liczba.Size = new Size(104, 25);
             label_Liczba.TabIndex = 25;
-            label_Liczba.Text = "Liczba";
+            label_Liczba.Text = "Liczba [kg]";
             // 
             // label_Pracownik
             // 
@@ -136,13 +136,13 @@
             button_PrzejdzDalej.Name = "button_PrzejdzDalej";
             button_PrzejdzDalej.Size = new Size(250, 50);
             button_PrzejdzDalej.TabIndex = 23;
-            button_PrzejdzDalej.Text = "Przejdź dalej";
+            button_PrzejdzDalej.Text = "Złóż zamówienie";
             button_PrzejdzDalej.UseVisualStyleBackColor = true;
             // 
             // dataGridView_Koszyk
             // 
             dataGridView_Koszyk.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView_Koszyk.Location = new Point(691, 58);
+            dataGridView_Koszyk.Location = new Point(738, 59);
             dataGridView_Koszyk.Margin = new Padding(3, 2, 3, 2);
             dataGridView_Koszyk.Name = "dataGridView_Koszyk";
             dataGridView_Koszyk.RowHeadersWidth = 51;
@@ -166,7 +166,7 @@
             // 
             numericUpDown_Cena.DecimalPlaces = 2;
             numericUpDown_Cena.Font = new Font("Segoe UI", 13.8F);
-            numericUpDown_Cena.Location = new Point(448, 246);
+            numericUpDown_Cena.Location = new Point(492, 246);
             numericUpDown_Cena.Margin = new Padding(3, 2, 3, 2);
             numericUpDown_Cena.Maximum = new decimal(new int[] { 1874919423, 2328306, 0, 0 });
             numericUpDown_Cena.Name = "numericUpDown_Cena";
@@ -176,8 +176,9 @@
             // 
             // numericUpDown_Ilosc
             // 
+            numericUpDown_Ilosc.DecimalPlaces = 2;
             numericUpDown_Ilosc.Font = new Font("Segoe UI", 13.8F);
-            numericUpDown_Ilosc.Location = new Point(101, 246);
+            numericUpDown_Ilosc.Location = new Point(112, 246);
             numericUpDown_Ilosc.Margin = new Padding(3, 2, 3, 2);
             numericUpDown_Ilosc.Maximum = new decimal(new int[] { 10000000, 0, 0, 0 });
             numericUpDown_Ilosc.Name = "numericUpDown_Ilosc";
@@ -252,7 +253,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1664, 791);
+            ClientSize = new Size(1784, 791);
             Controls.Add(comboBox1);
             Controls.Add(label_Firma);
             Controls.Add(comboBox_Firma);

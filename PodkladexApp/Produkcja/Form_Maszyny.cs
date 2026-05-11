@@ -55,36 +55,19 @@ namespace PodkladexApp
                 }
 
                 // otwarcie formularza dodawania maszyny z przekazaniem nazwy przycisku oraz maszny
-                Form_DodajMaszyne FD = new Form_DodajMaszyne(db, button.Name, selectedMaszyna);
+                Form_DodajMaszyne FD = new Form_DodajMaszyne(db, selectedMaszyna);
                 FD.ShowDialog();
             }
             else if (button.Text == "Dodaj")
             {
-                Form_DodajMaszyne FD = new Form_DodajMaszyne(db, button.Name);
+                Form_DodajMaszyne FD = new Form_DodajMaszyne(db);
                 FD.ShowDialog();
                 dgv_Maszyny.DataSource = db.Maszyna.ToList();
                 dgv_Maszyny.Refresh();
             }
             else
             {
-                DataGridViewRow row = dgv_Maszyny.SelectedRows.Count > 0 ? dgv_Maszyny.SelectedRows[0] : null;
-
-                if (row == null)
-                {
-                    MessageBox.Show("Proszę wybrać maszynę z listy.");
-                }
-                else
-                {
-                    selectedMaszyna = row.DataBoundItem as Maszyna;
-                    var confirmResult = MessageBox.Show("Czy na pewno chcesz usunąć tę maszynę?", "Potwierdzenie usunięcia", MessageBoxButtons.YesNo);
-                    if (confirmResult == DialogResult.Yes)
-                    {
-                        db.Maszyna.Remove(selectedMaszyna);
-                        db.SaveChanges();
-                    }
-                    dgv_Maszyny.DataSource = db.Maszyna.ToList();
-                    dgv_Maszyny.Refresh();
-                }
+                //DataGridViewRow row = dgv_Maszyny.SelectedRows.Count > 0 ? dgv_Maszyny.SelectedRows[0] : null;
             }
             // wybór maszyny z DataGridView
         }
@@ -93,11 +76,6 @@ namespace PodkladexApp
         {
             List<Maszyna> maszyny = db.Maszyna.Where(m => m.Nazwa.Contains(txt_Nazwa_Maszyny.Text)).ToList();
             dgv_Maszyny.DataSource = maszyny;
-        }
-
-        private void btn_MaszWyp_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

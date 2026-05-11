@@ -73,6 +73,7 @@
             // 
             // numericUpDown_Ilosc
             // 
+            numericUpDown_Ilosc.DecimalPlaces = 2;
             numericUpDown_Ilosc.Font = new Font("Segoe UI", 13.8F);
             numericUpDown_Ilosc.Location = new Point(124, 162);
             numericUpDown_Ilosc.Margin = new Padding(3, 2, 3, 2);
@@ -125,6 +126,7 @@
             dataGridView_Koszyk.Margin = new Padding(3, 2, 3, 2);
             dataGridView_Koszyk.Name = "dataGridView_Koszyk";
             dataGridView_Koszyk.RowHeadersWidth = 51;
+            dataGridView_Koszyk.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView_Koszyk.Size = new Size(969, 414);
             dataGridView_Koszyk.TabIndex = 6;
             dataGridView_Koszyk.CellContentClick += dataGridView_Koszyk_CellContentClick;
@@ -157,11 +159,11 @@
             // 
             label_Liczba.AutoSize = true;
             label_Liczba.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label_Liczba.Location = new Point(49, 166);
+            label_Liczba.Location = new Point(10, 166);
             label_Liczba.Name = "label_Liczba";
-            label_Liczba.Size = new Size(66, 25);
+            label_Liczba.Size = new Size(104, 25);
             label_Liczba.TabIndex = 9;
-            label_Liczba.Text = "Liczba";
+            label_Liczba.Text = "Liczba [kg]";
             // 
             // label_Produkt
             // 

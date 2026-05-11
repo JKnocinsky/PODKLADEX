@@ -35,6 +35,7 @@
             btn_normyP = new Button();
             btn_prod = new Button();
             btn_Pracownicy = new Button();
+            btn_odpady = new Button();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -50,11 +51,12 @@
             tableLayoutPanel1.Controls.Add(btn_normyP, 0, 3);
             tableLayoutPanel1.Controls.Add(btn_prod, 0, 4);
             tableLayoutPanel1.Controls.Add(btn_Pracownicy, 0, 2);
+            tableLayoutPanel1.Controls.Add(btn_odpady, 0, 5);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 7;
+            tableLayoutPanel1.RowCount = 12;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 7.5F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 7.5F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 7.5F));
@@ -62,8 +64,12 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 7.5F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 7.5F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 7.5F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 47.5F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 7.5F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 7.5F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 7.5F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 7.5F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 7.5F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
             tableLayoutPanel1.Size = new Size(1925, 1055);
             tableLayoutPanel1.TabIndex = 0;
             // 
@@ -74,12 +80,14 @@
             panel_Produkcja.Location = new Point(378, 4);
             panel_Produkcja.Margin = new Padding(3, 4, 3, 4);
             panel_Produkcja.Name = "panel_Produkcja";
-            tableLayoutPanel1.SetRowSpan(panel_Produkcja, 8);
+            tableLayoutPanel1.SetRowSpan(panel_Produkcja, 13);
             panel_Produkcja.Size = new Size(1544, 1047);
             panel_Produkcja.TabIndex = 3;
             // 
             // btn_wyp
             // 
+            btn_wyp.AutoSize = true;
+            btn_wyp.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btn_wyp.Dock = DockStyle.Fill;
             btn_wyp.Font = new Font("Segoe UI", 14.5F);
             btn_wyp.Location = new Point(3, 82);
@@ -92,6 +100,8 @@
             // 
             // btn_maszyny
             // 
+            btn_maszyny.AutoSize = true;
+            btn_maszyny.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btn_maszyny.Dock = DockStyle.Fill;
             btn_maszyny.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             btn_maszyny.Location = new Point(3, 4);
@@ -105,6 +115,8 @@
             // 
             // btn_normyP
             // 
+            btn_normyP.AutoSize = true;
+            btn_normyP.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btn_normyP.Dock = DockStyle.Fill;
             btn_normyP.Font = new Font("Segoe UI", 14.5F);
             btn_normyP.Location = new Point(3, 241);
@@ -118,6 +130,8 @@
             // 
             // btn_prod
             // 
+            btn_prod.AutoSize = true;
+            btn_prod.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btn_prod.Dock = DockStyle.Fill;
             btn_prod.Font = new Font("Segoe UI", 14.5F);
             btn_prod.Location = new Point(3, 320);
@@ -141,6 +155,21 @@
             btn_Pracownicy.TabIndex = 8;
             btn_Pracownicy.Text = "Pracownicy";
             btn_Pracownicy.UseVisualStyleBackColor = true;
+            btn_Pracownicy.Click += btn_Pracownicy_Click;
+            // 
+            // btn_odpady
+            // 
+            btn_odpady.AutoSize = true;
+            btn_odpady.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btn_odpady.Dock = DockStyle.Fill;
+            btn_odpady.Font = new Font("Segoe UI", 14.5F);
+            btn_odpady.Location = new Point(3, 398);
+            btn_odpady.Name = "btn_odpady";
+            btn_odpady.Size = new Size(369, 73);
+            btn_odpady.TabIndex = 9;
+            btn_odpady.Text = "Efekty produkcji";
+            btn_odpady.UseVisualStyleBackColor = true;
+            btn_odpady.Click += btn_odpady_Click;
             // 
             // Form_ProdukcjaMenu
             // 
@@ -168,5 +197,6 @@
         private Button btn_normyP;
         private Button btn_prod;
         private Button btn_Pracownicy;
+        private Button btn_odpady;
     }
 }
