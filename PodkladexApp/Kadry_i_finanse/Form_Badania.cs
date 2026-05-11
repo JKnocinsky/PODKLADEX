@@ -15,6 +15,8 @@ namespace PodkladexApp
         private bool ladowanieFiltrow = false;
         private bool ladowanieComboPracownikow = false;
 
+        private int? edytowaneIdBadania = null;
+
         private List<PracownikComboBoxItem> listaPracownikow = new List<PracownikComboBoxItem>();
 
         private class PracownikComboBoxItem
@@ -40,7 +42,10 @@ namespace PodkladexApp
             ZaladujPracownikowDoFiltra();
             ZaladujTypyBadanDoComboBox();
             UstawDomyslneDane();
+            UstawTrybDodawania();
             ZaladujBadania();
+
+            dataGridView_badania.CellDoubleClick += dataGridView_badania_CellDoubleClick;
         }
 
         private void KonfigurujDataGridView()
@@ -55,6 +60,14 @@ namespace PodkladexApp
             dataGridView_badania.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             dataGridView_badania.Columns.Clear();
+
+            dataGridView_badania.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "IdBadanieMedyczne",
+                HeaderText = "ID",
+                DataPropertyName = "IdBadanieMedyczne",
+                Visible = false
+            });
 
             dataGridView_badania.Columns.Add(new DataGridViewTextBoxColumn
             {
@@ -140,6 +153,7 @@ namespace PodkladexApp
                 var lista = daneZBazy
                     .Select(b => new
                     {
+                        b.IdBadanieMedyczne,
                         Pracownik = b.IdPracownikNavigation.IdOsobaNavigation.Imie + " " +
                                     b.IdPracownikNavigation.IdOsobaNavigation.Nazwisko,
                         TypBadania = b.IdTypBadaniaMedNavigation.Nazwa,
@@ -330,6 +344,102 @@ namespace PodkladexApp
             UstawDomyslneDane();
         }
 
+        private void UstawTrybDodawania()
+        {
+            edytowaneIdBadania = null;
+
+            button_dodajBadanie.Visible = true;
+            button_zatwierdzZmiany.Visible = false;
+
+            comboBox_pracownik.Enabled = true;
+        }
+
+        private void UstawTrybEdycji()
+        {
+            button_dodajBadanie.Visible = false;
+            button_zatwierdzZmiany.Visible = true;
+
+            comboBox_pracownik.Enabled = false;
+        }
+
+        private bool SprobujPobracKoszt(out decimal koszt)
+        {
+            string tekstKoszt = textBox_koszt.Text.Trim().Replace('.', ',');
+
+            if (!decimal.TryParse(
+                    tekstKoszt,
+                    NumberStyles.Number,
+                    CultureInfo.GetCultureInfo("pl-PL"),
+                    out koszt))
+            {
+                MessageBox.Show(
+                    "Podaj poprawny koszt badania.",
+                    "Błędne dane",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (koszt < 0)
+            {
+                MessageBox.Show(
+                    "Koszt badania nie może być ujemny.",
+                    "Błędne dane",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return false;
+            }
+
+            return true;
+        }
+
+        private void ZaladujBadanieDoEdycji(int idBadania)
+        {
+            try
+            {
+                var badanie = db.BadanieMedyczne.FirstOrDefault(b => b.IdBadanieMedyczne == idBadania);
+
+                if (badanie == null)
+                {
+                    MessageBox.Show(
+                        "Nie znaleziono badania.",
+                        "Błąd",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    return;
+                }
+
+                panel1.Visible = true;
+
+                ZaladujPracownikowDoComboBox();
+                ZaladujTypyBadanDoComboBox();
+
+                edytowaneIdBadania = badanie.IdBadanieMedyczne;
+
+                comboBox_pracownik.SelectedValue = badanie.IdPracownik;
+                comboBox_typBadania.SelectedValue = badanie.IdTypBadaniaMed;
+                dateTimePicker_dataBadania.Value = badanie.DataBadania.ToDateTime(TimeOnly.MinValue);
+
+                if (badanie.DataWaznosci.HasValue)
+                    dateTimePicker_dataWaznosci.Value = badanie.DataWaznosci.Value.ToDateTime(TimeOnly.MinValue);
+                else
+                    dateTimePicker_dataWaznosci.Value = badanie.DataBadania.ToDateTime(TimeOnly.MinValue);
+
+                textBox_koszt.Text = badanie.Koszt.ToString("0.00", CultureInfo.GetCultureInfo("pl-PL"));
+                textBox_uwagi.Text = badanie.Uwagi ?? "";
+
+                UstawTrybEdycji();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Błąd podczas ładowania badania do edycji:\n" + ex.Message,
+                    "Błąd",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
         private void button_odswiez_Click(object sender, EventArgs e)
         {
             ZaladujBadania();
@@ -344,6 +454,7 @@ namespace PodkladexApp
                 WyczyscPanelDodawania();
                 ZaladujPracownikowDoComboBox();
                 ZaladujTypyBadanDoComboBox();
+                UstawTrybDodawania();
             }
         }
 
@@ -369,35 +480,8 @@ namespace PodkladexApp
                 return;
             }
 
-            if (!decimal.TryParse(
-                    textBox_koszt.Text.Trim(),
-                    NumberStyles.Number,
-                    CultureInfo.InvariantCulture,
-                    out decimal koszt)
-                &&
-                !decimal.TryParse(
-                    textBox_koszt.Text.Trim(),
-                    NumberStyles.Number,
-                    CultureInfo.GetCultureInfo("pl-PL"),
-                    out koszt))
-            {
-                MessageBox.Show(
-                    "Podaj poprawny koszt badania.",
-                    "Błędne dane",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
+            if (!SprobujPobracKoszt(out decimal koszt))
                 return;
-            }
-
-            if (koszt < 0)
-            {
-                MessageBox.Show(
-                    "Koszt badania nie może być ujemny.",
-                    "Błędne dane",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-                return;
-            }
 
             if (dateTimePicker_dataWaznosci.Value.Date < dateTimePicker_dataBadania.Value.Date)
             {
@@ -438,12 +522,125 @@ namespace PodkladexApp
 
                 WyczyscPanelDodawania();
                 panel1.Visible = false;
+                UstawTrybDodawania();
                 ZaladujBadania();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
                     "Błąd podczas dodawania badania:\n" + ex.Message,
+                    "Błąd",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        private void button_zatwierdzZmiany_Click(object sender, EventArgs e)
+        {
+            if (edytowaneIdBadania == null)
+            {
+                MessageBox.Show(
+                    "Nie wybrano badania do edycji.",
+                    "Brak danych",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (comboBox_typBadania.SelectedValue == null)
+            {
+                MessageBox.Show(
+                    "Wybierz typ badania.",
+                    "Brak danych",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!SprobujPobracKoszt(out decimal koszt))
+                return;
+
+            if (dateTimePicker_dataWaznosci.Value.Date < dateTimePicker_dataBadania.Value.Date)
+            {
+                MessageBox.Show(
+                    "Data ważności nie może być wcześniejsza niż data badania.",
+                    "Błędne daty",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult wynik = MessageBox.Show(
+                "Czy na pewno chcesz zatwierdzić zmiany tego badania?",
+                "Potwierdzenie edycji",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (wynik == DialogResult.No)
+                return;
+
+            try
+            {
+                var badanie = db.BadanieMedyczne.FirstOrDefault(b => b.IdBadanieMedyczne == edytowaneIdBadania.Value);
+
+                if (badanie == null)
+                {
+                    MessageBox.Show(
+                        "Nie znaleziono badania w bazie.",
+                        "Błąd",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    return;
+                }
+
+                badanie.IdTypBadaniaMed = Convert.ToInt32(comboBox_typBadania.SelectedValue);
+                badanie.DataBadania = DateOnly.FromDateTime(dateTimePicker_dataBadania.Value.Date);
+                badanie.DataWaznosci = DateOnly.FromDateTime(dateTimePicker_dataWaznosci.Value.Date);
+                badanie.Koszt = koszt;
+                badanie.Uwagi = string.IsNullOrWhiteSpace(textBox_uwagi.Text.Trim())
+                    ? null
+                    : textBox_uwagi.Text.Trim();
+
+                db.SaveChanges();
+
+                MessageBox.Show(
+                    "Zmiany badania zostały zapisane.",
+                    "Sukces",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                WyczyscPanelDodawania();
+                panel1.Visible = false;
+                UstawTrybDodawania();
+                ZaladujBadania();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Błąd podczas zapisywania zmian:\n" + ex.Message,
+                    "Błąd",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        private void dataGridView_badania_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            try
+            {
+                if (dataGridView_badania.Rows[e.RowIndex].Cells["IdBadanieMedyczne"].Value == null)
+                    return;
+
+                int idBadania = Convert.ToInt32(dataGridView_badania.Rows[e.RowIndex].Cells["IdBadanieMedyczne"].Value);
+                ZaladujBadanieDoEdycji(idBadania);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Błąd podczas wyboru badania:\n" + ex.Message,
                     "Błąd",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);

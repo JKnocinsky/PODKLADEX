@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Umowy));
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             dataGridView_umowy = new DataGridView();
             comboBox_pracownik = new ComboBox();
             comboBox_rodzajUmowy = new ComboBox();
@@ -40,6 +42,7 @@
             label3 = new Label();
             label4 = new Label();
             panel1 = new Panel();
+            button_zatwierdzZmiany = new Button();
             button_nowaumowa = new Button();
             checkBox_tylkoAktywne = new CheckBox();
             comboBox_filtrPracownik = new ComboBox();
@@ -50,9 +53,19 @@
             // 
             // dataGridView_umowy
             // 
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView_umowy.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView_umowy.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             resources.ApplyResources(dataGridView_umowy, "dataGridView_umowy");
             dataGridView_umowy.Name = "dataGridView_umowy";
+            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dataGridView_umowy.RowsDefaultCellStyle = dataGridViewCellStyle2;
             // 
             // comboBox_pracownik
             // 
@@ -106,6 +119,7 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(button_zatwierdzZmiany);
             panel1.Controls.Add(label4);
             panel1.Controls.Add(comboBox_pracownik);
             panel1.Controls.Add(label3);
@@ -117,6 +131,13 @@
             panel1.Controls.Add(button_dodajUmowe);
             resources.ApplyResources(panel1, "panel1");
             panel1.Name = "panel1";
+            // 
+            // button_zatwierdzZmiany
+            // 
+            resources.ApplyResources(button_zatwierdzZmiany, "button_zatwierdzZmiany");
+            button_zatwierdzZmiany.Name = "button_zatwierdzZmiany";
+            button_zatwierdzZmiany.UseVisualStyleBackColor = true;
+            button_zatwierdzZmiany.Click += button_zatwierdzZmiany_Click;
             // 
             // button_nowaumowa
             // 
@@ -183,5 +204,6 @@
         private CheckBox checkBox_tylkoAktywne;
         private ComboBox comboBox_filtrPracownik;
         private Label label5;
+        private Button button_zatwierdzZmiany;
     }
 }

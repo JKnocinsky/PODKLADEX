@@ -14,6 +14,8 @@ namespace PodkladexApp
         private bool ladowanieFiltrow = false;
         private bool ladowanieComboPracownikow = false;
 
+        private int? edytowaneIdUmowy = null;
+
         private List<PracownikComboBoxItem> listaPracownikow = new List<PracownikComboBoxItem>();
 
         private class PracownikComboBoxItem
@@ -39,7 +41,10 @@ namespace PodkladexApp
             ZaladujPracownikowDoFiltra();
             ZaladujRodzajeUmowDoComboBox();
             UstawDomyslneDaty();
+            UstawTrybDodawania();
             ZaladujUmowy();
+
+            dataGridView_umowy.CellDoubleClick += dataGridView_umowy_CellDoubleClick;
         }
 
         private void KonfigurujDataGridView()
@@ -315,6 +320,64 @@ namespace PodkladexApp
             UstawDomyslneDaty();
         }
 
+        private void UstawTrybDodawania()
+        {
+            edytowaneIdUmowy = null;
+
+            button_dodajUmowe.Visible = true;
+            button_zatwierdzZmiany.Visible = false;
+
+            comboBox_pracownik.Enabled = true;
+        }
+
+        private void UstawTrybEdycji()
+        {
+            button_dodajUmowe.Visible = false;
+            button_zatwierdzZmiany.Visible = true;
+
+            comboBox_pracownik.Enabled = false;
+        }
+
+        private void ZaladujUmoweDoEdycji(int idUmowy)
+        {
+            try
+            {
+                var umowa = db.Umowa.FirstOrDefault(u => u.IdUmowa == idUmowy);
+
+                if (umowa == null)
+                {
+                    MessageBox.Show(
+                        "Nie znaleziono umowy.",
+                        "Błąd",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    return;
+                }
+
+                panel1.Visible = true;
+
+                ZaladujPracownikowDoComboBox();
+                ZaladujRodzajeUmowDoComboBox();
+
+                edytowaneIdUmowy = umowa.IdUmowa;
+
+                comboBox_pracownik.SelectedValue = umowa.IdPracownik;
+                comboBox_rodzajUmowy.SelectedValue = umowa.IdRodzaju;
+                dateTimePicker_dataroz.Value = umowa.DataRoz.ToDateTime(TimeOnly.MinValue);
+                dateTimePicker_datazak.Value = umowa.DataZak.ToDateTime(TimeOnly.MinValue);
+
+                UstawTrybEdycji();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Błąd podczas ładowania umowy do edycji:\n" + ex.Message,
+                    "Błąd",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
         private void button_dodajUmowe_Click(object sender, EventArgs e)
         {
             if (comboBox_pracownik.SelectedValue == null || Convert.ToInt32(comboBox_pracownik.SelectedValue) <= 0)
@@ -371,12 +434,95 @@ namespace PodkladexApp
 
                 WyczyscPolaDodawania();
                 panel1.Visible = false;
+                UstawTrybDodawania();
                 ZaladujUmowy();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
                     "Błąd podczas dodawania umowy:\n" + ex.Message,
+                    "Błąd",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        private void button_zatwierdzZmiany_Click(object sender, EventArgs e)
+        {
+            if (edytowaneIdUmowy == null)
+            {
+                MessageBox.Show(
+                    "Nie wybrano umowy do edycji.",
+                    "Brak danych",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (comboBox_rodzajUmowy.SelectedValue == null)
+            {
+                MessageBox.Show(
+                    "Wybierz rodzaj umowy.",
+                    "Brak danych",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (dateTimePicker_datazak.Value.Date < dateTimePicker_dataroz.Value.Date)
+            {
+                MessageBox.Show(
+                    "Data zakończenia umowy nie może być wcześniejsza niż data rozpoczęcia.",
+                    "Błędne daty",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult wynik = MessageBox.Show(
+                "Czy na pewno chcesz zatwierdzić zmiany tej umowy?",
+                "Potwierdzenie edycji",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (wynik == DialogResult.No)
+                return;
+
+            try
+            {
+                var umowa = db.Umowa.FirstOrDefault(u => u.IdUmowa == edytowaneIdUmowy.Value);
+
+                if (umowa == null)
+                {
+                    MessageBox.Show(
+                        "Nie znaleziono umowy w bazie.",
+                        "Błąd",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    return;
+                }
+
+                umowa.IdRodzaju = Convert.ToInt32(comboBox_rodzajUmowy.SelectedValue);
+                umowa.DataRoz = DateOnly.FromDateTime(dateTimePicker_dataroz.Value.Date);
+                umowa.DataZak = DateOnly.FromDateTime(dateTimePicker_datazak.Value.Date);
+
+                db.SaveChanges();
+
+                MessageBox.Show(
+                    "Zmiany umowy zostały zapisane.",
+                    "Sukces",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                WyczyscPolaDodawania();
+                panel1.Visible = false;
+                UstawTrybDodawania();
+                ZaladujUmowy();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Błąd podczas zapisywania zmian:\n" + ex.Message,
                     "Błąd",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -392,6 +538,30 @@ namespace PodkladexApp
                 WyczyscPolaDodawania();
                 ZaladujPracownikowDoComboBox();
                 ZaladujRodzajeUmowDoComboBox();
+                UstawTrybDodawania();
+            }
+        }
+
+        private void dataGridView_umowy_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            try
+            {
+                if (dataGridView_umowy.Rows[e.RowIndex].Cells["IdUmowa"].Value == null)
+                    return;
+
+                int idUmowy = Convert.ToInt32(dataGridView_umowy.Rows[e.RowIndex].Cells["IdUmowa"].Value);
+                ZaladujUmoweDoEdycji(idUmowy);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Błąd podczas wyboru umowy:\n" + ex.Message,
+                    "Błąd",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 

@@ -5,6 +5,7 @@ using ScottPlot;
 using System;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using DrawingColor = System.Drawing.Color;
 using FormsLabel = System.Windows.Forms.Label;
@@ -22,6 +23,7 @@ namespace PodkladexApp
             db = new PodkladexContext();
             connectionString = db.Database.GetDbConnection().ConnectionString;
         }
+
         private readonly DrawingColor[] koloryLegendy =
         {
             DrawingColor.SteelBlue,
@@ -60,14 +62,44 @@ namespace PodkladexApp
             comboBox_rokOd.Items.Clear();
             comboBox_rokDo.Items.Clear();
 
-            for (int i = 2020; i <= 2099; i++)
+            int rokMin = DateTime.Today.Year;
+            int rokMax = DateTime.Today.Year;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                string query = @"
+                    SELECT 
+                        MIN(Rok) AS MinRok,
+                        MAX(Rok) AS MaxRok
+                    FROM dbo.Bilans_Miesieczny;";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        if (reader["MinRok"] != DBNull.Value)
+                            rokMin = Convert.ToInt32(reader["MinRok"]);
+
+                        if (reader["MaxRok"] != DBNull.Value)
+                            rokMax = Convert.ToInt32(reader["MaxRok"]);
+                    }
+                }
+            }
+
+            for (int i = rokMin; i <= rokMax; i++)
             {
                 comboBox_rokOd.Items.Add(i);
                 comboBox_rokDo.Items.Add(i);
             }
 
-            comboBox_rokOd.SelectedItem = DateTime.Today.Year;
-            comboBox_rokDo.SelectedItem = DateTime.Today.Year;
+            if (comboBox_rokOd.Items.Count > 0)
+                comboBox_rokOd.SelectedItem = rokMin;
+
+            if (comboBox_rokDo.Items.Count > 0)
+                comboBox_rokDo.SelectedItem = rokMax;
         }
 
         private void KonfigurujDataGridView()
@@ -309,24 +341,28 @@ namespace PodkladexApp
         {
             Panel wiersz = new Panel();
             wiersz.Width = flowLayoutPanel_legenda.ClientSize.Width - 25;
-            wiersz.Height = 28;
+            wiersz.Height = 40;
             wiersz.Margin = new Padding(3);
+            wiersz.Padding = new Padding(0);
 
             Panel probkaKoloru = new Panel();
             probkaKoloru.BackColor = kolor;
             probkaKoloru.Width = 18;
             probkaKoloru.Height = 18;
             probkaKoloru.Left = 3;
-            probkaKoloru.Top = 5;
+            probkaKoloru.Top = 10;
             probkaKoloru.BorderStyle = BorderStyle.FixedSingle;
 
             FormsLabel opis = new FormsLabel();
             opis.Text = tekst;
             opis.AutoSize = false;
             opis.Left = 28;
-            opis.Top = 4;
+            opis.Top = 7;
             opis.Width = wiersz.Width - 32;
-            opis.Height = 20;
+            opis.Height = 26;
+            opis.TextAlign = ContentAlignment.MiddleLeft;
+            opis.UseCompatibleTextRendering = true;
+            opis.Padding = new Padding(0);
 
             wiersz.Controls.Add(probkaKoloru);
             wiersz.Controls.Add(opis);

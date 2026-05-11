@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             comboBox_miesiacOd = new ComboBox();
             comboBox_rokOd = new ComboBox();
             comboBox_miesiacDo = new ComboBox();
@@ -100,16 +101,24 @@
             // dataGridView_bilans
             // 
             dataGridView_bilans.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dataGridView_bilans.DefaultCellStyle = dataGridViewCellStyle1;
             dataGridView_bilans.Location = new Point(12, 357);
             dataGridView_bilans.Name = "dataGridView_bilans";
-            dataGridView_bilans.Size = new Size(866, 370);
+            dataGridView_bilans.Size = new Size(961, 370);
             dataGridView_bilans.TabIndex = 2;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.25F);
-            label1.Location = new Point(1012, 616);
+            label1.Location = new Point(979, 621);
             label1.Name = "label1";
             label1.Size = new Size(99, 25);
             label1.TabIndex = 3;
@@ -129,7 +138,7 @@
             // 
             Dochod.AutoSize = true;
             Dochod.Font = new Font("Segoe UI", 14.25F);
-            Dochod.Location = new Point(1012, 697);
+            Dochod.Location = new Point(979, 702);
             Dochod.Name = "Dochod";
             Dochod.Size = new Size(78, 25);
             Dochod.TabIndex = 5;
@@ -138,7 +147,7 @@
             // textBox_przychody
             // 
             textBox_przychody.Font = new Font("Segoe UI", 14.25F);
-            textBox_przychody.Location = new Point(1117, 616);
+            textBox_przychody.Location = new Point(1084, 621);
             textBox_przychody.Name = "textBox_przychody";
             textBox_przychody.Size = new Size(277, 33);
             textBox_przychody.TabIndex = 6;
@@ -146,7 +155,7 @@
             // textBox_wydatki
             // 
             textBox_wydatki.Font = new Font("Segoe UI", 14.25F);
-            textBox_wydatki.Location = new Point(1117, 655);
+            textBox_wydatki.Location = new Point(1084, 660);
             textBox_wydatki.Name = "textBox_wydatki";
             textBox_wydatki.Size = new Size(277, 33);
             textBox_wydatki.TabIndex = 6;
@@ -154,7 +163,7 @@
             // textBox_dochod
             // 
             textBox_dochod.Font = new Font("Segoe UI", 14.25F);
-            textBox_dochod.Location = new Point(1117, 694);
+            textBox_dochod.Location = new Point(1084, 699);
             textBox_dochod.Name = "textBox_dochod";
             textBox_dochod.Size = new Size(277, 33);
             textBox_dochod.TabIndex = 6;
@@ -193,7 +202,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 14.25F);
-            label6.Location = new Point(1012, 658);
+            label6.Location = new Point(979, 663);
             label6.Name = "label6";
             label6.Size = new Size(80, 25);
             label6.TabIndex = 5;
@@ -218,9 +227,10 @@
             // 
             // flowLayoutPanel_legenda
             // 
-            flowLayoutPanel_legenda.Location = new Point(913, 357);
+            flowLayoutPanel_legenda.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            flowLayoutPanel_legenda.Location = new Point(979, 357);
             flowLayoutPanel_legenda.Name = "flowLayoutPanel_legenda";
-            flowLayoutPanel_legenda.Size = new Size(355, 253);
+            flowLayoutPanel_legenda.Size = new Size(415, 253);
             flowLayoutPanel_legenda.TabIndex = 9;
             // 
             // Form_BilansZiS

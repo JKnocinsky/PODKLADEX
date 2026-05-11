@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             button_noweBadanie = new Button();
             panel1 = new Panel();
+            button_zatwierdzZmiany = new Button();
             button_dodajBadanie = new Button();
             textBox_uwagi = new TextBox();
             textBox_koszt = new TextBox();
@@ -64,6 +67,7 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(button_zatwierdzZmiany);
             panel1.Controls.Add(button_dodajBadanie);
             panel1.Controls.Add(textBox_uwagi);
             panel1.Controls.Add(textBox_koszt);
@@ -81,6 +85,17 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(852, 332);
             panel1.TabIndex = 10;
+            // 
+            // button_zatwierdzZmiany
+            // 
+            button_zatwierdzZmiany.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            button_zatwierdzZmiany.Location = new Point(335, 269);
+            button_zatwierdzZmiany.Name = "button_zatwierdzZmiany";
+            button_zatwierdzZmiany.Size = new Size(182, 42);
+            button_zatwierdzZmiany.TabIndex = 5;
+            button_zatwierdzZmiany.Text = "Zatwierdź zmiany";
+            button_zatwierdzZmiany.UseVisualStyleBackColor = true;
+            button_zatwierdzZmiany.Click += button_zatwierdzZmiany_Click;
             // 
             // button_dodajBadanie
             // 
@@ -208,7 +223,23 @@
             // 
             // dataGridView_badania
             // 
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dataGridView_badania.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dataGridView_badania.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Window;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dataGridView_badania.DefaultCellStyle = dataGridViewCellStyle4;
             dataGridView_badania.Location = new Point(17, 55);
             dataGridView_badania.Name = "dataGridView_badania";
             dataGridView_badania.Size = new Size(1390, 330);
@@ -290,5 +321,6 @@
         private ComboBox comboBox_filtrPracownik;
         private TextBox textBox_uwagi;
         private Label label7;
+        private Button button_zatwierdzZmiany;
     }
 }

@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             comboBox_filtrPracownik = new ComboBox();
             label1 = new Label();
             checkBox_tylkoNiewazne = new CheckBox();
@@ -85,9 +87,19 @@
             // 
             // dataGridView_szkolenia
             // 
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView_szkolenia.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView_szkolenia.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView_szkolenia.Location = new Point(17, 55);
             dataGridView_szkolenia.Name = "dataGridView_szkolenia";
+            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dataGridView_szkolenia.RowsDefaultCellStyle = dataGridViewCellStyle2;
             dataGridView_szkolenia.Size = new Size(1390, 409);
             dataGridView_szkolenia.TabIndex = 3;
             // 

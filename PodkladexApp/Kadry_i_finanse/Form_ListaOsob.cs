@@ -216,6 +216,22 @@ namespace PodkladexApp
             if (!CzyDaneOsobySaPoprawne())
                 return;
 
+            string email = textBox_email.Text.Trim();
+
+            bool czyIstniejeEmail = db.Osoba.Any(o =>
+                o.IdOsoba != idOsoby &&
+                o.AdresEMail.ToLower() == email.ToLower());
+
+            if (czyIstniejeEmail)
+            {
+                MessageBox.Show(
+                    "Osoba o podanym adresie e-mail już istnieje w bazie.",
+                    "Duplikat e-mail",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
             DialogResult wynik = MessageBox.Show(
                 "Czy na pewno chcesz zapisać zmiany danych tej osoby?",
                 "Potwierdzenie edycji",
@@ -240,7 +256,7 @@ namespace PodkladexApp
                 osoba.Imie = textBox_imie.Text.Trim();
                 osoba.Nazwisko = textBox_nazwisko.Text.Trim();
                 osoba.NrTelefonu = textBox_numertelefonu.Text.Trim();
-                osoba.AdresEMail = textBox_email.Text.Trim();
+                osoba.AdresEMail = email;
                 osoba.Miejscowosc = textBox_miejscowosc.Text.Trim();
                 osoba.KodPocztowy = textBox_kodpocztowy.Text.Trim();
                 osoba.Ulica = textBox_ulica.Text.Trim();
@@ -497,6 +513,18 @@ namespace PodkladexApp
                     MessageBox.Show(
                         "Osoba o podanym numerze PESEL już istnieje w bazie.",
                         "Duplikat PESEL",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return;
+                }
+
+                bool czyIstniejeEmail = db.Osoba.Any(o => o.AdresEMail.ToLower() == email.ToLower());
+
+                if (czyIstniejeEmail)
+                {
+                    MessageBox.Show(
+                        "Osoba o podanym adresie e-mail już istnieje w bazie.",
+                        "Duplikat e-mail",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
                     return;
