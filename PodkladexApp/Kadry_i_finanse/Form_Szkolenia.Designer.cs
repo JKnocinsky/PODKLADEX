@@ -30,11 +30,13 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             comboBox_filtrPracownik = new ComboBox();
             label1 = new Label();
             checkBox_tylkoNiewazne = new CheckBox();
             dataGridView_szkolenia = new DataGridView();
             panel1 = new Panel();
+            button_zatwierdzZmiany = new Button();
             button_dodajSzkolenie = new Button();
             textBox_cenaSzkolenia = new TextBox();
             dateTimePicker_dataSzkolenia = new DateTimePicker();
@@ -89,22 +91,31 @@
             // 
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 238);
             dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridView_szkolenia.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView_szkolenia.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridView_szkolenia.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView_szkolenia.Location = new Point(17, 55);
             dataGridView_szkolenia.Name = "dataGridView_szkolenia";
-            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            dataGridView_szkolenia.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dataGridView_szkolenia.RowsDefaultCellStyle = dataGridViewCellStyle3;
             dataGridView_szkolenia.Size = new Size(1390, 409);
             dataGridView_szkolenia.TabIndex = 3;
             // 
             // panel1
             // 
+            panel1.Controls.Add(button_zatwierdzZmiany);
             panel1.Controls.Add(button_dodajSzkolenie);
             panel1.Controls.Add(textBox_cenaSzkolenia);
             panel1.Controls.Add(dateTimePicker_dataSzkolenia);
@@ -120,6 +131,17 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(852, 283);
             panel1.TabIndex = 4;
+            // 
+            // button_zatwierdzZmiany
+            // 
+            button_zatwierdzZmiany.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            button_zatwierdzZmiany.Location = new Point(338, 230);
+            button_zatwierdzZmiany.Name = "button_zatwierdzZmiany";
+            button_zatwierdzZmiany.Size = new Size(176, 42);
+            button_zatwierdzZmiany.TabIndex = 5;
+            button_zatwierdzZmiany.Text = "Zatwierdź zmiany";
+            button_zatwierdzZmiany.UseVisualStyleBackColor = true;
+            button_zatwierdzZmiany.Click += button_zatwierdzZmiany_Click;
             // 
             // button_dodajSzkolenie
             // 
@@ -186,9 +208,9 @@
             label4.Font = new Font("Segoe UI", 14.25F);
             label4.Location = new Point(34, 101);
             label4.Name = "label4";
-            label4.Size = new Size(157, 25);
+            label4.Size = new Size(205, 25);
             label4.TabIndex = 1;
-            label4.Text = "Data rozpoczęcia";
+            label4.Text = "Data odbycia szkolenia";
             // 
             // label3
             // 
@@ -196,9 +218,9 @@
             label3.Font = new Font("Segoe UI", 14.25F);
             label3.Location = new Point(34, 59);
             label3.Name = "label3";
-            label3.Size = new Size(164, 25);
+            label3.Size = new Size(151, 25);
             label3.TabIndex = 1;
-            label3.Text = "Rodzaj zwolnienia";
+            label3.Text = "Rodzaj szkolenia";
             // 
             // label2
             // 
@@ -282,5 +304,6 @@
         private Label label3;
         private Label label2;
         private Label label6;
+        private Button button_zatwierdzZmiany;
     }
 }

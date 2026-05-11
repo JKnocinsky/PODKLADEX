@@ -17,6 +17,10 @@ namespace PodkladexApp
         private bool ustawianieAutomatyczneDaty = false;
         private bool recznaZmianaDatyWaznosci = false;
 
+        private int? edytowanyIdPracownik = null;
+        private int? edytowanyIdSzkolenia = null;
+        private DateOnly? edytowanaDataSzkolenia = null;
+
         private List<PracownikComboBoxItem> listaPracownikow = new List<PracownikComboBoxItem>();
 
         private class PracownikComboBoxItem
@@ -31,17 +35,24 @@ namespace PodkladexApp
         {
             InitializeComponent();
             db = new PodkladexContext();
+
             panel1.Visible = false;
+
+            UkryjPrzyciskZatwierdzZmiany();
         }
 
         private void Form_Szkolenia_Load(object sender, EventArgs e)
         {
             KonfigurujDataGridView();
+
             ZaladujPracownikow();
             ZaladujPracownikowDoComboBox();
             ZaladujPracownikowDoFiltra();
             ZaladujSzkoleniaDoComboBox();
+
             UstawDomyslneDane();
+            UstawTrybDodawania();
+
             ZaladujSzkoleniaPracownikow();
         }
 
@@ -57,6 +68,30 @@ namespace PodkladexApp
             dataGridView_szkolenia.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             dataGridView_szkolenia.Columns.Clear();
+
+            dataGridView_szkolenia.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "IdPracownik",
+                HeaderText = "IdPracownik",
+                DataPropertyName = "IdPracownik",
+                Visible = false
+            });
+
+            dataGridView_szkolenia.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "IdSzkolenia",
+                HeaderText = "IdSzkolenia",
+                DataPropertyName = "IdSzkolenia",
+                Visible = false
+            });
+
+            dataGridView_szkolenia.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "DataSzkoleniaKey",
+                HeaderText = "DataSzkoleniaKey",
+                DataPropertyName = "DataSzkoleniaKey",
+                Visible = false
+            });
 
             dataGridView_szkolenia.Columns.Add(new DataGridViewTextBoxColumn
             {
@@ -113,6 +148,9 @@ namespace PodkladexApp
                 DataPropertyName = "CenaSzkolenia",
                 FillWeight = 70
             });
+
+            dataGridView_szkolenia.CellDoubleClick -= dataGridView_szkolenia_CellDoubleClick;
+            dataGridView_szkolenia.CellDoubleClick += dataGridView_szkolenia_CellDoubleClick;
         }
 
         private void ZaladujSzkoleniaPracownikow()
@@ -121,7 +159,7 @@ namespace PodkladexApp
             {
                 var zapytanie = db.PracownikSzkolenia
                     .Include(ps => ps.IdPracownikNavigation)
-                        .ThenInclude(p => p.IdOsobaNavigation)
+                    .ThenInclude(p => p.IdOsobaNavigation)
                     .Include(ps => ps.IdSzkoleniaNavigation)
                     .AsQueryable();
 
@@ -138,7 +176,10 @@ namespace PodkladexApp
                 if (checkBox_tylkoNiewazne.Checked)
                 {
                     DateOnly dzis = DateOnly.FromDateTime(DateTime.Today);
-                    zapytanie = zapytanie.Where(ps => ps.DataWaznosci != null && ps.DataWaznosci < dzis);
+
+                    zapytanie = zapytanie.Where(ps =>
+                        ps.DataWaznosci != null &&
+                        ps.DataWaznosci < dzis);
                 }
 
                 var daneZBazy = zapytanie
@@ -150,18 +191,28 @@ namespace PodkladexApp
                 var lista = daneZBazy
                     .Select(ps => new
                     {
+                        IdPracownik = ps.IdPracownik,
+                        IdSzkolenia = ps.IdSzkolenia,
+                        DataSzkoleniaKey = ps.DataSzkolenia.ToString("yyyy-MM-dd"),
+
                         Pracownik = ps.IdPracownikNavigation.IdOsobaNavigation.Imie + " " +
                                     ps.IdPracownikNavigation.IdOsobaNavigation.Nazwisko,
+
                         Szkolenie = ps.IdSzkoleniaNavigation.Nazwa,
+
                         CzyObowiazkowe = ps.IdSzkoleniaNavigation.CzyObowiazkowe ?? false,
+
                         WaznoscDni = ps.IdSzkoleniaNavigation.Waznosc.HasValue
                             ? ps.IdSzkoleniaNavigation.Waznosc.Value.ToString()
                             : "Bezterminowe",
+
                         DataSzkolenia = ps.DataSzkolenia.ToString("dd.MM.yyyy"),
+
                         DataWaznosci = ps.DataWaznosci.HasValue
                             ? ps.DataWaznosci.Value.ToString("dd.MM.yyyy")
                             : "Bezterminowe",
-                        CenaSzkolenia = ps.CenaSzkolenia.ToString("0.00")
+
+                        CenaSzkolenia = ps.CenaSzkolenia.ToString("0.00", CultureInfo.GetCultureInfo("pl-PL"))
                     })
                     .ToList();
 
@@ -230,6 +281,7 @@ namespace PodkladexApp
             comboBox_pracownik.DisplayMember = "DanePracownika";
             comboBox_pracownik.ValueMember = "IdPracownik";
             comboBox_pracownik.DataSource = listaDoUstawienia;
+
             comboBox_pracownik.SelectedIndex = -1;
             comboBox_pracownik.Text = tekst;
             comboBox_pracownik.SelectionStart = comboBox_pracownik.Text.Length;
@@ -250,12 +302,20 @@ namespace PodkladexApp
 
             if (dodajWszystkich)
             {
-                listaDoFiltra.Add(new { IdPracownik = 0, DanePracownika = "Wszyscy pracownicy" });
+                listaDoFiltra.Add(new
+                {
+                    IdPracownik = 0,
+                    DanePracownika = "Wszyscy pracownicy"
+                });
             }
 
             if (pracownicy.Count == 0)
             {
-                listaDoFiltra.Add(new { IdPracownik = -1, DanePracownika = "Brak wyników" });
+                listaDoFiltra.Add(new
+                {
+                    IdPracownik = -1,
+                    DanePracownika = "Brak wyników"
+                });
             }
             else
             {
@@ -339,12 +399,64 @@ namespace PodkladexApp
             ustawianieAutomatyczneDaty = false;
         }
 
+        private void UkryjPrzyciskZatwierdzZmiany()
+        {
+            Control[] znalezioneKontrolki = Controls.Find("button_zatwierdzZmiany", true);
+
+            if (znalezioneKontrolki.Length > 0)
+            {
+                znalezioneKontrolki[0].Visible = false;
+                znalezioneKontrolki[0].Enabled = false;
+            }
+        }
+
+        private void PokazPrzyciskZatwierdzZmiany()
+        {
+            Control[] znalezioneKontrolki = Controls.Find("button_zatwierdzZmiany", true);
+
+            if (znalezioneKontrolki.Length > 0)
+            {
+                znalezioneKontrolki[0].Visible = true;
+                znalezioneKontrolki[0].Enabled = true;
+            }
+        }
+
+        private void UstawTrybDodawania()
+        {
+            edytowanyIdPracownik = null;
+            edytowanyIdSzkolenia = null;
+            edytowanaDataSzkolenia = null;
+
+            comboBox_pracownik.Enabled = true;
+            comboBox_szkolenie.Enabled = true;
+            dateTimePicker_dataSzkolenia.Enabled = true;
+
+            button_dodajSzkolenie.Enabled = true;
+            button_dodajSzkolenie.Visible = true;
+
+            UkryjPrzyciskZatwierdzZmiany();
+        }
+
+        private void UstawTrybEdycji()
+        {
+            comboBox_pracownik.Enabled = false;
+            comboBox_szkolenie.Enabled = true;
+            dateTimePicker_dataSzkolenia.Enabled = true;
+
+            button_dodajSzkolenie.Enabled = false;
+            button_dodajSzkolenie.Visible = true;
+
+            PokazPrzyciskZatwierdzZmiany();
+        }
+
         private void WyczyscPanelDodawania()
         {
             comboBox_pracownik.SelectedIndex = -1;
             comboBox_pracownik.Text = "";
             comboBox_szkolenie.SelectedIndex = -1;
+
             UstawDomyslneDane();
+            UstawTrybDodawania();
         }
 
         private void UstawDateWaznosciAutomatycznie()
@@ -355,6 +467,7 @@ namespace PodkladexApp
             try
             {
                 int idSzkolenia = Convert.ToInt32(comboBox_szkolenie.SelectedValue);
+
                 var szkolenie = db.Szkolenie.FirstOrDefault(s => s.IdSzkolenia == idSzkolenia);
 
                 if (szkolenie == null)
@@ -363,8 +476,7 @@ namespace PodkladexApp
                 if (szkolenie.Waznosc.HasValue && szkolenie.Waznosc.Value > 0)
                 {
                     ustawianieAutomatyczneDaty = true;
-                    dateTimePicker_dataWaznosci.Value =
-                        dateTimePicker_dataSzkolenia.Value.Date.AddDays(szkolenie.Waznosc.Value);
+                    dateTimePicker_dataWaznosci.Value = dateTimePicker_dataSzkolenia.Value.Date.AddDays(szkolenie.Waznosc.Value);
                     ustawianieAutomatyczneDaty = false;
                 }
             }
@@ -374,24 +486,112 @@ namespace PodkladexApp
             }
         }
 
-        private void button_odswiez_Click(object sender, EventArgs e)
+        private bool SprobujPobracCeneSzkolenia(out decimal cena)
         {
-            ZaladujSzkoleniaPracownikow();
+            string tekstCeny = textBox_cenaSzkolenia.Text.Trim().Replace('.', ',');
+
+            if (!decimal.TryParse(
+                tekstCeny,
+                NumberStyles.Number,
+                CultureInfo.GetCultureInfo("pl-PL"),
+                out cena))
+            {
+                MessageBox.Show(
+                    "Podaj poprawną cenę szkolenia.",
+                    "Błędne dane",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return false;
+            }
+
+            if (cena < 0)
+            {
+                MessageBox.Show(
+                    "Cena szkolenia nie może być ujemna.",
+                    "Błędne dane",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return false;
+            }
+
+            return true;
         }
 
-        private void button_noweSzkolenie_Click(object sender, EventArgs e)
+        private DateOnly? UstalDateWaznosci(int idSzkolenia)
         {
-            panel1.Visible = !panel1.Visible;
+            DateOnly? dataWaznosci = DateOnly.FromDateTime(dateTimePicker_dataWaznosci.Value.Date);
 
-            if (panel1.Visible)
+            var szkolenie = db.Szkolenie.FirstOrDefault(s => s.IdSzkolenia == idSzkolenia);
+
+            if (szkolenie != null && (!szkolenie.Waznosc.HasValue || szkolenie.Waznosc.Value <= 0))
             {
-                WyczyscPanelDodawania();
+                dataWaznosci = null;
+            }
+
+            return dataWaznosci;
+        }
+
+        private void ZaladujSzkolenieDoEdycji(int idPracownik, int idSzkolenia, DateOnly dataSzkolenia)
+        {
+            try
+            {
+                var wpis = db.PracownikSzkolenia
+                    .FirstOrDefault(ps =>
+                        ps.IdPracownik == idPracownik &&
+                        ps.IdSzkolenia == idSzkolenia &&
+                        ps.DataSzkolenia == dataSzkolenia);
+
+                if (wpis == null)
+                {
+                    MessageBox.Show(
+                        "Nie znaleziono wybranego szkolenia.",
+                        "Błąd",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+
+                    return;
+                }
+
+                panel1.Visible = true;
+
                 ZaladujPracownikowDoComboBox();
                 ZaladujSzkoleniaDoComboBox();
+
+                edytowanyIdPracownik = wpis.IdPracownik;
+                edytowanyIdSzkolenia = wpis.IdSzkolenia;
+                edytowanaDataSzkolenia = wpis.DataSzkolenia;
+
+                comboBox_pracownik.SelectedValue = wpis.IdPracownik;
+                comboBox_szkolenie.SelectedValue = wpis.IdSzkolenia;
+
+                dateTimePicker_dataSzkolenia.Value = wpis.DataSzkolenia.ToDateTime(TimeOnly.MinValue);
+
+                if (wpis.DataWaznosci.HasValue)
+                {
+                    dateTimePicker_dataWaznosci.Value = wpis.DataWaznosci.Value.ToDateTime(TimeOnly.MinValue);
+                }
+                else
+                {
+                    dateTimePicker_dataWaznosci.Value = wpis.DataSzkolenia.ToDateTime(TimeOnly.MinValue);
+                }
+
+                textBox_cenaSzkolenia.Text = wpis.CenaSzkolenia.ToString("0.00", CultureInfo.GetCultureInfo("pl-PL"));
+
+                UstawTrybEdycji();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Błąd podczas ładowania szkolenia do edycji:\n" + ex.Message,
+                    "Błąd",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
-        private void button_dodajSzkolenie_Click(object sender, EventArgs e)
+        private void DodajSzkolenie()
         {
             if (comboBox_pracownik.SelectedValue == null || Convert.ToInt32(comboBox_pracownik.SelectedValue) <= 0)
             {
@@ -400,6 +600,7 @@ namespace PodkladexApp
                     "Brak danych",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
+
                 return;
             }
 
@@ -410,45 +611,20 @@ namespace PodkladexApp
                     "Brak danych",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
+
                 return;
             }
 
-            if (!decimal.TryParse(
-                    textBox_cenaSzkolenia.Text.Trim(),
-                    NumberStyles.Number,
-                    CultureInfo.InvariantCulture,
-                    out decimal cena)
-                &&
-                !decimal.TryParse(
-                    textBox_cenaSzkolenia.Text.Trim(),
-                    NumberStyles.Number,
-                    CultureInfo.GetCultureInfo("pl-PL"),
-                    out cena))
-            {
-                MessageBox.Show(
-                    "Podaj poprawną cenę szkolenia.",
-                    "Błędne dane",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
+            if (!SprobujPobracCeneSzkolenia(out decimal cena))
                 return;
-            }
-
-            if (cena < 0)
-            {
-                MessageBox.Show(
-                    "Cena szkolenia nie może być ujemna.",
-                    "Błędne dane",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-                return;
-            }
 
             try
             {
                 int idPracownik = Convert.ToInt32(comboBox_pracownik.SelectedValue);
                 int idSzkolenia = Convert.ToInt32(comboBox_szkolenie.SelectedValue);
+
                 DateOnly dataSzkolenia = DateOnly.FromDateTime(dateTimePicker_dataSzkolenia.Value.Date);
-                DateOnly? dataWaznosci = DateOnly.FromDateTime(dateTimePicker_dataWaznosci.Value.Date);
+                DateOnly? dataWaznosci = UstalDateWaznosci(idSzkolenia);
 
                 bool czyIstnieje = db.PracownikSzkolenia.Any(ps =>
                     ps.IdPracownik == idPracownik &&
@@ -462,13 +638,8 @@ namespace PodkladexApp
                         "Duplikat",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
-                    return;
-                }
 
-                var szkolenie = db.Szkolenie.FirstOrDefault(s => s.IdSzkolenia == idSzkolenia);
-                if (szkolenie != null && (!szkolenie.Waznosc.HasValue || szkolenie.Waznosc.Value <= 0))
-                {
-                    dataWaznosci = null;
+                    return;
                 }
 
                 PracownikSzkolenia nowyWpis = new PracownikSzkolenia
@@ -503,6 +674,198 @@ namespace PodkladexApp
             }
         }
 
+        private void ZapiszZmianySzkolenia()
+        {
+            if (edytowanyIdPracownik == null ||
+                edytowanyIdSzkolenia == null ||
+                edytowanaDataSzkolenia == null)
+            {
+                MessageBox.Show(
+                    "Nie wybrano szkolenia do edycji.",
+                    "Brak danych",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            if (comboBox_szkolenie.SelectedValue == null)
+            {
+                MessageBox.Show(
+                    "Wybierz szkolenie.",
+                    "Brak danych",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            if (!SprobujPobracCeneSzkolenia(out decimal cena))
+                return;
+
+            try
+            {
+                int nowyIdPracownik = edytowanyIdPracownik.Value;
+                int nowyIdSzkolenia = Convert.ToInt32(comboBox_szkolenie.SelectedValue);
+
+                DateOnly nowaDataSzkolenia = DateOnly.FromDateTime(dateTimePicker_dataSzkolenia.Value.Date);
+                DateOnly? nowaDataWaznosci = UstalDateWaznosci(nowyIdSzkolenia);
+
+                var staryWpis = db.PracownikSzkolenia.FirstOrDefault(ps =>
+                    ps.IdPracownik == edytowanyIdPracownik.Value &&
+                    ps.IdSzkolenia == edytowanyIdSzkolenia.Value &&
+                    ps.DataSzkolenia == edytowanaDataSzkolenia.Value);
+
+                if (staryWpis == null)
+                {
+                    MessageBox.Show(
+                        "Nie znaleziono szkolenia w bazie.",
+                        "Błąd",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+
+                    return;
+                }
+
+                bool zmienionoKlucz =
+                    nowyIdPracownik != edytowanyIdPracownik.Value ||
+                    nowyIdSzkolenia != edytowanyIdSzkolenia.Value ||
+                    nowaDataSzkolenia != edytowanaDataSzkolenia.Value;
+
+                if (zmienionoKlucz)
+                {
+                    bool duplikat = db.PracownikSzkolenia.Any(ps =>
+                        ps.IdPracownik == nowyIdPracownik &&
+                        ps.IdSzkolenia == nowyIdSzkolenia &&
+                        ps.DataSzkolenia == nowaDataSzkolenia);
+
+                    if (duplikat)
+                    {
+                        MessageBox.Show(
+                            "Dla tego pracownika istnieje już wpis tego samego szkolenia z tą samą datą szkolenia.",
+                            "Duplikat",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+
+                        return;
+                    }
+
+                    db.PracownikSzkolenia.Remove(staryWpis);
+
+                    var nowyWpis = new PracownikSzkolenia
+                    {
+                        IdPracownik = nowyIdPracownik,
+                        IdSzkolenia = nowyIdSzkolenia,
+                        DataSzkolenia = nowaDataSzkolenia,
+                        DataWaznosci = nowaDataWaznosci,
+                        CenaSzkolenia = cena
+                    };
+
+                    db.PracownikSzkolenia.Add(nowyWpis);
+                }
+                else
+                {
+                    staryWpis.DataWaznosci = nowaDataWaznosci;
+                    staryWpis.CenaSzkolenia = cena;
+                }
+
+                db.SaveChanges();
+
+                MessageBox.Show(
+                    "Zmiany szkolenia zostały zapisane.",
+                    "Sukces",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                WyczyscPanelDodawania();
+                panel1.Visible = false;
+                ZaladujSzkoleniaPracownikow();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Błąd podczas zapisywania zmian szkolenia:\n" + ex.Message,
+                    "Błąd",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        private void button_odswiez_Click(object sender, EventArgs e)
+        {
+            ZaladujSzkoleniaPracownikow();
+        }
+
+        private void button_noweSzkolenie_Click(object sender, EventArgs e)
+        {
+            panel1.Visible = !panel1.Visible;
+
+            if (panel1.Visible)
+            {
+                WyczyscPanelDodawania();
+                ZaladujPracownikowDoComboBox();
+                ZaladujSzkoleniaDoComboBox();
+                UstawTrybDodawania();
+            }
+            else
+            {
+                WyczyscPanelDodawania();
+                UstawTrybDodawania();
+            }
+        }
+
+        private void button_dodajSzkolenie_Click(object sender, EventArgs e)
+        {
+            DodajSzkolenie();
+        }
+
+        private void button_zatwierdzZmiany_Click(object sender, EventArgs e)
+        {
+            ZapiszZmianySzkolenia();
+        }
+
+        private void dataGridView_szkolenia_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            try
+            {
+                var row = dataGridView_szkolenia.Rows[e.RowIndex];
+
+                int idPracownik = Convert.ToInt32(row.Cells["IdPracownik"].Value);
+                int idSzkolenia = Convert.ToInt32(row.Cells["IdSzkolenia"].Value);
+
+                string dataKey = row.Cells["DataSzkoleniaKey"].Value?.ToString();
+
+                if (!DateOnly.TryParseExact(
+                    dataKey,
+                    "yyyy-MM-dd",
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None,
+                    out DateOnly dataSzkolenia))
+                {
+                    MessageBox.Show(
+                        "Nie udało się odczytać daty szkolenia.",
+                        "Błąd",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+
+                    return;
+                }
+
+                ZaladujSzkolenieDoEdycji(idPracownik, idSzkolenia, dataSzkolenia);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Błąd podczas wyboru szkolenia:\n" + ex.Message,
+                    "Błąd",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
         private void comboBox_filtrPracownik_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ladowanieFiltrow)
@@ -512,6 +875,7 @@ namespace PodkladexApp
                 return;
 
             int id = Convert.ToInt32(comboBox_filtrPracownik.SelectedValue);
+
             if (id == -1)
                 return;
 
@@ -583,6 +947,7 @@ namespace PodkladexApp
                 return;
 
             int id = Convert.ToInt32(comboBox_pracownik.SelectedValue);
+
             if (id == -1)
                 return;
         }
