@@ -1,3 +1,5 @@
+USE Podkladex
+
 IF OBJECT_ID('dbo.Bilans_Miesieczny', 'V') IS NOT NULL
     DROP VIEW dbo.Bilans_Miesieczny;
 GO
