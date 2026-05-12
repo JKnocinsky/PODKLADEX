@@ -689,16 +689,16 @@ INSERT INTO Produkcja (ID_pracownik, RBH, Wyprodukowano, Odpady, ID_zadanieP, ID
 GO
 
 INSERT INTO Szczegoly_zamowienia (ID_zamowienie, ID_produkt, Ilosc, ID_material, Uwagi, Cena) VALUES 
-(1, 4, 50.00, 3, 'Priorytet', 0.15),
-(2, 4, 10.00, 1, 'Standard', 0.45),
-(3, 3, 40.00, 3, 'Duża partia', 0.20),
-(4, 2, 20.00, 3, 'Pilne', 1.25),
-(5, 1, 30.00, 2, 'Stała współpraca', 0.85),
-(6, 4, 15.00, 3, 'Priorytet', 0.15),
-(7, 4, 25.00, 2, 'Powtórzenie zlecenia', 0.60),
-(8, 3, 10.00, 3, 'Partia testowa', 0.25),
-(9, 2, 15.00, 1, 'Standard', 1.30),
-(10, 1, 30.00, 3, 'Odbiór etapowy', 0.90);
+(1, 4, 50.00, 3, 'Priorytet', 4),
+(2, 4, 10.00, 1, 'Standard', 5),
+(3, 3, 40.00, 3, 'Duża partia', 5),
+(4, 2, 20.00, 3, 'Pilne', 4),
+(5, 1, 30.00, 2, 'Stała współpraca', 5),
+(6, 4, 15.00, 3, 'Priorytet', 3),
+(7, 4, 25.00, 2, 'Powtórzenie zlecenia', 5),
+(8, 3, 10.00, 3, 'Partia testowa', 5),
+(9, 2, 15.00, 1, 'Standard', 5),
+(10, 1, 30.00, 3, 'Odbiór etapowy', 3);
 GO
 
 -- ==========================================
