@@ -28,6 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             comboBox_KontMatPrac = new ComboBox();
             textBox_KontMatRBH = new TextBox();
             label_KontMatPrac = new Label();
@@ -65,17 +69,19 @@
             // 
             // comboBox_KontMatPrac
             // 
+            comboBox_KontMatPrac.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox_KontMatPrac.FormattingEnabled = true;
-            comboBox_KontMatPrac.Location = new Point(526, 207);
+            comboBox_KontMatPrac.Location = new Point(527, 199);
             comboBox_KontMatPrac.Name = "comboBox_KontMatPrac";
-            comboBox_KontMatPrac.Size = new Size(371, 23);
+            comboBox_KontMatPrac.Size = new Size(427, 33);
             comboBox_KontMatPrac.TabIndex = 0;
             // 
             // textBox_KontMatRBH
             // 
-            textBox_KontMatRBH.Location = new Point(422, 310);
+            textBox_KontMatRBH.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            textBox_KontMatRBH.Location = new Point(422, 301);
             textBox_KontMatRBH.Name = "textBox_KontMatRBH";
-            textBox_KontMatRBH.Size = new Size(100, 23);
+            textBox_KontMatRBH.Size = new Size(100, 33);
             textBox_KontMatRBH.TabIndex = 1;
             // 
             // label_KontMatPrac
@@ -140,25 +146,28 @@
             // 
             // comboBox_KontMatMaterial
             // 
+            comboBox_KontMatMaterial.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox_KontMatMaterial.FormattingEnabled = true;
-            comboBox_KontMatMaterial.Location = new Point(526, 303);
+            comboBox_KontMatMaterial.Location = new Point(526, 295);
             comboBox_KontMatMaterial.Name = "comboBox_KontMatMaterial";
-            comboBox_KontMatMaterial.Size = new Size(371, 23);
+            comboBox_KontMatMaterial.Size = new Size(428, 33);
             comboBox_KontMatMaterial.TabIndex = 8;
             // 
             // comboBox_KontMatZadP
             // 
+            comboBox_KontMatZadP.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox_KontMatZadP.FormattingEnabled = true;
-            comboBox_KontMatZadP.Location = new Point(526, 255);
+            comboBox_KontMatZadP.Location = new Point(526, 247);
             comboBox_KontMatZadP.Name = "comboBox_KontMatZadP";
-            comboBox_KontMatZadP.Size = new Size(371, 23);
+            comboBox_KontMatZadP.Size = new Size(428, 33);
             comboBox_KontMatZadP.TabIndex = 9;
             // 
             // textBox_KontMatOdpady
             // 
-            textBox_KontMatOdpady.Location = new Point(200, 310);
+            textBox_KontMatOdpady.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            textBox_KontMatOdpady.Location = new Point(200, 301);
             textBox_KontMatOdpady.Name = "textBox_KontMatOdpady";
-            textBox_KontMatOdpady.Size = new Size(100, 23);
+            textBox_KontMatOdpady.Size = new Size(116, 33);
             textBox_KontMatOdpady.TabIndex = 10;
             // 
             // btn_DodajKontMat
@@ -205,7 +214,23 @@
             // 
             // DGV_KontMatKontrole
             // 
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            DGV_KontMatKontrole.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             DGV_KontMatKontrole.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            DGV_KontMatKontrole.DefaultCellStyle = dataGridViewCellStyle2;
             DGV_KontMatKontrole.Location = new Point(239, 72);
             DGV_KontMatKontrole.Name = "DGV_KontMatKontrole";
             DGV_KontMatKontrole.Size = new Size(754, 120);
@@ -223,7 +248,23 @@
             // 
             // DGV_PomiaryMat
             // 
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            DGV_PomiaryMat.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             DGV_PomiaryMat.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Window;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            DGV_PomiaryMat.DefaultCellStyle = dataGridViewCellStyle4;
             DGV_PomiaryMat.Location = new Point(44, 133);
             DGV_PomiaryMat.Name = "DGV_PomiaryMat";
             DGV_PomiaryMat.Size = new Size(754, 150);
@@ -297,19 +338,21 @@
             // 
             // textBox_PomiarMatWartosc
             // 
-            textBox_PomiarMatWartosc.Location = new Point(630, 18);
+            textBox_PomiarMatWartosc.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            textBox_PomiarMatWartosc.Location = new Point(628, 10);
             textBox_PomiarMatWartosc.Margin = new Padding(3, 2, 3, 2);
             textBox_PomiarMatWartosc.Name = "textBox_PomiarMatWartosc";
-            textBox_PomiarMatWartosc.Size = new Size(110, 23);
+            textBox_PomiarMatWartosc.Size = new Size(110, 33);
             textBox_PomiarMatWartosc.TabIndex = 25;
             // 
             // comboBox_PomiarMatWlasc
             // 
+            comboBox_PomiarMatWlasc.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox_PomiarMatWlasc.FormattingEnabled = true;
-            comboBox_PomiarMatWlasc.Location = new Point(186, 18);
+            comboBox_PomiarMatWlasc.Location = new Point(186, 10);
             comboBox_PomiarMatWlasc.Margin = new Padding(3, 2, 3, 2);
             comboBox_PomiarMatWlasc.Name = "comboBox_PomiarMatWlasc";
-            comboBox_PomiarMatWlasc.Size = new Size(178, 23);
+            comboBox_PomiarMatWlasc.Size = new Size(257, 33);
             comboBox_PomiarMatWlasc.TabIndex = 24;
             // 
             // label_PomiarMatWartosc

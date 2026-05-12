@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             label_Tytul = new Label();
             label_FiltrMaszyna = new Label();
             label_FiltrPracownik = new Label();
@@ -73,24 +75,26 @@
             // 
             // comboBox_FiltrMaszyna
             // 
+            comboBox_FiltrMaszyna.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox_FiltrMaszyna.FormattingEnabled = true;
-            comboBox_FiltrMaszyna.Location = new Point(231, 58);
+            comboBox_FiltrMaszyna.Location = new Point(231, 48);
             comboBox_FiltrMaszyna.Name = "comboBox_FiltrMaszyna";
-            comboBox_FiltrMaszyna.Size = new Size(180, 23);
+            comboBox_FiltrMaszyna.Size = new Size(210, 33);
             comboBox_FiltrMaszyna.TabIndex = 3;
             // 
             // comboBox_FiltrPracownik
             // 
+            comboBox_FiltrPracownik.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox_FiltrPracownik.FormattingEnabled = true;
-            comboBox_FiltrPracownik.Location = new Point(231, 102);
+            comboBox_FiltrPracownik.Location = new Point(231, 92);
             comboBox_FiltrPracownik.Name = "comboBox_FiltrPracownik";
-            comboBox_FiltrPracownik.Size = new Size(180, 23);
+            comboBox_FiltrPracownik.Size = new Size(210, 33);
             comboBox_FiltrPracownik.TabIndex = 4;
             // 
             // btn_WyczyscFiltry
             // 
             btn_WyczyscFiltry.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_WyczyscFiltry.Location = new Point(458, 56);
+            btn_WyczyscFiltry.Location = new Point(480, 56);
             btn_WyczyscFiltry.Name = "btn_WyczyscFiltry";
             btn_WyczyscFiltry.Size = new Size(159, 66);
             btn_WyczyscFiltry.TabIndex = 5;
@@ -99,7 +103,23 @@
             // 
             // DGV_Efektywnosc
             // 
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            DGV_Efektywnosc.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             DGV_Efektywnosc.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            DGV_Efektywnosc.DefaultCellStyle = dataGridViewCellStyle2;
             DGV_Efektywnosc.Location = new Point(42, 146);
             DGV_Efektywnosc.Name = "DGV_Efektywnosc";
             DGV_Efektywnosc.Size = new Size(1017, 248);
@@ -109,7 +129,7 @@
             // 
             label_Sortowanie.AutoSize = true;
             label_Sortowanie.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_Sortowanie.Location = new Point(674, 58);
+            label_Sortowanie.Location = new Point(688, 77);
             label_Sortowanie.Name = "label_Sortowanie";
             label_Sortowanie.Size = new Size(107, 25);
             label_Sortowanie.TabIndex = 7;
@@ -117,10 +137,11 @@
             // 
             // comboBox_Sortowanie
             // 
+            comboBox_Sortowanie.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox_Sortowanie.FormattingEnabled = true;
-            comboBox_Sortowanie.Location = new Point(674, 86);
+            comboBox_Sortowanie.Location = new Point(801, 74);
             comboBox_Sortowanie.Name = "comboBox_Sortowanie";
-            comboBox_Sortowanie.Size = new Size(159, 23);
+            comboBox_Sortowanie.Size = new Size(258, 33);
             comboBox_Sortowanie.TabIndex = 8;
             // 
             // formsPlot_Efektywnosc

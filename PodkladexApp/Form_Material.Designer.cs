@@ -54,9 +54,10 @@
             // 
             // textBox_DodajNazweMat
             // 
-            textBox_DodajNazweMat.Location = new Point(410, 90);
+            textBox_DodajNazweMat.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            textBox_DodajNazweMat.Location = new Point(410, 80);
             textBox_DodajNazweMat.Name = "textBox_DodajNazweMat";
-            textBox_DodajNazweMat.Size = new Size(346, 23);
+            textBox_DodajNazweMat.Size = new Size(346, 33);
             textBox_DodajNazweMat.TabIndex = 1;
             // 
             // label_OpisMat
@@ -71,9 +72,10 @@
             // 
             // textBox_DodajOpisMat
             // 
-            textBox_DodajOpisMat.Location = new Point(410, 140);
+            textBox_DodajOpisMat.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            textBox_DodajOpisMat.Location = new Point(410, 130);
             textBox_DodajOpisMat.Name = "textBox_DodajOpisMat";
-            textBox_DodajOpisMat.Size = new Size(346, 23);
+            textBox_DodajOpisMat.Size = new Size(346, 33);
             textBox_DodajOpisMat.TabIndex = 3;
             // 
             // btn_DodajMaterial
@@ -108,10 +110,11 @@
             // 
             // comboBox_MaterialLista
             // 
+            comboBox_MaterialLista.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox_MaterialLista.FormattingEnabled = true;
-            comboBox_MaterialLista.Location = new Point(410, 40);
+            comboBox_MaterialLista.Location = new Point(410, 30);
             comboBox_MaterialLista.Name = "comboBox_MaterialLista";
-            comboBox_MaterialLista.Size = new Size(346, 23);
+            comboBox_MaterialLista.Size = new Size(346, 33);
             comboBox_MaterialLista.TabIndex = 7;
             // 
             // label_DodajUsun
@@ -147,11 +150,12 @@
             // 
             // comboBox_MaterialRodzaj
             // 
+            comboBox_MaterialRodzaj.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox_MaterialRodzaj.FormattingEnabled = true;
-            comboBox_MaterialRodzaj.Location = new Point(410, 190);
+            comboBox_MaterialRodzaj.Location = new Point(410, 180);
             comboBox_MaterialRodzaj.Margin = new Padding(3, 2, 3, 2);
             comboBox_MaterialRodzaj.Name = "comboBox_MaterialRodzaj";
-            comboBox_MaterialRodzaj.Size = new Size(346, 23);
+            comboBox_MaterialRodzaj.Size = new Size(346, 33);
             comboBox_MaterialRodzaj.TabIndex = 11;
             // 
             // Form_Material

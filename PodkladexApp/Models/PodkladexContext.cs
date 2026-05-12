@@ -411,7 +411,7 @@ public partial class PodkladexContext : DbContext
             entity.Property(e => e.IdMaterial).HasColumnName("ID_material");
             entity.Property(e => e.IdPracownik).HasColumnName("ID_pracownik");
             entity.Property(e => e.IdZadanieP).HasColumnName("ID_zadanieP");
-            entity.Property(e => e.Odpady).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.Odpady).HasColumnType("decimal(10, 5)");
             entity.Property(e => e.Rbh)
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("RBH");
@@ -441,7 +441,7 @@ public partial class PodkladexContext : DbContext
             entity.Property(e => e.IdKontrolaProd).HasColumnName("ID_Kontrola_prod");
             entity.Property(e => e.IdPracownik).HasColumnName("ID_pracownik");
             entity.Property(e => e.IdZadanieP).HasColumnName("ID_zadanieP");
-            entity.Property(e => e.Odpady).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.Odpady).HasColumnType("decimal(10, 5)");
             entity.Property(e => e.Rbh)
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("RBH");

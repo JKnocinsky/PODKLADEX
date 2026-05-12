@@ -342,7 +342,7 @@ CREATE TABLE Kontrola_mat (
     ID_pracownik INT NOT NULL FOREIGN KEY REFERENCES Pracownik(ID_pracownik),
     RBH DECIMAL(10,2) NULL,
     Zatwierdzone BIT NOT NULL,
-    Odpady DECIMAL(10,2) NULL,
+    Odpady DECIMAL(10,5) NULL,
     ID_zadanieP INT NOT NULL FOREIGN KEY REFERENCES Zadanie_produkcyjne(ID_zadanieP),
     ID_material INT NOT NULL FOREIGN KEY REFERENCES Material(ID_material)
 );
@@ -353,7 +353,7 @@ CREATE TABLE Kontrola_prod (
     ID_pracownik INT NOT NULL FOREIGN KEY REFERENCES Pracownik(ID_pracownik),
     RBH DECIMAL(10,2) NULL,
     Zatwierdzone BIT NOT NULL,
-    Odpady DECIMAL(10,2) NULL,
+    Odpady DECIMAL(10,5) NULL,
     ID_zadanieP INT NOT NULL FOREIGN KEY REFERENCES Zadanie_produkcyjne(ID_zadanieP)
 );
 GO
@@ -539,7 +539,7 @@ SELECT
     P.RBH,
     Prod.Nazwa AS Nazwa_Produktu,
     ROUND((P.RBH * NP.Ilosc / NP.Czas), 2) AS Obliczona_Ilosc_Wyprodukowana,
-    ROUND((P.RBH * NP.Ilosc_mat / NP.Czas), 2) AS Obliczona_Ilosc_Odpadow 
+    ROUND((P.RBH * (NP.Ilosc_mat - NP.Ilosc) / NP.Czas), 2) AS Obliczona_Ilosc_Odpadow 
 FROM
     Zamowienie Z
 JOIN
@@ -561,32 +561,77 @@ GO
 -- ==========================================
 -- WIDOK ZAMÓWIEŃ, PRODUKTÓW I OBLICZEŃ
 -- ==========================================
-CREATE VIEW Widok_Produkcja_Planowanie_Obliczenia AS
-SELECT TOP 100 PERCENT
-    Z.ID_zamowienie,
-    Prod.Nazwa AS Nazwa_Produktu,
+CREATE OR ALTER VIEW Widok_Produkcja_Planowanie_Obliczenia AS
+
+WITH OdpadyCTE AS (
+    SELECT
+        zp.ID_zamowienie,
+        SUM(ISNULL(kp.Odpady, 0)) AS Suma_Odpady
+    FROM Zadanie_produkcyjne zp
+    LEFT JOIN Kontrola_prod kp
+        ON zp.ID_zadanieP = kp.ID_zadanieP
+    GROUP BY zp.ID_zamowienie
+),
+
+ProdukcjaCTE AS (
+    SELECT
+        zp.ID_zamowienie,
+        np.ID_produkt,
+
+        SUM(
+            ISNULL(p.RBH, 0) * np.Ilosc / NULLIF(np.Czas, 0)
+        ) AS Zaplanowana_Produkcja
+
+    FROM Zadanie_produkcyjne zp
+
+    LEFT JOIN Produkcja p
+        ON zp.ID_zadanieP = p.ID_zadanieP
+
+    LEFT JOIN Norma_prod np
+        ON p.ID_normyP = np.ID_normaP
+
+    GROUP BY
+        zp.ID_zamowienie,
+        np.ID_produkt
+)
+
+SELECT
+    z.ID_zamowienie,
+    prod.Nazwa AS Nazwa_Produktu,
+
     ROUND(sz.Ilosc, 2) AS Ilosc_zamowienia,
-    ROUND(SUM(ISNULL(km.Odpady, 0)), 2) AS Suma_Odpady,
-    ROUND(SUM(ISNULL(p.RBH * NP.Ilosc / NULLIF(NP.Czas, 0), 0)), 2) AS Zaplanowana_Produkcja,
-    ROUND(CASE WHEN SUM(ISNULL(sz.Ilosc, 0)) + SUM(ISNULL(km.Odpady, 0)) = 0
-        THEN NULL
-        ELSE SUM(ISNULL(p.RBH * NP.Ilosc / NULLIF(NP.Czas, 0), 0))
-            / (ISNULL(sz.Ilosc, 0) + SUM(ISNULL(km.Odpady, 0)))
-            * 100
-    END, 2) AS Procent_Zaplanowanej_Produkcji
-FROM Zamowienie Z
-JOIN Szczegoly_zamowienia sz ON Z.ID_zamowienie = sz.ID_zamowienie
-JOIN Produkt Prod ON sz.ID_produkt = Prod.ID_produkt
-LEFT JOIN Zadanie_produkcyjne ZP ON ZP.ID_zamowienie = Z.ID_zamowienie
-LEFT JOIN Kontrola_mat km ON ZP.ID_zadanieP = km.ID_zadanieP
-LEFT JOIN Norma_prod NP ON Prod.ID_produkt = NP.ID_produkt
-LEFT JOIN Produkcja p ON NP.ID_normaP = p.ID_normyP AND p.ID_zadanieP = ZP.ID_zadanieP
-GROUP BY
-    Z.ID_zamowienie,
-    Prod.Nazwa,
-	sz.Ilosc
-ORDER BY
-    Z.ID_zamowienie;
+
+    ROUND(ISNULL(o.Suma_Odpady, 0), 2) AS Suma_Odpady,
+
+    ROUND(ISNULL(pr.Zaplanowana_Produkcja, 0), 2)
+        AS Zaplanowana_Produkcja,
+
+    ROUND(
+        CASE
+            WHEN sz.Ilosc + ISNULL(o.Suma_Odpady, 0) = 0
+                THEN NULL
+            ELSE
+                ISNULL(pr.Zaplanowana_Produkcja, 0)
+                / (sz.Ilosc + ISNULL(o.Suma_Odpady, 0))
+                * 100
+        END,
+        2
+    ) AS Procent_Zaplanowanej_Produkcji
+
+FROM Zamowienie z
+
+JOIN Szczegoly_zamowienia sz
+    ON z.ID_zamowienie = sz.ID_zamowienie
+
+JOIN Produkt prod
+    ON sz.ID_produkt = prod.ID_produkt
+
+LEFT JOIN OdpadyCTE o
+    ON z.ID_zamowienie = o.ID_zamowienie
+
+LEFT JOIN ProdukcjaCTE pr
+    ON z.ID_zamowienie = pr.ID_zamowienie
+    AND prod.ID_produkt = pr.ID_produkt;
 GO
 
 -- ==========================================
@@ -597,25 +642,26 @@ SELECT TOP 100 PERCENT
     Z.ID_zamowienie,
     Prod.Nazwa AS Nazwa_Produktu,
     ROUND(sz.Ilosc, 2) AS Ilosc_zamowienia,
-    ROUND(SUM(ISNULL(km.Odpady, 0)), 2) AS Suma_Odpady,
+    ROUND(ISNULL(kp.Odpady, 0), 2) AS Suma_Odpady,
     ROUND(SUM(ISNULL(p.Wyprodukowano, 0)), 2) AS Suma_Wyprodukowano,
-    ROUND(CASE WHEN SUM(ISNULL(sz.Ilosc, 0)) + SUM(ISNULL(km.Odpady, 0)) = 0
+    ROUND(CASE WHEN SUM(ISNULL(sz.Ilosc, 0)) + SUM(ISNULL(kp.Odpady, 0)) = 0
         THEN NULL
         ELSE SUM(ISNULL(p.Wyprodukowano, 0))
-            / (ISNULL(sz.Ilosc, 0) + SUM(ISNULL(km.Odpady, 0)))
+            / (ISNULL(sz.Ilosc, 0) + SUM(ISNULL(kp.Odpady, 0)))
             * 100
     END, 2) AS Wartosc_Formula
 FROM Zamowienie Z
 JOIN Szczegoly_zamowienia sz ON Z.ID_zamowienie = sz.ID_zamowienie
 JOIN Produkt Prod ON sz.ID_produkt = Prod.ID_produkt
 LEFT JOIN Zadanie_produkcyjne ZP ON ZP.ID_zamowienie = Z.ID_zamowienie
-LEFT JOIN Kontrola_mat km ON ZP.ID_zadanieP = km.ID_zadanieP
+LEFT JOIN Kontrola_prod kp ON ZP.ID_zadanieP = kp.ID_zadanieP
 LEFT JOIN Norma_prod NP ON Prod.ID_produkt = NP.ID_produkt
 LEFT JOIN Produkcja p ON NP.ID_normaP = p.ID_normyP AND p.ID_zadanieP = ZP.ID_zadanieP
 GROUP BY
     Z.ID_zamowienie,
     Prod.Nazwa,
-    sz.Ilosc
+    sz.Ilosc,
+	kp.Odpady
 ORDER BY
     Z.ID_zamowienie ASC,
     Prod.Nazwa ASC;

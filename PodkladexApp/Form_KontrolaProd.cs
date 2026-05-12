@@ -649,6 +649,19 @@ namespace PodkladexApp
             comboBox_KontProdZadP.ValueMember = "IdZadanieP";
             comboBox_KontProdZadP.SelectedIndex = -1;
 
+            // Obliczanie odpowiedniej szerokości rozwijanej listy
+            int maxWidth = comboBox_KontProdZadP.Width;
+            foreach (var item in comboBox_KontProdZadP.Items)
+            {
+                int itemWidth = TextRenderer.MeasureText(comboBox_KontProdZadP.GetItemText(item), comboBox_KontProdZadP.Font).Width;
+                if (itemWidth > maxWidth)
+                {
+                    maxWidth = itemWidth;
+                }
+            }
+            // Zastosowanie wyliczonej szerokości + bufor na pasek przewijania
+            comboBox_KontProdZadP.DropDownWidth = maxWidth + SystemInformation.VerticalScrollBarWidth;
+
             comboBox_PomiarProdWlasc.DataSource = _context.Wlasciwosc.ToList();
             comboBox_PomiarProdWlasc.DisplayMember = "NazwaParametru";
             comboBox_PomiarProdWlasc.ValueMember = "IdWlasciwosci";
@@ -671,6 +684,21 @@ namespace PodkladexApp
                     Odpady = k.Odpady,
                     Zat = k.Zatwierdzone ? "TAK" : "NIE"
                 }).OrderByDescending(x => x.ID).ToList();
+
+            if (DGV_KontProdKontrole.Columns.Contains("ID"))
+            {
+                DGV_KontProdKontrole.Columns["ID"].Visible = false;
+            }
+
+            if (DGV_KontProdKontrole.Columns.Contains("Wyprodukowano"))
+            {
+                DGV_KontProdKontrole.Columns["Wyprodukowano"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+
+            if (DGV_KontProdKontrole.Columns.Contains("Pracownik"))
+            {
+                DGV_KontProdKontrole.Columns["Pracownik"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
         }
     }
 }

@@ -32,6 +32,9 @@
             btn_Edytuj = new Button();
             label_ListaKontroli = new Label();
             panel_DodawaniePomiaru = new Panel();
+            btn_GenerujPomiary = new Button();
+            textBox_IloscSztukGeneruj = new TextBox();
+            label1 = new Label();
             textBox_OdpadyPomiarySzt = new TextBox();
             textBox_OdpadyWizualneSzt = new TextBox();
             label_OdpadyPomiarySzt = new Label();
@@ -65,9 +68,6 @@
             label_KontProdZadP = new Label();
             label_KontProdPrac = new Label();
             comboBox_KontProdPrac = new ComboBox();
-            label1 = new Label();
-            textBox_IloscSztukGeneruj = new TextBox();
-            btn_GenerujPomiary = new Button();
             panel_DodawaniePomiaru.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DGV_PomiaryProd).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DGV_KontProdKontrole).BeginInit();
@@ -137,19 +137,50 @@
             panel_DodawaniePomiaru.Size = new Size(1207, 585);
             panel_DodawaniePomiaru.TabIndex = 37;
             // 
+            // btn_GenerujPomiary
+            // 
+            btn_GenerujPomiary.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            btn_GenerujPomiary.Location = new Point(928, 71);
+            btn_GenerujPomiary.Margin = new Padding(3, 2, 3, 2);
+            btn_GenerujPomiary.Name = "btn_GenerujPomiary";
+            btn_GenerujPomiary.Size = new Size(172, 57);
+            btn_GenerujPomiary.TabIndex = 40;
+            btn_GenerujPomiary.Text = "Generuj Pomiary";
+            btn_GenerujPomiary.UseVisualStyleBackColor = true;
+            // 
+            // textBox_IloscSztukGeneruj
+            // 
+            textBox_IloscSztukGeneruj.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            textBox_IloscSztukGeneruj.Location = new Point(1070, 29);
+            textBox_IloscSztukGeneruj.Name = "textBox_IloscSztukGeneruj";
+            textBox_IloscSztukGeneruj.Size = new Size(100, 33);
+            textBox_IloscSztukGeneruj.TabIndex = 39;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            label1.Location = new Point(837, 32);
+            label1.Name = "label1";
+            label1.Size = new Size(227, 25);
+            label1.TabIndex = 38;
+            label1.Text = "Liczba sztuk do symulacji:";
+            // 
             // textBox_OdpadyPomiarySzt
             // 
-            textBox_OdpadyPomiarySzt.Location = new Point(1068, 219);
+            textBox_OdpadyPomiarySzt.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            textBox_OdpadyPomiarySzt.Location = new Point(1068, 214);
             textBox_OdpadyPomiarySzt.Name = "textBox_OdpadyPomiarySzt";
             textBox_OdpadyPomiarySzt.ReadOnly = true;
-            textBox_OdpadyPomiarySzt.Size = new Size(100, 23);
+            textBox_OdpadyPomiarySzt.Size = new Size(100, 33);
             textBox_OdpadyPomiarySzt.TabIndex = 37;
             // 
             // textBox_OdpadyWizualneSzt
             // 
-            textBox_OdpadyWizualneSzt.Location = new Point(1068, 167);
+            textBox_OdpadyWizualneSzt.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            textBox_OdpadyWizualneSzt.Location = new Point(1068, 162);
             textBox_OdpadyWizualneSzt.Name = "textBox_OdpadyWizualneSzt";
-            textBox_OdpadyWizualneSzt.Size = new Size(100, 23);
+            textBox_OdpadyWizualneSzt.Size = new Size(100, 33);
             textBox_OdpadyWizualneSzt.TabIndex = 36;
             // 
             // label_OdpadyPomiarySzt
@@ -202,10 +233,11 @@
             // 
             // textBox_KontProdOdpadySzt
             // 
-            textBox_KontProdOdpadySzt.Location = new Point(184, 501);
+            textBox_KontProdOdpadySzt.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            textBox_KontProdOdpadySzt.Location = new Point(184, 496);
             textBox_KontProdOdpadySzt.Name = "textBox_KontProdOdpadySzt";
             textBox_KontProdOdpadySzt.ReadOnly = true;
-            textBox_KontProdOdpadySzt.Size = new Size(100, 23);
+            textBox_KontProdOdpadySzt.Size = new Size(100, 33);
             textBox_KontProdOdpadySzt.TabIndex = 30;
             // 
             // label_KontProdOdpadySzt
@@ -264,19 +296,21 @@
             // 
             // textBox_PomiarProdWartosc
             // 
-            textBox_PomiarProdWartosc.Location = new Point(648, 18);
+            textBox_PomiarProdWartosc.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            textBox_PomiarProdWartosc.Location = new Point(646, 15);
             textBox_PomiarProdWartosc.Margin = new Padding(3, 2, 3, 2);
             textBox_PomiarProdWartosc.Name = "textBox_PomiarProdWartosc";
-            textBox_PomiarProdWartosc.Size = new Size(110, 23);
+            textBox_PomiarProdWartosc.Size = new Size(110, 33);
             textBox_PomiarProdWartosc.TabIndex = 25;
             // 
             // comboBox_PomiarProdWlasc
             // 
+            comboBox_PomiarProdWlasc.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox_PomiarProdWlasc.FormattingEnabled = true;
-            comboBox_PomiarProdWlasc.Location = new Point(204, 18);
+            comboBox_PomiarProdWlasc.Location = new Point(204, 15);
             comboBox_PomiarProdWlasc.Margin = new Padding(3, 2, 3, 2);
             comboBox_PomiarProdWlasc.Name = "comboBox_PomiarProdWlasc";
-            comboBox_PomiarProdWlasc.Size = new Size(178, 23);
+            comboBox_PomiarProdWlasc.Size = new Size(178, 33);
             comboBox_PomiarProdWlasc.TabIndex = 24;
             // 
             // label_PomiarProdWartosc
@@ -309,9 +343,10 @@
             // 
             // textBox_KontProdRBH
             // 
-            textBox_KontProdRBH.Location = new Point(441, 459);
+            textBox_KontProdRBH.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            textBox_KontProdRBH.Location = new Point(441, 455);
             textBox_KontProdRBH.Name = "textBox_KontProdRBH";
-            textBox_KontProdRBH.Size = new Size(100, 23);
+            textBox_KontProdRBH.Size = new Size(100, 33);
             textBox_KontProdRBH.TabIndex = 1;
             // 
             // label_KontProdRBH
@@ -357,10 +392,11 @@
             // 
             // textBox_KontProdOdpady
             // 
-            textBox_KontProdOdpady.Location = new Point(184, 459);
+            textBox_KontProdOdpady.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            textBox_KontProdOdpady.Location = new Point(184, 454);
             textBox_KontProdOdpady.Name = "textBox_KontProdOdpady";
             textBox_KontProdOdpady.ReadOnly = true;
-            textBox_KontProdOdpady.Size = new Size(100, 23);
+            textBox_KontProdOdpady.Size = new Size(100, 33);
             textBox_KontProdOdpady.TabIndex = 10;
             // 
             // btn_KontProdPomiar
@@ -414,10 +450,11 @@
             // 
             // comboBox_KontProdZadP
             // 
+            comboBox_KontProdZadP.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox_KontProdZadP.FormattingEnabled = true;
-            comboBox_KontProdZadP.Location = new Point(514, 257);
+            comboBox_KontProdZadP.Location = new Point(514, 249);
             comboBox_KontProdZadP.Name = "comboBox_KontProdZadP";
-            comboBox_KontProdZadP.Size = new Size(371, 23);
+            comboBox_KontProdZadP.Size = new Size(371, 33);
             comboBox_KontProdZadP.TabIndex = 31;
             // 
             // label_KontProdZadP
@@ -442,39 +479,12 @@
             // 
             // comboBox_KontProdPrac
             // 
+            comboBox_KontProdPrac.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox_KontProdPrac.FormattingEnabled = true;
-            comboBox_KontProdPrac.Location = new Point(514, 209);
+            comboBox_KontProdPrac.Location = new Point(514, 201);
             comboBox_KontProdPrac.Name = "comboBox_KontProdPrac";
-            comboBox_KontProdPrac.Size = new Size(371, 23);
+            comboBox_KontProdPrac.Size = new Size(371, 33);
             comboBox_KontProdPrac.TabIndex = 26;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label1.Location = new Point(837, 32);
-            label1.Name = "label1";
-            label1.Size = new Size(227, 25);
-            label1.TabIndex = 38;
-            label1.Text = "Liczba sztuk do symulacji:";
-            // 
-            // textBox_IloscSztukGeneruj
-            // 
-            textBox_IloscSztukGeneruj.Location = new Point(1070, 34);
-            textBox_IloscSztukGeneruj.Name = "textBox_IloscSztukGeneruj";
-            textBox_IloscSztukGeneruj.Size = new Size(100, 23);
-            textBox_IloscSztukGeneruj.TabIndex = 39;
-            // 
-            // btn_GenerujPomiary
-            // 
-            btn_GenerujPomiary.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_GenerujPomiary.Location = new Point(928, 71);
-            btn_GenerujPomiary.Margin = new Padding(3, 2, 3, 2);
-            btn_GenerujPomiary.Name = "btn_GenerujPomiary";
-            btn_GenerujPomiary.Size = new Size(172, 57);
-            btn_GenerujPomiary.TabIndex = 40;
-            btn_GenerujPomiary.Text = "Generuj Pomiary";
-            btn_GenerujPomiary.UseVisualStyleBackColor = true;
             // 
             // Form_KontrolaProd
             // 
