@@ -28,6 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             btn_Anuluj = new Button();
             btn_Edytuj = new Button();
             label_ListaKontroli = new Label();
@@ -335,7 +339,23 @@
             // 
             // DGV_PomiaryProd
             // 
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            DGV_PomiaryProd.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             DGV_PomiaryProd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            DGV_PomiaryProd.DefaultCellStyle = dataGridViewCellStyle2;
             DGV_PomiaryProd.Location = new Point(62, 133);
             DGV_PomiaryProd.Name = "DGV_PomiaryProd";
             DGV_PomiaryProd.Size = new Size(754, 150);
@@ -402,7 +422,7 @@
             // btn_KontProdPomiar
             // 
             btn_KontProdPomiar.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_KontProdPomiar.Location = new Point(471, 316);
+            btn_KontProdPomiar.Location = new Point(471, 334);
             btn_KontProdPomiar.Name = "btn_KontProdPomiar";
             btn_KontProdPomiar.Size = new Size(172, 57);
             btn_KontProdPomiar.TabIndex = 36;
@@ -411,16 +431,32 @@
             // 
             // DGV_KontProdKontrole
             // 
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            DGV_KontProdKontrole.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             DGV_KontProdKontrole.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Window;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            DGV_KontProdKontrole.DefaultCellStyle = dataGridViewCellStyle4;
             DGV_KontProdKontrole.Location = new Point(227, 74);
             DGV_KontProdKontrole.Name = "DGV_KontProdKontrole";
-            DGV_KontProdKontrole.Size = new Size(754, 120);
+            DGV_KontProdKontrole.Size = new Size(754, 139);
             DGV_KontProdKontrole.TabIndex = 35;
             // 
             // btn_KontProdPotwierdz
             // 
             btn_KontProdPotwierdz.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_KontProdPotwierdz.Location = new Point(244, 316);
+            btn_KontProdPotwierdz.Location = new Point(244, 334);
             btn_KontProdPotwierdz.Margin = new Padding(3, 2, 3, 2);
             btn_KontProdPotwierdz.Name = "btn_KontProdPotwierdz";
             btn_KontProdPotwierdz.Size = new Size(172, 57);
@@ -452,7 +488,7 @@
             // 
             comboBox_KontProdZadP.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox_KontProdZadP.FormattingEnabled = true;
-            comboBox_KontProdZadP.Location = new Point(514, 249);
+            comboBox_KontProdZadP.Location = new Point(514, 267);
             comboBox_KontProdZadP.Name = "comboBox_KontProdZadP";
             comboBox_KontProdZadP.Size = new Size(371, 33);
             comboBox_KontProdZadP.TabIndex = 31;
@@ -461,7 +497,7 @@
             // 
             label_KontProdZadP.AutoSize = true;
             label_KontProdZadP.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_KontProdZadP.Location = new Point(264, 257);
+            label_KontProdZadP.Location = new Point(264, 275);
             label_KontProdZadP.Name = "label_KontProdZadP";
             label_KontProdZadP.Size = new Size(189, 25);
             label_KontProdZadP.TabIndex = 28;
@@ -471,7 +507,7 @@
             // 
             label_KontProdPrac.AutoSize = true;
             label_KontProdPrac.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_KontProdPrac.Location = new Point(264, 209);
+            label_KontProdPrac.Location = new Point(264, 227);
             label_KontProdPrac.Name = "label_KontProdPrac";
             label_KontProdPrac.Size = new Size(99, 25);
             label_KontProdPrac.TabIndex = 27;
@@ -481,7 +517,7 @@
             // 
             comboBox_KontProdPrac.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox_KontProdPrac.FormattingEnabled = true;
-            comboBox_KontProdPrac.Location = new Point(514, 201);
+            comboBox_KontProdPrac.Location = new Point(514, 219);
             comboBox_KontProdPrac.Name = "comboBox_KontProdPrac";
             comboBox_KontProdPrac.Size = new Size(371, 33);
             comboBox_KontProdPrac.TabIndex = 26;
