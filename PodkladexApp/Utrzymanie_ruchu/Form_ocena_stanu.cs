@@ -99,6 +99,7 @@ namespace PodkladexApp
 
             var lista = context.Obsluga
                 .Where(o => o.IdMaszyna == maszyna.IdMaszyna)
+                .OrderByDescending(o => o.DataPoczatek)
                 .Select(o => new
                 {
                     o.IdObsluga,
@@ -147,6 +148,7 @@ namespace PodkladexApp
 
             var lista = context.Awaria
                 .Where(a => a.IdMaszyna == maszyna.IdMaszyna)
+                .OrderByDescending(a => a.DataZgloszenia)
                 .Select(a => new
                 {
                     a.IdAwaria,
@@ -351,6 +353,13 @@ namespace PodkladexApp
 
             formsPlot2.Plot.Axes.Bottom.TickGenerator =
                 new ScottPlot.TickGenerators.NumericManual(xs, labels);
+
+            formsPlot2.Plot.Axes.Left.TickGenerator =
+                new ScottPlot.TickGenerators.NumericManual(new Tick[]
+                {
+                           new Tick(0, "0"),
+                            new Tick(1, "1")
+                });
 
             formsPlot2.Plot.Title("Serwis - Awarie i Obsługi");
             formsPlot2.Plot.ShowLegend();

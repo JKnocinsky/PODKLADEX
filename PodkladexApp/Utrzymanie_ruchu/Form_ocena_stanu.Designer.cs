@@ -163,9 +163,9 @@
             label5.Font = new Font("Segoe UI", 14F);
             label5.Location = new Point(881, 6);
             label5.Name = "label5";
-            label5.Size = new Size(218, 25);
+            label5.Size = new Size(126, 25);
             label5.TabIndex = 44;
-            label5.Text = "Przepracowane godziny:";
+            label5.Text = "Suma godzin:";
             // 
             // textBox1
             // 

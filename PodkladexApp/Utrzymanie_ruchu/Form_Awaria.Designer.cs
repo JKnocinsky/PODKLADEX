@@ -163,7 +163,7 @@
             // num_ud_liczba_czesci
             // 
             num_ud_liczba_czesci.Font = new Font("Segoe UI", 14F);
-            num_ud_liczba_czesci.Location = new Point(419, 28);
+            num_ud_liczba_czesci.Location = new Point(522, 29);
             num_ud_liczba_czesci.Margin = new Padding(3, 4, 3, 4);
             num_ud_liczba_czesci.Name = "num_ud_liczba_czesci";
             num_ud_liczba_czesci.Size = new Size(69, 32);
@@ -173,7 +173,7 @@
             // 
             label_liczba.AutoSize = true;
             label_liczba.Font = new Font("Segoe UI", 14F);
-            label_liczba.Location = new Point(419, 3);
+            label_liczba.Location = new Point(522, 4);
             label_liczba.Name = "label_liczba";
             label_liczba.Size = new Size(65, 25);
             label_liczba.TabIndex = 11;
@@ -196,7 +196,7 @@
             cbox_czesc.FormattingEnabled = true;
             cbox_czesc.Location = new Point(223, 28);
             cbox_czesc.Name = "cbox_czesc";
-            cbox_czesc.Size = new Size(190, 33);
+            cbox_czesc.Size = new Size(293, 33);
             cbox_czesc.TabIndex = 12;
             // 
             // dataGridView1
@@ -297,7 +297,7 @@
             comboBox_lista_awarii.FormattingEnabled = true;
             comboBox_lista_awarii.Location = new Point(0, 28);
             comboBox_lista_awarii.Name = "comboBox_lista_awarii";
-            comboBox_lista_awarii.Size = new Size(492, 33);
+            comboBox_lista_awarii.Size = new Size(714, 33);
             comboBox_lista_awarii.TabIndex = 17;
             comboBox_lista_awarii.SelectedIndexChanged += comboBox_lista_awarii_SelectedIndexChanged;
             // 

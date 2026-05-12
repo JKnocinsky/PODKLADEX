@@ -35,9 +35,21 @@ namespace PodkladexApp
             ZaladujMaszynyDoComboBox();
             ZaladujRodzajObslugiDoComboBox();
             ZaladujObslugiDoComboBox();
+            WyczyscKontrolki();
 
         }
+        private void WyczyscKontrolki()
+        {
+            cbox_osoby.SelectedIndex = -1;
+            cbox_maszyna.SelectedIndex = -1;
+            comboBox_rodzaj_obslugi.SelectedIndex = -1;
 
+            textBox_RBH.Clear();
+            textBox1.Clear();
+
+            dtp_data_zgloszenia.Value = DateTime.Now;
+            dtp_data_usuniecia.Value = DateTime.Now;
+        }
         private void button_zglos_awarie_Click(object sender, EventArgs e)
         {
             panel1.Visible = false;
