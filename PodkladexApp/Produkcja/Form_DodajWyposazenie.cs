@@ -13,14 +13,12 @@ namespace PodkladexApp.Produkcja
 {
     public partial class Form_DodajWyposazenie : Form
     {
-        // Dodane pole i DTO dla źródła danych DataGridView
         private BindingList<ParamDto> wlasciwosciBindingList;
 
         PodkladexContext context;
         int btn;
         Wyposazenie wyposazenie;
 
-        // DTO wykorzystywane jako element listy źródłowej dla DataGridView
         private class ParamDto
         {
             public string Nazwa { get; set; }
@@ -33,22 +31,21 @@ namespace PodkladexApp.Produkcja
             this.context = context;
             cmb_wlasciwosc.DataSource = context.Wlasciwosc.Select(w => w.NazwaParametru).ToList();
 
+            // Podpięcie zdarzenia zmiany selekcji (Zadanie 1)
+            dgv_wlasciwosci.SelectionChanged += dgv_wlasciwosci_SelectionChanged;
+
             switch (buttonName)
             {
                 case "btn_dodaj":
                     btn = 1;
-
-                    // Inicjalizuj pustą listę i powiąż z DataGridView zamiast dodawać kolumny ręcznie
                     wlasciwosciBindingList = new BindingList<ParamDto>();
                     dgv_wlasciwosci.DataSource = wlasciwosciBindingList;
-
                     lbl_tytul.Text = "Dodaj wyposażenie";
                     break;
                 case "btn_edytuj":
                     btn = 2;
                     this.wyposazenie = wyposazenie;
 
-                    // Najpierw zbuduj listę DTO, potem ustaw ją jako DataSource
                     var lista = context.WyposazenieWlasciwosci.Where(ww => ww.IdWyposazenie == wyposazenie.IdWyposazenie)
                         .Select(ww => new ParamDto
                         {
@@ -59,9 +56,8 @@ namespace PodkladexApp.Produkcja
 
                     wlasciwosciBindingList = new BindingList<ParamDto>(lista);
                     dgv_wlasciwosci.DataSource = wlasciwosciBindingList;
-
                     txtbox_Nazwa.Text = wyposazenie.Nazwa;
-
+                    txtbox_Uwagi.Text = wyposazenie.Uwagi;
                     lbl_tytul.Text = "Edytuj wyposażenie";
                     break;
                 default:
@@ -72,184 +68,137 @@ namespace PodkladexApp.Produkcja
 
         private void btn_zapiszZamknij_Click(object sender, EventArgs e)
         {
-            Wyposazenie noweWyposazenie = new Wyposazenie();
-
             switch (btn)
             {
                 case 1:
-                    if (txtbox_Nazwa.Text == "" || txtbox_Nazwa.Text == null)
+                    if (string.IsNullOrWhiteSpace(txtbox_Nazwa.Text))
                     {
                         MessageBox.Show("Nazwa jest pusta! Wpisz nazwę.", "Błąd");
-
                     }
-                    else if (context.Wyposazenie.Where(wyposazenie => wyposazenie.Nazwa == txtbox_Nazwa.Text).FirstOrDefault() != null)
+                    else if (context.Wyposazenie.Any(w => w.Nazwa == txtbox_Nazwa.Text))
                     {
-                        MessageBox.Show("Nazwa jest zajeta! Wpisz inna nazwę.", "Błąd");
+                        MessageBox.Show("Nazwa jest zajęta! Wpisz inną nazwę.", "Błąd");
                     }
                     else
                     {
-                        noweWyposazenie.Nazwa = txtbox_Nazwa.Text;
-                        noweWyposazenie.Uwagi = txtbox_Uwagi.Text;
+                        Wyposazenie noweWyposazenie = new Wyposazenie
+                        {
+                            Nazwa = txtbox_Nazwa.Text,
+                            Uwagi = txtbox_Uwagi.Text
+                        };
                         context.Wyposazenie.Add(noweWyposazenie);
                         context.SaveChanges();
-                        MessageBox.Show("Dodano nowe Wyposażenie!", "Dodawanie wyposażenia");
 
-                        foreach (DataGridViewRow row in dgv_wlasciwosci.Rows)
+                        foreach (var item in wlasciwosciBindingList)
                         {
-                            if (row.IsNewRow) continue;
+                            var wlascEntity = context.Wlasciwosc.FirstOrDefault(w => w.NazwaParametru == item.Nazwa);
+                            if (wlascEntity == null) continue;
 
-                            object cellWlasciwosc = null;
-                            object cellWartosc = null;
-
-                            if (dgv_wlasciwosci.Columns.Contains("colWlasciwosc"))
-                                cellWlasciwosc = row.Cells["colWlasciwosc"].Value;
-                            else if (dgv_wlasciwosci.Columns.Contains("Nazwa"))
-                                cellWlasciwosc = row.Cells["Nazwa"].Value;
-
-                            if (dgv_wlasciwosci.Columns.Contains("colWartosc"))
-                                cellWartosc = row.Cells["colWartosc"].Value;
-                            else if (dgv_wlasciwosci.Columns.Contains("Wartosc"))
-                                cellWartosc = row.Cells["Wartosc"].Value;
-
-                            if (cellWlasciwosc != null && cellWartosc != null)
+                            context.WyposazenieWlasciwosci.Add(new WyposazenieWlasciwosci
                             {
-                                string nazwaParametru = cellWlasciwosc.ToString();
-                                if (!decimal.TryParse(cellWartosc.ToString(), out decimal wartosc)) continue;
-
-                                var wlasciwoscEntity = context.Wlasciwosc.FirstOrDefault(w => w.NazwaParametru == nazwaParametru);
-                                if (wlasciwoscEntity == null) continue;
-
-                                var noweWlasc = new WyposazenieWlasciwosci
-                                {
-                                    IdWyposazenie = context.Wyposazenie.Where(wy => wy.Nazwa == txtbox_Nazwa.Text).FirstOrDefault().IdWyposazenie,
-                                    IdWlasciwosci = wlasciwoscEntity.IdWlasciwosci,
-                                    Wartosc = wartosc
-                                };
-                                context.WyposazenieWlasciwosci.Add(noweWlasc);
-                                context.SaveChanges();
-                            }
+                                IdWyposazenie = noweWyposazenie.IdWyposazenie,
+                                IdWlasciwosci = wlascEntity.IdWlasciwosci,
+                                Wartosc = item.Wartosc
+                            });
                         }
-
+                        context.SaveChanges();
+                        MessageBox.Show("Dodano nowe Wyposażenie!", "Dodawanie wyposażenia");
                         this.Close();
                     }
                     break;
+
                 case 2:
-                    if (txtbox_Nazwa.Text == "" || txtbox_Nazwa.Text == null)
+                    if (string.IsNullOrWhiteSpace(txtbox_Nazwa.Text))
                     {
                         MessageBox.Show("Nazwa jest pusta! Wpisz nazwę.", "Błąd");
                     }
                     else
                     {
-                        // Aktualizacja głównego rekordu wyposażenia
                         wyposazenie.Nazwa = txtbox_Nazwa.Text;
                         wyposazenie.Uwagi = txtbox_Uwagi.Text;
                         context.Wyposazenie.Update(wyposazenie);
 
-                        // Przetworzenie wierszy z dgv_wlasciwosci:
-                        // - jeśli powiązanie istnieje -> aktualizuj Wartosc
-                        // - jeśli brak -> dodaj nowy rekord WyposazenieWlasciwosci
-                        foreach (DataGridViewRow row in dgv_wlasciwosci.Rows)
+                        foreach (var item in wlasciwosciBindingList)
                         {
-                            if (row.IsNewRow) continue;
+                            var wlascEntity = context.Wlasciwosc.FirstOrDefault(w => w.NazwaParametru == item.Nazwa);
+                            if (wlascEntity == null) continue;
 
-                            object cellWlasciwosc = null;
-                            object cellWartosc = null;
-
-                            if (dgv_wlasciwosci.Columns.Contains("colWlasciwosc"))
-                                cellWlasciwosc = row.Cells["colWlasciwosc"].Value;
-                            else if (dgv_wlasciwosci.Columns.Contains("Nazwa"))
-                                cellWlasciwosc = row.Cells["Nazwa"].Value;
-
-                            if (dgv_wlasciwosci.Columns.Contains("colWartosc"))
-                                cellWartosc = row.Cells["colWartosc"].Value;
-                            else if (dgv_wlasciwosci.Columns.Contains("Wartosc"))
-                                cellWartosc = row.Cells["Wartosc"].Value;
-
-                            if (cellWlasciwosc == null || cellWartosc == null) continue;
-
-                            string nazwaParametru = cellWlasciwosc.ToString();
-                            if (!decimal.TryParse(cellWartosc.ToString(), out decimal parsedWartosc)) continue;
-
-                            // znajdź encję właściwości
-                            var wlasciwoscEntity = context.Wlasciwosc.FirstOrDefault(w => w.NazwaParametru == nazwaParametru);
-                            if (wlasciwoscEntity == null) continue;
-
-                            // sprawdź czy istnieje powiązanie WyposazenieWlasciwosci
                             var existing = context.WyposazenieWlasciwosci
-                                .FirstOrDefault(ww => ww.IdWyposazenie == wyposazenie.IdWyposazenie
-                                                   && ww.IdWlasciwosci == wlasciwoscEntity.IdWlasciwosci);
+                                .FirstOrDefault(ww => ww.IdWyposazenie == wyposazenie.IdWyposazenie && ww.IdWlasciwosci == wlascEntity.IdWlasciwosci);
 
                             if (existing != null)
                             {
-                                // aktualizuj wartość
-                                existing.Wartosc = parsedWartosc;
+                                existing.Wartosc = item.Wartosc;
                                 context.WyposazenieWlasciwosci.Update(existing);
                             }
                             else
                             {
-                                // dodaj nowe powiązanie
-                                var noweWlasc = new WyposazenieWlasciwosci
+                                context.WyposazenieWlasciwosci.Add(new WyposazenieWlasciwosci
                                 {
                                     IdWyposazenie = wyposazenie.IdWyposazenie,
-                                    IdWlasciwosci = wlasciwoscEntity.IdWlasciwosci,
-                                    Wartosc = parsedWartosc
-                                };
-                                context.WyposazenieWlasciwosci.Add(noweWlasc);
+                                    IdWlasciwosci = wlascEntity.IdWlasciwosci,
+                                    Wartosc = item.Wartosc
+                                });
                             }
                         }
-
-                        // Zapisz wszystkie zmiany jednorazowo
                         context.SaveChanges();
                         MessageBox.Show("Zmieniono dane Wyposażenia!", "Edycja wyposażenia");
+                        this.Close();
                     }
                     break;
             }
-
         }
 
         private void btn_zapisz_Click(object sender, EventArgs e)
         {
-            WyposazenieWlasciwosci noweWlasc = new WyposazenieWlasciwosci();
-
             if (cmb_wlasciwosc.SelectedItem == null)
             {
-                MessageBox.Show("Nie wybrano właściwości! Wybierz właściwość.", "Błąd");
-            }
-            else if (txtbox_wartosc.Text == "" || txtbox_wartosc.Text == null)
-            {
-                MessageBox.Show("Wartość jest pusta! Wpisz wartość.", "Błąd");
-            }
-            else if (!decimal.TryParse(txtbox_wartosc.Text.Trim(), out decimal parsedValue))
-            {
-                MessageBox.Show("Wprowadzono nieprawidłowy format wartości. Wprowadź liczbę zmiennoprzecinkową.", "Błąd");
+                MessageBox.Show("Nie wybrano właściwości!", "Błąd");
                 return;
+            }
+            if (string.IsNullOrWhiteSpace(txtbox_wartosc.Text))
+            {
+                MessageBox.Show("Wartość jest pusta!", "Błąd");
+                return;
+            }
+            if (!decimal.TryParse(txtbox_wartosc.Text.Trim(), out decimal parsedValue))
+            {
+                MessageBox.Show("Nieprawidłowy format wartości.", "Błąd");
+                return;
+            }
+
+            string wybranaNazwa = cmb_wlasciwosc.SelectedItem.ToString();
+
+            // Zadanie 2: Sprawdzenie czy właściwość już jest na liście i nadpisanie
+            var istniejąca = wlasciwosciBindingList.FirstOrDefault(p => p.Nazwa == wybranaNazwa);
+
+            if (istniejąca != null)
+            {
+                istniejąca.Wartosc = parsedValue;
+                wlasciwosciBindingList.ResetBindings(); // Odświeżenie DataGridView
             }
             else
             {
-                // Zamiast bezpośredniego dgv.Rows.Add — dodaj do listy źródłowej i odśwież DataSource jeśli potrzeba
-                if (wlasciwosciBindingList != null)
+                wlasciwosciBindingList.Add(new ParamDto
                 {
-                    wlasciwosciBindingList.Add(new ParamDto
-                    {
-                        Nazwa = cmb_wlasciwosc.SelectedItem.ToString(),
-                        Wartosc = parsedValue
-                    });
-
-                    // jeśli DataGridView wcześniej nie był powiązany (np. użytkownik dodał kolumny ręcznie),
-                    // przypisz BindingList jako DataSource — tu jednak konstruktor już ustawia DataSource.
-                    // dgv_wlasciwosci.DataSource = wlasciwosciBindingList;
-                }
-                else
-                {
-                    // awaryjnie zachowaj dotychczasowe zachowanie
-                    dgv_wlasciwosci.Rows.Add(cmb_wlasciwosc.SelectedItem.ToString(), txtbox_wartosc.Text);
-                }
+                    Nazwa = wybranaNazwa,
+                    Wartosc = parsedValue
+                });
             }
+
+            // Opcjonalne wyczyszczenie pól po dodaniu/edycji
+            txtbox_wartosc.Clear();
+            cmb_wlasciwosc.SelectedIndex = -1;
         }
 
         private void dgv_wlasciwosci_SelectionChanged(object sender, EventArgs e)
         {
-
+            // Zadanie 1: Wybór właściwości o tym samym Id (nazwie) i wyświetlenie wartości
+            if (dgv_wlasciwosci.CurrentRow != null && dgv_wlasciwosci.CurrentRow.DataBoundItem is ParamDto selectedParam)
+            {
+                cmb_wlasciwosc.SelectedItem = selectedParam.Nazwa;
+                txtbox_wartosc.Text = selectedParam.Wartosc.ToString();
+            }
         }
     }
 }
