@@ -108,20 +108,23 @@ namespace PodkladexApp.Zaopatrzenie
                             Produkt = sz.IdProduktNavigation?.Nazwa ?? "Brak",
                             Materiał = sz.IdMaterialNavigation?.Nazwa ?? "Brak",
                             Liczba = sz.Ilosc,
-                            Cena = sz.Cena,
+                            // ZMIANA TUTAJ: Mnożymy ilość przez cenę za kg
+                            Wartosc = sz.Ilosc * sz.Cena,
                             Uwagi = sz.Uwagi
                         }).ToList();
 
                     dataGridView_Koszyk.DataSource = listaZakupow;
 
-                    // --- ZMIANA NAGŁÓWKÓW ---
+                    // --- ZMIANA NAGŁÓWKÓW I FORMATOWANIA ---
                     if (dataGridView_Koszyk.Columns["Liczba"] != null)
                     {
                         dataGridView_Koszyk.Columns["Liczba"].HeaderText = "Liczba [kg]";
                     }
-                    if (dataGridView_Koszyk.Columns["Cena"] != null)
+                    if (dataGridView_Koszyk.Columns["Wartosc"] != null)
                     {
-                        dataGridView_Koszyk.Columns["Cena"].HeaderText = "Wartość [zł]";
+                        dataGridView_Koszyk.Columns["Wartosc"].HeaderText = "Wartość [zł]";
+                        // Wymuszamy format liczbowy z dwoma miejscami po przecinku
+                        dataGridView_Koszyk.Columns["Wartosc"].DefaultCellStyle.Format = "N2";
                     }
                 }
             }
