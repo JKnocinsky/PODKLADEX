@@ -342,7 +342,7 @@ CREATE TABLE Kontrola_mat (
     ID_pracownik INT NOT NULL FOREIGN KEY REFERENCES Pracownik(ID_pracownik),
     RBH DECIMAL(10,2) NULL,
     Zatwierdzone BIT NOT NULL,
-    Odpady DECIMAL(10,2) NULL,
+    Odpady DECIMAL(10,5) NULL,
     ID_zadanieP INT NOT NULL FOREIGN KEY REFERENCES Zadanie_produkcyjne(ID_zadanieP),
     ID_material INT NOT NULL FOREIGN KEY REFERENCES Material(ID_material)
 );
@@ -353,7 +353,7 @@ CREATE TABLE Kontrola_prod (
     ID_pracownik INT NOT NULL FOREIGN KEY REFERENCES Pracownik(ID_pracownik),
     RBH DECIMAL(10,2) NULL,
     Zatwierdzone BIT NOT NULL,
-    Odpady DECIMAL(10,2) NULL,
+    Odpady DECIMAL(10,5) NULL,
     ID_zadanieP INT NOT NULL FOREIGN KEY REFERENCES Zadanie_produkcyjne(ID_zadanieP)
 );
 GO
