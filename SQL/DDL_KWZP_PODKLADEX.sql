@@ -638,30 +638,71 @@ GO
 -- WIDOK REALIZACJI PRODUKCJI
 -- ==========================================
 CREATE VIEW Widok_Produkcja_Realizacja_Obliczenia AS
+WITH OdpadyCTE AS (
+    SELECT
+        ZP.ID_zamowienie,
+        SUM(ISNULL(KP.Odpady, 0)) AS Suma_Odpady
+    FROM dbo.Zadanie_produkcyjne ZP
+    LEFT JOIN dbo.Kontrola_prod KP
+        ON ZP.ID_zadanieP = KP.ID_zadanieP
+    GROUP BY
+        ZP.ID_zamowienie
+)
+
 SELECT TOP 100 PERCENT
     Z.ID_zamowienie,
+
     Prod.Nazwa AS Nazwa_Produktu,
-    ROUND(sz.Ilosc, 2) AS Ilosc_zamowienia,
-    ROUND(ISNULL(kp.Odpady, 0), 2) AS Suma_Odpady,
-    ROUND(SUM(ISNULL(p.Wyprodukowano, 0)), 2) AS Suma_Wyprodukowano,
-    ROUND(CASE WHEN SUM(ISNULL(sz.Ilosc, 0)) + SUM(ISNULL(kp.Odpady, 0)) = 0
-        THEN NULL
-        ELSE SUM(ISNULL(p.Wyprodukowano, 0))
-            / (ISNULL(sz.Ilosc, 0) + SUM(ISNULL(kp.Odpady, 0)))
-            * 100
-    END, 2) AS Wartosc_Formula
-FROM Zamowienie Z
-JOIN Szczegoly_zamowienia sz ON Z.ID_zamowienie = sz.ID_zamowienie
-JOIN Produkt Prod ON sz.ID_produkt = Prod.ID_produkt
-LEFT JOIN Zadanie_produkcyjne ZP ON ZP.ID_zamowienie = Z.ID_zamowienie
-LEFT JOIN Kontrola_prod kp ON ZP.ID_zadanieP = kp.ID_zadanieP
-LEFT JOIN Norma_prod NP ON Prod.ID_produkt = NP.ID_produkt
-LEFT JOIN Produkcja p ON NP.ID_normaP = p.ID_normyP AND p.ID_zadanieP = ZP.ID_zadanieP
+
+    ROUND(SZ.Ilosc, 2) AS Ilosc_zamowienia,
+
+    ROUND(ISNULL(O.Suma_Odpady, 0), 2) AS Suma_Odpady,
+
+    ROUND(SUM(ISNULL(P.Wyprodukowano, 0)), 2)
+        AS Suma_Wyprodukowano,
+
+    ROUND(
+        CASE
+            WHEN ISNULL(SZ.Ilosc, 0)
+                 + ISNULL(O.Suma_Odpady, 0) = 0
+                THEN NULL
+            ELSE
+                SUM(ISNULL(P.Wyprodukowano, 0))
+                / (
+                    ISNULL(SZ.Ilosc, 0)
+                    + ISNULL(O.Suma_Odpady, 0)
+                ) * 100
+        END,
+        2
+    ) AS Wartosc_Formula
+
+FROM dbo.Zamowienie Z
+
+JOIN dbo.Szczegoly_zamowienia SZ
+    ON Z.ID_zamowienie = SZ.ID_zamowienie
+
+JOIN dbo.Produkt Prod
+    ON SZ.ID_produkt = Prod.ID_produkt
+
+LEFT JOIN dbo.Zadanie_produkcyjne ZP
+    ON ZP.ID_zamowienie = Z.ID_zamowienie
+
+LEFT JOIN dbo.Norma_prod NP
+    ON Prod.ID_produkt = NP.ID_produkt
+
+LEFT JOIN dbo.Produkcja P
+    ON NP.ID_normaP = P.ID_normyP
+    AND P.ID_zadanieP = ZP.ID_zadanieP
+
+LEFT JOIN OdpadyCTE O
+    ON Z.ID_zamowienie = O.ID_zamowienie
+
 GROUP BY
     Z.ID_zamowienie,
     Prod.Nazwa,
-    sz.Ilosc,
-	kp.Odpady
+    SZ.Ilosc,
+    O.Suma_Odpady
+
 ORDER BY
     Z.ID_zamowienie ASC,
     Prod.Nazwa ASC;
