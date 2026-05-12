@@ -165,8 +165,10 @@ GO
 -- ==========================================
 INSERT INTO Material_wlasciwosci (ID_wlasciwosci, ID_material, Wartosc_minimalna, Wartosc_maksymalna, Wartosc_nominalna) VALUES
 (1, 1, 1.55, 1.65, 1.60),
+(8, 1, 4.80, 5.20, 5.00),
 (1, 2, 1.90, 2.10, 2.00), 
-(1, 3, 3.90, 4.10, 4.00);
+(1, 3, 3.90, 4.10, 4.00),
+(8, 3, 9.80, 10.20, 10.00);
 GO
 
 -- ==========================================
