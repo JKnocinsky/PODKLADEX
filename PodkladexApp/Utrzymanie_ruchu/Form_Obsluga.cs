@@ -194,6 +194,7 @@ namespace PodkladexApp
         private void ZaladujObslugiDoComboBox()
         {
             var lista = context.Obsluga
+                .OrderByDescending(o => o.DataPoczatek)
                 .Select(o => new
                 {
                     o.IdObsluga,

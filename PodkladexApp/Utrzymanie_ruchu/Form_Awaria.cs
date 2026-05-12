@@ -138,6 +138,7 @@ namespace PodkladexApp
             // 🔹 AWARIE (rozbudowany opis)
             // =========================
             var awarie = context.Awaria
+                .OrderByDescending(a => a.DataZgloszenia)
                 .Select(a => new
                 {
                     a.IdAwaria,
