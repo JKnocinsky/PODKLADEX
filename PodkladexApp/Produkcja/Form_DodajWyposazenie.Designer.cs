@@ -47,7 +47,8 @@
             // 
             lbl_tytul.AutoSize = true;
             lbl_tytul.Font = new Font("Segoe UI", 14.5F);
-            lbl_tytul.Location = new Point(118, 23);
+            lbl_tytul.Location = new Point(192, 36);
+            lbl_tytul.Margin = new Padding(5, 0, 5, 0);
             lbl_tytul.Name = "lbl_tytul";
             lbl_tytul.Size = new Size(230, 35);
             lbl_tytul.TabIndex = 0;
@@ -57,7 +58,8 @@
             // 
             lbl_nazwa.AutoSize = true;
             lbl_nazwa.Font = new Font("Segoe UI", 11F);
-            lbl_nazwa.Location = new Point(20, 88);
+            lbl_nazwa.Location = new Point(32, 136);
+            lbl_nazwa.Margin = new Padding(5, 0, 5, 0);
             lbl_nazwa.Name = "lbl_nazwa";
             lbl_nazwa.Size = new Size(69, 25);
             lbl_nazwa.TabIndex = 1;
@@ -66,25 +68,28 @@
             // txtbox_Nazwa
             // 
             txtbox_Nazwa.Font = new Font("Segoe UI", 11F);
-            txtbox_Nazwa.Location = new Point(95, 85);
+            txtbox_Nazwa.Location = new Point(154, 132);
+            txtbox_Nazwa.Margin = new Padding(5, 5, 5, 5);
             txtbox_Nazwa.Name = "txtbox_Nazwa";
-            txtbox_Nazwa.Size = new Size(328, 32);
+            txtbox_Nazwa.Size = new Size(530, 32);
             txtbox_Nazwa.TabIndex = 2;
             // 
             // cmb_wlasciwosc
             // 
             cmb_wlasciwosc.Font = new Font("Segoe UI", 11F);
             cmb_wlasciwosc.FormattingEnabled = true;
-            cmb_wlasciwosc.Location = new Point(20, 269);
+            cmb_wlasciwosc.Location = new Point(32, 417);
+            cmb_wlasciwosc.Margin = new Padding(5, 5, 5, 5);
             cmb_wlasciwosc.Name = "cmb_wlasciwosc";
-            cmb_wlasciwosc.Size = new Size(328, 33);
+            cmb_wlasciwosc.Size = new Size(530, 33);
             cmb_wlasciwosc.TabIndex = 3;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 11F);
-            label2.Location = new Point(20, 241);
+            label2.Location = new Point(32, 374);
+            label2.Margin = new Padding(5, 0, 5, 0);
             label2.Name = "label2";
             label2.Size = new Size(114, 25);
             label2.TabIndex = 4;
@@ -95,20 +100,22 @@
             dgv_wlasciwosci.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_wlasciwosci.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgv_wlasciwosci.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_wlasciwosci.Location = new Point(20, 390);
+            dgv_wlasciwosci.Location = new Point(32, 604);
+            dgv_wlasciwosci.Margin = new Padding(5, 5, 5, 5);
             dgv_wlasciwosci.Name = "dgv_wlasciwosci";
             dgv_wlasciwosci.RowHeadersWidth = 51;
             dgv_wlasciwosci.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv_wlasciwosci.Size = new Size(428, 350);
+            dgv_wlasciwosci.Size = new Size(696, 542);
             dgv_wlasciwosci.TabIndex = 5;
             dgv_wlasciwosci.SelectionChanged += dgv_wlasciwosci_SelectionChanged;
             // 
             // btn_zapisz
             // 
             btn_zapisz.Font = new Font("Segoe UI", 11F);
-            btn_zapisz.Location = new Point(354, 337);
+            btn_zapisz.Location = new Point(575, 522);
+            btn_zapisz.Margin = new Padding(5, 5, 5, 5);
             btn_zapisz.Name = "btn_zapisz";
-            btn_zapisz.Size = new Size(94, 33);
+            btn_zapisz.Size = new Size(153, 51);
             btn_zapisz.TabIndex = 6;
             btn_zapisz.Text = "Zapisz";
             btn_zapisz.UseVisualStyleBackColor = true;
@@ -117,9 +124,10 @@
             // btn_zapiszZamknij
             // 
             btn_zapiszZamknij.Font = new Font("Segoe UI", 11F);
-            btn_zapiszZamknij.Location = new Point(135, 760);
+            btn_zapiszZamknij.Location = new Point(219, 1178);
+            btn_zapiszZamknij.Margin = new Padding(5, 5, 5, 5);
             btn_zapiszZamknij.Name = "btn_zapiszZamknij";
-            btn_zapiszZamknij.Size = new Size(194, 39);
+            btn_zapiszZamknij.Size = new Size(315, 60);
             btn_zapiszZamknij.TabIndex = 8;
             btn_zapiszZamknij.Text = "Zapisz i zamknij";
             btn_zapiszZamknij.UseVisualStyleBackColor = true;
@@ -128,16 +136,18 @@
             // txtbox_wartosc
             // 
             txtbox_wartosc.Font = new Font("Segoe UI", 11F);
-            txtbox_wartosc.Location = new Point(20, 338);
+            txtbox_wartosc.Location = new Point(32, 524);
+            txtbox_wartosc.Margin = new Padding(5, 5, 5, 5);
             txtbox_wartosc.Name = "txtbox_wartosc";
-            txtbox_wartosc.Size = new Size(328, 32);
+            txtbox_wartosc.Size = new Size(530, 32);
             txtbox_wartosc.TabIndex = 9;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 11F);
-            label3.Location = new Point(20, 310);
+            label3.Location = new Point(32, 480);
+            label3.Margin = new Padding(5, 0, 5, 0);
             label3.Name = "label3";
             label3.Size = new Size(80, 25);
             label3.TabIndex = 10;
@@ -147,7 +157,8 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 11F);
-            label4.Location = new Point(20, 136);
+            label4.Location = new Point(32, 211);
+            label4.Margin = new Padding(5, 0, 5, 0);
             label4.Name = "label4";
             label4.Size = new Size(65, 25);
             label4.TabIndex = 11;
@@ -156,16 +167,17 @@
             // txtbox_Uwagi
             // 
             txtbox_Uwagi.Font = new Font("Segoe UI", 11F);
-            txtbox_Uwagi.Location = new Point(20, 164);
+            txtbox_Uwagi.Location = new Point(32, 254);
+            txtbox_Uwagi.Margin = new Padding(5, 5, 5, 5);
             txtbox_Uwagi.Name = "txtbox_Uwagi";
-            txtbox_Uwagi.Size = new Size(403, 32);
+            txtbox_Uwagi.Size = new Size(652, 32);
             txtbox_Uwagi.TabIndex = 12;
             // 
             // Form_DodajWyposazenie
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(13F, 31F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(473, 811);
+            ClientSize = new Size(769, 1257);
             Controls.Add(txtbox_Uwagi);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -178,6 +190,8 @@
             Controls.Add(txtbox_Nazwa);
             Controls.Add(lbl_nazwa);
             Controls.Add(lbl_tytul);
+            Font = new Font("Segoe UI", 14F);
+            Margin = new Padding(5, 5, 5, 5);
             Name = "Form_DodajWyposazenie";
             Text = "Form_DodajWyposazenie";
             ((System.ComponentModel.ISupportInitialize)dgv_wlasciwosci).EndInit();

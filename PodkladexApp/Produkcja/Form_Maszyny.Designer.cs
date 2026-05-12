@@ -36,9 +36,9 @@
             panel1.Controls.Add(tableLayoutPanel1);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
-            panel1.Margin = new Padding(3, 4, 3, 4);
+            panel1.Margin = new Padding(5, 6, 5, 6);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1110, 851);
+            panel1.Size = new Size(1804, 1319);
             panel1.TabIndex = 7;
             // 
             // tableLayoutPanel1
@@ -53,14 +53,14 @@
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
             tableLayoutPanel1.Location = new Point(0, 0);
-            tableLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
+            tableLayoutPanel1.Margin = new Padding(5, 6, 5, 6);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 4;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 7.142857F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 76.1904755F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 7.142857F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 9.523809F));
-            tableLayoutPanel1.Size = new Size(1110, 851);
+            tableLayoutPanel1.Size = new Size(1804, 1319);
             tableLayoutPanel1.TabIndex = 6;
             // 
             // dgv_Maszyny
@@ -69,11 +69,11 @@
             dgv_Maszyny.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgv_Maszyny.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_Maszyny.Dock = DockStyle.Fill;
-            dgv_Maszyny.Location = new Point(3, 64);
-            dgv_Maszyny.Margin = new Padding(3, 4, 3, 4);
+            dgv_Maszyny.Location = new Point(5, 100);
+            dgv_Maszyny.Margin = new Padding(5, 6, 5, 6);
             dgv_Maszyny.Name = "dgv_Maszyny";
             dgv_Maszyny.RowHeadersWidth = 51;
-            dgv_Maszyny.Size = new Size(1104, 640);
+            dgv_Maszyny.Size = new Size(1794, 992);
             dgv_Maszyny.TabIndex = 0;
             // 
             // tlpBottom
@@ -82,16 +82,16 @@
             tlpBottom.ColumnCount = 2;
             tlpBottom.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tlpBottom.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tlpBottom.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tlpBottom.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 32F));
             tlpBottom.Controls.Add(btn_dodaj, 0, 0);
             tlpBottom.Controls.Add(btn_edytuj, 1, 0);
             tlpBottom.Dock = DockStyle.Fill;
-            tlpBottom.Location = new Point(3, 712);
-            tlpBottom.Margin = new Padding(3, 4, 3, 4);
+            tlpBottom.Location = new Point(5, 1104);
+            tlpBottom.Margin = new Padding(5, 6, 5, 6);
             tlpBottom.Name = "tlpBottom";
             tlpBottom.RowCount = 1;
             tlpBottom.RowStyles.Add(new RowStyle());
-            tlpBottom.Size = new Size(1104, 52);
+            tlpBottom.Size = new Size(1794, 82);
             tlpBottom.TabIndex = 1;
             // 
             // btn_dodaj
@@ -99,10 +99,10 @@
             btn_dodaj.AutoSize = true;
             btn_dodaj.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btn_dodaj.Dock = DockStyle.Fill;
-            btn_dodaj.Location = new Point(3, 4);
-            btn_dodaj.Margin = new Padding(3, 4, 3, 4);
+            btn_dodaj.Location = new Point(5, 6);
+            btn_dodaj.Margin = new Padding(5, 6, 5, 6);
             btn_dodaj.Name = "btn_dodaj";
-            btn_dodaj.Size = new Size(546, 44);
+            btn_dodaj.Size = new Size(887, 70);
             btn_dodaj.TabIndex = 2;
             btn_dodaj.Text = "Dodaj";
             btn_dodaj.UseVisualStyleBackColor = true;
@@ -113,10 +113,10 @@
             btn_edytuj.AutoSize = true;
             btn_edytuj.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btn_edytuj.Dock = DockStyle.Fill;
-            btn_edytuj.Location = new Point(555, 4);
-            btn_edytuj.Margin = new Padding(3, 4, 3, 4);
+            btn_edytuj.Location = new Point(902, 6);
+            btn_edytuj.Margin = new Padding(5, 6, 5, 6);
             btn_edytuj.Name = "btn_edytuj";
-            btn_edytuj.Size = new Size(546, 44);
+            btn_edytuj.Size = new Size(887, 70);
             btn_edytuj.TabIndex = 3;
             btn_edytuj.Text = "Edytuj";
             btn_edytuj.UseVisualStyleBackColor = true;
@@ -130,43 +130,45 @@
             tlpTop.Controls.Add(label1, 0, 0);
             tlpTop.Controls.Add(txt_Nazwa_Maszyny, 1, 0);
             tlpTop.Dock = DockStyle.Fill;
-            tlpTop.Location = new Point(3, 4);
-            tlpTop.Margin = new Padding(3, 4, 3, 4);
+            tlpTop.Location = new Point(5, 6);
+            tlpTop.Margin = new Padding(5, 6, 5, 6);
             tlpTop.Name = "tlpTop";
             tlpTop.RowCount = 1;
             tlpTop.RowStyles.Add(new RowStyle());
-            tlpTop.Size = new Size(1104, 52);
+            tlpTop.Size = new Size(1794, 82);
             tlpTop.TabIndex = 0;
             // 
             // label1
             // 
             label1.Anchor = AnchorStyles.Left;
             label1.AutoSize = true;
-            label1.Location = new Point(3, 6);
+            label1.Location = new Point(5, 9);
+            label1.Margin = new Padding(5, 0, 5, 0);
             label1.Name = "label1";
-            label1.Size = new Size(65, 40);
+            label1.Size = new Size(107, 64);
             label1.TabIndex = 5;
             label1.Text = "Nazwa Maszyny";
             // 
             // txt_Nazwa_Maszyny
             // 
             txt_Nazwa_Maszyny.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            txt_Nazwa_Maszyny.Location = new Point(98, 12);
-            txt_Nazwa_Maszyny.Margin = new Padding(3, 4, 3, 4);
+            txt_Nazwa_Maszyny.Location = new Point(160, 21);
+            txt_Nazwa_Maszyny.Margin = new Padding(5, 6, 5, 6);
             txt_Nazwa_Maszyny.Name = "txt_Nazwa_Maszyny";
-            txt_Nazwa_Maszyny.Size = new Size(1003, 27);
+            txt_Nazwa_Maszyny.Size = new Size(1629, 39);
             txt_Nazwa_Maszyny.TabIndex = 1;
             txt_Nazwa_Maszyny.TextChanged += txt_Nazwa_Maszyny_TextChanged;
             // 
             // Form_Maszyny
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(13F, 31F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClientSize = new Size(1110, 851);
+            ClientSize = new Size(1804, 1319);
             Controls.Add(panel1);
-            Margin = new Padding(3, 4, 3, 4);
+            Font = new Font("Segoe UI", 14F);
+            Margin = new Padding(5, 6, 5, 6);
             Name = "Form_Maszyny";
             Text = "Form_Maszyny";
             panel1.ResumeLayout(false);

@@ -63,7 +63,7 @@
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
             tableLayoutPanel1.Location = new Point(0, 0);
-            tableLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
+            tableLayoutPanel1.Margin = new Padding(5, 6, 5, 6);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 7;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 5F));
@@ -73,7 +73,7 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 30F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
-            tableLayoutPanel1.Size = new Size(939, 747);
+            tableLayoutPanel1.Size = new Size(1526, 1158);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // label1
@@ -81,9 +81,10 @@
             label1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 11F);
-            label1.Location = new Point(3, 6);
+            label1.Location = new Point(5, 16);
+            label1.Margin = new Padding(5, 0, 5, 0);
             label1.Name = "label1";
-            label1.Size = new Size(153, 25);
+            label1.Size = new Size(249, 25);
             label1.TabIndex = 0;
             label1.Text = "Maszyna:";
             // 
@@ -92,10 +93,10 @@
             cb_wyborMaszyny.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             cb_wyborMaszyny.Font = new Font("Segoe UI", 11F);
             cb_wyborMaszyny.FormattingEnabled = true;
-            cb_wyborMaszyny.Location = new Point(162, 4);
-            cb_wyborMaszyny.Margin = new Padding(3, 4, 3, 4);
+            cb_wyborMaszyny.Location = new Point(264, 12);
+            cb_wyborMaszyny.Margin = new Padding(5, 6, 5, 6);
             cb_wyborMaszyny.Name = "cb_wyborMaszyny";
-            cb_wyborMaszyny.Size = new Size(774, 33);
+            cb_wyborMaszyny.Size = new Size(1257, 33);
             cb_wyborMaszyny.TabIndex = 1;
             cb_wyborMaszyny.SelectedIndexChanged += cb_wyborMaszyny_SelectedIndexChanged;
             cb_wyborMaszyny.TextChanged += cb_wyborMaszyny_TextChanged;
@@ -107,12 +108,12 @@
             dgv_Wyposazenie.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             tableLayoutPanel1.SetColumnSpan(dgv_Wyposazenie, 2);
             dgv_Wyposazenie.Dock = DockStyle.Fill;
-            dgv_Wyposazenie.Location = new Point(3, 78);
-            dgv_Wyposazenie.Margin = new Padding(3, 4, 3, 4);
+            dgv_Wyposazenie.Location = new Point(5, 120);
+            dgv_Wyposazenie.Margin = new Padding(5, 6, 5, 6);
             dgv_Wyposazenie.Name = "dgv_Wyposazenie";
             dgv_Wyposazenie.RowHeadersWidth = 51;
             dgv_Wyposazenie.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv_Wyposazenie.Size = new Size(933, 253);
+            dgv_Wyposazenie.Size = new Size(1516, 393);
             dgv_Wyposazenie.TabIndex = 2;
             dgv_Wyposazenie.SelectionChanged += dgv_Wyposazenie_SelectionChanged;
             // 
@@ -123,16 +124,16 @@
             tableLayoutPanel1.SetColumnSpan(tableLayoutPanel2, 2);
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 49.99999F));
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50.0000076F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 32F));
             tableLayoutPanel2.Controls.Add(btn_dodaj, 0, 0);
             tableLayoutPanel2.Controls.Add(btn_edytuj, 1, 0);
             tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(3, 600);
-            tableLayoutPanel2.Margin = new Padding(3, 4, 3, 4);
+            tableLayoutPanel2.Location = new Point(5, 929);
+            tableLayoutPanel2.Margin = new Padding(5, 6, 5, 6);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new Size(933, 66);
+            tableLayoutPanel2.Size = new Size(1516, 103);
             tableLayoutPanel2.TabIndex = 3;
             // 
             // btn_dodaj
@@ -140,9 +141,10 @@
             btn_dodaj.AutoSize = true;
             btn_dodaj.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btn_dodaj.Dock = DockStyle.Fill;
-            btn_dodaj.Location = new Point(3, 3);
+            btn_dodaj.Location = new Point(5, 5);
+            btn_dodaj.Margin = new Padding(5, 5, 5, 5);
             btn_dodaj.Name = "btn_dodaj";
-            btn_dodaj.Size = new Size(460, 60);
+            btn_dodaj.Size = new Size(747, 93);
             btn_dodaj.TabIndex = 0;
             btn_dodaj.Text = "Dodaj";
             btn_dodaj.UseVisualStyleBackColor = true;
@@ -153,9 +155,10 @@
             btn_edytuj.AutoSize = true;
             btn_edytuj.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btn_edytuj.Dock = DockStyle.Fill;
-            btn_edytuj.Location = new Point(469, 3);
+            btn_edytuj.Location = new Point(762, 5);
+            btn_edytuj.Margin = new Padding(5, 5, 5, 5);
             btn_edytuj.Name = "btn_edytuj";
-            btn_edytuj.Size = new Size(461, 60);
+            btn_edytuj.Size = new Size(749, 93);
             btn_edytuj.TabIndex = 1;
             btn_edytuj.Text = "Edytuj";
             btn_edytuj.UseVisualStyleBackColor = true;
@@ -166,9 +169,10 @@
             label2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 11F);
-            label2.Location = new Point(3, 43);
+            label2.Location = new Point(5, 73);
+            label2.Margin = new Padding(5, 0, 5, 0);
             label2.Name = "label2";
-            label2.Size = new Size(153, 25);
+            label2.Size = new Size(249, 25);
             label2.TabIndex = 4;
             label2.Text = "Wyszukaj:";
             // 
@@ -176,9 +180,10 @@
             // 
             txtbox_wyszukaj.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtbox_wyszukaj.Font = new Font("Segoe UI", 11F);
-            txtbox_wyszukaj.Location = new Point(162, 40);
+            txtbox_wyszukaj.Location = new Point(264, 69);
+            txtbox_wyszukaj.Margin = new Padding(5, 5, 5, 5);
             txtbox_wyszukaj.Name = "txtbox_wyszukaj";
-            txtbox_wyszukaj.Size = new Size(774, 32);
+            txtbox_wyszukaj.Size = new Size(1257, 32);
             txtbox_wyszukaj.TabIndex = 5;
             txtbox_wyszukaj.TextChanged += txtbox_wyszukaj_TextChanged;
             // 
@@ -187,9 +192,10 @@
             label3.AutoSize = true;
             label3.Dock = DockStyle.Fill;
             label3.Font = new Font("Segoe UI", 11F);
-            label3.Location = new Point(3, 335);
+            label3.Location = new Point(5, 519);
+            label3.Margin = new Padding(5, 0, 5, 0);
             label3.Name = "label3";
-            label3.Size = new Size(153, 37);
+            label3.Size = new Size(249, 57);
             label3.TabIndex = 6;
             label3.Text = "Właściwości";
             // 
@@ -200,21 +206,23 @@
             dgv_wlasciwosci.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             tableLayoutPanel1.SetColumnSpan(dgv_wlasciwosci, 2);
             dgv_wlasciwosci.Dock = DockStyle.Fill;
-            dgv_wlasciwosci.Location = new Point(3, 375);
+            dgv_wlasciwosci.Location = new Point(5, 581);
+            dgv_wlasciwosci.Margin = new Padding(5, 5, 5, 5);
             dgv_wlasciwosci.Name = "dgv_wlasciwosci";
             dgv_wlasciwosci.RowHeadersWidth = 51;
-            dgv_wlasciwosci.Size = new Size(933, 218);
+            dgv_wlasciwosci.Size = new Size(1516, 337);
             dgv_wlasciwosci.TabIndex = 7;
             // 
             // Form_MaszynaWyp
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(13F, 31F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClientSize = new Size(939, 747);
+            ClientSize = new Size(1526, 1158);
             Controls.Add(tableLayoutPanel1);
-            Margin = new Padding(3, 4, 3, 4);
+            Font = new Font("Segoe UI", 14F);
+            Margin = new Padding(5, 6, 5, 6);
             Name = "Form_MaszynaWyp";
             Text = "Form_MaszynaWyp";
             tableLayoutPanel1.ResumeLayout(false);

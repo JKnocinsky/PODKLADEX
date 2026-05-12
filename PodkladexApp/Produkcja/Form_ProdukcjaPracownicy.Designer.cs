@@ -49,13 +49,14 @@
             tableLayoutPanel1.Controls.Add(label1, 1, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
+            tableLayoutPanel1.Margin = new Padding(5, 5, 5, 5);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 4;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 65F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 15F));
-            tableLayoutPanel1.Size = new Size(884, 733);
+            tableLayoutPanel1.Size = new Size(1436, 1136);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // dgv_pracownicy
@@ -64,18 +65,20 @@
             dgv_pracownicy.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgv_pracownicy.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_pracownicy.Dock = DockStyle.Fill;
-            dgv_pracownicy.Location = new Point(47, 149);
+            dgv_pracownicy.Location = new Point(76, 231);
+            dgv_pracownicy.Margin = new Padding(5, 5, 5, 5);
             dgv_pracownicy.Name = "dgv_pracownicy";
             dgv_pracownicy.RowHeadersWidth = 51;
-            dgv_pracownicy.Size = new Size(745, 470);
+            dgv_pracownicy.Size = new Size(1210, 728);
             dgv_pracownicy.TabIndex = 0;
             // 
             // dtp_data
             // 
             dtp_data.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            dtp_data.Location = new Point(47, 96);
+            dtp_data.Location = new Point(76, 150);
+            dtp_data.Margin = new Padding(5, 5, 5, 5);
             dtp_data.Name = "dtp_data";
-            dtp_data.Size = new Size(745, 27);
+            dtp_data.Size = new Size(1210, 39);
             dtp_data.TabIndex = 1;
             // 
             // label1
@@ -83,7 +86,8 @@
             label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.5F);
-            label1.Location = new Point(203, 19);
+            label1.Location = new Point(465, 39);
+            label1.Margin = new Padding(5, 0, 5, 0);
             label1.Name = "label1";
             label1.Size = new Size(432, 35);
             label1.TabIndex = 2;
@@ -91,10 +95,12 @@
             // 
             // Form_ProdukcjaPracownicy
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(13F, 31F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(884, 733);
+            ClientSize = new Size(1436, 1136);
             Controls.Add(tableLayoutPanel1);
+            Font = new Font("Segoe UI", 14F);
+            Margin = new Padding(5, 5, 5, 5);
             Name = "Form_ProdukcjaPracownicy";
             Text = "Form_ProdukcjaPracownicy";
             tableLayoutPanel1.ResumeLayout(false);

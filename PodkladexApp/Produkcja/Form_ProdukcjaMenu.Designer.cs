@@ -54,7 +54,7 @@
             tableLayoutPanel1.Controls.Add(btn_odpady, 0, 5);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
-            tableLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
+            tableLayoutPanel1.Margin = new Padding(5, 6, 5, 6);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 12;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 7.5F));
@@ -70,18 +70,18 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 7.5F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 7.5F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
-            tableLayoutPanel1.Size = new Size(1925, 1055);
+            tableLayoutPanel1.Size = new Size(3128, 1635);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // panel_Produkcja
             // 
-            panel_Produkcja.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            panel_Produkcja.AutoSize = true;
             panel_Produkcja.Dock = DockStyle.Fill;
-            panel_Produkcja.Location = new Point(378, 4);
-            panel_Produkcja.Margin = new Padding(3, 4, 3, 4);
+            panel_Produkcja.Location = new Point(614, 6);
+            panel_Produkcja.Margin = new Padding(5, 6, 5, 6);
             panel_Produkcja.Name = "panel_Produkcja";
             tableLayoutPanel1.SetRowSpan(panel_Produkcja, 13);
-            panel_Produkcja.Size = new Size(1544, 1047);
+            panel_Produkcja.Size = new Size(2509, 1623);
             panel_Produkcja.TabIndex = 3;
             // 
             // btn_wyp
@@ -90,9 +90,10 @@
             btn_wyp.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btn_wyp.Dock = DockStyle.Fill;
             btn_wyp.Font = new Font("Segoe UI", 14.5F);
-            btn_wyp.Location = new Point(3, 82);
+            btn_wyp.Location = new Point(5, 127);
+            btn_wyp.Margin = new Padding(5);
             btn_wyp.Name = "btn_wyp";
-            btn_wyp.Size = new Size(369, 73);
+            btn_wyp.Size = new Size(599, 112);
             btn_wyp.TabIndex = 5;
             btn_wyp.Text = "Wyposażenie";
             btn_wyp.UseVisualStyleBackColor = true;
@@ -104,10 +105,10 @@
             btn_maszyny.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btn_maszyny.Dock = DockStyle.Fill;
             btn_maszyny.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_maszyny.Location = new Point(3, 4);
-            btn_maszyny.Margin = new Padding(3, 4, 3, 4);
+            btn_maszyny.Location = new Point(5, 6);
+            btn_maszyny.Margin = new Padding(5, 6, 5, 6);
             btn_maszyny.Name = "btn_maszyny";
-            btn_maszyny.Size = new Size(369, 71);
+            btn_maszyny.Size = new Size(599, 110);
             btn_maszyny.TabIndex = 4;
             btn_maszyny.Text = "Maszyny";
             btn_maszyny.UseVisualStyleBackColor = true;
@@ -119,10 +120,10 @@
             btn_normyP.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btn_normyP.Dock = DockStyle.Fill;
             btn_normyP.Font = new Font("Segoe UI", 14.5F);
-            btn_normyP.Location = new Point(3, 241);
-            btn_normyP.Margin = new Padding(3, 4, 3, 4);
+            btn_normyP.Location = new Point(5, 372);
+            btn_normyP.Margin = new Padding(5, 6, 5, 6);
             btn_normyP.Name = "btn_normyP";
-            btn_normyP.Size = new Size(369, 71);
+            btn_normyP.Size = new Size(599, 110);
             btn_normyP.TabIndex = 6;
             btn_normyP.Text = "Normy Produkcyjne";
             btn_normyP.UseVisualStyleBackColor = true;
@@ -134,10 +135,10 @@
             btn_prod.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btn_prod.Dock = DockStyle.Fill;
             btn_prod.Font = new Font("Segoe UI", 14.5F);
-            btn_prod.Location = new Point(3, 320);
-            btn_prod.Margin = new Padding(3, 4, 3, 4);
+            btn_prod.Location = new Point(5, 494);
+            btn_prod.Margin = new Padding(5, 6, 5, 6);
             btn_prod.Name = "btn_prod";
-            btn_prod.Size = new Size(369, 71);
+            btn_prod.Size = new Size(599, 110);
             btn_prod.TabIndex = 7;
             btn_prod.Text = "Produkcja";
             btn_prod.UseVisualStyleBackColor = true;
@@ -149,9 +150,10 @@
             btn_Pracownicy.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btn_Pracownicy.Dock = DockStyle.Fill;
             btn_Pracownicy.Font = new Font("Segoe UI", 14.5F);
-            btn_Pracownicy.Location = new Point(3, 161);
+            btn_Pracownicy.Location = new Point(5, 249);
+            btn_Pracownicy.Margin = new Padding(5);
             btn_Pracownicy.Name = "btn_Pracownicy";
-            btn_Pracownicy.Size = new Size(369, 73);
+            btn_Pracownicy.Size = new Size(599, 112);
             btn_Pracownicy.TabIndex = 8;
             btn_Pracownicy.Text = "Pracownicy";
             btn_Pracownicy.UseVisualStyleBackColor = true;
@@ -163,9 +165,10 @@
             btn_odpady.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btn_odpady.Dock = DockStyle.Fill;
             btn_odpady.Font = new Font("Segoe UI", 14.5F);
-            btn_odpady.Location = new Point(3, 398);
+            btn_odpady.Location = new Point(5, 615);
+            btn_odpady.Margin = new Padding(5);
             btn_odpady.Name = "btn_odpady";
-            btn_odpady.Size = new Size(369, 73);
+            btn_odpady.Size = new Size(599, 112);
             btn_odpady.TabIndex = 9;
             btn_odpady.Text = "Efekty produkcji";
             btn_odpady.UseVisualStyleBackColor = true;
@@ -173,15 +176,16 @@
             // 
             // Form_ProdukcjaMenu
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(13F, 31F);
             AutoScaleMode = AutoScaleMode.Font;
-            AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClientSize = new Size(1925, 1055);
+            ClientSize = new Size(3128, 1635);
             Controls.Add(tableLayoutPanel1);
-            Margin = new Padding(3, 4, 3, 4);
+            Font = new Font("Segoe UI", 14F);
+            Margin = new Padding(5, 6, 5, 6);
             Name = "Form_ProdukcjaMenu";
             Text = "Form_Produkcja";
+            WindowState = FormWindowState.Maximized;
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             ResumeLayout(false);

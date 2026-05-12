@@ -25,9 +25,6 @@ namespace PodkladexApp
             // Załaduj listę norm wraz z nazwami produktu i materiału
             LoadNormyGrid();
 
-            //dgv_NormyProd.Columns["DataZakupu"].HeaderText = "Data zakupu";
-            //dgv_NormyProd.Columns["DataUruchomienia"].HeaderText = "Data uruchomienia";
-            //dgv_NormyProd.Columns["DataWylaczenia"].HeaderText = "Data wyłączenia";
             dgv_NormyProd.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
             cmb_filtr.Items.AddRange(new string[] { "Wszystkie", "Produkt", "Maszyna", "Materiał" });
@@ -35,10 +32,12 @@ namespace PodkladexApp
 
         private void LoadNormyGrid()
         {
-            // Załaduj powiązane encje aby uzyskać nazwy maszyn, produktu i materiału
+            // Załaduj powiązane encje aby uzyskać nazwy maszyn, produktu i materiału wraz z grubością
             var normyEntities = bd.NormaProd
                 .Include(n => n.IdProduktNavigation)
                 .Include(n => n.IdMaterialNavigation)
+                    .ThenInclude(m => m.MaterialWlasciwosci)
+                        .ThenInclude(mw => mw.IdWlasciwosciNavigation)
                 .Include(n => n.MaszynaWyp)
                     .ThenInclude(mw => mw.IdMaszynaNavigation)
                 .ToList();
@@ -46,13 +45,13 @@ namespace PodkladexApp
             var normy = normyEntities
                 .Select(n => new
                 {
-                    // Pierwsza kolumna: nazwy maszyn powiązanych z tą normą (po przecinku jeśli więcej niż jedna)
-                    //Maszyna = string.Join(", ", n.MaszynaWyp
-                    //    .Select(mw => mw.IdMaszynaNavigation != null ? mw.IdMaszynaNavigation.Nazwa : string.Empty)
-                    //    .Where(s => !string.IsNullOrEmpty(s))),
-                    //n.IdNormaP,
+                    // PRZYWRÓCONO: IdNormaP musi być w DataSource, aby edycja działała
+                    n.IdNormaP,
                     Produkt = n.IdProduktNavigation != null ? n.IdProduktNavigation.Nazwa : string.Empty,
-                    Material = n.IdMaterialNavigation != null ? n.IdMaterialNavigation.Nazwa : string.Empty,
+                    // Nazwa materiału || grubość (2 miejsca po przecinku)
+                    Material = n.IdMaterialNavigation != null
+                        ? $"{n.IdMaterialNavigation.Nazwa} || {(n.IdMaterialNavigation.MaterialWlasciwosci.FirstOrDefault(mw => mw.IdWlasciwosciNavigation.NazwaParametru == "Grubość")?.WartoscNominalna ?? 0):N2}"
+                        : string.Empty,
                     n.IloscMat,
                     n.Ilosc,
                     n.Czas,
@@ -61,9 +60,14 @@ namespace PodkladexApp
                 .ToList();
 
             dgv_NormyProd.DataSource = normy;
-            //dgv_NormyProd.DataSource = normyEntities;
+
+            // Ukrywamy kolumnę techniczną IdNormaP przed użytkownikiem
             if (dgv_NormyProd.Columns.Contains("IdNormaP"))
                 dgv_NormyProd.Columns["IdNormaP"].Visible = false;
+
+            dgv_NormyProd.Columns["Material"].HeaderText = "Materiał";
+            dgv_NormyProd.Columns["IloscMat"].HeaderText = "Ilość zużytego materiału";
+            dgv_NormyProd.Columns["Ilosc"].HeaderText = "Ilość wyprodukowana";
         }
 
         private void btn_dodaj_Click(object sender, EventArgs e)
@@ -81,6 +85,7 @@ namespace PodkladexApp
                 return;
             }
 
+            // Teraz kolumna IdNormaP istnieje w DataSource, więc ta linijka zadziała poprawnie:
             var selectedNormaId = Convert.ToInt32(dgv_NormyProd.SelectedRows[0].Cells["IdNormaP"].Value);
             var wybranaNorma = bd.NormaProd.Find(selectedNormaId);
 
@@ -92,17 +97,15 @@ namespace PodkladexApp
 
             Form_DodajNormProd formDodaj = new Form_DodajNormProd(bd, wybranaNorma);
             formDodaj.FormClosed += (s, args) => LoadNormyGrid(); // Odśwież po zamknięciu
-                formDodaj.ShowDialog();
+            formDodaj.ShowDialog();
         }
 
         private void btn_MaszWyp_Click(object sender, EventArgs e)
         {
-
         }
 
         private void cmb_wybieranie_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Gdy wybór w comboboxie filtrów się zmienia — filtrujemy dgv_NormyProd
             if (cmb_filtr.SelectedItem == null)
             {
                 LoadNormyGrid();
@@ -111,7 +114,6 @@ namespace PodkladexApp
 
             var filtr = cmb_filtr.SelectedItem.ToString();
 
-            // Jeśli brak wartości (np. SelectedIndex == -1) przywracamy pełną listę
             if (cmb_wybieranie.DataSource == null || cmb_wybieranie.SelectedValue == null)
             {
                 LoadNormyGrid();
@@ -122,12 +124,12 @@ namespace PodkladexApp
             {
                 case "Produkt":
                     {
-
-
                         int idProd = Convert.ToInt32(cmb_wybieranie.SelectedValue);
                         var normyEntities = bd.NormaProd
                             .Include(n => n.IdProduktNavigation)
                             .Include(n => n.IdMaterialNavigation)
+                                .ThenInclude(m => m.MaterialWlasciwosci)
+                                    .ThenInclude(mw => mw.IdWlasciwosciNavigation)
                             .Include(n => n.MaszynaWyp)
                                 .ThenInclude(mw => mw.IdMaszynaNavigation)
                             .Where(n => n.IdProdukt == idProd)
@@ -136,12 +138,11 @@ namespace PodkladexApp
                         var normy = normyEntities
                             .Select(n => new
                             {
-                                Maszyna = string.Join(", ", n.MaszynaWyp
-                                    .Select(mw => mw.IdMaszynaNavigation != null ? mw.IdMaszynaNavigation.Nazwa : string.Empty)
-                                    .Where(s => !string.IsNullOrEmpty(s))),
                                 n.IdNormaP,
                                 Produkt = n.IdProduktNavigation != null ? n.IdProduktNavigation.Nazwa : string.Empty,
-                                Material = n.IdMaterialNavigation != null ? n.IdMaterialNavigation.Nazwa : string.Empty,
+                                Material = n.IdMaterialNavigation != null
+                                    ? $"{n.IdMaterialNavigation.Nazwa} || {(n.IdMaterialNavigation.MaterialWlasciwosci.FirstOrDefault(mw => mw.IdWlasciwosciNavigation.NazwaParametru == "Grubość")?.WartoscNominalna ?? 0):N2}"
+                                    : string.Empty,
                                 n.IloscMat,
                                 n.Ilosc,
                                 n.Czas,
@@ -159,6 +160,8 @@ namespace PodkladexApp
                         var normyEntities = bd.NormaProd
                             .Include(n => n.IdProduktNavigation)
                             .Include(n => n.IdMaterialNavigation)
+                                .ThenInclude(m => m.MaterialWlasciwosci)
+                                    .ThenInclude(mw => mw.IdWlasciwosciNavigation)
                             .Include(n => n.MaszynaWyp)
                                 .ThenInclude(mw => mw.IdMaszynaNavigation)
                             .Where(n => n.MaszynaWyp.Any(mw => mw.IdMaszyna == idMasz))
@@ -167,12 +170,11 @@ namespace PodkladexApp
                         var normy = normyEntities
                             .Select(n => new
                             {
-                                Maszyna = string.Join(", ", n.MaszynaWyp
-                                    .Select(mw => mw.IdMaszynaNavigation != null ? mw.IdMaszynaNavigation.Nazwa : string.Empty)
-                                    .Where(s => !string.IsNullOrEmpty(s))),
                                 n.IdNormaP,
                                 Produkt = n.IdProduktNavigation != null ? n.IdProduktNavigation.Nazwa : string.Empty,
-                                Material = n.IdMaterialNavigation != null ? n.IdMaterialNavigation.Nazwa : string.Empty,
+                                Material = n.IdMaterialNavigation != null
+                                    ? $"{n.IdMaterialNavigation.Nazwa} || {(n.IdMaterialNavigation.MaterialWlasciwosci.FirstOrDefault(mw => mw.IdWlasciwosciNavigation.NazwaParametru == "Grubość")?.WartoscNominalna ?? 0):N2}"
+                                    : string.Empty,
                                 n.IloscMat,
                                 n.Ilosc,
                                 n.Czas,
@@ -190,6 +192,8 @@ namespace PodkladexApp
                         var normyEntities = bd.NormaProd
                             .Include(n => n.IdProduktNavigation)
                             .Include(n => n.IdMaterialNavigation)
+                                .ThenInclude(m => m.MaterialWlasciwosci)
+                                    .ThenInclude(mw => mw.IdWlasciwosciNavigation)
                             .Include(n => n.MaszynaWyp)
                                 .ThenInclude(mw => mw.IdMaszynaNavigation)
                             .Where(n => n.IdMaterial == idMat)
@@ -198,12 +202,11 @@ namespace PodkladexApp
                         var normy = normyEntities
                             .Select(n => new
                             {
-                                Maszyna = string.Join(", ", n.MaszynaWyp
-                                    .Select(mw => mw.IdMaszynaNavigation != null ? mw.IdMaszynaNavigation.Nazwa : string.Empty)
-                                    .Where(s => !string.IsNullOrEmpty(s))),
                                 n.IdNormaP,
                                 Produkt = n.IdProduktNavigation != null ? n.IdProduktNavigation.Nazwa : string.Empty,
-                                Material = n.IdMaterialNavigation != null ? n.IdMaterialNavigation.Nazwa : string.Empty,
+                                Material = n.IdMaterialNavigation != null
+                                    ? $"{n.IdMaterialNavigation.Nazwa} || {(n.IdMaterialNavigation.MaterialWlasciwosci.FirstOrDefault(mw => mw.IdWlasciwosciNavigation.NazwaParametru == "Grubość")?.WartoscNominalna ?? 0):N2}"
+                                    : string.Empty,
                                 n.IloscMat,
                                 n.Ilosc,
                                 n.Czas,
@@ -255,7 +258,7 @@ namespace PodkladexApp
                             var maszyny = bd.Maszyna
                                 .Select(m => new { m.IdMaszyna, m.Nazwa })
                                 .ToList();
-                            cmb_wybieranie.DataSource = null;                    // usuń poprzedni źródłowy typ
+                            cmb_wybieranie.DataSource = null;
                             cmb_wybieranie.DisplayMember = "Nazwa";
                             cmb_wybieranie.ValueMember = "IdMaszyna";
                             cmb_wybieranie.DataSource = maszyny;

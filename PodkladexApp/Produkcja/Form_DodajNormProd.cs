@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.EntityFrameworkCore; // Dodane dla obsługi Include
 
 namespace PodkladexApp.Produkcja
 {
@@ -46,13 +47,8 @@ namespace PodkladexApp.Produkcja
             _selectedProduktId = selectedProduktId;
             _selectedMaterialId = selectedMaterialId;
 
-            // Nie ustawiamy SelectedValue tutaj, bo źródło danych combo zostanie przypisane przy ładowaniu formularza.
             btn = 0;
         }
-
-        // Publiczne właściwości do odczytu, jeśli potrzebne poza tym formularzem
-        public int SelectedProduktId => _selectedProduktId;
-        public int SelectedMaterialId => _selectedMaterialId;
 
         protected override void OnLoad(EventArgs e)
         {
@@ -63,7 +59,6 @@ namespace PodkladexApp.Produkcja
 
         private void LoadCombos()
         {
-            // Wypełnij cmb_produkt listą produktów posortowanych po nazwie
             var produkty = db.Produkt
                 .OrderBy(p => p.Nazwa)
                 .Select(p => new { p.IdProdukt, p.Nazwa })
@@ -73,36 +68,35 @@ namespace PodkladexApp.Produkcja
             cmb_produkt.ValueMember = "IdProdukt";
             cmb_produkt.DataSource = produkty;
 
-            // Wypełnij cmb_material listą materiałów posortowanych po nazwie
             var materialy = db.Material
+                .Include(m => m.MaterialWlasciwosci)
+                    .ThenInclude(mw => mw.IdWlasciwosciNavigation)
                 .OrderBy(m => m.Nazwa)
-                .Select(m => new { m.IdMaterial, m.Nazwa })
+                .AsEnumerable()
+                .Select(m => new
+                {
+                    m.IdMaterial,
+                    NazwaZGruboscia = $"{m.Nazwa} || {(m.MaterialWlasciwosci.FirstOrDefault(mw => mw.IdWlasciwosciNavigation.NazwaParametru == "Grubość")?.WartoscNominalna ?? 0):N2}"
+                })
                 .ToList();
 
-            cmb_material.DisplayMember = "Nazwa";
+            cmb_material.DisplayMember = "NazwaZGruboscia";
             cmb_material.ValueMember = "IdMaterial";
             cmb_material.DataSource = materialy;
         }
 
         private void ApplyInitialSelection()
         {
-            // Jeśli konstruktor otrzymał obiekt normaProd, ustaw wybrane elementy według jego Id
             if (normaProd != null)
             {
                 cmb_produkt.SelectedValue = normaProd.IdProdukt;
                 cmb_material.SelectedValue = normaProd.IdMaterial;
 
-                // Możliwe wstępne wypełnienie pól tekstowych wartościami normy
                 txt_usedMaterial.Text = normaProd.IloscMat.ToString(CultureInfo.CurrentCulture);
                 txt_wyprodukowano.Text = normaProd.Ilosc.ToString(CultureInfo.CurrentCulture);
                 txt_czas.Text = normaProd.Czas.ToString(CultureInfo.CurrentCulture);
-
-                // Jeśli chcesz zablokować edycję przy edycji normy, odkomentuj poniższe:
-                // cmb_produkt.Enabled = false;
-                // cmb_material.Enabled = false;
             }
 
-            // Jeśli konstruktor otrzymał identyfikatory, ustaw i zablokuj odpowiednie combo
             if (_selectedProduktId != 0)
             {
                 cmb_produkt.SelectedValue = _selectedProduktId;
@@ -118,47 +112,63 @@ namespace PodkladexApp.Produkcja
 
         private void btn_zapisz_Click(object sender, EventArgs e)
         {
-            // Walidacja wybranych produktów i materiałów
-            if (cmb_produkt.SelectedItem == null)
+            if (cmb_produkt.SelectedValue == null || cmb_material.SelectedValue == null)
             {
-                MessageBox.Show("Wybierz produkt.", "Brak wartości", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Proszę wybrać produkt i materiał.", "Brak danych", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (cmb_material.SelectedItem == null)
+            int currentProduktId = Convert.ToInt32(cmb_produkt.SelectedValue);
+            int currentMaterialId = Convert.ToInt32(cmb_material.SelectedValue);
+
+            // ======================================================
+            // WALIDACJA UNIKALNOŚCI NORMY (Zadanie)
+            // ======================================================
+            bool duplicateExists;
+            if (normaProd == null) // Tryb dodawania
             {
-                MessageBox.Show("Wybierz materiał.", "Brak wartości", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                duplicateExists = db.NormaProd.Any(n => n.IdProdukt == currentProduktId && n.IdMaterial == currentMaterialId);
+            }
+            else // Tryb edycji
+            {
+                duplicateExists = db.NormaProd.Any(n => n.IdProdukt == currentProduktId && n.IdMaterial == currentMaterialId && n.IdNormaP != normaProd.IdNormaP);
             }
 
-            // Parsowanie pól liczbowych (używamy aktualnej kultury, by obsłużyć przecinek/kropkę zgodnie z ustawieniami)
+            if (duplicateExists)
+            {
+                MessageBox.Show("Norma dla wybranego produktu i materiału (o tej grubości) już istnieje w systemie.\n\n" +
+                                "Nie można utworzyć duplikatu. Jeśli chcesz zmienić parametry tej normy, odszukaj ją na liście głównej i użyj opcji 'Edytuj'.",
+                                "Norma już istnieje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            // ======================================================
+
             if (!decimal.TryParse(txt_usedMaterial.Text?.Trim(), NumberStyles.Number, CultureInfo.CurrentCulture, out var iloscMat))
             {
-                MessageBox.Show("Wprowadź poprawną wartość ilości materiału (IloscMat).", "Niepoprawny format", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Wprowadź poprawną wartość ilości materiału.", "Niepoprawny format", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (!decimal.TryParse(txt_wyprodukowano.Text?.Trim(), NumberStyles.Number, CultureInfo.CurrentCulture, out var ilosc))
             {
-                MessageBox.Show("Wprowadź poprawną wartość wyprodukowanych sztuk (Ilosc).", "Niepoprawny format", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Wprowadź poprawną wartość wyprodukowanych sztuk.", "Niepoprawny format", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (!decimal.TryParse(txt_czas.Text?.Trim(), NumberStyles.Number, CultureInfo.CurrentCulture, out var czas))
             {
-                MessageBox.Show("Wprowadź poprawną wartość czasu (Czas).", "Niepoprawny format", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Wprowadź poprawną wartość czasu.", "Niepoprawny format", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Jeśli nie przekazano normy do edycji - tworzymy nowy rekord NormaProd
             if (normaProd == null)
             {
                 try
                 {
                     var nowaNorma = new NormaProd
                     {
-                        IdProdukt = Convert.ToInt32(cmb_produkt.SelectedValue),
-                        IdMaterial = Convert.ToInt32(cmb_material.SelectedValue),
+                        IdProdukt = currentProduktId,
+                        IdMaterial = currentMaterialId,
                         IloscMat = iloscMat,
                         Ilosc = ilosc,
                         Czas = czas,
@@ -179,11 +189,10 @@ namespace PodkladexApp.Produkcja
             }
             else
             {
-                // Jeśli chcesz obsłużyć aktualizację istniejącej normy, można tu zaktualizować pola i zapisać:
                 try
                 {
-                    normaProd.IdProdukt = Convert.ToInt32(cmb_produkt.SelectedValue);
-                    normaProd.IdMaterial = Convert.ToInt32(cmb_material.SelectedValue);
+                    normaProd.IdProdukt = currentProduktId;
+                    normaProd.IdMaterial = currentMaterialId;
                     normaProd.IloscMat = iloscMat;
                     normaProd.Ilosc = ilosc;
                     normaProd.Czas = czas;
@@ -201,6 +210,6 @@ namespace PodkladexApp.Produkcja
                     MessageBox.Show($"Wystąpił błąd podczas aktualizacji: {ex.Message}", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-        }   
+        }
     }
 }

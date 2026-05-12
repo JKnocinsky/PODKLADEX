@@ -14,7 +14,8 @@ namespace PodkladexApp.Produkcja
     public partial class Form_ProdukcjaZatwierdz : Form
     {
         PodkladexContext db;
-        // Flaga do odróżnienia programatycznych zmian DateTimePicker od zmian użytkownika
+        // Flaga zapobiegająca wielokrotnemu odświeżaniu siatki podczas operacji na kontrolkach
+        bool _isUpdatingLayout = false;
         bool _suppressDtpCheckedSet = false;
 
         public Form_ProdukcjaZatwierdz(PodkladexContext db)
@@ -22,19 +23,20 @@ namespace PodkladexApp.Produkcja
             InitializeComponent();
             this.db = db;
 
-            // Podłączamy zdarzenia tutaj, aby nie polegać na designerze.
             this.Load += Form_ProdukcjaZatwierdz_Load;
             cmb_zamowienia.SelectedIndexChanged += Cmb_zamowienia_SelectedIndexChanged;
             dtp_data.ValueChanged += Dtp_data_ValueChanged;
+            dgv_produkcja.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
         }
 
         private void Form_ProdukcjaZatwierdz_Load(object? sender, EventArgs e)
         {
+            _isUpdatingLayout = true;
             LoadZamowienia();
             ConfigureDataGridView();
-            // Nie wybieramy automatycznie elementów — umożliwia to "wyczyszczenie" wyborów
             cmb_zamowienia.SelectedIndex = -1;
-            // Odświeżymy siatkę (pusta, dopóki nie będzie wybranego zamówienia i daty)
+            _isUpdatingLayout = false;
+
             RefreshProdukcjaGrid();
         }
 
@@ -50,7 +52,10 @@ namespace PodkladexApp.Produkcja
 
         private void LoadZamowienia()
         {
-            // Pobierz unikalne zamówienia z widoku, gdzie SredniaWartoscFormula < 100
+            // Zapamiętujemy aktualnie wybrane zamówienie przed odświeżeniem listy
+            int? currentSelectedId = null;
+            if (cmb_zamowienia.SelectedValue is int id) currentSelectedId = id;
+
             var items = db.WidokProdukcjaProcentRealizacji
                 .Where(w => w.SredniaWartoscFormula < 100M)
                 .Select(w => w.IdZamowienie)
@@ -64,20 +69,29 @@ namespace PodkladexApp.Produkcja
                 })
                 .ToList();
 
+            // Podpięcie danych
             cmb_zamowienia.DisplayMember = "Text";
             cmb_zamowienia.ValueMember = "Value";
             cmb_zamowienia.DataSource = items;
-            // Pozostawiamy SelectedIndex = -1 (ustawione w Load) żeby umożliwić "wyczyszczenie" wyboru
+
+            // Przywracamy zaznaczenie, jeśli zamówienie nadal wymaga pracy (<100%)
+            if (currentSelectedId.HasValue && items.Any(i => i.Value == currentSelectedId.Value))
+            {
+                cmb_zamowienia.SelectedValue = currentSelectedId.Value;
+            }
+            else
+            {
+                cmb_zamowienia.SelectedIndex = -1;
+            }
         }
 
         private void Cmb_zamowienia_SelectedIndexChanged(object? sender, EventArgs e)
         {
-            RefreshProdukcjaGrid();
+            if (!_isUpdatingLayout) RefreshProdukcjaGrid();
         }
 
         private void Dtp_data_ValueChanged(object? sender, EventArgs e)
         {
-            // Jeśli zmiana daty jest wykonana przez użytkownika -> włącz checkbox (jeśli dostępny)
             if (!_suppressDtpCheckedSet)
             {
                 try
@@ -85,13 +99,9 @@ namespace PodkladexApp.Produkcja
                     if (dtp_data.ShowCheckBox)
                         dtp_data.Checked = true;
                 }
-                catch
-                {
-                    // kontrolka może nie mieć ShowCheckBox; ignorujemy
-                }
+                catch { }
             }
-
-            RefreshProdukcjaGrid();
+            if (!_isUpdatingLayout) RefreshProdukcjaGrid();
         }
 
         private void RefreshProdukcjaGrid()
@@ -101,19 +111,19 @@ namespace PodkladexApp.Produkcja
                 bool hasZamowienie = cmb_zamowienia.SelectedIndex >= 0 && cmb_zamowienia.SelectedValue != null;
                 bool hasDate;
 
-                // Obsługa opcjonalnego checkboxa w DateTimePicker:
-                // jeśli kontrolka nie ma checkboxa, Checked zwróci wyjątek — dlatego try/catch
                 try
                 {
                     hasDate = !dtp_data.ShowCheckBox || dtp_data.Checked;
                 }
                 catch
                 {
-                    hasDate = true; // brak checkboxa => data zawsze traktujemy jako wybrana
+                    hasDate = true;
                 }
 
-                // Budujemy zapytanie dynamicznie — jeśli żaden filtr nie jest ustawiony, query pozostaje nieograniczone i zwróci wszystkie rekordy.
                 var query = db.WidokZamowieniaZadania.AsQueryable();
+
+                // Filtrowanie tylko niezatwierdzonych zadań (Zgodnie z Twoją prośbą)
+                query = query.Where(w => db.Produkcja.Any(p => p.IdProdukcja == w.IdProdukcja && p.Wyprodukowano == null));
 
                 if (hasZamowienie)
                 {
@@ -142,6 +152,19 @@ namespace PodkladexApp.Produkcja
                     .ToList();
 
                 dgv_produkcja.DataSource = records;
+                dgv_produkcja.Columns["IdProdukcja"].Visible = false;
+                dgv_produkcja.Columns["DataZadania"].HeaderText = "Data Zadania";
+                dgv_produkcja.Columns["NazwaMaszyny"].HeaderText = "Nazwa Maszyny";
+                dgv_produkcja.Columns["NazwaProduktu"].HeaderText = "Nazwa Produktu";
+
+                dgv_produkcja.Columns["ObliczonaIloscWyprodukowana"].HeaderText = "Ilość Wyprodukowana (aproks.)";
+                dgv_produkcja.Columns["ObliczonaIloscWyprodukowana"].DefaultCellStyle.Format = "N2";
+
+                dgv_produkcja.Columns["ObliczonaIloscOdpadow"].HeaderText = "Ilość Odpadów (aproks.)";
+                dgv_produkcja.Columns["ObliczonaIloscOdpadow"].DefaultCellStyle.Format = "N2";
+
+                dgv_produkcja.Columns["Pracownik"].HeaderText = "Pracownik";
+                dgv_produkcja.Columns["RBH"].HeaderText = "RBH";
             }
             catch (Exception ex)
             {
@@ -151,8 +174,6 @@ namespace PodkladexApp.Produkcja
 
         private void btn_clearDate_Click(object sender, EventArgs e)
         {
-            // Czyścimy datę w DateTimePicker — ustawiamy checked = false i datę na dziś.
-            // Ustawiamy flagę aby nie zareagować w ValueChanged (programatyczna zmiana).
             _suppressDtpCheckedSet = true;
             try
             {
@@ -163,13 +184,11 @@ namespace PodkladexApp.Produkcja
             {
                 _suppressDtpCheckedSet = false;
             }
-
             RefreshProdukcjaGrid();
         }
 
         private void btn_zatwierdz_Click(object sender, EventArgs e)
         {
-            // Pobierz wybrany rekord z dgv_produkcja
             if (dgv_produkcja.CurrentRow == null || dgv_produkcja.CurrentRow.DataBoundItem == null)
             {
                 MessageBox.Show("Proszę wybrać rekord w tabeli.", "Brak wyboru", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -187,12 +206,19 @@ namespace PodkladexApp.Produkcja
             decimal iloscWyprodukowana = item.ObliczonaIloscWyprodukowana ?? 0M;
             decimal iloscOdpadow = item.ObliczonaIloscOdpadow ?? 0M;
 
-            // Przekazujemy dodatkowe dane do podformularza
             var form = new Form_ProdukcjaZatwierdzPodform(db, idProdukcja, iloscWyprodukowana, iloscOdpadow);
-            form.ShowDialog();
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                // ZADANIE: Stabilne odświeżenie danych bez utraty filtrów
+                _isUpdatingLayout = true;
+                LoadZamowienia(); // Odśwież listę zamówień (zachowując wybór jeśli możliwe)
+                _isUpdatingLayout = false;
+
+                RefreshProdukcjaGrid(); // Odśwież tabelę (zatwierdzony rekord zniknie dzięki filtrowi NULL)
+            }
         }
 
-        // DTO do bindowania DataGridView - konkretna klasa ułatwia późniejsze pobranie zaznaczonego rekordu
         private class ProductionGridItem
         {
             public int? IdProdukcja { get; set; }

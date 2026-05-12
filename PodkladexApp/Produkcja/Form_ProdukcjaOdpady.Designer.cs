@@ -45,22 +45,24 @@
             tableLayoutPanel1.Controls.Add(label1, 1, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
+            tableLayoutPanel1.Margin = new Padding(5);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 3;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 80F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
-            tableLayoutPanel1.Size = new Size(972, 712);
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 70F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.Size = new Size(1580, 1104);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // dgv_efekty
             // 
             dgv_efekty.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_efekty.Dock = DockStyle.Fill;
-            dgv_efekty.Location = new Point(100, 74);
+            dgv_efekty.Location = new Point(163, 115);
+            dgv_efekty.Margin = new Padding(5);
             dgv_efekty.Name = "dgv_efekty";
             dgv_efekty.RowHeadersWidth = 51;
-            dgv_efekty.Size = new Size(771, 563);
+            dgv_efekty.Size = new Size(1254, 762);
             dgv_efekty.TabIndex = 0;
             // 
             // label1
@@ -68,7 +70,8 @@
             label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.5F);
-            label1.Location = new Point(221, 18);
+            label1.Location = new Point(526, 37);
+            label1.Margin = new Padding(5, 0, 5, 0);
             label1.Name = "label1";
             label1.Size = new Size(528, 35);
             label1.TabIndex = 1;
@@ -76,12 +79,14 @@
             // 
             // Form_ProdukcjaOdpady
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(13F, 31F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClientSize = new Size(972, 712);
+            ClientSize = new Size(1580, 1104);
             Controls.Add(tableLayoutPanel1);
+            Font = new Font("Segoe UI", 14F);
+            Margin = new Padding(5);
             Name = "Form_ProdukcjaOdpady";
             Text = "Form_ProdukcjaOdpady";
             WindowState = FormWindowState.Maximized;

@@ -34,7 +34,6 @@
             cmb_zamowienia = new ComboBox();
             dtp_data = new DateTimePicker();
             dgv_produkcja = new DataGridView();
-            btn_clearDate = new Button();
             tableLayoutPanel2 = new TableLayoutPanel();
             btn_zatwierdz = new Button();
             tableLayoutPanel1.SuspendLayout();
@@ -55,53 +54,62 @@
             tableLayoutPanel1.Controls.Add(cmb_zamowienia, 1, 0);
             tableLayoutPanel1.Controls.Add(dtp_data, 1, 1);
             tableLayoutPanel1.Controls.Add(dgv_produkcja, 0, 2);
-            tableLayoutPanel1.Controls.Add(btn_clearDate, 2, 1);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 2, 2);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
+            tableLayoutPanel1.Margin = new Padding(5);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 3;
+            tableLayoutPanel1.RowCount = 4;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 5F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 5F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 90F));
-            tableLayoutPanel1.Size = new Size(1149, 862);
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 75F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 15F));
+            tableLayoutPanel1.Size = new Size(2571, 1336);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // label1
             // 
             label1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             label1.AutoSize = true;
-            label1.Location = new Point(3, 11);
+            label1.Font = new Font("Segoe UI", 14F);
+            label1.Location = new Point(5, 17);
+            label1.Margin = new Padding(5, 0, 5, 0);
             label1.Name = "label1";
-            label1.Size = new Size(166, 20);
+            label1.Size = new Size(375, 32);
             label1.TabIndex = 0;
-            label1.Text = "Zamowienie";
+            label1.Text = "Zamówienie";
             // 
             // label2
             // 
             label2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             label2.AutoSize = true;
-            label2.Location = new Point(3, 54);
+            label2.Font = new Font("Segoe UI", 14F);
+            label2.Location = new Point(5, 83);
+            label2.Margin = new Padding(5, 0, 5, 0);
             label2.Name = "label2";
-            label2.Size = new Size(166, 20);
+            label2.Size = new Size(375, 32);
             label2.TabIndex = 1;
             label2.Text = "Data";
             // 
             // cmb_zamowienia
             // 
             cmb_zamowienia.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            cmb_zamowienia.Font = new Font("Segoe UI", 14F);
             cmb_zamowienia.FormattingEnabled = true;
-            cmb_zamowienia.Location = new Point(175, 7);
+            cmb_zamowienia.Location = new Point(390, 13);
+            cmb_zamowienia.Margin = new Padding(5);
             cmb_zamowienia.Name = "cmb_zamowienia";
-            cmb_zamowienia.Size = new Size(625, 28);
+            cmb_zamowienia.Size = new Size(1404, 39);
             cmb_zamowienia.TabIndex = 2;
             // 
             // dtp_data
             // 
             dtp_data.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            dtp_data.Location = new Point(175, 51);
+            dtp_data.Font = new Font("Segoe UI", 14F);
+            dtp_data.Location = new Point(390, 79);
+            dtp_data.Margin = new Padding(5);
             dtp_data.Name = "dtp_data";
-            dtp_data.Size = new Size(625, 27);
+            dtp_data.Size = new Size(1404, 39);
             dtp_data.TabIndex = 3;
             // 
             // dgv_produkcja
@@ -111,23 +119,13 @@
             dgv_produkcja.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             tableLayoutPanel1.SetColumnSpan(dgv_produkcja, 2);
             dgv_produkcja.Dock = DockStyle.Fill;
-            dgv_produkcja.Location = new Point(3, 89);
+            dgv_produkcja.Location = new Point(5, 137);
+            dgv_produkcja.Margin = new Padding(5);
             dgv_produkcja.Name = "dgv_produkcja";
-            dgv_produkcja.RowHeadersWidth = 51;
+            dgv_produkcja.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             dgv_produkcja.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv_produkcja.Size = new Size(797, 770);
+            dgv_produkcja.Size = new Size(1789, 992);
             dgv_produkcja.TabIndex = 4;
-            // 
-            // btn_clearDate
-            // 
-            btn_clearDate.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            btn_clearDate.Location = new Point(806, 46);
-            btn_clearDate.Name = "btn_clearDate";
-            btn_clearDate.Size = new Size(94, 37);
-            btn_clearDate.TabIndex = 5;
-            btn_clearDate.Text = "Wyczyść";
-            btn_clearDate.UseVisualStyleBackColor = true;
-            btn_clearDate.Click += btn_clearDate_Click;
             // 
             // tableLayoutPanel2
             // 
@@ -135,40 +133,43 @@
             tableLayoutPanel2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             tableLayoutPanel2.ColumnCount = 1;
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 32F));
             tableLayoutPanel2.Controls.Add(btn_zatwierdz, 0, 1);
             tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(806, 89);
+            tableLayoutPanel2.Location = new Point(1804, 137);
+            tableLayoutPanel2.Margin = new Padding(5);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 3;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 5F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 85F));
-            tableLayoutPanel2.Size = new Size(340, 770);
+            tableLayoutPanel2.Size = new Size(762, 992);
             tableLayoutPanel2.TabIndex = 6;
             // 
             // btn_zatwierdz
             // 
             btn_zatwierdz.Anchor = AnchorStyles.None;
             btn_zatwierdz.Font = new Font("Segoe UI", 14.5F);
-            btn_zatwierdz.Location = new Point(99, 53);
+            btn_zatwierdz.Location = new Point(266, 62);
+            btn_zatwierdz.Margin = new Padding(5);
             btn_zatwierdz.Name = "btn_zatwierdz";
-            btn_zatwierdz.Size = new Size(141, 47);
+            btn_zatwierdz.Size = new Size(229, 73);
             btn_zatwierdz.TabIndex = 0;
-            btn_zatwierdz.Text = "Zatwierdź";
+            btn_zatwierdz.Text = "Rozlicz";
             btn_zatwierdz.UseVisualStyleBackColor = true;
             btn_zatwierdz.Click += btn_zatwierdz_Click;
             // 
             // Form_ProdukcjaZatwierdz
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(13F, 31F);
             AutoScaleMode = AutoScaleMode.Font;
-            AutoSize = true;
-            AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClientSize = new Size(1149, 862);
+            ClientSize = new Size(2571, 1336);
             Controls.Add(tableLayoutPanel1);
+            Font = new Font("Segoe UI", 14F);
+            Margin = new Padding(5);
             Name = "Form_ProdukcjaZatwierdz";
             Text = "Form_ProdukcjaZatwierdz";
+            WindowState = FormWindowState.Maximized;
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_produkcja).EndInit();
@@ -185,7 +186,6 @@
         private ComboBox cmb_zamowienia;
         private DateTimePicker dtp_data;
         private DataGridView dgv_produkcja;
-        private Button btn_clearDate;
         private TableLayoutPanel tableLayoutPanel2;
         private Button btn_zatwierdz;
     }

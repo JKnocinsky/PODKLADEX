@@ -68,6 +68,9 @@ namespace PodkladexApp.Produkcja
                 {
                     pb_procentZaplanowania.Value = 0;
                     lbl_wybraneZam.Text = string.Empty;
+                    // Resetuj label planu jeśli brak wyboru
+                    var lblPlanReset = Controls.Find("lbl_procent_plan", true).FirstOrDefault() as Label;
+                    if (lblPlanReset != null) lblPlanReset.Text = "0.00%";
                     return;
                 }
 
@@ -89,40 +92,25 @@ namespace PodkladexApp.Produkcja
                 if (cell == null || cell.Value == null || cell.Value == DBNull.Value)
                 {
                     pb_procentZaplanowania.Value = 0;
+                    var lblPlanEmpty = Controls.Find("lbl_procent_plan", true).FirstOrDefault() as Label;
+                    if (lblPlanEmpty != null) lblPlanEmpty.Text = "0.00%";
                     return;
                 }
 
                 decimal percentDecimal = 0m;
 
-                // Obsłuż różne typy wartości
                 switch (cell.Value)
                 {
-                    case decimal d:
-                        percentDecimal = d;
-                        break;
-                    case double db:
-                        percentDecimal = (decimal)db;
-                        break;
-                    case float f:
-                        percentDecimal = (decimal)f;
-                        break;
-                    case int i:
-                        percentDecimal = i;
-                        break;
-                    case long l:
-                        percentDecimal = l;
-                        break;
-                    case string s when decimal.TryParse(s, out var parsed):
-                        percentDecimal = parsed;
-                        break;
+                    case decimal d: percentDecimal = d; break;
+                    case double db: percentDecimal = (decimal)db; break;
+                    case float f: percentDecimal = (decimal)f; break;
+                    case int i: percentDecimal = i; break;
+                    case long l: percentDecimal = l; break;
                     default:
-                        // próba konwersji ogólnej
                         if (decimal.TryParse(Convert.ToString(cell.Value), out var conv))
                             percentDecimal = conv;
                         break;
                 }
-
-
 
                 // Zaokrąglij i obetnij do zakresu 0..100
                 var percentInt = (int)Math.Round((double)percentDecimal);
@@ -130,10 +118,14 @@ namespace PodkladexApp.Produkcja
                 if (percentInt > pb_procentZaplanowania.Maximum) percentInt = pb_procentZaplanowania.Maximum;
 
                 pb_procentZaplanowania.Value = percentInt;
+
+                // AKTUALIZACJA LABELA lbl_procent_plan - ograniczenie do 100%
+                var lblPlan = Controls.Find("lbl_procent_plan", true).FirstOrDefault() as Label;
+                if (lblPlan != null)
+                    lblPlan.Text = $"{(percentDecimal > 100m ? 100m : percentDecimal):N2}%";
             }
             catch
             {
-                // W razie błędu ustaw domyślną wartość
                 try { pb_procentZaplanowania.Value = 0; lbl_wybraneZam.Text = string.Empty; } catch { }
             }
         }
@@ -155,12 +147,16 @@ namespace PodkladexApp.Produkcja
                         int intVal = (int)Math.Min(100, Math.Max(0, val));
                         pb_realizacja.Value = intVal;
 
-                        var lblRealizacja = Controls.Find("lbl_realizacja", true).FirstOrDefault() as Label;
-                        if (lblRealizacja != null) lblRealizacja.Text = $"{val:N2}%";
+                        // AKTUALIZACJA LABELA lbl_procent_realiz - ograniczenie do 100%
+                        var lblRealizacja = Controls.Find("lbl_procent_realiz", true).FirstOrDefault() as Label;
+                        if (lblRealizacja != null)
+                            lblRealizacja.Text = $"{(val > 100m ? 100m : val):N2}%";
                     }
                     else
                     {
                         pb_realizacja.Value = 0;
+                        var lblRealReset = Controls.Find("lbl_procent_realiz", true).FirstOrDefault() as Label;
+                        if (lblRealReset != null) lblRealReset.Text = "0.00%";
                     }
                 }
             }
@@ -239,7 +235,7 @@ namespace PodkladexApp.Produkcja
             dtg_zaplanujProd.Columns["IloscZamowienia"].HeaderText = "Zamówiono";
             dtg_zaplanujProd.Columns["SumaOdpady"].HeaderText = "Odrzucono";
             dtg_zaplanujProd.Columns["ZaplanowanaProdukcja"].HeaderText = "Zaplanowano produkcję";
-            dtg_zaplanujProd.Columns["ProcentZaplanowanejProdukcji"].HeaderText = "Procent realizacji";
+            dtg_zaplanujProd.Columns["ProcentZaplanowanejProdukcji"].HeaderText = "Procent rozplanowania";
 
             // Formatowanie kolumn: dwie cyfry po przecinku
             var colRbh = dtg_zaplanujProd.Columns["ZaplanowanaProdukcja"];

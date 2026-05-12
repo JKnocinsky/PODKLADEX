@@ -40,9 +40,10 @@
             // 
             btn_zapisz.AutoSize = true;
             btn_zapisz.Font = new Font("Segoe UI", 11F);
-            btn_zapisz.Location = new Point(217, 340);
+            btn_zapisz.Location = new Point(353, 527);
+            btn_zapisz.Margin = new Padding(5, 5, 5, 5);
             btn_zapisz.Name = "btn_zapisz";
-            btn_zapisz.Size = new Size(94, 35);
+            btn_zapisz.Size = new Size(153, 54);
             btn_zapisz.TabIndex = 0;
             btn_zapisz.Text = "Zapisz";
             btn_zapisz.UseVisualStyleBackColor = true;
@@ -51,24 +52,27 @@
             // txt_odpady
             // 
             txt_odpady.Font = new Font("Segoe UI", 11F);
-            txt_odpady.Location = new Point(132, 225);
+            txt_odpady.Location = new Point(214, 349);
+            txt_odpady.Margin = new Padding(5, 5, 5, 5);
             txt_odpady.Name = "txt_odpady";
-            txt_odpady.Size = new Size(264, 32);
+            txt_odpady.Size = new Size(426, 32);
             txt_odpady.TabIndex = 1;
             // 
             // txt_wyprodukowano
             // 
             txt_wyprodukowano.Font = new Font("Segoe UI", 11F);
-            txt_wyprodukowano.Location = new Point(132, 106);
+            txt_wyprodukowano.Location = new Point(214, 164);
+            txt_wyprodukowano.Margin = new Padding(5, 5, 5, 5);
             txt_wyprodukowano.Name = "txt_wyprodukowano";
-            txt_wyprodukowano.Size = new Size(264, 32);
+            txt_wyprodukowano.Size = new Size(426, 32);
             txt_wyprodukowano.TabIndex = 2;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.5F);
-            label1.Location = new Point(203, 26);
+            label1.Location = new Point(330, 40);
+            label1.Margin = new Padding(5, 0, 5, 0);
             label1.Name = "label1";
             label1.Size = new Size(122, 35);
             label1.TabIndex = 3;
@@ -77,32 +81,36 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(132, 83);
+            label2.Location = new Point(214, 129);
+            label2.Margin = new Padding(5, 0, 5, 0);
             label2.Name = "label2";
-            label2.Size = new Size(169, 20);
+            label2.Size = new Size(269, 32);
             label2.TabIndex = 4;
             label2.Text = "Ile wyprodukowano [kg]";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(132, 202);
+            label3.Location = new Point(214, 313);
+            label3.Margin = new Padding(5, 0, 5, 0);
             label3.Name = "label3";
-            label3.Size = new Size(228, 20);
+            label3.Size = new Size(361, 32);
             label3.TabIndex = 5;
             label3.Text = "Ile odpadów wygenerowano [kg]";
             // 
             // Form_ProdukcjaZatwierdzPodform
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(13F, 31F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(536, 400);
+            ClientSize = new Size(871, 620);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(txt_wyprodukowano);
             Controls.Add(txt_odpady);
             Controls.Add(btn_zapisz);
+            Font = new Font("Segoe UI", 14F);
+            Margin = new Padding(5, 5, 5, 5);
             Name = "Form_ProdukcjaZatwierdzPodform";
             Text = "Form_ProdukcjaZatwierdzPodform";
             ResumeLayout(false);

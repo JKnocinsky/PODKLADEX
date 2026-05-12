@@ -50,17 +50,18 @@
             // txtbox_Nazwa
             // 
             txtbox_Nazwa.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            txtbox_Nazwa.Location = new Point(69, 100);
-            txtbox_Nazwa.Margin = new Padding(3, 4, 3, 4);
+            txtbox_Nazwa.Location = new Point(112, 155);
+            txtbox_Nazwa.Margin = new Padding(5, 6, 5, 6);
             txtbox_Nazwa.Name = "txtbox_Nazwa";
-            txtbox_Nazwa.Size = new Size(330, 34);
+            txtbox_Nazwa.Size = new Size(534, 34);
             txtbox_Nazwa.TabIndex = 0;
             // 
             // label_tytul
             // 
             label_tytul.AutoSize = true;
             label_tytul.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_tytul.Location = new Point(88, -4);
+            label_tytul.Location = new Point(143, -6);
+            label_tytul.Margin = new Padding(5, 0, 5, 0);
             label_tytul.Name = "label_tytul";
             label_tytul.Size = new Size(293, 54);
             label_tytul.TabIndex = 1;
@@ -70,7 +71,8 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label2.Location = new Point(69, 68);
+            label2.Location = new Point(112, 105);
+            label2.Margin = new Padding(5, 0, 5, 0);
             label2.Name = "label2";
             label2.Size = new Size(70, 28);
             label2.TabIndex = 2;
@@ -80,7 +82,8 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label3.Location = new Point(72, 559);
+            label3.Location = new Point(117, 866);
+            label3.Margin = new Padding(5, 0, 5, 0);
             label3.Name = "label3";
             label3.Size = new Size(67, 28);
             label3.TabIndex = 4;
@@ -89,26 +92,27 @@
             // txtbox_uwagi
             // 
             txtbox_uwagi.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            txtbox_uwagi.Location = new Point(69, 591);
-            txtbox_uwagi.Margin = new Padding(3, 4, 3, 4);
+            txtbox_uwagi.Location = new Point(112, 916);
+            txtbox_uwagi.Margin = new Padding(5, 6, 5, 6);
             txtbox_uwagi.Name = "txtbox_uwagi";
-            txtbox_uwagi.Size = new Size(330, 34);
+            txtbox_uwagi.Size = new Size(534, 34);
             txtbox_uwagi.TabIndex = 3;
             // 
             // dtp_dataZakup
             // 
             dtp_dataZakup.CalendarFont = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            dtp_dataZakup.Location = new Point(69, 306);
-            dtp_dataZakup.Margin = new Padding(3, 4, 3, 4);
+            dtp_dataZakup.Location = new Point(112, 474);
+            dtp_dataZakup.Margin = new Padding(5, 6, 5, 6);
             dtp_dataZakup.Name = "dtp_dataZakup";
-            dtp_dataZakup.Size = new Size(330, 27);
+            dtp_dataZakup.Size = new Size(534, 39);
             dtp_dataZakup.TabIndex = 5;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label4.Location = new Point(69, 274);
+            label4.Location = new Point(112, 425);
+            label4.Margin = new Padding(5, 0, 5, 0);
             label4.Name = "label4";
             label4.Size = new Size(121, 28);
             label4.TabIndex = 6;
@@ -118,7 +122,8 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label5.Location = new Point(69, 369);
+            label5.Location = new Point(112, 572);
+            label5.Margin = new Padding(5, 0, 5, 0);
             label5.Name = "label5";
             label5.Size = new Size(177, 28);
             label5.TabIndex = 8;
@@ -127,17 +132,18 @@
             // dtp_dataUruch
             // 
             dtp_dataUruch.CalendarFont = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            dtp_dataUruch.Location = new Point(69, 401);
-            dtp_dataUruch.Margin = new Padding(3, 4, 3, 4);
+            dtp_dataUruch.Location = new Point(112, 622);
+            dtp_dataUruch.Margin = new Padding(5, 6, 5, 6);
             dtp_dataUruch.Name = "dtp_dataUruch";
-            dtp_dataUruch.Size = new Size(330, 27);
+            dtp_dataUruch.Size = new Size(534, 39);
             dtp_dataUruch.TabIndex = 7;
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label6.Location = new Point(69, 464);
+            label6.Location = new Point(112, 719);
+            label6.Margin = new Padding(5, 0, 5, 0);
             label6.Name = "label6";
             label6.Size = new Size(151, 28);
             label6.TabIndex = 10;
@@ -146,18 +152,18 @@
             // dtp_dataWyl
             // 
             dtp_dataWyl.CalendarFont = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            dtp_dataWyl.Location = new Point(69, 496);
-            dtp_dataWyl.Margin = new Padding(3, 4, 3, 4);
+            dtp_dataWyl.Location = new Point(112, 769);
+            dtp_dataWyl.Margin = new Padding(5, 6, 5, 6);
             dtp_dataWyl.Name = "dtp_dataWyl";
-            dtp_dataWyl.Size = new Size(330, 27);
+            dtp_dataWyl.Size = new Size(534, 39);
             dtp_dataWyl.TabIndex = 9;
             // 
             // btn_funkcja
             // 
-            btn_funkcja.Location = new Point(155, 693);
-            btn_funkcja.Margin = new Padding(3, 4, 3, 4);
+            btn_funkcja.Location = new Point(252, 1074);
+            btn_funkcja.Margin = new Padding(5, 6, 5, 6);
             btn_funkcja.Name = "btn_funkcja";
-            btn_funkcja.Size = new Size(159, 45);
+            btn_funkcja.Size = new Size(258, 70);
             btn_funkcja.TabIndex = 11;
             btn_funkcja.Text = "Zatwierdź";
             btn_funkcja.UseVisualStyleBackColor = true;
@@ -167,16 +173,18 @@
             // 
             cmb_typ.Font = new Font("Segoe UI", 12F);
             cmb_typ.FormattingEnabled = true;
-            cmb_typ.Location = new Point(69, 202);
+            cmb_typ.Location = new Point(112, 313);
+            cmb_typ.Margin = new Padding(5, 5, 5, 5);
             cmb_typ.Name = "cmb_typ";
-            cmb_typ.Size = new Size(330, 36);
+            cmb_typ.Size = new Size(534, 36);
             cmb_typ.TabIndex = 12;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F);
-            label1.Location = new Point(69, 171);
+            label1.Location = new Point(112, 265);
+            label1.Margin = new Padding(5, 0, 5, 0);
             label1.Name = "label1";
             label1.Size = new Size(43, 28);
             label1.TabIndex = 13;
@@ -186,9 +194,10 @@
             // 
             cb_dataUr.Checked = true;
             cb_dataUr.CheckState = CheckState.Checked;
-            cb_dataUr.Location = new Point(36, 401);
+            cb_dataUr.Location = new Point(58, 622);
+            cb_dataUr.Margin = new Padding(5, 5, 5, 5);
             cb_dataUr.Name = "cb_dataUr";
-            cb_dataUr.Size = new Size(27, 27);
+            cb_dataUr.Size = new Size(44, 42);
             cb_dataUr.TabIndex = 14;
             cb_dataUr.UseVisualStyleBackColor = true;
             // 
@@ -196,28 +205,29 @@
             // 
             cb_dataWy.Checked = true;
             cb_dataWy.CheckState = CheckState.Checked;
-            cb_dataWy.Location = new Point(36, 496);
+            cb_dataWy.Location = new Point(58, 769);
+            cb_dataWy.Margin = new Padding(5, 5, 5, 5);
             cb_dataWy.Name = "cb_dataWy";
-            cb_dataWy.Size = new Size(27, 27);
+            cb_dataWy.Size = new Size(44, 42);
             cb_dataWy.TabIndex = 15;
-            cb_dataWy.Text = "checkBox1";
             cb_dataWy.UseVisualStyleBackColor = true;
             // 
             // cb_dataZa
             // 
             cb_dataZa.Checked = true;
             cb_dataZa.CheckState = CheckState.Checked;
-            cb_dataZa.Location = new Point(36, 306);
+            cb_dataZa.Location = new Point(58, 474);
+            cb_dataZa.Margin = new Padding(5, 5, 5, 5);
             cb_dataZa.Name = "cb_dataZa";
-            cb_dataZa.Size = new Size(27, 27);
+            cb_dataZa.Size = new Size(44, 42);
             cb_dataZa.TabIndex = 16;
             cb_dataZa.UseVisualStyleBackColor = true;
             // 
             // Form_DodajMaszyne
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(13F, 31F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(459, 764);
+            ClientSize = new Size(746, 1184);
             Controls.Add(cb_dataZa);
             Controls.Add(cb_dataWy);
             Controls.Add(cb_dataUr);
@@ -235,7 +245,8 @@
             Controls.Add(label2);
             Controls.Add(label_tytul);
             Controls.Add(txtbox_Nazwa);
-            Margin = new Padding(3, 4, 3, 4);
+            Font = new Font("Segoe UI", 14F);
+            Margin = new Padding(5, 6, 5, 6);
             Name = "Form_DodajMaszyne";
             Text = "Form_DodajMaszyne";
             ResumeLayout(false);
