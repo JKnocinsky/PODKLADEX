@@ -705,17 +705,17 @@ GO
 -- 24. KONTROLA MATERIALU I PRODUKTU
 -- ==========================================
 INSERT INTO Kontrola_mat (ID_pracownik, RBH, Zatwierdzone, Odpady, ID_zadanieP, ID_material) VALUES
-(1, 1.50, 1, 2.50, 3, 3),
-(2, 1.20, 1, 0.90, 6, 1),
-(3, 1.00, 0, 0.50, 8, 3);
+(6, 1.50, 1, 2.50, 3, 3),
+(8, 1.20, 1, 0.90, 6, 1),
+(9, 1.00, 0, 0.50, 8, 3);
 GO
 
 INSERT INTO Kontrola_prod (ID_pracownik, RBH, Zatwierdzone, Odpady, ID_zadanieP) VALUES
-(3, 2.00, 1, 4.15, 1),
-(1, 1.80, 1, 0.85, 2),
-(3, 1.70, 1, 1.40, 4),
-(1, 1.90, 1, 1.95, 5),
-(2, 1.50, 0, 2.10, 7);
+(6, 2.00, 1, 4.15, 1),
+(8, 1.80, 1, 0.85, 2),
+(9, 1.70, 1, 1.40, 4),
+(6, 1.90, 1, 1.95, 5),
+(8, 1.50, 0, 2.10, 7);
 GO
 
 INSERT INTO Pomiar_mat (ID_Kontrola_mat, ID_wlasciwosci, Wartosc_zmierzona) VALUES
