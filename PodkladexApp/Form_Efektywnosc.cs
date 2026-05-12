@@ -98,6 +98,8 @@ namespace PodkladexApp
             var query = _context.Produkcja
                 .Include(p => p.IdZadaniePNavigation.IdMaszynaNavigation)
                 .Include(p => p.IdPracownikNavigation.IdOsobaNavigation)
+                .Include(p => p.IdZadaniePNavigation.KontrolaProd)
+                .Include(p => p.IdZadaniePNavigation.KontrolaMat)
                 .AsQueryable();
 
             if (comboBox_FiltrMaszyna.SelectedValue is int idMaszyna)
@@ -117,9 +119,22 @@ namespace PodkladexApp
                 Pracownik = p.IdPracownikNavigation.IdOsobaNavigation.Imie + " " + p.IdPracownikNavigation.IdOsobaNavigation.Nazwisko,
                 Maszyna = p.IdZadaniePNavigation.IdMaszynaNavigation.Nazwa,
                 Wyprodukowano_kg = (double)p.Wyprodukowano,
-                Odpady_kg = (double)p.Odpady,
-                Efektywnosc = (double)(p.Wyprodukowano + p.Odpady) > 0
-                    ? Math.Round(((double)p.Wyprodukowano / ((double)p.Wyprodukowano + (double)p.Odpady)) * 100, 2)
+                Odpady_kg = (double)(
+                    p.IdZadaniePNavigation.KontrolaProd.Sum(k => k.Odpady ?? 0m) +
+                    p.IdZadaniePNavigation.KontrolaMat.Sum(k => k.Odpady ?? 0m)
+                )
+            }).ToList();
+
+            var daneZObliczeniami = suroweDane.Select(x => new
+            {
+                x.ID,
+                x.Zadanie,
+                x.Pracownik,
+                x.Maszyna,
+                x.Wyprodukowano_kg,
+                x.Odpady_kg,
+                Efektywnosc = (x.Wyprodukowano_kg + x.Odpady_kg) > 0
+                    ? Math.Round((x.Wyprodukowano_kg / (x.Wyprodukowano_kg + x.Odpady_kg)) * 100, 2)
                     : 0
             }).ToList();
 
@@ -128,12 +143,12 @@ namespace PodkladexApp
 
             switch (wybraneSortowanie)
             {
-                case "Pracownik A-Z": daneLista = suroweDane.OrderBy(x => x.Pracownik).Cast<dynamic>().ToList(); break;
-                case "Maszyna A-Z": daneLista = suroweDane.OrderBy(x => x.Maszyna).Cast<dynamic>().ToList(); break;
-                case "Efektywność (od najwyższej)": daneLista = suroweDane.OrderByDescending(x => x.Efektywnosc).Cast<dynamic>().ToList(); break;
-                case "Efektywność (od najniższej)": daneLista = suroweDane.OrderBy(x => x.Efektywnosc).Cast<dynamic>().ToList(); break;
-                case "Największa produkcja [kg]": daneLista = suroweDane.OrderByDescending(x => x.Wyprodukowano_kg).Cast<dynamic>().ToList(); break;
-                default: daneLista = suroweDane.OrderByDescending(x => x.ID).Cast<dynamic>().ToList(); break;
+                case "Pracownik A-Z": daneLista = daneZObliczeniami.OrderBy(x => x.Pracownik).Cast<dynamic>().ToList(); break;
+                case "Maszyna A-Z": daneLista = daneZObliczeniami.OrderBy(x => x.Maszyna).Cast<dynamic>().ToList(); break;
+                case "Efektywność (od najwyższej)": daneLista = daneZObliczeniami.OrderByDescending(x => x.Efektywnosc).Cast<dynamic>().ToList(); break;
+                case "Efektywność (od najniższej)": daneLista = daneZObliczeniami.OrderBy(x => x.Efektywnosc).Cast<dynamic>().ToList(); break;
+                case "Największa produkcja [kg]": daneLista = daneZObliczeniami.OrderByDescending(x => x.Wyprodukowano_kg).Cast<dynamic>().ToList(); break;
+                default: daneLista = daneZObliczeniami.OrderByDescending(x => x.ID).Cast<dynamic>().ToList(); break;
             }
 
             DGV_Efektywnosc.DataSource = daneLista;
@@ -174,18 +189,32 @@ namespace PodkladexApp
             }
             bars.ValueLabelStyle.Bold = true;
 
-            ScottPlot.Tick[] ticks = new ScottPlot.Tick[etykiety.Length];
+            // Skonfigurowanie etykiet osi X
+            ScottPlot.Tick[] xTicks = new ScottPlot.Tick[etykiety.Length];
             for (int i = 0; i < etykiety.Length; i++)
             {
-                ticks[i] = new ScottPlot.Tick(i, etykiety[i]);
+                xTicks[i] = new ScottPlot.Tick(i, etykiety[i]);
             }
 
-            formsPlot_Efektywnosc.Plot.Axes.Bottom.TickGenerator = new ScottPlot.TickGenerators.NumericManual(ticks);
+            formsPlot_Efektywnosc.Plot.Axes.Bottom.TickGenerator = new ScottPlot.TickGenerators.NumericManual(xTicks);
             formsPlot_Efektywnosc.Plot.Axes.Bottom.TickLabelStyle.Rotation = 45;
             formsPlot_Efektywnosc.Plot.Axes.Bottom.MinimumSize = 80;
 
-            // Resetowanie kamery wykresu, aby pokazała wszystkie słupki (od -1 do liczby rekordów)
+            // Ręczne ustawienie podziałki osi Y (tylko do 100)
+            ScottPlot.Tick[] yTicks = new ScottPlot.Tick[]
+            {
+                new ScottPlot.Tick(0, "0"),
+                new ScottPlot.Tick(20, "20"),
+                new ScottPlot.Tick(40, "40"),
+                new ScottPlot.Tick(60, "60"),
+                new ScottPlot.Tick(80, "80"),
+                new ScottPlot.Tick(100, "100")
+            };
+            formsPlot_Efektywnosc.Plot.Axes.Left.TickGenerator = new ScottPlot.TickGenerators.NumericManual(yTicks);
+
             formsPlot_Efektywnosc.Plot.Axes.SetLimitsX(-1, daneWykres.Count);
+
+            // Limit fizyczny dla tekstu, ale etykiety widoczne na osi kończą się równo na 100
             formsPlot_Efektywnosc.Plot.Axes.SetLimitsY(0, 115);
 
             formsPlot_Efektywnosc.Plot.YLabel("Efektywność [%]");

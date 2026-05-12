@@ -443,6 +443,17 @@ namespace PodkladexApp
             comboBox_KontMatZadP.ValueMember = "IdZadanieP";
             comboBox_KontMatZadP.SelectedIndex = -1;
 
+            int maxWidth = comboBox_KontMatZadP.Width;
+            foreach (var item in comboBox_KontMatZadP.Items)
+            {
+                int itemWidth = TextRenderer.MeasureText(comboBox_KontMatZadP.GetItemText(item), comboBox_KontMatZadP.Font).Width;
+                if (itemWidth > maxWidth)
+                {
+                    maxWidth = itemWidth;
+                }
+            }
+            comboBox_KontMatZadP.DropDownWidth = maxWidth + SystemInformation.VerticalScrollBarWidth;
+
             comboBox_KontMatMaterial.DataSource = _context.Material.ToList();
             comboBox_KontMatMaterial.DisplayMember = "Nazwa";
             comboBox_KontMatMaterial.ValueMember = "IdMaterial";
@@ -472,6 +483,21 @@ namespace PodkladexApp
                     Zat = k.Zatwierdzone ? "TAK" : "NIE"
                 })
                 .OrderByDescending(x => x.ID).ToList();
+
+            if (DGV_KontMatKontrole.Columns.Contains("ID"))
+            {
+                DGV_KontMatKontrole.Columns["ID"].Visible = false;
+            }
+
+            if (DGV_KontMatKontrole.Columns.Contains("Wyprodukowano"))
+            {
+                DGV_KontMatKontrole.Columns["Wyprodukowano"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+
+            if (DGV_KontMatKontrole.Columns.Contains("Pracownik"))
+            {
+                DGV_KontMatKontrole.Columns["Pracownik"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
         }
     }
 }
