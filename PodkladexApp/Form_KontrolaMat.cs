@@ -35,6 +35,9 @@ namespace PodkladexApp
             this.btn_ZakonczKontrole.Click += btn_ZakonczKontrole_Click;
             this.btn_Anuluj.Click += btn_Anuluj_Click;
 
+            // Podpięcie zdarzenia kliknięcia dla checkboxa
+            this.checkBox_KontrolaMatZat.Click += checkBox_KontrolaMatZat_Click;
+
             this.DGV_PomiaryMat.CellFormatting += DGV_PomiaryMat_CellFormatting;
 
             this.comboBox_KontMatZadP.SelectedIndexChanged += comboBox_KontMatZadP_SelectedIndexChanged;
@@ -86,8 +89,11 @@ namespace PodkladexApp
 
             textBox_KontMatRBH.Clear();
             textBox_KontMatOdpady.Clear();
+            textBox_KontMatOdpadySzt.Clear();
             checkBox_KontrolaMatZat.Checked = false;
             textBox_PomiarMatWartosc.Clear();
+            progressBar_Postep.Value = 0;
+            label_PostepInfo.Text = "";
 
             btn_PomiarMatDodaj.Text = "Dodaj pomiar";
         }
@@ -189,7 +195,7 @@ namespace PodkladexApp
                 comboBox_KontMatMaterial.Enabled = false;
 
                 textBox_KontMatRBH.Text = wybrana.Rbh?.ToString();
-                textBox_KontMatOdpady.Text = wybrana.Odpady?.ToString();
+                textBox_KontMatOdpady.Text = wybrana.Odpady?.ToString("N2");
                 checkBox_KontrolaMatZat.Checked = wybrana.Zatwierdzone;
 
                 btn_KontMatPomiar.Enabled = true;
@@ -250,6 +256,22 @@ namespace PodkladexApp
         private void btn_KontMatPomiar_Click(object sender, EventArgs e)
         {
             panel_DodawaniePomiaru.Visible = true;
+
+            // Filtrujemy combobox właściwości tylko do tych, które ma materiał (bez właściwości "Masa" id=8, bo ją wyliczamy)
+            var kontrola = _context.KontrolaMat.Find(_aktualneIdKontroli);
+            if (kontrola != null)
+            {
+                var wlasciwosciMaterialu = _context.MaterialWlasciwosci
+                    .Where(mw => mw.IdMaterial == kontrola.IdMaterial && mw.IdWlasciwosci != 8)
+                    .Include(mw => mw.IdWlasciwosciNavigation)
+                    .Select(mw => new { mw.IdWlasciwosci, mw.IdWlasciwosciNavigation.NazwaParametru })
+                    .ToList();
+
+                comboBox_PomiarMatWlasc.DataSource = wlasciwosciMaterialu;
+                comboBox_PomiarMatWlasc.DisplayMember = "NazwaParametru";
+                comboBox_PomiarMatWlasc.ValueMember = "IdWlasciwosci";
+            }
+
             OdswiezTabelePomiarow();
             btn_KontMatPomiar.Enabled = false;
         }
@@ -353,7 +375,11 @@ namespace PodkladexApp
 
         private void OdswiezTabelePomiarow()
         {
-            int idMat = (int)comboBox_KontMatMaterial.SelectedValue;
+            var kontrola = _context.KontrolaMat.Find(_aktualneIdKontroli);
+            if (kontrola == null) return;
+
+            int idMat = kontrola.IdMaterial;
+
             DGV_PomiaryMat.DataSource = _context.PomiarMat
                 .Where(p => p.IdKontrolaMat == _aktualneIdKontroli)
                 .Include(p => p.IdWlasciwosciNavigation)
@@ -370,6 +396,83 @@ namespace PodkladexApp
             if (DGV_PomiaryMat.Columns.Contains("Min")) DGV_PomiaryMat.Columns["Min"].DefaultCellStyle.Format = "N2";
             if (DGV_PomiaryMat.Columns.Contains("Max")) DGV_PomiaryMat.Columns["Max"].DefaultCellStyle.Format = "N2";
             if (DGV_PomiaryMat.Columns.Contains("Wartosc")) DGV_PomiaryMat.Columns["Wartosc"].DefaultCellStyle.Format = "N2";
+
+            // Wywołanie przeliczania postępu i sztuk zepsutych
+            PrzeliczPostepIOdpady();
+        }
+
+        // =====================================
+        // NOWA METODA: PRZELICZANIE ODPADÓW I POSTĘPU
+        // =====================================
+        private void PrzeliczPostepIOdpady()
+        {
+            if (_aktualneIdKontroli == 0) return;
+
+            var kontrola = _context.KontrolaMat
+                .Include(k => k.IdZadaniePNavigation.Produkcja)
+                .FirstOrDefault(k => k.IdKontrolaMat == _aktualneIdKontroli);
+
+            if (kontrola == null) return;
+
+            // 1. Pobranie danych do obliczeń
+            decimal wyprodukowano = kontrola.IdZadaniePNavigation.Produkcja.FirstOrDefault()?.Wyprodukowano ?? 0;
+
+            // ID_wlasciwosci 8 = Masa nominalna arkusza
+            decimal masaNominalna = _context.MaterialWlasciwosci
+                .Where(m => m.IdMaterial == kontrola.IdMaterial && m.IdWlasciwosci == 8)
+                .Select(m => m.WartoscNominalna)
+                .FirstOrDefault();
+
+            int liczbaWymagana = 0;
+            if (masaNominalna > 0)
+            {
+                // Zaokrąglenie do pełnych wyprodukowanych sztuk
+                liczbaWymagana = (int)(wyprodukowano / masaNominalna);
+            }
+
+            // 2. Pobranie bieżących pomiarów i norm dla materiału
+            var pomiary = _context.PomiarMat.Where(p => p.IdKontrolaMat == _aktualneIdKontroli).ToList();
+            int liczbaWypelniona = pomiary.Count;
+            int niezgodneSztuki = 0;
+
+            var normy = _context.MaterialWlasciwosci.Where(m => m.IdMaterial == kontrola.IdMaterial).ToList();
+
+            // 3. Sprawdzanie zgodności każdego pomiaru
+            foreach (var pomiar in pomiary)
+            {
+                var norma = normy.FirstOrDefault(n => n.IdWlasciwosci == pomiar.IdWlasciwosci);
+                if (norma != null)
+                {
+                    if (pomiar.WartoscZmierzona < norma.WartoscMinimalna || pomiar.WartoscZmierzona > norma.WartoscMaksymalna)
+                    {
+                        niezgodneSztuki++;
+                    }
+                }
+            }
+
+            // 4. Aktualizacja logiki Paska Postępu
+            if (liczbaWymagana <= 0)
+            {
+                progressBar_Postep.Value = 0;
+                label_PostepInfo.Text = "Brak masy nominalnej w bazie / Produkcja 0 kg";
+                label_PostepInfo.ForeColor = Color.Red;
+            }
+            else
+            {
+                int zliczone = liczbaWypelniona > liczbaWymagana ? liczbaWymagana : liczbaWypelniona;
+                int procent = (int)((double)zliczone / liczbaWymagana * 100);
+
+                progressBar_Postep.Value = procent;
+                label_PostepInfo.Text = $"Postęp kontroli: {zliczone} / {liczbaWymagana} arkuszy ({procent}%)";
+
+                if (procent >= 100) label_PostepInfo.ForeColor = Color.Green;
+                else label_PostepInfo.ForeColor = Color.Black;
+            }
+
+            // 5. Przeliczanie i wpisywanie odpadów (Sztuki i Kg)
+            textBox_KontMatOdpadySzt.Text = niezgodneSztuki.ToString();
+            decimal odpadyKgol = niezgodneSztuki * masaNominalna;
+            textBox_KontMatOdpady.Text = odpadyKgol.ToString("N2");
         }
 
         private void DGV_PomiaryMat_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -412,6 +515,21 @@ namespace PodkladexApp
                 }
             }
             catch { MessageBox.Show("Błąd podczas zapisywania podsumowania.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
+        // =====================================
+        // METODA BLOKUJĄCA CHECKBOX ZATWIERDZONE
+        // =====================================
+        private void checkBox_KontrolaMatZat_Click(object sender, EventArgs e)
+        {
+            if (checkBox_KontrolaMatZat.Checked && progressBar_Postep.Value < 100)
+            {
+                checkBox_KontrolaMatZat.Checked = false;
+                MessageBox.Show("Nie można zatwierdzić kontroli, ponieważ nie wykonano wszystkich wymaganych pomiarów!",
+                                "Brak kompletnych pomiarów",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+            }
         }
 
         private void OdswiezSlowniki()
@@ -497,6 +615,11 @@ namespace PodkladexApp
             if (DGV_KontMatKontrole.Columns.Contains("Pracownik"))
             {
                 DGV_KontMatKontrole.Columns["Pracownik"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+
+            if (DGV_KontMatKontrole.Columns.Contains("Odpady"))
+            {
+                DGV_KontMatKontrole.Columns["Odpady"].DefaultCellStyle.Format = "N2";
             }
         }
     }
