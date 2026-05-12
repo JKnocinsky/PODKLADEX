@@ -706,8 +706,7 @@ GO
 -- ==========================================
 INSERT INTO Kontrola_mat (ID_pracownik, RBH, Zatwierdzone, Odpady, ID_zadanieP, ID_material) VALUES
 (6, 1.50, 1, 2.50, 3, 3),
-(8, 1.20, 1, 0.90, 6, 1),
-(9, 1.00, 0, 0.50, 8, 3);
+(8, 1.20, 1, 0.90, 6, 1);
 GO
 
 INSERT INTO Kontrola_prod (ID_pracownik, RBH, Zatwierdzone, Odpady, ID_zadanieP) VALUES
@@ -722,41 +721,34 @@ INSERT INTO Pomiar_mat (ID_Kontrola_mat, ID_wlasciwosci, Wartosc_zmierzona) VALU
 (1, 1, 4.00),
 (1, 1, 4.50),
 (2, 1, 1.60),
-(2, 1, 1.85),
-(3, 1, 4.05),
-(3, 1, 3.70);
+(2, 1, 1.85);
 GO
 
 INSERT INTO Pomiar (ID_Kontrola_prod, ID_wlasciwosci, Wartosc_zmierzona) VALUES
--- Kontrola 1 (Zadanie 1 - M16)
 (1, 1, 4.00),
 (1, 2, 17.00),
 (1, 3, 30.00),
 (1, 1, 4.25),
 (1, 2, 17.80),
 (1, 3, 30.70),
--- Kontrola 2 (Zadanie 2 - M16)
 (2, 1, 3.98),
 (2, 2, 16.95),
 (2, 3, 30.10),
 (2, 1, 3.80),
 (2, 2, 16.50),
 (2, 3, 29.50),
--- Kontrola 3 (Zadanie 4 - M16)
 (3, 1, 4.02),
 (3, 2, 17.10),
 (3, 3, 29.95),
 (3, 1, 4.15),
 (3, 2, 17.40),
 (3, 3, 30.40),
--- Kontrola 4 (Zadanie 5 - M16)
 (4, 1, 4.00),
 (4, 2, 17.05),
 (4, 3, 30.05),
 (4, 1, 4.30),
 (4, 2, 17.60),
 (4, 3, 31.00),
--- Kontrola 5 (Zadanie 7 - M16)
 (5, 1, 3.95),
 (5, 2, 16.90),
 (5, 3, 29.90),
