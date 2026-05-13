@@ -62,6 +62,10 @@
             label_ListaKontroli = new Label();
             btn_Edytuj = new Button();
             btn_Anuluj = new Button();
+            label_PostepInfo = new Label();
+            progressBar_Postep = new ProgressBar();
+            textBox_KontMatOdpadySzt = new TextBox();
+            label_KontMatOdpadySzt = new Label();
             ((System.ComponentModel.ISupportInitialize)DGV_KontMatKontrole).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DGV_PomiaryMat).BeginInit();
             panel_DodawaniePomiaru.SuspendLayout();
@@ -79,7 +83,7 @@
             // textBox_KontMatRBH
             // 
             textBox_KontMatRBH.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            textBox_KontMatRBH.Location = new Point(422, 301);
+            textBox_KontMatRBH.Location = new Point(391, 383);
             textBox_KontMatRBH.Name = "textBox_KontMatRBH";
             textBox_KontMatRBH.Size = new Size(100, 33);
             textBox_KontMatRBH.TabIndex = 1;
@@ -98,7 +102,7 @@
             // 
             label_KontMatRBH.AutoSize = true;
             label_KontMatRBH.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_KontMatRBH.Location = new Point(369, 309);
+            label_KontMatRBH.Location = new Point(338, 391);
             label_KontMatRBH.Name = "label_KontMatRBH";
             label_KontMatRBH.Size = new Size(47, 25);
             label_KontMatRBH.TabIndex = 3;
@@ -108,7 +112,7 @@
             // 
             label_KontMatZat.AutoSize = true;
             label_KontMatZat.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_KontMatZat.Location = new Point(596, 309);
+            label_KontMatZat.Location = new Point(565, 391);
             label_KontMatZat.Name = "label_KontMatZat";
             label_KontMatZat.Size = new Size(127, 25);
             label_KontMatZat.TabIndex = 4;
@@ -118,11 +122,11 @@
             // 
             label_KontMatOdpady.AutoSize = true;
             label_KontMatOdpady.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_KontMatOdpady.Location = new Point(116, 309);
+            label_KontMatOdpady.Location = new Point(33, 391);
             label_KontMatOdpady.Name = "label_KontMatOdpady";
-            label_KontMatOdpady.Size = new Size(78, 25);
+            label_KontMatOdpady.Size = new Size(115, 25);
             label_KontMatOdpady.TabIndex = 5;
-            label_KontMatOdpady.Text = "Odpady";
+            label_KontMatOdpady.Text = "Odpady [kg]";
             // 
             // label_KontMatZadP
             // 
@@ -165,7 +169,7 @@
             // textBox_KontMatOdpady
             // 
             textBox_KontMatOdpady.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            textBox_KontMatOdpady.Location = new Point(200, 301);
+            textBox_KontMatOdpady.Location = new Point(154, 383);
             textBox_KontMatOdpady.Name = "textBox_KontMatOdpady";
             textBox_KontMatOdpady.Size = new Size(116, 33);
             textBox_KontMatOdpady.TabIndex = 10;
@@ -205,7 +209,7 @@
             // 
             checkBox_KontrolaMatZat.AutoSize = true;
             checkBox_KontrolaMatZat.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            checkBox_KontrolaMatZat.Location = new Point(729, 314);
+            checkBox_KontrolaMatZat.Location = new Point(698, 396);
             checkBox_KontrolaMatZat.Margin = new Padding(3, 2, 3, 2);
             checkBox_KontrolaMatZat.Name = "checkBox_KontrolaMatZat";
             checkBox_KontrolaMatZat.Size = new Size(15, 14);
@@ -272,6 +276,10 @@
             // 
             // panel_DodawaniePomiaru
             // 
+            panel_DodawaniePomiaru.Controls.Add(textBox_KontMatOdpadySzt);
+            panel_DodawaniePomiaru.Controls.Add(label_KontMatOdpadySzt);
+            panel_DodawaniePomiaru.Controls.Add(label_PostepInfo);
+            panel_DodawaniePomiaru.Controls.Add(progressBar_Postep);
             panel_DodawaniePomiaru.Controls.Add(btn_UsunPomiar);
             panel_DodawaniePomiaru.Controls.Add(btn_EdytujPomiar);
             panel_DodawaniePomiaru.Controls.Add(btn_ZakonczKontrole);
@@ -289,7 +297,7 @@
             panel_DodawaniePomiaru.Controls.Add(textBox_KontMatOdpady);
             panel_DodawaniePomiaru.Location = new Point(195, 400);
             panel_DodawaniePomiaru.Name = "panel_DodawaniePomiaru";
-            panel_DodawaniePomiaru.Size = new Size(854, 436);
+            panel_DodawaniePomiaru.Size = new Size(854, 569);
             panel_DodawaniePomiaru.TabIndex = 22;
             // 
             // btn_UsunPomiar
@@ -317,7 +325,7 @@
             // btn_ZakonczKontrole
             // 
             btn_ZakonczKontrole.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_ZakonczKontrole.Location = new Point(331, 365);
+            btn_ZakonczKontrole.Location = new Point(332, 481);
             btn_ZakonczKontrole.Margin = new Padding(3, 2, 3, 2);
             btn_ZakonczKontrole.Name = "btn_ZakonczKontrole";
             btn_ZakonczKontrole.Size = new Size(172, 57);
@@ -405,6 +413,42 @@
             btn_Anuluj.Text = "Anuluj";
             btn_Anuluj.UseVisualStyleBackColor = true;
             // 
+            // label_PostepInfo
+            // 
+            label_PostepInfo.AutoSize = true;
+            label_PostepInfo.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            label_PostepInfo.Location = new Point(449, 305);
+            label_PostepInfo.Name = "label_PostepInfo";
+            label_PostepInfo.Size = new Size(63, 25);
+            label_PostepInfo.TabIndex = 34;
+            label_PostepInfo.Text = "label1";
+            // 
+            // progressBar_Postep
+            // 
+            progressBar_Postep.Location = new Point(44, 307);
+            progressBar_Postep.Name = "progressBar_Postep";
+            progressBar_Postep.Size = new Size(388, 23);
+            progressBar_Postep.TabIndex = 33;
+            // 
+            // textBox_KontMatOdpadySzt
+            // 
+            textBox_KontMatOdpadySzt.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            textBox_KontMatOdpadySzt.Location = new Point(154, 444);
+            textBox_KontMatOdpadySzt.Name = "textBox_KontMatOdpadySzt";
+            textBox_KontMatOdpadySzt.ReadOnly = true;
+            textBox_KontMatOdpadySzt.Size = new Size(116, 33);
+            textBox_KontMatOdpadySzt.TabIndex = 36;
+            // 
+            // label_KontMatOdpadySzt
+            // 
+            label_KontMatOdpadySzt.AutoSize = true;
+            label_KontMatOdpadySzt.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            label_KontMatOdpadySzt.Location = new Point(33, 447);
+            label_KontMatOdpadySzt.Name = "label_KontMatOdpadySzt";
+            label_KontMatOdpadySzt.Size = new Size(118, 25);
+            label_KontMatOdpadySzt.TabIndex = 35;
+            label_KontMatOdpadySzt.Text = "Odpady [szt]";
+            // 
             // Form_KontrolaMat
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -468,5 +512,9 @@
         private Button btn_Anuluj;
         private Button btn_EdytujPomiar;
         private Button btn_UsunPomiar;
+        private Label label_PostepInfo;
+        private ProgressBar progressBar_Postep;
+        private TextBox textBox_KontMatOdpadySzt;
+        private Label label_KontMatOdpadySzt;
     }
 }

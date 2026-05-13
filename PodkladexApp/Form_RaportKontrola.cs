@@ -40,7 +40,8 @@ namespace PodkladexApp
         private void Form_RaportKontrola_Load(object sender, EventArgs e)
         {
             ZaladujSlowniki();
-            UstawWidok(TrybRaportu.Materialy);
+            // Zmiana: Domyślnie ustawiamy widok na Produkty
+            UstawWidok(TrybRaportu.Produkty);
         }
 
         private void FormatujTabele()
@@ -269,6 +270,11 @@ namespace PodkladexApp
                     }).ToList();
                 DGV_Pomiary.DataSource = SortujPomiary(dane.AsEnumerable(), sortowanie);
             }
+
+            // Formatowanie kolumn Min, Max oraz Wartosc do dwóch miejsc po przecinku
+            if (DGV_Pomiary.Columns.Contains("Min")) DGV_Pomiary.Columns["Min"].DefaultCellStyle.Format = "N2";
+            if (DGV_Pomiary.Columns.Contains("Max")) DGV_Pomiary.Columns["Max"].DefaultCellStyle.Format = "N2";
+            if (DGV_Pomiary.Columns.Contains("Wartosc")) DGV_Pomiary.Columns["Wartosc"].DefaultCellStyle.Format = "N2";
         }
 
         private List<dynamic> SortujPomiary(IEnumerable<dynamic> dane, string sortowanie)

@@ -40,6 +40,8 @@
             label_Sortowanie = new Label();
             comboBox_Sortowanie = new ComboBox();
             formsPlot_Efektywnosc = new ScottPlot.WinForms.FormsPlot();
+            btn_WidokMaterialy = new Button();
+            btn_WidokProdukty = new Button();
             ((System.ComponentModel.ISupportInitialize)DGV_Efektywnosc).BeginInit();
             SuspendLayout();
             // 
@@ -47,7 +49,7 @@
             // 
             label_Tytul.AutoSize = true;
             label_Tytul.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_Tytul.Location = new Point(384, 9);
+            label_Tytul.Location = new Point(564, 11);
             label_Tytul.Name = "label_Tytul";
             label_Tytul.Size = new Size(265, 25);
             label_Tytul.TabIndex = 0;
@@ -57,7 +59,7 @@
             // 
             label_FiltrMaszyna.AutoSize = true;
             label_FiltrMaszyna.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_FiltrMaszyna.Location = new Point(42, 56);
+            label_FiltrMaszyna.Location = new Point(222, 58);
             label_FiltrMaszyna.Name = "label_FiltrMaszyna";
             label_FiltrMaszyna.Size = new Size(159, 25);
             label_FiltrMaszyna.TabIndex = 1;
@@ -67,7 +69,7 @@
             // 
             label_FiltrPracownik.AutoSize = true;
             label_FiltrPracownik.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_FiltrPracownik.Location = new Point(42, 100);
+            label_FiltrPracownik.Location = new Point(222, 102);
             label_FiltrPracownik.Name = "label_FiltrPracownik";
             label_FiltrPracownik.Size = new Size(183, 25);
             label_FiltrPracownik.TabIndex = 2;
@@ -77,7 +79,7 @@
             // 
             comboBox_FiltrMaszyna.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox_FiltrMaszyna.FormattingEnabled = true;
-            comboBox_FiltrMaszyna.Location = new Point(231, 48);
+            comboBox_FiltrMaszyna.Location = new Point(411, 50);
             comboBox_FiltrMaszyna.Name = "comboBox_FiltrMaszyna";
             comboBox_FiltrMaszyna.Size = new Size(210, 33);
             comboBox_FiltrMaszyna.TabIndex = 3;
@@ -86,7 +88,7 @@
             // 
             comboBox_FiltrPracownik.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox_FiltrPracownik.FormattingEnabled = true;
-            comboBox_FiltrPracownik.Location = new Point(231, 92);
+            comboBox_FiltrPracownik.Location = new Point(411, 94);
             comboBox_FiltrPracownik.Name = "comboBox_FiltrPracownik";
             comboBox_FiltrPracownik.Size = new Size(210, 33);
             comboBox_FiltrPracownik.TabIndex = 4;
@@ -94,7 +96,7 @@
             // btn_WyczyscFiltry
             // 
             btn_WyczyscFiltry.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            btn_WyczyscFiltry.Location = new Point(480, 56);
+            btn_WyczyscFiltry.Location = new Point(660, 58);
             btn_WyczyscFiltry.Name = "btn_WyczyscFiltry";
             btn_WyczyscFiltry.Size = new Size(159, 66);
             btn_WyczyscFiltry.TabIndex = 5;
@@ -120,7 +122,7 @@
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             DGV_Efektywnosc.DefaultCellStyle = dataGridViewCellStyle2;
-            DGV_Efektywnosc.Location = new Point(42, 146);
+            DGV_Efektywnosc.Location = new Point(222, 148);
             DGV_Efektywnosc.Name = "DGV_Efektywnosc";
             DGV_Efektywnosc.Size = new Size(1017, 248);
             DGV_Efektywnosc.TabIndex = 6;
@@ -129,7 +131,7 @@
             // 
             label_Sortowanie.AutoSize = true;
             label_Sortowanie.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label_Sortowanie.Location = new Point(688, 77);
+            label_Sortowanie.Location = new Point(868, 79);
             label_Sortowanie.Name = "label_Sortowanie";
             label_Sortowanie.Size = new Size(107, 25);
             label_Sortowanie.TabIndex = 7;
@@ -139,23 +141,45 @@
             // 
             comboBox_Sortowanie.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox_Sortowanie.FormattingEnabled = true;
-            comboBox_Sortowanie.Location = new Point(801, 74);
+            comboBox_Sortowanie.Location = new Point(981, 76);
             comboBox_Sortowanie.Name = "comboBox_Sortowanie";
             comboBox_Sortowanie.Size = new Size(258, 33);
             comboBox_Sortowanie.TabIndex = 8;
             // 
             // formsPlot_Efektywnosc
             // 
-            formsPlot_Efektywnosc.Location = new Point(42, 417);
+            formsPlot_Efektywnosc.Location = new Point(222, 419);
             formsPlot_Efektywnosc.Name = "formsPlot_Efektywnosc";
             formsPlot_Efektywnosc.Size = new Size(1017, 540);
             formsPlot_Efektywnosc.TabIndex = 9;
+            // 
+            // btn_WidokMaterialy
+            // 
+            btn_WidokMaterialy.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            btn_WidokMaterialy.Location = new Point(21, 126);
+            btn_WidokMaterialy.Name = "btn_WidokMaterialy";
+            btn_WidokMaterialy.Size = new Size(154, 65);
+            btn_WidokMaterialy.TabIndex = 11;
+            btn_WidokMaterialy.Text = "Produkcja półfabrykatów";
+            btn_WidokMaterialy.UseVisualStyleBackColor = true;
+            // 
+            // btn_WidokProdukty
+            // 
+            btn_WidokProdukty.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            btn_WidokProdukty.Location = new Point(21, 33);
+            btn_WidokProdukty.Name = "btn_WidokProdukty";
+            btn_WidokProdukty.Size = new Size(154, 65);
+            btn_WidokProdukty.TabIndex = 10;
+            btn_WidokProdukty.Text = "Produkcja podkładek";
+            btn_WidokProdukty.UseVisualStyleBackColor = true;
             // 
             // Form_Efektywnosc
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1322, 1007);
+            Controls.Add(btn_WidokMaterialy);
+            Controls.Add(btn_WidokProdukty);
             Controls.Add(formsPlot_Efektywnosc);
             Controls.Add(comboBox_Sortowanie);
             Controls.Add(label_Sortowanie);
@@ -185,5 +209,7 @@
         private Label label_Sortowanie;
         private ComboBox comboBox_Sortowanie;
         private ScottPlot.WinForms.FormsPlot formsPlot_Efektywnosc;
+        private Button btn_WidokMaterialy;
+        private Button btn_WidokProdukty;
     }
 }
