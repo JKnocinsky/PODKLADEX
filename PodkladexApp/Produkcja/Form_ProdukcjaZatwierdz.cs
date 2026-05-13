@@ -92,6 +92,17 @@ namespace PodkladexApp.Produkcja
 
         private void Dtp_data_ValueChanged(object? sender, EventArgs e)
         {
+            // ZABEZPIECZENIE: Sprawdzenie, czy wybrana data nie jest z przyszłości
+            if (dtp_data.Value.Date > DateTime.Today)
+            {
+                MessageBox.Show("Nie można wybrać daty z przyszłości.", "Błędna data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                // Ustawienie daty na dzisiejszą - to wywoła zdarzenie ponownie, 
+                // ale następnym razem warunek (date > today) nie będzie spełniony.
+                dtp_data.Value = DateTime.Today;
+                return;
+            }
+
             if (!_suppressDtpCheckedSet)
             {
                 try

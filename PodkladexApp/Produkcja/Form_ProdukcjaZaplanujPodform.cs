@@ -58,13 +58,9 @@ namespace PodkladexApp.Produkcja
                     s.IdSzczegolyZamowienia,
                     s.IdProdukt,
                     Produkt = s.IdProduktNavigation.Nazwa,
-                    // NOWY ALGORYTM: Ilość = Zamówione + Odpady Kontrola_prod - Wyprodukowano - Zaplanowano z godzin (dla wyprodukowano == NULL)
                     RawIlosc = (decimal)s.Ilosc +
-                            // Odpady tylko z Kontrola_prod
                             (db.KontrolaProd.Where(k => k.IdZadaniePNavigation.IdZamowienie == idZam && db.Produkcja.Any(p => p.IdZadanieP == k.IdZadanieP && p.IdNormyPNavigation.IdProdukt == s.IdProdukt)).Sum(k => k.Odpady) ?? 0) -
-                            // Faktycznie wyprodukowane sztuki
                             (db.Produkcja.Where(p => p.IdNormyPNavigation.IdProdukt == s.IdProdukt && p.IdZadaniePNavigation.IdZamowienie == idZam).Sum(p => p.Wyprodukowano) ?? 0) -
-                            // Zaplanowane z godzin - tylko dla rekordów, u których wyprodukowano == NULL
                             (db.Produkcja.Where(p => p.IdNormyPNavigation.IdProdukt == s.IdProdukt && p.IdZadaniePNavigation.IdZamowienie == idZam && p.Wyprodukowano == null)
                                          .Sum(p => p.Rbh * (p.IdNormyPNavigation.Ilosc / (p.IdNormyPNavigation.Czas != 0 ? p.IdNormyPNavigation.Czas : 1)))),
                     s.IdMaterial,
@@ -215,7 +211,16 @@ namespace PodkladexApp.Produkcja
             }
 
             if (cmbPrac != null) cmbPrac.DropDown += (s, e) => UpdateWorkerInfoGrid();
-            if (cmbWyp != null) cmbWyp.DropDown += (s, e) => LoadAvailableEquipment();
+
+            // Zadanie 1: Obsługa dropdown dla wyposażenia
+            if (cmbWyp != null)
+            {
+                cmbWyp.DropDown += (s, e) => {
+                    LoadAvailableEquipment();
+                    UpdateEquipmentInfoGrid();
+                };
+            }
+
             if (txtRbh != null) txtRbh.TextChanged += (s, e) => RecalculateDoWyprod();
             if (btn != null) btn.Click += Btn_zapisz_Click;
         }
@@ -242,6 +247,9 @@ namespace PodkladexApp.Produkcja
             }).OrderBy(x => x.Nazwa).ToList();
 
             dtgInfo.DataSource = data;
+            // Zadanie 3: Poprawa nagłówka
+            if (dtgInfo.Columns.Contains("SumaRBH"))
+                dtgInfo.Columns["SumaRBH"].HeaderText = "Suma RBH";
         }
 
         private void UpdateWorkerInfoGrid()
@@ -277,6 +285,41 @@ namespace PodkladexApp.Produkcja
             }).OrderBy(x => x.Pracownik).ToList();
 
             dtgInfo.DataSource = data;
+            // Zadanie 3: Poprawa nagłówka
+            if (dtgInfo.Columns.Contains("SumaRBH"))
+                dtgInfo.Columns["SumaRBH"].HeaderText = "Suma RBH";
+        }
+
+        // Zadanie 1: Wyświetlanie sumy RBH dla wyposażenia
+        private void UpdateEquipmentInfoGrid()
+        {
+            var dtp = Controls.Find("dtp_Data", true).FirstOrDefault() as DateTimePicker;
+            var dtgInfo = Controls.Find("dtg_info", true).FirstOrDefault() as DataGridView;
+            if (dtp == null || dtgInfo == null) return;
+
+            var selectedDate = DateOnly.FromDateTime(dtp.Value.Date);
+
+            // Wyliczenie sumy RBH dla wyposażenia przypisanego do produkcji tego dnia
+            var equipmentRbh = db.Produkcja
+                .Where(p => p.IdZadaniePNavigation.DataZadania == selectedDate)
+                .Join(db.MaszynaWyp,
+                      p => new { p.IdZadaniePNavigation.IdMaszyna, IdNormaP = p.IdNormyP },
+                      mw => new { mw.IdMaszyna, mw.IdNormaP },
+                      (p, mw) => new { mw.IdWyposazenie, p.Rbh })
+                .GroupBy(x => x.IdWyposazenie)
+                .Select(g => new { IdWyposazenie = g.Key, Suma = g.Sum(x => x.Rbh) })
+                .ToDictionary(k => k.IdWyposazenie, v => v.Suma);
+
+            var data = db.Wyposazenie.AsNoTracking().ToList().Select(e => new {
+                e.Nazwa,
+                Data = selectedDate,
+                SumaRBH = equipmentRbh.ContainsKey(e.IdWyposazenie) ? equipmentRbh[e.IdWyposazenie] : 0m
+            }).OrderBy(x => x.Nazwa).ToList();
+
+            dtgInfo.DataSource = data;
+            // Zadanie 3: Poprawa nagłówka
+            if (dtgInfo.Columns.Contains("SumaRBH"))
+                dtgInfo.Columns["SumaRBH"].HeaderText = "Suma RBH";
         }
 
         private void LoadAvailableEquipment()
@@ -289,19 +332,24 @@ namespace PodkladexApp.Produkcja
 
             var selectedDate = DateOnly.FromDateTime(dtp.Value.Date);
 
-            var busyEquipmentIds = db.Produkcja
-                .AsNoTracking()
+            // Pobranie sumy RBH, aby filtrować tylko te poniżej 8h
+            var equipmentRbh = db.Produkcja
                 .Where(p => p.IdZadaniePNavigation.DataZadania == selectedDate)
                 .Join(db.MaszynaWyp,
                       p => new { p.IdZadaniePNavigation.IdMaszyna, IdNormaP = p.IdNormyP },
                       mw => new { mw.IdMaszyna, mw.IdNormaP },
-                      (p, mw) => mw.IdWyposazenie)
-                .Distinct()
-                .ToList();
+                      (p, mw) => new { mw.IdWyposazenie, p.Rbh })
+                .GroupBy(x => x.IdWyposazenie)
+                .Select(g => new { Id = g.Key, Sum = g.Sum(x => x.Rbh) })
+                .ToDictionary(k => k.Id, v => v.Sum);
 
             var available = db.Wyposazenie
                 .AsNoTracking()
-                .Where(w => !busyEquipmentIds.Contains(w.IdWyposazenie))
+                .AsEnumerable()
+                .Where(w => {
+                    decimal total = equipmentRbh.ContainsKey(w.IdWyposazenie) ? equipmentRbh[w.IdWyposazenie] : 0m;
+                    return total < 8;
+                })
                 .Select(w => new { w.IdWyposazenie, w.Nazwa })
                 .OrderBy(w => w.Nazwa)
                 .ToList();
@@ -375,9 +423,9 @@ namespace PodkladexApp.Produkcja
                 if (!decimal.TryParse(txtRbh.Text, out decimal plannedRbh)) return;
                 int workerId = (int)cmbPrac.SelectedValue;
                 int machineId = (int)cmbMasz.SelectedValue;
+                int equipmentId = (int)cmbWyp.SelectedValue;
                 var date = DateOnly.FromDateTime(dtp.Value.Date);
 
-                // ZABEZPIECZENIE: Sprawdzenie, czy data nie jest wcześniejsza niż dzisiejsza
                 var today = DateOnly.FromDateTime(DateTime.Today);
                 if (date < today)
                 {
@@ -385,6 +433,7 @@ namespace PodkladexApp.Produkcja
                     return;
                 }
 
+                // Walidacja pracownika
                 decimal workerCurrent = (db.Produkcja.Where(p => p.IdZadaniePNavigation.DataZadania == date && p.IdPracownik == workerId).Sum(p => (decimal?)p.Rbh) ?? 0) +
                                          (db.KontrolaProd.Where(k => k.IdZadaniePNavigation.DataZadania == date && k.IdPracownik == workerId).Sum(k => (decimal?)k.Rbh) ?? 0) +
                                          (db.KontrolaMat.Where(k => k.IdZadaniePNavigation.DataZadania == date && k.IdPracownik == workerId).Sum(k => (decimal?)k.Rbh) ?? 0) +
@@ -396,12 +445,29 @@ namespace PodkladexApp.Produkcja
                     return;
                 }
 
+                // Walidacja maszyny
                 decimal machineCurrent = (db.Produkcja.Where(p => p.IdZadaniePNavigation.DataZadania == date && p.IdZadaniePNavigation.IdMaszyna == machineId).Sum(p => (decimal?)p.Rbh) ?? 0) +
                                           (db.Obsluga.Any(o => o.DataPoczatek <= date && (o.DataKoniec == null || o.DataKoniec >= date) && o.IdMaszyna == machineId) ? 8m : 0m);
 
                 if (machineCurrent + plannedRbh > 8)
                 {
                     MessageBox.Show($"Maszyna przekroczy limit 8 RBH (obecnie: {machineCurrent} + plan: {plannedRbh}). Proszę wybrać inną maszynę.", "Błąd limitu maszyny", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Zadanie 2: Walidacja wyposażenia
+                decimal equipmentCurrent = db.Produkcja
+                    .Where(p => p.IdZadaniePNavigation.DataZadania == date)
+                    .Join(db.MaszynaWyp,
+                          p => new { p.IdZadaniePNavigation.IdMaszyna, IdNormaP = p.IdNormyP },
+                          mw => new { mw.IdMaszyna, mw.IdNormaP },
+                          (p, mw) => new { mw.IdWyposazenie, p.Rbh })
+                    .Where(x => x.IdWyposazenie == equipmentId)
+                    .Sum(x => (decimal?)x.Rbh) ?? 0m;
+
+                if (equipmentCurrent + plannedRbh > 8)
+                {
+                    MessageBox.Show($"Wyposażenie przekroczy limit 8 RBH (obecnie: {equipmentCurrent} + plan: {plannedRbh}). Proszę wybrać inne wyposażenie lub zmniejszyć liczbę godzin.", "Błąd limitu wyposażenia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
